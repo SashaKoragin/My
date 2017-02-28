@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,9 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 
 namespace TestIFNS
 {
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -22,24 +25,32 @@ namespace TestIFNS
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            string path = Path.GetFullPath(@"C:\Users\7751_svc_admin\Desktop\C\Path\");
-            string path1 = Path.GetFullPath(@"C:\Users\7751_svc_admin\Desktop\C\QBEDate\");
-            if (Directory.Exists(path))
+           
+            if (Directory.Exists(PathName.path))
             {
-                String[] dirarr = Directory.GetFiles(path).Select(x => Path.GetFileName(x)).ToArray();
+                String[] dirarr = Directory.GetFiles(PathName.path).Select(x => Path.GetFileName(x)).ToArray();
                 listView2.Items.Clear();
                 foreach (String item in dirarr)
                 {
                     listView2.Items.Add(item);
                 }
             }
-            if (Directory.Exists(path1))
+            if (Directory.Exists(PathName.path1))
             {
-                String[] dirarr = Directory.GetFiles(path1).Select(x => Path.GetFileName(x)).ToArray();
+                String[] dirarr = Directory.GetFiles(PathName.path1).Select(x => Path.GetFileName(x)).ToArray();
                 listView5.Items.Clear();
                 foreach (String item in dirarr)
                 {
                     listView5.Items.Add(item);
+                }
+            }
+            if (Directory.Exists(PathName.path2))
+            {
+                String[] dirarr = Directory.GetFiles(PathName.path2).Select(x => Path.GetFileName(x)).ToArray();
+                listView4.Items.Clear();
+                foreach (String item in dirarr)
+                {
+                    listView4.Items.Add(item);
                 }
             }
         }
@@ -81,27 +92,22 @@ namespace TestIFNS
 
         private void button3_Click(object sender, EventArgs e)
         {
+            
             if (listView1.Items.Count > 0)
             {
                 DialogForm f = new DialogForm();
                 f.ShowDialog();
                 if (f.DialogResult == DialogResult.OK)
                 {
-                    if (String.IsNullOrWhiteSpace(f.TextBox))
-                    {
-                        MessageBox.Show("Не введено название файла!");
-                    }
-                    else
-                    {
-                        ListViewItem a = listView2.FindItemWithText(f.TextBox + ".txt");
+                        ListViewItem a = listView2.FindItemWithText(f.textBox1.Text.ToString() + ".txt");
                         if (a == null)
                         {
-                            using (StreamWriter file = new StreamWriter(@"C:\Users\7751_svc_admin\Desktop\C\Path\" + f.TextBox + ".txt"))
+                            using (StreamWriter file = new StreamWriter(PathName.path + f.textBox1.Text.ToString() + ".txt"))
                                 foreach (ListViewItem str in listView1.Items)
                                 {
                                     file.WriteLine(str.Text);
                                 }
-                            string path = Path.GetFullPath(@"C:\Users\7751_svc_admin\Desktop\C\Path\");
+                            string path = Path.GetFullPath(PathName.path);
                             if (Directory.Exists(path))
                             {
                                 String[] dirarr = Directory.GetFiles(path, "*.txt").Select(x => Path.GetFileName(x)).ToArray();
@@ -116,7 +122,6 @@ namespace TestIFNS
                         {
                             MessageBox.Show("Имя файла совпадает с конечным!");
                         }
-                    }
                 }
             }
             else
@@ -154,7 +159,7 @@ namespace TestIFNS
         {
             listView1.Items.Clear();
             string lvl = listView2.SelectedItems[0].Text;  //Переменная имени Файла
-            string[] file = File.ReadAllLines(@"C:\Users\7751_svc_admin\Desktop\C\Path\" + lvl);
+            string[] file = File.ReadAllLines(PathName.path + lvl);
             foreach (String item in file)
             {
                 listView1.Items.Add(item);
@@ -164,7 +169,7 @@ namespace TestIFNS
         {
             ListViewItem lvl = listView2.SelectedItems[0];  //Переменная имени Файла
             listView2.Items.Remove(lvl);
-            File.Delete(@"C:\Users\7751_svc_admin\Desktop\C\Path\" + lvl.Text);
+            File.Delete(PathName.path + lvl.Text);
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -189,20 +194,20 @@ namespace TestIFNS
                 f.ShowDialog();
                 if (f.DialogResult == DialogResult.OK)
                 {
-                    if (String.IsNullOrWhiteSpace(f.TextBox))
+                    if (String.IsNullOrWhiteSpace(f.textBox1.Text.ToString()))
                     {
                         MessageBox.Show("Не введено название файла!");
                     }
                     else
                     {
-                        ListViewItem a = listView5.FindItemWithText(f.TextBox + ".txt");
+                        ListViewItem a = listView5.FindItemWithText(f.textBox1.Text.ToString() + ".txt");
                         if (a == null)
                         {
-                            using (StreamWriter file = new StreamWriter(@"C:\Users\7751_svc_admin\Desktop\C\QBEDate\" + f.TextBox + ".txt"))
+                            using (StreamWriter file = new StreamWriter(PathName.path1 + f.textBox1.Text.ToString() + ".txt"))
                             {
                                 file.WriteLine(DateStart.Text.ToString() + "/" + DateFinish.Text.ToString());
                             }
-                            string path = Path.GetFullPath(@"C:\Users\7751_svc_admin\Desktop\C\QBEDate\");
+                            string path = Path.GetFullPath(PathName.path1);
                             if (Directory.Exists(path))
                             {
                                 String[] dirarr = Directory.GetFiles(path, "*.txt").Select(x => Path.GetFileName(x)).ToArray();
@@ -233,19 +238,18 @@ namespace TestIFNS
         }
         private void загрузитьQBEToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            {
                 string lvl = listView5.SelectedItems[0].Text;  //Переменная имени Файла
-                string[] file = File.ReadAllText(@"C:\Users\7751_svc_admin\Desktop\C\QBEDate\" + lvl).Split('/');
+                string[] file = File.ReadAllText(PathName.path1 + lvl).Split('/');
                 DateStart.Text = file[0];
                 DateFinish.Text = file[1];
-            }
+           
         }
 
         private void удалитьQBEToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ListViewItem lvl = listView5.SelectedItems[0];  //Переменная имени Файла
             listView5.Items.Remove(lvl);
-            File.Delete(@"C:\Users\7751_svc_admin\Desktop\C\QBEDate\" + lvl.Text);
+            File.Delete(PathName.path1 + lvl.Text);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -264,14 +268,16 @@ namespace TestIFNS
             }
             else
             {
+
                 backgroundWorker1.RunWorkerAsync();
             }
-        }
 
+        }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             Arhiv A = new Arhiv(this);
-            A.cal();
+            A.arhiv();
+            
         }
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -282,7 +288,77 @@ namespace TestIFNS
         {
             button6.Enabled = true; // После окончания расчета разблокируем опасные кнопки
             progressBar1.Value = 10000;
+            progressBar1.Value = 0;
         }
+
+        private void listView4_MouseClick(object sender, MouseEventArgs e)  //Для задания координат в listview на элемент
+        {
+            if (e.Button == MouseButtons.Right)  //Если нажата правая кнопка
+            {
+                if (listView4.FocusedItem.Bounds.Contains(e.Location) == true)  //Проверка нажатия на элемент listviewItem
+                {
+                    contextMenuStrip4.Show(Cursor.Position);
+                }
+            }
+        }
+        private void удалитьОТЧЕТToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListViewItem lvl = listView4.SelectedItems[0];  //Переменная имени Файла
+            listView4.Items.Remove(lvl);
+            File.Delete(PathName.path2 + lvl.Text);
+        }
+
+        private void открытьОТЧЕТToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListViewItem lvl = listView4.SelectedItems[0];  //Переменная имени Файла
+            string file = Path.GetFullPath(PathName.path2 + lvl.Text);
+            OpenFile OpenX = new OpenFile(this);
+            OpenX.Openxls(file);
+
+        }
+
+        private void загрузитьОТЧЕТToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListViewItem lvl = listView4.SelectedItems[0];  //Переменная имени Файла
+            string file = Path.GetFullPath(PathName.path2 + lvl.Text);
+            
+           using (XLWorkbook workbook = new XLWorkbook(file))
+           {
+               IXLWorksheet workSheet = workbook.Worksheet(1);
+               DataTable dt=new DataTable();
+               bool firstRow = true;
+               foreach (IXLRow row in workSheet.Rows())
+               {
+                   if (firstRow)
+                   {
+                       foreach (IXLCell cell in row.Cells())
+                       {
+                           dt.Columns.Add(cell.Value.ToString());
+                       }
+                       firstRow = false;
+                   }
+                   else
+                   {
+                       dt.Rows.Add();
+                       int i = 0;
+                       foreach (IXLCell cell in row.Cells())
+                       {
+                           dt.Rows[dt.Rows.Count - 1][i] = cell.Value.ToString();
+                           i++;
+                       }
+                   }
+                   MessageBox.Show(dt.Columns.ToString());
+               }
+           }
+            
+        }
+
+        private void Sovpad_Enter(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(Sovpad, "Примеры ввода: *t*,*t,t*,t где t это текст!");
+        }
+
 
     }
 }

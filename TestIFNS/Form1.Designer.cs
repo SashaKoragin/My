@@ -73,9 +73,10 @@
             this.загрузитьQBEToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьQBEToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.загрузитьОТЧЕТToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьОТЧЕТToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьОТЧЕТToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.загрузитьОТЧЕТToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -128,6 +129,7 @@
             this.Sovpad.Size = new System.Drawing.Size(111, 20);
             this.Sovpad.TabIndex = 4;
             this.Sovpad.Text = "MI_2NDFLM*";
+            this.Sovpad.Enter += new System.EventHandler(this.Sovpad_Enter);
             // 
             // textBox2
             // 
@@ -385,6 +387,7 @@
             this.listView4.TabIndex = 1;
             this.listView4.UseCompatibleStateImageBehavior = false;
             this.listView4.View = System.Windows.Forms.View.Details;
+            this.listView4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView4_MouseClick);
             // 
             // columnHeader0
             // 
@@ -501,22 +504,32 @@
             // contextMenuStrip4
             // 
             this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.загрузитьОТЧЕТToolStripMenuItem,
-            this.удалитьОТЧЕТToolStripMenuItem});
+            this.открытьОТЧЕТToolStripMenuItem,
+            this.удалитьОТЧЕТToolStripMenuItem,
+            this.загрузитьОТЧЕТToolStripMenuItem});
             this.contextMenuStrip4.Name = "contextMenuStrip4";
-            this.contextMenuStrip4.Size = new System.Drawing.Size(169, 48);
+            this.contextMenuStrip4.Size = new System.Drawing.Size(169, 92);
             // 
-            // загрузитьОТЧЕТToolStripMenuItem
+            // открытьОТЧЕТToolStripMenuItem
             // 
-            this.загрузитьОТЧЕТToolStripMenuItem.Name = "загрузитьОТЧЕТToolStripMenuItem";
-            this.загрузитьОТЧЕТToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.загрузитьОТЧЕТToolStripMenuItem.Text = "Загрузить ОТЧЕТ";
+            this.открытьОТЧЕТToolStripMenuItem.Name = "открытьОТЧЕТToolStripMenuItem";
+            this.открытьОТЧЕТToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.открытьОТЧЕТToolStripMenuItem.Text = "Открыть ОТЧЕТ";
+            this.открытьОТЧЕТToolStripMenuItem.Click += new System.EventHandler(this.открытьОТЧЕТToolStripMenuItem_Click);
             // 
             // удалитьОТЧЕТToolStripMenuItem
             // 
             this.удалитьОТЧЕТToolStripMenuItem.Name = "удалитьОТЧЕТToolStripMenuItem";
             this.удалитьОТЧЕТToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.удалитьОТЧЕТToolStripMenuItem.Text = "Удалить ОТЧЕТ";
+            this.удалитьОТЧЕТToolStripMenuItem.Click += new System.EventHandler(this.удалитьОТЧЕТToolStripMenuItem_Click);
+            // 
+            // загрузитьОТЧЕТToolStripMenuItem1
+            // 
+            this.загрузитьОТЧЕТToolStripMenuItem.Name = "загрузитьОТЧЕТToolStripMenuItem1";
+            this.загрузитьОТЧЕТToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.загрузитьОТЧЕТToolStripMenuItem.Text = "Загрузить ОТЧЕТ";
+            this.загрузитьОТЧЕТToolStripMenuItem.Click += new System.EventHandler(this.загрузитьОТЧЕТToolStripMenuItem_Click);
             // 
             // backgroundWorker1
             // 
@@ -561,7 +574,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -582,8 +594,6 @@
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ListView listView5;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button6;
@@ -591,8 +601,9 @@
         private System.Windows.Forms.ToolStripMenuItem загрузитьQBEToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem удалитьQBEToolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip4;
-        private System.Windows.Forms.ToolStripMenuItem загрузитьОТЧЕТToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem открытьОТЧЕТToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьОТЧЕТToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьОТЧЕТToolStripMenuItem;
         internal System.Windows.Forms.ListView listView1;
         internal System.ComponentModel.BackgroundWorker backgroundWorker1;
         internal System.Windows.Forms.Label label5;
@@ -606,6 +617,10 @@
         internal System.Windows.Forms.ColumnHeader colum1;
         internal System.Windows.Forms.ColumnHeader colum2;
         internal System.Windows.Forms.ColumnHeader column3;
+        internal System.Windows.Forms.TextBox textBox2;
+        internal System.Windows.Forms.ListView listView5;
+        internal System.Windows.Forms.ColumnHeader columnHeader1;
+       
     }
 }
 
