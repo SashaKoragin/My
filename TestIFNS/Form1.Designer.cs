@@ -1,4 +1,4 @@
-﻿namespace TestIFNS
+﻿namespace TestIFNSTools
 {
     partial class Form1
     {
@@ -75,8 +75,8 @@
             this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.открытьОТЧЕТToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьОТЧЕТToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.загрузитьОТЧЕТToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -508,7 +508,7 @@
             this.удалитьОТЧЕТToolStripMenuItem,
             this.загрузитьОТЧЕТToolStripMenuItem});
             this.contextMenuStrip4.Name = "contextMenuStrip4";
-            this.contextMenuStrip4.Size = new System.Drawing.Size(169, 92);
+            this.contextMenuStrip4.Size = new System.Drawing.Size(169, 70);
             // 
             // открытьОТЧЕТToolStripMenuItem
             // 
@@ -524,9 +524,9 @@
             this.удалитьОТЧЕТToolStripMenuItem.Text = "Удалить ОТЧЕТ";
             this.удалитьОТЧЕТToolStripMenuItem.Click += new System.EventHandler(this.удалитьОТЧЕТToolStripMenuItem_Click);
             // 
-            // загрузитьОТЧЕТToolStripMenuItem1
+            // загрузитьОТЧЕТToolStripMenuItem
             // 
-            this.загрузитьОТЧЕТToolStripMenuItem.Name = "загрузитьОТЧЕТToolStripMenuItem1";
+            this.загрузитьОТЧЕТToolStripMenuItem.Name = "загрузитьОТЧЕТToolStripMenuItem";
             this.загрузитьОТЧЕТToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.загрузитьОТЧЕТToolStripMenuItem.Text = "Загрузить ОТЧЕТ";
             this.загрузитьОТЧЕТToolStripMenuItem.Click += new System.EventHandler(this.загрузитьОТЧЕТToolStripMenuItem_Click);

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClosedXML.Excel;
 
-namespace TestIFNS
+namespace TestIFNSTools
 {
 
     public partial class Form1 : Form
@@ -319,9 +319,9 @@ namespace TestIFNS
 
         private void загрузитьОТЧЕТToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            listView3.Items.Clear();
             ListViewItem lvl = listView4.SelectedItems[0];  //Переменная имени Файла
             string file = Path.GetFullPath(PathName.path2 + lvl.Text);
-            
            using (XLWorkbook workbook = new XLWorkbook(file))
            {
                IXLWorksheet workSheet = workbook.Worksheet(1);
@@ -331,9 +331,13 @@ namespace TestIFNS
                {
                    if (firstRow)
                    {
+                       dt.Rows.Add();
+                       int i = 0;
                        foreach (IXLCell cell in row.Cells())
                        {
                            dt.Columns.Add(cell.Value.ToString());
+                           dt.Rows[dt.Rows.Count - 1][i] = cell.Value.ToString();
+                           i++;
                        }
                        firstRow = false;
                    }
@@ -347,9 +351,20 @@ namespace TestIFNS
                            i++;
                        }
                    }
-                   MessageBox.Show(dt.Columns.ToString());
                }
+               
+               foreach (DataRow rows in dt.Rows)
+               {
+                   ListViewItem item = new ListViewItem(rows[0].ToString());
+                   for (int i = 1; i < dt.Columns.Count; i++)
+                   {
+                       item.SubItems.Add(rows[i].ToString());
+                   }
+                   listView3.Items.Add(item);
+               }
+           
            }
+            
             
         }
 
@@ -358,8 +373,6 @@ namespace TestIFNS
             ToolTip t = new ToolTip();
             t.SetToolTip(Sovpad, "Примеры ввода: *t*,*t,t*,t где t это текст!");
         }
-
-
     }
 }
 

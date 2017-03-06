@@ -1,4 +1,4 @@
-﻿namespace TestIFNS
+﻿namespace TestIFNSTools
 {
     partial class DialogForm
     {

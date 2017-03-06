@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using ClosedXML.Excel;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace TestIFNS
+namespace TestIFNSTools
 {
     public class Arhiv
     {

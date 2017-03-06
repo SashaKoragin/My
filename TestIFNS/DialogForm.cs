@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TestIFNS
+namespace TestIFNSTools
 {
     public partial class DialogForm : Form
     {

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+	<?define ProductManufacturer="IFNS51"?>
+  <?define SharedBinaryFolder=$(env.NETLIBS)?>
+  <?if $(var.Platform) = x64 ?>
+    <?define Win64 = "yes"?>
+    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder"?>
+  <?endif?>
+  <?if $(var.Platform) = x86 ?>
+    <?define Win64 = "no"?>
+    <?define PlatformProgramFilesFolder = "ProgramFilesFolder"?>
+  <?endif?>
+
+</Include>
