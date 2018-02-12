@@ -12,6 +12,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Face.FL.File.SqlParamFile
             var seath = new ZaprosFileFl();
             var tablefilefl = seath.Zaprosfilefl(god, param, detal);
             return generatefile.GeheratePath(tablefilefl, detal,god);
+            //dddddddd
         }
     }
 }
