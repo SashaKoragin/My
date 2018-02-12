@@ -6,11 +6,13 @@
     <Icon Id="au3.ico" SourceFile="$(var.ProjectDir)au3.ico" />
     <Property Id="ARPPRODUCTICON" Value="au3.ico" />
 
-    <WixVariable Id="WixUIBunnersBmp" Value="bmp\installer_banner_wix.bmp" />
+     <WixVariable Id="WixUIBunnersBmp" Value="bmp\installer_banner_wix.bmp" />
      <WixVariable Id="WixUIDialogBmp" Value="bmp\installer_background_wix.bmp" />
+    
     <!--Диалоговые окна по ссылкам UI-->
+    
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
-    <UIRef Id="WixUI_InstallDir" />
+    <UIRef Id="WixUI_MyInstallDir" />
     
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes" />
@@ -39,9 +41,6 @@
   </Directory>
 	</Fragment>
 
-
-  
-  
   
   <Fragment>
     <DirectoryRef Id="AppProgramsFolder">

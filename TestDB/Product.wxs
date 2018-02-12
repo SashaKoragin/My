@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define ZZZ_TargetDir=$(var.ZZZ.TargetDir)?>
+	<Product Id="*" Name="TestDB" Language="1033" Version="1.0.0.0" Manufacturer="WWW" UpgradeCode="3b33ede3-8866-447a-afbe-d3ba528fa188">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="TestDB" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="TestDB" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+			<Component Id="ZZZ.exe" Guid="0926ab19-e149-41eb-b696-312cee8cf366">
+			  <File Id="ZZZ.exe" Name="ZZZ.exe" Source="$(var.ZZZ_TargetDir)ZZZ.exe" />
+			</Component>
+			<Component Id="ZZZ.exe.config" Guid="e4d4479f-5bb6-41d6-91c0-7c91bbf8fe38">
+			  <File Id="ZZZ.exe.config" Name="ZZZ.exe.config" Source="$(var.ZZZ_TargetDir)ZZZ.exe.config" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

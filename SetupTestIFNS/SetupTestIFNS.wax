@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DeployedProjects>
-    <string>TestIFNS\TestIFNS.csproj</string>
+    <string>TestIFNS\TestIFNSTools.csproj</string>
   </DeployedProjects>
   <DirectoryMappings>
     <Item Key="" Value="INSTALLFOLDER" />
+    <Item Key="icon" Value="INSTALLLOCATION" />
   </DirectoryMappings>
-  <FileMappings />
+  <FileMappings>
+    <Item Key="icon\au3.ico" Value="au3.ico" />
+  </FileMappings>
   <DeploySymbols>false</DeploySymbols>
+  <DeployLocalizations>true</DeployLocalizations>
   <DeployExternalLocalizations>false</DeployExternalLocalizations>
 </Configuration>

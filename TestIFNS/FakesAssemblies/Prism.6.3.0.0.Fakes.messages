@@ -1,0 +1,32 @@
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать заглушку для Prism.Properties.Resources: тип невидим для exported or assembly(Prism.6.3.0.0.Fakes).
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать заглушку для Prism.Mvvm.PropertySupport: тип является запечатанным.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать заглушку для Prism.Mvvm.ViewModelLocationProvider: тип является запечатанным.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать заглушку для Prism.Logging.Category: тип является типом значения.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать заглушку для Prism.Logging.Priority: тип является типом значения.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать заглушку для Prism.Events.ThreadOption: тип является типом значения.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.IActiveAware: тип является интерфейсом.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Properties.Resources: тип невидим для exported or assembly(Prism.6.3.0.0.Fakes).
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Mvvm.ViewModelLocationProvider+<>c: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Logging.Category: тип является перечислением.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Logging.ILoggerFacade: тип является интерфейсом.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Logging.Priority: тип является перечислением.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.BackgroundEventSubscription`1+<>c__DisplayClass1_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.DispatcherEventSubscription+<>c__DisplayClass2_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.DispatcherEventSubscription`1+<>c__DisplayClass2_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.EventBase+<>c__DisplayClass10_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.EventBase+<>c__DisplayClass9_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.EventSubscription+<>c__DisplayClass8_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.EventSubscription`1+<>c__DisplayClass11_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.IDelegateReference: тип является интерфейсом.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.IEventAggregator: тип является интерфейсом.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.IEventSubscription: тип является интерфейсом.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.PubSubEvent+<>c__DisplayClass5_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.PubSubEvent+<>c__DisplayClass6_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.PubSubEvent`1+<>c: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.PubSubEvent`1+<>c__DisplayClass6_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.PubSubEvent`1+<>c__DisplayClass7_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Events.ThreadOption: тип является перечислением.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Commands.CompositeCommand+<>c__DisplayClass17_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Commands.DelegateCommand+<>c: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Commands.DelegateCommandBase+<>c__DisplayClass8_0: тип не поддерживается из-за внутренних ограничений.
+D:\Visual Studio 2012\MyStudio\Обучение\TestIFNS\Fakes\Prism.fakes : warning : Невозможно создать оболочку совместимости для Prism.Commands.DelegateCommand`1+<>c: тип не поддерживается из-за внутренних ограничений.

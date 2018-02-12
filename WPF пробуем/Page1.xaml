@@ -6,21 +6,19 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Page1">
-    <Grid Margin="-213,-49,-242,-55">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="125*"/>
-            <RowDefinition Height="279*"/>
-        </Grid.RowDefinitions>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="226,84,0,0" VerticalAlignment="Top" Height="16" Width="68"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="226,2,0,0" VerticalAlignment="Top" Height="26" Grid.Row="1" Width="38"/>
-        <TabControl HorizontalAlignment="Left" Height="100" Margin="263,10,0,0" VerticalAlignment="Top" Width="189" Grid.Row="1">
-            <TabItem Header="пвап" Margin="-2,-2,-2,-11">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="павп" Margin="-2,-2,-2,-11">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
-
+    <Grid>
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выход"/>
+            </MenuItem>
+            <MenuItem Header="Работа с БД">
+                <MenuItem Header="Добавить заявку"/>
+            </MenuItem>
+            <MenuItem Header="Выборки">
+                <MenuItem Header="Отработаные"/>
+                <MenuItem Header="Не отработаные"/>
+                <MenuItem Header="Детализация"/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Page>

@@ -1,0 +1,2054 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Prism.6.3.0.0.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.QualityTools.Testing.Fakes.Delegates.PrismDelegates">
+            <summary>Содержит пользовательские делегаты для заглушек и оболочек совместимости Prism</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.ShimCompositeCommand">
+            <summary>Тип оболочки совместимости для Prism.Commands.CompositeCommand</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimCompositeCommand.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimCompositeCommand.#ctor(Prism.Commands.CompositeCommand)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.CanExecuteChangedAddEventHandler">
+            <summary>Задает оболочка совместимости CompositeCommand.add_CanExecuteChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.CanExecuteChangedRemoveEventHandler">
+            <summary>Задает оболочка совместимости CompositeCommand.remove_CanExecuteChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.CanExecuteObject">
+            <summary>Задает оболочка совместимости CompositeCommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.Command_IsActiveChangedObjectEventArgs">
+            <summary>Задает оболочка совместимости CompositeCommand.Command_IsActiveChanged(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.ExecuteObject">
+            <summary>Задает оболочка совместимости CompositeCommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.OnCanExecuteChanged">
+            <summary>Задает оболочка совместимости CompositeCommand.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.OnRegisteredCommandCanExecuteChangedObjectEventArgs">
+            <summary>Задает оболочка совместимости CompositeCommand.OnRegisteredCommandCanExecuteChanged(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.RegisterCommandICommand">
+            <summary>Задает оболочка совместимости CompositeCommand.RegisterCommand(ICommand command)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.RegisteredCommandsGet">
+            <summary>Задает оболочка совместимости CompositeCommand.get_RegisteredCommands()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.ShouldExecuteICommand">
+            <summary>Задает оболочка совместимости CompositeCommand.ShouldExecute(ICommand command)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.AllInstances.UnregisterCommandICommand">
+            <summary>Задает оболочка совместимости CompositeCommand.UnregisterCommand(ICommand command)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimCompositeCommand.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimCompositeCommand.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimCompositeCommand.Bind(System.Windows.Input.ICommand)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.CanExecuteChangedAddEventHandler">
+            <summary>Задает оболочка совместимости CompositeCommand.add_CanExecuteChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.CanExecuteChangedRemoveEventHandler">
+            <summary>Задает оболочка совместимости CompositeCommand.remove_CanExecuteChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.CanExecuteObject">
+            <summary>Задает оболочка совместимости CompositeCommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.Command_IsActiveChangedObjectEventArgs">
+            <summary>Задает оболочка совместимости CompositeCommand.Command_IsActiveChanged(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.Constructor">
+            <summary>Задает оболочка совместимости CompositeCommand.CompositeCommand()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.ConstructorBoolean">
+            <summary>Задает оболочка совместимости CompositeCommand.CompositeCommand(Boolean monitorCommandActivity)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.ExecuteObject">
+            <summary>Задает оболочка совместимости CompositeCommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.OnCanExecuteChanged">
+            <summary>Задает оболочка совместимости CompositeCommand.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.OnRegisteredCommandCanExecuteChangedObjectEventArgs">
+            <summary>Задает оболочка совместимости CompositeCommand.OnRegisteredCommandCanExecuteChanged(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.RegisterCommandICommand">
+            <summary>Задает оболочка совместимости CompositeCommand.RegisterCommand(ICommand command)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.RegisteredCommandsGet">
+            <summary>Задает оболочка совместимости CompositeCommand.get_RegisteredCommands()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.ShouldExecuteICommand">
+            <summary>Задает оболочка совместимости CompositeCommand.ShouldExecute(ICommand command)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimCompositeCommand.UnregisterCommandICommand">
+            <summary>Задает оболочка совместимости CompositeCommand.UnregisterCommand(ICommand command)</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.ShimDelegateCommand">
+            <summary>Тип оболочки совместимости для Prism.Commands.DelegateCommand</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand.#ctor(Prism.Commands.DelegateCommand)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.ShimDelegateCommand.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.AllInstances.CanExecute">
+            <summary>Задает оболочка совместимости DelegateCommand.CanExecute()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.AllInstances.CanExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.AllInstances.Execute">
+            <summary>Задает оболочка совместимости DelegateCommand.Execute()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.AllInstances.ExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.AllInstances.ObservesCanExecuteExpressionOfFuncOfBoolean">
+            <summary>Задает оболочка совместимости DelegateCommand.ObservesCanExecute(Expression`1&lt;Func`1&lt;Boolean&gt;&gt; canExecuteExpression)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand.AllInstances.ObservesPropertyOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{Prism.Commands.DelegateCommand,System.Linq.Expressions.Expression{System.Func{``0}},Prism.Commands.DelegateCommand})">
+            <summary>Задает оболочка совместимости DelegateCommand.ObservesProperty(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand.Bind(Prism.IActiveAware)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand.Bind(System.Windows.Input.ICommand)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.CanExecute">
+            <summary>Задает оболочка совместимости DelegateCommand.CanExecute()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.CanExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.ConstructorAction">
+            <summary>Задает оболочка совместимости DelegateCommand.DelegateCommand(Action executeMethod)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.ConstructorActionFuncOfBoolean">
+            <summary>Задает оболочка совместимости DelegateCommand.DelegateCommand(Action executeMethod, Func`1&lt;Boolean&gt; canExecuteMethod)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.Execute">
+            <summary>Задает оболочка совместимости DelegateCommand.Execute()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.ExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand.ObservesCanExecuteExpressionOfFuncOfBoolean">
+            <summary>Задает оболочка совместимости DelegateCommand.ObservesCanExecute(Expression`1&lt;Func`1&lt;Boolean&gt;&gt; canExecuteExpression)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand.ObservesPropertyOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{``0}},Prism.Commands.DelegateCommand})">
+            <summary>Задает оболочка совместимости DelegateCommand.ObservesProperty(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.ShimDelegateCommand`1">
+            <summary>Тип оболочки совместимости для Prism.Commands.DelegateCommand`1</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand`1.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand`1.#ctor(Prism.Commands.DelegateCommand{`0})">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.ShimDelegateCommand`1.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.AllInstances.CanExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommand`1.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.AllInstances.CanExecuteT0">
+            <summary>Задает оболочка совместимости DelegateCommand`1.CanExecute(!0 parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.AllInstances.ExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommand`1.Execute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.AllInstances.ExecuteT0">
+            <summary>Задает оболочка совместимости DelegateCommand`1.Execute(!0 parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.AllInstances.ObservesCanExecuteExpressionOfFuncOfBoolean">
+            <summary>Задает оболочка совместимости DelegateCommand`1.ObservesCanExecute(Expression`1&lt;Func`1&lt;Boolean&gt;&gt; canExecuteExpression)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand`1.AllInstances.ObservesPropertyOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{Prism.Commands.DelegateCommand{`0},System.Linq.Expressions.Expression{System.Func{``0}},Prism.Commands.DelegateCommand{`0}})">
+            <summary>Задает оболочка совместимости DelegateCommand`1.ObservesProperty(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand`1.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand`1.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand`1.Bind(Prism.IActiveAware)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand`1.Bind(System.Windows.Input.ICommand)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.CanExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommand`1.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.CanExecuteT0">
+            <summary>Задает оболочка совместимости DelegateCommand`1.CanExecute(!0 parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.ConstructorActionOfT0">
+            <summary>Задает оболочка совместимости DelegateCommand`1.DelegateCommand`1(Action`1&lt;!0&gt; executeMethod)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.ConstructorActionOfT0FuncOfT0Boolean">
+            <summary>Задает оболочка совместимости DelegateCommand`1.DelegateCommand`1(Action`1&lt;!0&gt; executeMethod, Func`2&lt;!0,Boolean&gt; canExecuteMethod)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.ExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommand`1.Execute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.ExecuteT0">
+            <summary>Задает оболочка совместимости DelegateCommand`1.Execute(!0 parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommand`1.ObservesCanExecuteExpressionOfFuncOfBoolean">
+            <summary>Задает оболочка совместимости DelegateCommand`1.ObservesCanExecute(Expression`1&lt;Func`1&lt;Boolean&gt;&gt; canExecuteExpression)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommand`1.ObservesPropertyOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{``0}},Prism.Commands.DelegateCommand{`0}})">
+            <summary>Задает оболочка совместимости DelegateCommand`1.ObservesProperty(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.ShimDelegateCommandBase">
+            <summary>Тип оболочки совместимости для Prism.Commands.DelegateCommandBase</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommandBase.#ctor(Prism.Commands.DelegateCommandBase)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AddPropertyToObserveString">
+            <summary>Задает оболочка совместимости DelegateCommandBase.AddPropertyToObserve(String property)</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.AddPropertyToObserveString">
+            <summary>Задает оболочка совместимости DelegateCommandBase.AddPropertyToObserve(String property)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.CanExecuteChangedAddEventHandler">
+            <summary>Задает оболочка совместимости DelegateCommandBase.add_CanExecuteChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.CanExecuteChangedRemoveEventHandler">
+            <summary>Задает оболочка совместимости DelegateCommandBase.remove_CanExecuteChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.HookInpcMemberExpression">
+            <summary>Задает оболочка совместимости DelegateCommandBase.HookInpc(MemberExpression expression)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.Inpc_PropertyChangedObjectPropertyChangedEventArgs">
+            <summary>Задает оболочка совместимости DelegateCommandBase.Inpc_PropertyChanged(Object sender, PropertyChangedEventArgs e)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.IsActiveChangedAddEventHandler">
+            <summary>Задает оболочка совместимости DelegateCommandBase.add_IsActiveChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.IsActiveChangedRemoveEventHandler">
+            <summary>Задает оболочка совместимости DelegateCommandBase.remove_IsActiveChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.IsActiveGet">
+            <summary>Задает оболочка совместимости DelegateCommandBase.get_IsActive()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.IsActiveSetBoolean">
+            <summary>Задает оболочка совместимости DelegateCommandBase.set_IsActive(Boolean value)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.ObservesPropertyInternalOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{Prism.Commands.DelegateCommandBase,System.Linq.Expressions.Expression{System.Func{``0}}})">
+            <summary>Задает оболочка совместимости DelegateCommandBase.ObservesPropertyInternal(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.OnCanExecuteChanged">
+            <summary>Задает оболочка совместимости DelegateCommandBase.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.OnIsActiveChanged">
+            <summary>Задает оболочка совместимости DelegateCommandBase.OnIsActiveChanged()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.RaiseCanExecuteChanged">
+            <summary>Задает оболочка совместимости DelegateCommandBase.RaiseCanExecuteChanged()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.SystemWindowsInputICommandCanExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommandBase.System.Windows.Input.ICommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.AllInstances.SystemWindowsInputICommandExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommandBase.System.Windows.Input.ICommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommandBase.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommandBase.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommandBase.Bind(Prism.IActiveAware)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommandBase.Bind(System.Windows.Input.ICommand)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.CanExecuteChangedAddEventHandler">
+            <summary>Задает оболочка совместимости DelegateCommandBase.add_CanExecuteChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.CanExecuteChangedRemoveEventHandler">
+            <summary>Задает оболочка совместимости DelegateCommandBase.remove_CanExecuteChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.Constructor">
+            <summary>Задает оболочка совместимости DelegateCommandBase.DelegateCommandBase()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.HookInpcMemberExpression">
+            <summary>Задает оболочка совместимости DelegateCommandBase.HookInpc(MemberExpression expression)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.Inpc_PropertyChangedObjectPropertyChangedEventArgs">
+            <summary>Задает оболочка совместимости DelegateCommandBase.Inpc_PropertyChanged(Object sender, PropertyChangedEventArgs e)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.IsActiveChangedAddEventHandler">
+            <summary>Задает оболочка совместимости DelegateCommandBase.add_IsActiveChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.IsActiveChangedRemoveEventHandler">
+            <summary>Задает оболочка совместимости DelegateCommandBase.remove_IsActiveChanged(EventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.IsActiveGet">
+            <summary>Задает оболочка совместимости DelegateCommandBase.get_IsActive()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.IsActiveSetBoolean">
+            <summary>Задает оболочка совместимости DelegateCommandBase.set_IsActive(Boolean value)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.ShimDelegateCommandBase.ObservesPropertyInternalOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{System.Linq.Expressions.Expression{System.Func{``0}}})">
+            <summary>Задает оболочка совместимости DelegateCommandBase.ObservesPropertyInternal(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.OnCanExecuteChanged">
+            <summary>Задает оболочка совместимости DelegateCommandBase.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.OnIsActiveChanged">
+            <summary>Задает оболочка совместимости DelegateCommandBase.OnIsActiveChanged()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.RaiseCanExecuteChanged">
+            <summary>Задает оболочка совместимости DelegateCommandBase.RaiseCanExecuteChanged()</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.SystemWindowsInputICommandCanExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommandBase.System.Windows.Input.ICommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.ShimDelegateCommandBase.SystemWindowsInputICommandExecuteObject">
+            <summary>Задает оболочка совместимости DelegateCommandBase.System.Windows.Input.ICommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.StubCompositeCommand">
+            <summary>Тип заглушки Prism.Commands.CompositeCommand</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubCompositeCommand.#ctor">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubCompositeCommand.#ctor(System.Boolean)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubCompositeCommand.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubCompositeCommand.CanExecute(System.Object)">
+            <summary>Задает заглушка CompositeCommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubCompositeCommand.CanExecuteObject">
+            <summary>Задает stub CompositeCommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubCompositeCommand.Execute(System.Object)">
+            <summary>Задает заглушка CompositeCommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubCompositeCommand.ExecuteObject">
+            <summary>Задает stub CompositeCommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubCompositeCommand.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubCompositeCommand</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubCompositeCommand.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubCompositeCommand.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubCompositeCommand.OnCanExecuteChanged">
+            <summary>Задает заглушка CompositeCommand.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubCompositeCommand.OnCanExecuteChanged01">
+            <summary>Задает stub CompositeCommand.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubCompositeCommand.RegisterCommand(System.Windows.Input.ICommand)">
+            <summary>Задает заглушка CompositeCommand.RegisterCommand(ICommand command)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubCompositeCommand.RegisterCommandICommand">
+            <summary>Задает stub CompositeCommand.RegisterCommand(ICommand command)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubCompositeCommand.ShouldExecute(System.Windows.Input.ICommand)">
+            <summary>Задает заглушка CompositeCommand.ShouldExecute(ICommand command)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubCompositeCommand.ShouldExecuteICommand">
+            <summary>Задает stub CompositeCommand.ShouldExecute(ICommand command)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubCompositeCommand.UnregisterCommand(System.Windows.Input.ICommand)">
+            <summary>Задает заглушка CompositeCommand.UnregisterCommand(ICommand command)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubCompositeCommand.UnregisterCommandICommand">
+            <summary>Задает stub CompositeCommand.UnregisterCommand(ICommand command)</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.StubDelegateCommand">
+            <summary>Тип заглушки Prism.Commands.DelegateCommand</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand.#ctor(System.Action)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand.#ctor(System.Action,System.Func{System.Boolean})">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubDelegateCommand.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand.CanExecute(System.Object)">
+            <summary>Задает заглушка DelegateCommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommand.CanExecuteObject">
+            <summary>Задает stub DelegateCommand.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand.Execute(System.Object)">
+            <summary>Задает заглушка DelegateCommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommand.ExecuteObject">
+            <summary>Задает stub DelegateCommand.Execute(Object parameter)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubDelegateCommand</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubDelegateCommand.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubDelegateCommand.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand.OnCanExecuteChanged">
+            <summary>Задает заглушка DelegateCommandBase.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommand.OnCanExecuteChanged01">
+            <summary>Задает stub DelegateCommandBase.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand.OnIsActiveChanged">
+            <summary>Задает заглушка DelegateCommandBase.OnIsActiveChanged()</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommand.OnIsActiveChanged01">
+            <summary>Задает stub DelegateCommandBase.OnIsActiveChanged()</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.StubDelegateCommand`1">
+            <summary>Тип заглушки Prism.Commands.DelegateCommand`1</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand`1.#ctor(System.Action{`0})">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean})">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubDelegateCommand`1.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand`1.CanExecute(System.Object)">
+            <summary>Задает заглушка DelegateCommand`1.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommand`1.CanExecuteObject">
+            <summary>Задает stub DelegateCommand`1.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand`1.Execute(System.Object)">
+            <summary>Задает заглушка DelegateCommand`1.Execute(Object parameter)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommand`1.ExecuteObject">
+            <summary>Задает stub DelegateCommand`1.Execute(Object parameter)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand`1.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubDelegateCommand</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubDelegateCommand`1.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubDelegateCommand`1.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand`1.OnCanExecuteChanged">
+            <summary>Задает заглушка DelegateCommandBase.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommand`1.OnCanExecuteChanged01">
+            <summary>Задает stub DelegateCommandBase.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommand`1.OnIsActiveChanged">
+            <summary>Задает заглушка DelegateCommandBase.OnIsActiveChanged()</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommand`1.OnIsActiveChanged01">
+            <summary>Задает stub DelegateCommandBase.OnIsActiveChanged()</summary>
+        </member>
+        <member name="T:Prism.Commands.Fakes.StubDelegateCommandBase">
+            <summary>Тип заглушки Prism.Commands.DelegateCommandBase</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommandBase.#ctor">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubDelegateCommandBase.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommandBase.CanExecute(System.Object)">
+            <summary>Задает заглушка DelegateCommandBase.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommandBase.CanExecuteObject">
+            <summary>Задает stub DelegateCommandBase.CanExecute(Object parameter)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommandBase.Execute(System.Object)">
+            <summary>Задает заглушка DelegateCommandBase.Execute(Object parameter)</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommandBase.ExecuteObject">
+            <summary>Задает stub DelegateCommandBase.Execute(Object parameter)</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommandBase.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubDelegateCommandBase</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubDelegateCommandBase.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Commands.Fakes.StubDelegateCommandBase.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommandBase.OnCanExecuteChanged">
+            <summary>Задает заглушка DelegateCommandBase.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommandBase.OnCanExecuteChanged01">
+            <summary>Задает stub DelegateCommandBase.OnCanExecuteChanged()</summary>
+        </member>
+        <member name="M:Prism.Commands.Fakes.StubDelegateCommandBase.OnIsActiveChanged">
+            <summary>Задает заглушка DelegateCommandBase.OnIsActiveChanged()</summary>
+        </member>
+        <member name="F:Prism.Commands.Fakes.StubDelegateCommandBase.OnIsActiveChanged01">
+            <summary>Задает stub DelegateCommandBase.OnIsActiveChanged()</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimBackgroundEventSubscription">
+            <summary>Тип оболочки совместимости для Prism.Events.BackgroundEventSubscription</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription.#ctor(Prism.Events.BackgroundEventSubscription)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimBackgroundEventSubscription.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimBackgroundEventSubscription.AllInstances.InvokeActionAction">
+            <summary>Задает оболочка совместимости BackgroundEventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimBackgroundEventSubscription.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription.Bind(Prism.Events.IEventSubscription)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimBackgroundEventSubscription.ConstructorIDelegateReference">
+            <summary>Задает оболочка совместимости BackgroundEventSubscription.BackgroundEventSubscription(IDelegateReference actionReference)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimBackgroundEventSubscription.InvokeActionAction">
+            <summary>Задает оболочка совместимости BackgroundEventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimBackgroundEventSubscription`1">
+            <summary>Тип оболочки совместимости для Prism.Events.BackgroundEventSubscription`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.#ctor(Prism.Events.BackgroundEventSubscription{`0})">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.AllInstances.InvokeActionActionOfT0T0">
+            <summary>Задает оболочка совместимости BackgroundEventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.Bind(Prism.Events.IEventSubscription)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.ConstructorIDelegateReferenceIDelegateReference">
+            <summary>Задает оболочка совместимости BackgroundEventSubscription`1.BackgroundEventSubscription`1(IDelegateReference actionReference, IDelegateReference filterReference)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimBackgroundEventSubscription`1.InvokeActionActionOfT0T0">
+            <summary>Задает оболочка совместимости BackgroundEventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimDataEventArgs`1">
+            <summary>Тип оболочки совместимости для Prism.Events.DataEventArgs`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDataEventArgs`1.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDataEventArgs`1.#ctor(Prism.Events.DataEventArgs{`0})">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimDataEventArgs`1.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDataEventArgs`1.AllInstances.ValueGet">
+            <summary>Задает оболочка совместимости DataEventArgs`1.get_Value()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDataEventArgs`1.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDataEventArgs`1.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDataEventArgs`1.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDataEventArgs`1.ConstructorT0">
+            <summary>Задает оболочка совместимости DataEventArgs`1.DataEventArgs`1(!0 value)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDataEventArgs`1.ValueGet">
+            <summary>Задает оболочка совместимости DataEventArgs`1.get_Value()</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimDelegateReference">
+            <summary>Тип оболочки совместимости для Prism.Events.DelegateReference</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDelegateReference.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDelegateReference.#ctor(Prism.Events.DelegateReference)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimDelegateReference.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDelegateReference.AllInstances.TargetGet">
+            <summary>Задает оболочка совместимости DelegateReference.get_Target()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDelegateReference.AllInstances.TryGetDelegate">
+            <summary>Задает оболочка совместимости DelegateReference.TryGetDelegate()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDelegateReference.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDelegateReference.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDelegateReference.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDelegateReference.Bind(Prism.Events.IDelegateReference)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDelegateReference.ConstructorDelegateBoolean">
+            <summary>Задает оболочка совместимости DelegateReference.DelegateReference(Delegate delegate, Boolean keepReferenceAlive)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDelegateReference.TargetGet">
+            <summary>Задает оболочка совместимости DelegateReference.get_Target()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDelegateReference.TryGetDelegate">
+            <summary>Задает оболочка совместимости DelegateReference.TryGetDelegate()</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimDispatcherEventSubscription">
+            <summary>Тип оболочки совместимости для Prism.Events.DispatcherEventSubscription</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription.#ctor(Prism.Events.DispatcherEventSubscription)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimDispatcherEventSubscription.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDispatcherEventSubscription.AllInstances.InvokeActionAction">
+            <summary>Задает оболочка совместимости DispatcherEventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDispatcherEventSubscription.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription.Bind(Prism.Events.IEventSubscription)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDispatcherEventSubscription.ConstructorIDelegateReferenceSynchronizationContext">
+            <summary>Задает оболочка совместимости DispatcherEventSubscription.DispatcherEventSubscription(IDelegateReference actionReference, SynchronizationContext context)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDispatcherEventSubscription.InvokeActionAction">
+            <summary>Задает оболочка совместимости DispatcherEventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimDispatcherEventSubscription`1">
+            <summary>Тип оболочки совместимости для Prism.Events.DispatcherEventSubscription`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.#ctor(Prism.Events.DispatcherEventSubscription{`0})">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.AllInstances.InvokeActionActionOfT0T0">
+            <summary>Задает оболочка совместимости DispatcherEventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.Bind(Prism.Events.IEventSubscription)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.ConstructorIDelegateReferenceIDelegateReferenceSynchronizationContext">
+            <summary>Задает оболочка совместимости DispatcherEventSubscription`1.DispatcherEventSubscription`1(IDelegateReference actionReference, IDelegateReference filterReference, SynchronizationContext context)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimDispatcherEventSubscription`1.InvokeActionActionOfT0T0">
+            <summary>Задает оболочка совместимости DispatcherEventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimEventAggregator">
+            <summary>Тип оболочки совместимости для Prism.Events.EventAggregator</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventAggregator.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventAggregator.#ctor(Prism.Events.EventAggregator)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimEventAggregator.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventAggregator.AllInstances.GetEventOf1``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{Prism.Events.EventAggregator,``0})">
+            <summary>Задает оболочка совместимости EventAggregator.GetEvent()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventAggregator.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventAggregator.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventAggregator.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventAggregator.Bind(Prism.Events.IEventAggregator)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventAggregator.Constructor">
+            <summary>Задает оболочка совместимости EventAggregator.EventAggregator()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventAggregator.GetEventOf1``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{``0})">
+            <summary>Задает оболочка совместимости EventAggregator.GetEvent()</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimEventBase">
+            <summary>Тип оболочки совместимости для Prism.Events.EventBase</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventBase.#ctor(Prism.Events.EventBase)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimEventBase.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.AllInstances.ContainsSubscriptionToken">
+            <summary>Задает оболочка совместимости EventBase.Contains(SubscriptionToken token)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.AllInstances.InternalPublishObjectArray">
+            <summary>Задает оболочка совместимости EventBase.InternalPublish(Object[] arguments)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.AllInstances.InternalSubscribeIEventSubscription">
+            <summary>Задает оболочка совместимости EventBase.InternalSubscribe(IEventSubscription eventSubscription)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.AllInstances.PruneAndReturnStrategies">
+            <summary>Задает оболочка совместимости EventBase.PruneAndReturnStrategies()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.AllInstances.SubscriptionsGet">
+            <summary>Задает оболочка совместимости EventBase.get_Subscriptions()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.AllInstances.SynchronizationContextGet">
+            <summary>Задает оболочка совместимости EventBase.get_SynchronizationContext()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.AllInstances.SynchronizationContextSetSynchronizationContext">
+            <summary>Задает оболочка совместимости EventBase.set_SynchronizationContext(SynchronizationContext value)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.AllInstances.UnsubscribeSubscriptionToken">
+            <summary>Задает оболочка совместимости EventBase.Unsubscribe(SubscriptionToken token)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventBase.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventBase.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.Constructor">
+            <summary>Задает оболочка совместимости EventBase.EventBase()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.ContainsSubscriptionToken">
+            <summary>Задает оболочка совместимости EventBase.Contains(SubscriptionToken token)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.InternalPublishObjectArray">
+            <summary>Задает оболочка совместимости EventBase.InternalPublish(Object[] arguments)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.InternalSubscribeIEventSubscription">
+            <summary>Задает оболочка совместимости EventBase.InternalSubscribe(IEventSubscription eventSubscription)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.PruneAndReturnStrategies">
+            <summary>Задает оболочка совместимости EventBase.PruneAndReturnStrategies()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.SubscriptionsGet">
+            <summary>Задает оболочка совместимости EventBase.get_Subscriptions()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.SynchronizationContextGet">
+            <summary>Задает оболочка совместимости EventBase.get_SynchronizationContext()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.SynchronizationContextSetSynchronizationContext">
+            <summary>Задает оболочка совместимости EventBase.set_SynchronizationContext(SynchronizationContext value)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventBase.UnsubscribeSubscriptionToken">
+            <summary>Задает оболочка совместимости EventBase.Unsubscribe(SubscriptionToken token)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimEventSubscription">
+            <summary>Тип оболочки совместимости для Prism.Events.EventSubscription</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription.#ctor(Prism.Events.EventSubscription)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.ActionGet">
+            <summary>Задает оболочка совместимости EventSubscription.get_Action()</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimEventSubscription.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.AllInstances.ActionGet">
+            <summary>Задает оболочка совместимости EventSubscription.get_Action()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.AllInstances.GetExecutionStrategy">
+            <summary>Задает оболочка совместимости EventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.AllInstances.InvokeActionAction">
+            <summary>Задает оболочка совместимости EventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.AllInstances.SubscriptionTokenGet">
+            <summary>Задает оболочка совместимости EventSubscription.get_SubscriptionToken()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.AllInstances.SubscriptionTokenSetSubscriptionToken">
+            <summary>Задает оболочка совместимости EventSubscription.set_SubscriptionToken(SubscriptionToken value)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription.Bind(Prism.Events.IEventSubscription)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.ConstructorIDelegateReference">
+            <summary>Задает оболочка совместимости EventSubscription.EventSubscription(IDelegateReference actionReference)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.GetExecutionStrategy">
+            <summary>Задает оболочка совместимости EventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.InvokeActionAction">
+            <summary>Задает оболочка совместимости EventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.SubscriptionTokenGet">
+            <summary>Задает оболочка совместимости EventSubscription.get_SubscriptionToken()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription.SubscriptionTokenSetSubscriptionToken">
+            <summary>Задает оболочка совместимости EventSubscription.set_SubscriptionToken(SubscriptionToken value)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimEventSubscription`1">
+            <summary>Тип оболочки совместимости для Prism.Events.EventSubscription`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription`1.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription`1.#ctor(Prism.Events.EventSubscription{`0})">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.ActionGet">
+            <summary>Задает оболочка совместимости EventSubscription`1.get_Action()</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimEventSubscription`1.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.AllInstances.ActionGet">
+            <summary>Задает оболочка совместимости EventSubscription`1.get_Action()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.AllInstances.FilterGet">
+            <summary>Задает оболочка совместимости EventSubscription`1.get_Filter()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.AllInstances.GetExecutionStrategy">
+            <summary>Задает оболочка совместимости EventSubscription`1.GetExecutionStrategy()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.AllInstances.InvokeActionActionOfT0T0">
+            <summary>Задает оболочка совместимости EventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.AllInstances.SubscriptionTokenGet">
+            <summary>Задает оболочка совместимости EventSubscription`1.get_SubscriptionToken()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.AllInstances.SubscriptionTokenSetSubscriptionToken">
+            <summary>Задает оболочка совместимости EventSubscription`1.set_SubscriptionToken(SubscriptionToken value)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription`1.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription`1.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimEventSubscription`1.Bind(Prism.Events.IEventSubscription)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.ConstructorIDelegateReferenceIDelegateReference">
+            <summary>Задает оболочка совместимости EventSubscription`1.EventSubscription`1(IDelegateReference actionReference, IDelegateReference filterReference)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.FilterGet">
+            <summary>Задает оболочка совместимости EventSubscription`1.get_Filter()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.GetExecutionStrategy">
+            <summary>Задает оболочка совместимости EventSubscription`1.GetExecutionStrategy()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.InvokeActionActionOfT0T0">
+            <summary>Задает оболочка совместимости EventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.SubscriptionTokenGet">
+            <summary>Задает оболочка совместимости EventSubscription`1.get_SubscriptionToken()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimEventSubscription`1.SubscriptionTokenSetSubscriptionToken">
+            <summary>Задает оболочка совместимости EventSubscription`1.set_SubscriptionToken(SubscriptionToken value)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimPubSubEvent">
+            <summary>Тип оболочки совместимости для Prism.Events.PubSubEvent</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimPubSubEvent.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimPubSubEvent.#ctor(Prism.Events.PubSubEvent)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimPubSubEvent.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.AllInstances.ContainsAction">
+            <summary>Задает оболочка совместимости PubSubEvent.Contains(Action subscriber)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.AllInstances.Publish">
+            <summary>Задает оболочка совместимости PubSubEvent.Publish()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.AllInstances.SubscribeAction">
+            <summary>Задает оболочка совместимости PubSubEvent.Subscribe(Action action)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.AllInstances.SubscribeActionBoolean">
+            <summary>Задает оболочка совместимости PubSubEvent.Subscribe(Action action, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.AllInstances.SubscribeActionThreadOption">
+            <summary>Задает оболочка совместимости PubSubEvent.Subscribe(Action action, ThreadOption threadOption)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.AllInstances.SubscribeActionThreadOptionBoolean">
+            <summary>Задает оболочка совместимости PubSubEvent.Subscribe(Action action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.AllInstances.UnsubscribeAction">
+            <summary>Задает оболочка совместимости PubSubEvent.Unsubscribe(Action subscriber)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimPubSubEvent.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimPubSubEvent.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.Constructor">
+            <summary>Задает оболочка совместимости PubSubEvent.PubSubEvent()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.ContainsAction">
+            <summary>Задает оболочка совместимости PubSubEvent.Contains(Action subscriber)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.Publish">
+            <summary>Задает оболочка совместимости PubSubEvent.Publish()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.SubscribeAction">
+            <summary>Задает оболочка совместимости PubSubEvent.Subscribe(Action action)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.SubscribeActionBoolean">
+            <summary>Задает оболочка совместимости PubSubEvent.Subscribe(Action action, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.SubscribeActionThreadOption">
+            <summary>Задает оболочка совместимости PubSubEvent.Subscribe(Action action, ThreadOption threadOption)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.SubscribeActionThreadOptionBoolean">
+            <summary>Задает оболочка совместимости PubSubEvent.Subscribe(Action action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent.UnsubscribeAction">
+            <summary>Задает оболочка совместимости PubSubEvent.Unsubscribe(Action subscriber)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimPubSubEvent`1">
+            <summary>Тип оболочки совместимости для Prism.Events.PubSubEvent`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimPubSubEvent`1.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimPubSubEvent`1.#ctor(Prism.Events.PubSubEvent{`0})">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimPubSubEvent`1.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.AllInstances.ContainsActionOfT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Contains(Action`1&lt;!0&gt; subscriber)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.AllInstances.PublishT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Publish(!0 payload)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.AllInstances.SubscribeActionOfT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.AllInstances.SubscribeActionOfT0Boolean">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.AllInstances.SubscribeActionOfT0ThreadOption">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, ThreadOption threadOption)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.AllInstances.SubscribeActionOfT0ThreadOptionBoolean">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.AllInstances.SubscribeActionOfT0ThreadOptionBooleanPredicateOfT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive, Predicate`1&lt;!0&gt; filter)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.AllInstances.UnsubscribeActionOfT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Unsubscribe(Action`1&lt;!0&gt; subscriber)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimPubSubEvent`1.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimPubSubEvent`1.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.Constructor">
+            <summary>Задает оболочка совместимости PubSubEvent`1.PubSubEvent`1()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.ContainsActionOfT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Contains(Action`1&lt;!0&gt; subscriber)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.PublishT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Publish(!0 payload)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.SubscribeActionOfT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.SubscribeActionOfT0Boolean">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.SubscribeActionOfT0ThreadOption">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, ThreadOption threadOption)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.SubscribeActionOfT0ThreadOptionBoolean">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.SubscribeActionOfT0ThreadOptionBooleanPredicateOfT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive, Predicate`1&lt;!0&gt; filter)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimPubSubEvent`1.UnsubscribeActionOfT0">
+            <summary>Задает оболочка совместимости PubSubEvent`1.Unsubscribe(Action`1&lt;!0&gt; subscriber)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimSubscriptionToken">
+            <summary>Тип оболочки совместимости для Prism.Events.SubscriptionToken</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimSubscriptionToken.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimSubscriptionToken.#ctor(Prism.Events.SubscriptionToken)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.ShimSubscriptionToken.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.AllInstances.Dispose">
+            <summary>Задает оболочка совместимости SubscriptionToken.Dispose()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.AllInstances.EqualsObject">
+            <summary>Задает оболочка совместимости SubscriptionToken.Equals(Object obj)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.AllInstances.EqualsSubscriptionToken">
+            <summary>Задает оболочка совместимости SubscriptionToken.Equals(SubscriptionToken other)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.AllInstances.GetHashCode01">
+            <summary>Задает оболочка совместимости SubscriptionToken.GetHashCode()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimSubscriptionToken.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimSubscriptionToken.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimSubscriptionToken.Bind(System.IDisposable)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.ShimSubscriptionToken.Bind(System.IEquatable{Prism.Events.SubscriptionToken})">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.ConstructorActionOfSubscriptionToken">
+            <summary>Задает оболочка совместимости SubscriptionToken.SubscriptionToken(Action`1&lt;SubscriptionToken&gt; unsubscribeAction)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.Dispose">
+            <summary>Задает оболочка совместимости SubscriptionToken.Dispose()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.EqualsObject">
+            <summary>Задает оболочка совместимости SubscriptionToken.Equals(Object obj)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.EqualsSubscriptionToken">
+            <summary>Задает оболочка совместимости SubscriptionToken.Equals(SubscriptionToken other)</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.ShimSubscriptionToken.GetHashCode">
+            <summary>Задает оболочка совместимости SubscriptionToken.GetHashCode()</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubBackgroundEventSubscription">
+            <summary>Тип заглушки Prism.Events.BackgroundEventSubscription</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubBackgroundEventSubscription.#ctor(Prism.Events.IDelegateReference)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubBackgroundEventSubscription.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubBackgroundEventSubscription.GetExecutionStrategy">
+            <summary>Задает заглушка EventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubBackgroundEventSubscription.GetExecutionStrategy01">
+            <summary>Задает stub EventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubBackgroundEventSubscription.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubBackgroundEventSubscription</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubBackgroundEventSubscription.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubBackgroundEventSubscription.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubBackgroundEventSubscription.InvokeAction(System.Action)">
+            <summary>Задает заглушка BackgroundEventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubBackgroundEventSubscription.InvokeActionAction">
+            <summary>Задает stub BackgroundEventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubBackgroundEventSubscription`1">
+            <summary>Тип заглушки Prism.Events.BackgroundEventSubscription`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubBackgroundEventSubscription`1.#ctor(Prism.Events.IDelegateReference,Prism.Events.IDelegateReference)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubBackgroundEventSubscription`1.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubBackgroundEventSubscription`1.GetExecutionStrategy">
+            <summary>Задает заглушка EventSubscription`1.GetExecutionStrategy()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubBackgroundEventSubscription`1.GetExecutionStrategy01">
+            <summary>Задает stub EventSubscription`1.GetExecutionStrategy()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubBackgroundEventSubscription`1.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubBackgroundEventSubscription</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubBackgroundEventSubscription`1.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubBackgroundEventSubscription`1.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubBackgroundEventSubscription`1.InvokeAction(System.Action{`0},`0)">
+            <summary>Задает заглушка BackgroundEventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubBackgroundEventSubscription`1.InvokeActionActionOfT0T0">
+            <summary>Задает stub BackgroundEventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubDataEventArgs`1">
+            <summary>Тип заглушки Prism.Events.DataEventArgs`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDataEventArgs`1.#ctor(`0)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDataEventArgs`1.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDataEventArgs`1.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubDataEventArgs</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDataEventArgs`1.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDataEventArgs`1.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubDelegateReference">
+            <summary>Тип заглушки Prism.Events.DelegateReference</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDelegateReference.#ctor(System.Delegate,System.Boolean)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDelegateReference.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDelegateReference.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubDelegateReference</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDelegateReference.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDelegateReference.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubDispatcherEventSubscription">
+            <summary>Тип заглушки Prism.Events.DispatcherEventSubscription</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDispatcherEventSubscription.#ctor(Prism.Events.IDelegateReference,System.Threading.SynchronizationContext)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDispatcherEventSubscription.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDispatcherEventSubscription.GetExecutionStrategy">
+            <summary>Задает заглушка EventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubDispatcherEventSubscription.GetExecutionStrategy01">
+            <summary>Задает stub EventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDispatcherEventSubscription.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubDispatcherEventSubscription</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDispatcherEventSubscription.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDispatcherEventSubscription.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDispatcherEventSubscription.InvokeAction(System.Action)">
+            <summary>Задает заглушка DispatcherEventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubDispatcherEventSubscription.InvokeActionAction">
+            <summary>Задает stub DispatcherEventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubDispatcherEventSubscription`1">
+            <summary>Тип заглушки Prism.Events.DispatcherEventSubscription`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDispatcherEventSubscription`1.#ctor(Prism.Events.IDelegateReference,Prism.Events.IDelegateReference,System.Threading.SynchronizationContext)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDispatcherEventSubscription`1.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDispatcherEventSubscription`1.GetExecutionStrategy">
+            <summary>Задает заглушка EventSubscription`1.GetExecutionStrategy()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubDispatcherEventSubscription`1.GetExecutionStrategy01">
+            <summary>Задает stub EventSubscription`1.GetExecutionStrategy()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDispatcherEventSubscription`1.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubDispatcherEventSubscription</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDispatcherEventSubscription`1.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubDispatcherEventSubscription`1.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubDispatcherEventSubscription`1.InvokeAction(System.Action{`0},`0)">
+            <summary>Задает заглушка DispatcherEventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubDispatcherEventSubscription`1.InvokeActionActionOfT0T0">
+            <summary>Задает stub DispatcherEventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubEventAggregator">
+            <summary>Тип заглушки Prism.Events.EventAggregator</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventAggregator.#ctor">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventAggregator.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventAggregator.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubEventAggregator</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventAggregator.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventAggregator.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubEventBase">
+            <summary>Тип заглушки Prism.Events.EventBase</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventBase.#ctor">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventBase.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventBase.Contains(Prism.Events.SubscriptionToken)">
+            <summary>Задает заглушка EventBase.Contains(SubscriptionToken token)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubEventBase.ContainsSubscriptionToken">
+            <summary>Задает stub EventBase.Contains(SubscriptionToken token)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventBase.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubEventBase</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventBase.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventBase.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventBase.InternalPublish(System.Object[])">
+            <summary>Задает заглушка EventBase.InternalPublish(Object[] arguments)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubEventBase.InternalPublishObjectArray">
+            <summary>Задает stub EventBase.InternalPublish(Object[] arguments)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventBase.InternalSubscribe(Prism.Events.IEventSubscription)">
+            <summary>Задает заглушка EventBase.InternalSubscribe(IEventSubscription eventSubscription)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubEventBase.InternalSubscribeIEventSubscription">
+            <summary>Задает stub EventBase.InternalSubscribe(IEventSubscription eventSubscription)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventBase.Unsubscribe(Prism.Events.SubscriptionToken)">
+            <summary>Задает заглушка EventBase.Unsubscribe(SubscriptionToken token)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubEventBase.UnsubscribeSubscriptionToken">
+            <summary>Задает stub EventBase.Unsubscribe(SubscriptionToken token)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubEventSubscription">
+            <summary>Тип заглушки Prism.Events.EventSubscription</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventSubscription.#ctor(Prism.Events.IDelegateReference)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventSubscription.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventSubscription.GetExecutionStrategy">
+            <summary>Задает заглушка EventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubEventSubscription.GetExecutionStrategy01">
+            <summary>Задает stub EventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventSubscription.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubEventSubscription</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventSubscription.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventSubscription.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventSubscription.InvokeAction(System.Action)">
+            <summary>Задает заглушка EventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubEventSubscription.InvokeActionAction">
+            <summary>Задает stub EventSubscription.InvokeAction(Action action)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubEventSubscription`1">
+            <summary>Тип заглушки Prism.Events.EventSubscription`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventSubscription`1.#ctor(Prism.Events.IDelegateReference,Prism.Events.IDelegateReference)">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventSubscription`1.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventSubscription`1.GetExecutionStrategy">
+            <summary>Задает заглушка EventSubscription`1.GetExecutionStrategy()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubEventSubscription`1.GetExecutionStrategy01">
+            <summary>Задает stub EventSubscription`1.GetExecutionStrategy()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventSubscription`1.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubEventSubscription</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventSubscription`1.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubEventSubscription`1.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubEventSubscription`1.InvokeAction(System.Action{`0},`0)">
+            <summary>Задает заглушка EventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubEventSubscription`1.InvokeActionActionOfT0T0">
+            <summary>Задает stub EventSubscription`1.InvokeAction(Action`1&lt;!0&gt; action, !0 argument)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubIDelegateReference">
+            <summary>Тип заглушки Prism.Events.IDelegateReference</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubIDelegateReference.#ctor">
+            <summary>Инициализирует новый экземпляр type StubIDelegateReference</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubIDelegateReference.Prism#Events#IDelegateReference#Target">
+            <summary>Задает stub IDelegateReference.get_Target()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubIDelegateReference.TargetGet">
+            <summary>Задает stub IDelegateReference.get_Target()</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubIEventAggregator">
+            <summary>Тип заглушки Prism.Events.IEventAggregator</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubIEventAggregator.#ctor">
+            <summary>Инициализирует новый экземпляр type StubIEventAggregator</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubIEventAggregator.GetEventOf1``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{``0})">
+            <summary>Задает заглушки GetEvent()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubIEventAggregator.Prism#Events#IEventAggregator#GetEvent``1">
+            <summary>Задает заглушка IEventAggregator.GetEvent()</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubIEventSubscription">
+            <summary>Тип заглушки Prism.Events.IEventSubscription</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubIEventSubscription.#ctor">
+            <summary>Инициализирует новый экземпляр type StubIEventSubscription</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubIEventSubscription.AttachBackingFieldToSubscriptionToken">
+            <summary>Присоединение делегатов для эмуляции StubIEventSubscription.SubscriptionToken как свойства с резервным полем.</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubIEventSubscription.GetExecutionStrategy">
+            <summary>Задает stub IEventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubIEventSubscription.Prism#Events#IEventSubscription#GetExecutionStrategy">
+            <summary>Задает заглушка IEventSubscription.GetExecutionStrategy()</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubIEventSubscription.Prism#Events#IEventSubscription#SubscriptionToken">
+            <summary>Задает stub IEventSubscription.get_SubscriptionToken()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubIEventSubscription.SubscriptionTokenGet">
+            <summary>Задает stub IEventSubscription.get_SubscriptionToken()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubIEventSubscription.SubscriptionTokenSetSubscriptionToken">
+            <summary>Задает stub IEventSubscription.set_SubscriptionToken(SubscriptionToken value)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubPubSubEvent">
+            <summary>Тип заглушки Prism.Events.PubSubEvent</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.#ctor">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubPubSubEvent.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.Contains(Prism.Events.SubscriptionToken)">
+            <summary>Задает заглушка EventBase.Contains(SubscriptionToken token)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.Contains(System.Action)">
+            <summary>Задает заглушка PubSubEvent.Contains(Action subscriber)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent.ContainsAction">
+            <summary>Задает stub PubSubEvent.Contains(Action subscriber)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent.ContainsSubscriptionToken">
+            <summary>Задает stub EventBase.Contains(SubscriptionToken token)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubPubSubEvent</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubPubSubEvent.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubPubSubEvent.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.InternalPublish(System.Object[])">
+            <summary>Задает заглушка EventBase.InternalPublish(Object[] arguments)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent.InternalPublishObjectArray">
+            <summary>Задает stub EventBase.InternalPublish(Object[] arguments)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.InternalSubscribe(Prism.Events.IEventSubscription)">
+            <summary>Задает заглушка EventBase.InternalSubscribe(IEventSubscription eventSubscription)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent.InternalSubscribeIEventSubscription">
+            <summary>Задает stub EventBase.InternalSubscribe(IEventSubscription eventSubscription)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.Publish">
+            <summary>Задает заглушка PubSubEvent.Publish()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent.Publish01">
+            <summary>Задает stub PubSubEvent.Publish()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.Subscribe(System.Action,Prism.Events.ThreadOption,System.Boolean)">
+            <summary>Задает заглушка PubSubEvent.Subscribe(Action action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent.SubscribeActionThreadOptionBoolean">
+            <summary>Задает stub PubSubEvent.Subscribe(Action action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.Unsubscribe(Prism.Events.SubscriptionToken)">
+            <summary>Задает заглушка EventBase.Unsubscribe(SubscriptionToken token)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent.Unsubscribe(System.Action)">
+            <summary>Задает заглушка PubSubEvent.Unsubscribe(Action subscriber)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent.UnsubscribeAction">
+            <summary>Задает stub PubSubEvent.Unsubscribe(Action subscriber)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent.UnsubscribeSubscriptionToken">
+            <summary>Задает stub EventBase.Unsubscribe(SubscriptionToken token)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubPubSubEvent`1">
+            <summary>Тип заглушки Prism.Events.PubSubEvent`1</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.#ctor">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubPubSubEvent`1.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.Contains(Prism.Events.SubscriptionToken)">
+            <summary>Задает заглушка EventBase.Contains(SubscriptionToken token)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.Contains(System.Action{`0})">
+            <summary>Задает заглушка PubSubEvent`1.Contains(Action`1&lt;!0&gt; subscriber)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent`1.ContainsActionOfT0">
+            <summary>Задает stub PubSubEvent`1.Contains(Action`1&lt;!0&gt; subscriber)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent`1.ContainsSubscriptionToken">
+            <summary>Задает stub EventBase.Contains(SubscriptionToken token)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubPubSubEvent</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubPubSubEvent`1.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubPubSubEvent`1.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.InternalPublish(System.Object[])">
+            <summary>Задает заглушка EventBase.InternalPublish(Object[] arguments)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent`1.InternalPublishObjectArray">
+            <summary>Задает stub EventBase.InternalPublish(Object[] arguments)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.InternalSubscribe(Prism.Events.IEventSubscription)">
+            <summary>Задает заглушка EventBase.InternalSubscribe(IEventSubscription eventSubscription)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent`1.InternalSubscribeIEventSubscription">
+            <summary>Задает stub EventBase.InternalSubscribe(IEventSubscription eventSubscription)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.Publish(`0)">
+            <summary>Задает заглушка PubSubEvent`1.Publish(!0 payload)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent`1.PublishT0">
+            <summary>Задает stub PubSubEvent`1.Publish(!0 payload)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.Subscribe(System.Action{`0},Prism.Events.ThreadOption,System.Boolean,System.Predicate{`0})">
+            <summary>Задает заглушка PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive, Predicate`1&lt;!0&gt; filter)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent`1.SubscribeActionOfT0ThreadOptionBooleanPredicateOfT0">
+            <summary>Задает stub PubSubEvent`1.Subscribe(Action`1&lt;!0&gt; action, ThreadOption threadOption, Boolean keepSubscriberReferenceAlive, Predicate`1&lt;!0&gt; filter)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.Unsubscribe(Prism.Events.SubscriptionToken)">
+            <summary>Задает заглушка EventBase.Unsubscribe(SubscriptionToken token)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubPubSubEvent`1.Unsubscribe(System.Action{`0})">
+            <summary>Задает заглушка PubSubEvent`1.Unsubscribe(Action`1&lt;!0&gt; subscriber)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent`1.UnsubscribeActionOfT0">
+            <summary>Задает stub PubSubEvent`1.Unsubscribe(Action`1&lt;!0&gt; subscriber)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubPubSubEvent`1.UnsubscribeSubscriptionToken">
+            <summary>Задает stub EventBase.Unsubscribe(SubscriptionToken token)</summary>
+        </member>
+        <member name="T:Prism.Events.Fakes.StubSubscriptionToken">
+            <summary>Тип заглушки Prism.Events.SubscriptionToken</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubSubscriptionToken.#ctor(System.Action{Prism.Events.SubscriptionToken})">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubSubscriptionToken.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubSubscriptionToken.Dispose">
+            <summary>Задает заглушка SubscriptionToken.Dispose()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubSubscriptionToken.Dispose01">
+            <summary>Задает stub SubscriptionToken.Dispose()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubSubscriptionToken.Equals(System.Object)">
+            <summary>Задает заглушка SubscriptionToken.Equals(Object obj)</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubSubscriptionToken.EqualsObject">
+            <summary>Задает stub SubscriptionToken.Equals(Object obj)</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubSubscriptionToken.GetHashCode">
+            <summary>Задает заглушка SubscriptionToken.GetHashCode()</summary>
+        </member>
+        <member name="F:Prism.Events.Fakes.StubSubscriptionToken.GetHashCode01">
+            <summary>Задает stub SubscriptionToken.GetHashCode()</summary>
+        </member>
+        <member name="M:Prism.Events.Fakes.StubSubscriptionToken.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubSubscriptionToken</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubSubscriptionToken.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Events.Fakes.StubSubscriptionToken.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="T:Prism.Fakes.StubIActiveAware">
+            <summary>Тип заглушки Prism.IActiveAware</summary>
+        </member>
+        <member name="M:Prism.Fakes.StubIActiveAware.#ctor">
+            <summary>Инициализирует новый экземпляр type StubIActiveAware</summary>
+        </member>
+        <member name="M:Prism.Fakes.StubIActiveAware.AttachBackingFieldToIsActive">
+            <summary>Присоединение делегатов для эмуляции StubIActiveAware.IsActive как свойства с резервным полем.</summary>
+        </member>
+        <member name="P:Prism.Fakes.StubIActiveAware.Prism#IActiveAware#IsActive">
+            <summary>Задает stub IActiveAware.get_IsActive()</summary>
+        </member>
+        <member name="F:Prism.Fakes.StubIActiveAware.IsActiveGet">
+            <summary>Задает stub IActiveAware.get_IsActive()</summary>
+        </member>
+        <member name="F:Prism.Fakes.StubIActiveAware.IsActiveSetBoolean">
+            <summary>Задает stub IActiveAware.set_IsActive(Boolean value)</summary>
+        </member>
+        <member name="T:Prism.Logging.Fakes.ShimDebugLogger">
+            <summary>Тип оболочки совместимости для Prism.Logging.DebugLogger</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimDebugLogger.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimDebugLogger.#ctor(Prism.Logging.DebugLogger)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Logging.Fakes.ShimDebugLogger.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.ShimDebugLogger.AllInstances.LogStringCategoryPriority">
+            <summary>Задает оболочка совместимости DebugLogger.Log(String message, Category category, Priority priority)</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimDebugLogger.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimDebugLogger.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.ShimDebugLogger.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimDebugLogger.Bind(Prism.Logging.ILoggerFacade)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.ShimDebugLogger.Constructor">
+            <summary>Задает оболочка совместимости DebugLogger.DebugLogger()</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.ShimDebugLogger.LogStringCategoryPriority">
+            <summary>Задает оболочка совместимости DebugLogger.Log(String message, Category category, Priority priority)</summary>
+        </member>
+        <member name="T:Prism.Logging.Fakes.ShimEmptyLogger">
+            <summary>Тип оболочки совместимости для Prism.Logging.EmptyLogger</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimEmptyLogger.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimEmptyLogger.#ctor(Prism.Logging.EmptyLogger)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Logging.Fakes.ShimEmptyLogger.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.ShimEmptyLogger.AllInstances.LogStringCategoryPriority">
+            <summary>Задает оболочка совместимости EmptyLogger.Log(String message, Category category, Priority priority)</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimEmptyLogger.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimEmptyLogger.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.ShimEmptyLogger.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.ShimEmptyLogger.Bind(Prism.Logging.ILoggerFacade)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.ShimEmptyLogger.Constructor">
+            <summary>Задает оболочка совместимости EmptyLogger.EmptyLogger()</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.ShimEmptyLogger.LogStringCategoryPriority">
+            <summary>Задает оболочка совместимости EmptyLogger.Log(String message, Category category, Priority priority)</summary>
+        </member>
+        <member name="T:Prism.Logging.Fakes.StubDebugLogger">
+            <summary>Тип заглушки Prism.Logging.DebugLogger</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.StubDebugLogger.#ctor">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.StubDebugLogger.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.StubDebugLogger.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubDebugLogger</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.StubDebugLogger.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.StubDebugLogger.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="T:Prism.Logging.Fakes.StubEmptyLogger">
+            <summary>Тип заглушки Prism.Logging.EmptyLogger</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.StubEmptyLogger.#ctor">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.StubEmptyLogger.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.StubEmptyLogger.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubEmptyLogger</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.StubEmptyLogger.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Logging.Fakes.StubEmptyLogger.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="T:Prism.Logging.Fakes.StubILoggerFacade">
+            <summary>Тип заглушки Prism.Logging.ILoggerFacade</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.StubILoggerFacade.#ctor">
+            <summary>Инициализирует новый экземпляр type StubILoggerFacade</summary>
+        </member>
+        <member name="F:Prism.Logging.Fakes.StubILoggerFacade.LogStringCategoryPriority">
+            <summary>Задает stub ILoggerFacade.Log(String message, Category category, Priority priority)</summary>
+        </member>
+        <member name="M:Prism.Logging.Fakes.StubILoggerFacade.Prism#Logging#ILoggerFacade#Log(System.String,Prism.Logging.Category,Prism.Logging.Priority)">
+            <summary>Задает заглушка ILoggerFacade.Log(String message, Category category, Priority priority)</summary>
+        </member>
+        <member name="T:Prism.Mvvm.Fakes.ShimBindableBase">
+            <summary>Тип оболочки совместимости для Prism.Mvvm.BindableBase</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimBindableBase.#ctor(Prism.Mvvm.BindableBase)">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Mvvm.Fakes.ShimBindableBase.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimBindableBase.AllInstances.OnPropertyChangedOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{Prism.Mvvm.BindableBase,System.Linq.Expressions.Expression{System.Func{``0}}})">
+            <summary>Задает оболочка совместимости BindableBase.OnPropertyChanged(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.AllInstances.OnPropertyChangedPropertyChangedEventArgs">
+            <summary>Задает оболочка совместимости BindableBase.OnPropertyChanged(PropertyChangedEventArgs args)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.AllInstances.OnPropertyChangedString">
+            <summary>Задает оболочка совместимости BindableBase.OnPropertyChanged(String propertyName)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.AllInstances.PropertyChangedAddPropertyChangedEventHandler">
+            <summary>Задает оболочка совместимости BindableBase.add_PropertyChanged(PropertyChangedEventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.AllInstances.PropertyChangedRemovePropertyChangedEventHandler">
+            <summary>Задает оболочка совместимости BindableBase.remove_PropertyChanged(PropertyChangedEventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.AllInstances.RaisePropertyChangedString">
+            <summary>Задает оболочка совместимости BindableBase.RaisePropertyChanged(String propertyName)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimBindableBase.AllInstances.SetPropertyOf1M0RefM0ActionString``1(Microsoft.QualityTools.Testing.Fakes.Delegates.PrismDelegates.Ref1Func6{Prism.Mvvm.BindableBase,``0,``0,System.Action,System.String,System.Boolean})">
+            <summary>Задает оболочка совместимости BindableBase.SetProperty(!!0&amp; storage, !!0 value, Action onChanged, String propertyName)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimBindableBase.AllInstances.SetPropertyOf1M0RefM0String``1(Microsoft.QualityTools.Testing.Fakes.Delegates.PrismDelegates.Ref1Func5{Prism.Mvvm.BindableBase,``0,``0,System.String,System.Boolean})">
+            <summary>Задает оболочка совместимости BindableBase.SetProperty(!!0&amp; storage, !!0 value, String propertyName)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimBindableBase.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimBindableBase.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimBindableBase.Bind(System.ComponentModel.INotifyPropertyChanged)">
+            <summary>Привязка членов интерфейса к оболочке совместимости.</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.Constructor">
+            <summary>Задает оболочка совместимости BindableBase.BindableBase()</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimBindableBase.OnPropertyChangedOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{System.Linq.Expressions.Expression{System.Func{``0}}})">
+            <summary>Задает оболочка совместимости BindableBase.OnPropertyChanged(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.OnPropertyChangedPropertyChangedEventArgs">
+            <summary>Задает оболочка совместимости BindableBase.OnPropertyChanged(PropertyChangedEventArgs args)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.OnPropertyChangedString">
+            <summary>Задает оболочка совместимости BindableBase.OnPropertyChanged(String propertyName)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.PropertyChangedAddPropertyChangedEventHandler">
+            <summary>Задает оболочка совместимости BindableBase.add_PropertyChanged(PropertyChangedEventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.PropertyChangedRemovePropertyChangedEventHandler">
+            <summary>Задает оболочка совместимости BindableBase.remove_PropertyChanged(PropertyChangedEventHandler value)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimBindableBase.RaisePropertyChangedString">
+            <summary>Задает оболочка совместимости BindableBase.RaisePropertyChanged(String propertyName)</summary>
+        </member>
+        <member name="T:Prism.Mvvm.Fakes.ShimErrorsContainer`1">
+            <summary>Тип оболочки совместимости для Prism.Mvvm.ErrorsContainer`1</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimErrorsContainer`1.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimErrorsContainer`1.#ctor(Prism.Mvvm.ErrorsContainer{`0})">
+            <summary>Инициализация новой оболочки совместимости для заданного экземпляра</summary>
+        </member>
+        <member name="T:Prism.Mvvm.Fakes.ShimErrorsContainer`1.AllInstances">
+            <summary>Определение оболочек совместимости для всех членов экземпляров</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimErrorsContainer`1.AllInstances.ClearErrorsOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{Prism.Mvvm.ErrorsContainer{`0},System.Linq.Expressions.Expression{System.Func{``0}}})">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.ClearErrors(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.AllInstances.ClearErrorsString">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.ClearErrors(String propertyName)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.AllInstances.GetErrorsString">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.GetErrors(String propertyName)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.AllInstances.HasErrorsGet">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.get_HasErrors()</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimErrorsContainer`1.AllInstances.SetErrorsOf1ExpressionOfFuncOfM0IEnumerableOfT0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{Prism.Mvvm.ErrorsContainer{`0},System.Linq.Expressions.Expression{System.Func{``0}},System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.SetErrors(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression, IEnumerable`1&lt;!0&gt; propertyErrors)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.AllInstances.SetErrorsStringIEnumerableOfT0">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.SetErrors(String propertyName, IEnumerable`1&lt;!0&gt; newValidationResults)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimErrorsContainer`1.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimErrorsContainer`1.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimErrorsContainer`1.ClearErrorsOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{System.Linq.Expressions.Expression{System.Func{``0}}})">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.ClearErrors(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.ClearErrorsString">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.ClearErrors(String propertyName)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.ConstructorActionOfString">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.ErrorsContainer`1(Action`1&lt;String&gt; raiseErrorsChanged)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.GetErrorsString">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.GetErrors(String propertyName)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.HasErrorsGet">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.get_HasErrors()</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimErrorsContainer`1.SetErrorsOf1ExpressionOfFuncOfM0IEnumerableOfT0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{System.Linq.Expressions.Expression{System.Func{``0}},System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.SetErrors(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression, IEnumerable`1&lt;!0&gt; propertyErrors)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.SetErrorsStringIEnumerableOfT0">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.SetErrors(String propertyName, IEnumerable`1&lt;!0&gt; newValidationResults)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimErrorsContainer`1.StaticConstructor">
+            <summary>Задает оболочка совместимости ErrorsContainer`1.ErrorsContainer`1()</summary>
+        </member>
+        <member name="T:Prism.Mvvm.Fakes.ShimPropertySupport">
+            <summary>Тип оболочки совместимости для Prism.Mvvm.PropertySupport</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimPropertySupport.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimPropertySupport.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimPropertySupport.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimPropertySupport.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimPropertySupport.ExtractPropertyNameFromLambdaLambdaExpression">
+            <summary>Задает оболочка совместимости PropertySupport.ExtractPropertyNameFromLambda(LambdaExpression expression)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimPropertySupport.ExtractPropertyNameOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{``0}},System.String})">
+            <summary>Задает оболочка совместимости PropertySupport.ExtractPropertyName(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="T:Prism.Mvvm.Fakes.ShimViewModelLocationProvider">
+            <summary>Тип оболочки совместимости для Prism.Mvvm.ViewModelLocationProvider</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.#ctor">
+            <summary>Инициализация нового экземпляра оболочки совместимости</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.AutoWireViewModelChangedObjectActionOfObjectObject">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.AutoWireViewModelChanged(Object view, Action`2&lt;Object,Object&gt; setDataContextCallback)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.BehaveAsCurrent">
+            <summary>Назначение поведения &quot;Current&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.BehaveAsNotImplemented">
+            <summary>Назначение поведения &quot;NotImplemented&quot; всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.Behavior">
+            <summary>Назначение поведения всем методам типа с оболочкой совместимости</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.GetViewModelForViewObject">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.GetViewModelForView(Object view)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.GetViewModelTypeForViewType">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.GetViewModelTypeForView(Type view)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.RegisterOf1FuncOfObject``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{System.Func{System.Object}})">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.Register(Func`1&lt;Object&gt; factory)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.RegisterOf2``2(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action)">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.Register()</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.RegisterStringFuncOfObject">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.Register(String viewTypeName, Func`1&lt;Object&gt; factory)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.RegisterStringType">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.Register(String viewTypeName, Type viewModelType)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.SetDefaultViewModelFactoryFuncOfObjectTypeObject">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.SetDefaultViewModelFactory(Func`3&lt;Object,Type,Object&gt; viewModelFactory)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.SetDefaultViewModelFactoryFuncOfTypeObject">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.SetDefaultViewModelFactory(Func`2&lt;Type,Object&gt; viewModelFactory)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolverFuncOfTypeType">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(Func`2&lt;Type,Type&gt; viewTypeToViewModelTypeResolver)</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.ShimViewModelLocationProvider.StaticConstructor">
+            <summary>Задает оболочка совместимости ViewModelLocationProvider.ViewModelLocationProvider()</summary>
+        </member>
+        <member name="T:Prism.Mvvm.Fakes.StubBindableBase">
+            <summary>Тип заглушки Prism.Mvvm.BindableBase</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.#ctor">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.StubBindableBase.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubBindableBase</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.StubBindableBase.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.StubBindableBase.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>Задает заглушка BindableBase.OnPropertyChanged(PropertyChangedEventArgs args)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.OnPropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>Задает заглушка BindableBase.OnPropertyChanged(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.OnPropertyChanged(System.String)">
+            <summary>Задает заглушка BindableBase.OnPropertyChanged(String propertyName)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.OnPropertyChangedOf1ExpressionOfFuncOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{System.Linq.Expressions.Expression{System.Func{``0}}})">
+            <summary>Задает заглушки OnPropertyChanged(Expression`1&lt;Func`1&lt;!!0&gt;&gt; propertyExpression)</summary>
+        </member>
+        <member name="F:Prism.Mvvm.Fakes.StubBindableBase.OnPropertyChangedPropertyChangedEventArgs">
+            <summary>Задает stub BindableBase.OnPropertyChanged(PropertyChangedEventArgs args)</summary>
+        </member>
+        <member name="F:Prism.Mvvm.Fakes.StubBindableBase.OnPropertyChangedString">
+            <summary>Задает stub BindableBase.OnPropertyChanged(String propertyName)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.SetProperty``1(``0@,``0,System.String)">
+            <summary>Задает заглушка BindableBase.SetProperty(!!0&amp; storage, !!0 value, String propertyName)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.SetProperty``1(``0@,``0,System.Action,System.String)">
+            <summary>Задает заглушка BindableBase.SetProperty(!!0&amp; storage, !!0 value, Action onChanged, String propertyName)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.SetPropertyOf1M0RefM0ActionString``1(Microsoft.QualityTools.Testing.Fakes.Delegates.PrismDelegates.Ref0Func5{``0,``0,System.Action,System.String,System.Boolean})">
+            <summary>Задает заглушки SetProperty(!!0&amp; storage, !!0 value, Action onChanged, String propertyName)</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubBindableBase.SetPropertyOf1M0RefM0String``1(Microsoft.QualityTools.Testing.Fakes.Delegates.PrismDelegates.Ref0Func4{``0,``0,System.String,System.Boolean})">
+            <summary>Задает заглушки SetProperty(!!0&amp; storage, !!0 value, String propertyName)</summary>
+        </member>
+        <member name="T:Prism.Mvvm.Fakes.StubErrorsContainer`1">
+            <summary>Тип заглушки Prism.Mvvm.ErrorsContainer`1</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubErrorsContainer`1.#ctor(System.Action{System.String})">
+            <summary>Инициализирует новый экземпляр</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.StubErrorsContainer`1.CallBase">
+            <summary>Получает или задает значение, указывающее, следует ли вызывать базовый метод вместо резервного поведения</summary>
+        </member>
+        <member name="M:Prism.Mvvm.Fakes.StubErrorsContainer`1.InitializeStub">
+            <summary>Инициализирует новый экземпляр type StubErrorsContainer</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.StubErrorsContainer`1.InstanceBehavior">
+            <summary>Получает или задает поведение экземпляра.</summary>
+        </member>
+        <member name="P:Prism.Mvvm.Fakes.StubErrorsContainer`1.InstanceObserver">
+            <summary>Получает или задает наблюдатель экземпляра.</summary>
+        </member>
+    </members>
+</doc>

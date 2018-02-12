@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ViewModelLib.ViewModelPage.ViewModel" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ViewModelLib.ViewModelPage.ViewModel" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ViewModelLib.ViewModelPage" />
+  <xs:complexType name="ArrayOfLinkCommutator">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LinkCommutator" nillable="true" type="tns:LinkCommutator" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLinkCommutator" nillable="true" type="tns:ArrayOfLinkCommutator" />
+  <xs:complexType name="LinkCommutator">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Content" nillable="true" type="xs:anyType" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ViewModelLib.ViewModelPage" minOccurs="0" name="Documentation" nillable="true" type="q1:ArrayOfLink" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LinkCommutator" nillable="true" type="tns:LinkCommutator" />
+</xs:schema>

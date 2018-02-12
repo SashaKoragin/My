@@ -11,6 +11,7 @@
     <AssemblyName>TestIFNSTools</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>опубликовать\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,7 +24,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -47,7 +47,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>au3.ico</ApplicationIcon>
+    <ApplicationIcon>icon\au3.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.86.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
@@ -61,10 +77,48 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\NugetPackages\SharpZipLib.0.86.0\lib\11\ICSharpCode.SharpZipLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Nuget\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.1.953, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Nuget\MaterialDesignThemes.2.3.1.953\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>C:\Nuget\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\..\..\..\NugetPackages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Prism">
+      <HintPath>C:\Nuget\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>C:\Nuget\Prism.Wpf.6.3.0\lib\net45\Prism.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Discovery" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Nuget\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,30 +127,110 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arhiv.cs" />
-    <Compile Include="OpenFile.cs" />
-    <Compile Include="DialogForm.cs">
+    <Compile Include="Arhivator\Arhiv\Farhiv\Arhiv.cs" />
+    <Compile Include="Arhivator\Arhiv\Farhiv\ArhivirovanieFile\Arxivirovanie.cs" />
+    <Compile Include="Arhivator\Arhiv\Farhiv\SeathFileA\SeathfiletoArhiv.cs" />
+    <Compile Include="Arhivator\Arhiv\OtcetKV\DBStringDBF.cs" />
+    <Compile Include="Detalizacia\Detalizacia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DialogForm.Designer.cs">
+    <Compile Include="Detalizacia\Detalizacia.Designer.cs">
+      <DependentUpon>Detalizacia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Detalizacia\WpfUserControl\AddColection\AddColection.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Collections\ColectionFilesDbf\ListFiles.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Collections\ColectionTab\TabControl.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Collections\ColectionYers\YearsDbf.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Collections\PanelSqlZap\SelectPanelUl.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\ConvertorWpf\Conver.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\DataContext\DataDatalization.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\FL\File\SqlParamFile\AddFileFl.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\FL\File\SqlParamFile\ZaprosFileFl.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\FL\File\SqlZaprosFile\SQLFILEFL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLFILEFL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Detalizacia\WpfUserControl\Face\FL\SqlParamSelect\Qbe.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\FL\SqlParamSelect\ZaprosFl.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\FL\SqlZapros\SQLQBEFL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLQBEFL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Detalizacia\WpfUserControl\Face\GroupReportTable\AnyUlOnFlReport.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\UL\File\Files\AddFile.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\UL\File\Files\SeathFile.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\UL\File\ResursFile\FileResurs.Designer.cs">
+      <DependentUpon>FileResurs.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Detalizacia\WpfUserControl\Face\UL\SqlParamSelect\QBE.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\UL\SqlParamSelect\Zapros.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Face\UL\SqlZapros\SQLQBE.Designer.cs">
+      <DependentUpon>SQLQBE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Detalizacia\WpfUserControl\GenareteFindFile\GenerateFindFile.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\IconsDetalization\Icons.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Logica\Logica.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\SelectControlSqlZaprosUlOnFl.xaml.cs">
+      <DependentUpon>SelectControlSqlZaprosUlOnFl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Detalizacia\WpfUserControl\SobytieAndCommandContext\ContextCommand.cs" />
+    <Compile Include="Detalizacia\WpfUserControl\Trigers\TrigersUse.cs" />
+    <Compile Include="OpenFile\OpenFile.cs" />
+    <Compile Include="Arhivator\DialogForm\DialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Arhivator\DialogForm\DialogForm.Designer.cs">
       <DependentUpon>DialogForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Arhivator\Arhiv\Arhivator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Arhivator\Arhiv\Arhivator.Designer.cs">
+      <DependentUpon>Arhivator.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PathName.cs" />
-    <EmbeddedResource Include="DialogForm.resx">
+    <Compile Include="Arhivator\Pathing\PathName.cs" />
+    <Compile Include="Service References\ServiceTestIfns\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Detalizacia\Detalizacia.resx">
+      <DependentUpon>Detalizacia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Arhivator\DialogForm\DialogForm.resx">
       <DependentUpon>DialogForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Arhivator\Arhiv\Arhivator.resx">
+      <DependentUpon>Arhivator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detalizacia\WpfUserControl\Face\FL\File\SqlZaprosFile\SQLFILEFL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SQLFILEFL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detalizacia\WpfUserControl\Face\FL\SqlZapros\SQLQBEFL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SQLQBEFL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detalizacia\WpfUserControl\Face\UL\File\ResursFile\FileResurs.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileResurs.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detalizacia\WpfUserControl\Face\UL\SqlZapros\SQLQBE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SQLQBE.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -109,6 +243,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -118,6 +253,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\ServiceTestIfns\service.wsdl" />
+    <None Include="Service References\ServiceTestIfns\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceTestIfns\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceTestIfns\service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -125,10 +270,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Excel\" />
-    <Folder Include="Log\" />
-    <Folder Include="Path\" />
-    <Folder Include="QBEDATE\" />
+    <Page Include="Detalizacia\WpfUserControl\SelectControlSqlZaprosUlOnFl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -148,11 +293,23 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="au3.ico">
+    <Content Include="icon\au3.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SetupTestIFNS.wax" />
+    <None Include="Service References\ServiceTestIfns\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceTestIfns\configuration.svcinfo" />
+    <None Include="Service References\ServiceTestIfns\configuration91.svcinfo" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceTestIfns\" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" xmlns:net="http://schemas.microsoft.com/wix/NetFxExtension">
+  <?define CurrentVersion="!(bind.fileVersion.TestIFNSTools.exe)"?>
   <?define TestIFNSTools_TargetDir=$(var.TestIFNSTools.TargetDir)?>
-	<Product Id="25FB77BD-082F-441B-8603-4C43420432CA" Name="TestIFNSTools" Language="1049" Version="1.0.0.0" Manufacturer="TestIFNSTools" UpgradeCode="25938fc2-4af2-40ee-b538-29fd6d43cf45">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+  <Product Id="*" Name="TestIFNSTools" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="TestIFNSTools" UpgradeCode="25938fc2-4af2-40ee-b538-29fd6d43cf45">
 
-
+    <Package InstallerVersion="405" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
+    <!--Проверка установленных программ дополнительного обеспечения. А так-же их установка в случае отсутствия."Пока данная тема не сделана открыта!!!!"-->
+      <PropertyRef Id="NETFRAMEWORK45" />
+      <PropertyRef Id="NETFRAMEWORK40FULL" />
+    
+      <Condition Message="This setup requires Microsoft .NET Framework 4.0 Full or 4.5 package or greater needs to be installed for this installation to continue.">
+        <![CDATA[Installed OR (NETFRAMEWORK40FULL AND NETFRAMEWORK45)]]>
+      </Condition>
+   
+      <!--Для обновления программы и наката новой версии-->
+    <Upgrade Id="25938fc2-4af2-40ee-b538-29fd6d43cf45">
+      <UpgradeVersion OnlyDetect="yes" Minimum="1.0.0.0" IncludeMinimum="yes" Maximum="$(var.CurrentVersion)" IncludeMaximum="no" Property="PREVIOUSFOUND" Language="1049" IgnoreRemoveFailure="yes" />
+    </Upgrade>
+    
     <!--СДЕСЬ СОЗДАЮТСЯ ЗАГРУЗОЧНЫЕ ОКНА ЛОГОТИП ЯРЛЫЧЕК-->
     <Icon Id="au3.ico" SourceFile="$(var.ProjectDir)au3.ico" />
     <Property Id="ARPPRODUCTICON" Value="au3.ico" />
 
     <WixVariable Id="WixUIBunnersBmp" Value="bmp\installer_banner_wix.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="bmp\installer_background_wix.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="License\License.rtf" />
+    
     <!--Диалоговые окна по ссылкам UI-->
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
-    <UIRef Id="WixUI_InstallDir" />
-    
-    
-    
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <UIRef Id="WixUI_MyInstallDir" />
+
+
+
+    <MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <MediaTemplate EmbedCab="yes" />
 
-<!--ССЫЛКИ НА ОБЪЕКТЫ ПАПКИ ФАЙЛЫ-->
+    
+    <!--ССЫЛКИ НА ОБЪЕКТЫ ПАПКИ ФАЙЛЫ-->
     <Feature Id="ProductFeature" Title="TestIFNSTools" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="AppShortcut" />
       <ComponentRef Id="AppShortcutDesktop" />
-      <ComponentRef Id="CreateNewFolder"/>
-      <ComponentRef Id="CreateNewFolder1"/>
-      <ComponentRef Id="CreateNewFolder2"/>
-      <ComponentRef Id="CreateNewFolder3"/>
-      <ComponentRef Id="ClearUnistallation"/>
+      <ComponentRef Id="CreateNewFolder" />
+      <ComponentRef Id="CreateNewFolder1" />
+      <ComponentRef Id="CreateNewFolder2" />
+      <ComponentRef Id="CreateNewFolder3" />
+      <ComponentRef Id="CreateNewFolder4" />
+      <ComponentRef Id="CreateNewFolder5" />
+      <ComponentRef Id="ClearUnistallation" />
     </Feature>
   </Product>
 
 
-<!--КОД ДЛЯ УСТАНОВКИ ПРИЛОЖЕНИЯ "НЕ СОВСЕМ ПОНИМАЮ КАК РАБОТАЕТ СОЗДАНИЯ В НЕМ ВЛОЖЕННЫХ КАТАЛОГОВ???"-->
+  <!--КОД ДЛЯ УСТАНОВКИ ПРИЛОЖЕНИЯ "НЕ СОВСЕМ ПОНИМАЮ КАК РАБОТАЕТ СОЗДАНИЯ В НЕМ ВЛОЖЕННЫХ КАТАЛОГОВ???"-->
   <Fragment>
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
@@ -50,56 +68,77 @@
     </Directory>
   </Fragment>
 
-<!--Создание папок-->
-<Fragment>
-  <DirectoryRef Id="INSTALLLOCATION">
-    <Directory Id="NewFolderDirectory" Name="Path">
-      <Component Id="CreateNewFolder" Guid="4856564F-DD44-4A5C-A700-415F0B9E4D91">
-        <CreateFolder/>
-      </Component>
-    </Directory>
-  </DirectoryRef>
-  <DirectoryRef Id="INSTALLLOCATION">
-    <Directory Id="NewFolderDirectory1" Name="Log">
-      <Component Id="CreateNewFolder1" Guid="31D9DDAE-E76B-49BB-B20A-AFB91E2ABCC7">
-        <CreateFolder/>
-      </Component>
-    </Directory>
-  </DirectoryRef>
-  <DirectoryRef Id="INSTALLLOCATION">
-    <Directory Id="NewFolderDirectory2" Name="Excel">
-      <Component Id="CreateNewFolder2" Guid="58F82275-8AE4-478F-A655-663695F776D0">
-        <CreateFolder/>
-      </Component>
-    </Directory>
-  </DirectoryRef>
-  <DirectoryRef Id="INSTALLLOCATION">
-    <Directory Id="NewFolderDirectory3" Name="QBEDATE">
-      <Component Id="CreateNewFolder3" Guid="646BAAE2-65E8-4D03-A5C5-E268A83AE691">
-        <CreateFolder/>
-      </Component>
-    </Directory>
-  </DirectoryRef>
-</Fragment>
 
-<!--Удаление папок-->
+
+  <!--Создание папок по пути должен вкладываться в INSTALLLOCATION но не получается!!!-->
   <Fragment>
     <DirectoryRef Id="INSTALLLOCATION">
-    <Component Id="ClearUnistallation" Guid="034B0B57-7105-447E-88AD-A8C62B7EA62B">
-      <CreateFolder Directory="INSTALLLOCATION"/>
-      <RemoveFile Id="RemoveFileQBEDATE" On="uninstall" Name="*.*" Directory="NewFolderDirectory3"/>
-      <RemoveFolder Id="RemoveFolderQBEDATE" On="uninstall" Directory="NewFolderDirectory3"/>
-      <RemoveFile Id="RemoveFileExcel" On="uninstall" Name="*.*" Directory="NewFolderDirectory2"/>
-      <RemoveFolder Id="RemoveFolderExcel" On="uninstall" Directory="NewFolderDirectory2"/>
-      <RemoveFile Id="RemoveFileLog" On="uninstall" Name="*.*" Directory="NewFolderDirectory1"/>
-      <RemoveFolder Id="RemoveFolderLog" On="uninstall" Directory="NewFolderDirectory1"/>
-      <RemoveFile Id="RemoveFilePath" On="uninstall" Name="*.*" Directory="NewFolderDirectory"/>
-      <RemoveFolder Id="RemoveFolderPath" On="uninstall" Directory="NewFolderDirectory"/>
-    </Component>
+      <Directory Id="NewFolderDirectory" Name="Path">
+        <Component Id="CreateNewFolder" Guid="4856564F-DD44-4A5C-A700-415F0B9E4D91">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="NewFolderDirectory1" Name="Log">
+        <Component Id="CreateNewFolder1" Guid="31D9DDAE-E76B-49BB-B20A-AFB91E2ABCC7">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="NewFolderDirectory2" Name="Excel">
+        <Component Id="CreateNewFolder2" Guid="58F82275-8AE4-478F-A655-663695F776D0">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="NewFolderDirectory3" Name="QBEDATE">
+        <Component Id="CreateNewFolder3" Guid="646BAAE2-65E8-4D03-A5C5-E268A83AE691">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="NewFolderDirectory4" Name="KVOtchet">
+        <Component Id="CreateNewFolder4" Guid="08ACE70C-C76A-4978-B21C-4502CBCAC1EE">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="NewFolderDirectory5" Name="Detalizacia">
+        <Component Id="CreateNewFolder5" Guid="88D4DBBB-24E0-4152-BE7D-797A6E4B1CFD">
+          <CreateFolder />
+        </Component>
+      </Directory>
     </DirectoryRef>
   </Fragment>
-  
-  <!--Не мой код код из примера незнаю знаю ссылки-->
+
+  <!--Удаление папок и все что вложенно в них.-->
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Component Id="ClearUnistallation" Guid="034B0B57-7105-447E-88AD-A8C62B7EA62B">
+        <CreateFolder Directory="INSTALLLOCATION" />
+        <RemoveFile Id="RemoveFileQBEDATE" On="uninstall" Name="*.*" Directory="NewFolderDirectory3" />
+        <RemoveFolder Id="RemoveFolderQBEDATE" On="uninstall" Directory="NewFolderDirectory3" />
+        <RemoveFile Id="RemoveFileExcel" On="uninstall" Name="*.*" Directory="NewFolderDirectory2" />
+        <RemoveFolder Id="RemoveFolderExcel" On="uninstall" Directory="NewFolderDirectory2" />
+        <RemoveFile Id="RemoveFileLog" On="uninstall" Name="*.*" Directory="NewFolderDirectory1" />
+        <RemoveFolder Id="RemoveFolderLog" On="uninstall" Directory="NewFolderDirectory1" />
+        <RemoveFile Id="RemoveFilePath" On="uninstall" Name="*.*" Directory="NewFolderDirectory" />
+        <RemoveFolder Id="RemoveFolderPath" On="uninstall" Directory="NewFolderDirectory" />
+        <RemoveFile Id="RemoveFileKVOtchet" On="uninstall" Name="*.*" Directory="NewFolderDirectory4" />
+        <RemoveFolder Id="RemoveFolderKVOtchet" On="uninstall" Directory="NewFolderDirectory4" />
+        <RemoveFile Id="RemoveFileDetalizacia" On="uninstall" Name="*.*" Directory="NewFolderDirectory5" />
+        <RemoveFolder Id="RemoveFolderDetalizacia" On="uninstall" Directory="NewFolderDirectory5" />
+        
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+  <!--Не мой код код внесения в реестр из примера незнаю знаю ссылки надо разобраться -->
   <Fragment>
     <DirectoryRef Id="AppProgramsFolder">
       <Component Id="AppShortcut" Guid="9AB82713-EF84-49AB-9561-05378E5953B3">
@@ -118,34 +157,63 @@
   </Fragment>
 
   <!--Сгенерированный код добавления файлов Dll и ь\т.д.-->
-  
+
   <Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
-			<Component Id="TestIFNSTools.exe" Guid="f9da18d4-5ed8-4227-8c8f-50fefdf51936">
-			  <File Id="TestIFNSTools.exe" Name="TestIFNSTools.exe" Source="$(var.TestIFNSTools_TargetDir)TestIFNSTools.exe" />
-			</Component>
-      <Component Id="TestIFNSTools.exe.config" Guid="e52e0a35-93e6-4d29-9008-1906229ef5ef">
-        <File Id="TestIFNSTools.exe.config" Name="TestIFNSTools.exe.config" Source="$(var.TestIFNSTools_TargetDir)TestIFNSTools.exe.config" KeyPath="yes" Vital="yes"/>
-        <util:XmlFile Id="TestIFNSTools" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path'[\]]//@value" Value="[NewFolderDirectory]" SelectionLanguage="XPath" Sequence="1"/>
-        <util:XmlFile Id="TestIFNSTools1" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path1'[\]]//@value" Value="[NewFolderDirectory3]" SelectionLanguage="XPath" Sequence="1"/>
-        <util:XmlFile Id="TestIFNSTools2" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path2'[\]]//@value" Value="[NewFolderDirectory2]" SelectionLanguage="XPath" Sequence="1"/>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+      <!-- <Component Id="ProductComponent"> -->
+      <!-- TODO: Insert files, registry keys, and other resources here. -->
+      <!-- </Component> -->
+      <Component Id="TestIFNSTools.exe" Guid="f9da18d4-5ed8-4227-8c8f-50fefdf51936">
+        <File Id="TestIFNSTools.exe" Name="TestIFNSTools.exe" Source="$(var.TestIFNSTools_TargetDir)TestIFNSTools.exe" />
       </Component>
-			<Component Id="ClosedXML.dll" Guid="b3c3e6ea-b921-4b10-adcd-11c9382a7d4c">
-			  <File Id="ClosedXML.dll" Name="ClosedXML.dll" Source="$(var.TestIFNSTools_TargetDir)ClosedXML.dll" />
-			</Component>
-			<Component Id="DocumentFormat.OpenXml.dll" Guid="843c69bd-a859-48c2-bf95-d2aaec6b8323">
-			  <File Id="DocumentFormat.OpenXml.dll" Name="DocumentFormat.OpenXml.dll" Source="$(var.TestIFNSTools_TargetDir)DocumentFormat.OpenXml.dll" />
-			</Component>
-			<Component Id="ICSharpCode.SharpZipLib.dll" Guid="b1e1edb2-dfe2-4722-a216-d362b0d1a1fa">
-			  <File Id="ICSharpCode.SharpZipLib.dll" Name="ICSharpCode.SharpZipLib.dll" Source="$(var.TestIFNSTools_TargetDir)ICSharpCode.SharpZipLib.dll" />
-			</Component>
-			<Component Id="au3.ico" Guid="215f7755-d95d-429a-898f-5a3f87ce6372">
-			  <File Id="au3.ico" Name="au3.ico" Source="$(var.TestIFNSTools_TargetDir)au3.ico" />
-			</Component>
-		</ComponentGroup>
-	</Fragment>
+      <Component Id="TestIFNSTools.exe.config" Guid="e52e0a35-93e6-4d29-9008-1906229ef5ef">
+        <File Id="TestIFNSTools.exe.config" Name="TestIFNSTools.exe.config" Source="$(var.TestIFNSTools_TargetDir)TestIFNSTools.exe.config" KeyPath="yes" Vital="yes" />
+        <util:XmlFile Id="TestIFNSTools" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path'[\]]//@value" Value="[NewFolderDirectory]" SelectionLanguage="XPath" Sequence="1" />
+        <util:XmlFile Id="TestIFNSTools1" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path1'[\]]//@value" Value="[NewFolderDirectory3]" SelectionLanguage="XPath" Sequence="1" />
+        <util:XmlFile Id="TestIFNSTools2" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path2'[\]]//@value" Value="[NewFolderDirectory2]" SelectionLanguage="XPath" Sequence="1" />
+        <util:XmlFile Id="TestIFNSTools3" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path3'[\]]//@value" Value="[NewFolderDirectory4]" SelectionLanguage="XPath" Sequence="1" />
+        <util:XmlFile Id="TestIFNSTools5" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path4'[\]]//@value" Value="[NewFolderDirectory5]" SelectionLanguage="XPath" Sequence="1" />
+        <util:XmlFile Id="TestIFNSTools4" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//connectionStrings//add[\[]@name='DBF'[\]]//@connectionString" Value="Provider=vfpoledb;Data Source=[SimpleEditProperty];Collating Sequence=machine" SelectionLanguage="XPath" Sequence="1" />
+        <util:XmlFile Id="TestResult" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PathResult'[\]]//@value" Value="[Result]" SelectionLanguage="XPath" Sequence="1"/>
+        <util:XmlFile Id="TestResultAuto" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PathResultAuto'[\]]//@value" Value="[ResultAuto]" SelectionLanguage="XPath" Sequence="1"/>
+      </Component>
+      <Component Id="ClosedXML.dll" Guid="b3c3e6ea-b921-4b10-adcd-11c9382a7d4c">
+        <File Id="ClosedXML.dll" Name="ClosedXML.dll" Source="$(var.TestIFNSTools_TargetDir)ClosedXML.dll" Assembly=".net" KeyPath="yes" />
+      </Component>
+      <Component Id="DocumentFormat.OpenXml.dll" Guid="843c69bd-a859-48c2-bf95-d2aaec6b8323">
+        <File Id="DocumentFormat.OpenXml.dll" Name="DocumentFormat.OpenXml.dll" Source="$(var.TestIFNSTools_TargetDir)DocumentFormat.OpenXml.dll" Assembly=".net" KeyPath="yes" />
+      </Component>
+      <Component Id="ICSharpCode.SharpZipLib.dll" Guid="b1e1edb2-dfe2-4722-a216-d362b0d1a1fa">
+        <File Id="ICSharpCode.SharpZipLib.dll" Name="ICSharpCode.SharpZipLib.dll" Source="$(var.TestIFNSTools_TargetDir)ICSharpCode.SharpZipLib.dll" Assembly=".net" KeyPath="yes" />
+      </Component>
+      <Component Id="au3.ico" Guid="215f7755-d95d-429a-898f-5a3f87ce6372">
+        <File Id="au3.ico" Name="au3.ico" Source="$(var.TestIFNSTools_TargetDir)\icon\au3.ico" />
+      </Component>
+      <Component Id="System.Windows.Interactivity.dll" Guid="cf283751-4483-4436-8155-bf79018aa29f">
+        <File Id="System.Windows.Interactivity.dll" Name="System.Windows.Interactivity.dll" Source="$(var.TestIFNSTools_TargetDir)System.Windows.Interactivity.dll" />
+      </Component>
+      <Component Id="Prism.Wpf.dll" Guid="b00fb07b-26ac-42b4-8885-dd04b842c19f">
+        <File Id="Prism.Wpf.dll" Name="Prism.Wpf.dll" Source="$(var.TestIFNSTools_TargetDir)Prism.Wpf.dll" />
+      </Component>
+      <Component Id="Prism.dll" Guid="cba70fbc-db31-450f-a5d8-c1ef7c48f33f">
+        <File Id="Prism.dll" Name="Prism.dll" Source="$(var.TestIFNSTools_TargetDir)Prism.dll" />
+      </Component>
+      <Component Id="Microsoft.WindowsAPICodePack.Shell.dll" Guid="5633b15b-aa63-4e49-b7d8-05b33be47cc5">
+        <File Id="Microsoft.WindowsAPICodePack.Shell.dll" Name="Microsoft.WindowsAPICodePack.Shell.dll" Source="$(var.TestIFNSTools_TargetDir)Microsoft.WindowsAPICodePack.Shell.dll" />
+      </Component>
+      <Component Id="Microsoft.WindowsAPICodePack.dll" Guid="0d0dbcff-0595-4a6c-93a1-57acb053a089">
+        <File Id="Microsoft.WindowsAPICodePack.dll" Name="Microsoft.WindowsAPICodePack.dll" Source="$(var.TestIFNSTools_TargetDir)Microsoft.WindowsAPICodePack.dll" />
+      </Component>
+      <Component Id="Microsoft.QualityTools.Testing.Fakes.dll" Guid="974a2d30-8e2f-4810-8ffc-9a036b260889">
+        <File Id="Microsoft.QualityTools.Testing.Fakes.dll" Name="Microsoft.QualityTools.Testing.Fakes.dll" Source="$(var.TestIFNSTools_TargetDir)Microsoft.QualityTools.Testing.Fakes.dll" />
+      </Component>
+      <Component Id="MaterialDesignThemes.Wpf.dll" Guid="2770dc33-4167-4b28-b819-b6d2ddf8c8e1">
+        <File Id="MaterialDesignThemes.Wpf.dll" Name="MaterialDesignThemes.Wpf.dll" Source="$(var.TestIFNSTools_TargetDir)MaterialDesignThemes.Wpf.dll" />
+      </Component>
+      <Component Id="MaterialDesignColors.dll" Guid="8550f917-05e7-4893-a333-c707602f1378">
+        <File Id="MaterialDesignColors.dll" Name="MaterialDesignColors.dll" Source="$(var.TestIFNSTools_TargetDir)MaterialDesignColors.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
 </Wix>

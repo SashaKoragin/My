@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SQLSvedFL2012" xml:space="preserve">
+    <value>select distinct t1.ИННФЛ,t1.ФАМИЛИЯ,t1.ИМЯ,t1.ОТЧЕСТВО,t1.ДАТАРОЖД,t1.ГРАЖД,t1.СЕРНОМДОК,t2.* from 2012\\Sved2012 t1 join 2012\\Sv_summ2012 t2 on t2.ID_DOK=t1.ID_DOK Where {0}</value>
+    <comment>Доходы ФЛ в организациях за 2012!!!</comment>
+  </data>
+  <data name="SQLSvedFL2013" xml:space="preserve">
+    <value>select distinct t1.ИННФЛ,t1.ФАМИЛИЯ,t1.ИМЯ,t1.ОТЧЕСТВО,t1.ДАТАРОЖД,t1.ГРАЖД,t1.СЕРНОМДОК,t2.* from 2013\\Sved2013 t1 join 2013\\Sv_summ2013 t2 on t2.ID_DOK=t1.ID_DOK Where {0}</value>
+    <comment>Доходы ФЛ в организациях за 2013!!!</comment>
+  </data>
+  <data name="SQLSvedFL2014" xml:space="preserve">
+    <value>select distinct t1.ИННФЛ,t1.ФАМИЛИЯ,t1.ИМЯ,t1.ОТЧЕСТВО,t1.ДАТАРОЖД,t1.ГРАЖД,t1.СЕРНОМДОК,t2.* from 2014\\Sved2014 t1 join 2014\\Sv_summ2014 t2 on t2.ID_DOK=t1.ID_DOK Where {0}</value>
+    <comment>Доходы ФЛ в организациях за 2014!!!</comment>
+  </data>
+  <data name="SQLSvedFL2015" xml:space="preserve">
+    <value>select distinct t1.ИННФЛ,t1.ФАМИЛИЯ,t1.ИМЯ,t1.ОТЧЕСТВО,t1.ДАТАРОЖД,t1.ГРАЖД,t1.СЕРНОМДОК,t2.* from 2015\\Sved2015 t1 join 2015\\Sv_summ2015 t2 on t2.ID_DOK=t1.ID_DOK Where {0}</value>
+    <comment>Доходы ФЛ в организациях за 2015!!!</comment>
+  </data>
+  <data name="SQLSvedFL2016" xml:space="preserve">
+    <value>select distinct t1.ИННФЛ,t1.ФАМИЛИЯ,t1.ИМЯ,t1.ОТЧЕСТВО,t1.ДАТАРОЖД,t1.ГРАЖД,t1.СЕРНОМДОК,t2.* from 2016\\Sved2016 t1 join 2016\\Sv_summ2016 t2 on t2.ID_DOK=t1.ID_DOK Where {0}</value>
+    <comment>Доходы ФЛ в организациях за 2016!!!</comment>
+  </data>
+  <data name="SQLSvedFL2017" xml:space="preserve">
+    <value>select distinct t1.ИННФЛ,t1.ФАМИЛИЯ,t1.ИМЯ,t1.ОТЧЕСТВО,t1.ДАТАРОЖД,t1.ГРАЖД,t1.СЕРНОМДОК,t2.* from 2017\\Sved2017 t1 join 2017\\Sv_summ2017 t2 on t2.ID_DOK=t1.ID_DOK Where {0}</value>
+    <comment>Доходы ФЛ в организациях за 2017!!!</comment>
+  </data>
+  <data name="SQLSvedFL2018" xml:space="preserve">
+    <value>select distinct t1.ИННФЛ,t1.ФАМИЛИЯ,t1.ИМЯ,t1.ОТЧЕСТВО,t1.ДАТАРОЖД,t1.ГРАЖД,t1.СЕРНОМДОК,t2.* from 2018\\Sved2018 t1 join 2018\\Sv_summ2018 t2 on t2.ID_DOK=t1.ID_DOK Where {0}</value>
+    <comment>Доходы ФЛ в организациях за 2018!!!</comment>
+  </data>
+</root>

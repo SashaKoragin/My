@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="ZZZ.Pages.Page1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Главная"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <DockPanel Name="DockPanel" LastChildFill="False">
+        <Menu
+            Height="25"
+            VerticalAlignment="Top"
+            DockPanel.Dock="Top">
+            <MenuItem Header="Добавление в БД">
+                <MenuItem Click="AddUser" Header="Добавить Пользователя" />
+                <MenuItem Header="Перенаправить заявку" />
+                <MenuItem Header="Добавить заявку" />
+            </MenuItem>
+            <MenuItem Header="Работа с БД" />
+        </Menu>
+        <Grid
+            Height="235"
+            VerticalAlignment="Center"
+            DockPanel.Dock="Top" />
+        <StatusBar
+            Height="40"
+            VerticalAlignment="Center"
+            DockPanel.Dock="Bottom">
+            <ProgressBar Width="100" Height="25" />
+            <Label Width="100" Height="25">Status</Label>
+        </StatusBar>
+
+
+    </DockPanel>
+</Page>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define TestIFNSService_TargetDir=$(var.TestIFNSService.TargetDir)?>
+  <?define TestIFNSLibary_TargetDir=$(var.TestIFNSLibary.TargetDir)?>
+  <?define CurrentVersion="!(bind.fileVersion.TestIFNSService.exe)"?>
+	<Product Id="*" Name="SetupServiceTestIfns" Codepage="1251" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="ServiceIfns" UpgradeCode="a9ade744-7ad3-477c-9cb3-759214eb7f56">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    
+		<MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="SetupServiceTestIfns" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ClearAll"/>
+		</Feature>
+	</Product>
+    
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="SetupServiceTestIfns" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+<Fragment>
+  <DirectoryRef Id="INSTALLFOLDER" >
+    <Component Id="ClearAll" Guid="C4349956-E92E-4304-BA58-E7D30A6A77D9">
+      <RemoveFile Id="RemoveFileAll" Directory="INSTALLFOLDER" Name="*.*" On="uninstall" />
+      <RemoveFolder Id="Removeall" On="uninstall" Directory="INSTALLFOLDER" />
+    </Component>
+  </DirectoryRef>
+</Fragment>
+  
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+		<Component Id="TestIFNSService.exe" Guid="35613289-cf8b-4f77-be69-89a42bdac4d3">
+		  <File Id="TestIFNSService.exe" Name="TestIFNSService.exe" Source="$(var.TestIFNSService_TargetDir)TestIFNSService.exe" />
+      <ServiceInstall Id="ServiceInstall" Type="ownProcess" Interactive="yes" Vital="yes" Description="Служба для TestIfns!!!" Name="ServiceTestIFNS" Start="auto" ErrorControl="normal"/>
+      <ServiceControl Id="ServiceRemove" Name="ServiceTestIFNS" Start="install" Stop="both" Remove="uninstall" Wait="yes"/>
+		</Component>
+		<Component Id="TestIFNSService.exe.config" Guid="3fc7cbe8-a2da-4d99-b66f-073d89bd44a3">
+		  <File Id="TestIFNSService.exe.config" Name="TestIFNSService.exe.config" Source="$(var.TestIFNSService_TargetDir)TestIFNSService.exe.config" />
+		</Component>
+		<Component Id="TestIFNSLibary.dll" Guid="bae45c5b-9bd2-4d6a-a979-dc0d7c13d0cf">
+		  <File Id="TestIFNSLibary.dll" Name="TestIFNSLibary.dll" Source="$(var.TestIFNSLibary_TargetDir)TestIFNSLibary.dll" />
+		</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

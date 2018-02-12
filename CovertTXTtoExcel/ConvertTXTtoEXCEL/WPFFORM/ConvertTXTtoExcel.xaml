@@ -1,0 +1,244 @@
+﻿<Window
+    x:Class="CovertTXTtoExcel.ConvertTXTtoEXCEL.WPFFORM.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local1="clr-namespace:CovertTXTtoExcel.ConvertTXTtoEXCEL.Styles"
+    xmlns:local2="clr-namespace:CovertTXTtoExcel.ConvertTXTtoEXCEL.ExcelFile"
+    xmlns:local3="clr-namespace:CovertTXTtoExcel.ConvertTXTtoEXCEL.Converters"
+    xmlns:local4="clr-namespace:CovertTXTtoExcel.ConvertTXTtoEXCEL.Errors"
+    xmlns:local5="clr-namespace:CovertTXTtoExcel.ConvertTXTtoEXCEL.AddItem"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ConvertTXTtoExcel"
+    MinWidth="700"
+    MinHeight="550"
+    MaxWidth="700"
+    MaxHeight="550"
+    Loaded="Load"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <local5:ZnachView x:Key="Data" />
+        <local1:Styles x:Key="DddStyles" />
+        <local2:ZnExcel x:Key="Excel" />
+        <local3:ConvertersAllUse x:Key="Converte" />
+        <local5:ErrTriger x:Key="ErrTriger" />
+        <Style x:Key="StyleList" TargetType="{x:Type ListView}">
+            <Setter Property="Background" Value="Blue" />
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+                <DataTrigger Binding="{Binding Path=FocusedElement, Source={StaticResource ErrTriger}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Value="false">
+                    <Setter Property="ToolTip" Value="{Binding Path=Error, Source={StaticResource ErrTriger}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <Setter Property="BorderBrush" Value="Red" />
+                    <Setter Property="BorderThickness" Value="6" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="StyleText" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <ControlTemplate x:Key="ValidationFailed">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Red" BorderThickness="4">
+                    <AdornedElementPlaceholder />
+                </Border>
+                <TextBlock
+                    FontSize="25"
+                    FontWeight="Bold"
+                    Foreground="Red"
+                    Text="!" />
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+    <DockPanel Name="DockPanel" LastChildFill="False">
+        <Menu
+            Height="30"
+            VerticalAlignment="Top"
+            DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Click="MenuItem_Exit" Header="Выход" />
+            </MenuItem>
+        </Menu>
+        <Grid
+            Height="400"
+            VerticalAlignment="Center"
+            DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350" />
+                <ColumnDefinition Width="350" />
+            </Grid.ColumnDefinitions>
+            <TextBox
+                x:Name="Scalare"
+                Grid.Row="1"
+                Grid.Column="0"
+                Width="33"
+                Height="25"
+                Margin="210,0,0,15"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                MaxLength="1"
+                MinLines="1"
+                Style="{StaticResource StyleText}"
+                Validation.ErrorTemplate="{StaticResource ValidationFailed}">
+                <TextBox.Text>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="Scalare"
+                        Source="{StaticResource ErrTriger}"
+                        UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnExceptions="False">
+                        <Binding.ValidationRules>
+                            <local4:Valid
+                                Names="Scalare"
+                                ValidatesOnTargetUpdated="False"
+                                ValidationStep="RawProposedValue" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Width="200"
+                Height="25"
+                Margin="0,0,140,15"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Content="Введите символ разделитель:" />
+            <Button
+                x:Name="AddFiles"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="100"
+                Height="30"
+                Margin="0,0,240,10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Click="AddFile"
+                Content="Выбрать файлы!!!" />
+            <ListView
+                x:Name="ListFile"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Width="Auto"
+                Height="200"
+                Margin="10,0,0,150"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                MouseDoubleClick="File_Open"
+                Style="{Binding Source={StaticResource StyleList}}"
+                Validation.ErrorTemplate="{StaticResource ValidationFailed}">
+                <ListView.ItemsSource>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="File"
+                        Source="{StaticResource Data}"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local4:Valid
+                                Names="ListFile"
+                                ValidatesOnTargetUpdated="False"
+                                ValidationStep="RawProposedValue" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ListView.ItemsSource>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
+                            Width="Auto"
+                            Header="Select"
+                            HeaderContainerStyle="{Binding Path=StilyColumn, Source={StaticResource DddStyles}}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Width="250"
+                            DisplayMemberBinding="{Binding NameFile}"
+                            Header="File"
+                            HeaderContainerStyle="{Binding Path=StilyColumn, Source={StaticResource DddStyles}}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button
+                x:Name="CnFiles"
+                Grid.Row="2"
+                Grid.Column="0"
+                Width="120"
+                Height="30"
+                Margin="0,5,5,265"
+                HorizontalAlignment="Right"
+                Click="ConvertFile"
+                Content="ConvertTXTtoExcel" />
+            <ListView
+                x:Name="Otcet"
+                Grid.Row="2"
+                Grid.Column="0"
+                Width="Auto"
+                Height="200"
+                Margin="10,45,0,55"
+                HorizontalAlignment="Left"
+                DataContext="{StaticResource Excel}"
+                ItemsSource="{Binding FileExcels, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                MouseDoubleClick="Otcet_Open"
+                Style="{Binding Path=Fon, Source={StaticResource DddStyles}}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
+                            Width="Auto"
+                            Header="Отчет Excel"
+                            HeaderContainerStyle="{Binding Source={StaticResource DddStyles}, Path=StilyColumnOthet}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel HorizontalAlignment="Stretch">
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            Source="{Binding Icon, Converter={StaticResource Converte}}" />
+                                        <TextBlock Text="{Binding NameFile}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn
+                            Width="230"
+                            DisplayMemberBinding="{Binding Size}"
+                            Header="Размер файла в байтах!"
+                            HeaderContainerStyle="{Binding Source={StaticResource DddStyles}, Path=StilyColumnOthet}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <StatusBar
+            Height="40"
+            VerticalAlignment="Center"
+            DockPanel.Dock="Bottom">
+            <ProgressBar
+                x:Name="Progress"
+                Width="100"
+                Height="25"
+                Maximum="1000"
+                Value="0" />
+            <Label
+                x:Name="Status"
+                Width="300"
+                Height="25"
+                Content="Status" />
+        </StatusBar>
+    </DockPanel>
+</Window>

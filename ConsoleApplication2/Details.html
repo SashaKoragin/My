@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Details</title>
+</head>
+<body>
+    <h2>Назначение</h2>
+    <p>Тестовое консольное приложение "Hello World" предназначено для демонстрации возможностей Sandcastle.</p>
+    <h2>Пример ссылок на автодокументацию</h2>
+В качестве примера в консольное приложение добавлен следующий тестовый класс:  <see cref="ConsoleApplication2.TTT" />
+   
+    <h2>Пример использования подсветки синтаксиса с использованием встроенного компонента "The Code Block Component"</h2>
+    <pre lang="cs" numberLines="true" outlining="true"
+         title="Example of Syntax Highlighting">
+// Test method
+   static public void CreateMyOleDbCommand(string args)
+       {
+           string connectionString = "Provider=vfpoledb.1;Data Source=D:\\DBF;Collating Sequence=Machine";
+           using (OleDbConnection connection = new OleDbConnection(connectionString))
+           {
+               connection.Open();
+               OleDbCommand cmd = connection.CreateCommand();
+               cmd.Parameters.Add(new OleDbParameter("ИНН", "7751512277"));
+               cmd.CommandText = "select * from NA Where ИНН = ? ";
+               
+               Console.WriteLine(cmd.ExecuteScalar());
+               Console.ReadKey();
+           }
+       }
+</pre>
+
+</body>
+</html>
