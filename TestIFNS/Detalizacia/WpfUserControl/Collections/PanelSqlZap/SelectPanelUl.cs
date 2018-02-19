@@ -35,7 +35,8 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Collections.PanelSqlZap
                 switch (columnName)
                 {
                     case "InnUl":
-                        Error = ValidInnUl(Error); break;
+                            Error = ValidInnUl(Error);
+                        break;
                 }
             return Error;
         }
@@ -43,6 +44,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Collections.PanelSqlZap
         public string ValidInnUl(string error)
         {
             const string expr = @"^(?:\d{10})$";
+            const string expr1 = @"^(?:\d{12})$";
             if (string.IsNullOrWhiteSpace(InnUl))
             {
                 error = "Не введен ИНН!!!";
@@ -51,37 +53,38 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Collections.PanelSqlZap
             }
             else
             {
-                if (!Regex.IsMatch(InnUl.Trim(), expr))
+                if (!Regex.IsMatch(InnUl.Trim(), expr) & !Regex.IsMatch(InnUl.Trim(), expr1))
                 {
-                    error = "Не соответствует количеству чисел!!!";
+                    error = "Не соответствует количеству чисел ЮЛ!!!";
                     IsValid = true;
                     return error;
                 }
-                if (!KontrSummUl(InnUl.Trim(), ref error))
-                {
-                    IsValid = true;
-                    return error;
-                }
+                //if (!KontrSummUl(InnUl.Trim(), ref error))
+                //{
+                //    IsValid = true;
+                //    return error;
+                //}
+                
         }
             return error;
         }
 
-        public bool KontrSummUl(string innul, ref string error)
-        {
-            int sum;
-            char[] s = innul.ToCharArray();
-            int[] a = Array.ConvertAll(s, c => (int)char.GetNumericValue(c));
-            sum = a[0] * 2 + a[1] * 4 + a[2] * 10 + a[3] * 3 + a[4] * 5 + a[5] * 9 + a[6] * 4 + a[7] * 6 + a[8] * 8;
-            if ((a[9] == sum % 11))
-            {
-                return true;
-            }
-            else
-            {
-                error = "Контрольное число не соответствует последним цифрам " + a[9];
-                return false;
-            }
-        }
+        //public bool KontrSummUl(string innul, ref string error)
+        //{
+        //    int sum;
+        //    char[] s = innul.ToCharArray();
+        //    int[] a = Array.ConvertAll(s, c => (int)char.GetNumericValue(c));
+        //    sum = a[0] * 2 + a[1] * 4 + a[2] * 10 + a[3] * 3 + a[4] * 5 + a[5] * 9 + a[6] * 4 + a[7] * 6 + a[8] * 8;
+        //    if ((a[9] == sum % 11))
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        error = "Контрольное число не соответствует последним цифрам " + a[9];
+        //        return false;
+        //    }
+        //}
     }
 
     public class SelectPanelFl : BindableBase, IDataErrorInfo

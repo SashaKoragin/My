@@ -83,7 +83,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Trigers
         }
 
         private Boolean _isCheked;
-        private string _selected = @"Выбираем ЮЛ";
+        private string _selected = @"Поставте галку чтобы выбрать ФЛ!!!";
 
         public string Selected
         {
@@ -113,7 +113,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Trigers
                 IsCheked = true;
                 Fl = true;
                 Ul = false;
-                Selected = @"Выбираем ФЛ";
+                Selected = @"Снимите галку чтобы выбрать ЮЛ!!!";
             }
             else
             {
@@ -122,7 +122,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Trigers
                 IsCheked = false;
                 Fl = false;
                 Ul = true;
-                Selected = @"Выбираем ЮЛ";
+                Selected = @"Поставте галку чтобы выбрать ФЛ!!!";
             }
         }
     }

@@ -15,6 +15,18 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionFilesDbf
 {
    public class ListFilesDbf : BindableBase
     {
+        public object _lock = new object();
+
+        public void UpdateOff()
+        {
+            BindingOperations.DisableCollectionSynchronization(ShemesFiles);
+        }
+
+        public void UpdateOn()
+        {
+            BindingOperations.EnableCollectionSynchronization(ShemesFiles, _lock);
+        }
+
         private ObservableCollection<ListFilesDbf> _shemesfiles = new ObservableCollection<ListFilesDbf>();
         public ObservableCollection<ListFilesDbf> ShemesFiles
         { get { return _shemesfiles; } }
@@ -67,6 +79,19 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionFilesDbf
 
     public class ListFileReport : BindableBase
     {
+        public object _lock = new object();
+
+        public void UpdateOff()
+        {
+            BindingOperations.DisableCollectionSynchronization(ShemesFilesReport);
+        }
+
+        public void UpdateOn()
+        {
+            BindingOperations.EnableCollectionSynchronization(ShemesFilesReport, _lock);
+        }
+
+
         private ObservableCollection<ListFileReport> _shemesfilesreport = new ObservableCollection<ListFileReport>();
         public ObservableCollection<ListFileReport> ShemesFilesReport
         { get { return _shemesfilesreport; } }

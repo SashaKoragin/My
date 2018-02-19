@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using ClosedXML.Excel;
+using GalaSoft.MvvmLight.Threading;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionFilesDbf;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionYers;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.PanelSqlZap;
@@ -39,6 +44,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
             ListFile = filedbf;
             Report = report;
             Tab = tab;
+            DispatcherHelper.Initialize();
             if (Yers.IsValidation())
             {
                 if (Triger.IsCheked)
@@ -52,7 +58,6 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
                         WorkerFl.ProgressChanged += worker_progressChangeFL;
                         WorkerFl.RunWorkerCompleted += worker_RunWorkerCompleteFL;
                         WorkerFl.RunWorkerAsync();
-                        
                     }
                 }
                 else
@@ -80,6 +85,9 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
         {
             try
             {
+            var logica = new Face.GroupReportTable.AnyUlOnFlReport();
+            var workbookreport = new XLWorkbook();
+            var colection = new AddColection.AddColection();
             var selectzapros = new Face.UL.SqlParamSelect.Zapros();
             var filedbf = new Face.UL.File.Files.AddFile();
             Detal.Invoke(new MethodInvoker(delegate { Detal.StatusUl.Text = @"Собираем выборки!!!"; }));
@@ -87,11 +95,39 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
             Detal.Invoke(new MethodInvoker(delegate { Detal.StatusUl.Text = @"Собираем файлы!!!"; }));
             CollectionFileUl = filedbf.AddF(Ul.InnUl,Yers.SelectYears.Years, Detal);
             Detal.Invoke(new MethodInvoker(delegate { Detal.StatusUl.Text = @"Формируем таблицы!!!"; }));
-            Detal.BeginInvoke(new MethodInvoker(() => WorkerUl.CancelAsync()));
-            }
+            TableSqlUl = logica.Generatexsls(TableSqlUl, workbookreport,Arhivator.Pathing.PathName.Path4 + Ul.InnUl + "_" + Yers.SelectYears.Years);
+            DispatcherHelper.CheckBeginInvokeOnUI(() => { 
+                Dispatcher.CurrentDispatcher.Invoke(()=>
+                {
+                    ListFile.UpdateOn();
+                    Tab.UpdateOn();
+                    Report.UpdateOn();
+                        Task.Run(async () =>
+                        {
+                            await Task.Run(() =>
+                            {
+                                try
+                                {
+                                    colection.FilesDbf(CollectionFileUl, ListFile, Ul.InnUl);
+                                    logica.GenereteReport(TableSqlUl, Tab);
+                                    colection.UpdateReport(Report);
+                                    ListFile.UpdateOff();
+                                    Tab.UpdateOff();
+                                    Report.UpdateOff();
+                                }
+                                catch (Exception exception)
+                                {
+                                    System.Windows.Forms.MessageBox.Show(exception.ToString());
+                                }
+                            });
+
+                        });
+                    });
+                });
+            Detal.BeginInvoke(new MethodInvoker(() => WorkerUl.CancelAsync()));}
             catch (Exception exception)
             {
-                MessageBox.Show(exception.ToString());
+                System.Windows.Forms.MessageBox.Show(exception.ToString());
             }
         }
 
@@ -108,13 +144,6 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
         {
             if (!e.Cancelled)
             {
-               var t = new Face.GroupReportTable.AnyUlOnFlReport();
-               var workbookreport = new XLWorkbook();
-               var colection = new AddColection.AddColection();
-               colection.FilesDbf(CollectionFileUl, ListFile,Ul.InnUl);
-               workbookreport = t.GenereteReport(TableSqlUl, workbookreport, Tab);
-               workbookreport.SaveAs(Arhivator.Pathing.PathName.Path4 + Ul.InnUl + "_" + Yers.SelectYears.Years + ".xlsx");
-               colection.UpdateReport(Report);
                WorkerUl.DoWork -= worker_DoworkUL;
                WorkerUl.ProgressChanged -= worker_progressChangeUL;
                WorkerUl.RunWorkerCompleted -= worker_RunWorkerCompleteUL;
@@ -134,7 +163,10 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
         {
             try
             {
+            var logica = new Face.GroupReportTable.AnyUlOnFlReport();
+            var workbookreport = new XLWorkbook();
             var selectzaprosfl = new Face.FL.SqlParamSelect.ZaprosFl();
+            var colection = new AddColection.AddColection();
             var filedbffl = new Face.FL.File.SqlParamFile.AddFileFl();
             Detal.Invoke(new MethodInvoker(delegate { Detal.StatusFl.Text = @"Собираем выборки!!!"; }));
             var parametr = selectzaprosfl.GenerateParam(Fl.InnFl, Fl.SeriaNomerPasport, Fl.Familia, Fl.Name,Fl.MiddleName);
@@ -142,11 +174,40 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
             Detal.Invoke(new MethodInvoker(delegate { Detal.StatusFl.Text = @"Собираем файлы!!!"; }));
             CollectionFileFl = filedbffl.AddF(Yers.SelectYears.Years,parametr, Detal);
             Detal.Invoke(new MethodInvoker(delegate { Detal.StatusFl.Text = @"Формируем таблицы!!!"; }));
+            TableSqlFl = logica.Generatexsls(TableSqlFl, workbookreport, Arhivator.Pathing.PathName.Path4 + Fl.InnFl + "_" + Fl.SeriaNomerPasport + "_" + Fl.Familia + "_" + Yers.SelectYears.Years);
+            DispatcherHelper.CheckBeginInvokeOnUI(() => {
+                    Dispatcher.CurrentDispatcher.Invoke(() =>
+                    {
+                        ListFile.UpdateOn();
+                        Tab.UpdateOn();
+                        Report.UpdateOn();
+                        Task.Run(async () =>
+                        {
+                            await Task.Run(() =>
+                            {
+                                try
+                                {
+                                    colection.FilesDbf(CollectionFileFl, ListFile, Fl.InnFl + "_" + Fl.SeriaNomerPasport + "_" + Fl.Familia);
+                                    logica.GenereteReport(TableSqlFl, Tab);
+                                    colection.UpdateReport(Report);
+                                    ListFile.UpdateOff();
+                                    Tab.UpdateOff();
+                                    Report.UpdateOff();
+                                }
+                                catch (Exception exception)
+                                {
+                                    System.Windows.Forms.MessageBox.Show(exception.ToString());
+                                }
+                            });
+
+                        });
+                    });
+                });
             Detal.BeginInvoke(new MethodInvoker(() => WorkerFl.CancelAsync()));
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.ToString());
+                System.Windows.Forms.MessageBox.Show(exception.ToString());
             }
         }
 
@@ -163,13 +224,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
         {
             if (!e.Cancelled)
             {
-                var t = new Face.GroupReportTable.AnyUlOnFlReport();
-                var workbookreport = new XLWorkbook();
-                var colection = new AddColection.AddColection();
-                colection.FilesDbf(CollectionFileFl, ListFile,Fl.InnFl+"_"+Fl.SeriaNomerPasport+"_"+Fl.Familia);
-                workbookreport = t.GenereteReport(TableSqlFl, workbookreport, Tab);
-                workbookreport.SaveAs(Arhivator.Pathing.PathName.Path4 + Fl.InnFl + "_" + Fl.SeriaNomerPasport + "_" + Fl.Familia + "_" + Yers.SelectYears.Years + ".xlsx");
-                colection.UpdateReport(Report);
+
                 WorkerFl.DoWork -= worker_DoworkFL;
                 WorkerFl.ProgressChanged -= worker_progressChangeFL;
                 WorkerFl.RunWorkerCompleted -= worker_RunWorkerCompleteFL;

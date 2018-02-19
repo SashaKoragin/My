@@ -50,7 +50,10 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.AddColection
 
         public void UpdateReport(ListFileReport report)
         {
+
             report.ShemesFilesReport.Clear();
+            lock (report._lock)
+            {
             if (Directory.Exists(Arhivator.Pathing.PathName.Path4))
             {
                 var dir = new DirectoryInfo(Arhivator.Pathing.PathName.Path4);
@@ -60,18 +63,22 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.AddColection
                     report.ShemesFilesReport.Add(new ListFileReport { Icon = IconsDetalization.Icons.Extracticonfile(file.FullName), Name = file.Name, FullPath = file.FullName });
                 }
             }
+            }
         }
 
 
         public void FilesDbf(ObservableCollection<FileInfo[]> files,ListFilesDbf dbffiles,string usefile)
         {
-            foreach (var fileInfose in files)
-            {
-                foreach (var fileInfo in fileInfose)
-                {
-                    dbffiles.ShemesFiles.Add(new ListFilesDbf { Icon = IconsDetalization.Icons.Extracticonfile(fileInfo.FullName), Name = fileInfo.Name, Path = fileInfo.FullName, FileUse = usefile});
-                }
-            }
+                    lock (dbffiles._lock)
+                    {
+                        foreach (var fileInfose in files)
+                        {
+                            foreach (var fileInfo in fileInfose)
+                            {
+                                dbffiles.ShemesFiles.Add(new ListFilesDbf { Icon = IconsDetalization.Icons.Extracticonfile(fileInfo.FullName), Name = fileInfo.Name, Path = fileInfo.FullName, FileUse = usefile });
+                            }
+                        }
+                    }
         }
     }
 }

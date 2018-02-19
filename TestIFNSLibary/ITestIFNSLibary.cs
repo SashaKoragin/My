@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.OleDb;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Data;
 using System.ServiceModel;
-using System.Text;
 
 namespace TestIFNSLibary
 {
@@ -34,6 +28,7 @@ namespace TestIFNSLibary
         /// <returns>Возвращается таблица с запросом</returns>
         [OperationContract]
         DataSet SqlUl(string inn, string god, string command, string conectionstring, DataSet datasetreport, int i);
+
     }
 
 }

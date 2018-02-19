@@ -175,8 +175,8 @@
         <util:XmlFile Id="TestIFNSTools3" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path3'[\]]//@value" Value="[NewFolderDirectory4]" SelectionLanguage="XPath" Sequence="1" />
         <util:XmlFile Id="TestIFNSTools5" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Path4'[\]]//@value" Value="[NewFolderDirectory5]" SelectionLanguage="XPath" Sequence="1" />
         <util:XmlFile Id="TestIFNSTools4" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//connectionStrings//add[\[]@name='DBF'[\]]//@connectionString" Value="Provider=vfpoledb;Data Source=[SimpleEditProperty];Collating Sequence=machine" SelectionLanguage="XPath" Sequence="1" />
-        <util:XmlFile Id="TestResult" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PathResult'[\]]//@value" Value="[Result]" SelectionLanguage="XPath" Sequence="1"/>
-        <util:XmlFile Id="TestResultAuto" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PathResultAuto'[\]]//@value" Value="[ResultAuto]" SelectionLanguage="XPath" Sequence="1"/>
+        <util:XmlFile Id="TestResult" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PathResult'[\]]//@value" Value="[Result]" SelectionLanguage="XPath" Sequence="1" />
+        <util:XmlFile Id="TestResultAuto" File="[#TestIFNSTools.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PathResultAuto'[\]]//@value" Value="[ResultAuto]" SelectionLanguage="XPath" Sequence="1" />
       </Component>
       <Component Id="ClosedXML.dll" Guid="b3c3e6ea-b921-4b10-adcd-11c9382a7d4c">
         <File Id="ClosedXML.dll" Name="ClosedXML.dll" Source="$(var.TestIFNSTools_TargetDir)ClosedXML.dll" Assembly=".net" KeyPath="yes" />
@@ -213,6 +213,15 @@
       </Component>
       <Component Id="MaterialDesignColors.dll" Guid="8550f917-05e7-4893-a333-c707602f1378">
         <File Id="MaterialDesignColors.dll" Name="MaterialDesignColors.dll" Source="$(var.TestIFNSTools_TargetDir)MaterialDesignColors.dll" />
+      </Component>
+      <Component Id="GalaSoft.MvvmLight.Platform.dll" Guid="0574987e-108d-42a2-95a5-2ea9bcc21df6">
+        <File Id="GalaSoft.MvvmLight.Platform.dll" Name="GalaSoft.MvvmLight.Platform.dll" Source="$(var.TestIFNSTools_TargetDir)GalaSoft.MvvmLight.Platform.dll" />
+      </Component>
+      <Component Id="GalaSoft.MvvmLight.Extras.dll" Guid="2acb453b-b587-4bb3-97fd-af405f63e5cc">
+        <File Id="GalaSoft.MvvmLight.Extras.dll" Name="GalaSoft.MvvmLight.Extras.dll" Source="$(var.TestIFNSTools_TargetDir)GalaSoft.MvvmLight.Extras.dll" />
+      </Component>
+      <Component Id="GalaSoft.MvvmLight.dll" Guid="66a9ad6d-8db7-4b42-a53f-65e9e285a16a">
+        <File Id="GalaSoft.MvvmLight.dll" Name="GalaSoft.MvvmLight.dll" Source="$(var.TestIFNSTools_TargetDir)GalaSoft.MvvmLight.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>

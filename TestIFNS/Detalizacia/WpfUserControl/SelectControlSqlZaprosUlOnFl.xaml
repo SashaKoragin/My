@@ -137,7 +137,7 @@
                                 Height="30"
                                 HorizontalContentAlignment="Left"
                                 VerticalContentAlignment="Bottom"
-                                Content="ИНН ЮЛ:" />
+                                Content="ИНН ЮЛ или ИП:" />
                             <TextBox
                                 x:Name="InnUl"
                                 Width="150"
@@ -290,10 +290,10 @@
                                     FontStyle="Normal"
                                     Foreground="Black" />
                             </GridViewColumn>
-                            <GridViewColumn >
+                            <GridViewColumn>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding FileUse}"></TextBlock>
+                                        <TextBlock Text="{Binding FileUse}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                                 <Label
