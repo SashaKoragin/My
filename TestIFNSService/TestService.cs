@@ -11,18 +11,14 @@ namespace TestIFNSService
         }
 
         public ServiceHost Servicehost;
-        public ServiceHost Servicehost1;
 
         protected override void OnStart(string[] args)
         {
             if (Servicehost != null)
             {
                 Servicehost.Close();
-                Servicehost1.Close();
             }
             Servicehost = new ServiceHost(typeof(TestIFNSLibary.CommandDbf));
-            Servicehost1 = new ServiceHost(typeof(TestIFNSLibary.WebSevice.Service));
-            Servicehost1.Open();
             Servicehost.Open();
         }
 
@@ -31,9 +27,7 @@ namespace TestIFNSService
             if (Servicehost != null)
             {
                 Servicehost.Close();
-                Servicehost1.Close();
                 Servicehost = null;
-                Servicehost1 = null;
             }
         }
     }

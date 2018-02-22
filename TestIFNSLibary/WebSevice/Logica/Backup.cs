@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using System.IO;
+
 
 namespace TestIFNSLibary.WebSevice.Logica
 {
@@ -29,13 +24,5 @@ namespace TestIFNSLibary.WebSevice.Logica
 
             return resul;
         }
-
-        [HttpPost]
-        public static string Ff()
-        {
-            string gg = "dddd";
-            return gg;
-        }
-
     }
 }

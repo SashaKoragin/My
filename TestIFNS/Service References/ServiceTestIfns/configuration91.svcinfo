@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="19eibcapL1qlm70Pvco/tcSfZrs=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="ku4ZtqgXz88irCT86ZwavF4CK3o=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IReaderCommandDbf">
       <properties>
@@ -315,10 +315,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IReaderCommandDbf" contract="ServiceTestIfns.IReaderCommandDbf" bindingType="netTcpBinding" address="net.tcp://localhost:45618/TestIFNSLibary.CommandDbf" bindingConfiguration="NetTcpBinding_IReaderCommandDbf">
+    <endpoint name="NetTcpBinding_IReaderCommandDbf" contract="ServiceTestIfns.IReaderCommandDbf" bindingType="netTcpBinding" address="net.tcp://localhost:45618/" bindingConfiguration="NetTcpBinding_IReaderCommandDbf">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:45618/TestIFNSLibary.CommandDbf</serializedValue>
+          <serializedValue>net.tcp://localhost:45618/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -351,7 +351,7 @@
           <serializedValue>System.ServiceModel.Configuration.ServicePrincipalNameElement</serializedValue>
         </property>
         <property path="/identity/servicePrincipalName/value" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>host/i7751-w00000745.regions.tax.nalog.ru</serializedValue>
+          <serializedValue>host/I7751-W40000961.regions.tax.nalog.ru</serializedValue>
         </property>
         <property path="/identity/dns" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.DnsElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.DnsElement</serializedValue>

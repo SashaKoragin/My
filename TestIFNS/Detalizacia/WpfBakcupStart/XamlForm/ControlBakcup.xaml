@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="TestIFNSTools.Detalizacia.WpfBakcupStart.XamlForm.ControlBakcup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="1500"
+             d:DesignWidth="1500"
+             Width="700"
+             Height="300">
+    <UserControl.Resources>
+     <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="../../ResurseMaterialDesigne.xaml"/>
+        </ResourceDictionary.MergedDictionaries>
+     </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Система Резервного копирования БД"/>
+        <Button Margin="5,5,5,5" Grid.Column="0" Grid.Row="1" Content="Обновить БД!!!"  />
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <WrapPanel>
+                <Label Margin="5,5,5,5" Content="Дата копии БД:" ></Label>
+                <Label Margin="5,5,5,5" Content="Binding" ></Label>
+            </WrapPanel>
+        </StackPanel>
+        <Label Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" Content="Внимание данный режим использовать только если копия нужна на текущий момент!!!" FontSize="14" FontStyle="Italic" FontWeight="Black" Foreground="Red"></Label>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,5,5,5" Grid.Column="0" Grid.Row="3" Content="Закрыть" ></Button>
+    </Grid>
+</UserControl>

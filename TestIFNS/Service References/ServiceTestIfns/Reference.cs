@@ -26,6 +26,12 @@ namespace TestIFNSTools.ServiceTestIfns {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReaderCommandDbf/SqlUl", ReplyAction="http://tempuri.org/IReaderCommandDbf/SqlUlResponse")]
         System.Threading.Tasks.Task<System.Data.DataSet> SqlUlAsync(string inn, string god, string command, string conectionstring, System.Data.DataSet datasetreport, int i);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReaderCommandDbf/Page", ReplyAction="http://tempuri.org/IReaderCommandDbf/PageResponse")]
+        object Page();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReaderCommandDbf/Page", ReplyAction="http://tempuri.org/IReaderCommandDbf/PageResponse")]
+        System.Threading.Tasks.Task<object> PageAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +75,14 @@ namespace TestIFNSTools.ServiceTestIfns {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> SqlUlAsync(string inn, string god, string command, string conectionstring, System.Data.DataSet datasetreport, int i) {
             return base.Channel.SqlUlAsync(inn, god, command, conectionstring, datasetreport, i);
+        }
+        
+        public object Page() {
+            return base.Channel.Page();
+        }
+        
+        public System.Threading.Tasks.Task<object> PageAsync() {
+            return base.Channel.PageAsync();
         }
     }
 }

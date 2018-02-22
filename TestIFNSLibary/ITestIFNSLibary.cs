@@ -1,5 +1,8 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.ServiceModel;
+using System.Threading;
+using System.Windows.Controls;
 
 namespace TestIFNSLibary
 {
@@ -28,7 +31,5 @@ namespace TestIFNSLibary
         /// <returns>Возвращается таблица с запросом</returns>
         [OperationContract]
         DataSet SqlUl(string inn, string god, string command, string conectionstring, DataSet datasetreport, int i);
-
     }
-
 }

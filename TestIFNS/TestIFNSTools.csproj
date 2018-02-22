@@ -153,6 +153,11 @@
     <Compile Include="Detalizacia\Detalizacia.Designer.cs">
       <DependentUpon>Detalizacia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Detalizacia\WpfBakcupStart\ContentBakcup\MVVM\DialogWindow.cs" />
+    <Compile Include="Detalizacia\WpfBakcupStart\ContentBakcup\Service\Service.cs" />
+    <Compile Include="Detalizacia\WpfBakcupStart\XamlForm\ControlBakcup.xaml.cs">
+      <DependentUpon>ControlBakcup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Detalizacia\WpfUserControl\AddColection\AddColection.cs" />
     <Compile Include="Detalizacia\WpfUserControl\Collections\ColectionFilesDbf\ListFiles.cs" />
     <Compile Include="Detalizacia\WpfUserControl\Collections\ColectionTab\TabControl.cs" />
@@ -195,6 +200,7 @@
     <Compile Include="Detalizacia\WpfUserControl\SelectControlSqlZaprosUlOnFl.xaml.cs">
       <DependentUpon>SelectControlSqlZaprosUlOnFl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Detalizacia\WpfUserControl\ServiceDialod\OpenDialogWpf.cs" />
     <Compile Include="Detalizacia\WpfUserControl\SobytieAndCommandContext\ContextCommand.cs" />
     <Compile Include="Detalizacia\WpfUserControl\Trigers\TrigersUse.cs" />
     <Compile Include="OpenFile\OpenFile.cs" />
@@ -264,14 +270,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\ServiceTestIfns\service.wsdl" />
-    <None Include="Service References\ServiceTestIfns\service.xsd">
+    <None Include="Service References\ServiceTestIfns\CommandDbf.wsdl" />
+    <None Include="Service References\ServiceTestIfns\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceTestIfns\service1.xsd">
+    <None Include="Service References\ServiceTestIfns\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceTestIfns\service2.xsd">
+    <None Include="Service References\ServiceTestIfns\item2.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -281,6 +287,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Detalizacia\ResurseMaterialDesigne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Detalizacia\WpfBakcupStart\XamlForm\ControlBakcup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Detalizacia\WpfUserControl\SelectControlSqlZaprosUlOnFl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -313,6 +327,7 @@
     </None>
     <None Include="Service References\ServiceTestIfns\configuration.svcinfo" />
     <None Include="Service References\ServiceTestIfns\configuration91.svcinfo" />
+    <None Include="Service References\ServiceTestIfns\item.disco" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

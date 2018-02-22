@@ -2,14 +2,12 @@
 using System.Data;
 using System.Data.OleDb;
 using System.ServiceModel;
-using TestIFNSLibary.WebSevice;
-
+using System.Windows.Controls;
 
 namespace TestIFNSLibary
 {
     public class CommandDbf : IReaderCommandDbf
     {
-        [OperationBehavior]
         public DataSet SqlFl(string command, string conectionstring, DataSet datasetreport, int i)
         {
             using (var con = new OleDbConnection(conectionstring))
@@ -27,7 +25,6 @@ namespace TestIFNSLibary
             return datasetreport;
         }
 
-        [OperationBehavior]
         public DataSet SqlUl(string inn, string god, string command, string conectionstring, DataSet datasetreport,int i)
         {
             using (var con = new OleDbConnection(conectionstring))

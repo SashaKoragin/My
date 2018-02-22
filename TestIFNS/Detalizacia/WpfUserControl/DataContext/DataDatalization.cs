@@ -74,6 +74,10 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.DataContext
         /// Открыть найденные файлы на сервере
         /// </summary>
         public DelegateCommand FileOpenDbf { get; }
+        /// <summary>
+        /// Окно для работы с диалогом Bakcup класс статический для удобства вызова
+        /// </summary>
+        public DelegateCommand OpenDialogWcfBackup { get; }
         public DataDatalization(Detalizacia detal)
         {
             var logic = new Logica.Logica();
@@ -95,6 +99,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.DataContext
             FileOpenEvent = new DelegateCommand(()=>sobytie.OpenReportEvent(ListReport.Report));
             FileOpenDbf = new DelegateCommand((() => sobytiedbf.OpenDbfEvent(ListFilesDbf.FileDbf)));
             FileDropDrapDbf = new DelegateCommand<object>(parameter=>sobytiedbf.MoveCopyDbf(parameter,ListFilesDbf.FileDbf));
+            OpenDialogWcfBackup =new DelegateCommand(ServiceDialod.OpenDialogWpf.OpenDialog);
         }
     }
 }
