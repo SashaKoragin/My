@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
+using TestIFNSTools.Detalizacia.WpfBakcupStart.ContentBakcup.Service;
+using TestIFNSTools.Detalizacia.WpfUserControl.ServiceDialod;
+
 
 namespace TestIFNSTools.Detalizacia.WpfBakcupStart.XamlForm
 {
@@ -20,9 +10,14 @@ namespace TestIFNSTools.Detalizacia.WpfBakcupStart.XamlForm
     /// </summary>
     public partial class ControlBakcup : UserControl
     {
-        public ControlBakcup()
+        /// <summary>
+        /// Наш диалог с сервисом  WCF
+        /// </summary>
+        /// <param name="isopen">Параметр открыт True диалог или закрыт False</param>
+        public ControlBakcup(OpenDialogWpf isopen, Service service)
         {
             InitializeComponent();
+            DataContext = new ContentBakcup.MVVM.DialogWindow(isopen, service);
         }
     }
 }

@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.ServiceModel;
-using System.Windows.Controls;
 
 namespace TestIFNSLibary
 {
+    [ServiceBehavior(UseSynchronizationContext = true)]
     public class CommandDbf : IReaderCommandDbf
     {
+
         public DataSet SqlFl(string command, string conectionstring, DataSet datasetreport, int i)
         {
             using (var con = new OleDbConnection(conectionstring))
@@ -43,6 +45,12 @@ namespace TestIFNSLibary
                 con.Close();
             }
             return datasetreport;
+        }
+
+        public DateTime DateBakcup()
+        {
+            DateTime value = Convert.ToDateTime(ConfigurationManager.AppSettings["Date"]);
+            return value;
         }
     }
 }

@@ -84,15 +84,15 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Page">
+  <xs:element name="DateBakcup">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PageResponse">
+  <xs:element name="DateBakcupResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="PageResult" nillable="true" type="xs:anyType" />
+        <xs:element minOccurs="0" name="DateBakcupResult" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -44,7 +44,6 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
             ListFile = filedbf;
             Report = report;
             Tab = tab;
-            DispatcherHelper.Initialize();
             if (Yers.IsValidation())
             {
                 if (Triger.IsCheked)
@@ -85,6 +84,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
         {
             try
             {
+            DispatcherHelper.Initialize();
             var logica = new Face.GroupReportTable.AnyUlOnFlReport();
             var workbookreport = new XLWorkbook();
             var colection = new AddColection.AddColection();

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (Ifns) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Bakcup">
+		<xs:annotation>
+			<xs:documentation>XSD для копии Backup</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Jurnal" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="Date" type="xs:dateTime"/>
+						<xs:attribute name="Status" type="xs:boolean"/>
+						<xs:attribute name="Text" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="Date" type="xs:dateTime"/>
+			<xs:attribute name="Status" type="xs:boolean"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -5,16 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.OleDb;
-using System.Web;
 using ClosedXML.Excel;
-using System.Configuration;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Drawing.Imaging;
-using System.Drawing;
-using DocumentFormat.OpenXml.Packaging;
 
 namespace DBF
 {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 using Prism.Commands;
 using System.Windows.Input;
-using System.Windows;
+using TestIFNSTools.Detalizacia.WpfBakcupStart.XamlForm;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionFilesDbf;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionYers;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.PanelSqlZap;
+using TestIFNSTools.Detalizacia.WpfUserControl.ServiceDialod;
 using TestIFNSTools.Detalizacia.WpfUserControl.Trigers;
 using TabControl = TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionTab.TabControl;
 
@@ -78,12 +78,30 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.DataContext
         /// Окно для работы с диалогом Bakcup класс статический для удобства вызова
         /// </summary>
         public DelegateCommand OpenDialogWcfBackup { get; }
+        /// <summary>
+        /// Диалоговое окно
+        /// </summary>
+        public ControlBakcup Dialog { get; }
+        /// <summary>
+        /// Открыто ли Диалоговое окно
+        /// </summary>
+        public OpenDialogWpf OpenDialog { get; }
+
+        public WpfBakcupStart.ContentBakcup.Service.Service Service { get; }
+        /// <summary>
+        /// Наш MVVM Патерн
+        /// </summary>
+        /// <param name="detal"></param>
         public DataDatalization(Detalizacia detal)
         {
+            
             var logic = new Logica.Logica();
             var contextlogic = new SobytieAndCommandContext.ContextCommand();
             var sobytie = new SobytieAndCommandContext.SobytieReport(); 
             var sobytiedbf = new SobytieAndCommandContext.SobytieDbfFile();
+            Service = new WpfBakcupStart.ContentBakcup.Service.Service();
+            OpenDialog = new OpenDialogWpf();
+            Dialog = new ControlBakcup(OpenDialog,Service);
             Years = new AddColection.AddColection().Years();
             PanelUl = new SelectPanelUl();
             PanelFl = new SelectPanelFl();
@@ -99,7 +117,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.DataContext
             FileOpenEvent = new DelegateCommand(()=>sobytie.OpenReportEvent(ListReport.Report));
             FileOpenDbf = new DelegateCommand((() => sobytiedbf.OpenDbfEvent(ListFilesDbf.FileDbf)));
             FileDropDrapDbf = new DelegateCommand<object>(parameter=>sobytiedbf.MoveCopyDbf(parameter,ListFilesDbf.FileDbf));
-            OpenDialogWcfBackup =new DelegateCommand(ServiceDialod.OpenDialogWpf.OpenDialog);
+            OpenDialogWcfBackup =new DelegateCommand((() => OpenDialog.OpenAndClose(Service)));
         }
     }
 }

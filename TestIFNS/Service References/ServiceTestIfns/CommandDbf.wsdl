@@ -48,11 +48,11 @@
   <wsdl:message name="IReaderCommandDbf_SqlUl_OutputMessage">
     <wsdl:part name="parameters" element="tns:SqlUlResponse" />
   </wsdl:message>
-  <wsdl:message name="IReaderCommandDbf_Page_InputMessage">
-    <wsdl:part name="parameters" element="tns:Page" />
+  <wsdl:message name="IReaderCommandDbf_DateBakcup_InputMessage">
+    <wsdl:part name="parameters" element="tns:DateBakcup" />
   </wsdl:message>
-  <wsdl:message name="IReaderCommandDbf_Page_OutputMessage">
-    <wsdl:part name="parameters" element="tns:PageResponse" />
+  <wsdl:message name="IReaderCommandDbf_DateBakcup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DateBakcupResponse" />
   </wsdl:message>
   <wsdl:portType name="IReaderCommandDbf">
     <wsdl:operation name="SqlFl">
@@ -63,9 +63,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IReaderCommandDbf/SqlUl" message="tns:IReaderCommandDbf_SqlUl_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IReaderCommandDbf/SqlUlResponse" message="tns:IReaderCommandDbf_SqlUl_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Page">
-      <wsdl:input wsaw:Action="http://tempuri.org/IReaderCommandDbf/Page" message="tns:IReaderCommandDbf_Page_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IReaderCommandDbf/PageResponse" message="tns:IReaderCommandDbf_Page_OutputMessage" />
+    <wsdl:operation name="DateBakcup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IReaderCommandDbf/DateBakcup" message="tns:IReaderCommandDbf_DateBakcup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IReaderCommandDbf/DateBakcupResponse" message="tns:IReaderCommandDbf_DateBakcup_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IReaderCommandDbf" type="tns:IReaderCommandDbf">
@@ -88,8 +88,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Page">
-      <soap:operation soapAction="http://tempuri.org/IReaderCommandDbf/Page" style="document" />
+    <wsdl:operation name="DateBakcup">
+      <soap:operation soapAction="http://tempuri.org/IReaderCommandDbf/DateBakcup" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -119,8 +119,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Page">
-      <soap12:operation soapAction="http://tempuri.org/IReaderCommandDbf/Page" style="document" />
+    <wsdl:operation name="DateBakcup">
+      <soap12:operation soapAction="http://tempuri.org/IReaderCommandDbf/DateBakcup" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -138,7 +138,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:45618/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Spn>host/I7751-W40000961.regions.tax.nalog.ru</Spn>
+          <Spn>host/Programmer</Spn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

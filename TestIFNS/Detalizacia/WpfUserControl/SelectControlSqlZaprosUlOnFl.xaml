@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:TestIFNSTools.Detalizacia.WpfUserControl"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:local1="clr-namespace:TestIFNSTools.Detalizacia.WpfUserControl.ConvertorWpf"
     xmlns:locals="clr-namespace:TestIFNSTools.Detalizacia.WpfUserControl.DataContext"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -63,12 +64,23 @@
                     Height="30"
                     Background="Aqua">
                     <MenuItem Height="30" Header="Файл">
-                        <MenuItem
+                        <MenuItem 
                             Height="30"
-                            Command="{Binding OpenDialogWcfBackup}" 
-                            Header="Проверить БД" />
+                            Command="{Binding OpenDialogWcfBackup}"
+                            Header="Проверить копию БД" />
                     </MenuItem>
                 </Menu>
+                <materialDesign:DialogHost Name="DialogHost"
+                    Grid.Row="1" 
+                    Grid.Column="0" 
+                    Grid.ColumnSpan="3" 
+                    Grid.RowSpan="4" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Identifier="RootDialog"
+                    IsOpen="{Binding OpenDialog.IsOpenDialog}"
+                    DialogContent="{Binding Dialog}">
+                </materialDesign:DialogHost>
                 <StackPanel
                     Grid.Row="1"
                     Grid.RowSpan="2"

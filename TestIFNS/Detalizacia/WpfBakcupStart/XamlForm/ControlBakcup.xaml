@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:datacontext="clr-namespace:TestIFNSTools.Detalizacia.WpfBakcupStart.ContentBakcup.MVVM"
              mc:Ignorable="d" 
              d:DesignHeight="1500"
              d:DesignWidth="1500"
-             Width="700"
-             Height="300">
+             VerticalAlignment="Center"
+             HorizontalAlignment="Center">
     <UserControl.Resources>
      <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
@@ -15,7 +16,7 @@
         </ResourceDictionary.MergedDictionaries>
      </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid d:DataContext="{d:DesignInstance {x:Type datacontext:DialogWindow}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -31,10 +32,10 @@
         <StackPanel Grid.Column="1" Grid.Row="1">
             <WrapPanel>
                 <Label Margin="5,5,5,5" Content="Дата копии БД:" ></Label>
-                <Label Margin="5,5,5,5" Content="Binding" ></Label>
+                <Label Margin="5,5,5,5" Content="{Binding Service.DateBakcup}" ></Label>
             </WrapPanel>
         </StackPanel>
         <Label Grid.ColumnSpan="2" Grid.Row="2" Grid.Column="0" Content="Внимание данный режим использовать только если копия нужна на текущий момент!!!" FontSize="14" FontStyle="Italic" FontWeight="Black" Foreground="Red"></Label>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,5,5,5" Grid.Column="0" Grid.Row="3" Content="Закрыть" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,5,5,5" Grid.Column="0" Grid.Row="3" Content="Закрыть" Command="{Binding CloseDialog}" ></Button>
     </Grid>
 </UserControl>
