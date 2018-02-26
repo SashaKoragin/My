@@ -35,8 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="EPPlus">
-      <HintPath>..\..\..\..\Nuget\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>C:\Nuget\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -106,10 +107,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Packages\Package.xsd">
-      <SubType>Designer</SubType>
-      <TransformOnBuild>true</TransformOnBuild>
-    </None>
+    <None Include="packages.config" />
     <None Include="Packages\packages.config">
       <TransformOnBuild>true</TransformOnBuild>
     </None>

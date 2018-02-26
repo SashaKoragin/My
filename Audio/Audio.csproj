@@ -33,11 +33,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NAudio, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Nuget\NAudio.1.8.0\lib\net35\NAudio.dll</HintPath>
+      <HintPath>C:\Nuget\NAudio.1.8.0\lib\net35\NAudio.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NAudio.Lame, Version=1.0.3.3048, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Nuget\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
+      <HintPath>C:\Nuget\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

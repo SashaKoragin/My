@@ -74,7 +74,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
     <Reference Include="Xml.Net, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\Nuget\Xml.Net.1.0.6\lib\net451\Xml.Net.dll</HintPath>
+      <HintPath>C:\Nuget\Xml.Net.1.0.6\lib\net451\Xml.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
