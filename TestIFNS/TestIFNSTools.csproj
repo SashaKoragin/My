@@ -67,8 +67,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.86.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\ClosedXML.0.86.0\lib\net40\ClosedXML.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Nuget\ClosedXML.0.87.1\lib\net40\ClosedXML.dll</HintPath>
     </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>C:\Nuget\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
@@ -80,10 +80,6 @@
     </Reference>
     <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>C:\Nuget\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
@@ -122,12 +118,21 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Nuget\WindowsAPICodePack.1.1.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\Microsoft.WindowsAPICodePack.Shell.1.1.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.WindowsAPICodePack.ExtendedLinguisticServices">
+      <HintPath>C:\Nuget\WindowsAPICodePack.1.1.0\lib\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Sensors">
+      <HintPath>C:\Nuget\WindowsAPICodePack.1.1.0\lib\Microsoft.WindowsAPICodePack.Sensors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Nuget\WindowsAPICodePack.1.1.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions">
+      <HintPath>C:\Nuget\WindowsAPICodePack.1.1.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -168,6 +173,7 @@
   <ItemGroup>
     <Compile Include="Arhivator\Arhiv\Farhiv\Arhiv.cs" />
     <Compile Include="Arhivator\Arhiv\Farhiv\ArhivirovanieFile\Arxivirovanie.cs" />
+    <Compile Include="Arhivator\Arhiv\Farhiv\LoadingFormReport\LoadingReport.cs" />
     <Compile Include="Arhivator\Arhiv\Farhiv\SeathFileA\SeathfiletoArhiv.cs" />
     <Compile Include="Arhivator\Arhiv\OtcetKV\DBStringDBF.cs" />
     <Compile Include="Detalizacia\Detalizacia.cs">
@@ -180,6 +186,10 @@
     <Compile Include="Detalizacia\WpfBakcupStart\ContentBakcup\Service\Service.cs" />
     <Compile Include="Detalizacia\WpfBakcupStart\XamlForm\ControlBakcup.xaml.cs">
       <DependentUpon>ControlBakcup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Detalizacia\WpfBakcupStart\XamlForm\DialogsModel\DialogsModel.cs" />
+    <Compile Include="Detalizacia\WpfBakcupStart\XamlForm\EditConfigWcf.xaml.cs">
+      <DependentUpon>EditConfigWcf.xaml</DependentUpon>
     </Compile>
     <Compile Include="Detalizacia\WpfUserControl\AddColection\AddColection.cs" />
     <Compile Include="Detalizacia\WpfUserControl\Collections\ColectionFilesDbf\ListFiles.cs" />
@@ -223,7 +233,6 @@
     <Compile Include="Detalizacia\WpfUserControl\SelectControlSqlZaprosUlOnFl.xaml.cs">
       <DependentUpon>SelectControlSqlZaprosUlOnFl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Detalizacia\WpfUserControl\ServiceDialod\OpenDialogWpf.cs" />
     <Compile Include="Detalizacia\WpfUserControl\SobytieAndCommandContext\ContextCommand.cs" />
     <Compile Include="Detalizacia\WpfUserControl\Trigers\TrigersUse.cs" />
     <Compile Include="OpenFile\OpenFile.cs" />
@@ -284,6 +293,7 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Properties\DataSources\System.Xml.XmlReader.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -293,15 +303,27 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\ServiceTestIfns\CommandDbf.wsdl" />
-    <None Include="Service References\ServiceTestIfns\item.xsd">
+    <None Include="Service References\ServiceTestIfns\service.wsdl" />
+    <None Include="Service References\ServiceTestIfns\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceTestIfns\item1.xsd">
+    <None Include="Service References\ServiceTestIfns\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceTestIfns\item2.xsd">
+    <None Include="Service References\ServiceTestIfns\service2.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceTestIfns\TestIFNSLibary.PathJurnalAndUse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceTestIfns\TestIFNSLibary.Xml.XmlDS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceTestIfns\TestIFNSTools.ServiceTestIfns.BakcupJurnal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceTestIfns\TestIFNSTools.ServiceTestIfns.Parametr.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +337,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Detalizacia\WpfBakcupStart\XamlForm\ControlBakcup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Detalizacia\WpfBakcupStart\XamlForm\EditConfigWcf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -350,7 +376,6 @@
     </None>
     <None Include="Service References\ServiceTestIfns\configuration.svcinfo" />
     <None Include="Service References\ServiceTestIfns\configuration91.svcinfo" />
-    <None Include="Service References\ServiceTestIfns\item.disco" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -358,7 +383,6 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceTestIfns\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

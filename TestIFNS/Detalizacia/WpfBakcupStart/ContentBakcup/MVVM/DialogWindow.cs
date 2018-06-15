@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Presentation;
-using Prism.Commands;
-using TestIFNSTools.Detalizacia.WpfUserControl.ServiceDialod;
+﻿using Prism.Commands;
+using TestIFNSTools.ServiceTestIfns;
 
 namespace TestIFNSTools.Detalizacia.WpfBakcupStart.ContentBakcup.MVVM
 {
@@ -14,22 +8,25 @@ namespace TestIFNSTools.Detalizacia.WpfBakcupStart.ContentBakcup.MVVM
     /// </summary>
    internal class DialogWindow
     {
-        
-        public Service.Service Service { get; }
         /// <summary>
-        /// Переменная для закрытия диалога
+        /// Наш сервис взаимодействия с WCF
         /// </summary>
-        private OpenDialogWpf IsOpen { get; }
+        public Service.VoidService Service { get; }
         /// <summary>
         /// Команда закрыть окно
         /// </summary>
         public DelegateCommand CloseDialog { get;}
 
-        internal DialogWindow(OpenDialogWpf isopen, Service.Service service)
+        public DelegateCommand BackupCommand { get; }
+
+        public DelegateCommand Save { get; }
+
+        internal DialogWindow(Service.VoidService service)
         {
             Service = service;
-            IsOpen = isopen;
-            CloseDialog = new DelegateCommand((() => IsOpen.OpenAndClose()));
+            CloseDialog = new DelegateCommand((() => Service.OpenDialog()));
+            BackupCommand = new DelegateCommand((() => Service.Bakcup()));
+            Save = new DelegateCommand(()=>Service.Save());
         }
     }
 }

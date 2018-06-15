@@ -1,6 +1,11 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using TestIFNSTools.Detalizacia.WpfBakcupStart.ContentBakcup.Service;
-using TestIFNSTools.Detalizacia.WpfUserControl.ServiceDialod;
 
 
 namespace TestIFNSTools.Detalizacia.WpfBakcupStart.XamlForm
@@ -13,11 +18,13 @@ namespace TestIFNSTools.Detalizacia.WpfBakcupStart.XamlForm
         /// <summary>
         /// Наш диалог с сервисом  WCF
         /// </summary>
-        /// <param name="isopen">Параметр открыт True диалог или закрыт False</param>
-        public ControlBakcup(OpenDialogWpf isopen, Service service)
+        /// <param name="service">Наш сервис взаимодействия с WCF</param>
+        public ControlBakcup(VoidService service)
         {
             InitializeComponent();
-            DataContext = new ContentBakcup.MVVM.DialogWindow(isopen, service);
+            DataContext = new ContentBakcup.MVVM.DialogWindow(service);
         }
+
+
     }
 }

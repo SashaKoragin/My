@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Threading;
 using DocumentFormat.OpenXml.Spreadsheet;
+using GalaSoft.MvvmLight.Threading;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionFilesDbf;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionYers;
 
@@ -69,16 +70,25 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.AddColection
 
         public void FilesDbf(ObservableCollection<FileInfo[]> files,ListFilesDbf dbffiles,string usefile)
         {
-                    lock (dbffiles._lock)
+            lock (dbffiles._lock)
+            {
+                foreach (var fileInfose in files)
+                {
+                    foreach (var fileInfo in fileInfose)
                     {
-                        foreach (var fileInfose in files)
+                        DispatcherHelper.CheckBeginInvokeOnUI(() =>
                         {
-                            foreach (var fileInfo in fileInfose)
+                            dbffiles.ShemesFiles.Add(new ListFilesDbf
                             {
-                                dbffiles.ShemesFiles.Add(new ListFilesDbf { Icon = IconsDetalization.Icons.Extracticonfile(fileInfo.FullName), Name = fileInfo.Name, Path = fileInfo.FullName, FileUse = usefile });
-                            }
-                        }
+                                Icon = IconsDetalization.Icons.Extracticonfile(fileInfo.FullName),
+                                Name = fileInfo.Name,
+                                Path = fileInfo.FullName,
+                                FileUse = usefile
+                            });
+                        });
                     }
+                }
+            }
         }
     }
 }

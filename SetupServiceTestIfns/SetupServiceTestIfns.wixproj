@@ -19,12 +19,24 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DialogForm\WixUI_MyInstallDir.wxs" />
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bmp\installer_background_wix.bmp" />
+    <Content Include="bmp\installer_banner_wix.bmp" />
+    <Content Include="License\License.rtf" />
     <Content Include="SetupServiceTestIfns.wax" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Loggers\Loggers.csproj">
+      <Name>Loggers</Name>
+      <Project>{9bac233e-ed3d-493e-b7f6-f26f8091968d}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\TestIFNSLibary\TestIFNSLibary.csproj">
       <Name>TestIFNSLibary</Name>
       <Project>{5ae84e79-d255-4484-a265-a3831f1a7915}</Project>
@@ -41,6 +53,31 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DialogForm" />
+    <Folder Include="bmp" />
+    <Folder Include="License" />
+    <Folder Include="Ru-ru" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ru-ru\IIsExtension_ru-ru.wxl" />
+    <EmbeddedResource Include="Ru-ru\SqlExtension_ru-ru.wxl" />
+    <EmbeddedResource Include="Ru-ru\UtilExtension_ru-ru.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />

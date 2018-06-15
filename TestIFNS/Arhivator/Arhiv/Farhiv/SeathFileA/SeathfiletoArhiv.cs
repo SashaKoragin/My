@@ -11,31 +11,47 @@ namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.SeathFileA
     {
         internal DataTable SeathFile(ListView.ListViewItemCollection pathing, string sovpad,string way, string start, string finish)
         {
-            var formarhiv = ((Arhivator)Application.OpenForms["Arhivator"]);
-            var files = new List<FileInfo>();
-            var datetimefile = new List<string>();
-            formarhiv?.BeginInvoke(new MethodInvoker(() => formarhiv.toolStripStatusLabel1.Text = @"Собираем файлы для архивации!!!"));
-            foreach (var dirarr in from ListViewItem str in pathing select Directory.GetFiles(str.Text, sovpad).Select(Path.GetFullPath).ToArray())
+            try
             {
-                var proc = (100.0f / dirarr.Length);
-                foreach (var file in dirarr)
+
+
+                var formarhiv = ((Arhivator) Application.OpenForms["Arhivator"]);
+                var files = new List<FileInfo>();
+                var datetimefile = new List<string>();
+                formarhiv?.BeginInvoke(
+                    new MethodInvoker(() => formarhiv.toolStripStatusLabel1.Text = @"Собираем файлы для архивации!!!"));
+                foreach (
+                    var dirarr in
+                    from ListViewItem str in pathing
+                    select Directory.GetFiles(str.Text, sovpad).Select(Path.GetFullPath).ToArray())
                 {
-                    var date = File.GetLastWriteTime(file).Date.ToString("dd.MM.yyyy");
-                    formarhiv?.BeginInvoke(new MethodInvoker(delegate{formarhiv.backgroundWorker1.ReportProgress((int) (proc * 100.0f));}));
-                    if ((DateTime.Parse(start) <= DateTime.Parse(date)&&DateTime.Parse(finish) >= DateTime.Parse(date)))
+                    var proc = (100.0f / dirarr.Length);
+                    foreach (var file in dirarr)
                     {
-                        files.Add(new FileInfo(file));  //Формируем массив файлов
-                        datetimefile.Add(date);
+                        var date = File.GetLastWriteTime(file).Date.ToString("dd.MM.yyyy");
+                        formarhiv?.BeginInvoke(
+                            new MethodInvoker(
+                                delegate { formarhiv.backgroundWorker1.ReportProgress((int) (proc * 100.0f)); }));
+                        if ((DateTime.Parse(start) <= DateTime.Parse(date) &&
+                             DateTime.Parse(finish) >= DateTime.Parse(date)))
+                        {
+                            files.Add(new FileInfo(file)); //Формируем массив файлов
+                            datetimefile.Add(date);
+                        }
                     }
                 }
-                formarhiv?.BeginInvoke(new MethodInvoker(delegate { formarhiv.Stat.Value = 0; }));
+                var fileList = files.OrderBy(f => f.LastWriteTime).ToList();
+                var unit = new List<string>(datetimefile.Distinct());
+                var dates = unit.Select(DateTime.Parse).ToList();
+                dates.Sort();
+                var fileDataSet = FileToPath(fileList, dates, way);
+                return fileDataSet;
             }
-            var fileList = files.OrderBy(f => f.LastWriteTime).ToList();
-            var unit =new List<string>(datetimefile.Distinct());
-            var dates = unit.Select(DateTime.Parse).ToList();
-            dates.Sort();
-            var fileDataSet = FileToPath(fileList, dates, way);
-            return fileDataSet;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
         }
 
         static DataTable FileToPath(IEnumerable<FileInfo> file, IList<DateTime> datetList, string way)

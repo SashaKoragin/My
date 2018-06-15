@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.ServiceModel;
-using System.Threading;
-using System.Windows.Controls;
-namespace TestIFNSLibary
+using TestIFNSLibary.PathJurnalAndUse;
+using TestIFNSLibary.Xml.XmlDS;
+
+
+namespace TestIFNSLibary.Service
 {
     [ServiceContract]
     public interface IReaderCommandDbf
@@ -31,7 +33,41 @@ namespace TestIFNSLibary
         [OperationContract]
         DataSet SqlUl(string inn, string god, string command, string conectionstring, DataSet datasetreport, int i);
 
+        /// <summary>
+        /// Активно ли выполнения Bakcup
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        bool IsActive();
+        /// <summary>
+        /// Журнал Резервного копирования
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        BakcupJurnal[] Jurnal();
+        /// <summary>
+        /// Дата последнего Bakcup
+        /// </summary>
+        /// <returns></returns>
         [OperationContract]
         DateTime DateBakcup();
+        /// <summary>
+        /// Функция Bakcup
+        /// </summary>
+        [OperationContract(IsOneWay = true)]
+        [STAThread]
+        void FileBakcup();
+        /// <summary>
+        /// Получение настроек сервиса!!!
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        Parametr Config();
+        /// <summary>
+        /// Сохранение настроек сервиса
+        /// </summary>
+        [OperationContract(IsOneWay = true)]
+        [STAThread]
+        void SaveSeting(string testDb, string workDb, int hours, int minutes);
     }
 }

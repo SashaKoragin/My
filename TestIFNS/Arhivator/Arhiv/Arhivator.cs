@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using ClosedXML.Excel;
+using TestIFNSTools.Arhivator.Arhiv.Farhiv.LoadingFormReport;
 
 namespace TestIFNSTools.Arhivator.Arhiv
 {
@@ -307,7 +308,6 @@ namespace TestIFNSTools.Arhivator.Arhiv
             
             
         }
-
         private void Sovpad_Enter(object sender, EventArgs e)
         {
             var t = new ToolTip();
@@ -357,9 +357,15 @@ namespace TestIFNSTools.Arhivator.Arhiv
         }
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            var a = new Farhiv.Arhiv(this);
-            a.ArhivF();
-
+            try
+            {
+                var a = new Farhiv.Arhiv(this);
+                a.ArhivF();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -368,9 +374,16 @@ namespace TestIFNSTools.Arhivator.Arhiv
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            button6.Enabled = true; // После окончания расчета разблокируем опасные кнопки
-            Stat.Value = 10000;
-            Stat.Value = 0;
+            try
+            {
+                button6.Enabled = true; // После окончания расчета разблокируем опасные кнопки
+                Stat.Value = 10000;
+                Stat.Value = 0;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void просмотретьKVToolStripMenuItem_Click(object sender, EventArgs e)
@@ -420,6 +433,15 @@ namespace TestIFNSTools.Arhivator.Arhiv
                 Application.OpenForms["Detalizacia"].Show();
                 Hide();
             }
+        }
+
+        private void LoadReport(object sender, EventArgs e)
+        {
+            LoadingReport loadreport = new LoadingReport();
+            loadreport.ReportPath(Pathing.PathName.Path,listView2);
+            loadreport.ReportQbedate(Pathing.PathName.Path1,listView5);
+            loadreport.ReportExcel(Pathing.PathName.Path2,listView4);
+            loadreport.ReportKvOtchet(Pathing.PathName.Path3,listView6);
         }
     }
 }

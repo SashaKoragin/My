@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" xmlns:net="http://schemas.microsoft.com/wix/NetFxExtension">
   <?define CurrentVersion="!(bind.fileVersion.TestIFNSTools.exe)"?>
   <?define TestIFNSTools_TargetDir=$(var.TestIFNSTools.TargetDir)?>
-  <Product Id="*" Name="TestIFNSTools" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="TestIFNSTools" UpgradeCode="25938fc2-4af2-40ee-b538-29fd6d43cf45">
+  <Product Id="*" Name="TestIFNSTools version $(var.CurrentVersion)" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="TestIFNSTools" UpgradeCode="25938fc2-4af2-40ee-b538-29fd6d43cf45">
 
     <Package InstallerVersion="405" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
     <!--Проверка установленных программ дополнительного обеспечения. А так-же их установка в случае отсутствия."Пока данная тема не сделана открыта!!!!"-->
@@ -222,6 +222,27 @@
       </Component>
       <Component Id="GalaSoft.MvvmLight.dll" Guid="66a9ad6d-8db7-4b42-a53f-65e9e285a16a">
         <File Id="GalaSoft.MvvmLight.dll" Name="GalaSoft.MvvmLight.dll" Source="$(var.TestIFNSTools_TargetDir)GalaSoft.MvvmLight.dll" />
+      </Component>
+      <Component Id="CommonServiceLocator.dll" Guid="97e5cfd9-c0e8-45ff-9c4e-b62d489d45ac">
+        <File Id="CommonServiceLocator.dll" Name="CommonServiceLocator.dll" Source="$(var.TestIFNSTools_TargetDir)CommonServiceLocator.dll" />
+      </Component>
+      <Component Id="MaterialDesignThemes.MahApps.dll" Guid="8383f292-293d-4c76-97c7-6a2ed4c2fc83">
+        <File Id="MaterialDesignThemes.MahApps.dll" Name="MaterialDesignThemes.MahApps.dll" Source="$(var.TestIFNSTools_TargetDir)MaterialDesignThemes.MahApps.dll" />
+      </Component>
+      <Component Id="MahApps.Metro.dll" Guid="e3bc7db4-a56d-407e-a597-8fda53893d45">
+        <File Id="MahApps.Metro.dll" Name="MahApps.Metro.dll" Source="$(var.TestIFNSTools_TargetDir)MahApps.Metro.dll" />
+      </Component>
+      <Component Id="DotNetZip.dll" Guid="4408aa34-b6ce-401b-9d43-509442491503">
+        <File Id="DotNetZip.dll" Name="DotNetZip.dll" Source="$(var.TestIFNSTools_TargetDir)DotNetZip.dll" />
+      </Component>
+      <Component Id="Microsoft.WindowsAPICodePack.ShellExtensions.dll" Guid="e56b6f24-b8ad-4950-a08a-b13793f16938">
+        <File Id="Microsoft.WindowsAPICodePack.ShellExtensions.dll" Name="Microsoft.WindowsAPICodePack.ShellExtensions.dll" Source="$(var.TestIFNSTools_TargetDir)Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+      </Component>
+      <Component Id="Microsoft.WindowsAPICodePack.Sensors.dll" Guid="6869386a-abef-4ea7-88e7-1a70422a49a9">
+        <File Id="Microsoft.WindowsAPICodePack.Sensors.dll" Name="Microsoft.WindowsAPICodePack.Sensors.dll" Source="$(var.TestIFNSTools_TargetDir)Microsoft.WindowsAPICodePack.Sensors.dll" />
+      </Component>
+      <Component Id="Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" Guid="7c0f69c3-f413-4143-b032-9ac681df1f47">
+        <File Id="Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" Name="Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" Source="$(var.TestIFNSTools_TargetDir)Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>

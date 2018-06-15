@@ -5,9 +5,10 @@
   </DeployedProjects>
   <DirectoryMappings>
     <Item Key="" Value="INSTALLFOLDER" />
+    <Item Key="Xml\XmlDS" Value="ProgramFilesFolder" />
   </DirectoryMappings>
   <FileMappings />
   <DeploySymbols>false</DeploySymbols>
   <DeployLocalizations>true</DeployLocalizations>
-  <DeployExternalLocalizations>false</DeployExternalLocalizations>
+  <DeployExternalLocalizations>true</DeployExternalLocalizations>
 </Configuration>

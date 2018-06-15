@@ -36,7 +36,8 @@ namespace DBF
         private void button2_Click(object sender, EventArgs e)
         {
             //string FilePath = @"\\i7751-w40000722\2017_03_16 05_00_03";
-            string constr1 = @"Provider=vfpoledb.1;Data Source=D:\DBF;Collating Sequence=Machine";
+            //  string constr1 = @"Provider=vfpoledb.1;Data Source=D:\DBF;Collating Sequence=Machine";
+            string constr1 = @"Provider=vfpoledb.1;Data Source=\\i7751-app127\2NDFL\stat;Collating Sequence=Machine";
             //var i = 1;
             var workbook = new XLWorkbook();
             //   string sql = "select statistics.ID_FILE, * from NA left Join statistics on NA.ID_BOSS=statistics.ID_BOSS Where ИНН in ('7751001314','7751506971')";  //Join statistics on NA.ID_BOSS=statistics.ID_BOSS left Join 2016\\Sved2016.dbf t1 on t1.ID_FILE=statistics.ID_FILE left join 2016\\Sv_summ2016 t2 on t2.ID_FILE=statistics.ID_FILE
@@ -44,14 +45,14 @@ namespace DBF
             // string sql = "select statistics.ID_FILE, * from NA left Join statistics on NA.ID_BOSS=statistics.ID_BOSS left Join 2016\\Sved2016 t1 on t1.ID_FILE=statistics.ID_FILE left join 2016\\Sv_summ2016 t2 on t2.ID_FILE=statistics.ID_FILE Where ИНН = '7728262893' and ГОДДОХ ='2016'";  //Join statistics on NA.ID_BOSS=statistics.ID_BOSS left Join 2016\\Sved2016.dbf t1 on t1.ID_FILE=statistics.ID_FILE left join 2016\\Sv_summ2016 t2 on t2.ID_FILE=statistics.ID_FILE
             // string sql = "select distinct t1.ИННФЛ,t1.ФАМИЛИЯ,t1.ИМЯ,t1.ОТЧЕСТВО,t1.ДАТАРОЖД,t1.ГРАЖД,t1.СЕРНОМДОК,t2.* from NA left Join statistics on NA.ID_BOSS=statistics.ID_BOSS left Join 2017\\Sved2017 t1 on t1.ID_FILE=statistics.ID_FILE left join 2017\\Sv_summ2017 t2 on t2.ID_DOK=t1.ID_DOK  Where t1.ИННФЛ ='7728262893' and ГОДДОХ = '2016'"; //1
 
-            string sql1 = "Update statistics set АРХИВ = STRTRAN(АРХИВ,'app002','w40000650')"; //5
+            string sql1 = "Update statistics set АРХИВ = STRTRAN(АРХИВ,'w40000650','app127')"; //5
 
-            string sql2 = "Update statistics set АРХИВ = STRTRAN(АРХИВ,'w40000722','w40000650')"; //5
+           // string sql2 = "Update statistics set АРХИВ = STRTRAN(АРХИВ,'w40000722','w40000650')"; //5
 
-            string sql3 = "Update statistics set DIRPRGPR1 = STRTRAN(DIRPRGPR1,'app002','w40000650')"; //5
+            string sql3 = "Update statistics set DIRPRGPR1 = STRTRAN(DIRPRGPR1,'w40000650','app127')"; //5
 
-            string sql4 = "Update statistics set DIRPRGPR1 = STRTRAN(DIRPRGPR1,'w40000722','w40000650')"; //5
-            string sql5 = "Update statistics set АРХИВ = STRTRAN(АРХИВ,'i7751-app021\\MNSExchange\\Export\\NDFL','i7751-app033\\LPK_NBO\\EXPORT\\2NDFL')"; //5
+          //  string sql4 = "Update statistics set DIRPRGPR1 = STRTRAN(DIRPRGPR1,'w40000722','w40000650')"; //5
+          //  string sql5 = "Update statistics set АРХИВ = STRTRAN(АРХИВ,'i7751-app021\\MNSExchange\\Export\\NDFL','i7751-app033\\LPK_NBO\\EXPORT\\2NDFL')"; //5
             //   string sql2 = "Delete From 2016\\Sved2016  Where ID_FILE in (37494,45714)"; //
             //string sql3 = "Delete From 2016\\Sv_summ2016  Where ID_FILE in (37494,45714)";
             //string sql4 = "Delete From 2016\\KsSved2016.DBF  Where ID_FILE in (37494,45714)";
@@ -71,7 +72,7 @@ namespace DBF
                 {
                     connection.Open();
                     oledbAdapter.UpdateCommand = connection.CreateCommand();
-                    oledbAdapter.UpdateCommand.CommandText = sql5;
+                    oledbAdapter.UpdateCommand.CommandText = sql3;
                     int rows = oledbAdapter.UpdateCommand.ExecuteNonQuery();
                     MessageBox.Show(rows.ToString());
                     if (rows > 0)

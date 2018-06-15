@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information. -->
+<!--
+First-time install dialog sequence:
+ - WixUI_WelcomeDlg
+ - WixUI_LicenseAgreementDlg
+ - WixUI_InstallDirDlg
+ - WixUI_VerifyReadyDlg
+ - WixUI_DiskCostDlg
+
+Maintenance dialog sequence:
+ - WixUI_MaintenanceWelcomeDlg
+ - WixUI_MaintenanceTypeDlg
+ - WixUI_InstallDirDlg
+ - WixUI_VerifyReadyDlg
+
+Patch dialog sequence:
+ - WixUI_WelcomeDlg
+ - WixUI_VerifyReadyDlg
+
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <UI Id="WixUI_MyInstallDir">
+            <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
+            <TextStyle Id="WixUI_Font_Bigger" FaceName="Tahoma" Size="12" />
+            <TextStyle Id="WixUI_Font_Title" FaceName="Tahoma" Size="9" Bold="yes" />
+            <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+            <Property Id="WixUI_Mode" Value="InstallDir" />
+            <DialogRef Id="BrowseDlg" />
+            <DialogRef Id="CancelInstal" />
+            <DialogRef Id="DiskCostDlg" />
+            <DialogRef Id="ErrorDlg" />
+            <DialogRef Id="FatalError" />
+            <DialogRef Id="FilesInUse" />
+            <DialogRef Id="MsiRMFilesInUse" />
+            <DialogRef Id="PrepareDlg" />
+            <DialogRef Id="ProgressDlg" />
+            <DialogRef Id="ResumeDlg" />
+            <DialogRef Id="NDFLConect" />
+            <DialogRef Id="UserExit" />
+            <Publish Dialog="BrowseDlg" Control="OK" Event="DoAction" Value="WixUIValidatePath" Order="3">1</Publish>
+            <Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="4"><![CDATA[WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
+            <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999">1</Publish>
+            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="LicenseAgreementDlg">NOT Installed</Publish>
+            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg">Installed AND PATCH</Publish>
+            <Publish Dialog="LicenseAgreementDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg">1</Publish>
+            <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg">LicenseAccepted = "1"</Publish>
+            <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="LicenseAgreementDlg">1</Publish>
+            <Publish Dialog="InstallDirDlg" Control="Next" Event="SetTargetPath" Value="[WIXUI_INSTALLDIR]" Order="1">1</Publish>
+            <Publish Dialog="InstallDirDlg" Control="Next" Event="DoAction" Value="WixUIValidatePath" Order="2">NOT WIXUI_DONTVALIDATEPATH</Publish>
+            <Publish Dialog="InstallDirDlg" Control="Next" Event="SpawnDialog" Value="InvalidDirDlg" Order="3"><![CDATA[NOT WIXUI_DONTVALIDATEPATH AND WIXUI_INSTALLDIR_VALID<>"1"]]></Publish>
+            <Publish Dialog="InstallDirDlg" Control="Next" Event="NewDialog" Value="NDFLConect" Order="4">WIXUI_DONTVALIDATEPATH OR WIXUI_INSTALLDIR_VALID="1"</Publish>
+            <Publish Dialog="InstallDirDlg" Control="ChangeFolder" Property="_BrowseProperty" Value="[WIXUI_INSTALLDIR]" Order="1">1</Publish>
+            <Publish Dialog="InstallDirDlg" Control="ChangeFolder" Event="SpawnDialog" Value="BrowseDlg" Order="2">1</Publish>
+            <!--Начало моего окна-->
+            <Dialog Id="NDFLConect" Width="370" Height="270" Title="Настройка обновление актуальности копии!!!">
+                <Control Id="Title" Type="Text" X="10" Y="8" Width="400" Height="15" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}В данном окне пишется пути к рабочей БД чтобы взять с нее копию!!!" />
+                <Control Id="Title1" Type="Text" X="15" Y="56" Width="106" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь к Work DB:" />
+                <Control Id="SimpleEdit" Type="Edit" X="90" Y="52" Width="195" Height="15" Property="WorkDb" Sunken="no">
+                    <Property Id="WorkDb" Value="\\i7751-w40000650\2NDFL\stat" />
+                </Control>
+                <Control Id="ResultComment" Type="Text" X="15" Y="75" Width="60" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь Теsт DB:" />
+                <Control Id="ResultFolder" Type="Edit" X="90" Y="75" Width="194" Height="15" Property="TestDb" Sunken="no" ToolTip="Use Folder Result ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">
+                    <Property Id="TestDb" Value="\\i7751-w00000745\SrezDBF" />
+                </Control>
+                <Control Id="Title2" Type="Text" Text="Настройки для Rest приложения:" Height="17" Width="140" X="11" Y="120"/>
+                <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="70" X="11" Y="146"/>
+              <Control Id="Db" Type="Edit" X="90" Y="146" Height="15" Width="194" Property="DataBase">
+                <Property Id="DataBase" Value="i7751-app001"/>
+              </Control>
+                <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
+                    <Publish Event="NewDialog" Value="VerifyReadyDlg" Order="10" />
+                </Control>
+                <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)">
+                    <Publish Event="NewDialog" Value="InstallDirDlg" Order="10" />
+                </Control>
+                <Control Id="buttonCancelRequest" Type="PushButton" X="304" Y="243" Width="56" Height="17" Default="yes" Text="Отмена">
+                    <Publish Event="SpawnDialog" Value="CancelInstal" Order="2">1</Publish>
+                </Control>
+                
+            </Dialog>
+            <Dialog Id="CancelInstal" Width="200" Height="80" Title="Внимание">
+                <Control Type="Text" Id="textQ" Width="128" Height="17" X="28" Y="15" Text="Прервать установку?" />
+                <Control Type="PushButton" Id="buttonOk" Width="69" Height="17" X="22" Y="52" Text="OK">
+                    <Publish Event="EndDialog" Value="Exit" />
+                </Control>
+                <Control Type="PushButton" Id="buttonCancel" Width="70" Height="17" X="109" Y="52" Text="Отмена">
+                    <Publish Event="EndDialog" Value="Return" />
+                </Control>
+            </Dialog>
+            <!--Конец моего окна-->
+            <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="InstallDirDlg" Order="1">NOT Installed</Publish>
+            <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="2">Installed AND NOT PATCH</Publish>
+            <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">Installed AND PATCH</Publish>
+            <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
+            <Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+            <Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg">1</Publish>
+            <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg">1</Publish>
+            <Property Id="ARPNOMODIFY" Value="1" />
+        </UI>
+        <UIRef Id="WixUI_Common" />
+    </Fragment>
+</Wix>

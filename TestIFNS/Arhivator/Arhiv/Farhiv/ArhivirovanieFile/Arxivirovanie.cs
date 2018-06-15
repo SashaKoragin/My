@@ -14,7 +14,10 @@ namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.ArhivirovanieFile
     {
         internal static void Arhv(DataTable files,string fileNameOthcet)
         {
+            try
+            {
             var i = 1;
+            
             var formarhiv = ((Arhivator)Application.OpenForms["Arhivator"]);
             var otchet = new List<Tuple<string, string, string, string>>(); //Для отчета Excel
             var proc = (100.0f / files.Rows.Count);
@@ -45,7 +48,12 @@ namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.ArhivirovanieFile
                 formarhiv?.BeginInvoke(new MethodInvoker(delegate{formarhiv.backgroundWorker1.ReportProgress((int)(proc * 100.0f));}));
             }
             formarhiv?.BeginInvoke(new MethodInvoker(() => formarhiv.toolStripStatusLabel1.Text = @"Количество отработаных файлов:  "+files.Rows.Count));
-            Otchet(otchet,fileNameOthcet);
+            Otchet(otchet, fileNameOthcet);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
 
@@ -98,18 +106,27 @@ namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.ArhivirovanieFile
            zipAdd.Close();
          }
        }
-       /// <summary>
-       /// Данный метод  Otchet создает отчет по тработаным файлам
-       /// </summary>
-       /// <param name="othet"></param>     Параметр содержимого отчета
-       /// <param name="nameFile"></param>  Имя отчета задается пользователем
-       internal static void Otchet(List<Tuple<string, string, string, string>> othet, string nameFile)
+        /// <summary>
+        /// Данный метод  Otchet создает отчет по тработаным файлам
+        /// </summary>
+        /// <param name="othet">Параметр содержимого отчета</param>     
+        /// <param name="nameFile">Имя отчета задается пользователем</param>  
+        /// <param name="filereport">Файл отчета для генерации</param>
+        internal static  void Otchet(List<Tuple<string, string, string, string>> othet, string nameFile)
        {
-        var workbook = new XLWorkbook();
-        var worksheet = workbook.Worksheets.Add("Отчет отработаных.");
-        worksheet.Cells("A1").Value = othet.ToArray();
-        worksheet.Cell("A1").InsertData(othet.ToArray()).Worksheet.Columns().AdjustToContents();
-        workbook.SaveAs(Pathing.PathName.Path2 + nameFile);
+           try
+           {
+               var workbook = new XLWorkbook();
+               var worksheet = workbook.Worksheets.Add("Отчет отработаных.");
+               worksheet.Cells("A1").Value = othet.ToArray();
+               worksheet.Cell("A1").InsertData(othet.ToArray()).Worksheet.Columns().AdjustToContents();
+               workbook.SaveAs(Pathing.PathName.Path2 + nameFile);
+           }
+           catch (Exception ex)
+           {
+               MessageBox.Show(ex.Message);
+           }
+
        }
     }
 }

@@ -1,30 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" xmlns:net="http://schemas.microsoft.com/wix/NetFxExtension">
   <?define TestIFNSService_TargetDir=$(var.TestIFNSService.TargetDir)?>
   <?define TestIFNSLibary_TargetDir=$(var.TestIFNSLibary.TargetDir)?>
   <?define CurrentVersion="!(bind.fileVersion.TestIFNSService.exe)"?>
-	<Product Id="*" Name="SetupServiceTestIfns" Codepage="1251" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="ServiceIfns" UpgradeCode="a9ade744-7ad3-477c-9cb3-759214eb7f56">
+  <?define Loggers_TargetDir=$(var.Loggers.TargetDir)?>
+  <?define LibaryXMLAuto_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\LibaryXMLAuto\bin\Debug\"?>
+  <?define SqlLibaryIfns_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\SqlLibaryIfns\bin\Debug\"?>
+	<Product Id="*" Name="SetupServiceTestIfns $(var.CurrentVersion)" Codepage="1251" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="ServiceIfns" UpgradeCode="a9ade744-7ad3-477c-9cb3-759214eb7f56">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <!--Для обновления программы и наката новой версии-->
+    <Upgrade Id="25938fc2-4af2-40ee-b538-29fd6d43cf45">
+      <UpgradeVersion OnlyDetect="yes" Minimum="1.0.0.0" IncludeMinimum="yes" Maximum="$(var.CurrentVersion)" IncludeMaximum="no" Property="PREVIOUSFOUND" Language="1049" IgnoreRemoveFailure="yes" />
+    </Upgrade>
     
 		<MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes" />
 
+    <WixVariable Id="WixUIBunnersBmp" Value="bmp\installer_banner_wix.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="bmp\installer_background_wix.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="License\License.rtf" />
+
+    <!--Диалоговые окна по ссылкам UI-->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_MyInstallDir" />
+    
 		<Feature Id="ProductFeature" Title="SetupServiceTestIfns" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
-      <ComponentRef Id="ClearAll"/>
+      <ComponentRef Id="ClearAll" />
+			<ComponentRef Id="CreateFolder" />
+      <ComponentGroupRef Id="ProgramFilesFolder_files" />
+      <ComponentRef Id="ClearUnistallation" />
 		</Feature>
 	</Product>
     
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="SetupServiceTestIfns" />
+				<Directory Id="INSTALLFOLDER" Name="SetupServiceTestIfns">
+          <Directory Id="INSTALLLOCATION" />
+        </Directory>
 			</Directory>
 		</Directory>
 	</Fragment>
 
+  
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="Path" Name="Xml">
+        <Component Id="CreateFolder" Guid="26577311-516C-41F5-8724-FAC1192DCA89">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
+    
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Component Id="ClearUnistallation" Guid="6C456475-ABBB-462D-A3EF-2D5FF170B933">
+        <CreateFolder Directory="INSTALLLOCATION" />
+        <RemoveFile Id="RemoveFileQBEDATE" On="uninstall" Name="*.*" Directory="Path" />
+        <RemoveFolder Id="RemoveFolderQBEDATE" On="uninstall" Directory="Path" /> 
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+    
+      
+        
 <Fragment>
-  <DirectoryRef Id="INSTALLFOLDER" >
+  <DirectoryRef Id="INSTALLFOLDER">
     <Component Id="ClearAll" Guid="C4349956-E92E-4304-BA58-E7D30A6A77D9">
       <RemoveFile Id="RemoveFileAll" Directory="INSTALLFOLDER" Name="*.*" On="uninstall" />
       <RemoveFolder Id="Removeall" On="uninstall" Directory="INSTALLFOLDER" />
@@ -36,15 +80,38 @@
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 		<Component Id="TestIFNSService.exe" Guid="35613289-cf8b-4f77-be69-89a42bdac4d3">
 		  <File Id="TestIFNSService.exe" Name="TestIFNSService.exe" Source="$(var.TestIFNSService_TargetDir)TestIFNSService.exe" />
-      <ServiceInstall Id="ServiceInstall" Type="ownProcess" Interactive="yes" Vital="yes" Description="Служба для TestIfns!!!" Name="ServiceTestIFNS" Start="auto" ErrorControl="normal"/>
-      <ServiceControl Id="ServiceRemove" Name="ServiceTestIFNS" Start="install" Stop="both" Remove="uninstall" Wait="yes"/>
+      <ServiceInstall Id="ServiceInstall" Type="ownProcess" Interactive="yes" Vital="yes" Description="Служба для TestIfns!!!" Name="ServiceTestIFNS" Start="auto" ErrorControl="normal" />
+      <ServiceControl Id="ServiceRemove" Name="ServiceTestIFNS" Start="install" Stop="both" Remove="uninstall" Wait="yes" />
 		</Component>
 		<Component Id="TestIFNSService.exe.config" Guid="3fc7cbe8-a2da-4d99-b66f-073d89bd44a3">
-		  <File Id="TestIFNSService.exe.config" Name="TestIFNSService.exe.config" Source="$(var.TestIFNSService_TargetDir)TestIFNSService.exe.config" />
-		</Component>
+		  <File Id="TestIFNSService.exe.config" Name="TestIFNSService.exe.config" Source="$(var.TestIFNSService_TargetDir)TestIFNSService.exe.config" KeyPath="yes" Vital="yes" />
+      <util:XmlFile Id="ServeceXml" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PathJurnal'[\]]//@value" Value="[Path]XmlBacup.xml" SelectionLanguage="XPath" Sequence="1" />
+      <util:XmlFile Id="ServeceXml1" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='TestDB'[\]]//@value" Value="[TestDb]" SelectionLanguage="XPath" Sequence="1" />
+      <util:XmlFile Id="ServeceXml2" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='WorkDB'[\]]//@value" Value="[WorkDb]" SelectionLanguage="XPath" Sequence="1" />
+      <util:XmlFile Id="DataBase" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Connect'[\]]//@value" Value="Data Source=[DataBase];Initial Catalog=Taxes51;Integrated Security=True;MultipleActiveResultSets=True" SelectionLanguage="XPath" Sequence="1"/>
+    </Component>
 		<Component Id="TestIFNSLibary.dll" Guid="bae45c5b-9bd2-4d6a-a979-dc0d7c13d0cf">
 		  <File Id="TestIFNSLibary.dll" Name="TestIFNSLibary.dll" Source="$(var.TestIFNSLibary_TargetDir)TestIFNSLibary.dll" />
 		</Component>
+		<Component Id="Loggers.dll" Guid="c5c2ed6a-575b-4ed4-9dbc-f460fe587e65">
+		  <File Id="Loggers.dll" Name="Loggers.dll" Source="$(var.Loggers_TargetDir)Loggers.dll" />
+		</Component>
+		<Component Id="NLog.dll" Guid="32976b21-117d-41d7-b72d-10b38eddaf03">
+		  <File Id="NLog.dll" Name="NLog.dll" Source="$(var.TestIFNSService_TargetDir)NLog.dll" />
+		</Component>
+		<Component Id="LibaryXMLAuto.dll" Guid="95c206c5-dbdb-4502-9549-a85fc1187429">
+		  <File Id="LibaryXMLAuto.dll" Name="LibaryXMLAuto.dll" Source="$(var.LibaryXMLAuto_TargetDir)LibaryXMLAuto.dll" />
+		</Component>
+		<Component Id="SqlLibaryIfns.dll" Guid="5290c5bf-accd-4e6d-b3c7-5c806b8d50a9">
+		  <File Id="SqlLibaryIfns.dll" Name="SqlLibaryIfns.dll" Source="$(var.SqlLibaryIfns_TargetDir)SqlLibaryIfns.dll" />
+		</Component>
 		</ComponentGroup>
 	</Fragment>
+  <Fragment>
+    <ComponentGroup Id="ProgramFilesFolder_files" Directory="Path">
+      <Component Id="Xml_XmlDS_XmlBacup.xml" Guid="9acc1dac-427a-47c3-8d1a-1b6a5496ae07">
+        <File Id="Xml_XmlDS_XmlBacup.xml" Name="XmlBacup.xml" Source="$(var.TestIFNSLibary_TargetDir)Xml\XmlDS\XmlBacup.xml" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
 </Wix>

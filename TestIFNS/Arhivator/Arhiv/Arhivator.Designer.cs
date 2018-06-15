@@ -32,6 +32,7 @@ namespace TestIFNSTools.Arhivator.Arhiv
         /// </summary>
         private void InitializeComponent()
         {
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Arhivator));
             this.button1 = new System.Windows.Forms.Button();
@@ -661,7 +662,8 @@ namespace TestIFNSTools.Arhivator.Arhiv
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Arhivator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Архиватор";
+            this.Text = String.Format("Архиватор версии {0}", version);
+            this.Load += new System.EventHandler(this.LoadReport);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

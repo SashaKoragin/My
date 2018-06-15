@@ -14,6 +14,7 @@ using TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionFilesDbf;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.ColectionYers;
 using TestIFNSTools.Detalizacia.WpfUserControl.Collections.PanelSqlZap;
 using TestIFNSTools.Detalizacia.WpfUserControl.Trigers;
+using TestIFNSTools.ServiceTestIfns;
 
 namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
 {
@@ -36,6 +37,8 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
         public static ObservableCollection<FileInfo[]> CollectionFileFl { get; set; }
         public void Go(Detalizacia detal, TrigersUse trigerselect, SelectPanelUl ul, SelectPanelFl fl,YearsDbf years, ListFilesDbf filedbf, Collections.ColectionTab.TabControl tab,ListFileReport report)
         {
+            ReaderCommandDbfClient service = new ReaderCommandDbfClient("BasicHttpBinding_IReaderCommandDbf");
+            DispatcherHelper.Initialize();
             Triger = trigerselect;
             Ul = ul;
             Fl = fl;
@@ -44,34 +47,43 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
             ListFile = filedbf;
             Report = report;
             Tab = tab;
-            if (Yers.IsValidation())
+            if (service.IsActive())
             {
-                if (Triger.IsCheked)
+                if (Yers.IsValidation())
                 {
-                    if (!Fl.IsValidation())
+                    if (Triger.IsCheked)
                     {
-                        Triger.IsEnableButtonFl = false;
-                        WorkerFl.WorkerReportsProgress = true;
-                        WorkerFl.WorkerSupportsCancellation = true;
-                        WorkerFl.DoWork += worker_DoworkFL;
-                        WorkerFl.ProgressChanged += worker_progressChangeFL;
-                        WorkerFl.RunWorkerCompleted += worker_RunWorkerCompleteFL;
-                        WorkerFl.RunWorkerAsync();
+                        if (!Fl.IsValidation())
+                        {
+                            Triger.IsEnableButtonFl = false;
+                            WorkerFl.WorkerReportsProgress = true;
+                            WorkerFl.WorkerSupportsCancellation = true;
+                            WorkerFl.DoWork += worker_DoworkFL;
+                            WorkerFl.ProgressChanged += worker_progressChangeFL;
+                            WorkerFl.RunWorkerCompleted += worker_RunWorkerCompleteFL;
+                            WorkerFl.RunWorkerAsync();
+                        }
                     }
-                }
-                else
-                {
-                    if (!Ul.IsValidation())
+                    else
                     {
-                        Triger.IsEnableButtonUl = false;
-                        WorkerUl.WorkerReportsProgress = true;
-                        WorkerUl.WorkerSupportsCancellation = true;
-                        WorkerUl.DoWork += worker_DoworkUL;
-                        WorkerUl.ProgressChanged += worker_progressChangeUL;
-                        WorkerUl.RunWorkerCompleted += worker_RunWorkerCompleteUL;
-                        WorkerUl.RunWorkerAsync();
+                        if (!Ul.IsValidation())
+                        {
+                            Triger.IsEnableButtonUl = false;
+                            WorkerUl.WorkerReportsProgress = true;
+                            WorkerUl.WorkerSupportsCancellation = true;
+                            WorkerUl.DoWork += worker_DoworkUL;
+                            WorkerUl.ProgressChanged += worker_progressChangeUL;
+                            WorkerUl.RunWorkerCompleted += worker_RunWorkerCompleteUL;
+                            WorkerUl.RunWorkerAsync();
+                        }
                     }
+
                 }
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show(
+                    @"Ошибка сервис не может принять запрос в связи с резервным копированием");
             }
         }
 
@@ -84,7 +96,6 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
         {
             try
             {
-            DispatcherHelper.Initialize();
             var logica = new Face.GroupReportTable.AnyUlOnFlReport();
             var workbookreport = new XLWorkbook();
             var colection = new AddColection.AddColection();
@@ -102,7 +113,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
                     ListFile.UpdateOn();
                     Tab.UpdateOn();
                     Report.UpdateOn();
-                        Task.Run(async () =>
+                    Task.Run(async () =>
                         {
                             await Task.Run(() =>
                             {
@@ -200,7 +211,7 @@ namespace TestIFNSTools.Detalizacia.WpfUserControl.Logica
                                 }
                             });
 
-                        });
+                       });
                     });
                 });
             Detal.BeginInvoke(new MethodInvoker(() => WorkerFl.CancelAsync()));

@@ -5,9 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:TestIFNSTools.Detalizacia.WpfUserControl"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:local1="clr-namespace:TestIFNSTools.Detalizacia.WpfUserControl.ConvertorWpf"
     xmlns:locals="clr-namespace:TestIFNSTools.Detalizacia.WpfUserControl.DataContext"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="1000"
     d:DesignWidth="1000"
@@ -64,23 +64,41 @@
                     Height="30"
                     Background="Aqua">
                     <MenuItem Height="30" Header="Файл">
-                        <MenuItem 
+                        <MenuItem
+                            Name="DialogBakcup"
                             Height="30"
+                            HorizontalAlignment="Left"
                             Command="{Binding OpenDialogWcfBackup}"
-                            Header="Проверить копию БД" />
+                            CommandParameter="{Binding Name, ElementName=DialogBakcup}"
+                            Header="Проверить копию БД">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Database" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            Name="ConfigWcf"
+                            Height="30"
+                            HorizontalAlignment="Left"
+                            Command="{Binding OpenDialogWcfBackup}"
+                            CommandParameter="{Binding Name, ElementName=ConfigWcf}"
+                            Header="Настройки сервиса!!!">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="Settings" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
                 </Menu>
-                <materialDesign:DialogHost Name="DialogHost"
-                    Grid.Row="1" 
-                    Grid.Column="0" 
-                    Grid.ColumnSpan="3" 
-                    Grid.RowSpan="4" 
-                    VerticalAlignment="Center"
+                <materialDesign:DialogHost
+                    Name="DialogHost"
+                    Grid.Row="1"
+                    Grid.RowSpan="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
                     HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    DialogContent="{Binding Dialog.Dialog.UserControl}"
                     Identifier="RootDialog"
-                    IsOpen="{Binding OpenDialog.IsOpenDialog}"
-                    DialogContent="{Binding Dialog}">
-                </materialDesign:DialogHost>
+                    IsOpen="{Binding Service.IsOpenDialog}" />
                 <StackPanel
                     Grid.Row="1"
                     Grid.RowSpan="2"
@@ -101,7 +119,7 @@
                             VerticalContentAlignment="Stretch"
                             ItemsSource="{Binding Years.Shemedyears}"
                             SelectedItem="{Binding Years.SelectYears, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                            ToolTip="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}">
+                            ToolTip="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={x:Static RelativeSource.Self}}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
@@ -165,7 +183,7 @@
                                 HorizontalAlignment="Left"
                                 HorizontalContentAlignment="Left"
                                 Text="{Binding PanelUl.InnUl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                ToolTip="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
+                                ToolTip="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
                                 Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
                         </WrapPanel>
                     </StackPanel>
@@ -200,7 +218,7 @@
                                 Height="30"
                                 HorizontalContentAlignment="Stretch"
                                 Text="{Binding PanelFl.InnFl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                ToolTip="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
+                                ToolTip="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
                                 Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
                         </WrapPanel>
                         <WrapPanel>
@@ -216,7 +234,7 @@
                                 Height="30"
                                 HorizontalAlignment="Stretch"
                                 Text="{Binding PanelFl.SeriaNomerPasport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                ToolTip="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
+                                ToolTip="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
                                 Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
                         </WrapPanel>
                         <WrapPanel>
@@ -232,7 +250,7 @@
                                 Height="30"
                                 HorizontalAlignment="Stretch"
                                 Text="{Binding PanelFl.Familia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                ToolTip="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
+                                ToolTip="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
                                 Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
                         </WrapPanel>
                         <WrapPanel>
@@ -248,7 +266,7 @@
                                 Height="30"
                                 HorizontalAlignment="Stretch"
                                 Text="{Binding PanelFl.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                ToolTip="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
+                                ToolTip="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
                                 Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
                         </WrapPanel>
                         <WrapPanel>
@@ -264,7 +282,7 @@
                                 Height="30"
                                 HorizontalAlignment="Stretch"
                                 Text="{Binding PanelFl.MiddleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                ToolTip="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
+                                ToolTip="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"
                                 Validation.ErrorTemplate="{StaticResource ValidationFailed}" />
                         </WrapPanel>
                     </StackPanel>
