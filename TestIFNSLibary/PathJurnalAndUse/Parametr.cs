@@ -55,7 +55,22 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// Файл Лога
         /// </summary>
         public static string Log = ConfigurationManager.AppSettings["Log4Net"];
-
+        /// <summary>
+        /// Соединение на слияние
+        /// </summary>
         public static string ConnectionString = ConfigurationManager.AppSettings["Connect"];
+        /// <summary>
+        /// Соединение с тестовой БД RISK_TEST
+        /// </summary>
+        public static string ConectTest = ConfigurationManager.AppSettings["ConectTest"];
+
+        /// <summary>
+        /// Соединение с рабочей БД BDK77737751000070020000019757
+        /// </summary>
+        public static string ConectWork = ConfigurationManager.AppSettings["ConectWork"];
+        /// <summary>
+        /// Сохранение отчетов в автомате
+        /// </summary>
+        public static string Report = ConfigurationManager.AppSettings["SaveReport"];
     }
 }

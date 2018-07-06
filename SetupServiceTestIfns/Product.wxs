@@ -31,6 +31,8 @@
 			<ComponentRef Id="CreateFolder" />
       <ComponentGroupRef Id="ProgramFilesFolder_files" />
       <ComponentRef Id="ClearUnistallation" />
+      <ComponentRef Id="CreateFolderReport" />
+      <ComponentRef Id="CreateLog" />
 		</Feature>
 	</Product>
     
@@ -44,7 +46,27 @@
 		</Directory>
 	</Fragment>
 
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="PathReport" Name="Report">
+        <Component Id="CreateFolderReport" Guid="F9DEE3D6-D9EB-4FE4-9FC5-29E9A8D1D1E4">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
   
+    <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="PathLog" Name="Log">
+        <Component Id="CreateLog" Guid="D439FD9F-1DA7-431A-8301-30DCF111D606">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
+    
+      
   <Fragment>
     <DirectoryRef Id="INSTALLLOCATION">
       <Directory Id="Path" Name="Xml">
@@ -60,13 +82,15 @@
       <Component Id="ClearUnistallation" Guid="6C456475-ABBB-462D-A3EF-2D5FF170B933">
         <CreateFolder Directory="INSTALLLOCATION" />
         <RemoveFile Id="RemoveFileQBEDATE" On="uninstall" Name="*.*" Directory="Path" />
-        <RemoveFolder Id="RemoveFolderQBEDATE" On="uninstall" Directory="Path" /> 
+        <RemoveFolder Id="RemoveFolderQBEDATE" On="uninstall" Directory="Path" />
+        <RemoveFile Id="RemoveFileReport" On="uninstall" Name="*.*" Directory="PathReport" />
+        <RemoveFolder Id="RemoveFolderReport" On="uninstall" Directory="PathReport" />
+        <RemoveFile Id="RemoveFileLog" On="uninstall" Name="*.*" Directory="PathLog" />
+        <RemoveFolder Id="RemoveFolderLog" On="uninstall" Directory="PathLog" />
       </Component>
     </DirectoryRef>
   </Fragment>
     
-      
-        
 <Fragment>
   <DirectoryRef Id="INSTALLFOLDER">
     <Component Id="ClearAll" Guid="C4349956-E92E-4304-BA58-E7D30A6A77D9">
@@ -88,7 +112,8 @@
       <util:XmlFile Id="ServeceXml" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PathJurnal'[\]]//@value" Value="[Path]XmlBacup.xml" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="ServeceXml1" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='TestDB'[\]]//@value" Value="[TestDb]" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="ServeceXml2" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='WorkDB'[\]]//@value" Value="[WorkDb]" SelectionLanguage="XPath" Sequence="1" />
-      <util:XmlFile Id="DataBase" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Connect'[\]]//@value" Value="Data Source=[DataBase];Initial Catalog=Taxes51;Integrated Security=True;MultipleActiveResultSets=True" SelectionLanguage="XPath" Sequence="1"/>
+      <util:XmlFile Id="DataBase" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Connect'[\]]//@value" Value="Data Source=[DataBase];Initial Catalog=Taxes51;Integrated Security=True;MultipleActiveResultSets=True" SelectionLanguage="XPath" Sequence="1" />
+      <util:XmlFile Id="Report" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='SaveReport'[\]]//@value" Value="[PathReport]" SelectionLanguage="XPath" Sequence="1" />
     </Component>
 		<Component Id="TestIFNSLibary.dll" Guid="bae45c5b-9bd2-4d6a-a979-dc0d7c13d0cf">
 		  <File Id="TestIFNSLibary.dll" Name="TestIFNSLibary.dll" Source="$(var.TestIFNSLibary_TargetDir)TestIFNSLibary.dll" />
@@ -104,6 +129,18 @@
 		</Component>
 		<Component Id="SqlLibaryIfns.dll" Guid="5290c5bf-accd-4e6d-b3c7-5c806b8d50a9">
 		  <File Id="SqlLibaryIfns.dll" Name="SqlLibaryIfns.dll" Source="$(var.SqlLibaryIfns_TargetDir)SqlLibaryIfns.dll" />
+		</Component>
+		<Component Id="ClosedXML.dll" Guid="2455be23-133f-444d-91d6-37c500bee57a">
+		  <File Id="ClosedXML.dll" Name="ClosedXML.dll" Source="$(var.TestIFNSService_TargetDir)ClosedXML.dll" />
+		</Component>
+		<Component Id="DocumentFormat.OpenXml.dll" Guid="86576c53-5197-4bf8-9f83-626e94e3892b">
+		  <File Id="DocumentFormat.OpenXml.dll" Name="DocumentFormat.OpenXml.dll" Source="$(var.TestIFNSService_TargetDir)DocumentFormat.OpenXml.dll" />
+		</Component>
+		<Component Id="ExcelNumberFormat.dll" Guid="41db810a-bd13-4f23-9651-6f923976efcf">
+		  <File Id="ExcelNumberFormat.dll" Name="ExcelNumberFormat.dll" Source="$(var.TestIFNSService_TargetDir)ExcelNumberFormat.dll" />
+		</Component>
+		<Component Id="FastMember.Signed.dll" Guid="54db0ec9-b793-48e2-8a6f-f6c38ebeafe3">
+		  <File Id="FastMember.Signed.dll" Name="FastMember.Signed.dll" Source="$(var.TestIFNSService_TargetDir)FastMember.Signed.dll" />
 		</Component>
 		</ComponentGroup>
 	</Fragment>

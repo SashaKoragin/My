@@ -58,7 +58,7 @@ Patch dialog sequence:
                 <Control Id="Title" Type="Text" X="10" Y="8" Width="400" Height="15" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}В данном окне пишется пути к рабочей БД чтобы взять с нее копию!!!" />
                 <Control Id="Title1" Type="Text" X="15" Y="56" Width="106" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь к Work DB:" />
                 <Control Id="SimpleEdit" Type="Edit" X="90" Y="52" Width="195" Height="15" Property="WorkDb" Sunken="no">
-                    <Property Id="WorkDb" Value="\\i7751-w40000650\2NDFL\stat" />
+                    <Property Id="WorkDb" Value="\\i7751-app127\2NDFL\stat" />
                 </Control>
                 <Control Id="ResultComment" Type="Text" X="15" Y="75" Width="60" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь Теsт DB:" />
                 <Control Id="ResultFolder" Type="Edit" X="90" Y="75" Width="194" Height="15" Property="TestDb" Sunken="no" ToolTip="Use Folder Result ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">

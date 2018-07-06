@@ -26,8 +26,7 @@ namespace TestIFNSService
             Servicehost = new ServiceHost(typeof(CommandDbf));
             ServiceRest.Open();
             Servicehost.Open();
-            var timerGo = new TimerGo();
-            timerGo.TimerStart();
+            var timeEvent = new TestIFNSLibary.TimeEvent.TimeEvent();
         }
 
         protected override void OnStop()

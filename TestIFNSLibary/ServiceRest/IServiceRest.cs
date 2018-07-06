@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
-using System.Xml.Linq;
-using System.Xml.Serialization;
+using System.Threading.Tasks;
+using LibaryXMLAuto.ModelXmlSql.Model.Trebovanie;
 using LibaryXMLAutoModelXmlSql.Model.FaceError;
-using TestIFNSLibary.PathJurnalAndUse;
+using LibaryXMLAutoModelXmlSql.Model.Trebovanie;
 using TestIFNSLibary.PostRequest.Face;
 
 namespace TestIFNSLibary.ServiceRest
@@ -34,7 +33,7 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SqlFaceError", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
-        Face SqlFaceError();
+        Task<Face> SqlFaceError();
         /// <summary>
         /// Метод добавления лица
         /// </summary>
@@ -51,5 +50,22 @@ namespace TestIFNSLibary.ServiceRest
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SqlFaceDel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         string FaceDel(int id);
+        /// <summary>
+        /// Выполнение процедур в зависимости от setting
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <returns>Возврат сообщения с сервера SQL</returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StoreProcedureReshenie", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> StoreProcedure(Setting setting);
+
+        /// <summary>
+        /// Подгрузка сведений на сайт 
+        /// </summary>
+        /// <param name="setting">Настройки подкгрузки</param>
+        /// <returns>Возврат модели JSON в виде строки</returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/LoadTreb", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> LoaderReshenie(Setting setting);
     }
 }
