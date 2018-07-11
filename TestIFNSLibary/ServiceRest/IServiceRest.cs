@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
@@ -67,5 +68,8 @@ namespace TestIFNSLibary.ServiceRest
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/LoadTreb", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> LoaderReshenie(Setting setting);
+        [OperationContract]
+        [WebGet(UriTemplate = "/ReportFile/{fileName}")]
+        Task<Stream> DonloadFile(string filename);
     }
 }

@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cross\CorsEnablingBehavior.cs" />
+    <Compile Include="FileDonload\DonloadFile.cs" />
     <Compile Include="PostRequest\Face\FaceAdd.cs" />
     <Compile Include="ServiceRest\IServiceRest.cs" />
     <Compile Include="ServiceRest\ServiceRest.cs" />

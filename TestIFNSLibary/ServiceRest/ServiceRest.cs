@@ -11,6 +11,8 @@ using TestIFNSLibary.PostRequest.Face;
 using SqlLibaryIfns.SqlEntytiCommand.TaskUse;
 using SqlLibaryIfns.SqlZapros.SobytieSql;
 using SqlLibaryIfns.SqlZapros.ZaprosSelectNotParam;
+using System.IO;
+using TestIFNSLibary.FileDonload;
 
 namespace TestIFNSLibary.ServiceRest
 {
@@ -129,6 +131,18 @@ namespace TestIFNSLibary.ServiceRest
                 default:
                     return null;
             }
+        }
+
+        public async Task<Stream> DonloadFile(string filename)
+        {
+            DonloadFile donloasd = new DonloadFile();
+            if (File.Exists(Path.Combine(Parametr.Report, filename)))
+            {
+                return
+                       await Task.Factory.StartNew<Stream>(
+                           () => donloasd.DonloadTreb(Path.Combine(Parametr.Report, filename)));
+            }
+              return null;
         }
     }
 }
