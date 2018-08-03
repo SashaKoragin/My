@@ -134,13 +134,16 @@
 		  <File Id="ClosedXML.dll" Name="ClosedXML.dll" Source="$(var.TestIFNSService_TargetDir)ClosedXML.dll" />
 		</Component>
 		<Component Id="DocumentFormat.OpenXml.dll" Guid="86576c53-5197-4bf8-9f83-626e94e3892b">
-		  <File Id="DocumentFormat.OpenXml.dll" Name="DocumentFormat.OpenXml.dll" Source="$(var.TestIFNSService_TargetDir)DocumentFormat.OpenXml.dll" />
+		  <File Id="DocumentFormat.OpenXml.dll" Name="DocumentFormat.OpenXml.dll" Source="$(var.SqlLibaryIfns_TargetDir)DocumentFormat.OpenXml.dll" />
 		</Component>
 		<Component Id="ExcelNumberFormat.dll" Guid="41db810a-bd13-4f23-9651-6f923976efcf">
 		  <File Id="ExcelNumberFormat.dll" Name="ExcelNumberFormat.dll" Source="$(var.TestIFNSService_TargetDir)ExcelNumberFormat.dll" />
 		</Component>
 		<Component Id="FastMember.Signed.dll" Guid="54db0ec9-b793-48e2-8a6f-f6c38ebeafe3">
 		  <File Id="FastMember.Signed.dll" Name="FastMember.Signed.dll" Source="$(var.TestIFNSService_TargetDir)FastMember.Signed.dll" />
+		</Component>
+		<Component Id="Newtonsoft.Json.dll" Guid="4b16e079-f550-4f34-9033-69340d9ac3ef">
+		  <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.TestIFNSService_TargetDir)Newtonsoft.Json.dll" />
 		</Component>
 		</ComponentGroup>
 	</Fragment>

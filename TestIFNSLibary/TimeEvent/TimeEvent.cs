@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using SqlLibaryIfns.SqlZapros.Report;
 using SqlLibaryIfns.ExcelReport.Report;
 using System.Threading.Tasks;

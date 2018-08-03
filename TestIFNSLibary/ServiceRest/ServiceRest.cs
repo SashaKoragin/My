@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using LibaryXMLAuto.ModelXmlSql.Model.Trebovanie;
 using LibaryXMLAutoModelXmlSql.Model.FaceError;
 using TestIFNSLibary.PathJurnalAndUse;
 using TestIFNSLibary.PostRequest.Face;
@@ -12,7 +10,12 @@ using SqlLibaryIfns.SqlEntytiCommand.TaskUse;
 using SqlLibaryIfns.SqlZapros.SobytieSql;
 using SqlLibaryIfns.SqlZapros.ZaprosSelectNotParam;
 using System.IO;
-using TestIFNSLibary.FileDonload;
+using LibaryDocumentGenerator.Documents.Word.Generate.StartGenerate;
+using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
+using SqlLibaryIfns.ExcelReport.Report;
+using SqlLibaryIfns.SqlSelect.SqlReshenia;
+
+
 
 namespace TestIFNSLibary.ServiceRest
 {
@@ -20,30 +23,6 @@ namespace TestIFNSLibary.ServiceRest
     public class ServiceRest : IServiceRest
     {
         //Функции для сайта IFNS
-        /// <summary>
-        /// Тест пост запроса хотим посмотреть как работает
-        /// </summary>
-        /// <returns></returns>
-        public FaceAdd Test()
-        {
-            FaceAdd add= new FaceAdd();
-            add.N1New = 1212;
-            add.N1Old = 23232;
-            return add;
-        }
-
-       public List<Test.Test> Test1()
-        {
-            List<Test.Test> _products = new List<Test.Test>
-                        {
-                            new Test.Test() {ProductId = 1, Name = "Product 1", CategoryName = "Category 1", Price = 10},
-                            new Test.Test() {ProductId = 2, Name = "Product 2", CategoryName = "Category 1", Price = 5},
-                            new Test.Test() {ProductId = 3, Name = "Product 3", CategoryName = "Category 2", Price = 15},
-                            new Test.Test() {ProductId = 4, Name = "Product 4", CategoryName = "Category 3", Price = 9}
-                        };
-            return _products;
-        }
-
         public async Task<Face> SqlFaceError()
         {
             var selectfull = new SelectFull();
@@ -101,7 +80,7 @@ namespace TestIFNSLibary.ServiceRest
         /// </summary>
         /// <param name="seting">Настройки</param>
         /// <returns>Возврат сообщения с сервера SQL</returns>
-        public async Task<string> StoreProcedure(Setting seting)
+        public async Task<string> StoreProcedure(FullSetting seting)
         {
             var taskcommand = new TaskResult();
             switch (seting.Db)
@@ -119,30 +98,69 @@ namespace TestIFNSLibary.ServiceRest
         /// </summary>
         /// <param name="seting">Настройки</param>
         /// <returns>Возврат модели JSON в виде строки</returns>
-        public async Task<string> LoaderReshenie(Setting seting)
+        public async Task<string> LoaderReshenie(FullSetting seting)
         {
           var selectfull = new SelectFull();
             switch (seting.Db)
             {
                 case "Work":
-                   return await Task.Factory.StartNew<string>(() => selectfull.SysNumReshenie(Parametr.ConectWork, SqlLibaryIfns.SqlSelect.SqlReshenia.ProcedureReshenie.SelectReshenie));
+                   return await Task.Factory.StartNew<string>(() => selectfull.SysNumReshenie(Parametr.ConectWork, ProcedureReshenie.SelectReshenie));
                 case "Test":
-                      return await Task.Factory.StartNew<string>(() => selectfull.SysNumReshenie(Parametr.ConectTest, SqlLibaryIfns.SqlSelect.SqlReshenia.ProcedureReshenie.SelectReshenie));
+                      return await Task.Factory.StartNew<string>(() => selectfull.SysNumReshenie(Parametr.ConectTest, ProcedureReshenie.SelectReshenie));
+                default:
+                    return null;
+            }
+        }
+        /// <summary>
+        /// Загрузка файла с сервера
+        /// </summary>
+        /// <param name="filename">Имя файла</param>
+        /// <returns></returns>
+        public async Task<Stream> DonloadFile(string filename)
+        {
+          DonloadsFile donloads = new DonloadsFile();
+          return await donloads.SelectDonloadsFile(Parametr.Report, filename, Parametr.ConectWork);
+        }
+        /// <summary>
+        /// Подгрузка БДК Статистики
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <returns></returns>
+        public async Task<string> LoaderBdk(FullSetting setting)
+        {
+            var selectfull = new SelectFull();
+            switch (setting.Db)
+            {
+                case "Work":
+                    return await Task.Factory.StartNew(() => selectfull.BdkSqlSelect(Parametr.ConectWork, SqlLibaryIfns.SqlSelect.SqlBdkIt.SqlBdkIt.SelectAnalisBdk));
+               default:
+                    return null;
+            }
+        }
+        /// <summary>
+        /// Выполнения процедур по БДК блоку
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <returns></returns>
+        public async Task<string> StoreProcedureBdk(FullSetting setting)
+        {
+            var taskcommand = new TaskResult();
+            switch (setting.Db)
+            {
+                case "Work":
+                    return await taskcommand.TaskSqlProcedureBdk(Parametr.ConectWork, setting);
                 default:
                     return null;
             }
         }
 
-        public async Task<Stream> DonloadFile(string filename)
+        public void StartNewOpenXmlTemplate()
         {
-            DonloadFile donloasd = new DonloadFile();
-            if (File.Exists(Path.Combine(Parametr.Report, filename)))
+            Task.Factory.StartNew(() =>
             {
-                return
-                       await Task.Factory.StartNew<Stream>(
-                           () => donloasd.DonloadTreb(Path.Combine(Parametr.Report, filename)));
-            }
-              return null;
+                DocumentsWord report = new DocumentsWord();
+                report.StartWordBdk(Parametr.ConectTest, Parametr.ConnectionString, Parametr.ReportMassTemplate);
+            });
         }
     }
 }

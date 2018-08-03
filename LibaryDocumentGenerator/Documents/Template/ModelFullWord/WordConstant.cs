@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LibaryDocumentGenerator.Documents.Template.ModelFullWord
+{
+    /// <summary>
+    /// Константы расширений
+    /// </summary>
+   public class WordConstant
+    {
+        /// <summary>
+        /// Константа Word Расширения
+        /// </summary>
+        public string Formatword = ".docx";
+    }
+}

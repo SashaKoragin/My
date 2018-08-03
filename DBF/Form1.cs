@@ -5,7 +5,19 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.OleDb;
+using System.Threading;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Italic = DocumentFormat.OpenXml.Wordprocessing.Italic;
+using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
+using RunProperties = DocumentFormat.OpenXml.Wordprocessing.RunProperties;
+using Table = DocumentFormat.OpenXml.Wordprocessing.Table;
+using TableStyle = DocumentFormat.OpenXml.Wordprocessing.TableStyle;
+using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
+
 
 namespace DBF
 {
@@ -20,7 +32,7 @@ namespace DBF
         {
             String[] dirarr =
                 Directory.GetFiles(@"D:\DBF", "*.DBF", SearchOption.AllDirectories)
-                    .Select(x => Path.GetFullPath(x))
+                    .Select(x => System.IO.Path.GetFullPath(x))
                     .ToArray();
             foreach (string file in dirarr)
             {
@@ -263,9 +275,54 @@ namespace DBF
                 con.Dispose();
             }
         }
-    }
 
-   
-}
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Doc doc = new Doc();
+            doc.CreatePackage("C:\\Testing\\test.docx");
+        }
+
+
+        public Table Docum1(Table tbl, string[,] data)
+        {
+            for (var i = 0; i <= data.GetUpperBound(0); i++)
+            {
+                var tr = new TableRow("row"+i);
+                for (var j = 0; j <= data.GetUpperBound(1); j++)
+                {
+                    var tc = new TableCell("cell"+j);
+                    tc.Append(new Paragraph(new Run(new Text(data[i, j]))));
+                    tc.Append(new TableCellProperties(new TableCellWidth { Type = TableWidthUnitValues.Auto }));
+                    tr.Append(tc);
+                }
+                tbl.Append(tr);
+            }
+            return tbl;
+        }
+
+        public Table Docum(TableCellProperties prop, int row,int cell)
+        {
+            Table tbl = new Table();
+            for (var i = 0; i <= row; i++)
+            {
+                var tr = new TableRow();
+                for (var j = 0; j <= cell; j++)
+                {
+                    var tc = new TableCell();
+                    if (j == 2)
+                    {
+                        tc.AppendChild(prop);
+                    }
+                    tc.Append(new Paragraph(new Run(new Text(null))));
+                    tc.Append(new TableCellProperties(new TableCellWidth { Type = TableWidthUnitValues.Auto }));
+                    tr.Append(tc);
+
+                }
+                tbl.Append(tr);
+            }
+            return tbl;
+        }
+    }
+    }
 
 

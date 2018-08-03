@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace TestIFNSLibary.PathJurnalAndUse
 {
@@ -56,7 +51,7 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// </summary>
         public static string Log = ConfigurationManager.AppSettings["Log4Net"];
         /// <summary>
-        /// Соединение на слияние
+        /// Соединение с рабочей Базой данных Taxes51
         /// </summary>
         public static string ConnectionString = ConfigurationManager.AppSettings["Connect"];
         /// <summary>
@@ -72,5 +67,9 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// Сохранение отчетов в автомате
         /// </summary>
         public static string Report = ConfigurationManager.AppSettings["SaveReport"];
+        /// <summary>
+        /// Путь для массовой печати
+        /// </summary>
+        public static string ReportMassTemplate = ConfigurationManager.AppSettings["ReportMassTemplate"];
     }
 }

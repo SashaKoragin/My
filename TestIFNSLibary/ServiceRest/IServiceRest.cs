@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
-using LibaryXMLAuto.ModelXmlSql.Model.Trebovanie;
+using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 using LibaryXMLAutoModelXmlSql.Model.FaceError;
-using LibaryXMLAutoModelXmlSql.Model.Trebovanie;
 using TestIFNSLibary.PostRequest.Face;
 
 namespace TestIFNSLibary.ServiceRest
@@ -13,21 +11,6 @@ namespace TestIFNSLibary.ServiceRest
     [ServiceContract]
     interface IServiceRest 
     {
-        /// <summary>
-        /// Тестовый пост запрос
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "Test", ResponseFormat = WebMessageFormat.Json)]
-        FaceAdd Test();
-        /// <summary>
-        /// Тестовый адрес для запроса JSON не получилось сделать XML
-        /// </summary>
-        /// <param name="face">Теытовый JSON</param>
-        /// <returns></returns>
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "Test1")]
-        List<Test.Test> Test1();
         /// <summary>
         /// Получение данных на сайт по средством пост запроса на сервис WCF
         /// </summary>
@@ -58,8 +41,7 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns>Возврат сообщения с сервера SQL</returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StoreProcedureReshenie", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> StoreProcedure(Setting setting);
-
+        Task<string> StoreProcedure(FullSetting setting);
         /// <summary>
         /// Подгрузка сведений на сайт 
         /// </summary>
@@ -67,9 +49,37 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns>Возврат модели JSON в виде строки</returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/LoadTreb", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> LoaderReshenie(Setting setting);
+        Task<string> LoaderReshenie(FullSetting setting);
+        /// <summary>
+        /// Загрузка файла на компьютер с сервера
+        /// </summary>
+        /// <param name="filename">Имя файла</param>
+        /// <returns>Файл в птоке</returns>
         [OperationContract]
         [WebGet(UriTemplate = "/ReportFile/{fileName}")]
         Task<Stream> DonloadFile(string filename);
+        /// <summary>
+        /// Загрузка данных по БДК
+        /// </summary>
+        /// <param name="setting">Параметры</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/LoadBdk", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> LoaderBdk(FullSetting setting);
+        /// <summary>
+        /// Процедуры БДК
+        /// </summary>
+        /// <param name="setting">Параметры</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ProcedureBdk", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> StoreProcedureBdk(FullSetting setting);
+
+        /// <summary>
+        /// Создание шаблона для исходящих сообщений БДК
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StartOpenXmlTest", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
+        void StartNewOpenXmlTemplate();
     }
 }
