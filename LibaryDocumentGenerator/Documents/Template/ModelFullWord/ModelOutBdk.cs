@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 using LibaryXMLAutoReports.ReportsBdk;
 using SqlLibaryIfns.SqlModelReport.Bdk;
 using LibaryXMLAutoReports.TemplateSheme;
@@ -32,13 +33,14 @@ namespace LibaryDocumentGenerator.Documents.Template.ModelFullWord
         /// <param name="connectionstringtemplate">Строка соединения с шаблонами</param>
         /// <param name="connectionstringtaxes">Строка соединения с Данными</param>
         /// <param name="path">Путоь сохранения документов</param>
-        public ModelOutBdk(string connectionstringtemplate, string connectionstringtaxes, string path)
+        /// <param name="setting">Параметры пользователя</param>
+        public ModelOutBdk(string connectionstringtemplate, string connectionstringtaxes, string path, FullSetting setting)
         {
             ModelFull modelFull = new ModelFull();
             SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate template = new SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate();
             PathSave = path;
-            Report = modelFull.ReportBdk(connectionstringtaxes);
-            DocumentTemplate = template.Template(connectionstringtemplate);
+            Report = modelFull.ReportBdk(connectionstringtaxes,setting);
+            DocumentTemplate = template.Template(connectionstringtemplate, setting);
         }
     }
 }

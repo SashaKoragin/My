@@ -11,21 +11,21 @@ namespace TestIFNSLibary.WebSevice.Bakcup
         /// <summary>
         /// Режим резервного копирования с журналом
         /// </summary>
-        /// <param name="WorkDb">Удаленная БД</param>
-        /// <param name="TestDb">Локальная БД</param>
-        public void Backup(string WorkDb, string TestDb)
+        /// <param name="work">Удаленная БД</param>
+        /// <param name="test">Локальная БД</param>
+        public void Backup(string work, string test)
         {
             UpdateXml xml = new UpdateXml();
             try
             {
                 xml.WriteStatus(PathJurnalAndUse.Parametr.PathJurnal, "false");
-                foreach (string dirPath in Directory.GetDirectories(WorkDb, "*", SearchOption.AllDirectories))
+                foreach (string dirPath in Directory.GetDirectories(work, "*", SearchOption.AllDirectories))
                 {
-                    Directory.CreateDirectory(dirPath.Replace(WorkDb, TestDb));
+                    Directory.CreateDirectory(dirPath.Replace(work, test));
                 }
-                foreach (string newPath in Directory.GetFiles(WorkDb, "*.*", SearchOption.AllDirectories))
+                foreach (string newPath in Directory.GetFiles(work, "*.*", SearchOption.AllDirectories))
                 {
-                    File.Copy(newPath, newPath.Replace(WorkDb, TestDb), true);
+                    File.Copy(newPath, newPath.Replace(work, test), true);
                 }
                 xml.WriteStatus(PathJurnalAndUse.Parametr.PathJurnal);
                 xml.WriteStatus(PathJurnalAndUse.Parametr.PathJurnal, "true");

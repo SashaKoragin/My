@@ -23,5 +23,17 @@ namespace LibaryDocumentGenerator.Documents.Word.Generate.UseDocument.SettingPag
             page.SettingPage(ref body, mainDocument);
             return body;
         }
+        /// <summary>
+        /// Для генерации параграфа с Разрывом
+        /// </summary>
+        /// <param name="mainDocument">Документ</param>
+        /// <returns></returns>
+        public Body ParagraphSetting(MainDocumentPart mainDocument)
+        {
+            Body body = new Body();
+            Page page = new Page();
+            page.SettingParagraph(ref body, mainDocument);
+            return body;
+        }
     }
 }

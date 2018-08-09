@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 using LibaryXMLAutoModelXmlSql.Model.FaceError;
 using TestIFNSLibary.PostRequest.Face;
@@ -79,7 +80,7 @@ namespace TestIFNSLibary.ServiceRest
         /// Создание шаблона для исходящих сообщений БДК
         /// </summary>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StartOpenXmlTest", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedResponse)]
-        void StartNewOpenXmlTemplate();
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StartOpenXmlTest", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        string StartNewOpenXmlTemplate(FullSetting setting);
     }
 }

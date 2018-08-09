@@ -13,6 +13,7 @@ using System.IO;
 using LibaryDocumentGenerator.Documents.Word.Generate.StartGenerate;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 using SqlLibaryIfns.ExcelReport.Report;
+using SqlLibaryIfns.SqlModelReport.SqlReshenue;
 using SqlLibaryIfns.SqlSelect.SqlReshenia;
 
 
@@ -100,13 +101,14 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns>Возврат модели JSON в виде строки</returns>
         public async Task<string> LoaderReshenie(FullSetting seting)
         {
-          var selectfull = new SelectFull();
+            SqlReshen resselect = new SqlReshen();
             switch (seting.Db)
             {
                 case "Work":
-                   return await Task.Factory.StartNew<string>(() => selectfull.SysNumReshenie(Parametr.ConectWork, ProcedureReshenie.SelectReshenie));
+                    return
+                        await Task.Factory.StartNew<string>(() => resselect.SysNumReshenie(Parametr.ConectWork, seting));
                 case "Test":
-                      return await Task.Factory.StartNew<string>(() => selectfull.SysNumReshenie(Parametr.ConectTest, ProcedureReshenie.SelectReshenie));
+                      return await Task.Factory.StartNew<string>(() => resselect.SysNumReshenie(Parametr.ConectTest, seting));
                 default:
                     return null;
             }
@@ -154,13 +156,22 @@ namespace TestIFNSLibary.ServiceRest
             }
         }
 
-        public void StartNewOpenXmlTemplate()
+        public string StartNewOpenXmlTemplate(FullSetting setting)
         {
-            Task.Factory.StartNew(() =>
+            try
+            {   Parametr para = new Parametr();
+                Task.Factory.StartNew(() =>
+                {
+                    DocumentsWord report = new DocumentsWord();
+                    report.StartWordBdk(Parametr.ConectTest, Parametr.ConnectionString, Parametr.ReportMassTemplate, setting);
+                });
+                return "Документы для печати запущены и сохраняются в папку "+ Parametr.ReportMassTemplate;
+            }
+            catch (Exception e)
             {
-                DocumentsWord report = new DocumentsWord();
-                report.StartWordBdk(Parametr.ConectTest, Parametr.ConnectionString, Parametr.ReportMassTemplate);
-            });
+                Loggers.Log4NetLogger.Error(e);
+                return e.Message;
+            }
         }
     }
 }

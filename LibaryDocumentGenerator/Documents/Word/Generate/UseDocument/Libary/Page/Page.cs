@@ -42,6 +42,8 @@ namespace LibaryDocumentGenerator.Documents.Word.Generate.UseDocument.Libary.Pag
             SectionProperties sectionProperties = new SectionProperties() ;
             PageSize pageSize = new PageSize() { Width = 11900U, Height = 16840U };
 
+            SectionType section = new SectionType() {Val = SectionMarkValues.Continuous};
+
             PageMargin pageMargin = new PageMargin() { Top = 1440, Right = 700U, Bottom = -1400, Left = 1470U, Header = 710U, Footer = 700U, Gutter = 0U };
             TitlePage titlePage = new TitlePage();
             FooterReference footerReference = new FooterReference() { Type = HeaderFooterValues.First, Id = mainDocument.GetIdOfPart(mainDocument.FooterParts.FirstOrDefault()) };
@@ -49,9 +51,35 @@ namespace LibaryDocumentGenerator.Documents.Word.Generate.UseDocument.Libary.Pag
             sectionProperties.Append(pageSize);
             sectionProperties.Append(pageMargin);
             sectionProperties.Append(titlePage);
+            sectionProperties.Append(section);
             sectionProperties.Append(footerReference);
 
             body.Append(sectionProperties);
+        }
+
+        /// <summary>
+        /// Настройки параграфа с разрывом
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="mainDocument"></param>
+        public void SettingParagraph(ref Body body,MainDocumentPart mainDocument)
+        {
+            Paragraph paragraph = new Paragraph();
+            ParagraphProperties paragraphProperties = new ParagraphProperties();
+
+            SectionProperties sectionProperties = new SectionProperties();
+            FooterReference footerReference = new FooterReference() { Type = HeaderFooterValues.Default, Id = mainDocument.GetIdOfPart(mainDocument.FooterParts.FirstOrDefault()) };
+            SectionType sectionType = new SectionType() { Val = SectionMarkValues.Continuous };
+            PageMargin pageMargin = new PageMargin() { Top = 1440, Right = 700U, Bottom = -1400, Left = 1470U, Header = 710U, Footer = 700U, Gutter = 0U };
+
+            sectionProperties.Append(footerReference);
+            sectionProperties.Append(sectionType);
+            sectionProperties.Append(pageMargin);
+
+            paragraphProperties.Append(sectionProperties);
+            paragraph.Append(paragraphProperties);
+            body.Append(paragraph);
+
         }
     }
 }

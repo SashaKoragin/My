@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LibaryDocumentGenerator.Documents.Template.ModelFullWord;
+using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 
 namespace LibaryDocumentGenerator.Documents.Template.ModelTemplate
 {
@@ -28,10 +29,11 @@ namespace LibaryDocumentGenerator.Documents.Template.ModelTemplate
         /// <param name="connectionstringtemplate">Строка соединения с шаблонами</param>
         /// <param name="connectionstringtaxes">Строка соединения с данными</param>
         /// <param name="path">Путь сохранения</param>
+        /// <param name="setting">Нестройки параметров</param>
         /// <returns></returns>
-        public ModelOutBdk ModelOutBdk(string connectionstringtemplate, string connectionstringtaxes, string path)
+        public ModelOutBdk ModelOutBdk(string connectionstringtemplate, string connectionstringtaxes, string path, FullSetting setting)
         {
-            return new ModelOutBdk(connectionstringtemplate, connectionstringtaxes, path);
+            return new ModelOutBdk(connectionstringtemplate, connectionstringtaxes, path, setting);
         }
         /// <summary>
         /// Реализация модели констант

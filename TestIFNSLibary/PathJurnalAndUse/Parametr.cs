@@ -15,8 +15,8 @@ namespace TestIFNSLibary.PathJurnalAndUse
         public void SettingEdit(string testDb, string workDb, int hours, int minutes)
         {
            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["TestDB"].Value = testDb;
-            config.AppSettings.Settings["WorkDB"].Value = workDb;
+            config.AppSettings.Settings["TestDb"].Value = testDb;
+            config.AppSettings.Settings["WorkDb"].Value = workDb;
             config.AppSettings.Settings["Hours"].Value = hours.ToString();
             config.AppSettings.Settings["Minutes"].Value = minutes.ToString();
             config.Save(ConfigurationSaveMode.Modified);
@@ -30,22 +30,22 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// Путь к локальной Базе данных
         /// </summary>
         [DataMember]
-        public string TestDB = ConfigurationManager.AppSettings["TestDB"];
+        public string TestDB { get; set; } = ConfigurationManager.AppSettings["TestDb"];
         /// <summary>
         /// Путь к удаленной Базе данных
         /// </summary>
         [DataMember]
-        public string WorkDB = ConfigurationManager.AppSettings["WorkDB"];
+        public string WorkDB { get; set; } = ConfigurationManager.AppSettings["WorkDb"];
         /// <summary>
         /// Часы
         /// </summary>
         [DataMember]
-        public int Hours  = Convert.ToInt32( ConfigurationManager.AppSettings["Hours"]);
+        public int Hours { get; set; } = Convert.ToInt32( ConfigurationManager.AppSettings["Hours"]);
         /// <summary>
         /// Минуты
         /// </summary>
         [DataMember]
-        public int Minutes  = Convert.ToInt32( ConfigurationManager.AppSettings["Minutes"]);
+        public int Minutes { get; set; } = Convert.ToInt32( ConfigurationManager.AppSettings["Minutes"]);
         /// <summary>
         /// Файл Лога
         /// </summary>

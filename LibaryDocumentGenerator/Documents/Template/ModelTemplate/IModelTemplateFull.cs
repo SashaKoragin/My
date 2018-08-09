@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LibaryDocumentGenerator.Documents.Template.ModelFullWord;
+﻿using LibaryDocumentGenerator.Documents.Template.ModelFullWord;
+using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 
 namespace LibaryDocumentGenerator.Documents.Template.ModelTemplate
 {
@@ -14,7 +10,7 @@ namespace LibaryDocumentGenerator.Documents.Template.ModelTemplate
     {
         WordConstant ConstWord();
         ModelInBdk ModelInBdk(string connectionstring, string path);
-        ModelOutBdk ModelOutBdk(string connectionstringtemplate, string connectionstringtaxes, string path);
+        ModelOutBdk ModelOutBdk(string connectionstringtemplate, string connectionstringtaxes, string path, FullSetting setting);
 
     }
 }

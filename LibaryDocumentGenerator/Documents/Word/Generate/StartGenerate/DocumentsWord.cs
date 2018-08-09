@@ -5,8 +5,8 @@ using LibaryDocumentGenerator.Documents.Template.ModelTemplate;
 using LibaryDocumentGenerator.Documents.Word.Generate.UseDocument.BodyDocument;
 using LibaryDocumentGenerator.Documents.Word.Generate.UseDocument.FottersDocument;
 using LibaryDocumentGenerator.Documents.Word.Generate.UseDocument.HeadersDocument;
-using LibaryDocumentGenerator.Documents.Word.Generate.UseDocument.Libary.FottersGenerator;
 using LibaryDocumentGenerator.Documents.Word.Generate.UseDocument.SettingPage;
+using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 using LibaryXMLAutoReports.ReportsBdk;
 using Single = LibaryDocumentGenerator.Documents.Word.Generate.UseDocument.FottersDocument.Single;
 
@@ -22,25 +22,32 @@ namespace LibaryDocumentGenerator.Documents.Word.Generate.StartGenerate
         /// <param name="connectionstringtemplate">Строка соединения с Шаблонами на сервере</param>
         /// <param name="connectionstringtaxes">Строка соединения с данными</param>
         /// <param name="path">Путь сохранения документов</param>
-        public void StartWordBdk(string connectionstringtemplate, string connectionstringtaxes, string path)
+        public void StartWordBdk(string connectionstringtemplate, string connectionstringtaxes, string path, FullSetting setting)
         {
             try
             {
                 var model = new ModelTemplateFull();
-                var templatemodel = model.ModelOutBdk(connectionstringtemplate, connectionstringtaxes, path);
-                foreach (var fn71 in templatemodel.Report.FN71)
-                {
-                    try
-                    {
+                var templatemodel = model.ModelOutBdk(connectionstringtemplate, connectionstringtaxes, path, setting);
+                if (templatemodel.Report!=null)
+                { 
+                   foreach (var fn71 in templatemodel.Report.FN71)
+                    { 
+                      try
+                       {
                         string fullpath = templatemodel.PathSave + fn71.N279 + "_CountBDK_" + fn71.FN1723_2.Length +
                                           model.ConstWord().Formatword;
                         CreateDocum(fullpath,templatemodel.DocumentTemplate.NameDocument.Template,fn71);
 
-                    }
-                    catch (Exception ex)
-                    {
+                       }
+                      catch (Exception ex)
+                       {
                         Loggers.Log4NetLogger.Error(ex);
+                       }
                     }
+                }
+                else
+                {
+                    Loggers.Log4NetLogger.Info(new Exception("Нет данных для создания шаблонов писем по данным датам!!! Info FN1723_2.D85"));
                 }
             }
             catch (Exception e)
@@ -85,7 +92,6 @@ namespace LibaryDocumentGenerator.Documents.Word.Generate.StartGenerate
            document.Append(body.TextDocument(template));
            document.Append(body.DocumentIshBdkTableBody(parametr));
            document.Append(single.AddSingle(template));
-
            mainDocumentPart.Document = document;
         }
     }

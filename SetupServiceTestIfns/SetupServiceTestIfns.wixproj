@@ -29,6 +29,14 @@
     <Content Include="SetupServiceTestIfns.wax" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LibaryDocumentGenerator\LibaryDocumentGenerator.csproj">
+      <Name>LibaryDocumentGenerator</Name>
+      <Project>{939b256e-591b-40cc-8097-5d34456404cd}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\Loggers\Loggers.csproj">
       <Name>Loggers</Name>
       <Project>{9bac233e-ed3d-493e-b7f6-f26f8091968d}</Project>

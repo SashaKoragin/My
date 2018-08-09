@@ -1,9 +1,12 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;
+using Ap = DocumentFormat.OpenXml.ExtendedProperties;
+using Vt = DocumentFormat.OpenXml.VariantTypes;
 using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Wordprocessing;
 using M = DocumentFormat.OpenXml.Math;
 using Ovml = DocumentFormat.OpenXml.Vml.Office;
 using V = DocumentFormat.OpenXml.Vml;
+using A = DocumentFormat.OpenXml.Drawing;
 
 
 namespace DBF
@@ -16,1235 +19,1828 @@ namespace DBF
             using (WordprocessingDocument package = WordprocessingDocument.Create(filePath, WordprocessingDocumentType.Document))
             {
                 CreateParts(package);
-                package.MainDocumentPart.Document.Save();
-                package.Close();
             }
         }
 
         // Adds child parts and generates content of the specified part.
         private void CreateParts(WordprocessingDocument document)
         {
+            ExtendedFilePropertiesPart extendedFilePropertiesPart1 = document.AddNewPart<ExtendedFilePropertiesPart>("rId3");
+            GenerateExtendedFilePropertiesPart1Content(extendedFilePropertiesPart1);
+
             MainDocumentPart mainDocumentPart1 = document.AddMainDocumentPart();
             GenerateMainDocumentPart1Content(mainDocumentPart1);
 
-            StyleDefinitionsPart styleDefinitionsPart1 = mainDocumentPart1.AddNewPart<StyleDefinitionsPart>("Re751382eff734755");
-            GenerateStyleDefinitionsPart1Content(styleDefinitionsPart1);
-
-            DocumentSettingsPart documentSettingsPart1 = mainDocumentPart1.AddNewPart<DocumentSettingsPart>("Re734e8513d18441e");
-            GenerateDocumentSettingsPart1Content(documentSettingsPart1);
-
-            FooterPart footerPart1 = mainDocumentPart1.AddNewPart<FooterPart>("Rda32440226204264");
+            FooterPart footerPart1 = mainDocumentPart1.AddNewPart<FooterPart>("rId8");
             GenerateFooterPart1Content(footerPart1);
 
-            FooterPart footerPart2 = mainDocumentPart1.AddNewPart<FooterPart>("R89395fbdc60f4fec");
+            DocumentSettingsPart documentSettingsPart1 = mainDocumentPart1.AddNewPart<DocumentSettingsPart>("rId3");
+            GenerateDocumentSettingsPart1Content(documentSettingsPart1);
+
+            FooterPart footerPart2 = mainDocumentPart1.AddNewPart<FooterPart>("rId7");
             GenerateFooterPart2Content(footerPart2);
 
-            FooterPart footerPart3 = mainDocumentPart1.AddNewPart<FooterPart>("R669df9439214493b");
-            GenerateFooterPart3Content(footerPart3);
+            StylesWithEffectsPart stylesWithEffectsPart1 = mainDocumentPart1.AddNewPart<StylesWithEffectsPart>("rId2");
+            GenerateStylesWithEffectsPart1Content(stylesWithEffectsPart1);
+
+            StyleDefinitionsPart styleDefinitionsPart1 = mainDocumentPart1.AddNewPart<StyleDefinitionsPart>("rId1");
+            GenerateStyleDefinitionsPart1Content(styleDefinitionsPart1);
+
+            EndnotesPart endnotesPart1 = mainDocumentPart1.AddNewPart<EndnotesPart>("rId6");
+            GenerateEndnotesPart1Content(endnotesPart1);
+
+            FootnotesPart footnotesPart1 = mainDocumentPart1.AddNewPart<FootnotesPart>("rId5");
+            GenerateFootnotesPart1Content(footnotesPart1);
+
+            ThemePart themePart1 = mainDocumentPart1.AddNewPart<ThemePart>("rId10");
+            GenerateThemePart1Content(themePart1);
+
+            WebSettingsPart webSettingsPart1 = mainDocumentPart1.AddNewPart<WebSettingsPart>("rId4");
+            GenerateWebSettingsPart1Content(webSettingsPart1);
+
+            FontTablePart fontTablePart1 = mainDocumentPart1.AddNewPart<FontTablePart>("rId9");
+            GenerateFontTablePart1Content(fontTablePart1);
+
+            SetPackageProperties(document);
+        }
+
+        // Generates content of extendedFilePropertiesPart1.
+        private void GenerateExtendedFilePropertiesPart1Content(ExtendedFilePropertiesPart extendedFilePropertiesPart1)
+        {
+            Ap.Properties properties1 = new Ap.Properties();
+            properties1.AddNamespaceDeclaration("vt", "http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes");
+            Ap.Template template1 = new Ap.Template();
+            template1.Text = "Normal.dotm";
+            Ap.TotalTime totalTime1 = new Ap.TotalTime();
+            totalTime1.Text = "35";
+            Ap.Pages pages1 = new Ap.Pages();
+            pages1.Text = "4";
+            Ap.Words words1 = new Ap.Words();
+            words1.Text = "13";
+            Ap.Characters characters1 = new Ap.Characters();
+            characters1.Text = "80";
+            Ap.Application application1 = new Ap.Application();
+            application1.Text = "Microsoft Office Word";
+            Ap.DocumentSecurity documentSecurity1 = new Ap.DocumentSecurity();
+            documentSecurity1.Text = "0";
+            Ap.Lines lines1 = new Ap.Lines();
+            lines1.Text = "1";
+            Ap.Paragraphs paragraphs1 = new Ap.Paragraphs();
+            paragraphs1.Text = "1";
+            Ap.ScaleCrop scaleCrop1 = new Ap.ScaleCrop();
+            scaleCrop1.Text = "false";
+
+            Ap.HeadingPairs headingPairs1 = new Ap.HeadingPairs();
+
+            Vt.VTVector vTVector1 = new Vt.VTVector() { BaseType = Vt.VectorBaseValues.Variant, Size = (UInt32Value)2U };
+
+            Vt.Variant variant1 = new Vt.Variant();
+            Vt.VTLPSTR vTLPSTR1 = new Vt.VTLPSTR();
+            vTLPSTR1.Text = "Название";
+
+            variant1.Append(vTLPSTR1);
+
+            Vt.Variant variant2 = new Vt.Variant();
+            Vt.VTInt32 vTInt321 = new Vt.VTInt32();
+            vTInt321.Text = "1";
+
+            variant2.Append(vTInt321);
+
+            vTVector1.Append(variant1);
+            vTVector1.Append(variant2);
+
+            headingPairs1.Append(vTVector1);
+
+            Ap.TitlesOfParts titlesOfParts1 = new Ap.TitlesOfParts();
+
+            Vt.VTVector vTVector2 = new Vt.VTVector() { BaseType = Vt.VectorBaseValues.Lpstr, Size = (UInt32Value)1U };
+            Vt.VTLPSTR vTLPSTR2 = new Vt.VTLPSTR();
+            vTLPSTR2.Text = "";
+
+            vTVector2.Append(vTLPSTR2);
+
+            titlesOfParts1.Append(vTVector2);
+            Ap.Company company1 = new Ap.Company();
+            company1.Text = "";
+            Ap.LinksUpToDate linksUpToDate1 = new Ap.LinksUpToDate();
+            linksUpToDate1.Text = "false";
+            Ap.CharactersWithSpaces charactersWithSpaces1 = new Ap.CharactersWithSpaces();
+            charactersWithSpaces1.Text = "92";
+            Ap.SharedDocument sharedDocument1 = new Ap.SharedDocument();
+            sharedDocument1.Text = "false";
+            Ap.HyperlinksChanged hyperlinksChanged1 = new Ap.HyperlinksChanged();
+            hyperlinksChanged1.Text = "false";
+            Ap.ApplicationVersion applicationVersion1 = new Ap.ApplicationVersion();
+            applicationVersion1.Text = "14.0000";
+
+            properties1.Append(template1);
+            properties1.Append(totalTime1);
+            properties1.Append(pages1);
+            properties1.Append(words1);
+            properties1.Append(characters1);
+            properties1.Append(application1);
+            properties1.Append(documentSecurity1);
+            properties1.Append(lines1);
+            properties1.Append(paragraphs1);
+            properties1.Append(scaleCrop1);
+            properties1.Append(headingPairs1);
+            properties1.Append(titlesOfParts1);
+            properties1.Append(company1);
+            properties1.Append(linksUpToDate1);
+            properties1.Append(charactersWithSpaces1);
+            properties1.Append(sharedDocument1);
+            properties1.Append(hyperlinksChanged1);
+            properties1.Append(applicationVersion1);
+
+            extendedFilePropertiesPart1.Properties = properties1;
         }
 
         // Generates content of mainDocumentPart1.
         private void GenerateMainDocumentPart1Content(MainDocumentPart mainDocumentPart1)
         {
+            Document document1 = new Document() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14 wp14" } };
+            document1.AddNamespaceDeclaration("wpc", "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas");
+            document1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            document1.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
+            document1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            document1.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+            document1.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+            document1.AddNamespaceDeclaration("wp14", "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing");
+            document1.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
+            document1.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
+            document1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            document1.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            document1.AddNamespaceDeclaration("wpg", "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup");
+            document1.AddNamespaceDeclaration("wpi", "http://schemas.microsoft.com/office/word/2010/wordprocessingInk");
+            document1.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+            document1.AddNamespaceDeclaration("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape");
 
-            Document document1 = new Document();
             Body body1 = new Body();
 
-            SectionProperties sectionProperties1 = new SectionProperties() { RsidR = "003E25F4", RsidSect = "00FC3028" };
-            PageSize pageSize1 = new PageSize() { Width = (UInt32Value)11906U, Height = (UInt32Value)16838U };
-            PageMargin pageMargin1 = new PageMargin() { Top = 1400, Right = (UInt32Value)800U, Bottom = -1400, Left = (UInt32Value)1440U, Header = (UInt32Value)710U, Footer = (UInt32Value)700U, Gutter = (UInt32Value)0U };
-            Columns columns1 = new Columns() { Space = "710" };
-            DocGrid docGrid1 = new DocGrid() { LinePitch = 360 };
-            FooterReference footerReference1 = new FooterReference() { Type = HeaderFooterValues.Default, Id = "Rda32440226204264" };
-            FooterReference footerReference2 = new FooterReference() { Type = HeaderFooterValues.Even, Id = "R89395fbdc60f4fec" };
-            FooterReference footerReference3 = new FooterReference() { Type = HeaderFooterValues.First, Id = "R669df9439214493b" };
-            TitlePage titlePage1 = new TitlePage();
+            Paragraph paragraph1 = new Paragraph() { RsidParagraphAddition = "00EB322D", RsidRunAdditionDefault = "00EB7AF4" };
 
+            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties1 = new ParagraphMarkRunProperties();
+            Languages languages1 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties1.Append(languages1);
+
+            paragraphProperties1.Append(paragraphMarkRunProperties1);
+
+            paragraph1.Append(paragraphProperties1);
+
+            Paragraph paragraph2 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties2 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties2 = new ParagraphMarkRunProperties();
+            Languages languages2 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties2.Append(languages2);
+
+            paragraphProperties2.Append(paragraphMarkRunProperties2);
+
+            paragraph2.Append(paragraphProperties2);
+
+            Paragraph paragraph3 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties3 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties3 = new ParagraphMarkRunProperties();
+            Languages languages3 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties3.Append(languages3);
+
+            paragraphProperties3.Append(paragraphMarkRunProperties3);
+
+            paragraph3.Append(paragraphProperties3);
+
+            Paragraph paragraph4 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties4 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties4 = new ParagraphMarkRunProperties();
+            Languages languages4 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties4.Append(languages4);
+
+            paragraphProperties4.Append(paragraphMarkRunProperties4);
+
+            paragraph4.Append(paragraphProperties4);
+
+            Paragraph paragraph5 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties5 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties5 = new ParagraphMarkRunProperties();
+            Languages languages5 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties5.Append(languages5);
+
+            paragraphProperties5.Append(paragraphMarkRunProperties5);
+
+            paragraph5.Append(paragraphProperties5);
+
+            Paragraph paragraph6 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties6 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties6 = new ParagraphMarkRunProperties();
+            Languages languages6 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties6.Append(languages6);
+
+            paragraphProperties6.Append(paragraphMarkRunProperties6);
+
+            paragraph6.Append(paragraphProperties6);
+
+            Paragraph paragraph7 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties7 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties7 = new ParagraphMarkRunProperties();
+            Languages languages7 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties7.Append(languages7);
+
+            paragraphProperties7.Append(paragraphMarkRunProperties7);
+
+            paragraph7.Append(paragraphProperties7);
+
+            Paragraph paragraph8 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties8 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties8 = new ParagraphMarkRunProperties();
+            Languages languages8 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties8.Append(languages8);
+
+            paragraphProperties8.Append(paragraphMarkRunProperties8);
+
+            paragraph8.Append(paragraphProperties8);
+
+            Paragraph paragraph9 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties9 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties9 = new ParagraphMarkRunProperties();
+            Languages languages9 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties9.Append(languages9);
+
+            paragraphProperties9.Append(paragraphMarkRunProperties9);
+            BookmarkStart bookmarkStart1 = new BookmarkStart() { Name = "_GoBack", Id = "0" };
+            BookmarkEnd bookmarkEnd1 = new BookmarkEnd() { Id = "0" };
+
+            paragraph9.Append(paragraphProperties9);
+            paragraph9.Append(bookmarkStart1);
+            paragraph9.Append(bookmarkEnd1);
+
+            Paragraph paragraph10 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties10 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties10 = new ParagraphMarkRunProperties();
+            Languages languages10 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties10.Append(languages10);
+
+            paragraphProperties10.Append(paragraphMarkRunProperties10);
+
+            paragraph10.Append(paragraphProperties10);
+
+            Paragraph paragraph11 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties11 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties11 = new ParagraphMarkRunProperties();
+            Languages languages11 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties11.Append(languages11);
+
+            paragraphProperties11.Append(paragraphMarkRunProperties11);
+
+            paragraph11.Append(paragraphProperties11);
+
+            Paragraph paragraph12 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties12 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties12 = new ParagraphMarkRunProperties();
+            Languages languages12 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties12.Append(languages12);
+
+            paragraphProperties12.Append(paragraphMarkRunProperties12);
+
+            paragraph12.Append(paragraphProperties12);
+
+            Paragraph paragraph13 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties13 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties13 = new ParagraphMarkRunProperties();
+            Languages languages13 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties13.Append(languages13);
+
+            paragraphProperties13.Append(paragraphMarkRunProperties13);
+
+            paragraph13.Append(paragraphProperties13);
+
+            Paragraph paragraph14 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties14 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties14 = new ParagraphMarkRunProperties();
+            Languages languages14 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties14.Append(languages14);
+
+            paragraphProperties14.Append(paragraphMarkRunProperties14);
+
+            paragraph14.Append(paragraphProperties14);
+
+            Paragraph paragraph15 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties15 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties15 = new ParagraphMarkRunProperties();
+            Languages languages15 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties15.Append(languages15);
+
+            paragraphProperties15.Append(paragraphMarkRunProperties15);
+
+            paragraph15.Append(paragraphProperties15);
+
+            Paragraph paragraph16 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties16 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties16 = new ParagraphMarkRunProperties();
+            Languages languages16 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties16.Append(languages16);
+
+            paragraphProperties16.Append(paragraphMarkRunProperties16);
+
+            paragraph16.Append(paragraphProperties16);
+
+            Paragraph paragraph17 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties17 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties17 = new ParagraphMarkRunProperties();
+            Languages languages17 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties17.Append(languages17);
+
+            paragraphProperties17.Append(paragraphMarkRunProperties17);
+
+            paragraph17.Append(paragraphProperties17);
+
+            Paragraph paragraph18 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties18 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties18 = new ParagraphMarkRunProperties();
+            Languages languages18 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties18.Append(languages18);
+
+            paragraphProperties18.Append(paragraphMarkRunProperties18);
+
+            paragraph18.Append(paragraphProperties18);
+
+            Paragraph paragraph19 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties19 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties19 = new ParagraphMarkRunProperties();
+            Languages languages19 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties19.Append(languages19);
+
+            paragraphProperties19.Append(paragraphMarkRunProperties19);
+
+            paragraph19.Append(paragraphProperties19);
+
+            Paragraph paragraph20 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties20 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties20 = new ParagraphMarkRunProperties();
+            Languages languages20 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties20.Append(languages20);
+
+            paragraphProperties20.Append(paragraphMarkRunProperties20);
+
+            paragraph20.Append(paragraphProperties20);
+
+            Paragraph paragraph21 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties21 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties21 = new ParagraphMarkRunProperties();
+            Languages languages21 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties21.Append(languages21);
+
+            paragraphProperties21.Append(paragraphMarkRunProperties21);
+
+            paragraph21.Append(paragraphProperties21);
+
+            Paragraph paragraph22 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties22 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties22 = new ParagraphMarkRunProperties();
+            Languages languages22 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties22.Append(languages22);
+
+            paragraphProperties22.Append(paragraphMarkRunProperties22);
+
+            paragraph22.Append(paragraphProperties22);
+
+            Paragraph paragraph23 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties23 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties23 = new ParagraphMarkRunProperties();
+            Languages languages23 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties23.Append(languages23);
+
+            paragraphProperties23.Append(paragraphMarkRunProperties23);
+
+            paragraph23.Append(paragraphProperties23);
+
+            Paragraph paragraph24 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties24 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties24 = new ParagraphMarkRunProperties();
+            Languages languages24 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties24.Append(languages24);
+
+            paragraphProperties24.Append(paragraphMarkRunProperties24);
+
+            paragraph24.Append(paragraphProperties24);
+
+            Paragraph paragraph25 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties25 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties25 = new ParagraphMarkRunProperties();
+            Languages languages25 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties25.Append(languages25);
+
+            paragraphProperties25.Append(paragraphMarkRunProperties25);
+
+            paragraph25.Append(paragraphProperties25);
+
+            Paragraph paragraph26 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties26 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties26 = new ParagraphMarkRunProperties();
+            Languages languages26 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties26.Append(languages26);
+
+            paragraphProperties26.Append(paragraphMarkRunProperties26);
+
+            paragraph26.Append(paragraphProperties26);
+
+            Paragraph paragraph27 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties27 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties27 = new ParagraphMarkRunProperties();
+            Languages languages27 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties27.Append(languages27);
+
+            paragraphProperties27.Append(paragraphMarkRunProperties27);
+
+            paragraph27.Append(paragraphProperties27);
+
+            Paragraph paragraph28 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties28 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties28 = new ParagraphMarkRunProperties();
+            Languages languages28 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties28.Append(languages28);
+
+            paragraphProperties28.Append(paragraphMarkRunProperties28);
+
+            paragraph28.Append(paragraphProperties28);
+
+            Paragraph paragraph29 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties29 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties29 = new ParagraphMarkRunProperties();
+            Languages languages29 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties29.Append(languages29);
+
+            paragraphProperties29.Append(paragraphMarkRunProperties29);
+
+            paragraph29.Append(paragraphProperties29);
+
+            Paragraph paragraph30 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties30 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties30 = new ParagraphMarkRunProperties();
+            Languages languages30 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties30.Append(languages30);
+
+            paragraphProperties30.Append(paragraphMarkRunProperties30);
+
+            paragraph30.Append(paragraphProperties30);
+
+            Paragraph paragraph31 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties31 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties31 = new ParagraphMarkRunProperties();
+            Languages languages31 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties31.Append(languages31);
+
+            paragraphProperties31.Append(paragraphMarkRunProperties31);
+
+            paragraph31.Append(paragraphProperties31);
+
+            Paragraph paragraph32 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties32 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties32 = new ParagraphMarkRunProperties();
+            Languages languages32 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties32.Append(languages32);
+
+            paragraphProperties32.Append(paragraphMarkRunProperties32);
+
+            paragraph32.Append(paragraphProperties32);
+
+            Paragraph paragraph33 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties33 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties33 = new ParagraphMarkRunProperties();
+            Languages languages33 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties33.Append(languages33);
+
+            paragraphProperties33.Append(paragraphMarkRunProperties33);
+
+            paragraph33.Append(paragraphProperties33);
+
+            Paragraph paragraph34 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties34 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties34 = new ParagraphMarkRunProperties();
+            Languages languages34 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties34.Append(languages34);
+
+            paragraphProperties34.Append(paragraphMarkRunProperties34);
+
+            paragraph34.Append(paragraphProperties34);
+
+            Paragraph paragraph35 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties35 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties35 = new ParagraphMarkRunProperties();
+            Languages languages35 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties35.Append(languages35);
+
+            paragraphProperties35.Append(paragraphMarkRunProperties35);
+
+            paragraph35.Append(paragraphProperties35);
+
+            Paragraph paragraph36 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties36 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties36 = new ParagraphMarkRunProperties();
+            Languages languages36 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties36.Append(languages36);
+
+            paragraphProperties36.Append(paragraphMarkRunProperties36);
+
+            paragraph36.Append(paragraphProperties36);
+
+            Paragraph paragraph37 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties37 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties37 = new ParagraphMarkRunProperties();
+            Languages languages37 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties37.Append(languages37);
+
+            paragraphProperties37.Append(paragraphMarkRunProperties37);
+
+            paragraph37.Append(paragraphProperties37);
+
+            Paragraph paragraph38 = new Paragraph() { RsidParagraphAddition = "00B0767E", RsidRunAdditionDefault = "00B0767E" };
+
+            ParagraphProperties paragraphProperties38 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties38 = new ParagraphMarkRunProperties();
+            Languages languages38 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties38.Append(languages38);
+
+            paragraphProperties38.Append(paragraphMarkRunProperties38);
+
+            paragraph38.Append(paragraphProperties38);
+
+            Paragraph paragraph39 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties39 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties39 = new ParagraphMarkRunProperties();
+            Languages languages39 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties39.Append(languages39);
+
+            paragraphProperties39.Append(paragraphMarkRunProperties39);
+
+            paragraph39.Append(paragraphProperties39);
+
+            Paragraph paragraph40 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties40 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties40 = new ParagraphMarkRunProperties();
+            Languages languages40 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties40.Append(languages40);
+
+            paragraphProperties40.Append(paragraphMarkRunProperties40);
+
+            paragraph40.Append(paragraphProperties40);
+
+            Paragraph paragraph41 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties41 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties41 = new ParagraphMarkRunProperties();
+            Languages languages41 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties41.Append(languages41);
+
+            paragraphProperties41.Append(paragraphMarkRunProperties41);
+
+            paragraph41.Append(paragraphProperties41);
+
+            Paragraph paragraph42 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties42 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties42 = new ParagraphMarkRunProperties();
+            Languages languages42 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties42.Append(languages42);
+
+            paragraphProperties42.Append(paragraphMarkRunProperties42);
+
+            paragraph42.Append(paragraphProperties42);
+
+            Paragraph paragraph43 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties43 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties43 = new ParagraphMarkRunProperties();
+            Languages languages43 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties43.Append(languages43);
+
+            paragraphProperties43.Append(paragraphMarkRunProperties43);
+
+            paragraph43.Append(paragraphProperties43);
+
+            Paragraph paragraph44 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties44 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties44 = new ParagraphMarkRunProperties();
+            Languages languages44 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties44.Append(languages44);
+
+            paragraphProperties44.Append(paragraphMarkRunProperties44);
+
+            paragraph44.Append(paragraphProperties44);
+
+            Paragraph paragraph45 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties45 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties45 = new ParagraphMarkRunProperties();
+            Languages languages45 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties45.Append(languages45);
+
+            paragraphProperties45.Append(paragraphMarkRunProperties45);
+
+            paragraph45.Append(paragraphProperties45);
+
+            Paragraph paragraph46 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties46 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties46 = new ParagraphMarkRunProperties();
+            Languages languages46 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties46.Append(languages46);
+
+            paragraphProperties46.Append(paragraphMarkRunProperties46);
+
+            paragraph46.Append(paragraphProperties46);
+
+            Paragraph paragraph47 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties47 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties47 = new ParagraphMarkRunProperties();
+            Languages languages47 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties47.Append(languages47);
+
+            paragraphProperties47.Append(paragraphMarkRunProperties47);
+
+            paragraph47.Append(paragraphProperties47);
+
+            Paragraph paragraph48 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties48 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties48 = new ParagraphMarkRunProperties();
+            Languages languages48 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties48.Append(languages48);
+
+            paragraphProperties48.Append(paragraphMarkRunProperties48);
+
+            paragraph48.Append(paragraphProperties48);
+
+            Paragraph paragraph49 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties49 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties49 = new ParagraphMarkRunProperties();
+            Languages languages49 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties49.Append(languages49);
+
+            paragraphProperties49.Append(paragraphMarkRunProperties49);
+
+            paragraph49.Append(paragraphProperties49);
+
+            Paragraph paragraph50 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties50 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties50 = new ParagraphMarkRunProperties();
+            Languages languages50 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties50.Append(languages50);
+
+            paragraphProperties50.Append(paragraphMarkRunProperties50);
+
+            paragraph50.Append(paragraphProperties50);
+
+            Paragraph paragraph51 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties51 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties51 = new ParagraphMarkRunProperties();
+            Languages languages51 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties51.Append(languages51);
+
+            paragraphProperties51.Append(paragraphMarkRunProperties51);
+
+            paragraph51.Append(paragraphProperties51);
+
+            Paragraph paragraph52 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties52 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties52 = new ParagraphMarkRunProperties();
+            Languages languages52 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties52.Append(languages52);
+
+            paragraphProperties52.Append(paragraphMarkRunProperties52);
+
+            paragraph52.Append(paragraphProperties52);
+
+            Paragraph paragraph53 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties53 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties53 = new ParagraphMarkRunProperties();
+            Languages languages53 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties53.Append(languages53);
+
+            paragraphProperties53.Append(paragraphMarkRunProperties53);
+
+            paragraph53.Append(paragraphProperties53);
+
+            Paragraph paragraph54 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties54 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties54 = new ParagraphMarkRunProperties();
+            Languages languages54 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties54.Append(languages54);
+
+            paragraphProperties54.Append(paragraphMarkRunProperties54);
+
+            paragraph54.Append(paragraphProperties54);
+
+            Paragraph paragraph55 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties55 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties55 = new ParagraphMarkRunProperties();
+            Languages languages55 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties55.Append(languages55);
+
+            paragraphProperties55.Append(paragraphMarkRunProperties55);
+
+            paragraph55.Append(paragraphProperties55);
+
+            Paragraph paragraph56 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties56 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties56 = new ParagraphMarkRunProperties();
+            Languages languages56 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties56.Append(languages56);
+
+            paragraphProperties56.Append(paragraphMarkRunProperties56);
+
+            paragraph56.Append(paragraphProperties56);
+
+            Paragraph paragraph57 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties57 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties57 = new ParagraphMarkRunProperties();
+            Languages languages57 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties57.Append(languages57);
+
+            paragraphProperties57.Append(paragraphMarkRunProperties57);
+
+            paragraph57.Append(paragraphProperties57);
+
+            Paragraph paragraph58 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties58 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties58 = new ParagraphMarkRunProperties();
+            Languages languages58 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties58.Append(languages58);
+
+            paragraphProperties58.Append(paragraphMarkRunProperties58);
+
+            paragraph58.Append(paragraphProperties58);
+
+            Paragraph paragraph59 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties59 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties59 = new ParagraphMarkRunProperties();
+            Languages languages59 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties59.Append(languages59);
+
+            paragraphProperties59.Append(paragraphMarkRunProperties59);
+
+            paragraph59.Append(paragraphProperties59);
+
+            Paragraph paragraph60 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties60 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties60 = new ParagraphMarkRunProperties();
+            Languages languages60 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties60.Append(languages60);
+
+            paragraphProperties60.Append(paragraphMarkRunProperties60);
+
+            paragraph60.Append(paragraphProperties60);
+
+            Paragraph paragraph61 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties61 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties61 = new ParagraphMarkRunProperties();
+            Languages languages61 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties61.Append(languages61);
+
+            paragraphProperties61.Append(paragraphMarkRunProperties61);
+
+            paragraph61.Append(paragraphProperties61);
+
+            Paragraph paragraph62 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties62 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties62 = new ParagraphMarkRunProperties();
+            Languages languages62 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties62.Append(languages62);
+
+            paragraphProperties62.Append(paragraphMarkRunProperties62);
+
+            paragraph62.Append(paragraphProperties62);
+
+            Paragraph paragraph63 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties63 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties63 = new ParagraphMarkRunProperties();
+            Languages languages63 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties63.Append(languages63);
+
+            paragraphProperties63.Append(paragraphMarkRunProperties63);
+
+            paragraph63.Append(paragraphProperties63);
+
+            Paragraph paragraph64 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties64 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties64 = new ParagraphMarkRunProperties();
+            Languages languages64 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties64.Append(languages64);
+
+            paragraphProperties64.Append(paragraphMarkRunProperties64);
+
+            paragraph64.Append(paragraphProperties64);
+
+            Paragraph paragraph65 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties65 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties65 = new ParagraphMarkRunProperties();
+            Languages languages65 = new Languages() { Val = "en-US" };
+
+            paragraphMarkRunProperties65.Append(languages65);
+
+            SectionProperties sectionProperties1 = new SectionProperties() { RsidR = "004A5FEA" };
+            FooterReference footerReference1 = new FooterReference() { Type = HeaderFooterValues.Default, Id = "rId7" };
+            PageSize pageSize1 = new PageSize() { Width = (UInt32Value)11906U, Height = (UInt32Value)16838U };
+            PageMargin pageMargin1 = new PageMargin() { Top = 1134, Right = (UInt32Value)850U, Bottom = 1134, Left = (UInt32Value)1701U, Header = (UInt32Value)708U, Footer = (UInt32Value)708U, Gutter = (UInt32Value)0U };
+            Columns columns1 = new Columns() { Space = "708" };
+            DocGrid docGrid1 = new DocGrid() { LinePitch = 360 };
+
+            sectionProperties1.Append(footerReference1);
             sectionProperties1.Append(pageSize1);
             sectionProperties1.Append(pageMargin1);
             sectionProperties1.Append(columns1);
             sectionProperties1.Append(docGrid1);
-            sectionProperties1.Append(footerReference1);
-            sectionProperties1.Append(footerReference2);
-            sectionProperties1.Append(footerReference3);
-            sectionProperties1.Append(titlePage1);
 
+            paragraphProperties65.Append(paragraphMarkRunProperties65);
+            paragraphProperties65.Append(sectionProperties1);
 
-            Table table1 = new Table();
+            paragraph65.Append(paragraphProperties65);
 
-            TableProperties tableProperties1 = new TableProperties();
-            TableStyle tableStyle1 = new TableStyle() { Val = "TableNormal" };
-            TableWidth tableWidth1 = new TableWidth() { Width = "5000", Type = TableWidthUnitValues.Auto };
+            Paragraph paragraph66 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            tableProperties1.Append(tableStyle1);
-            tableProperties1.Append(tableWidth1);
+            ParagraphProperties paragraphProperties66 = new ParagraphProperties();
 
+            ParagraphMarkRunProperties paragraphMarkRunProperties66 = new ParagraphMarkRunProperties();
+            Languages languages66 = new Languages() { Val = "en-US" };
 
-            TableRow tableRow1 = new TableRow();
+            paragraphMarkRunProperties66.Append(languages66);
 
-            TableCell tableCell1 = new TableCell();
+            paragraphProperties66.Append(paragraphMarkRunProperties66);
 
-            TableCellProperties tableCellProperties1 = new TableCellProperties();
-            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "4000", Type = TableWidthUnitValues.Dxa };
-            GridSpan gridSpan1 = new GridSpan() { Val = 3 };
+            paragraph66.Append(paragraphProperties66);
 
-            tableCellProperties1.Append(tableCellWidth1);
-            tableCellProperties1.Append(gridSpan1);
+            Paragraph paragraph67 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            Paragraph paragraph1 = new Paragraph();
+            ParagraphProperties paragraphProperties67 = new ParagraphProperties();
 
-            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
-            Justification justification1 = new Justification() { Val = JustificationValues.Center };
+            ParagraphMarkRunProperties paragraphMarkRunProperties67 = new ParagraphMarkRunProperties();
+            Languages languages67 = new Languages() { Val = "en-US" };
 
-            paragraphProperties1.Append(justification1);
+            paragraphMarkRunProperties67.Append(languages67);
 
-            Run run1 = new Run();
+            paragraphProperties67.Append(paragraphMarkRunProperties67);
 
-            RunProperties runProperties1 = new RunProperties();
-            Bold bold1 = new Bold();
-            RunFonts runFonts1 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize1 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript1 = new FontSizeComplexScript() { Val = "20" };
+            paragraph67.Append(paragraphProperties67);
 
-            runProperties1.Append(bold1);
-            runProperties1.Append(runFonts1);
-            runProperties1.Append(fontSize1);
-            runProperties1.Append(fontSizeComplexScript1);
-            Break break1 = new Break();
+            Paragraph paragraph68 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            run1.Append(runProperties1);
-            run1.Append(break1);
+            ParagraphProperties paragraphProperties68 = new ParagraphProperties();
 
-            Run run2 = new Run();
+            ParagraphMarkRunProperties paragraphMarkRunProperties68 = new ParagraphMarkRunProperties();
+            Languages languages68 = new Languages() { Val = "en-US" };
 
-            RunProperties runProperties2 = new RunProperties();
-            Bold bold2 = new Bold();
-            RunFonts runFonts2 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize2 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript2 = new FontSizeComplexScript() { Val = "20" };
+            paragraphMarkRunProperties68.Append(languages68);
 
-            runProperties2.Append(bold2);
-            runProperties2.Append(runFonts2);
-            runProperties2.Append(fontSize2);
-            runProperties2.Append(fontSizeComplexScript2);
-            Text text1 = new Text();
-            text1.Text = "МИНФИН РОССИИ";
+            paragraphProperties68.Append(paragraphMarkRunProperties68);
 
-            run2.Append(runProperties2);
-            run2.Append(text1);
+            paragraph68.Append(paragraphProperties68);
 
-            Run run3 = new Run();
+            Paragraph paragraph69 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            RunProperties runProperties3 = new RunProperties();
-            RunFonts runFonts3 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize3 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript3 = new FontSizeComplexScript() { Val = "20" };
+            ParagraphProperties paragraphProperties69 = new ParagraphProperties();
 
-            runProperties3.Append(runFonts3);
-            runProperties3.Append(fontSize3);
-            runProperties3.Append(fontSizeComplexScript3);
-            Break break2 = new Break();
+            ParagraphMarkRunProperties paragraphMarkRunProperties69 = new ParagraphMarkRunProperties();
+            Languages languages69 = new Languages() { Val = "en-US" };
 
-            run3.Append(runProperties3);
-            run3.Append(break2);
+            paragraphMarkRunProperties69.Append(languages69);
 
-            Run run4 = new Run();
+            paragraphProperties69.Append(paragraphMarkRunProperties69);
 
-            RunProperties runProperties4 = new RunProperties();
-            RunFonts runFonts4 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize4 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript4 = new FontSizeComplexScript() { Val = "20" };
+            paragraph69.Append(paragraphProperties69);
 
-            runProperties4.Append(runFonts4);
-            runProperties4.Append(fontSize4);
-            runProperties4.Append(fontSizeComplexScript4);
-            Text text2 = new Text();
-            text2.Text = "ФЕДЕРАЛЬНАЯ НАЛОГОВАЯ СЛУЖБА";
+            Paragraph paragraph70 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            run4.Append(runProperties4);
-            run4.Append(text2);
+            ParagraphProperties paragraphProperties70 = new ParagraphProperties();
 
-            Run run5 = new Run();
-
-            RunProperties runProperties5 = new RunProperties();
-            Bold bold3 = new Bold();
-            RunFonts runFonts5 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize5 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript5 = new FontSizeComplexScript() { Val = "16" };
-
-            runProperties5.Append(bold3);
-            runProperties5.Append(runFonts5);
-            runProperties5.Append(fontSize5);
-            runProperties5.Append(fontSizeComplexScript5);
-            Break break3 = new Break();
-
-            run5.Append(runProperties5);
-            run5.Append(break3);
+            ParagraphMarkRunProperties paragraphMarkRunProperties70 = new ParagraphMarkRunProperties();
+            Languages languages70 = new Languages() { Val = "en-US" };
 
-            Run run6 = new Run();
-
-            RunProperties runProperties6 = new RunProperties();
-            Bold bold4 = new Bold();
-            RunFonts runFonts6 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize6 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript6 = new FontSizeComplexScript() { Val = "16" };
-
-            runProperties6.Append(bold4);
-            runProperties6.Append(runFonts6);
-            runProperties6.Append(fontSize6);
-            runProperties6.Append(fontSizeComplexScript6);
-            Text text3 = new Text();
-            text3.Text = "УФНС РОССИИ ПО Г. МОСКВЕ";
+            paragraphMarkRunProperties70.Append(languages70);
 
-            run6.Append(runProperties6);
-            run6.Append(text3);
-
-            Run run7 = new Run();
+            paragraphProperties70.Append(paragraphMarkRunProperties70);
 
-            RunProperties runProperties7 = new RunProperties();
-            RunFonts runFonts7 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize7 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript7 = new FontSizeComplexScript() { Val = "16" };
-
-            runProperties7.Append(runFonts7);
-            runProperties7.Append(fontSize7);
-            runProperties7.Append(fontSizeComplexScript7);
-            Break break4 = new Break();
+            paragraph70.Append(paragraphProperties70);
 
-            run7.Append(runProperties7);
-            run7.Append(break4);
-
-            Run run8 = new Run();
+            Paragraph paragraph71 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            RunProperties runProperties8 = new RunProperties();
-            RunFonts runFonts8 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize8 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript8 = new FontSizeComplexScript() { Val = "16" };
+            ParagraphProperties paragraphProperties71 = new ParagraphProperties();
 
-            runProperties8.Append(runFonts8);
-            runProperties8.Append(fontSize8);
-            runProperties8.Append(fontSizeComplexScript8);
-            Text text4 = new Text();
-            text4.Text = "МЕЖРАЙОННАЯ ИНСПЕКЦИЯ";
+            ParagraphMarkRunProperties paragraphMarkRunProperties71 = new ParagraphMarkRunProperties();
+            Languages languages71 = new Languages() { Val = "en-US" };
 
-            run8.Append(runProperties8);
-            run8.Append(text4);
-
-            Run run9 = new Run();
+            paragraphMarkRunProperties71.Append(languages71);
 
-            RunProperties runProperties9 = new RunProperties();
-            RunFonts runFonts9 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize9 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript9 = new FontSizeComplexScript() { Val = "16" };
+            paragraphProperties71.Append(paragraphMarkRunProperties71);
 
-            runProperties9.Append(runFonts9);
-            runProperties9.Append(fontSize9);
-            runProperties9.Append(fontSizeComplexScript9);
-            Break break5 = new Break();
+            paragraph71.Append(paragraphProperties71);
 
-            run9.Append(runProperties9);
-            run9.Append(break5);
+            Paragraph paragraph72 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            Run run10 = new Run();
+            ParagraphProperties paragraphProperties72 = new ParagraphProperties();
 
-            RunProperties runProperties10 = new RunProperties();
-            RunFonts runFonts10 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize10 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript10 = new FontSizeComplexScript() { Val = "16" };
+            ParagraphMarkRunProperties paragraphMarkRunProperties72 = new ParagraphMarkRunProperties();
+            Languages languages72 = new Languages() { Val = "en-US" };
 
-            runProperties10.Append(runFonts10);
-            runProperties10.Append(fontSize10);
-            runProperties10.Append(fontSizeComplexScript10);
-            Text text5 = new Text();
-            text5.Text = "ФЕДЕРАЛЬНОЙ НАЛОГОВОЙ СЛУЖБЫ №51";
+            paragraphMarkRunProperties72.Append(languages72);
 
-            run10.Append(runProperties10);
-            run10.Append(text5);
+            paragraphProperties72.Append(paragraphMarkRunProperties72);
 
-            Run run11 = new Run();
+            paragraph72.Append(paragraphProperties72);
 
-            RunProperties runProperties11 = new RunProperties();
-            RunFonts runFonts11 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize11 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript11 = new FontSizeComplexScript() { Val = "16" };
+            Paragraph paragraph73 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            runProperties11.Append(runFonts11);
-            runProperties11.Append(fontSize11);
-            runProperties11.Append(fontSizeComplexScript11);
-            Break break6 = new Break();
+            ParagraphProperties paragraphProperties73 = new ParagraphProperties();
 
-            run11.Append(runProperties11);
-            run11.Append(break6);
+            ParagraphMarkRunProperties paragraphMarkRunProperties73 = new ParagraphMarkRunProperties();
+            Languages languages73 = new Languages() { Val = "en-US" };
 
-            Run run12 = new Run();
+            paragraphMarkRunProperties73.Append(languages73);
 
-            RunProperties runProperties12 = new RunProperties();
-            RunFonts runFonts12 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize12 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript12 = new FontSizeComplexScript() { Val = "16" };
+            paragraphProperties73.Append(paragraphMarkRunProperties73);
 
-            runProperties12.Append(runFonts12);
-            runProperties12.Append(fontSize12);
-            runProperties12.Append(fontSizeComplexScript12);
-            Text text6 = new Text();
-            text6.Text = "ПО Г.МОСКВЕ";
+            paragraph73.Append(paragraphProperties73);
 
-            run12.Append(runProperties12);
-            run12.Append(text6);
+            Paragraph paragraph74 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            Run run13 = new Run();
+            ParagraphProperties paragraphProperties74 = new ParagraphProperties();
 
-            RunProperties runProperties13 = new RunProperties();
-            RunFonts runFonts13 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize13 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript13 = new FontSizeComplexScript() { Val = "16" };
+            ParagraphMarkRunProperties paragraphMarkRunProperties74 = new ParagraphMarkRunProperties();
+            Languages languages74 = new Languages() { Val = "en-US" };
 
-            runProperties13.Append(runFonts13);
-            runProperties13.Append(fontSize13);
-            runProperties13.Append(fontSizeComplexScript13);
-            Break break7 = new Break();
+            paragraphMarkRunProperties74.Append(languages74);
 
-            run13.Append(runProperties13);
-            run13.Append(break7);
+            paragraphProperties74.Append(paragraphMarkRunProperties74);
 
-            Run run14 = new Run();
+            paragraph74.Append(paragraphProperties74);
 
-            RunProperties runProperties14 = new RunProperties();
-            RunFonts runFonts14 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize14 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript14 = new FontSizeComplexScript() { Val = "16" };
+            Paragraph paragraph75 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            runProperties14.Append(runFonts14);
-            runProperties14.Append(fontSize14);
-            runProperties14.Append(fontSizeComplexScript14);
-            Text text7 = new Text();
-            text7.Text = "(Межрайонная ИФНС России №51 по г.Москве)";
+            ParagraphProperties paragraphProperties75 = new ParagraphProperties();
 
-            run14.Append(runProperties14);
-            run14.Append(text7);
-
-            Run run15 = new Run();
-
-            RunProperties runProperties15 = new RunProperties();
-            RunFonts runFonts15 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize15 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript15 = new FontSizeComplexScript() { Val = "16" };
-
-            runProperties15.Append(runFonts15);
-            runProperties15.Append(fontSize15);
-            runProperties15.Append(fontSizeComplexScript15);
-            Break break8 = new Break();
-
-            run15.Append(runProperties15);
-            run15.Append(break8);
-
-            Run run16 = new Run();
-
-            RunProperties runProperties16 = new RunProperties();
-            RunFonts runFonts16 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize16 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript16 = new FontSizeComplexScript() { Val = "16" };
-
-            runProperties16.Append(runFonts16);
-            runProperties16.Append(fontSize16);
-            runProperties16.Append(fontSizeComplexScript16);
-            Text text8 = new Text();
-            text8.Text = "ул. 50 лет Октября, д.6, г. Москва, 119618";
-
-            run16.Append(runProperties16);
-            run16.Append(text8);
-
-            Run run17 = new Run();
-
-            RunProperties runProperties17 = new RunProperties();
-            RunFonts runFonts17 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize17 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript17 = new FontSizeComplexScript() { Val = "16" };
-
-            runProperties17.Append(runFonts17);
-            runProperties17.Append(fontSize17);
-            runProperties17.Append(fontSizeComplexScript17);
-            Break break9 = new Break();
-
-            run17.Append(runProperties17);
-            run17.Append(break9);
+            ParagraphMarkRunProperties paragraphMarkRunProperties75 = new ParagraphMarkRunProperties();
+            Languages languages75 = new Languages() { Val = "en-US" };
 
-            Run run18 = new Run();
+            paragraphMarkRunProperties75.Append(languages75);
 
-            RunProperties runProperties18 = new RunProperties();
-            RunFonts runFonts18 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize18 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript18 = new FontSizeComplexScript() { Val = "16" };
+            paragraphProperties75.Append(paragraphMarkRunProperties75);
 
-            runProperties18.Append(runFonts18);
-            runProperties18.Append(fontSize18);
-            runProperties18.Append(fontSizeComplexScript18);
-            Text text9 = new Text();
-            text9.Text = "Телефон: (495)400-00-51; Факс: (495) 400-26-35;";
+            paragraph75.Append(paragraphProperties75);
 
-            run18.Append(runProperties18);
-            run18.Append(text9);
+            Paragraph paragraph76 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            Run run19 = new Run();
+            ParagraphProperties paragraphProperties76 = new ParagraphProperties();
 
-            RunProperties runProperties19 = new RunProperties();
-            RunFonts runFonts19 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize19 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript19 = new FontSizeComplexScript() { Val = "16" };
+            ParagraphMarkRunProperties paragraphMarkRunProperties76 = new ParagraphMarkRunProperties();
+            Languages languages76 = new Languages() { Val = "en-US" };
 
-            runProperties19.Append(runFonts19);
-            runProperties19.Append(fontSize19);
-            runProperties19.Append(fontSizeComplexScript19);
-            Break break10 = new Break();
+            paragraphMarkRunProperties76.Append(languages76);
 
-            run19.Append(runProperties19);
-            run19.Append(break10);
+            paragraphProperties76.Append(paragraphMarkRunProperties76);
 
-            Run run20 = new Run();
+            paragraph76.Append(paragraphProperties76);
 
-            RunProperties runProperties20 = new RunProperties();
-            RunFonts runFonts20 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize20 = new FontSize() { Val = "16" };
-            FontSizeComplexScript fontSizeComplexScript20 = new FontSizeComplexScript() { Val = "16" };
+            Paragraph paragraph77 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            runProperties20.Append(runFonts20);
-            runProperties20.Append(fontSize20);
-            runProperties20.Append(fontSizeComplexScript20);
-            Text text10 = new Text();
-            text10.Text = "www.nalog.ru";
+            ParagraphProperties paragraphProperties77 = new ParagraphProperties();
 
-            run20.Append(runProperties20);
-            run20.Append(text10);
+            ParagraphMarkRunProperties paragraphMarkRunProperties77 = new ParagraphMarkRunProperties();
+            Languages languages77 = new Languages() { Val = "en-US" };
 
-            paragraph1.Append(paragraphProperties1);
-            paragraph1.Append(run1);
-            paragraph1.Append(run2);
-            paragraph1.Append(run3);
-            paragraph1.Append(run4);
-            paragraph1.Append(run5);
-            paragraph1.Append(run6);
-            paragraph1.Append(run7);
-            paragraph1.Append(run8);
-            paragraph1.Append(run9);
-            paragraph1.Append(run10);
-            paragraph1.Append(run11);
-            paragraph1.Append(run12);
-            paragraph1.Append(run13);
-            paragraph1.Append(run14);
-            paragraph1.Append(run15);
-            paragraph1.Append(run16);
-            paragraph1.Append(run17);
-            paragraph1.Append(run18);
-            paragraph1.Append(run19);
-            paragraph1.Append(run20);
+            paragraphMarkRunProperties77.Append(languages77);
 
-            tableCell1.Append(tableCellProperties1);
-            tableCell1.Append(paragraph1);
+            paragraphProperties77.Append(paragraphMarkRunProperties77);
 
-            TableCell tableCell2 = new TableCell();
+            paragraph77.Append(paragraphProperties77);
 
-            TableCellProperties tableCellProperties2 = new TableCellProperties();
-            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
+            Paragraph paragraph78 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            TableCellMargin tableCellMargin1 = new TableCellMargin();
-            LeftMargin leftMargin1 = new LeftMargin() { Width = "1200", Type = TableWidthUnitValues.Dxa };
+            ParagraphProperties paragraphProperties78 = new ParagraphProperties();
 
-            tableCellMargin1.Append(leftMargin1);
+            ParagraphMarkRunProperties paragraphMarkRunProperties78 = new ParagraphMarkRunProperties();
+            Languages languages78 = new Languages() { Val = "en-US" };
 
-            tableCellProperties2.Append(tableCellWidth2);
-            tableCellProperties2.Append(tableCellMargin1);
+            paragraphMarkRunProperties78.Append(languages78);
 
-            Paragraph paragraph2 = new Paragraph();
+            paragraphProperties78.Append(paragraphMarkRunProperties78);
 
-            ParagraphProperties paragraphProperties2 = new ParagraphProperties();
-            Justification justification2 = new Justification() { Val = JustificationValues.Center };
+            paragraph78.Append(paragraphProperties78);
 
-            paragraphProperties2.Append(justification2);
+            Paragraph paragraph79 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            Run run21 = new Run();
-            Break break11 = new Break();
+            ParagraphProperties paragraphProperties79 = new ParagraphProperties();
 
-            run21.Append(break11);
+            ParagraphMarkRunProperties paragraphMarkRunProperties79 = new ParagraphMarkRunProperties();
+            Languages languages79 = new Languages() { Val = "en-US" };
 
-            Run run22 = new Run();
+            paragraphMarkRunProperties79.Append(languages79);
 
-            RunProperties runProperties21 = new RunProperties();
-            RunFonts runFonts21 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
+            paragraphProperties79.Append(paragraphMarkRunProperties79);
 
-            runProperties21.Append(runFonts21);
-            Break break12 = new Break();
+            paragraph79.Append(paragraphProperties79);
 
-            run22.Append(runProperties21);
-            run22.Append(break12);
+            Paragraph paragraph80 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            Run run23 = new Run();
+            ParagraphProperties paragraphProperties80 = new ParagraphProperties();
 
-            RunProperties runProperties22 = new RunProperties();
-            RunFonts runFonts22 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize21 = new FontSize() { Val = "24" };
-            FontSizeComplexScript fontSizeComplexScript21 = new FontSizeComplexScript() { Val = "24" };
+            ParagraphMarkRunProperties paragraphMarkRunProperties80 = new ParagraphMarkRunProperties();
+            Languages languages80 = new Languages() { Val = "en-US" };
 
-            runProperties22.Append(runFonts22);
-            runProperties22.Append(fontSize21);
-            runProperties22.Append(fontSizeComplexScript21);
-            Text text11 = new Text();
-            text11.Text = "ИФНС России по г.Красногорску Московской области";
+            paragraphMarkRunProperties80.Append(languages80);
 
-            run23.Append(runProperties22);
-            run23.Append(text11);
+            paragraphProperties80.Append(paragraphMarkRunProperties80);
 
-            Run run24 = new Run();
-            Break break13 = new Break();
+            paragraph80.Append(paragraphProperties80);
 
-            run24.Append(break13);
+            Paragraph paragraph81 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            Run run25 = new Run();
+            ParagraphProperties paragraphProperties81 = new ParagraphProperties();
 
-            RunProperties runProperties23 = new RunProperties();
-            RunFonts runFonts23 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
+            ParagraphMarkRunProperties paragraphMarkRunProperties81 = new ParagraphMarkRunProperties();
+            Languages languages81 = new Languages() { Val = "en-US" };
 
-            runProperties23.Append(runFonts23);
-            Break break14 = new Break();
+            paragraphMarkRunProperties81.Append(languages81);
 
-            run25.Append(runProperties23);
-            run25.Append(break14);
+            paragraphProperties81.Append(paragraphMarkRunProperties81);
 
-            Run run26 = new Run();
+            paragraph81.Append(paragraphProperties81);
 
-            RunProperties runProperties24 = new RunProperties();
-            RunFonts runFonts24 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize22 = new FontSize() { Val = "24" };
-            FontSizeComplexScript fontSizeComplexScript22 = new FontSizeComplexScript() { Val = "24" };
+            Paragraph paragraph82 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            runProperties24.Append(runFonts24);
-            runProperties24.Append(fontSize22);
-            runProperties24.Append(fontSizeComplexScript22);
-            Text text12 = new Text();
-            text12.Text = "5024";
+            ParagraphProperties paragraphProperties82 = new ParagraphProperties();
 
-            run26.Append(runProperties24);
-            run26.Append(text12);
+            ParagraphMarkRunProperties paragraphMarkRunProperties82 = new ParagraphMarkRunProperties();
+            Languages languages82 = new Languages() { Val = "en-US" };
 
-            paragraph2.Append(paragraphProperties2);
-            paragraph2.Append(run21);
-            paragraph2.Append(run22);
-            paragraph2.Append(run23);
-            paragraph2.Append(run24);
-            paragraph2.Append(run25);
-            paragraph2.Append(run26);
+            paragraphMarkRunProperties82.Append(languages82);
 
-            tableCell2.Append(tableCellProperties2);
-            tableCell2.Append(paragraph2);
+            paragraphProperties82.Append(paragraphMarkRunProperties82);
 
-            tableRow1.Append(tableCell1);
-            tableRow1.Append(tableCell2);
+            paragraph82.Append(paragraphProperties82);
 
-            TableRow tableRow2 = new TableRow();
+            Paragraph paragraph83 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            TableCell tableCell3 = new TableCell();
+            ParagraphProperties paragraphProperties83 = new ParagraphProperties();
 
-            TableCellProperties tableCellProperties3 = new TableCellProperties();
-            TableCellWidth tableCellWidth3 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
+            ParagraphMarkRunProperties paragraphMarkRunProperties83 = new ParagraphMarkRunProperties();
+            Languages languages83 = new Languages() { Val = "en-US" };
 
-            TableCellBorders tableCellBorders1 = new TableCellBorders();
-            BottomBorder bottomBorder1 = new BottomBorder() { Val = BorderValues.Single, Color = "000000", Size = (UInt32Value)4U, Space = (UInt32Value)1U };
+            paragraphMarkRunProperties83.Append(languages83);
 
-            tableCellBorders1.Append(bottomBorder1);
+            paragraphProperties83.Append(paragraphMarkRunProperties83);
 
-            TableCellMargin tableCellMargin2 = new TableCellMargin();
-            LeftMargin leftMargin2 = new LeftMargin() { Width = "600", Type = TableWidthUnitValues.Dxa };
+            paragraph83.Append(paragraphProperties83);
 
-            tableCellMargin2.Append(leftMargin2);
+            Paragraph paragraph84 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            tableCellProperties3.Append(tableCellWidth3);
-            tableCellProperties3.Append(tableCellBorders1);
-            tableCellProperties3.Append(tableCellMargin2);
+            ParagraphProperties paragraphProperties84 = new ParagraphProperties();
 
-            Paragraph paragraph3 = new Paragraph();
-            ParagraphProperties paragraphProperties3 = new ParagraphProperties();
+            ParagraphMarkRunProperties paragraphMarkRunProperties84 = new ParagraphMarkRunProperties();
+            Languages languages84 = new Languages() { Val = "en-US" };
 
-            paragraph3.Append(paragraphProperties3);
+            paragraphMarkRunProperties84.Append(languages84);
 
-            tableCell3.Append(tableCellProperties3);
-            tableCell3.Append(paragraph3);
+            paragraphProperties84.Append(paragraphMarkRunProperties84);
 
-            TableCell tableCell4 = new TableCell();
+            paragraph84.Append(paragraphProperties84);
 
-            TableCellProperties tableCellProperties4 = new TableCellProperties();
-            TableCellWidth tableCellWidth4 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
+            Paragraph paragraph85 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            tableCellProperties4.Append(tableCellWidth4);
+            ParagraphProperties paragraphProperties85 = new ParagraphProperties();
 
-            Paragraph paragraph4 = new Paragraph();
+            ParagraphMarkRunProperties paragraphMarkRunProperties85 = new ParagraphMarkRunProperties();
+            Languages languages85 = new Languages() { Val = "en-US" };
 
-            ParagraphProperties paragraphProperties4 = new ParagraphProperties();
-            Justification justification3 = new Justification() { Val = JustificationValues.Center };
+            paragraphMarkRunProperties85.Append(languages85);
 
-            paragraphProperties4.Append(justification3);
+            paragraphProperties85.Append(paragraphMarkRunProperties85);
 
-            Run run27 = new Run();
+            paragraph85.Append(paragraphProperties85);
 
-            RunProperties runProperties25 = new RunProperties();
-            RunFonts runFonts25 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize23 = new FontSize() { Val = "24" };
-            FontSizeComplexScript fontSizeComplexScript23 = new FontSizeComplexScript() { Val = "24" };
+            Paragraph paragraph86 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            runProperties25.Append(runFonts25);
-            runProperties25.Append(fontSize23);
-            runProperties25.Append(fontSizeComplexScript23);
-            Text text13 = new Text();
-            text13.Text = "№";
+            ParagraphProperties paragraphProperties86 = new ParagraphProperties();
 
-            run27.Append(runProperties25);
-            run27.Append(text13);
+            ParagraphMarkRunProperties paragraphMarkRunProperties86 = new ParagraphMarkRunProperties();
+            Languages languages86 = new Languages() { Val = "en-US" };
 
-            paragraph4.Append(paragraphProperties4);
-            paragraph4.Append(run27);
+            paragraphMarkRunProperties86.Append(languages86);
 
-            tableCell4.Append(tableCellProperties4);
-            tableCell4.Append(paragraph4);
+            paragraphProperties86.Append(paragraphMarkRunProperties86);
 
-            TableCell tableCell5 = new TableCell();
+            paragraph86.Append(paragraphProperties86);
 
-            TableCellProperties tableCellProperties5 = new TableCellProperties();
-            TableCellWidth tableCellWidth5 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
+            Paragraph paragraph87 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            TableCellBorders tableCellBorders2 = new TableCellBorders();
-            BottomBorder bottomBorder2 = new BottomBorder() { Val = BorderValues.Single, Color = "000000", Size = (UInt32Value)4U, Space = (UInt32Value)1U };
+            ParagraphProperties paragraphProperties87 = new ParagraphProperties();
 
-            tableCellBorders2.Append(bottomBorder2);
+            ParagraphMarkRunProperties paragraphMarkRunProperties87 = new ParagraphMarkRunProperties();
+            Languages languages87 = new Languages() { Val = "en-US" };
 
-            TableCellMargin tableCellMargin3 = new TableCellMargin();
-            LeftMargin leftMargin3 = new LeftMargin() { Width = "2000", Type = TableWidthUnitValues.Dxa };
+            paragraphMarkRunProperties87.Append(languages87);
 
-            tableCellMargin3.Append(leftMargin3);
+            SectionProperties sectionProperties2 = new SectionProperties() { RsidR = "004A5FEA", RsidSect = "004A5FEA" };
+            FooterReference footerReference2 = new FooterReference() { Type = HeaderFooterValues.Default, Id = "rId8" };
+            SectionType sectionType1 = new SectionType() { Val = SectionMarkValues.Continuous };
+            PageSize pageSize2 = new PageSize() { Width = (UInt32Value)11906U, Height = (UInt32Value)16838U };
+            PageMargin pageMargin2 = new PageMargin() { Top = 1134, Right = (UInt32Value)850U, Bottom = 1134, Left = (UInt32Value)1701U, Header = (UInt32Value)708U, Footer = (UInt32Value)708U, Gutter = (UInt32Value)0U };
+            Columns columns2 = new Columns() { Space = "708" };
+            DocGrid docGrid2 = new DocGrid() { LinePitch = 360 };
 
-            tableCellProperties5.Append(tableCellWidth5);
-            tableCellProperties5.Append(tableCellBorders2);
-            tableCellProperties5.Append(tableCellMargin3);
+            sectionProperties2.Append(footerReference2);
+            sectionProperties2.Append(sectionType1);
+            sectionProperties2.Append(pageSize2);
+            sectionProperties2.Append(pageMargin2);
+            sectionProperties2.Append(columns2);
+            sectionProperties2.Append(docGrid2);
 
-            Paragraph paragraph5 = new Paragraph();
-            ParagraphProperties paragraphProperties5 = new ParagraphProperties();
+            paragraphProperties87.Append(paragraphMarkRunProperties87);
+            paragraphProperties87.Append(sectionProperties2);
 
-            paragraph5.Append(paragraphProperties5);
+            paragraph87.Append(paragraphProperties87);
 
-            tableCell5.Append(tableCellProperties5);
-            tableCell5.Append(paragraph5);
+            Paragraph paragraph88 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            TableCell tableCell6 = new TableCell();
+            ParagraphProperties paragraphProperties88 = new ParagraphProperties();
 
-            TableCellProperties tableCellProperties6 = new TableCellProperties();
-            TableCellWidth tableCellWidth6 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
+            ParagraphMarkRunProperties paragraphMarkRunProperties88 = new ParagraphMarkRunProperties();
+            Languages languages88 = new Languages() { Val = "en-US" };
 
-            tableCellProperties6.Append(tableCellWidth6);
+            paragraphMarkRunProperties88.Append(languages88);
 
-            Paragraph paragraph6 = new Paragraph();
-            ParagraphProperties paragraphProperties6 = new ParagraphProperties();
+            paragraphProperties88.Append(paragraphMarkRunProperties88);
 
-            paragraph6.Append(paragraphProperties6);
+            paragraph88.Append(paragraphProperties88);
 
-            tableCell6.Append(tableCellProperties6);
-            tableCell6.Append(paragraph6);
+            Paragraph paragraph89 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            tableRow2.Append(tableCell3);
-            tableRow2.Append(tableCell4);
-            tableRow2.Append(tableCell5);
-            tableRow2.Append(tableCell6);
+            ParagraphProperties paragraphProperties89 = new ParagraphProperties();
 
-            TableRow tableRow3 = new TableRow();
+            ParagraphMarkRunProperties paragraphMarkRunProperties89 = new ParagraphMarkRunProperties();
+            Languages languages89 = new Languages() { Val = "en-US" };
 
-            TableCell tableCell7 = new TableCell();
+            paragraphMarkRunProperties89.Append(languages89);
 
-            TableCellProperties tableCellProperties7 = new TableCellProperties();
-            TableCellWidth tableCellWidth7 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-            GridSpan gridSpan2 = new GridSpan() { Val = 3 };
+            paragraphProperties89.Append(paragraphMarkRunProperties89);
 
-            tableCellProperties7.Append(tableCellWidth7);
-            tableCellProperties7.Append(gridSpan2);
+            paragraph89.Append(paragraphProperties89);
 
-            Paragraph paragraph7 = new Paragraph();
-            ParagraphProperties paragraphProperties7 = new ParagraphProperties();
+            Paragraph paragraph90 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            paragraph7.Append(paragraphProperties7);
+            ParagraphProperties paragraphProperties90 = new ParagraphProperties();
 
-            tableCell7.Append(tableCellProperties7);
-            tableCell7.Append(paragraph7);
+            ParagraphMarkRunProperties paragraphMarkRunProperties90 = new ParagraphMarkRunProperties();
+            Languages languages90 = new Languages() { Val = "en-US" };
 
-            TableCell tableCell8 = new TableCell();
+            paragraphMarkRunProperties90.Append(languages90);
 
-            TableCellProperties tableCellProperties8 = new TableCellProperties();
-            TableCellWidth tableCellWidth8 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
+            paragraphProperties90.Append(paragraphMarkRunProperties90);
 
-            tableCellProperties8.Append(tableCellWidth8);
+            paragraph90.Append(paragraphProperties90);
 
-            Paragraph paragraph8 = new Paragraph();
-            ParagraphProperties paragraphProperties8 = new ParagraphProperties();
+            Paragraph paragraph91 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            paragraph8.Append(paragraphProperties8);
+            ParagraphProperties paragraphProperties91 = new ParagraphProperties();
 
-            tableCell8.Append(tableCellProperties8);
-            tableCell8.Append(paragraph8);
+            ParagraphMarkRunProperties paragraphMarkRunProperties91 = new ParagraphMarkRunProperties();
+            Languages languages91 = new Languages() { Val = "en-US" };
 
-            tableRow3.Append(tableCell7);
-            tableRow3.Append(tableCell8);
+            paragraphMarkRunProperties91.Append(languages91);
 
-            TableRow tableRow4 = new TableRow();
+            paragraphProperties91.Append(paragraphMarkRunProperties91);
 
-            TableCell tableCell9 = new TableCell();
+            paragraph91.Append(paragraphProperties91);
 
-            TableCellProperties tableCellProperties9 = new TableCellProperties();
-            TableCellWidth tableCellWidth9 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
+            Paragraph paragraph92 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            tableCellProperties9.Append(tableCellWidth9);
+            ParagraphProperties paragraphProperties92 = new ParagraphProperties();
 
-            Paragraph paragraph9 = new Paragraph();
+            ParagraphMarkRunProperties paragraphMarkRunProperties92 = new ParagraphMarkRunProperties();
+            Languages languages92 = new Languages() { Val = "en-US" };
 
-            ParagraphProperties paragraphProperties9 = new ParagraphProperties();
-            Justification justification4 = new Justification() { Val = JustificationValues.Both };
+            paragraphMarkRunProperties92.Append(languages92);
 
-            paragraphProperties9.Append(justification4);
+            paragraphProperties92.Append(paragraphMarkRunProperties92);
 
-            Run run28 = new Run();
+            paragraph92.Append(paragraphProperties92);
 
-            RunProperties runProperties26 = new RunProperties();
-            RunFonts runFonts26 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize24 = new FontSize() { Val = "24" };
-            FontSizeComplexScript fontSizeComplexScript24 = new FontSizeComplexScript() { Val = "24" };
+            Paragraph paragraph93 = new Paragraph() { RsidParagraphMarkRevision = "00B0767E", RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
 
-            runProperties26.Append(runFonts26);
-            runProperties26.Append(fontSize24);
-            runProperties26.Append(fontSizeComplexScript24);
-            Text text14 = new Text();
-            text14.Text = "На №";
+            ParagraphProperties paragraphProperties93 = new ParagraphProperties();
 
-            run28.Append(runProperties26);
-            run28.Append(text14);
+            ParagraphMarkRunProperties paragraphMarkRunProperties93 = new ParagraphMarkRunProperties();
+            Languages languages93 = new Languages() { Val = "en-US" };
 
-            paragraph9.Append(paragraphProperties9);
-            paragraph9.Append(run28);
+            paragraphMarkRunProperties93.Append(languages93);
 
-            tableCell9.Append(tableCellProperties9);
-            tableCell9.Append(paragraph9);
+            paragraphProperties93.Append(paragraphMarkRunProperties93);
 
-            TableCell tableCell10 = new TableCell();
+            paragraph93.Append(paragraphProperties93);
 
-            TableCellProperties tableCellProperties10 = new TableCellProperties();
-            TableCellWidth tableCellWidth10 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-            GridSpan gridSpan3 = new GridSpan() { Val = 2 };
+            SectionProperties sectionProperties3 = new SectionProperties() { RsidRPr = "00B0767E", RsidR = "004A5FEA", RsidSect = "004A5FEA" };
+            SectionType sectionType2 = new SectionType() { Val = SectionMarkValues.Continuous };
+            PageSize pageSize3 = new PageSize() { Width = (UInt32Value)11906U, Height = (UInt32Value)16838U };
+            PageMargin pageMargin3 = new PageMargin() { Top = 1134, Right = (UInt32Value)850U, Bottom = 1134, Left = (UInt32Value)1701U, Header = (UInt32Value)708U, Footer = (UInt32Value)708U, Gutter = (UInt32Value)0U };
+            Columns columns3 = new Columns() { Space = "708" };
+            DocGrid docGrid3 = new DocGrid() { LinePitch = 360 };
 
-            TableCellBorders tableCellBorders3 = new TableCellBorders();
-            BottomBorder bottomBorder3 = new BottomBorder() { Val = BorderValues.Single, Color = "000000", Size = (UInt32Value)4U, Space = (UInt32Value)1U };
+            sectionProperties3.Append(sectionType2);
+            sectionProperties3.Append(pageSize3);
+            sectionProperties3.Append(pageMargin3);
+            sectionProperties3.Append(columns3);
+            sectionProperties3.Append(docGrid3);
 
-            tableCellBorders3.Append(bottomBorder3);
-
-            tableCellProperties10.Append(tableCellWidth10);
-            tableCellProperties10.Append(gridSpan3);
-            tableCellProperties10.Append(tableCellBorders3);
-
-            Paragraph paragraph10 = new Paragraph();
-            ParagraphProperties paragraphProperties10 = new ParagraphProperties();
-
-            paragraph10.Append(paragraphProperties10);
-
-            tableCell10.Append(tableCellProperties10);
-            tableCell10.Append(paragraph10);
-
-            TableCell tableCell11 = new TableCell();
-
-            TableCellProperties tableCellProperties11 = new TableCellProperties();
-            TableCellWidth tableCellWidth11 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-
-            tableCellProperties11.Append(tableCellWidth11);
-
-            Paragraph paragraph11 = new Paragraph();
-            ParagraphProperties paragraphProperties11 = new ParagraphProperties();
-
-            paragraph11.Append(paragraphProperties11);
-
-            tableCell11.Append(tableCellProperties11);
-            tableCell11.Append(paragraph11);
-
-            tableRow4.Append(tableCell9);
-            tableRow4.Append(tableCell10);
-            tableRow4.Append(tableCell11);
-
-            table1.Append(tableProperties1);
-            table1.Append(tableRow1);
-            table1.Append(tableRow2);
-            table1.Append(tableRow3);
-            table1.Append(tableRow4);
-
-            Paragraph paragraph12 = new Paragraph();
-
-            ParagraphProperties paragraphProperties12 = new ParagraphProperties();
-            SpacingBetweenLines spacingBetweenLines1 = new SpacingBetweenLines() { Line = "1200" };
-
-            paragraphProperties12.Append(spacingBetweenLines1);
-
-            paragraph12.Append(paragraphProperties12);
-
-            Paragraph paragraph13 = new Paragraph();
-
-            ParagraphProperties paragraphProperties13 = new ParagraphProperties();
-            Justification justification5 = new Justification() { Val = JustificationValues.Both };
-
-            paragraphProperties13.Append(justification5);
-
-            Run run29 = new Run();
-
-            RunProperties runProperties27 = new RunProperties();
-            RunFonts runFonts27 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize25 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript25 = new FontSizeComplexScript() { Val = "26" };
-
-            runProperties27.Append(runFonts27);
-            runProperties27.Append(fontSize25);
-            runProperties27.Append(fontSizeComplexScript25);
-
-            Text text15 = new Text() { Space = SpaceProcessingModeValues.Preserve };
-            text15.Text = "          Межрайонная ИФНС России №51 по г. Москве просит в СРОЧНОМ порядке направить Информационное сообщение о приеме / отказе БДК:";
-
-            run29.Append(runProperties27);
-            run29.Append(text15);
-
-            paragraph13.Append(paragraphProperties13);
-            paragraph13.Append(run29);
-
-            Table table2 = new Table();
-
-            TableProperties tableProperties2 = new TableProperties();
-            TableStyle tableStyle2 = new TableStyle() { Val = "TableGrid" };
-            TableWidth tableWidth2 = new TableWidth() { Width = "5000", Type = TableWidthUnitValues.Auto };
-            TableLook tableLook2 = new TableLook() { Val = "04A0" };
-
-            tableProperties2.Append(tableStyle2);
-            tableProperties2.Append(tableWidth2);
-            tableProperties2.Append(tableLook2);
-
-            TableRow tableRow5 = new TableRow();
-
-            TableCell tableCell12 = new TableCell();
-
-            TableCellProperties tableCellProperties12 = new TableCellProperties();
-            TableCellWidth tableCellWidth12 = new TableCellWidth() { Width = "800", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties12.Append(tableCellWidth12);
-
-            Paragraph paragraph14 = new Paragraph();
-
-            ParagraphProperties paragraphProperties14 = new ParagraphProperties();
-            Justification justification6 = new Justification() { Val = JustificationValues.Center };
-
-            paragraphProperties14.Append(justification6);
-
-            Run run30 = new Run();
-
-            RunProperties runProperties28 = new RunProperties();
-            Bold bold5 = new Bold();
-            RunFonts runFonts28 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize26 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript26 = new FontSizeComplexScript() { Val = "26" };
-
-            runProperties28.Append(bold5);
-            runProperties28.Append(runFonts28);
-            runProperties28.Append(fontSize26);
-            runProperties28.Append(fontSizeComplexScript26);
-            Text text16 = new Text();
-            text16.Text = "Дата отправки";
-
-            run30.Append(runProperties28);
-            run30.Append(text16);
-
-            paragraph14.Append(paragraphProperties14);
-            paragraph14.Append(run30);
-
-            tableCell12.Append(tableCellProperties12);
-            tableCell12.Append(paragraph14);
-
-            TableCell tableCell13 = new TableCell();
-
-            TableCellProperties tableCellProperties13 = new TableCellProperties();
-            TableCellWidth tableCellWidth13 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-
-            tableCellProperties13.Append(tableCellWidth13);
-
-            Paragraph paragraph15 = new Paragraph();
-
-            ParagraphProperties paragraphProperties15 = new ParagraphProperties();
-            Justification justification7 = new Justification() { Val = JustificationValues.Center };
-
-            paragraphProperties15.Append(justification7);
-
-            Run run31 = new Run();
-
-            RunProperties runProperties29 = new RunProperties();
-            Bold bold6 = new Bold();
-            RunFonts runFonts29 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize27 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript27 = new FontSizeComplexScript() { Val = "26" };
-
-            runProperties29.Append(bold6);
-            runProperties29.Append(runFonts29);
-            runProperties29.Append(fontSize27);
-            runProperties29.Append(fontSizeComplexScript27);
-            Text text17 = new Text();
-            text17.Text = "Наименование контейнера";
-
-            run31.Append(runProperties29);
-            run31.Append(text17);
-
-            paragraph15.Append(paragraphProperties15);
-            paragraph15.Append(run31);
-
-            tableCell13.Append(tableCellProperties13);
-            tableCell13.Append(paragraph15);
-
-            TableCell tableCell14 = new TableCell();
-
-            TableCellProperties tableCellProperties14 = new TableCellProperties();
-            TableCellWidth tableCellWidth14 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-
-            tableCellProperties14.Append(tableCellWidth14);
-
-            Paragraph paragraph16 = new Paragraph();
-
-            ParagraphProperties paragraphProperties16 = new ParagraphProperties();
-            Justification justification8 = new Justification() { Val = JustificationValues.Center };
-
-            paragraphProperties16.Append(justification8);
-
-            Run run32 = new Run();
-
-            RunProperties runProperties30 = new RunProperties();
-            Bold bold7 = new Bold();
-            RunFonts runFonts30 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize28 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript28 = new FontSizeComplexScript() { Val = "26" };
-
-            runProperties30.Append(bold7);
-            runProperties30.Append(runFonts30);
-            runProperties30.Append(fontSize28);
-            runProperties30.Append(fontSizeComplexScript28);
-            Text text18 = new Text();
-            text18.Text = "GUID";
-
-            run32.Append(runProperties30);
-            run32.Append(text18);
-
-            paragraph16.Append(paragraphProperties16);
-            paragraph16.Append(run32);
-
-            tableCell14.Append(tableCellProperties14);
-            tableCell14.Append(paragraph16);
-
-            tableRow5.Append(tableCell12);
-            tableRow5.Append(tableCell13);
-            tableRow5.Append(tableCell14);
-
-            TableRow tableRow6 = new TableRow();
-
-            TableCell tableCell15 = new TableCell();
-
-            TableCellProperties tableCellProperties15 = new TableCellProperties();
-            TableCellWidth tableCellWidth15 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-
-            tableCellProperties15.Append(tableCellWidth15);
-
-            Paragraph paragraph17 = new Paragraph();
-
-            ParagraphProperties paragraphProperties17 = new ParagraphProperties();
-            Justification justification9 = new Justification() { Val = JustificationValues.Center };
-
-            paragraphProperties17.Append(justification9);
-
-            Run run33 = new Run();
-
-            RunProperties runProperties31 = new RunProperties();
-            RunFonts runFonts31 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize29 = new FontSize() { Val = "24" };
-            FontSizeComplexScript fontSizeComplexScript29 = new FontSizeComplexScript() { Val = "24" };
-
-            runProperties31.Append(runFonts31);
-            runProperties31.Append(fontSize29);
-            runProperties31.Append(fontSizeComplexScript29);
-            Text text19 = new Text();
-            text19.Text = "29-03-2018";
-
-            run33.Append(runProperties31);
-            run33.Append(text19);
-
-            paragraph17.Append(paragraphProperties17);
-            paragraph17.Append(run33);
-
-            tableCell15.Append(tableCellProperties15);
-            tableCell15.Append(paragraph17);
-
-            TableCell tableCell16 = new TableCell();
-
-            TableCellProperties tableCellProperties16 = new TableCellProperties();
-            TableCellWidth tableCellWidth16 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-
-            tableCellProperties16.Append(tableCellWidth16);
-
-            Paragraph paragraph18 = new Paragraph();
-
-            ParagraphProperties paragraphProperties18 = new ParagraphProperties();
-            Justification justification10 = new Justification() { Val = JustificationValues.Center };
-
-            paragraphProperties18.Append(justification10);
-
-            Run run34 = new Run();
-
-            RunProperties runProperties32 = new RunProperties();
-            RunFonts runFonts32 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize30 = new FontSize() { Val = "24" };
-            FontSizeComplexScript fontSizeComplexScript30 = new FontSizeComplexScript() { Val = "24" };
-
-            runProperties32.Append(runFonts32);
-            runProperties32.Append(fontSize30);
-            runProperties32.Append(fontSizeComplexScript30);
-            Text text20 = new Text();
-            text20.Text = "BDK77515024000150020000025386";
-
-            run34.Append(runProperties32);
-            run34.Append(text20);
-
-            paragraph18.Append(paragraphProperties18);
-            paragraph18.Append(run34);
-
-            tableCell16.Append(tableCellProperties16);
-            tableCell16.Append(paragraph18);
-
-            TableCell tableCell17 = new TableCell();
-
-            TableCellProperties tableCellProperties17 = new TableCellProperties();
-            TableCellWidth tableCellWidth17 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-
-            tableCellProperties17.Append(tableCellWidth17);
-
-            Paragraph paragraph19 = new Paragraph();
-
-            ParagraphProperties paragraphProperties19 = new ParagraphProperties();
-            Justification justification11 = new Justification() { Val = JustificationValues.Center };
-
-            paragraphProperties19.Append(justification11);
-
-            Run run35 = new Run();
-
-            RunProperties runProperties33 = new RunProperties();
-            RunFonts runFonts33 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize31 = new FontSize() { Val = "22" };
-            FontSizeComplexScript fontSizeComplexScript31 = new FontSizeComplexScript() { Val = "22" };
-
-            runProperties33.Append(runFonts33);
-            runProperties33.Append(fontSize31);
-            runProperties33.Append(fontSizeComplexScript31);
-            Text text21 = new Text();
-            text21.Text = "2FC83627-5DE8-4A82-B22F-DB3EE933D79D";
-
-            run35.Append(runProperties33);
-            run35.Append(text21);
-
-            paragraph19.Append(paragraphProperties19);
-            paragraph19.Append(run35);
-
-            tableCell17.Append(tableCellProperties17);
-            tableCell17.Append(paragraph19);
-
-            tableRow6.Append(tableCell15);
-            tableRow6.Append(tableCell16);
-            tableRow6.Append(tableCell17);
-
-            table2.Append(tableProperties2);
-            table2.Append(tableRow5);
-            table2.Append(tableRow6);
-
-            Paragraph paragraph20 = new Paragraph();
-
-            ParagraphProperties paragraphProperties20 = new ParagraphProperties();
-            SpacingBetweenLines spacingBetweenLines2 = new SpacingBetweenLines() { Line = "720" };
-
-            paragraphProperties20.Append(spacingBetweenLines2);
-
-            paragraph20.Append(paragraphProperties20);
-
-            Table table3 = new Table();
-
-            TableProperties tableProperties3 = new TableProperties();
-            TableStyle tableStyle3 = new TableStyle() { Val = "TableNormal" };
-            TableWidth tableWidth3 = new TableWidth() { Width = "5000", Type = TableWidthUnitValues.Auto };
-            TableLook tableLook3 = new TableLook() { Val = "04A0" };
-
-            tableProperties3.Append(tableStyle3);
-            tableProperties3.Append(tableWidth3);
-            tableProperties3.Append(tableLook3);
-
-            TableRow tableRow7 = new TableRow();
-
-            TableCell tableCell18 = new TableCell();
-
-            TableCellProperties tableCellProperties18 = new TableCellProperties();
-            TableCellWidth tableCellWidth18 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-
-            tableCellProperties18.Append(tableCellWidth18);
-
-            Paragraph paragraph21 = new Paragraph();
-            ParagraphProperties paragraphProperties21 = new ParagraphProperties();
-
-            Run run36 = new Run();
-
-            RunProperties runProperties34 = new RunProperties();
-            RunFonts runFonts34 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize32 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript32 = new FontSizeComplexScript() { Val = "26" };
-
-            runProperties34.Append(runFonts34);
-            runProperties34.Append(fontSize32);
-            runProperties34.Append(fontSizeComplexScript32);
-            Text text22 = new Text();
-            text22.Text = "Заместитель начальника инспекции";
-
-            run36.Append(runProperties34);
-            run36.Append(text22);
-
-            Run run37 = new Run();
-
-            RunProperties runProperties35 = new RunProperties();
-            RunFonts runFonts35 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize33 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript33 = new FontSizeComplexScript() { Val = "26" };
-
-            runProperties35.Append(runFonts35);
-            runProperties35.Append(fontSize33);
-            runProperties35.Append(fontSizeComplexScript33);
-            Break break15 = new Break();
-
-            run37.Append(runProperties35);
-            run37.Append(break15);
-
-            Run run38 = new Run();
-
-            RunProperties runProperties36 = new RunProperties();
-            RunFonts runFonts36 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize34 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript34 = new FontSizeComplexScript() { Val = "26" };
-
-            runProperties36.Append(runFonts36);
-            runProperties36.Append(fontSize34);
-            runProperties36.Append(fontSizeComplexScript34);
-            Text text23 = new Text();
-            text23.Text = "Советник государственной гражданской службы Российской Федерации 2 класса";
-
-            run38.Append(runProperties36);
-            run38.Append(text23);
-
-            paragraph21.Append(paragraphProperties21);
-            paragraph21.Append(run36);
-            paragraph21.Append(run37);
-            paragraph21.Append(run38);
-
-            tableCell18.Append(tableCellProperties18);
-            tableCell18.Append(paragraph21);
-
-            TableCell tableCell19 = new TableCell();
-
-            TableCellProperties tableCellProperties19 = new TableCellProperties();
-            TableCellWidth tableCellWidth19 = new TableCellWidth() { Width = "2310", Type = TableWidthUnitValues.Auto };
-
-            TableCellMargin tableCellMargin4 = new TableCellMargin();
-            LeftMargin leftMargin4 = new LeftMargin() { Width = "2000", Type = TableWidthUnitValues.Dxa };
-
-            tableCellMargin4.Append(leftMargin4);
-
-            tableCellProperties19.Append(tableCellWidth19);
-            tableCellProperties19.Append(tableCellMargin4);
-
-            Paragraph paragraph22 = new Paragraph();
-
-            ParagraphProperties paragraphProperties22 = new ParagraphProperties();
-            Justification justification12 = new Justification() { Val = JustificationValues.Right };
-
-            paragraphProperties22.Append(justification12);
-
-            Run run39 = new Run();
-            Break break16 = new Break();
-
-            run39.Append(break16);
-
-            Run run40 = new Run();
-            Break break17 = new Break();
-
-            run40.Append(break17);
-
-            Run run41 = new Run();
-
-            RunProperties runProperties37 = new RunProperties();
-            RunFonts runFonts37 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize35 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript35 = new FontSizeComplexScript() { Val = "26" };
-
-            runProperties37.Append(runFonts37);
-            runProperties37.Append(fontSize35);
-            runProperties37.Append(fontSizeComplexScript35);
-            Text text24 = new Text();
-            text24.Text = "В.Ф.Авзалова";
-
-            run41.Append(runProperties37);
-            run41.Append(text24);
-
-            paragraph22.Append(paragraphProperties22);
-            paragraph22.Append(run39);
-            paragraph22.Append(run40);
-            paragraph22.Append(run41);
-
-            tableCell19.Append(tableCellProperties19);
-            tableCell19.Append(paragraph22);
-
-            tableRow7.Append(tableCell18);
-            tableRow7.Append(tableCell19);
-
-            table3.Append(tableProperties3);
-            table3.Append(tableRow7);
-            SectionProperties sectionProperties2 = new SectionProperties();
-
-            body1.Append(sectionProperties1);
-            body1.Append(table1);
+            body1.Append(paragraph1);
+            body1.Append(paragraph2);
+            body1.Append(paragraph3);
+            body1.Append(paragraph4);
+            body1.Append(paragraph5);
+            body1.Append(paragraph6);
+            body1.Append(paragraph7);
+            body1.Append(paragraph8);
+            body1.Append(paragraph9);
+            body1.Append(paragraph10);
+            body1.Append(paragraph11);
             body1.Append(paragraph12);
             body1.Append(paragraph13);
-            body1.Append(table2);
+            body1.Append(paragraph14);
+            body1.Append(paragraph15);
+            body1.Append(paragraph16);
+            body1.Append(paragraph17);
+            body1.Append(paragraph18);
+            body1.Append(paragraph19);
             body1.Append(paragraph20);
-            body1.Append(table3);
-            body1.Append(sectionProperties2);
+            body1.Append(paragraph21);
+            body1.Append(paragraph22);
+            body1.Append(paragraph23);
+            body1.Append(paragraph24);
+            body1.Append(paragraph25);
+            body1.Append(paragraph26);
+            body1.Append(paragraph27);
+            body1.Append(paragraph28);
+            body1.Append(paragraph29);
+            body1.Append(paragraph30);
+            body1.Append(paragraph31);
+            body1.Append(paragraph32);
+            body1.Append(paragraph33);
+            body1.Append(paragraph34);
+            body1.Append(paragraph35);
+            body1.Append(paragraph36);
+            body1.Append(paragraph37);
+            body1.Append(paragraph38);
+            body1.Append(paragraph39);
+            body1.Append(paragraph40);
+            body1.Append(paragraph41);
+            body1.Append(paragraph42);
+            body1.Append(paragraph43);
+            body1.Append(paragraph44);
+            body1.Append(paragraph45);
+            body1.Append(paragraph46);
+            body1.Append(paragraph47);
+            body1.Append(paragraph48);
+            body1.Append(paragraph49);
+            body1.Append(paragraph50);
+            body1.Append(paragraph51);
+            body1.Append(paragraph52);
+            body1.Append(paragraph53);
+            body1.Append(paragraph54);
+            body1.Append(paragraph55);
+            body1.Append(paragraph56);
+            body1.Append(paragraph57);
+            body1.Append(paragraph58);
+            body1.Append(paragraph59);
+            body1.Append(paragraph60);
+            body1.Append(paragraph61);
+            body1.Append(paragraph62);
+            body1.Append(paragraph63);
+            body1.Append(paragraph64);
+            body1.Append(paragraph65);
+            body1.Append(paragraph66);
+            body1.Append(paragraph67);
+            body1.Append(paragraph68);
+            body1.Append(paragraph69);
+            body1.Append(paragraph70);
+            body1.Append(paragraph71);
+            body1.Append(paragraph72);
+            body1.Append(paragraph73);
+            body1.Append(paragraph74);
+            body1.Append(paragraph75);
+            body1.Append(paragraph76);
+            body1.Append(paragraph77);
+            body1.Append(paragraph78);
+            body1.Append(paragraph79);
+            body1.Append(paragraph80);
+            body1.Append(paragraph81);
+            body1.Append(paragraph82);
+            body1.Append(paragraph83);
+            body1.Append(paragraph84);
+            body1.Append(paragraph85);
+            body1.Append(paragraph86);
+            body1.Append(paragraph87);
+            body1.Append(paragraph88);
+            body1.Append(paragraph89);
+            body1.Append(paragraph90);
+            body1.Append(paragraph91);
+            body1.Append(paragraph92);
+            body1.Append(paragraph93);
+            body1.Append(sectionProperties3);
 
             document1.Append(body1);
 
             mainDocumentPart1.Document = document1;
         }
 
-        // Generates content of styleDefinitionsPart1.
-        private void GenerateStyleDefinitionsPart1Content(StyleDefinitionsPart styleDefinitionsPart1)
+        // Generates content of footerPart1.
+        private void GenerateFooterPart1Content(FooterPart footerPart1)
         {
-            Styles styles1 = new Styles();
+            Footer footer1 = new Footer() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14 wp14" } };
+            footer1.AddNamespaceDeclaration("wpc", "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas");
+            footer1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            footer1.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
+            footer1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            footer1.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+            footer1.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+            footer1.AddNamespaceDeclaration("wp14", "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing");
+            footer1.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
+            footer1.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
+            footer1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            footer1.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            footer1.AddNamespaceDeclaration("wpg", "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup");
+            footer1.AddNamespaceDeclaration("wpi", "http://schemas.microsoft.com/office/word/2010/wordprocessingInk");
+            footer1.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+            footer1.AddNamespaceDeclaration("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape");
+
+            Paragraph paragraph94 = new Paragraph() { RsidParagraphMarkRevision = "00763152", RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "00763152" };
+
+            ParagraphProperties paragraphProperties94 = new ParagraphProperties();
+            ParagraphStyleId paragraphStyleId1 = new ParagraphStyleId() { Val = "a5" };
+
+            paragraphProperties94.Append(paragraphStyleId1);
+
+            Run run1 = new Run();
+            Text text1 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+            text1.Text = "Привет ";
+
+            run1.Append(text1);
+            ProofError proofError1 = new ProofError() { Type = ProofingErrorValues.SpellStart };
+
+            Run run2 = new Run();
+            Text text2 = new Text();
+            text2.Text = "МиР";
+
+            run2.Append(text2);
+            ProofError proofError2 = new ProofError() { Type = ProofingErrorValues.SpellEnd };
+
+            Run run3 = new Run();
+            Text text3 = new Text();
+            text3.Text = "!!!";
+
+            run3.Append(text3);
+
+            paragraph94.Append(paragraphProperties94);
+            paragraph94.Append(run1);
+            paragraph94.Append(proofError1);
+            paragraph94.Append(run2);
+            paragraph94.Append(proofError2);
+            paragraph94.Append(run3);
+
+            Paragraph paragraph95 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties95 = new ParagraphProperties();
+            ParagraphStyleId paragraphStyleId2 = new ParagraphStyleId() { Val = "a5" };
+
+            paragraphProperties95.Append(paragraphStyleId2);
+
+            paragraph95.Append(paragraphProperties95);
+
+            Paragraph paragraph96 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties96 = new ParagraphProperties();
+            ParagraphStyleId paragraphStyleId3 = new ParagraphStyleId() { Val = "a5" };
+
+            paragraphProperties96.Append(paragraphStyleId3);
+
+            paragraph96.Append(paragraphProperties96);
+
+            footer1.Append(paragraph94);
+            footer1.Append(paragraph95);
+            footer1.Append(paragraph96);
+
+            footerPart1.Footer = footer1;
+        }
+
+        // Generates content of documentSettingsPart1.
+        private void GenerateDocumentSettingsPart1Content(DocumentSettingsPart documentSettingsPart1)
+        {
+            Settings settings1 = new Settings() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14" } };
+            settings1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            settings1.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
+            settings1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            settings1.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+            settings1.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+            settings1.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
+            settings1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            settings1.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            settings1.AddNamespaceDeclaration("sl", "http://schemas.openxmlformats.org/schemaLibrary/2006/main");
+            Zoom zoom1 = new Zoom() { Percent = "110" };
+            ProofState proofState1 = new ProofState() { Spelling = ProofingStateValues.Clean, Grammar = ProofingStateValues.Clean };
+            DefaultTabStop defaultTabStop1 = new DefaultTabStop() { Val = 708 };
+            CharacterSpacingControl characterSpacingControl1 = new CharacterSpacingControl() { Val = CharacterSpacingValues.DoNotCompress };
+
+            FootnoteDocumentWideProperties footnoteDocumentWideProperties1 = new FootnoteDocumentWideProperties();
+            FootnoteSpecialReference footnoteSpecialReference1 = new FootnoteSpecialReference() { Id = -1 };
+            FootnoteSpecialReference footnoteSpecialReference2 = new FootnoteSpecialReference() { Id = 0 };
+
+            footnoteDocumentWideProperties1.Append(footnoteSpecialReference1);
+            footnoteDocumentWideProperties1.Append(footnoteSpecialReference2);
+
+            EndnoteDocumentWideProperties endnoteDocumentWideProperties1 = new EndnoteDocumentWideProperties();
+            EndnoteSpecialReference endnoteSpecialReference1 = new EndnoteSpecialReference() { Id = -1 };
+            EndnoteSpecialReference endnoteSpecialReference2 = new EndnoteSpecialReference() { Id = 0 };
+
+            endnoteDocumentWideProperties1.Append(endnoteSpecialReference1);
+            endnoteDocumentWideProperties1.Append(endnoteSpecialReference2);
+
+            Compatibility compatibility1 = new Compatibility();
+            CompatibilitySetting compatibilitySetting1 = new CompatibilitySetting() { Name = CompatSettingNameValues.CompatibilityMode, Uri = "http://schemas.microsoft.com/office/word", Val = "14" };
+            CompatibilitySetting compatibilitySetting2 = new CompatibilitySetting() { Name = CompatSettingNameValues.OverrideTableStyleFontSizeAndJustification, Uri = "http://schemas.microsoft.com/office/word", Val = "1" };
+            CompatibilitySetting compatibilitySetting3 = new CompatibilitySetting() { Name = CompatSettingNameValues.EnableOpenTypeFeatures, Uri = "http://schemas.microsoft.com/office/word", Val = "1" };
+            CompatibilitySetting compatibilitySetting4 = new CompatibilitySetting() { Name = CompatSettingNameValues.DoNotFlipMirrorIndents, Uri = "http://schemas.microsoft.com/office/word", Val = "1" };
+
+            compatibility1.Append(compatibilitySetting1);
+            compatibility1.Append(compatibilitySetting2);
+            compatibility1.Append(compatibilitySetting3);
+            compatibility1.Append(compatibilitySetting4);
+
+            Rsids rsids1 = new Rsids();
+            RsidRoot rsidRoot1 = new RsidRoot() { Val = "00B0767E" };
+            Rsid rsid1 = new Rsid() { Val = "000D2DE1" };
+            Rsid rsid2 = new Rsid() { Val = "003A42F1" };
+            Rsid rsid3 = new Rsid() { Val = "003C4DAF" };
+            Rsid rsid4 = new Rsid() { Val = "004A5FEA" };
+            Rsid rsid5 = new Rsid() { Val = "0059689D" };
+            Rsid rsid6 = new Rsid() { Val = "005B13BB" };
+            Rsid rsid7 = new Rsid() { Val = "00763152" };
+            Rsid rsid8 = new Rsid() { Val = "00796B77" };
+            Rsid rsid9 = new Rsid() { Val = "00B0767E" };
+            Rsid rsid10 = new Rsid() { Val = "00B571AC" };
+            Rsid rsid11 = new Rsid() { Val = "00B62D6A" };
+            Rsid rsid12 = new Rsid() { Val = "00B71262" };
+            Rsid rsid13 = new Rsid() { Val = "00BF4911" };
+            Rsid rsid14 = new Rsid() { Val = "00C11C5C" };
+            Rsid rsid15 = new Rsid() { Val = "00EB4E0D" };
+            Rsid rsid16 = new Rsid() { Val = "00EB7AF4" };
+            Rsid rsid17 = new Rsid() { Val = "00EC656C" };
+
+            rsids1.Append(rsidRoot1);
+            rsids1.Append(rsid1);
+            rsids1.Append(rsid2);
+            rsids1.Append(rsid3);
+            rsids1.Append(rsid4);
+            rsids1.Append(rsid5);
+            rsids1.Append(rsid6);
+            rsids1.Append(rsid7);
+            rsids1.Append(rsid8);
+            rsids1.Append(rsid9);
+            rsids1.Append(rsid10);
+            rsids1.Append(rsid11);
+            rsids1.Append(rsid12);
+            rsids1.Append(rsid13);
+            rsids1.Append(rsid14);
+            rsids1.Append(rsid15);
+            rsids1.Append(rsid16);
+            rsids1.Append(rsid17);
+
+            M.MathProperties mathProperties1 = new M.MathProperties();
+            M.MathFont mathFont1 = new M.MathFont() { Val = "Cambria Math" };
+            M.BreakBinary breakBinary1 = new M.BreakBinary() { Val = M.BreakBinaryOperatorValues.Before };
+            M.BreakBinarySubtraction breakBinarySubtraction1 = new M.BreakBinarySubtraction() { Val = M.BreakBinarySubtractionValues.MinusMinus };
+            M.SmallFraction smallFraction1 = new M.SmallFraction() { Val = M.BooleanValues.Zero };
+            M.DisplayDefaults displayDefaults1 = new M.DisplayDefaults();
+            M.LeftMargin leftMargin1 = new M.LeftMargin() { Val = (UInt32Value)0U };
+            M.RightMargin rightMargin1 = new M.RightMargin() { Val = (UInt32Value)0U };
+            M.DefaultJustification defaultJustification1 = new M.DefaultJustification() { Val = M.JustificationValues.CenterGroup };
+            M.WrapIndent wrapIndent1 = new M.WrapIndent() { Val = (UInt32Value)1440U };
+            M.IntegralLimitLocation integralLimitLocation1 = new M.IntegralLimitLocation() { Val = M.LimitLocationValues.SubscriptSuperscript };
+            M.NaryLimitLocation naryLimitLocation1 = new M.NaryLimitLocation() { Val = M.LimitLocationValues.UnderOver };
+
+            mathProperties1.Append(mathFont1);
+            mathProperties1.Append(breakBinary1);
+            mathProperties1.Append(breakBinarySubtraction1);
+            mathProperties1.Append(smallFraction1);
+            mathProperties1.Append(displayDefaults1);
+            mathProperties1.Append(leftMargin1);
+            mathProperties1.Append(rightMargin1);
+            mathProperties1.Append(defaultJustification1);
+            mathProperties1.Append(wrapIndent1);
+            mathProperties1.Append(integralLimitLocation1);
+            mathProperties1.Append(naryLimitLocation1);
+            ThemeFontLanguages themeFontLanguages1 = new ThemeFontLanguages() { Val = "ru-RU" };
+            ColorSchemeMapping colorSchemeMapping1 = new ColorSchemeMapping() { Background1 = ColorSchemeIndexValues.Light1, Text1 = ColorSchemeIndexValues.Dark1, Background2 = ColorSchemeIndexValues.Light2, Text2 = ColorSchemeIndexValues.Dark2, Accent1 = ColorSchemeIndexValues.Accent1, Accent2 = ColorSchemeIndexValues.Accent2, Accent3 = ColorSchemeIndexValues.Accent3, Accent4 = ColorSchemeIndexValues.Accent4, Accent5 = ColorSchemeIndexValues.Accent5, Accent6 = ColorSchemeIndexValues.Accent6, Hyperlink = ColorSchemeIndexValues.Hyperlink, FollowedHyperlink = ColorSchemeIndexValues.FollowedHyperlink };
+
+            ShapeDefaults shapeDefaults1 = new ShapeDefaults();
+            Ovml.ShapeDefaults shapeDefaults2 = new Ovml.ShapeDefaults() { Extension = V.ExtensionHandlingBehaviorValues.Edit, MaxShapeId = 1026 };
+
+            Ovml.ShapeLayout shapeLayout1 = new Ovml.ShapeLayout() { Extension = V.ExtensionHandlingBehaviorValues.Edit };
+            Ovml.ShapeIdMap shapeIdMap1 = new Ovml.ShapeIdMap() { Extension = V.ExtensionHandlingBehaviorValues.Edit, Data = "1" };
+
+            shapeLayout1.Append(shapeIdMap1);
+
+            shapeDefaults1.Append(shapeDefaults2);
+            shapeDefaults1.Append(shapeLayout1);
+            DecimalSymbol decimalSymbol1 = new DecimalSymbol() { Val = "." };
+            ListSeparator listSeparator1 = new ListSeparator() { Val = ";" };
+
+            settings1.Append(zoom1);
+            settings1.Append(proofState1);
+            settings1.Append(defaultTabStop1);
+            settings1.Append(characterSpacingControl1);
+            settings1.Append(footnoteDocumentWideProperties1);
+            settings1.Append(endnoteDocumentWideProperties1);
+            settings1.Append(compatibility1);
+            settings1.Append(rsids1);
+            settings1.Append(mathProperties1);
+            settings1.Append(themeFontLanguages1);
+            settings1.Append(colorSchemeMapping1);
+            settings1.Append(shapeDefaults1);
+            settings1.Append(decimalSymbol1);
+            settings1.Append(listSeparator1);
+
+            documentSettingsPart1.Settings = settings1;
+        }
+
+        // Generates content of footerPart2.
+        private void GenerateFooterPart2Content(FooterPart footerPart2)
+        {
+            Footer footer2 = new Footer() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14 wp14" } };
+            footer2.AddNamespaceDeclaration("wpc", "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas");
+            footer2.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            footer2.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
+            footer2.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            footer2.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+            footer2.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+            footer2.AddNamespaceDeclaration("wp14", "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing");
+            footer2.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
+            footer2.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
+            footer2.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            footer2.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            footer2.AddNamespaceDeclaration("wpg", "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup");
+            footer2.AddNamespaceDeclaration("wpi", "http://schemas.microsoft.com/office/word/2010/wordprocessingInk");
+            footer2.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+            footer2.AddNamespaceDeclaration("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape");
+
+            Paragraph paragraph97 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties97 = new ParagraphProperties();
+            ParagraphStyleId paragraphStyleId4 = new ParagraphStyleId() { Val = "a5" };
+
+            paragraphProperties97.Append(paragraphStyleId4);
+
+            paragraph97.Append(paragraphProperties97);
+
+            Paragraph paragraph98 = new Paragraph() { RsidParagraphAddition = "004A5FEA", RsidRunAdditionDefault = "004A5FEA" };
+
+            ParagraphProperties paragraphProperties98 = new ParagraphProperties();
+            ParagraphStyleId paragraphStyleId5 = new ParagraphStyleId() { Val = "a5" };
+
+            paragraphProperties98.Append(paragraphStyleId5);
+
+            paragraph98.Append(paragraphProperties98);
+
+            footer2.Append(paragraph97);
+            footer2.Append(paragraph98);
+
+            footerPart2.Footer = footer2;
+        }
+
+        // Generates content of stylesWithEffectsPart1.
+        private void GenerateStylesWithEffectsPart1Content(StylesWithEffectsPart stylesWithEffectsPart1)
+        {
+            Styles styles1 = new Styles() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14 wp14" } };
+            styles1.AddNamespaceDeclaration("wpc", "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas");
+            styles1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            styles1.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
             styles1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            styles1.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+            styles1.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+            styles1.AddNamespaceDeclaration("wp14", "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing");
+            styles1.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
+            styles1.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
             styles1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            styles1.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            styles1.AddNamespaceDeclaration("wpg", "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup");
+            styles1.AddNamespaceDeclaration("wpi", "http://schemas.microsoft.com/office/word/2010/wordprocessingInk");
+            styles1.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+            styles1.AddNamespaceDeclaration("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape");
 
             DocDefaults docDefaults1 = new DocDefaults();
 
             RunPropertiesDefault runPropertiesDefault1 = new RunPropertiesDefault();
 
             RunPropertiesBaseStyle runPropertiesBaseStyle1 = new RunPropertiesBaseStyle();
-            RunFonts runFonts38 = new RunFonts() { AsciiTheme = ThemeFontValues.MinorHighAnsi, HighAnsiTheme = ThemeFontValues.MinorHighAnsi, EastAsiaTheme = ThemeFontValues.MinorHighAnsi, ComplexScriptTheme = ThemeFontValues.MinorBidi };
-            FontSize fontSize36 = new FontSize() { Val = "22" };
-            FontSizeComplexScript fontSizeComplexScript36 = new FontSizeComplexScript() { Val = "22" };
-            Languages languages1 = new Languages() { Val = "ru-RU", EastAsia = "en-US", Bidi = "ar-SA" };
+            RunFonts runFonts1 = new RunFonts() { AsciiTheme = ThemeFontValues.MinorHighAnsi, HighAnsiTheme = ThemeFontValues.MinorHighAnsi, EastAsiaTheme = ThemeFontValues.MinorHighAnsi, ComplexScriptTheme = ThemeFontValues.MinorBidi };
+            FontSize fontSize1 = new FontSize() { Val = "22" };
+            FontSizeComplexScript fontSizeComplexScript1 = new FontSizeComplexScript() { Val = "22" };
+            Languages languages94 = new Languages() { Val = "ru-RU", EastAsia = "en-US", Bidi = "ar-SA" };
 
-            runPropertiesBaseStyle1.Append(runFonts38);
-            runPropertiesBaseStyle1.Append(fontSize36);
-            runPropertiesBaseStyle1.Append(fontSizeComplexScript36);
-            runPropertiesBaseStyle1.Append(languages1);
+            runPropertiesBaseStyle1.Append(runFonts1);
+            runPropertiesBaseStyle1.Append(fontSize1);
+            runPropertiesBaseStyle1.Append(fontSizeComplexScript1);
+            runPropertiesBaseStyle1.Append(languages94);
 
             runPropertiesDefault1.Append(runPropertiesBaseStyle1);
+
             ParagraphPropertiesDefault paragraphPropertiesDefault1 = new ParagraphPropertiesDefault();
+
+            ParagraphPropertiesBaseStyle paragraphPropertiesBaseStyle1 = new ParagraphPropertiesBaseStyle();
+            SpacingBetweenLines spacingBetweenLines1 = new SpacingBetweenLines() { After = "200", Line = "276", LineRule = LineSpacingRuleValues.Auto };
+
+            paragraphPropertiesBaseStyle1.Append(spacingBetweenLines1);
+
+            paragraphPropertiesDefault1.Append(paragraphPropertiesBaseStyle1);
 
             docDefaults1.Append(runPropertiesDefault1);
             docDefaults1.Append(paragraphPropertiesDefault1);
@@ -1526,637 +2122,29 @@ namespace DBF
             latentStyles1.Append(latentStyleExceptionInfo136);
             latentStyles1.Append(latentStyleExceptionInfo137);
 
-            Style style1 = new Style() { Type = StyleValues.Paragraph, StyleId = "Heading1" };
-            StyleName styleName1 = new StyleName() { Val = "heading 1" };
-            BasedOn basedOn1 = new BasedOn() { Val = "Normal" };
-            NextParagraphStyle nextParagraphStyle1 = new NextParagraphStyle() { Val = "Normal" };
-            LinkedStyle linkedStyle1 = new LinkedStyle() { Val = "Heading1Char" };
-            UIPriority uIPriority1 = new UIPriority() { Val = 9 };
+            Style style1 = new Style() { Type = StyleValues.Paragraph, StyleId = "a", Default = true };
+            StyleName styleName1 = new StyleName() { Val = "Normal" };
             PrimaryStyle primaryStyle1 = new PrimaryStyle();
-            Rsid rsid1 = new Rsid() { Val = "00263428" };
-
-            StyleParagraphProperties styleParagraphProperties1 = new StyleParagraphProperties();
-            KeepNext keepNext1 = new KeepNext();
-            KeepLines keepLines1 = new KeepLines();
-            SpacingBetweenLines spacingBetweenLines3 = new SpacingBetweenLines() { Before = "480", After = "0" };
-            OutlineLevel outlineLevel1 = new OutlineLevel() { Val = 0 };
-
-            styleParagraphProperties1.Append(keepNext1);
-            styleParagraphProperties1.Append(keepLines1);
-            styleParagraphProperties1.Append(spacingBetweenLines3);
-            styleParagraphProperties1.Append(outlineLevel1);
-
-            StyleRunProperties styleRunProperties1 = new StyleRunProperties();
-            RunFonts runFonts39 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Bold bold8 = new Bold();
-            BoldComplexScript boldComplexScript1 = new BoldComplexScript();
-            Color color1 = new Color() { Val = "365F91", ThemeColor = ThemeColorValues.Accent1, ThemeShade = "BF" };
-            FontSize fontSize37 = new FontSize() { Val = "28" };
-            FontSizeComplexScript fontSizeComplexScript37 = new FontSizeComplexScript() { Val = "28" };
-
-            styleRunProperties1.Append(runFonts39);
-            styleRunProperties1.Append(bold8);
-            styleRunProperties1.Append(boldComplexScript1);
-            styleRunProperties1.Append(color1);
-            styleRunProperties1.Append(fontSize37);
-            styleRunProperties1.Append(fontSizeComplexScript37);
 
             style1.Append(styleName1);
-            style1.Append(basedOn1);
-            style1.Append(nextParagraphStyle1);
-            style1.Append(linkedStyle1);
-            style1.Append(uIPriority1);
             style1.Append(primaryStyle1);
-            style1.Append(rsid1);
-            style1.Append(styleParagraphProperties1);
-            style1.Append(styleRunProperties1);
 
-            Style style2 = new Style() { Type = StyleValues.Paragraph, StyleId = "Heading2" };
-            StyleName styleName2 = new StyleName() { Val = "heading 2" };
-            BasedOn basedOn2 = new BasedOn() { Val = "Normal" };
-            NextParagraphStyle nextParagraphStyle2 = new NextParagraphStyle() { Val = "Normal" };
-            LinkedStyle linkedStyle2 = new LinkedStyle() { Val = "Heading2Char" };
-            UIPriority uIPriority2 = new UIPriority() { Val = 9 };
+            Style style2 = new Style() { Type = StyleValues.Character, StyleId = "a0", Default = true };
+            StyleName styleName2 = new StyleName() { Val = "Default Paragraph Font" };
+            UIPriority uIPriority1 = new UIPriority() { Val = 1 };
+            SemiHidden semiHidden1 = new SemiHidden();
             UnhideWhenUsed unhideWhenUsed1 = new UnhideWhenUsed();
-            PrimaryStyle primaryStyle2 = new PrimaryStyle();
-            Rsid rsid2 = new Rsid() { Val = "00263428" };
-
-            StyleParagraphProperties styleParagraphProperties2 = new StyleParagraphProperties();
-            KeepNext keepNext2 = new KeepNext();
-            KeepLines keepLines2 = new KeepLines();
-            SpacingBetweenLines spacingBetweenLines4 = new SpacingBetweenLines() { Before = "200", After = "0" };
-            OutlineLevel outlineLevel2 = new OutlineLevel() { Val = 1 };
-
-            styleParagraphProperties2.Append(keepNext2);
-            styleParagraphProperties2.Append(keepLines2);
-            styleParagraphProperties2.Append(spacingBetweenLines4);
-            styleParagraphProperties2.Append(outlineLevel2);
-
-            StyleRunProperties styleRunProperties2 = new StyleRunProperties();
-            RunFonts runFonts40 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Bold bold9 = new Bold();
-            BoldComplexScript boldComplexScript2 = new BoldComplexScript();
-            Color color2 = new Color() { Val = "4F81BD", ThemeColor = ThemeColorValues.Accent1 };
-            FontSize fontSize38 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript38 = new FontSizeComplexScript() { Val = "26" };
-
-            styleRunProperties2.Append(runFonts40);
-            styleRunProperties2.Append(bold9);
-            styleRunProperties2.Append(boldComplexScript2);
-            styleRunProperties2.Append(color2);
-            styleRunProperties2.Append(fontSize38);
-            styleRunProperties2.Append(fontSizeComplexScript38);
 
             style2.Append(styleName2);
-            style2.Append(basedOn2);
-            style2.Append(nextParagraphStyle2);
-            style2.Append(linkedStyle2);
-            style2.Append(uIPriority2);
+            style2.Append(uIPriority1);
+            style2.Append(semiHidden1);
             style2.Append(unhideWhenUsed1);
-            style2.Append(primaryStyle2);
-            style2.Append(rsid2);
-            style2.Append(styleParagraphProperties2);
-            style2.Append(styleRunProperties2);
 
-            Style style3 = new Style() { Type = StyleValues.Paragraph, StyleId = "Heading3" };
-            StyleName styleName3 = new StyleName() { Val = "heading 3" };
-            BasedOn basedOn3 = new BasedOn() { Val = "Normal" };
-            NextParagraphStyle nextParagraphStyle3 = new NextParagraphStyle() { Val = "Normal" };
-            LinkedStyle linkedStyle3 = new LinkedStyle() { Val = "Heading3Char" };
-            UIPriority uIPriority3 = new UIPriority() { Val = 9 };
-            UnhideWhenUsed unhideWhenUsed2 = new UnhideWhenUsed();
-            PrimaryStyle primaryStyle3 = new PrimaryStyle();
-            Rsid rsid3 = new Rsid() { Val = "00263428" };
-
-            StyleParagraphProperties styleParagraphProperties3 = new StyleParagraphProperties();
-            KeepNext keepNext3 = new KeepNext();
-            KeepLines keepLines3 = new KeepLines();
-            SpacingBetweenLines spacingBetweenLines5 = new SpacingBetweenLines() { Before = "200", After = "0" };
-            OutlineLevel outlineLevel3 = new OutlineLevel() { Val = 2 };
-
-            styleParagraphProperties3.Append(keepNext3);
-            styleParagraphProperties3.Append(keepLines3);
-            styleParagraphProperties3.Append(spacingBetweenLines5);
-            styleParagraphProperties3.Append(outlineLevel3);
-
-            StyleRunProperties styleRunProperties3 = new StyleRunProperties();
-            RunFonts runFonts41 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Bold bold10 = new Bold();
-            BoldComplexScript boldComplexScript3 = new BoldComplexScript();
-            Color color3 = new Color() { Val = "4F81BD", ThemeColor = ThemeColorValues.Accent1 };
-
-            styleRunProperties3.Append(runFonts41);
-            styleRunProperties3.Append(bold10);
-            styleRunProperties3.Append(boldComplexScript3);
-            styleRunProperties3.Append(color3);
-
-            style3.Append(styleName3);
-            style3.Append(basedOn3);
-            style3.Append(nextParagraphStyle3);
-            style3.Append(linkedStyle3);
-            style3.Append(uIPriority3);
-            style3.Append(unhideWhenUsed2);
-            style3.Append(primaryStyle3);
-            style3.Append(rsid3);
-            style3.Append(styleParagraphProperties3);
-            style3.Append(styleRunProperties3);
-
-            Style style4 = new Style() { Type = StyleValues.Paragraph, StyleId = "Heading4" };
-            StyleName styleName4 = new StyleName() { Val = "heading 4" };
-            BasedOn basedOn4 = new BasedOn() { Val = "Normal" };
-            NextParagraphStyle nextParagraphStyle4 = new NextParagraphStyle() { Val = "Normal" };
-            LinkedStyle linkedStyle4 = new LinkedStyle() { Val = "Heading4Char" };
-            UIPriority uIPriority4 = new UIPriority() { Val = 9 };
-            UnhideWhenUsed unhideWhenUsed3 = new UnhideWhenUsed();
-            PrimaryStyle primaryStyle4 = new PrimaryStyle();
-            Rsid rsid4 = new Rsid() { Val = "00263428" };
-
-            StyleParagraphProperties styleParagraphProperties4 = new StyleParagraphProperties();
-            KeepNext keepNext4 = new KeepNext();
-            KeepLines keepLines4 = new KeepLines();
-            SpacingBetweenLines spacingBetweenLines6 = new SpacingBetweenLines() { Before = "200", After = "0" };
-            OutlineLevel outlineLevel4 = new OutlineLevel() { Val = 3 };
-
-            styleParagraphProperties4.Append(keepNext4);
-            styleParagraphProperties4.Append(keepLines4);
-            styleParagraphProperties4.Append(spacingBetweenLines6);
-            styleParagraphProperties4.Append(outlineLevel4);
-
-            StyleRunProperties styleRunProperties4 = new StyleRunProperties();
-            RunFonts runFonts42 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Bold bold11 = new Bold();
-            BoldComplexScript boldComplexScript4 = new BoldComplexScript();
-            Italic italic1 = new Italic();
-            ItalicComplexScript italicComplexScript1 = new ItalicComplexScript();
-            Color color4 = new Color() { Val = "4F81BD", ThemeColor = ThemeColorValues.Accent1 };
-
-            styleRunProperties4.Append(runFonts42);
-            styleRunProperties4.Append(bold11);
-            styleRunProperties4.Append(boldComplexScript4);
-            styleRunProperties4.Append(italic1);
-            styleRunProperties4.Append(italicComplexScript1);
-            styleRunProperties4.Append(color4);
-
-            style4.Append(styleName4);
-            style4.Append(basedOn4);
-            style4.Append(nextParagraphStyle4);
-            style4.Append(linkedStyle4);
-            style4.Append(uIPriority4);
-            style4.Append(unhideWhenUsed3);
-            style4.Append(primaryStyle4);
-            style4.Append(rsid4);
-            style4.Append(styleParagraphProperties4);
-            style4.Append(styleRunProperties4);
-
-            Style style5 = new Style() { Type = StyleValues.Paragraph, StyleId = "Heading5" };
-            StyleName styleName5 = new StyleName() { Val = "heading 5" };
-            BasedOn basedOn5 = new BasedOn() { Val = "Normal" };
-            NextParagraphStyle nextParagraphStyle5 = new NextParagraphStyle() { Val = "Normal" };
-            LinkedStyle linkedStyle5 = new LinkedStyle() { Val = "Heading5Char" };
-            UIPriority uIPriority5 = new UIPriority() { Val = 9 };
-            UnhideWhenUsed unhideWhenUsed4 = new UnhideWhenUsed();
-            PrimaryStyle primaryStyle5 = new PrimaryStyle();
-            Rsid rsid5 = new Rsid() { Val = "00263428" };
-
-            StyleParagraphProperties styleParagraphProperties5 = new StyleParagraphProperties();
-            KeepNext keepNext5 = new KeepNext();
-            KeepLines keepLines5 = new KeepLines();
-            SpacingBetweenLines spacingBetweenLines7 = new SpacingBetweenLines() { Before = "200", After = "0" };
-            OutlineLevel outlineLevel5 = new OutlineLevel() { Val = 4 };
-
-            styleParagraphProperties5.Append(keepNext5);
-            styleParagraphProperties5.Append(keepLines5);
-            styleParagraphProperties5.Append(spacingBetweenLines7);
-            styleParagraphProperties5.Append(outlineLevel5);
-
-            StyleRunProperties styleRunProperties5 = new StyleRunProperties();
-            RunFonts runFonts43 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Color color5 = new Color() { Val = "243F60", ThemeColor = ThemeColorValues.Accent1, ThemeShade = "7F" };
-
-            styleRunProperties5.Append(runFonts43);
-            styleRunProperties5.Append(color5);
-
-            style5.Append(styleName5);
-            style5.Append(basedOn5);
-            style5.Append(nextParagraphStyle5);
-            style5.Append(linkedStyle5);
-            style5.Append(uIPriority5);
-            style5.Append(unhideWhenUsed4);
-            style5.Append(primaryStyle5);
-            style5.Append(rsid5);
-            style5.Append(styleParagraphProperties5);
-            style5.Append(styleRunProperties5);
-
-            Style style6 = new Style() { Type = StyleValues.Paragraph, StyleId = "Heading6" };
-            StyleName styleName6 = new StyleName() { Val = "heading 6" };
-            BasedOn basedOn6 = new BasedOn() { Val = "Normal" };
-            NextParagraphStyle nextParagraphStyle6 = new NextParagraphStyle() { Val = "Normal" };
-            LinkedStyle linkedStyle6 = new LinkedStyle() { Val = "Heading6Char" };
-            UIPriority uIPriority6 = new UIPriority() { Val = 9 };
-            UnhideWhenUsed unhideWhenUsed5 = new UnhideWhenUsed();
-            PrimaryStyle primaryStyle6 = new PrimaryStyle();
-            Rsid rsid6 = new Rsid() { Val = "00263428" };
-
-            StyleParagraphProperties styleParagraphProperties6 = new StyleParagraphProperties();
-            KeepNext keepNext6 = new KeepNext();
-            KeepLines keepLines6 = new KeepLines();
-            SpacingBetweenLines spacingBetweenLines8 = new SpacingBetweenLines() { Before = "200", After = "0" };
-            OutlineLevel outlineLevel6 = new OutlineLevel() { Val = 5 };
-
-            styleParagraphProperties6.Append(keepNext6);
-            styleParagraphProperties6.Append(keepLines6);
-            styleParagraphProperties6.Append(spacingBetweenLines8);
-            styleParagraphProperties6.Append(outlineLevel6);
-
-            StyleRunProperties styleRunProperties6 = new StyleRunProperties();
-            RunFonts runFonts44 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Italic italic2 = new Italic();
-            ItalicComplexScript italicComplexScript2 = new ItalicComplexScript();
-            Color color6 = new Color() { Val = "243F60", ThemeColor = ThemeColorValues.Accent1, ThemeShade = "7F" };
-
-            styleRunProperties6.Append(runFonts44);
-            styleRunProperties6.Append(italic2);
-            styleRunProperties6.Append(italicComplexScript2);
-            styleRunProperties6.Append(color6);
-
-            style6.Append(styleName6);
-            style6.Append(basedOn6);
-            style6.Append(nextParagraphStyle6);
-            style6.Append(linkedStyle6);
-            style6.Append(uIPriority6);
-            style6.Append(unhideWhenUsed5);
-            style6.Append(primaryStyle6);
-            style6.Append(rsid6);
-            style6.Append(styleParagraphProperties6);
-            style6.Append(styleRunProperties6);
-
-            Style style7 = new Style() { Type = StyleValues.Paragraph, StyleId = "Heading7" };
-            StyleName styleName7 = new StyleName() { Val = "heading 7" };
-            BasedOn basedOn7 = new BasedOn() { Val = "Normal" };
-            NextParagraphStyle nextParagraphStyle7 = new NextParagraphStyle() { Val = "Normal" };
-            LinkedStyle linkedStyle7 = new LinkedStyle() { Val = "Heading7Char" };
-            UIPriority uIPriority7 = new UIPriority() { Val = 9 };
-            UnhideWhenUsed unhideWhenUsed6 = new UnhideWhenUsed();
-            PrimaryStyle primaryStyle7 = new PrimaryStyle();
-            Rsid rsid7 = new Rsid() { Val = "00263428" };
-
-            StyleParagraphProperties styleParagraphProperties7 = new StyleParagraphProperties();
-            KeepNext keepNext7 = new KeepNext();
-            KeepLines keepLines7 = new KeepLines();
-            SpacingBetweenLines spacingBetweenLines9 = new SpacingBetweenLines() { Before = "200", After = "0" };
-            OutlineLevel outlineLevel7 = new OutlineLevel() { Val = 6 };
-
-            styleParagraphProperties7.Append(keepNext7);
-            styleParagraphProperties7.Append(keepLines7);
-            styleParagraphProperties7.Append(spacingBetweenLines9);
-            styleParagraphProperties7.Append(outlineLevel7);
-
-            StyleRunProperties styleRunProperties7 = new StyleRunProperties();
-            RunFonts runFonts45 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Italic italic3 = new Italic();
-            ItalicComplexScript italicComplexScript3 = new ItalicComplexScript();
-            Color color7 = new Color() { Val = "404040", ThemeColor = ThemeColorValues.Text1, ThemeTint = "BF" };
-
-            styleRunProperties7.Append(runFonts45);
-            styleRunProperties7.Append(italic3);
-            styleRunProperties7.Append(italicComplexScript3);
-            styleRunProperties7.Append(color7);
-
-            style7.Append(styleName7);
-            style7.Append(basedOn7);
-            style7.Append(nextParagraphStyle7);
-            style7.Append(linkedStyle7);
-            style7.Append(uIPriority7);
-            style7.Append(unhideWhenUsed6);
-            style7.Append(primaryStyle7);
-            style7.Append(rsid7);
-            style7.Append(styleParagraphProperties7);
-            style7.Append(styleRunProperties7);
-
-            Style style8 = new Style() { Type = StyleValues.Paragraph, StyleId = "Heading8" };
-            StyleName styleName8 = new StyleName() { Val = "heading 8" };
-            BasedOn basedOn8 = new BasedOn() { Val = "Normal" };
-            NextParagraphStyle nextParagraphStyle8 = new NextParagraphStyle() { Val = "Normal" };
-            LinkedStyle linkedStyle8 = new LinkedStyle() { Val = "Heading8Char" };
-            UIPriority uIPriority8 = new UIPriority() { Val = 9 };
-            UnhideWhenUsed unhideWhenUsed7 = new UnhideWhenUsed();
-            PrimaryStyle primaryStyle8 = new PrimaryStyle();
-            Rsid rsid8 = new Rsid() { Val = "00263428" };
-
-            StyleParagraphProperties styleParagraphProperties8 = new StyleParagraphProperties();
-            KeepNext keepNext8 = new KeepNext();
-            KeepLines keepLines8 = new KeepLines();
-            SpacingBetweenLines spacingBetweenLines10 = new SpacingBetweenLines() { Before = "200", After = "0" };
-            OutlineLevel outlineLevel8 = new OutlineLevel() { Val = 7 };
-
-            styleParagraphProperties8.Append(keepNext8);
-            styleParagraphProperties8.Append(keepLines8);
-            styleParagraphProperties8.Append(spacingBetweenLines10);
-            styleParagraphProperties8.Append(outlineLevel8);
-
-            StyleRunProperties styleRunProperties8 = new StyleRunProperties();
-            RunFonts runFonts46 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Color color8 = new Color() { Val = "404040", ThemeColor = ThemeColorValues.Text1, ThemeTint = "BF" };
-            FontSize fontSize39 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript39 = new FontSizeComplexScript() { Val = "20" };
-
-            styleRunProperties8.Append(runFonts46);
-            styleRunProperties8.Append(color8);
-            styleRunProperties8.Append(fontSize39);
-            styleRunProperties8.Append(fontSizeComplexScript39);
-
-            style8.Append(styleName8);
-            style8.Append(basedOn8);
-            style8.Append(nextParagraphStyle8);
-            style8.Append(linkedStyle8);
-            style8.Append(uIPriority8);
-            style8.Append(unhideWhenUsed7);
-            style8.Append(primaryStyle8);
-            style8.Append(rsid8);
-            style8.Append(styleParagraphProperties8);
-            style8.Append(styleRunProperties8);
-
-            Style style9 = new Style() { Type = StyleValues.Paragraph, StyleId = "Heading9" };
-            StyleName styleName9 = new StyleName() { Val = "heading 9" };
-            BasedOn basedOn9 = new BasedOn() { Val = "Normal" };
-            NextParagraphStyle nextParagraphStyle9 = new NextParagraphStyle() { Val = "Normal" };
-            LinkedStyle linkedStyle9 = new LinkedStyle() { Val = "Heading9Char" };
-            UIPriority uIPriority9 = new UIPriority() { Val = 9 };
-            UnhideWhenUsed unhideWhenUsed8 = new UnhideWhenUsed();
-            PrimaryStyle primaryStyle9 = new PrimaryStyle();
-            Rsid rsid9 = new Rsid() { Val = "00263428" };
-
-            StyleParagraphProperties styleParagraphProperties9 = new StyleParagraphProperties();
-            KeepNext keepNext9 = new KeepNext();
-            KeepLines keepLines9 = new KeepLines();
-            SpacingBetweenLines spacingBetweenLines11 = new SpacingBetweenLines() { Before = "200", After = "0" };
-            OutlineLevel outlineLevel9 = new OutlineLevel() { Val = 8 };
-
-            styleParagraphProperties9.Append(keepNext9);
-            styleParagraphProperties9.Append(keepLines9);
-            styleParagraphProperties9.Append(spacingBetweenLines11);
-            styleParagraphProperties9.Append(outlineLevel9);
-
-            StyleRunProperties styleRunProperties9 = new StyleRunProperties();
-            RunFonts runFonts47 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Italic italic4 = new Italic();
-            ItalicComplexScript italicComplexScript4 = new ItalicComplexScript();
-            Color color9 = new Color() { Val = "404040", ThemeColor = ThemeColorValues.Text1, ThemeTint = "BF" };
-            FontSize fontSize40 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript40 = new FontSizeComplexScript() { Val = "20" };
-
-            styleRunProperties9.Append(runFonts47);
-            styleRunProperties9.Append(italic4);
-            styleRunProperties9.Append(italicComplexScript4);
-            styleRunProperties9.Append(color9);
-            styleRunProperties9.Append(fontSize40);
-            styleRunProperties9.Append(fontSizeComplexScript40);
-
-            style9.Append(styleName9);
-            style9.Append(basedOn9);
-            style9.Append(nextParagraphStyle9);
-            style9.Append(linkedStyle9);
-            style9.Append(uIPriority9);
-            style9.Append(unhideWhenUsed8);
-            style9.Append(primaryStyle9);
-            style9.Append(rsid9);
-            style9.Append(styleParagraphProperties9);
-            style9.Append(styleRunProperties9);
-
-            Style style10 = new Style() { Type = StyleValues.Character, StyleId = "Heading2Char", CustomStyle = true };
-            StyleName styleName10 = new StyleName() { Val = "Heading 2 Char" };
-            BasedOn basedOn10 = new BasedOn() { Val = "DefaultParagraphFont" };
-            LinkedStyle linkedStyle10 = new LinkedStyle() { Val = "Heading2" };
-            UIPriority uIPriority10 = new UIPriority() { Val = 9 };
-            Rsid rsid10 = new Rsid() { Val = "00263428" };
-
-            StyleRunProperties styleRunProperties10 = new StyleRunProperties();
-            RunFonts runFonts48 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Bold bold12 = new Bold();
-            BoldComplexScript boldComplexScript5 = new BoldComplexScript();
-            Color color10 = new Color() { Val = "4F81BD", ThemeColor = ThemeColorValues.Accent1 };
-            FontSize fontSize41 = new FontSize() { Val = "26" };
-            FontSizeComplexScript fontSizeComplexScript41 = new FontSizeComplexScript() { Val = "26" };
-
-            styleRunProperties10.Append(runFonts48);
-            styleRunProperties10.Append(bold12);
-            styleRunProperties10.Append(boldComplexScript5);
-            styleRunProperties10.Append(color10);
-            styleRunProperties10.Append(fontSize41);
-            styleRunProperties10.Append(fontSizeComplexScript41);
-
-            style10.Append(styleName10);
-            style10.Append(basedOn10);
-            style10.Append(linkedStyle10);
-            style10.Append(uIPriority10);
-            style10.Append(rsid10);
-            style10.Append(styleRunProperties10);
-
-            Style style11 = new Style() { Type = StyleValues.Character, StyleId = "Heading3Char", CustomStyle = true };
-            StyleName styleName11 = new StyleName() { Val = "Heading 3 Char" };
-            BasedOn basedOn11 = new BasedOn() { Val = "DefaultParagraphFont" };
-            LinkedStyle linkedStyle11 = new LinkedStyle() { Val = "Heading3" };
-            UIPriority uIPriority11 = new UIPriority() { Val = 9 };
-            Rsid rsid11 = new Rsid() { Val = "00263428" };
-
-            StyleRunProperties styleRunProperties11 = new StyleRunProperties();
-            RunFonts runFonts49 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Bold bold13 = new Bold();
-            BoldComplexScript boldComplexScript6 = new BoldComplexScript();
-            Color color11 = new Color() { Val = "4F81BD", ThemeColor = ThemeColorValues.Accent1 };
-
-            styleRunProperties11.Append(runFonts49);
-            styleRunProperties11.Append(bold13);
-            styleRunProperties11.Append(boldComplexScript6);
-            styleRunProperties11.Append(color11);
-
-            style11.Append(styleName11);
-            style11.Append(basedOn11);
-            style11.Append(linkedStyle11);
-            style11.Append(uIPriority11);
-            style11.Append(rsid11);
-            style11.Append(styleRunProperties11);
-
-            Style style12 = new Style() { Type = StyleValues.Character, StyleId = "Heading4Char", CustomStyle = true };
-            StyleName styleName12 = new StyleName() { Val = "Heading 4 Char" };
-            BasedOn basedOn12 = new BasedOn() { Val = "DefaultParagraphFont" };
-            LinkedStyle linkedStyle12 = new LinkedStyle() { Val = "Heading4" };
-            UIPriority uIPriority12 = new UIPriority() { Val = 9 };
-            Rsid rsid12 = new Rsid() { Val = "00263428" };
-
-            StyleRunProperties styleRunProperties12 = new StyleRunProperties();
-            RunFonts runFonts50 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Bold bold14 = new Bold();
-            BoldComplexScript boldComplexScript7 = new BoldComplexScript();
-            Italic italic5 = new Italic();
-            ItalicComplexScript italicComplexScript5 = new ItalicComplexScript();
-            Color color12 = new Color() { Val = "4F81BD", ThemeColor = ThemeColorValues.Accent1 };
-
-            styleRunProperties12.Append(runFonts50);
-            styleRunProperties12.Append(bold14);
-            styleRunProperties12.Append(boldComplexScript7);
-            styleRunProperties12.Append(italic5);
-            styleRunProperties12.Append(italicComplexScript5);
-            styleRunProperties12.Append(color12);
-
-            style12.Append(styleName12);
-            style12.Append(basedOn12);
-            style12.Append(linkedStyle12);
-            style12.Append(uIPriority12);
-            style12.Append(rsid12);
-            style12.Append(styleRunProperties12);
-
-            Style style13 = new Style() { Type = StyleValues.Character, StyleId = "Heading5Char", CustomStyle = true };
-            StyleName styleName13 = new StyleName() { Val = "Heading 5 Char" };
-            BasedOn basedOn13 = new BasedOn() { Val = "DefaultParagraphFont" };
-            LinkedStyle linkedStyle13 = new LinkedStyle() { Val = "Heading5" };
-            UIPriority uIPriority13 = new UIPriority() { Val = 9 };
-            Rsid rsid13 = new Rsid() { Val = "00263428" };
-
-            StyleRunProperties styleRunProperties13 = new StyleRunProperties();
-            RunFonts runFonts51 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Color color13 = new Color() { Val = "243F60", ThemeColor = ThemeColorValues.Accent1, ThemeShade = "7F" };
-
-            styleRunProperties13.Append(runFonts51);
-            styleRunProperties13.Append(color13);
-
-            style13.Append(styleName13);
-            style13.Append(basedOn13);
-            style13.Append(linkedStyle13);
-            style13.Append(uIPriority13);
-            style13.Append(rsid13);
-            style13.Append(styleRunProperties13);
-
-            Style style14 = new Style() { Type = StyleValues.Character, StyleId = "Heading6Char", CustomStyle = true };
-            StyleName styleName14 = new StyleName() { Val = "Heading 6 Char" };
-            BasedOn basedOn14 = new BasedOn() { Val = "DefaultParagraphFont" };
-            LinkedStyle linkedStyle14 = new LinkedStyle() { Val = "Heading6" };
-            UIPriority uIPriority14 = new UIPriority() { Val = 9 };
-            Rsid rsid14 = new Rsid() { Val = "00263428" };
-
-            StyleRunProperties styleRunProperties14 = new StyleRunProperties();
-            RunFonts runFonts52 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Italic italic6 = new Italic();
-            ItalicComplexScript italicComplexScript6 = new ItalicComplexScript();
-            Color color14 = new Color() { Val = "243F60", ThemeColor = ThemeColorValues.Accent1, ThemeShade = "7F" };
-
-            styleRunProperties14.Append(runFonts52);
-            styleRunProperties14.Append(italic6);
-            styleRunProperties14.Append(italicComplexScript6);
-            styleRunProperties14.Append(color14);
-
-            style14.Append(styleName14);
-            style14.Append(basedOn14);
-            style14.Append(linkedStyle14);
-            style14.Append(uIPriority14);
-            style14.Append(rsid14);
-            style14.Append(styleRunProperties14);
-
-            Style style15 = new Style() { Type = StyleValues.Character, StyleId = "Heading7Char", CustomStyle = true };
-            StyleName styleName15 = new StyleName() { Val = "Heading 7 Char" };
-            BasedOn basedOn15 = new BasedOn() { Val = "DefaultParagraphFont" };
-            LinkedStyle linkedStyle15 = new LinkedStyle() { Val = "Heading7" };
-            UIPriority uIPriority15 = new UIPriority() { Val = 9 };
-            Rsid rsid15 = new Rsid() { Val = "00263428" };
-
-            StyleRunProperties styleRunProperties15 = new StyleRunProperties();
-            RunFonts runFonts53 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Italic italic7 = new Italic();
-            ItalicComplexScript italicComplexScript7 = new ItalicComplexScript();
-            Color color15 = new Color() { Val = "404040", ThemeColor = ThemeColorValues.Text1, ThemeTint = "BF" };
-
-            styleRunProperties15.Append(runFonts53);
-            styleRunProperties15.Append(italic7);
-            styleRunProperties15.Append(italicComplexScript7);
-            styleRunProperties15.Append(color15);
-
-            style15.Append(styleName15);
-            style15.Append(basedOn15);
-            style15.Append(linkedStyle15);
-            style15.Append(uIPriority15);
-            style15.Append(rsid15);
-            style15.Append(styleRunProperties15);
-
-            Style style16 = new Style() { Type = StyleValues.Character, StyleId = "Heading8Char", CustomStyle = true };
-            StyleName styleName16 = new StyleName() { Val = "Heading 8 Char" };
-            BasedOn basedOn16 = new BasedOn() { Val = "DefaultParagraphFont" };
-            LinkedStyle linkedStyle16 = new LinkedStyle() { Val = "Heading8" };
-            UIPriority uIPriority16 = new UIPriority() { Val = 9 };
-            Rsid rsid16 = new Rsid() { Val = "00263428" };
-
-            StyleRunProperties styleRunProperties16 = new StyleRunProperties();
-            RunFonts runFonts54 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Color color16 = new Color() { Val = "404040", ThemeColor = ThemeColorValues.Text1, ThemeTint = "BF" };
-            FontSize fontSize42 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript42 = new FontSizeComplexScript() { Val = "20" };
-
-            styleRunProperties16.Append(runFonts54);
-            styleRunProperties16.Append(color16);
-            styleRunProperties16.Append(fontSize42);
-            styleRunProperties16.Append(fontSizeComplexScript42);
-
-            style16.Append(styleName16);
-            style16.Append(basedOn16);
-            style16.Append(linkedStyle16);
-            style16.Append(uIPriority16);
-            style16.Append(rsid16);
-            style16.Append(styleRunProperties16);
-
-            Style style17 = new Style() { Type = StyleValues.Character, StyleId = "Heading9Char", CustomStyle = true };
-            StyleName styleName17 = new StyleName() { Val = "Heading 9 Char" };
-            BasedOn basedOn17 = new BasedOn() { Val = "DefaultParagraphFont" };
-            LinkedStyle linkedStyle17 = new LinkedStyle() { Val = "Heading9" };
-            UIPriority uIPriority17 = new UIPriority() { Val = 9 };
-            Rsid rsid17 = new Rsid() { Val = "00263428" };
-
-            StyleRunProperties styleRunProperties17 = new StyleRunProperties();
-            RunFonts runFonts55 = new RunFonts() { AsciiTheme = ThemeFontValues.MajorHighAnsi, HighAnsiTheme = ThemeFontValues.MajorHighAnsi, EastAsiaTheme = ThemeFontValues.MajorEastAsia, ComplexScriptTheme = ThemeFontValues.MajorBidi };
-            Italic italic8 = new Italic();
-            ItalicComplexScript italicComplexScript8 = new ItalicComplexScript();
-            Color color17 = new Color() { Val = "404040", ThemeColor = ThemeColorValues.Text1, ThemeTint = "BF" };
-            FontSize fontSize43 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript43 = new FontSizeComplexScript() { Val = "20" };
-
-            styleRunProperties17.Append(runFonts55);
-            styleRunProperties17.Append(italic8);
-            styleRunProperties17.Append(italicComplexScript8);
-            styleRunProperties17.Append(color17);
-            styleRunProperties17.Append(fontSize43);
-            styleRunProperties17.Append(fontSizeComplexScript43);
-
-            style17.Append(styleName17);
-            style17.Append(basedOn17);
-            style17.Append(linkedStyle17);
-            style17.Append(uIPriority17);
-            style17.Append(rsid17);
-            style17.Append(styleRunProperties17);
-
-            Style style18 = new Style() { Type = StyleValues.Paragraph, StyleId = "Normal", Default = true };
-            StyleName styleName18 = new StyleName() { Val = "Normal" };
-            PrimaryStyle primaryStyle10 = new PrimaryStyle();
-            Rsid rsid18 = new Rsid() { Val = "00B3465E" };
-
-            style18.Append(styleName18);
-            style18.Append(primaryStyle10);
-            style18.Append(rsid18);
-
-            Style style19 = new Style() { Type = StyleValues.Character, StyleId = "DefaultParagraphFont", Default = true };
-            StyleName styleName19 = new StyleName() { Val = "Default Paragraph Font" };
-            UIPriority uIPriority18 = new UIPriority() { Val = 1 };
-            SemiHidden semiHidden1 = new SemiHidden();
-            UnhideWhenUsed unhideWhenUsed9 = new UnhideWhenUsed();
-
-            style19.Append(styleName19);
-            style19.Append(uIPriority18);
-            style19.Append(semiHidden1);
-            style19.Append(unhideWhenUsed9);
-
-            Style style20 = new Style() { Type = StyleValues.Table, StyleId = "TableNormal", Default = true };
-            StyleName styleName20 = new StyleName() { Val = "Normal Table" };
-            UIPriority uIPriority19 = new UIPriority() { Val = 99 };
+            Style style3 = new Style() { Type = StyleValues.Table, StyleId = "a1", Default = true };
+            StyleName styleName3 = new StyleName() { Val = "Normal Table" };
+            UIPriority uIPriority2 = new UIPriority() { Val = 99 };
             SemiHidden semiHidden2 = new SemiHidden();
-            UnhideWhenUsed unhideWhenUsed10 = new UnhideWhenUsed();
-            PrimaryStyle primaryStyle11 = new PrimaryStyle();
+            UnhideWhenUsed unhideWhenUsed2 = new UnhideWhenUsed();
 
             StyleTableProperties styleTableProperties1 = new StyleTableProperties();
             TableIndentation tableIndentation1 = new TableIndentation() { Width = 0, Type = TableWidthUnitValues.Dxa };
@@ -2175,74 +2163,164 @@ namespace DBF
             styleTableProperties1.Append(tableIndentation1);
             styleTableProperties1.Append(tableCellMarginDefault1);
 
-            style20.Append(styleName20);
-            style20.Append(uIPriority19);
-            style20.Append(semiHidden2);
-            style20.Append(unhideWhenUsed10);
-            style20.Append(primaryStyle11);
-            style20.Append(styleTableProperties1);
+            style3.Append(styleName3);
+            style3.Append(uIPriority2);
+            style3.Append(semiHidden2);
+            style3.Append(unhideWhenUsed2);
+            style3.Append(styleTableProperties1);
 
-            Style style21 = new Style() { Type = StyleValues.Numbering, StyleId = "NoList", Default = true };
-            StyleName styleName21 = new StyleName() { Val = "No List" };
-            UIPriority uIPriority20 = new UIPriority() { Val = 99 };
+            Style style4 = new Style() { Type = StyleValues.Numbering, StyleId = "a2", Default = true };
+            StyleName styleName4 = new StyleName() { Val = "No List" };
+            UIPriority uIPriority3 = new UIPriority() { Val = 99 };
             SemiHidden semiHidden3 = new SemiHidden();
-            UnhideWhenUsed unhideWhenUsed11 = new UnhideWhenUsed();
+            UnhideWhenUsed unhideWhenUsed3 = new UnhideWhenUsed();
 
-            style21.Append(styleName21);
-            style21.Append(uIPriority20);
-            style21.Append(semiHidden3);
-            style21.Append(unhideWhenUsed11);
+            style4.Append(styleName4);
+            style4.Append(uIPriority3);
+            style4.Append(semiHidden3);
+            style4.Append(unhideWhenUsed3);
 
-            Style style22 = new Style() { Type = StyleValues.Table, StyleId = "TableGrid" };
-            StyleName styleName22 = new StyleName() { Val = "Table Grid" };
-            BasedOn basedOn18 = new BasedOn() { Val = "TableNormal" };
-            UIPriority uIPriority21 = new UIPriority() { Val = 59 };
-            Rsid rsid19 = new Rsid() { Val = "008D0119" };
+            Style style5 = new Style() { Type = StyleValues.Paragraph, StyleId = "a3" };
+            StyleName styleName5 = new StyleName() { Val = "header" };
+            BasedOn basedOn1 = new BasedOn() { Val = "a" };
+            LinkedStyle linkedStyle1 = new LinkedStyle() { Val = "a4" };
+            UIPriority uIPriority4 = new UIPriority() { Val = 99 };
+            UnhideWhenUsed unhideWhenUsed4 = new UnhideWhenUsed();
+            Rsid rsid18 = new Rsid() { Val = "004A5FEA" };
 
-            StyleParagraphProperties styleParagraphProperties10 = new StyleParagraphProperties();
-            SpacingBetweenLines spacingBetweenLines12 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            StyleParagraphProperties styleParagraphProperties1 = new StyleParagraphProperties();
 
-            styleParagraphProperties10.Append(spacingBetweenLines12);
+            Tabs tabs1 = new Tabs();
+            TabStop tabStop1 = new TabStop() { Val = TabStopValues.Center, Position = 4677 };
+            TabStop tabStop2 = new TabStop() { Val = TabStopValues.Right, Position = 9355 };
 
-            StyleTableProperties styleTableProperties2 = new StyleTableProperties();
-            TableIndentation tableIndentation2 = new TableIndentation() { Width = 0, Type = TableWidthUnitValues.Dxa };
+            tabs1.Append(tabStop1);
+            tabs1.Append(tabStop2);
+            SpacingBetweenLines spacingBetweenLines2 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
 
-            TableBorders tableBorders1 = new TableBorders();
-            TopBorder topBorder1 = new TopBorder() { Val = BorderValues.Single, Color = "000000", ThemeColor = ThemeColorValues.Text1, Size = (UInt32Value)4U, Space = (UInt32Value)0U };
-            LeftBorder leftBorder1 = new LeftBorder() { Val = BorderValues.Single, Color = "000000", ThemeColor = ThemeColorValues.Text1, Size = (UInt32Value)4U, Space = (UInt32Value)0U };
-            BottomBorder bottomBorder4 = new BottomBorder() { Val = BorderValues.Single, Color = "000000", ThemeColor = ThemeColorValues.Text1, Size = (UInt32Value)4U, Space = (UInt32Value)0U };
-            RightBorder rightBorder1 = new RightBorder() { Val = BorderValues.Single, Color = "000000", ThemeColor = ThemeColorValues.Text1, Size = (UInt32Value)4U, Space = (UInt32Value)0U };
-            InsideHorizontalBorder insideHorizontalBorder1 = new InsideHorizontalBorder() { Val = BorderValues.Single, Color = "000000", ThemeColor = ThemeColorValues.Text1, Size = (UInt32Value)4U, Space = (UInt32Value)0U };
-            InsideVerticalBorder insideVerticalBorder1 = new InsideVerticalBorder() { Val = BorderValues.Single, Color = "000000", ThemeColor = ThemeColorValues.Text1, Size = (UInt32Value)4U, Space = (UInt32Value)0U };
+            styleParagraphProperties1.Append(tabs1);
+            styleParagraphProperties1.Append(spacingBetweenLines2);
 
-            tableBorders1.Append(topBorder1);
-            tableBorders1.Append(leftBorder1);
-            tableBorders1.Append(bottomBorder4);
-            tableBorders1.Append(rightBorder1);
-            tableBorders1.Append(insideHorizontalBorder1);
-            tableBorders1.Append(insideVerticalBorder1);
+            style5.Append(styleName5);
+            style5.Append(basedOn1);
+            style5.Append(linkedStyle1);
+            style5.Append(uIPriority4);
+            style5.Append(unhideWhenUsed4);
+            style5.Append(rsid18);
+            style5.Append(styleParagraphProperties1);
 
-            TableCellMarginDefault tableCellMarginDefault2 = new TableCellMarginDefault();
-            TopMargin topMargin2 = new TopMargin() { Width = "0", Type = TableWidthUnitValues.Dxa };
-            TableCellLeftMargin tableCellLeftMargin2 = new TableCellLeftMargin() { Width = 108, Type = TableWidthValues.Dxa };
-            BottomMargin bottomMargin2 = new BottomMargin() { Width = "0", Type = TableWidthUnitValues.Dxa };
-            TableCellRightMargin tableCellRightMargin2 = new TableCellRightMargin() { Width = 108, Type = TableWidthValues.Dxa };
+            Style style6 = new Style() { Type = StyleValues.Character, StyleId = "a4", CustomStyle = true };
+            StyleName styleName6 = new StyleName() { Val = "Верхний колонтитул Знак" };
+            BasedOn basedOn2 = new BasedOn() { Val = "a0" };
+            LinkedStyle linkedStyle2 = new LinkedStyle() { Val = "a3" };
+            UIPriority uIPriority5 = new UIPriority() { Val = 99 };
+            Rsid rsid19 = new Rsid() { Val = "004A5FEA" };
 
-            tableCellMarginDefault2.Append(topMargin2);
-            tableCellMarginDefault2.Append(tableCellLeftMargin2);
-            tableCellMarginDefault2.Append(bottomMargin2);
-            tableCellMarginDefault2.Append(tableCellRightMargin2);
+            style6.Append(styleName6);
+            style6.Append(basedOn2);
+            style6.Append(linkedStyle2);
+            style6.Append(uIPriority5);
+            style6.Append(rsid19);
 
-            styleTableProperties2.Append(tableIndentation2);
-            styleTableProperties2.Append(tableBorders1);
-            styleTableProperties2.Append(tableCellMarginDefault2);
+            Style style7 = new Style() { Type = StyleValues.Paragraph, StyleId = "a5" };
+            StyleName styleName7 = new StyleName() { Val = "footer" };
+            BasedOn basedOn3 = new BasedOn() { Val = "a" };
+            LinkedStyle linkedStyle3 = new LinkedStyle() { Val = "a6" };
+            UIPriority uIPriority6 = new UIPriority() { Val = 99 };
+            UnhideWhenUsed unhideWhenUsed5 = new UnhideWhenUsed();
+            Rsid rsid20 = new Rsid() { Val = "004A5FEA" };
 
-            style22.Append(styleName22);
-            style22.Append(basedOn18);
-            style22.Append(uIPriority21);
-            style22.Append(rsid19);
-            style22.Append(styleParagraphProperties10);
-            style22.Append(styleTableProperties2);
+            StyleParagraphProperties styleParagraphProperties2 = new StyleParagraphProperties();
+
+            Tabs tabs2 = new Tabs();
+            TabStop tabStop3 = new TabStop() { Val = TabStopValues.Center, Position = 4677 };
+            TabStop tabStop4 = new TabStop() { Val = TabStopValues.Right, Position = 9355 };
+
+            tabs2.Append(tabStop3);
+            tabs2.Append(tabStop4);
+            SpacingBetweenLines spacingBetweenLines3 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            styleParagraphProperties2.Append(tabs2);
+            styleParagraphProperties2.Append(spacingBetweenLines3);
+
+            style7.Append(styleName7);
+            style7.Append(basedOn3);
+            style7.Append(linkedStyle3);
+            style7.Append(uIPriority6);
+            style7.Append(unhideWhenUsed5);
+            style7.Append(rsid20);
+            style7.Append(styleParagraphProperties2);
+
+            Style style8 = new Style() { Type = StyleValues.Character, StyleId = "a6", CustomStyle = true };
+            StyleName styleName8 = new StyleName() { Val = "Нижний колонтитул Знак" };
+            BasedOn basedOn4 = new BasedOn() { Val = "a0" };
+            LinkedStyle linkedStyle4 = new LinkedStyle() { Val = "a5" };
+            UIPriority uIPriority7 = new UIPriority() { Val = 99 };
+            Rsid rsid21 = new Rsid() { Val = "004A5FEA" };
+
+            style8.Append(styleName8);
+            style8.Append(basedOn4);
+            style8.Append(linkedStyle4);
+            style8.Append(uIPriority7);
+            style8.Append(rsid21);
+
+            Style style9 = new Style() { Type = StyleValues.Paragraph, StyleId = "a7" };
+            StyleName styleName9 = new StyleName() { Val = "Balloon Text" };
+            BasedOn basedOn5 = new BasedOn() { Val = "a" };
+            LinkedStyle linkedStyle5 = new LinkedStyle() { Val = "a8" };
+            UIPriority uIPriority8 = new UIPriority() { Val = 99 };
+            SemiHidden semiHidden4 = new SemiHidden();
+            UnhideWhenUsed unhideWhenUsed6 = new UnhideWhenUsed();
+            Rsid rsid22 = new Rsid() { Val = "004A5FEA" };
+
+            StyleParagraphProperties styleParagraphProperties3 = new StyleParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines4 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            styleParagraphProperties3.Append(spacingBetweenLines4);
+
+            StyleRunProperties styleRunProperties1 = new StyleRunProperties();
+            RunFonts runFonts2 = new RunFonts() { Ascii = "Tahoma", HighAnsi = "Tahoma", ComplexScript = "Tahoma" };
+            FontSize fontSize2 = new FontSize() { Val = "16" };
+            FontSizeComplexScript fontSizeComplexScript2 = new FontSizeComplexScript() { Val = "16" };
+
+            styleRunProperties1.Append(runFonts2);
+            styleRunProperties1.Append(fontSize2);
+            styleRunProperties1.Append(fontSizeComplexScript2);
+
+            style9.Append(styleName9);
+            style9.Append(basedOn5);
+            style9.Append(linkedStyle5);
+            style9.Append(uIPriority8);
+            style9.Append(semiHidden4);
+            style9.Append(unhideWhenUsed6);
+            style9.Append(rsid22);
+            style9.Append(styleParagraphProperties3);
+            style9.Append(styleRunProperties1);
+
+            Style style10 = new Style() { Type = StyleValues.Character, StyleId = "a8", CustomStyle = true };
+            StyleName styleName10 = new StyleName() { Val = "Текст выноски Знак" };
+            BasedOn basedOn6 = new BasedOn() { Val = "a0" };
+            LinkedStyle linkedStyle6 = new LinkedStyle() { Val = "a7" };
+            UIPriority uIPriority9 = new UIPriority() { Val = 99 };
+            SemiHidden semiHidden5 = new SemiHidden();
+            Rsid rsid23 = new Rsid() { Val = "004A5FEA" };
+
+            StyleRunProperties styleRunProperties2 = new StyleRunProperties();
+            RunFonts runFonts3 = new RunFonts() { Ascii = "Tahoma", HighAnsi = "Tahoma", ComplexScript = "Tahoma" };
+            FontSize fontSize3 = new FontSize() { Val = "16" };
+            FontSizeComplexScript fontSizeComplexScript3 = new FontSizeComplexScript() { Val = "16" };
+
+            styleRunProperties2.Append(runFonts3);
+            styleRunProperties2.Append(fontSize3);
+            styleRunProperties2.Append(fontSizeComplexScript3);
+
+            style10.Append(styleName10);
+            style10.Append(basedOn6);
+            style10.Append(linkedStyle6);
+            style10.Append(uIPriority9);
+            style10.Append(semiHidden5);
+            style10.Append(rsid23);
+            style10.Append(styleRunProperties2);
 
             styles1.Append(docDefaults1);
             styles1.Append(latentStyles1);
@@ -2256,247 +2334,1339 @@ namespace DBF
             styles1.Append(style8);
             styles1.Append(style9);
             styles1.Append(style10);
-            styles1.Append(style11);
-            styles1.Append(style12);
-            styles1.Append(style13);
-            styles1.Append(style14);
-            styles1.Append(style15);
-            styles1.Append(style16);
-            styles1.Append(style17);
-            styles1.Append(style18);
-            styles1.Append(style19);
-            styles1.Append(style20);
-            styles1.Append(style21);
-            styles1.Append(style22);
 
-            styleDefinitionsPart1.Styles = styles1;
+            stylesWithEffectsPart1.Styles = styles1;
         }
 
-        // Generates content of documentSettingsPart1.
-        private void GenerateDocumentSettingsPart1Content(DocumentSettingsPart documentSettingsPart1)
+        // Generates content of styleDefinitionsPart1.
+        private void GenerateStyleDefinitionsPart1Content(StyleDefinitionsPart styleDefinitionsPart1)
         {
-            Settings settings1 = new Settings();
-            //settings1.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
-            //settings1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
-            //settings1.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
-            //settings1.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
-            //settings1.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
-            //settings1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
-            //settings1.AddNamespaceDeclaration("sl", "http://schemas.openxmlformats.org/schemaLibrary/2006/main");
-            EvenAndOddHeaders evenAndOddHeaders1 = new EvenAndOddHeaders();
-            Zoom zoom1 = new Zoom() { Percent = "100" };
-            DefaultTabStop defaultTabStop1 = new DefaultTabStop() { Val = 720 };
-            CharacterSpacingControl characterSpacingControl1 = new CharacterSpacingControl() { Val = CharacterSpacingValues.DoNotCompress };
-            Compatibility compatibility1 = new Compatibility();
+            Styles styles2 = new Styles() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14" } };
+            styles2.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            styles2.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            styles2.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            styles2.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
 
-            Rsids rsids1 = new Rsids();
-            RsidRoot rsidRoot1 = new RsidRoot() { Val = "00217F62" };
-            Rsid rsid20 = new Rsid() { Val = "001915A3" };
-            Rsid rsid21 = new Rsid() { Val = "00217F62" };
-            Rsid rsid22 = new Rsid() { Val = "00A906D8" };
-            Rsid rsid23 = new Rsid() { Val = "00AB5A74" };
-            Rsid rsid24 = new Rsid() { Val = "00F071AE" };
+            DocDefaults docDefaults2 = new DocDefaults();
 
-            rsids1.Append(rsidRoot1);
-            rsids1.Append(rsid20);
-            rsids1.Append(rsid21);
-            rsids1.Append(rsid22);
-            rsids1.Append(rsid23);
-            rsids1.Append(rsid24);
+            RunPropertiesDefault runPropertiesDefault2 = new RunPropertiesDefault();
 
-            M.MathProperties mathProperties1 = new M.MathProperties();
-            M.MathFont mathFont1 = new M.MathFont() { Val = "Cambria Math" };
-            M.BreakBinary breakBinary1 = new M.BreakBinary() { Val = M.BreakBinaryOperatorValues.Before };
-            M.BreakBinarySubtraction breakBinarySubtraction1 = new M.BreakBinarySubtraction() { Val = M.BreakBinarySubtractionValues.MinusMinus };
-            M.SmallFraction smallFraction1 = new M.SmallFraction() { Val = M.BooleanValues.Off };
-            M.DisplayDefaults displayDefaults1 = new M.DisplayDefaults();
-            M.LeftMargin leftMargin5 = new M.LeftMargin() { Val = (UInt32Value)0U };
-            M.RightMargin rightMargin1 = new M.RightMargin() { Val = (UInt32Value)0U };
-            M.DefaultJustification defaultJustification1 = new M.DefaultJustification() { Val = M.JustificationValues.CenterGroup };
-            M.WrapIndent wrapIndent1 = new M.WrapIndent() { Val = (UInt32Value)1440U };
-            M.IntegralLimitLocation integralLimitLocation1 = new M.IntegralLimitLocation() { Val = M.LimitLocationValues.SubscriptSuperscript };
-            M.NaryLimitLocation naryLimitLocation1 = new M.NaryLimitLocation() { Val = M.LimitLocationValues.UnderOver };
+            RunPropertiesBaseStyle runPropertiesBaseStyle2 = new RunPropertiesBaseStyle();
+            RunFonts runFonts4 = new RunFonts() { AsciiTheme = ThemeFontValues.MinorHighAnsi, HighAnsiTheme = ThemeFontValues.MinorHighAnsi, EastAsiaTheme = ThemeFontValues.MinorHighAnsi, ComplexScriptTheme = ThemeFontValues.MinorBidi };
+            FontSize fontSize4 = new FontSize() { Val = "22" };
+            FontSizeComplexScript fontSizeComplexScript4 = new FontSizeComplexScript() { Val = "22" };
+            Languages languages95 = new Languages() { Val = "ru-RU", EastAsia = "en-US", Bidi = "ar-SA" };
 
-            mathProperties1.Append(mathFont1);
-            mathProperties1.Append(breakBinary1);
-            mathProperties1.Append(breakBinarySubtraction1);
-            mathProperties1.Append(smallFraction1);
-            mathProperties1.Append(displayDefaults1);
-            mathProperties1.Append(leftMargin5);
-            mathProperties1.Append(rightMargin1);
-            mathProperties1.Append(defaultJustification1);
-            mathProperties1.Append(wrapIndent1);
-            mathProperties1.Append(integralLimitLocation1);
-            mathProperties1.Append(naryLimitLocation1);
-            ThemeFontLanguages themeFontLanguages1 = new ThemeFontLanguages() { Val = "ru-RU", Bidi = "ar-SA" };
-            ColorSchemeMapping colorSchemeMapping1 = new ColorSchemeMapping() { Background1 = ColorSchemeIndexValues.Light1, Text1 = ColorSchemeIndexValues.Dark1, Background2 = ColorSchemeIndexValues.Light2, Text2 = ColorSchemeIndexValues.Dark2, Accent1 = ColorSchemeIndexValues.Accent1, Accent2 = ColorSchemeIndexValues.Accent2, Accent3 = ColorSchemeIndexValues.Accent3, Accent4 = ColorSchemeIndexValues.Accent4, Accent5 = ColorSchemeIndexValues.Accent5, Accent6 = ColorSchemeIndexValues.Accent6, Hyperlink = ColorSchemeIndexValues.Hyperlink, FollowedHyperlink = ColorSchemeIndexValues.FollowedHyperlink };
+            runPropertiesBaseStyle2.Append(runFonts4);
+            runPropertiesBaseStyle2.Append(fontSize4);
+            runPropertiesBaseStyle2.Append(fontSizeComplexScript4);
+            runPropertiesBaseStyle2.Append(languages95);
 
-            ShapeDefaults shapeDefaults1 = new ShapeDefaults();
-            Ovml.ShapeDefaults shapeDefaults2 = new Ovml.ShapeDefaults() { Extension = V.ExtensionHandlingBehaviorValues.Edit, MaxShapeId = 2050 };
+            runPropertiesDefault2.Append(runPropertiesBaseStyle2);
 
-            Ovml.ShapeLayout shapeLayout1 = new Ovml.ShapeLayout() { Extension = V.ExtensionHandlingBehaviorValues.Edit };
-            Ovml.ShapeIdMap shapeIdMap1 = new Ovml.ShapeIdMap() { Extension = V.ExtensionHandlingBehaviorValues.Edit, Data = "1" };
+            ParagraphPropertiesDefault paragraphPropertiesDefault2 = new ParagraphPropertiesDefault();
 
-            shapeLayout1.Append(shapeIdMap1);
+            ParagraphPropertiesBaseStyle paragraphPropertiesBaseStyle2 = new ParagraphPropertiesBaseStyle();
+            SpacingBetweenLines spacingBetweenLines5 = new SpacingBetweenLines() { After = "200", Line = "276", LineRule = LineSpacingRuleValues.Auto };
 
-            shapeDefaults1.Append(shapeDefaults2);
-            shapeDefaults1.Append(shapeLayout1);
-            DecimalSymbol decimalSymbol1 = new DecimalSymbol() { Val = "." };
-            ListSeparator listSeparator1 = new ListSeparator() { Val = "," };
+            paragraphPropertiesBaseStyle2.Append(spacingBetweenLines5);
 
-            settings1.Append(evenAndOddHeaders1);
-            settings1.Append(zoom1);
-            settings1.Append(defaultTabStop1);
-            settings1.Append(characterSpacingControl1);
-            settings1.Append(compatibility1);
-            settings1.Append(rsids1);
-            settings1.Append(mathProperties1);
-            settings1.Append(themeFontLanguages1);
-            settings1.Append(colorSchemeMapping1);
-            settings1.Append(shapeDefaults1);
-            settings1.Append(decimalSymbol1);
-            settings1.Append(listSeparator1);
+            paragraphPropertiesDefault2.Append(paragraphPropertiesBaseStyle2);
 
-            documentSettingsPart1.Settings = settings1;
+            docDefaults2.Append(runPropertiesDefault2);
+            docDefaults2.Append(paragraphPropertiesDefault2);
+
+            LatentStyles latentStyles2 = new LatentStyles() { DefaultLockedState = false, DefaultUiPriority = 99, DefaultSemiHidden = true, DefaultUnhideWhenUsed = true, DefaultPrimaryStyle = false, Count = 267 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo138 = new LatentStyleExceptionInfo() { Name = "Normal", UiPriority = 0, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo139 = new LatentStyleExceptionInfo() { Name = "heading 1", UiPriority = 9, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo140 = new LatentStyleExceptionInfo() { Name = "heading 2", UiPriority = 9, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo141 = new LatentStyleExceptionInfo() { Name = "heading 3", UiPriority = 9, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo142 = new LatentStyleExceptionInfo() { Name = "heading 4", UiPriority = 9, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo143 = new LatentStyleExceptionInfo() { Name = "heading 5", UiPriority = 9, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo144 = new LatentStyleExceptionInfo() { Name = "heading 6", UiPriority = 9, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo145 = new LatentStyleExceptionInfo() { Name = "heading 7", UiPriority = 9, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo146 = new LatentStyleExceptionInfo() { Name = "heading 8", UiPriority = 9, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo147 = new LatentStyleExceptionInfo() { Name = "heading 9", UiPriority = 9, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo148 = new LatentStyleExceptionInfo() { Name = "toc 1", UiPriority = 39 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo149 = new LatentStyleExceptionInfo() { Name = "toc 2", UiPriority = 39 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo150 = new LatentStyleExceptionInfo() { Name = "toc 3", UiPriority = 39 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo151 = new LatentStyleExceptionInfo() { Name = "toc 4", UiPriority = 39 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo152 = new LatentStyleExceptionInfo() { Name = "toc 5", UiPriority = 39 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo153 = new LatentStyleExceptionInfo() { Name = "toc 6", UiPriority = 39 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo154 = new LatentStyleExceptionInfo() { Name = "toc 7", UiPriority = 39 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo155 = new LatentStyleExceptionInfo() { Name = "toc 8", UiPriority = 39 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo156 = new LatentStyleExceptionInfo() { Name = "toc 9", UiPriority = 39 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo157 = new LatentStyleExceptionInfo() { Name = "caption", UiPriority = 35, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo158 = new LatentStyleExceptionInfo() { Name = "Title", UiPriority = 10, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo159 = new LatentStyleExceptionInfo() { Name = "Default Paragraph Font", UiPriority = 1 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo160 = new LatentStyleExceptionInfo() { Name = "Subtitle", UiPriority = 11, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo161 = new LatentStyleExceptionInfo() { Name = "Strong", UiPriority = 22, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo162 = new LatentStyleExceptionInfo() { Name = "Emphasis", UiPriority = 20, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo163 = new LatentStyleExceptionInfo() { Name = "Table Grid", UiPriority = 59, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo164 = new LatentStyleExceptionInfo() { Name = "Placeholder Text", UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo165 = new LatentStyleExceptionInfo() { Name = "No Spacing", UiPriority = 1, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo166 = new LatentStyleExceptionInfo() { Name = "Light Shading", UiPriority = 60, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo167 = new LatentStyleExceptionInfo() { Name = "Light List", UiPriority = 61, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo168 = new LatentStyleExceptionInfo() { Name = "Light Grid", UiPriority = 62, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo169 = new LatentStyleExceptionInfo() { Name = "Medium Shading 1", UiPriority = 63, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo170 = new LatentStyleExceptionInfo() { Name = "Medium Shading 2", UiPriority = 64, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo171 = new LatentStyleExceptionInfo() { Name = "Medium List 1", UiPriority = 65, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo172 = new LatentStyleExceptionInfo() { Name = "Medium List 2", UiPriority = 66, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo173 = new LatentStyleExceptionInfo() { Name = "Medium Grid 1", UiPriority = 67, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo174 = new LatentStyleExceptionInfo() { Name = "Medium Grid 2", UiPriority = 68, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo175 = new LatentStyleExceptionInfo() { Name = "Medium Grid 3", UiPriority = 69, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo176 = new LatentStyleExceptionInfo() { Name = "Dark List", UiPriority = 70, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo177 = new LatentStyleExceptionInfo() { Name = "Colorful Shading", UiPriority = 71, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo178 = new LatentStyleExceptionInfo() { Name = "Colorful List", UiPriority = 72, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo179 = new LatentStyleExceptionInfo() { Name = "Colorful Grid", UiPriority = 73, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo180 = new LatentStyleExceptionInfo() { Name = "Light Shading Accent 1", UiPriority = 60, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo181 = new LatentStyleExceptionInfo() { Name = "Light List Accent 1", UiPriority = 61, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo182 = new LatentStyleExceptionInfo() { Name = "Light Grid Accent 1", UiPriority = 62, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo183 = new LatentStyleExceptionInfo() { Name = "Medium Shading 1 Accent 1", UiPriority = 63, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo184 = new LatentStyleExceptionInfo() { Name = "Medium Shading 2 Accent 1", UiPriority = 64, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo185 = new LatentStyleExceptionInfo() { Name = "Medium List 1 Accent 1", UiPriority = 65, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo186 = new LatentStyleExceptionInfo() { Name = "Revision", UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo187 = new LatentStyleExceptionInfo() { Name = "List Paragraph", UiPriority = 34, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo188 = new LatentStyleExceptionInfo() { Name = "Quote", UiPriority = 29, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo189 = new LatentStyleExceptionInfo() { Name = "Intense Quote", UiPriority = 30, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo190 = new LatentStyleExceptionInfo() { Name = "Medium List 2 Accent 1", UiPriority = 66, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo191 = new LatentStyleExceptionInfo() { Name = "Medium Grid 1 Accent 1", UiPriority = 67, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo192 = new LatentStyleExceptionInfo() { Name = "Medium Grid 2 Accent 1", UiPriority = 68, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo193 = new LatentStyleExceptionInfo() { Name = "Medium Grid 3 Accent 1", UiPriority = 69, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo194 = new LatentStyleExceptionInfo() { Name = "Dark List Accent 1", UiPriority = 70, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo195 = new LatentStyleExceptionInfo() { Name = "Colorful Shading Accent 1", UiPriority = 71, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo196 = new LatentStyleExceptionInfo() { Name = "Colorful List Accent 1", UiPriority = 72, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo197 = new LatentStyleExceptionInfo() { Name = "Colorful Grid Accent 1", UiPriority = 73, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo198 = new LatentStyleExceptionInfo() { Name = "Light Shading Accent 2", UiPriority = 60, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo199 = new LatentStyleExceptionInfo() { Name = "Light List Accent 2", UiPriority = 61, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo200 = new LatentStyleExceptionInfo() { Name = "Light Grid Accent 2", UiPriority = 62, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo201 = new LatentStyleExceptionInfo() { Name = "Medium Shading 1 Accent 2", UiPriority = 63, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo202 = new LatentStyleExceptionInfo() { Name = "Medium Shading 2 Accent 2", UiPriority = 64, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo203 = new LatentStyleExceptionInfo() { Name = "Medium List 1 Accent 2", UiPriority = 65, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo204 = new LatentStyleExceptionInfo() { Name = "Medium List 2 Accent 2", UiPriority = 66, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo205 = new LatentStyleExceptionInfo() { Name = "Medium Grid 1 Accent 2", UiPriority = 67, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo206 = new LatentStyleExceptionInfo() { Name = "Medium Grid 2 Accent 2", UiPriority = 68, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo207 = new LatentStyleExceptionInfo() { Name = "Medium Grid 3 Accent 2", UiPriority = 69, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo208 = new LatentStyleExceptionInfo() { Name = "Dark List Accent 2", UiPriority = 70, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo209 = new LatentStyleExceptionInfo() { Name = "Colorful Shading Accent 2", UiPriority = 71, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo210 = new LatentStyleExceptionInfo() { Name = "Colorful List Accent 2", UiPriority = 72, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo211 = new LatentStyleExceptionInfo() { Name = "Colorful Grid Accent 2", UiPriority = 73, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo212 = new LatentStyleExceptionInfo() { Name = "Light Shading Accent 3", UiPriority = 60, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo213 = new LatentStyleExceptionInfo() { Name = "Light List Accent 3", UiPriority = 61, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo214 = new LatentStyleExceptionInfo() { Name = "Light Grid Accent 3", UiPriority = 62, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo215 = new LatentStyleExceptionInfo() { Name = "Medium Shading 1 Accent 3", UiPriority = 63, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo216 = new LatentStyleExceptionInfo() { Name = "Medium Shading 2 Accent 3", UiPriority = 64, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo217 = new LatentStyleExceptionInfo() { Name = "Medium List 1 Accent 3", UiPriority = 65, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo218 = new LatentStyleExceptionInfo() { Name = "Medium List 2 Accent 3", UiPriority = 66, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo219 = new LatentStyleExceptionInfo() { Name = "Medium Grid 1 Accent 3", UiPriority = 67, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo220 = new LatentStyleExceptionInfo() { Name = "Medium Grid 2 Accent 3", UiPriority = 68, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo221 = new LatentStyleExceptionInfo() { Name = "Medium Grid 3 Accent 3", UiPriority = 69, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo222 = new LatentStyleExceptionInfo() { Name = "Dark List Accent 3", UiPriority = 70, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo223 = new LatentStyleExceptionInfo() { Name = "Colorful Shading Accent 3", UiPriority = 71, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo224 = new LatentStyleExceptionInfo() { Name = "Colorful List Accent 3", UiPriority = 72, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo225 = new LatentStyleExceptionInfo() { Name = "Colorful Grid Accent 3", UiPriority = 73, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo226 = new LatentStyleExceptionInfo() { Name = "Light Shading Accent 4", UiPriority = 60, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo227 = new LatentStyleExceptionInfo() { Name = "Light List Accent 4", UiPriority = 61, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo228 = new LatentStyleExceptionInfo() { Name = "Light Grid Accent 4", UiPriority = 62, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo229 = new LatentStyleExceptionInfo() { Name = "Medium Shading 1 Accent 4", UiPriority = 63, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo230 = new LatentStyleExceptionInfo() { Name = "Medium Shading 2 Accent 4", UiPriority = 64, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo231 = new LatentStyleExceptionInfo() { Name = "Medium List 1 Accent 4", UiPriority = 65, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo232 = new LatentStyleExceptionInfo() { Name = "Medium List 2 Accent 4", UiPriority = 66, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo233 = new LatentStyleExceptionInfo() { Name = "Medium Grid 1 Accent 4", UiPriority = 67, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo234 = new LatentStyleExceptionInfo() { Name = "Medium Grid 2 Accent 4", UiPriority = 68, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo235 = new LatentStyleExceptionInfo() { Name = "Medium Grid 3 Accent 4", UiPriority = 69, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo236 = new LatentStyleExceptionInfo() { Name = "Dark List Accent 4", UiPriority = 70, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo237 = new LatentStyleExceptionInfo() { Name = "Colorful Shading Accent 4", UiPriority = 71, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo238 = new LatentStyleExceptionInfo() { Name = "Colorful List Accent 4", UiPriority = 72, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo239 = new LatentStyleExceptionInfo() { Name = "Colorful Grid Accent 4", UiPriority = 73, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo240 = new LatentStyleExceptionInfo() { Name = "Light Shading Accent 5", UiPriority = 60, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo241 = new LatentStyleExceptionInfo() { Name = "Light List Accent 5", UiPriority = 61, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo242 = new LatentStyleExceptionInfo() { Name = "Light Grid Accent 5", UiPriority = 62, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo243 = new LatentStyleExceptionInfo() { Name = "Medium Shading 1 Accent 5", UiPriority = 63, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo244 = new LatentStyleExceptionInfo() { Name = "Medium Shading 2 Accent 5", UiPriority = 64, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo245 = new LatentStyleExceptionInfo() { Name = "Medium List 1 Accent 5", UiPriority = 65, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo246 = new LatentStyleExceptionInfo() { Name = "Medium List 2 Accent 5", UiPriority = 66, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo247 = new LatentStyleExceptionInfo() { Name = "Medium Grid 1 Accent 5", UiPriority = 67, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo248 = new LatentStyleExceptionInfo() { Name = "Medium Grid 2 Accent 5", UiPriority = 68, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo249 = new LatentStyleExceptionInfo() { Name = "Medium Grid 3 Accent 5", UiPriority = 69, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo250 = new LatentStyleExceptionInfo() { Name = "Dark List Accent 5", UiPriority = 70, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo251 = new LatentStyleExceptionInfo() { Name = "Colorful Shading Accent 5", UiPriority = 71, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo252 = new LatentStyleExceptionInfo() { Name = "Colorful List Accent 5", UiPriority = 72, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo253 = new LatentStyleExceptionInfo() { Name = "Colorful Grid Accent 5", UiPriority = 73, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo254 = new LatentStyleExceptionInfo() { Name = "Light Shading Accent 6", UiPriority = 60, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo255 = new LatentStyleExceptionInfo() { Name = "Light List Accent 6", UiPriority = 61, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo256 = new LatentStyleExceptionInfo() { Name = "Light Grid Accent 6", UiPriority = 62, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo257 = new LatentStyleExceptionInfo() { Name = "Medium Shading 1 Accent 6", UiPriority = 63, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo258 = new LatentStyleExceptionInfo() { Name = "Medium Shading 2 Accent 6", UiPriority = 64, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo259 = new LatentStyleExceptionInfo() { Name = "Medium List 1 Accent 6", UiPriority = 65, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo260 = new LatentStyleExceptionInfo() { Name = "Medium List 2 Accent 6", UiPriority = 66, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo261 = new LatentStyleExceptionInfo() { Name = "Medium Grid 1 Accent 6", UiPriority = 67, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo262 = new LatentStyleExceptionInfo() { Name = "Medium Grid 2 Accent 6", UiPriority = 68, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo263 = new LatentStyleExceptionInfo() { Name = "Medium Grid 3 Accent 6", UiPriority = 69, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo264 = new LatentStyleExceptionInfo() { Name = "Dark List Accent 6", UiPriority = 70, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo265 = new LatentStyleExceptionInfo() { Name = "Colorful Shading Accent 6", UiPriority = 71, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo266 = new LatentStyleExceptionInfo() { Name = "Colorful List Accent 6", UiPriority = 72, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo267 = new LatentStyleExceptionInfo() { Name = "Colorful Grid Accent 6", UiPriority = 73, SemiHidden = false, UnhideWhenUsed = false };
+            LatentStyleExceptionInfo latentStyleExceptionInfo268 = new LatentStyleExceptionInfo() { Name = "Subtle Emphasis", UiPriority = 19, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo269 = new LatentStyleExceptionInfo() { Name = "Intense Emphasis", UiPriority = 21, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo270 = new LatentStyleExceptionInfo() { Name = "Subtle Reference", UiPriority = 31, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo271 = new LatentStyleExceptionInfo() { Name = "Intense Reference", UiPriority = 32, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo272 = new LatentStyleExceptionInfo() { Name = "Book Title", UiPriority = 33, SemiHidden = false, UnhideWhenUsed = false, PrimaryStyle = true };
+            LatentStyleExceptionInfo latentStyleExceptionInfo273 = new LatentStyleExceptionInfo() { Name = "Bibliography", UiPriority = 37 };
+            LatentStyleExceptionInfo latentStyleExceptionInfo274 = new LatentStyleExceptionInfo() { Name = "TOC Heading", UiPriority = 39, PrimaryStyle = true };
+
+            latentStyles2.Append(latentStyleExceptionInfo138);
+            latentStyles2.Append(latentStyleExceptionInfo139);
+            latentStyles2.Append(latentStyleExceptionInfo140);
+            latentStyles2.Append(latentStyleExceptionInfo141);
+            latentStyles2.Append(latentStyleExceptionInfo142);
+            latentStyles2.Append(latentStyleExceptionInfo143);
+            latentStyles2.Append(latentStyleExceptionInfo144);
+            latentStyles2.Append(latentStyleExceptionInfo145);
+            latentStyles2.Append(latentStyleExceptionInfo146);
+            latentStyles2.Append(latentStyleExceptionInfo147);
+            latentStyles2.Append(latentStyleExceptionInfo148);
+            latentStyles2.Append(latentStyleExceptionInfo149);
+            latentStyles2.Append(latentStyleExceptionInfo150);
+            latentStyles2.Append(latentStyleExceptionInfo151);
+            latentStyles2.Append(latentStyleExceptionInfo152);
+            latentStyles2.Append(latentStyleExceptionInfo153);
+            latentStyles2.Append(latentStyleExceptionInfo154);
+            latentStyles2.Append(latentStyleExceptionInfo155);
+            latentStyles2.Append(latentStyleExceptionInfo156);
+            latentStyles2.Append(latentStyleExceptionInfo157);
+            latentStyles2.Append(latentStyleExceptionInfo158);
+            latentStyles2.Append(latentStyleExceptionInfo159);
+            latentStyles2.Append(latentStyleExceptionInfo160);
+            latentStyles2.Append(latentStyleExceptionInfo161);
+            latentStyles2.Append(latentStyleExceptionInfo162);
+            latentStyles2.Append(latentStyleExceptionInfo163);
+            latentStyles2.Append(latentStyleExceptionInfo164);
+            latentStyles2.Append(latentStyleExceptionInfo165);
+            latentStyles2.Append(latentStyleExceptionInfo166);
+            latentStyles2.Append(latentStyleExceptionInfo167);
+            latentStyles2.Append(latentStyleExceptionInfo168);
+            latentStyles2.Append(latentStyleExceptionInfo169);
+            latentStyles2.Append(latentStyleExceptionInfo170);
+            latentStyles2.Append(latentStyleExceptionInfo171);
+            latentStyles2.Append(latentStyleExceptionInfo172);
+            latentStyles2.Append(latentStyleExceptionInfo173);
+            latentStyles2.Append(latentStyleExceptionInfo174);
+            latentStyles2.Append(latentStyleExceptionInfo175);
+            latentStyles2.Append(latentStyleExceptionInfo176);
+            latentStyles2.Append(latentStyleExceptionInfo177);
+            latentStyles2.Append(latentStyleExceptionInfo178);
+            latentStyles2.Append(latentStyleExceptionInfo179);
+            latentStyles2.Append(latentStyleExceptionInfo180);
+            latentStyles2.Append(latentStyleExceptionInfo181);
+            latentStyles2.Append(latentStyleExceptionInfo182);
+            latentStyles2.Append(latentStyleExceptionInfo183);
+            latentStyles2.Append(latentStyleExceptionInfo184);
+            latentStyles2.Append(latentStyleExceptionInfo185);
+            latentStyles2.Append(latentStyleExceptionInfo186);
+            latentStyles2.Append(latentStyleExceptionInfo187);
+            latentStyles2.Append(latentStyleExceptionInfo188);
+            latentStyles2.Append(latentStyleExceptionInfo189);
+            latentStyles2.Append(latentStyleExceptionInfo190);
+            latentStyles2.Append(latentStyleExceptionInfo191);
+            latentStyles2.Append(latentStyleExceptionInfo192);
+            latentStyles2.Append(latentStyleExceptionInfo193);
+            latentStyles2.Append(latentStyleExceptionInfo194);
+            latentStyles2.Append(latentStyleExceptionInfo195);
+            latentStyles2.Append(latentStyleExceptionInfo196);
+            latentStyles2.Append(latentStyleExceptionInfo197);
+            latentStyles2.Append(latentStyleExceptionInfo198);
+            latentStyles2.Append(latentStyleExceptionInfo199);
+            latentStyles2.Append(latentStyleExceptionInfo200);
+            latentStyles2.Append(latentStyleExceptionInfo201);
+            latentStyles2.Append(latentStyleExceptionInfo202);
+            latentStyles2.Append(latentStyleExceptionInfo203);
+            latentStyles2.Append(latentStyleExceptionInfo204);
+            latentStyles2.Append(latentStyleExceptionInfo205);
+            latentStyles2.Append(latentStyleExceptionInfo206);
+            latentStyles2.Append(latentStyleExceptionInfo207);
+            latentStyles2.Append(latentStyleExceptionInfo208);
+            latentStyles2.Append(latentStyleExceptionInfo209);
+            latentStyles2.Append(latentStyleExceptionInfo210);
+            latentStyles2.Append(latentStyleExceptionInfo211);
+            latentStyles2.Append(latentStyleExceptionInfo212);
+            latentStyles2.Append(latentStyleExceptionInfo213);
+            latentStyles2.Append(latentStyleExceptionInfo214);
+            latentStyles2.Append(latentStyleExceptionInfo215);
+            latentStyles2.Append(latentStyleExceptionInfo216);
+            latentStyles2.Append(latentStyleExceptionInfo217);
+            latentStyles2.Append(latentStyleExceptionInfo218);
+            latentStyles2.Append(latentStyleExceptionInfo219);
+            latentStyles2.Append(latentStyleExceptionInfo220);
+            latentStyles2.Append(latentStyleExceptionInfo221);
+            latentStyles2.Append(latentStyleExceptionInfo222);
+            latentStyles2.Append(latentStyleExceptionInfo223);
+            latentStyles2.Append(latentStyleExceptionInfo224);
+            latentStyles2.Append(latentStyleExceptionInfo225);
+            latentStyles2.Append(latentStyleExceptionInfo226);
+            latentStyles2.Append(latentStyleExceptionInfo227);
+            latentStyles2.Append(latentStyleExceptionInfo228);
+            latentStyles2.Append(latentStyleExceptionInfo229);
+            latentStyles2.Append(latentStyleExceptionInfo230);
+            latentStyles2.Append(latentStyleExceptionInfo231);
+            latentStyles2.Append(latentStyleExceptionInfo232);
+            latentStyles2.Append(latentStyleExceptionInfo233);
+            latentStyles2.Append(latentStyleExceptionInfo234);
+            latentStyles2.Append(latentStyleExceptionInfo235);
+            latentStyles2.Append(latentStyleExceptionInfo236);
+            latentStyles2.Append(latentStyleExceptionInfo237);
+            latentStyles2.Append(latentStyleExceptionInfo238);
+            latentStyles2.Append(latentStyleExceptionInfo239);
+            latentStyles2.Append(latentStyleExceptionInfo240);
+            latentStyles2.Append(latentStyleExceptionInfo241);
+            latentStyles2.Append(latentStyleExceptionInfo242);
+            latentStyles2.Append(latentStyleExceptionInfo243);
+            latentStyles2.Append(latentStyleExceptionInfo244);
+            latentStyles2.Append(latentStyleExceptionInfo245);
+            latentStyles2.Append(latentStyleExceptionInfo246);
+            latentStyles2.Append(latentStyleExceptionInfo247);
+            latentStyles2.Append(latentStyleExceptionInfo248);
+            latentStyles2.Append(latentStyleExceptionInfo249);
+            latentStyles2.Append(latentStyleExceptionInfo250);
+            latentStyles2.Append(latentStyleExceptionInfo251);
+            latentStyles2.Append(latentStyleExceptionInfo252);
+            latentStyles2.Append(latentStyleExceptionInfo253);
+            latentStyles2.Append(latentStyleExceptionInfo254);
+            latentStyles2.Append(latentStyleExceptionInfo255);
+            latentStyles2.Append(latentStyleExceptionInfo256);
+            latentStyles2.Append(latentStyleExceptionInfo257);
+            latentStyles2.Append(latentStyleExceptionInfo258);
+            latentStyles2.Append(latentStyleExceptionInfo259);
+            latentStyles2.Append(latentStyleExceptionInfo260);
+            latentStyles2.Append(latentStyleExceptionInfo261);
+            latentStyles2.Append(latentStyleExceptionInfo262);
+            latentStyles2.Append(latentStyleExceptionInfo263);
+            latentStyles2.Append(latentStyleExceptionInfo264);
+            latentStyles2.Append(latentStyleExceptionInfo265);
+            latentStyles2.Append(latentStyleExceptionInfo266);
+            latentStyles2.Append(latentStyleExceptionInfo267);
+            latentStyles2.Append(latentStyleExceptionInfo268);
+            latentStyles2.Append(latentStyleExceptionInfo269);
+            latentStyles2.Append(latentStyleExceptionInfo270);
+            latentStyles2.Append(latentStyleExceptionInfo271);
+            latentStyles2.Append(latentStyleExceptionInfo272);
+            latentStyles2.Append(latentStyleExceptionInfo273);
+            latentStyles2.Append(latentStyleExceptionInfo274);
+
+            Style style11 = new Style() { Type = StyleValues.Paragraph, StyleId = "a", Default = true };
+            StyleName styleName11 = new StyleName() { Val = "Normal" };
+            PrimaryStyle primaryStyle2 = new PrimaryStyle();
+
+            style11.Append(styleName11);
+            style11.Append(primaryStyle2);
+
+            Style style12 = new Style() { Type = StyleValues.Character, StyleId = "a0", Default = true };
+            StyleName styleName12 = new StyleName() { Val = "Default Paragraph Font" };
+            UIPriority uIPriority10 = new UIPriority() { Val = 1 };
+            SemiHidden semiHidden6 = new SemiHidden();
+            UnhideWhenUsed unhideWhenUsed7 = new UnhideWhenUsed();
+
+            style12.Append(styleName12);
+            style12.Append(uIPriority10);
+            style12.Append(semiHidden6);
+            style12.Append(unhideWhenUsed7);
+
+            Style style13 = new Style() { Type = StyleValues.Table, StyleId = "a1", Default = true };
+            StyleName styleName13 = new StyleName() { Val = "Normal Table" };
+            UIPriority uIPriority11 = new UIPriority() { Val = 99 };
+            SemiHidden semiHidden7 = new SemiHidden();
+            UnhideWhenUsed unhideWhenUsed8 = new UnhideWhenUsed();
+
+            StyleTableProperties styleTableProperties2 = new StyleTableProperties();
+            TableIndentation tableIndentation2 = new TableIndentation() { Width = 0, Type = TableWidthUnitValues.Dxa };
+
+            TableCellMarginDefault tableCellMarginDefault2 = new TableCellMarginDefault();
+            TopMargin topMargin2 = new TopMargin() { Width = "0", Type = TableWidthUnitValues.Dxa };
+            TableCellLeftMargin tableCellLeftMargin2 = new TableCellLeftMargin() { Width = 108, Type = TableWidthValues.Dxa };
+            BottomMargin bottomMargin2 = new BottomMargin() { Width = "0", Type = TableWidthUnitValues.Dxa };
+            TableCellRightMargin tableCellRightMargin2 = new TableCellRightMargin() { Width = 108, Type = TableWidthValues.Dxa };
+
+            tableCellMarginDefault2.Append(topMargin2);
+            tableCellMarginDefault2.Append(tableCellLeftMargin2);
+            tableCellMarginDefault2.Append(bottomMargin2);
+            tableCellMarginDefault2.Append(tableCellRightMargin2);
+
+            styleTableProperties2.Append(tableIndentation2);
+            styleTableProperties2.Append(tableCellMarginDefault2);
+
+            style13.Append(styleName13);
+            style13.Append(uIPriority11);
+            style13.Append(semiHidden7);
+            style13.Append(unhideWhenUsed8);
+            style13.Append(styleTableProperties2);
+
+            Style style14 = new Style() { Type = StyleValues.Numbering, StyleId = "a2", Default = true };
+            StyleName styleName14 = new StyleName() { Val = "No List" };
+            UIPriority uIPriority12 = new UIPriority() { Val = 99 };
+            SemiHidden semiHidden8 = new SemiHidden();
+            UnhideWhenUsed unhideWhenUsed9 = new UnhideWhenUsed();
+
+            style14.Append(styleName14);
+            style14.Append(uIPriority12);
+            style14.Append(semiHidden8);
+            style14.Append(unhideWhenUsed9);
+
+            Style style15 = new Style() { Type = StyleValues.Paragraph, StyleId = "a3" };
+            StyleName styleName15 = new StyleName() { Val = "header" };
+            BasedOn basedOn7 = new BasedOn() { Val = "a" };
+            LinkedStyle linkedStyle7 = new LinkedStyle() { Val = "a4" };
+            UIPriority uIPriority13 = new UIPriority() { Val = 99 };
+            UnhideWhenUsed unhideWhenUsed10 = new UnhideWhenUsed();
+            Rsid rsid24 = new Rsid() { Val = "004A5FEA" };
+
+            StyleParagraphProperties styleParagraphProperties4 = new StyleParagraphProperties();
+
+            Tabs tabs3 = new Tabs();
+            TabStop tabStop5 = new TabStop() { Val = TabStopValues.Center, Position = 4677 };
+            TabStop tabStop6 = new TabStop() { Val = TabStopValues.Right, Position = 9355 };
+
+            tabs3.Append(tabStop5);
+            tabs3.Append(tabStop6);
+            SpacingBetweenLines spacingBetweenLines6 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            styleParagraphProperties4.Append(tabs3);
+            styleParagraphProperties4.Append(spacingBetweenLines6);
+
+            style15.Append(styleName15);
+            style15.Append(basedOn7);
+            style15.Append(linkedStyle7);
+            style15.Append(uIPriority13);
+            style15.Append(unhideWhenUsed10);
+            style15.Append(rsid24);
+            style15.Append(styleParagraphProperties4);
+
+            Style style16 = new Style() { Type = StyleValues.Character, StyleId = "a4", CustomStyle = true };
+            StyleName styleName16 = new StyleName() { Val = "Верхний колонтитул Знак" };
+            BasedOn basedOn8 = new BasedOn() { Val = "a0" };
+            LinkedStyle linkedStyle8 = new LinkedStyle() { Val = "a3" };
+            UIPriority uIPriority14 = new UIPriority() { Val = 99 };
+            Rsid rsid25 = new Rsid() { Val = "004A5FEA" };
+
+            style16.Append(styleName16);
+            style16.Append(basedOn8);
+            style16.Append(linkedStyle8);
+            style16.Append(uIPriority14);
+            style16.Append(rsid25);
+
+            Style style17 = new Style() { Type = StyleValues.Paragraph, StyleId = "a5" };
+            StyleName styleName17 = new StyleName() { Val = "footer" };
+            BasedOn basedOn9 = new BasedOn() { Val = "a" };
+            LinkedStyle linkedStyle9 = new LinkedStyle() { Val = "a6" };
+            UIPriority uIPriority15 = new UIPriority() { Val = 99 };
+            UnhideWhenUsed unhideWhenUsed11 = new UnhideWhenUsed();
+            Rsid rsid26 = new Rsid() { Val = "004A5FEA" };
+
+            StyleParagraphProperties styleParagraphProperties5 = new StyleParagraphProperties();
+
+            Tabs tabs4 = new Tabs();
+            TabStop tabStop7 = new TabStop() { Val = TabStopValues.Center, Position = 4677 };
+            TabStop tabStop8 = new TabStop() { Val = TabStopValues.Right, Position = 9355 };
+
+            tabs4.Append(tabStop7);
+            tabs4.Append(tabStop8);
+            SpacingBetweenLines spacingBetweenLines7 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            styleParagraphProperties5.Append(tabs4);
+            styleParagraphProperties5.Append(spacingBetweenLines7);
+
+            style17.Append(styleName17);
+            style17.Append(basedOn9);
+            style17.Append(linkedStyle9);
+            style17.Append(uIPriority15);
+            style17.Append(unhideWhenUsed11);
+            style17.Append(rsid26);
+            style17.Append(styleParagraphProperties5);
+
+            Style style18 = new Style() { Type = StyleValues.Character, StyleId = "a6", CustomStyle = true };
+            StyleName styleName18 = new StyleName() { Val = "Нижний колонтитул Знак" };
+            BasedOn basedOn10 = new BasedOn() { Val = "a0" };
+            LinkedStyle linkedStyle10 = new LinkedStyle() { Val = "a5" };
+            UIPriority uIPriority16 = new UIPriority() { Val = 99 };
+            Rsid rsid27 = new Rsid() { Val = "004A5FEA" };
+
+            style18.Append(styleName18);
+            style18.Append(basedOn10);
+            style18.Append(linkedStyle10);
+            style18.Append(uIPriority16);
+            style18.Append(rsid27);
+
+            Style style19 = new Style() { Type = StyleValues.Paragraph, StyleId = "a7" };
+            StyleName styleName19 = new StyleName() { Val = "Balloon Text" };
+            BasedOn basedOn11 = new BasedOn() { Val = "a" };
+            LinkedStyle linkedStyle11 = new LinkedStyle() { Val = "a8" };
+            UIPriority uIPriority17 = new UIPriority() { Val = 99 };
+            SemiHidden semiHidden9 = new SemiHidden();
+            UnhideWhenUsed unhideWhenUsed12 = new UnhideWhenUsed();
+            Rsid rsid28 = new Rsid() { Val = "004A5FEA" };
+
+            StyleParagraphProperties styleParagraphProperties6 = new StyleParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines8 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            styleParagraphProperties6.Append(spacingBetweenLines8);
+
+            StyleRunProperties styleRunProperties3 = new StyleRunProperties();
+            RunFonts runFonts5 = new RunFonts() { Ascii = "Tahoma", HighAnsi = "Tahoma", ComplexScript = "Tahoma" };
+            FontSize fontSize5 = new FontSize() { Val = "16" };
+            FontSizeComplexScript fontSizeComplexScript5 = new FontSizeComplexScript() { Val = "16" };
+
+            styleRunProperties3.Append(runFonts5);
+            styleRunProperties3.Append(fontSize5);
+            styleRunProperties3.Append(fontSizeComplexScript5);
+
+            style19.Append(styleName19);
+            style19.Append(basedOn11);
+            style19.Append(linkedStyle11);
+            style19.Append(uIPriority17);
+            style19.Append(semiHidden9);
+            style19.Append(unhideWhenUsed12);
+            style19.Append(rsid28);
+            style19.Append(styleParagraphProperties6);
+            style19.Append(styleRunProperties3);
+
+            Style style20 = new Style() { Type = StyleValues.Character, StyleId = "a8", CustomStyle = true };
+            StyleName styleName20 = new StyleName() { Val = "Текст выноски Знак" };
+            BasedOn basedOn12 = new BasedOn() { Val = "a0" };
+            LinkedStyle linkedStyle12 = new LinkedStyle() { Val = "a7" };
+            UIPriority uIPriority18 = new UIPriority() { Val = 99 };
+            SemiHidden semiHidden10 = new SemiHidden();
+            Rsid rsid29 = new Rsid() { Val = "004A5FEA" };
+
+            StyleRunProperties styleRunProperties4 = new StyleRunProperties();
+            RunFonts runFonts6 = new RunFonts() { Ascii = "Tahoma", HighAnsi = "Tahoma", ComplexScript = "Tahoma" };
+            FontSize fontSize6 = new FontSize() { Val = "16" };
+            FontSizeComplexScript fontSizeComplexScript6 = new FontSizeComplexScript() { Val = "16" };
+
+            styleRunProperties4.Append(runFonts6);
+            styleRunProperties4.Append(fontSize6);
+            styleRunProperties4.Append(fontSizeComplexScript6);
+
+            style20.Append(styleName20);
+            style20.Append(basedOn12);
+            style20.Append(linkedStyle12);
+            style20.Append(uIPriority18);
+            style20.Append(semiHidden10);
+            style20.Append(rsid29);
+            style20.Append(styleRunProperties4);
+
+            styles2.Append(docDefaults2);
+            styles2.Append(latentStyles2);
+            styles2.Append(style11);
+            styles2.Append(style12);
+            styles2.Append(style13);
+            styles2.Append(style14);
+            styles2.Append(style15);
+            styles2.Append(style16);
+            styles2.Append(style17);
+            styles2.Append(style18);
+            styles2.Append(style19);
+            styles2.Append(style20);
+
+            styleDefinitionsPart1.Styles = styles2;
         }
 
-        // Generates content of footerPart1.
-        private void GenerateFooterPart1Content(FooterPart footerPart1)
+        // Generates content of endnotesPart1.
+        private void GenerateEndnotesPart1Content(EndnotesPart endnotesPart1)
         {
-            Footer footer1 = new Footer();
-            //footer1.AddNamespaceDeclaration("ve", "http://schemas.openxmlformats.org/markup-compatibility/2006");
-            //footer1.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
-            //footer1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
-            //footer1.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
-            //footer1.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
-            //footer1.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
-            //footer1.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
-            //footer1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
-            //footer1.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+            Endnotes endnotes1 = new Endnotes() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14 wp14" } };
+            endnotes1.AddNamespaceDeclaration("wpc", "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas");
+            endnotes1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            endnotes1.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
+            endnotes1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            endnotes1.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+            endnotes1.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+            endnotes1.AddNamespaceDeclaration("wp14", "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing");
+            endnotes1.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
+            endnotes1.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
+            endnotes1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            endnotes1.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            endnotes1.AddNamespaceDeclaration("wpg", "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup");
+            endnotes1.AddNamespaceDeclaration("wpi", "http://schemas.microsoft.com/office/word/2010/wordprocessingInk");
+            endnotes1.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+            endnotes1.AddNamespaceDeclaration("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape");
 
-            Paragraph paragraph23 = new Paragraph() { RsidParagraphAddition = "009D472B", RsidRunAdditionDefault = "009D472B" };
+            Endnote endnote1 = new Endnote() { Type = FootnoteEndnoteValues.Separator, Id = -1 };
 
-            ParagraphProperties paragraphProperties23 = new ParagraphProperties();
-            ParagraphStyleId paragraphStyleId1 = new ParagraphStyleId() { Val = "footer" };
+            Paragraph paragraph99 = new Paragraph() { RsidParagraphAddition = "00EB7AF4", RsidParagraphProperties = "004A5FEA", RsidRunAdditionDefault = "00EB7AF4" };
 
-            paragraphProperties23.Append(paragraphStyleId1);
+            ParagraphProperties paragraphProperties99 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines9 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
 
-            paragraph23.Append(paragraphProperties23);
+            paragraphProperties99.Append(spacingBetweenLines9);
 
-            footer1.Append(paragraph23);
+            Run run4 = new Run();
+            SeparatorMark separatorMark1 = new SeparatorMark();
 
-            footerPart1.Footer = footer1;
+            run4.Append(separatorMark1);
+
+            paragraph99.Append(paragraphProperties99);
+            paragraph99.Append(run4);
+
+            endnote1.Append(paragraph99);
+
+            Endnote endnote2 = new Endnote() { Type = FootnoteEndnoteValues.ContinuationSeparator, Id = 0 };
+
+            Paragraph paragraph100 = new Paragraph() { RsidParagraphAddition = "00EB7AF4", RsidParagraphProperties = "004A5FEA", RsidRunAdditionDefault = "00EB7AF4" };
+
+            ParagraphProperties paragraphProperties100 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines10 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            paragraphProperties100.Append(spacingBetweenLines10);
+
+            Run run5 = new Run();
+            ContinuationSeparatorMark continuationSeparatorMark1 = new ContinuationSeparatorMark();
+
+            run5.Append(continuationSeparatorMark1);
+
+            paragraph100.Append(paragraphProperties100);
+            paragraph100.Append(run5);
+
+            endnote2.Append(paragraph100);
+
+            endnotes1.Append(endnote1);
+            endnotes1.Append(endnote2);
+
+            endnotesPart1.Endnotes = endnotes1;
         }
 
-        // Generates content of footerPart2.
-        private void GenerateFooterPart2Content(FooterPart footerPart2)
+        // Generates content of footnotesPart1.
+        private void GenerateFootnotesPart1Content(FootnotesPart footnotesPart1)
         {
-            Footer footer2 = new Footer();
+            Footnotes footnotes1 = new Footnotes() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14 wp14" } };
+            footnotes1.AddNamespaceDeclaration("wpc", "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas");
+            footnotes1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            footnotes1.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
+            footnotes1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            footnotes1.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
+            footnotes1.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
+            footnotes1.AddNamespaceDeclaration("wp14", "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing");
+            footnotes1.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
+            footnotes1.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
+            footnotes1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            footnotes1.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            footnotes1.AddNamespaceDeclaration("wpg", "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup");
+            footnotes1.AddNamespaceDeclaration("wpi", "http://schemas.microsoft.com/office/word/2010/wordprocessingInk");
+            footnotes1.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+            footnotes1.AddNamespaceDeclaration("wps", "http://schemas.microsoft.com/office/word/2010/wordprocessingShape");
 
-            Paragraph paragraph24 = new Paragraph() { RsidParagraphAddition = "009D472B", RsidRunAdditionDefault = "009D472B" };
+            Footnote footnote1 = new Footnote() { Type = FootnoteEndnoteValues.Separator, Id = -1 };
 
-            ParagraphProperties paragraphProperties24 = new ParagraphProperties();
-            ParagraphStyleId paragraphStyleId2 = new ParagraphStyleId() { Val = "footer" };
+            Paragraph paragraph101 = new Paragraph() { RsidParagraphAddition = "00EB7AF4", RsidParagraphProperties = "004A5FEA", RsidRunAdditionDefault = "00EB7AF4" };
 
-            paragraphProperties24.Append(paragraphStyleId2);
+            ParagraphProperties paragraphProperties101 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines11 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
 
-            paragraph24.Append(paragraphProperties24);
+            paragraphProperties101.Append(spacingBetweenLines11);
 
-            footer2.Append(paragraph24);
+            Run run6 = new Run();
+            SeparatorMark separatorMark2 = new SeparatorMark();
 
-            footerPart2.Footer = footer2;
+            run6.Append(separatorMark2);
+
+            paragraph101.Append(paragraphProperties101);
+            paragraph101.Append(run6);
+
+            footnote1.Append(paragraph101);
+
+            Footnote footnote2 = new Footnote() { Type = FootnoteEndnoteValues.ContinuationSeparator, Id = 0 };
+
+            Paragraph paragraph102 = new Paragraph() { RsidParagraphAddition = "00EB7AF4", RsidParagraphProperties = "004A5FEA", RsidRunAdditionDefault = "00EB7AF4" };
+
+            ParagraphProperties paragraphProperties102 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines12 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            paragraphProperties102.Append(spacingBetweenLines12);
+
+            Run run7 = new Run();
+            ContinuationSeparatorMark continuationSeparatorMark2 = new ContinuationSeparatorMark();
+
+            run7.Append(continuationSeparatorMark2);
+
+            paragraph102.Append(paragraphProperties102);
+            paragraph102.Append(run7);
+
+            footnote2.Append(paragraph102);
+
+            footnotes1.Append(footnote1);
+            footnotes1.Append(footnote2);
+
+            footnotesPart1.Footnotes = footnotes1;
         }
 
-        // Generates content of footerPart3.
-        private void GenerateFooterPart3Content(FooterPart footerPart3)
+        // Generates content of themePart1.
+        private void GenerateThemePart1Content(ThemePart themePart1)
         {
-            Footer footer3 = new Footer();
-            //footer3.AddNamespaceDeclaration("ve", "http://schemas.openxmlformats.org/markup-compatibility/2006");
-            //footer3.AddNamespaceDeclaration("o", "urn:schemas-microsoft-com:office:office");
-            //footer3.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
-            //footer3.AddNamespaceDeclaration("m", "http://schemas.openxmlformats.org/officeDocument/2006/math");
-            //footer3.AddNamespaceDeclaration("v", "urn:schemas-microsoft-com:vml");
-            //footer3.AddNamespaceDeclaration("wp", "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing");
-            //footer3.AddNamespaceDeclaration("w10", "urn:schemas-microsoft-com:office:word");
-            //footer3.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
-            //footer3.AddNamespaceDeclaration("wne", "http://schemas.microsoft.com/office/word/2006/wordml");
+            A.Theme theme1 = new A.Theme() { Name = "Тема Office" };
+            theme1.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
 
-            Paragraph paragraph25 = new Paragraph() { RsidParagraphAddition = "009D472B", RsidRunAdditionDefault = "009D472B" };
+            A.ThemeElements themeElements1 = new A.ThemeElements();
 
-            ParagraphProperties paragraphProperties25 = new ParagraphProperties();
-            ParagraphStyleId paragraphStyleId3 = new ParagraphStyleId() { Val = "footer" };
+            A.ColorScheme colorScheme1 = new A.ColorScheme() { Name = "Стандартная" };
 
-            paragraphProperties25.Append(paragraphStyleId3);
+            A.Dark1Color dark1Color1 = new A.Dark1Color();
+            A.SystemColor systemColor1 = new A.SystemColor() { Val = A.SystemColorValues.WindowText, LastColor = "000000" };
 
-            paragraph25.Append(paragraphProperties25);
+            dark1Color1.Append(systemColor1);
 
-            Paragraph paragraph26 = new Paragraph();
-            ParagraphProperties paragraphProperties26 = new ParagraphProperties();
+            A.Light1Color light1Color1 = new A.Light1Color();
+            A.SystemColor systemColor2 = new A.SystemColor() { Val = A.SystemColorValues.Window, LastColor = "FFFFFF" };
 
-            Run run42 = new Run();
+            light1Color1.Append(systemColor2);
 
-            RunProperties runProperties38 = new RunProperties();
-            Languages languages2 = new Languages() { Val = "ru-RU" };
-            RunFonts runFonts56 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize44 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript44 = new FontSizeComplexScript() { Val = "20" };
-            Color color18 = new Color() { Val = "000000" };
+            A.Dark2Color dark2Color1 = new A.Dark2Color();
+            A.RgbColorModelHex rgbColorModelHex1 = new A.RgbColorModelHex() { Val = "1F497D" };
 
-            runProperties38.Append(languages2);
-            runProperties38.Append(runFonts56);
-            runProperties38.Append(fontSize44);
-            runProperties38.Append(fontSizeComplexScript44);
-            runProperties38.Append(color18);
-            Text text25 = new Text();
-            text25.Text = "ОИ: Славгородцева И.А.";
+            dark2Color1.Append(rgbColorModelHex1);
 
-            run42.Append(runProperties38);
-            run42.Append(text25);
+            A.Light2Color light2Color1 = new A.Light2Color();
+            A.RgbColorModelHex rgbColorModelHex2 = new A.RgbColorModelHex() { Val = "EEECE1" };
 
-            Run run43 = new Run();
+            light2Color1.Append(rgbColorModelHex2);
 
-            RunProperties runProperties39 = new RunProperties();
-            RunFonts runFonts57 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize45 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript45 = new FontSizeComplexScript() { Val = "20" };
-            Color color19 = new Color() { Val = "000000" };
+            A.Accent1Color accent1Color1 = new A.Accent1Color();
+            A.RgbColorModelHex rgbColorModelHex3 = new A.RgbColorModelHex() { Val = "4F81BD" };
 
-            runProperties39.Append(runFonts57);
-            runProperties39.Append(fontSize45);
-            runProperties39.Append(fontSizeComplexScript45);
-            runProperties39.Append(color19);
-            Break break18 = new Break();
+            accent1Color1.Append(rgbColorModelHex3);
 
-            run43.Append(runProperties39);
-            run43.Append(break18);
+            A.Accent2Color accent2Color1 = new A.Accent2Color();
+            A.RgbColorModelHex rgbColorModelHex4 = new A.RgbColorModelHex() { Val = "C0504D" };
 
-            Run run44 = new Run();
+            accent2Color1.Append(rgbColorModelHex4);
 
-            RunProperties runProperties40 = new RunProperties();
-            RunFonts runFonts58 = new RunFonts() { Ascii = "Times New Roman", HighAnsi = "Times New Roman", EastAsia = "Times New Roman", ComplexScript = "Times New Roman" };
-            FontSize fontSize46 = new FontSize() { Val = "20" };
-            FontSizeComplexScript fontSizeComplexScript46 = new FontSizeComplexScript() { Val = "20" };
-            Color color20 = new Color() { Val = "000000" };
+            A.Accent3Color accent3Color1 = new A.Accent3Color();
+            A.RgbColorModelHex rgbColorModelHex5 = new A.RgbColorModelHex() { Val = "9BBB59" };
 
-            runProperties40.Append(runFonts58);
-            runProperties40.Append(fontSize46);
-            runProperties40.Append(fontSizeComplexScript46);
-            runProperties40.Append(color20);
-            Text text26 = new Text();
-            text26.Text = "Тел.: (495)400-46-96, (77)56-656";
+            accent3Color1.Append(rgbColorModelHex5);
 
-            run44.Append(runProperties40);
-            run44.Append(text26);
+            A.Accent4Color accent4Color1 = new A.Accent4Color();
+            A.RgbColorModelHex rgbColorModelHex6 = new A.RgbColorModelHex() { Val = "8064A2" };
 
-            paragraph26.Append(paragraphProperties26);
-            paragraph26.Append(run42);
-            paragraph26.Append(run43);
-            paragraph26.Append(run44);
+            accent4Color1.Append(rgbColorModelHex6);
 
-            footer3.Append(paragraph25);
-            footer3.Append(paragraph26);
+            A.Accent5Color accent5Color1 = new A.Accent5Color();
+            A.RgbColorModelHex rgbColorModelHex7 = new A.RgbColorModelHex() { Val = "4BACC6" };
 
-            footerPart3.Footer = footer3;
+            accent5Color1.Append(rgbColorModelHex7);
+
+            A.Accent6Color accent6Color1 = new A.Accent6Color();
+            A.RgbColorModelHex rgbColorModelHex8 = new A.RgbColorModelHex() { Val = "F79646" };
+
+            accent6Color1.Append(rgbColorModelHex8);
+
+            A.Hyperlink hyperlink1 = new A.Hyperlink();
+            A.RgbColorModelHex rgbColorModelHex9 = new A.RgbColorModelHex() { Val = "0000FF" };
+
+            hyperlink1.Append(rgbColorModelHex9);
+
+            A.FollowedHyperlinkColor followedHyperlinkColor1 = new A.FollowedHyperlinkColor();
+            A.RgbColorModelHex rgbColorModelHex10 = new A.RgbColorModelHex() { Val = "800080" };
+
+            followedHyperlinkColor1.Append(rgbColorModelHex10);
+
+            colorScheme1.Append(dark1Color1);
+            colorScheme1.Append(light1Color1);
+            colorScheme1.Append(dark2Color1);
+            colorScheme1.Append(light2Color1);
+            colorScheme1.Append(accent1Color1);
+            colorScheme1.Append(accent2Color1);
+            colorScheme1.Append(accent3Color1);
+            colorScheme1.Append(accent4Color1);
+            colorScheme1.Append(accent5Color1);
+            colorScheme1.Append(accent6Color1);
+            colorScheme1.Append(hyperlink1);
+            colorScheme1.Append(followedHyperlinkColor1);
+
+            A.FontScheme fontScheme1 = new A.FontScheme() { Name = "Стандартная" };
+
+            A.MajorFont majorFont1 = new A.MajorFont();
+            A.LatinFont latinFont1 = new A.LatinFont() { Typeface = "Cambria" };
+            A.EastAsianFont eastAsianFont1 = new A.EastAsianFont() { Typeface = "" };
+            A.ComplexScriptFont complexScriptFont1 = new A.ComplexScriptFont() { Typeface = "" };
+            A.SupplementalFont supplementalFont1 = new A.SupplementalFont() { Script = "Jpan", Typeface = "ＭＳ ゴシック" };
+            A.SupplementalFont supplementalFont2 = new A.SupplementalFont() { Script = "Hang", Typeface = "맑은 고딕" };
+            A.SupplementalFont supplementalFont3 = new A.SupplementalFont() { Script = "Hans", Typeface = "宋体" };
+            A.SupplementalFont supplementalFont4 = new A.SupplementalFont() { Script = "Hant", Typeface = "新細明體" };
+            A.SupplementalFont supplementalFont5 = new A.SupplementalFont() { Script = "Arab", Typeface = "Times New Roman" };
+            A.SupplementalFont supplementalFont6 = new A.SupplementalFont() { Script = "Hebr", Typeface = "Times New Roman" };
+            A.SupplementalFont supplementalFont7 = new A.SupplementalFont() { Script = "Thai", Typeface = "Angsana New" };
+            A.SupplementalFont supplementalFont8 = new A.SupplementalFont() { Script = "Ethi", Typeface = "Nyala" };
+            A.SupplementalFont supplementalFont9 = new A.SupplementalFont() { Script = "Beng", Typeface = "Vrinda" };
+            A.SupplementalFont supplementalFont10 = new A.SupplementalFont() { Script = "Gujr", Typeface = "Shruti" };
+            A.SupplementalFont supplementalFont11 = new A.SupplementalFont() { Script = "Khmr", Typeface = "MoolBoran" };
+            A.SupplementalFont supplementalFont12 = new A.SupplementalFont() { Script = "Knda", Typeface = "Tunga" };
+            A.SupplementalFont supplementalFont13 = new A.SupplementalFont() { Script = "Guru", Typeface = "Raavi" };
+            A.SupplementalFont supplementalFont14 = new A.SupplementalFont() { Script = "Cans", Typeface = "Euphemia" };
+            A.SupplementalFont supplementalFont15 = new A.SupplementalFont() { Script = "Cher", Typeface = "Plantagenet Cherokee" };
+            A.SupplementalFont supplementalFont16 = new A.SupplementalFont() { Script = "Yiii", Typeface = "Microsoft Yi Baiti" };
+            A.SupplementalFont supplementalFont17 = new A.SupplementalFont() { Script = "Tibt", Typeface = "Microsoft Himalaya" };
+            A.SupplementalFont supplementalFont18 = new A.SupplementalFont() { Script = "Thaa", Typeface = "MV Boli" };
+            A.SupplementalFont supplementalFont19 = new A.SupplementalFont() { Script = "Deva", Typeface = "Mangal" };
+            A.SupplementalFont supplementalFont20 = new A.SupplementalFont() { Script = "Telu", Typeface = "Gautami" };
+            A.SupplementalFont supplementalFont21 = new A.SupplementalFont() { Script = "Taml", Typeface = "Latha" };
+            A.SupplementalFont supplementalFont22 = new A.SupplementalFont() { Script = "Syrc", Typeface = "Estrangelo Edessa" };
+            A.SupplementalFont supplementalFont23 = new A.SupplementalFont() { Script = "Orya", Typeface = "Kalinga" };
+            A.SupplementalFont supplementalFont24 = new A.SupplementalFont() { Script = "Mlym", Typeface = "Kartika" };
+            A.SupplementalFont supplementalFont25 = new A.SupplementalFont() { Script = "Laoo", Typeface = "DokChampa" };
+            A.SupplementalFont supplementalFont26 = new A.SupplementalFont() { Script = "Sinh", Typeface = "Iskoola Pota" };
+            A.SupplementalFont supplementalFont27 = new A.SupplementalFont() { Script = "Mong", Typeface = "Mongolian Baiti" };
+            A.SupplementalFont supplementalFont28 = new A.SupplementalFont() { Script = "Viet", Typeface = "Times New Roman" };
+            A.SupplementalFont supplementalFont29 = new A.SupplementalFont() { Script = "Uigh", Typeface = "Microsoft Uighur" };
+            A.SupplementalFont supplementalFont30 = new A.SupplementalFont() { Script = "Geor", Typeface = "Sylfaen" };
+
+            majorFont1.Append(latinFont1);
+            majorFont1.Append(eastAsianFont1);
+            majorFont1.Append(complexScriptFont1);
+            majorFont1.Append(supplementalFont1);
+            majorFont1.Append(supplementalFont2);
+            majorFont1.Append(supplementalFont3);
+            majorFont1.Append(supplementalFont4);
+            majorFont1.Append(supplementalFont5);
+            majorFont1.Append(supplementalFont6);
+            majorFont1.Append(supplementalFont7);
+            majorFont1.Append(supplementalFont8);
+            majorFont1.Append(supplementalFont9);
+            majorFont1.Append(supplementalFont10);
+            majorFont1.Append(supplementalFont11);
+            majorFont1.Append(supplementalFont12);
+            majorFont1.Append(supplementalFont13);
+            majorFont1.Append(supplementalFont14);
+            majorFont1.Append(supplementalFont15);
+            majorFont1.Append(supplementalFont16);
+            majorFont1.Append(supplementalFont17);
+            majorFont1.Append(supplementalFont18);
+            majorFont1.Append(supplementalFont19);
+            majorFont1.Append(supplementalFont20);
+            majorFont1.Append(supplementalFont21);
+            majorFont1.Append(supplementalFont22);
+            majorFont1.Append(supplementalFont23);
+            majorFont1.Append(supplementalFont24);
+            majorFont1.Append(supplementalFont25);
+            majorFont1.Append(supplementalFont26);
+            majorFont1.Append(supplementalFont27);
+            majorFont1.Append(supplementalFont28);
+            majorFont1.Append(supplementalFont29);
+            majorFont1.Append(supplementalFont30);
+
+            A.MinorFont minorFont1 = new A.MinorFont();
+            A.LatinFont latinFont2 = new A.LatinFont() { Typeface = "Calibri" };
+            A.EastAsianFont eastAsianFont2 = new A.EastAsianFont() { Typeface = "" };
+            A.ComplexScriptFont complexScriptFont2 = new A.ComplexScriptFont() { Typeface = "" };
+            A.SupplementalFont supplementalFont31 = new A.SupplementalFont() { Script = "Jpan", Typeface = "ＭＳ 明朝" };
+            A.SupplementalFont supplementalFont32 = new A.SupplementalFont() { Script = "Hang", Typeface = "맑은 고딕" };
+            A.SupplementalFont supplementalFont33 = new A.SupplementalFont() { Script = "Hans", Typeface = "宋体" };
+            A.SupplementalFont supplementalFont34 = new A.SupplementalFont() { Script = "Hant", Typeface = "新細明體" };
+            A.SupplementalFont supplementalFont35 = new A.SupplementalFont() { Script = "Arab", Typeface = "Arial" };
+            A.SupplementalFont supplementalFont36 = new A.SupplementalFont() { Script = "Hebr", Typeface = "Arial" };
+            A.SupplementalFont supplementalFont37 = new A.SupplementalFont() { Script = "Thai", Typeface = "Cordia New" };
+            A.SupplementalFont supplementalFont38 = new A.SupplementalFont() { Script = "Ethi", Typeface = "Nyala" };
+            A.SupplementalFont supplementalFont39 = new A.SupplementalFont() { Script = "Beng", Typeface = "Vrinda" };
+            A.SupplementalFont supplementalFont40 = new A.SupplementalFont() { Script = "Gujr", Typeface = "Shruti" };
+            A.SupplementalFont supplementalFont41 = new A.SupplementalFont() { Script = "Khmr", Typeface = "DaunPenh" };
+            A.SupplementalFont supplementalFont42 = new A.SupplementalFont() { Script = "Knda", Typeface = "Tunga" };
+            A.SupplementalFont supplementalFont43 = new A.SupplementalFont() { Script = "Guru", Typeface = "Raavi" };
+            A.SupplementalFont supplementalFont44 = new A.SupplementalFont() { Script = "Cans", Typeface = "Euphemia" };
+            A.SupplementalFont supplementalFont45 = new A.SupplementalFont() { Script = "Cher", Typeface = "Plantagenet Cherokee" };
+            A.SupplementalFont supplementalFont46 = new A.SupplementalFont() { Script = "Yiii", Typeface = "Microsoft Yi Baiti" };
+            A.SupplementalFont supplementalFont47 = new A.SupplementalFont() { Script = "Tibt", Typeface = "Microsoft Himalaya" };
+            A.SupplementalFont supplementalFont48 = new A.SupplementalFont() { Script = "Thaa", Typeface = "MV Boli" };
+            A.SupplementalFont supplementalFont49 = new A.SupplementalFont() { Script = "Deva", Typeface = "Mangal" };
+            A.SupplementalFont supplementalFont50 = new A.SupplementalFont() { Script = "Telu", Typeface = "Gautami" };
+            A.SupplementalFont supplementalFont51 = new A.SupplementalFont() { Script = "Taml", Typeface = "Latha" };
+            A.SupplementalFont supplementalFont52 = new A.SupplementalFont() { Script = "Syrc", Typeface = "Estrangelo Edessa" };
+            A.SupplementalFont supplementalFont53 = new A.SupplementalFont() { Script = "Orya", Typeface = "Kalinga" };
+            A.SupplementalFont supplementalFont54 = new A.SupplementalFont() { Script = "Mlym", Typeface = "Kartika" };
+            A.SupplementalFont supplementalFont55 = new A.SupplementalFont() { Script = "Laoo", Typeface = "DokChampa" };
+            A.SupplementalFont supplementalFont56 = new A.SupplementalFont() { Script = "Sinh", Typeface = "Iskoola Pota" };
+            A.SupplementalFont supplementalFont57 = new A.SupplementalFont() { Script = "Mong", Typeface = "Mongolian Baiti" };
+            A.SupplementalFont supplementalFont58 = new A.SupplementalFont() { Script = "Viet", Typeface = "Arial" };
+            A.SupplementalFont supplementalFont59 = new A.SupplementalFont() { Script = "Uigh", Typeface = "Microsoft Uighur" };
+            A.SupplementalFont supplementalFont60 = new A.SupplementalFont() { Script = "Geor", Typeface = "Sylfaen" };
+
+            minorFont1.Append(latinFont2);
+            minorFont1.Append(eastAsianFont2);
+            minorFont1.Append(complexScriptFont2);
+            minorFont1.Append(supplementalFont31);
+            minorFont1.Append(supplementalFont32);
+            minorFont1.Append(supplementalFont33);
+            minorFont1.Append(supplementalFont34);
+            minorFont1.Append(supplementalFont35);
+            minorFont1.Append(supplementalFont36);
+            minorFont1.Append(supplementalFont37);
+            minorFont1.Append(supplementalFont38);
+            minorFont1.Append(supplementalFont39);
+            minorFont1.Append(supplementalFont40);
+            minorFont1.Append(supplementalFont41);
+            minorFont1.Append(supplementalFont42);
+            minorFont1.Append(supplementalFont43);
+            minorFont1.Append(supplementalFont44);
+            minorFont1.Append(supplementalFont45);
+            minorFont1.Append(supplementalFont46);
+            minorFont1.Append(supplementalFont47);
+            minorFont1.Append(supplementalFont48);
+            minorFont1.Append(supplementalFont49);
+            minorFont1.Append(supplementalFont50);
+            minorFont1.Append(supplementalFont51);
+            minorFont1.Append(supplementalFont52);
+            minorFont1.Append(supplementalFont53);
+            minorFont1.Append(supplementalFont54);
+            minorFont1.Append(supplementalFont55);
+            minorFont1.Append(supplementalFont56);
+            minorFont1.Append(supplementalFont57);
+            minorFont1.Append(supplementalFont58);
+            minorFont1.Append(supplementalFont59);
+            minorFont1.Append(supplementalFont60);
+
+            fontScheme1.Append(majorFont1);
+            fontScheme1.Append(minorFont1);
+
+            A.FormatScheme formatScheme1 = new A.FormatScheme() { Name = "Стандартная" };
+
+            A.FillStyleList fillStyleList1 = new A.FillStyleList();
+
+            A.SolidFill solidFill1 = new A.SolidFill();
+            A.SchemeColor schemeColor1 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+
+            solidFill1.Append(schemeColor1);
+
+            A.GradientFill gradientFill1 = new A.GradientFill() { RotateWithShape = true };
+
+            A.GradientStopList gradientStopList1 = new A.GradientStopList();
+
+            A.GradientStop gradientStop1 = new A.GradientStop() { Position = 0 };
+
+            A.SchemeColor schemeColor2 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Tint tint1 = new A.Tint() { Val = 50000 };
+            A.SaturationModulation saturationModulation1 = new A.SaturationModulation() { Val = 300000 };
+
+            schemeColor2.Append(tint1);
+            schemeColor2.Append(saturationModulation1);
+
+            gradientStop1.Append(schemeColor2);
+
+            A.GradientStop gradientStop2 = new A.GradientStop() { Position = 35000 };
+
+            A.SchemeColor schemeColor3 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Tint tint2 = new A.Tint() { Val = 37000 };
+            A.SaturationModulation saturationModulation2 = new A.SaturationModulation() { Val = 300000 };
+
+            schemeColor3.Append(tint2);
+            schemeColor3.Append(saturationModulation2);
+
+            gradientStop2.Append(schemeColor3);
+
+            A.GradientStop gradientStop3 = new A.GradientStop() { Position = 100000 };
+
+            A.SchemeColor schemeColor4 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Tint tint3 = new A.Tint() { Val = 15000 };
+            A.SaturationModulation saturationModulation3 = new A.SaturationModulation() { Val = 350000 };
+
+            schemeColor4.Append(tint3);
+            schemeColor4.Append(saturationModulation3);
+
+            gradientStop3.Append(schemeColor4);
+
+            gradientStopList1.Append(gradientStop1);
+            gradientStopList1.Append(gradientStop2);
+            gradientStopList1.Append(gradientStop3);
+            A.LinearGradientFill linearGradientFill1 = new A.LinearGradientFill() { Angle = 16200000, Scaled = true };
+
+            gradientFill1.Append(gradientStopList1);
+            gradientFill1.Append(linearGradientFill1);
+
+            A.GradientFill gradientFill2 = new A.GradientFill() { RotateWithShape = true };
+
+            A.GradientStopList gradientStopList2 = new A.GradientStopList();
+
+            A.GradientStop gradientStop4 = new A.GradientStop() { Position = 0 };
+
+            A.SchemeColor schemeColor5 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Shade shade1 = new A.Shade() { Val = 51000 };
+            A.SaturationModulation saturationModulation4 = new A.SaturationModulation() { Val = 130000 };
+
+            schemeColor5.Append(shade1);
+            schemeColor5.Append(saturationModulation4);
+
+            gradientStop4.Append(schemeColor5);
+
+            A.GradientStop gradientStop5 = new A.GradientStop() { Position = 80000 };
+
+            A.SchemeColor schemeColor6 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Shade shade2 = new A.Shade() { Val = 93000 };
+            A.SaturationModulation saturationModulation5 = new A.SaturationModulation() { Val = 130000 };
+
+            schemeColor6.Append(shade2);
+            schemeColor6.Append(saturationModulation5);
+
+            gradientStop5.Append(schemeColor6);
+
+            A.GradientStop gradientStop6 = new A.GradientStop() { Position = 100000 };
+
+            A.SchemeColor schemeColor7 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Shade shade3 = new A.Shade() { Val = 94000 };
+            A.SaturationModulation saturationModulation6 = new A.SaturationModulation() { Val = 135000 };
+
+            schemeColor7.Append(shade3);
+            schemeColor7.Append(saturationModulation6);
+
+            gradientStop6.Append(schemeColor7);
+
+            gradientStopList2.Append(gradientStop4);
+            gradientStopList2.Append(gradientStop5);
+            gradientStopList2.Append(gradientStop6);
+            A.LinearGradientFill linearGradientFill2 = new A.LinearGradientFill() { Angle = 16200000, Scaled = false };
+
+            gradientFill2.Append(gradientStopList2);
+            gradientFill2.Append(linearGradientFill2);
+
+            fillStyleList1.Append(solidFill1);
+            fillStyleList1.Append(gradientFill1);
+            fillStyleList1.Append(gradientFill2);
+
+            A.LineStyleList lineStyleList1 = new A.LineStyleList();
+
+            A.Outline outline1 = new A.Outline() { Width = 9525, CapType = A.LineCapValues.Flat, CompoundLineType = A.CompoundLineValues.Single, Alignment = A.PenAlignmentValues.Center };
+
+            A.SolidFill solidFill2 = new A.SolidFill();
+
+            A.SchemeColor schemeColor8 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Shade shade4 = new A.Shade() { Val = 95000 };
+            A.SaturationModulation saturationModulation7 = new A.SaturationModulation() { Val = 105000 };
+
+            schemeColor8.Append(shade4);
+            schemeColor8.Append(saturationModulation7);
+
+            solidFill2.Append(schemeColor8);
+            A.PresetDash presetDash1 = new A.PresetDash() { Val = A.PresetLineDashValues.Solid };
+
+            outline1.Append(solidFill2);
+            outline1.Append(presetDash1);
+
+            A.Outline outline2 = new A.Outline() { Width = 25400, CapType = A.LineCapValues.Flat, CompoundLineType = A.CompoundLineValues.Single, Alignment = A.PenAlignmentValues.Center };
+
+            A.SolidFill solidFill3 = new A.SolidFill();
+            A.SchemeColor schemeColor9 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+
+            solidFill3.Append(schemeColor9);
+            A.PresetDash presetDash2 = new A.PresetDash() { Val = A.PresetLineDashValues.Solid };
+
+            outline2.Append(solidFill3);
+            outline2.Append(presetDash2);
+
+            A.Outline outline3 = new A.Outline() { Width = 38100, CapType = A.LineCapValues.Flat, CompoundLineType = A.CompoundLineValues.Single, Alignment = A.PenAlignmentValues.Center };
+
+            A.SolidFill solidFill4 = new A.SolidFill();
+            A.SchemeColor schemeColor10 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+
+            solidFill4.Append(schemeColor10);
+            A.PresetDash presetDash3 = new A.PresetDash() { Val = A.PresetLineDashValues.Solid };
+
+            outline3.Append(solidFill4);
+            outline3.Append(presetDash3);
+
+            lineStyleList1.Append(outline1);
+            lineStyleList1.Append(outline2);
+            lineStyleList1.Append(outline3);
+
+            A.EffectStyleList effectStyleList1 = new A.EffectStyleList();
+
+            A.EffectStyle effectStyle1 = new A.EffectStyle();
+
+            A.EffectList effectList1 = new A.EffectList();
+
+            A.OuterShadow outerShadow1 = new A.OuterShadow() { BlurRadius = 40000L, Distance = 20000L, Direction = 5400000, RotateWithShape = false };
+
+            A.RgbColorModelHex rgbColorModelHex11 = new A.RgbColorModelHex() { Val = "000000" };
+            A.Alpha alpha1 = new A.Alpha() { Val = 38000 };
+
+            rgbColorModelHex11.Append(alpha1);
+
+            outerShadow1.Append(rgbColorModelHex11);
+
+            effectList1.Append(outerShadow1);
+
+            effectStyle1.Append(effectList1);
+
+            A.EffectStyle effectStyle2 = new A.EffectStyle();
+
+            A.EffectList effectList2 = new A.EffectList();
+
+            A.OuterShadow outerShadow2 = new A.OuterShadow() { BlurRadius = 40000L, Distance = 23000L, Direction = 5400000, RotateWithShape = false };
+
+            A.RgbColorModelHex rgbColorModelHex12 = new A.RgbColorModelHex() { Val = "000000" };
+            A.Alpha alpha2 = new A.Alpha() { Val = 35000 };
+
+            rgbColorModelHex12.Append(alpha2);
+
+            outerShadow2.Append(rgbColorModelHex12);
+
+            effectList2.Append(outerShadow2);
+
+            effectStyle2.Append(effectList2);
+
+            A.EffectStyle effectStyle3 = new A.EffectStyle();
+
+            A.EffectList effectList3 = new A.EffectList();
+
+            A.OuterShadow outerShadow3 = new A.OuterShadow() { BlurRadius = 40000L, Distance = 23000L, Direction = 5400000, RotateWithShape = false };
+
+            A.RgbColorModelHex rgbColorModelHex13 = new A.RgbColorModelHex() { Val = "000000" };
+            A.Alpha alpha3 = new A.Alpha() { Val = 35000 };
+
+            rgbColorModelHex13.Append(alpha3);
+
+            outerShadow3.Append(rgbColorModelHex13);
+
+            effectList3.Append(outerShadow3);
+
+            A.Scene3DType scene3DType1 = new A.Scene3DType();
+
+            A.Camera camera1 = new A.Camera() { Preset = A.PresetCameraValues.OrthographicFront };
+            A.Rotation rotation1 = new A.Rotation() { Latitude = 0, Longitude = 0, Revolution = 0 };
+
+            camera1.Append(rotation1);
+
+            A.LightRig lightRig1 = new A.LightRig() { Rig = A.LightRigValues.ThreePoints, Direction = A.LightRigDirectionValues.Top };
+            A.Rotation rotation2 = new A.Rotation() { Latitude = 0, Longitude = 0, Revolution = 1200000 };
+
+            lightRig1.Append(rotation2);
+
+            scene3DType1.Append(camera1);
+            scene3DType1.Append(lightRig1);
+
+            A.Shape3DType shape3DType1 = new A.Shape3DType();
+            A.BevelTop bevelTop1 = new A.BevelTop() { Width = 63500L, Height = 25400L };
+
+            shape3DType1.Append(bevelTop1);
+
+            effectStyle3.Append(effectList3);
+            effectStyle3.Append(scene3DType1);
+            effectStyle3.Append(shape3DType1);
+
+            effectStyleList1.Append(effectStyle1);
+            effectStyleList1.Append(effectStyle2);
+            effectStyleList1.Append(effectStyle3);
+
+            A.BackgroundFillStyleList backgroundFillStyleList1 = new A.BackgroundFillStyleList();
+
+            A.SolidFill solidFill5 = new A.SolidFill();
+            A.SchemeColor schemeColor11 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+
+            solidFill5.Append(schemeColor11);
+
+            A.GradientFill gradientFill3 = new A.GradientFill() { RotateWithShape = true };
+
+            A.GradientStopList gradientStopList3 = new A.GradientStopList();
+
+            A.GradientStop gradientStop7 = new A.GradientStop() { Position = 0 };
+
+            A.SchemeColor schemeColor12 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Tint tint4 = new A.Tint() { Val = 40000 };
+            A.SaturationModulation saturationModulation8 = new A.SaturationModulation() { Val = 350000 };
+
+            schemeColor12.Append(tint4);
+            schemeColor12.Append(saturationModulation8);
+
+            gradientStop7.Append(schemeColor12);
+
+            A.GradientStop gradientStop8 = new A.GradientStop() { Position = 40000 };
+
+            A.SchemeColor schemeColor13 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Tint tint5 = new A.Tint() { Val = 45000 };
+            A.Shade shade5 = new A.Shade() { Val = 99000 };
+            A.SaturationModulation saturationModulation9 = new A.SaturationModulation() { Val = 350000 };
+
+            schemeColor13.Append(tint5);
+            schemeColor13.Append(shade5);
+            schemeColor13.Append(saturationModulation9);
+
+            gradientStop8.Append(schemeColor13);
+
+            A.GradientStop gradientStop9 = new A.GradientStop() { Position = 100000 };
+
+            A.SchemeColor schemeColor14 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Shade shade6 = new A.Shade() { Val = 20000 };
+            A.SaturationModulation saturationModulation10 = new A.SaturationModulation() { Val = 255000 };
+
+            schemeColor14.Append(shade6);
+            schemeColor14.Append(saturationModulation10);
+
+            gradientStop9.Append(schemeColor14);
+
+            gradientStopList3.Append(gradientStop7);
+            gradientStopList3.Append(gradientStop8);
+            gradientStopList3.Append(gradientStop9);
+
+            A.PathGradientFill pathGradientFill1 = new A.PathGradientFill() { Path = A.PathShadeValues.Circle };
+            A.FillToRectangle fillToRectangle1 = new A.FillToRectangle() { Left = 50000, Top = -80000, Right = 50000, Bottom = 180000 };
+
+            pathGradientFill1.Append(fillToRectangle1);
+
+            gradientFill3.Append(gradientStopList3);
+            gradientFill3.Append(pathGradientFill1);
+
+            A.GradientFill gradientFill4 = new A.GradientFill() { RotateWithShape = true };
+
+            A.GradientStopList gradientStopList4 = new A.GradientStopList();
+
+            A.GradientStop gradientStop10 = new A.GradientStop() { Position = 0 };
+
+            A.SchemeColor schemeColor15 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Tint tint6 = new A.Tint() { Val = 80000 };
+            A.SaturationModulation saturationModulation11 = new A.SaturationModulation() { Val = 300000 };
+
+            schemeColor15.Append(tint6);
+            schemeColor15.Append(saturationModulation11);
+
+            gradientStop10.Append(schemeColor15);
+
+            A.GradientStop gradientStop11 = new A.GradientStop() { Position = 100000 };
+
+            A.SchemeColor schemeColor16 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
+            A.Shade shade7 = new A.Shade() { Val = 30000 };
+            A.SaturationModulation saturationModulation12 = new A.SaturationModulation() { Val = 200000 };
+
+            schemeColor16.Append(shade7);
+            schemeColor16.Append(saturationModulation12);
+
+            gradientStop11.Append(schemeColor16);
+
+            gradientStopList4.Append(gradientStop10);
+            gradientStopList4.Append(gradientStop11);
+
+            A.PathGradientFill pathGradientFill2 = new A.PathGradientFill() { Path = A.PathShadeValues.Circle };
+            A.FillToRectangle fillToRectangle2 = new A.FillToRectangle() { Left = 50000, Top = 50000, Right = 50000, Bottom = 50000 };
+
+            pathGradientFill2.Append(fillToRectangle2);
+
+            gradientFill4.Append(gradientStopList4);
+            gradientFill4.Append(pathGradientFill2);
+
+            backgroundFillStyleList1.Append(solidFill5);
+            backgroundFillStyleList1.Append(gradientFill3);
+            backgroundFillStyleList1.Append(gradientFill4);
+
+            formatScheme1.Append(fillStyleList1);
+            formatScheme1.Append(lineStyleList1);
+            formatScheme1.Append(effectStyleList1);
+            formatScheme1.Append(backgroundFillStyleList1);
+
+            themeElements1.Append(colorScheme1);
+            themeElements1.Append(fontScheme1);
+            themeElements1.Append(formatScheme1);
+            A.ObjectDefaults objectDefaults1 = new A.ObjectDefaults();
+            A.ExtraColorSchemeList extraColorSchemeList1 = new A.ExtraColorSchemeList();
+
+            theme1.Append(themeElements1);
+            theme1.Append(objectDefaults1);
+            theme1.Append(extraColorSchemeList1);
+
+            themePart1.Theme = theme1;
         }
+
+        // Generates content of webSettingsPart1.
+        private void GenerateWebSettingsPart1Content(WebSettingsPart webSettingsPart1)
+        {
+            WebSettings webSettings1 = new WebSettings() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14" } };
+            webSettings1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            webSettings1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            webSettings1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            webSettings1.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+            OptimizeForBrowser optimizeForBrowser1 = new OptimizeForBrowser();
+            RelyOnVML relyOnVML1 = new RelyOnVML();
+            AllowPNG allowPNG1 = new AllowPNG();
+
+            webSettings1.Append(optimizeForBrowser1);
+            webSettings1.Append(relyOnVML1);
+            webSettings1.Append(allowPNG1);
+
+            webSettingsPart1.WebSettings = webSettings1;
+        }
+
+        // Generates content of fontTablePart1.
+        private void GenerateFontTablePart1Content(FontTablePart fontTablePart1)
+        {
+            Fonts fonts1 = new Fonts() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "w14" } };
+            fonts1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            fonts1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            fonts1.AddNamespaceDeclaration("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+            fonts1.AddNamespaceDeclaration("w14", "http://schemas.microsoft.com/office/word/2010/wordml");
+
+            Font font1 = new Font() { Name = "Calibri" };
+            Panose1Number panose1Number1 = new Panose1Number() { Val = "020F0502020204030204" };
+            FontCharSet fontCharSet1 = new FontCharSet() { Val = "CC" };
+            FontFamily fontFamily1 = new FontFamily() { Val = FontFamilyValues.Swiss };
+            Pitch pitch1 = new Pitch() { Val = FontPitchValues.Variable };
+            FontSignature fontSignature1 = new FontSignature() { UnicodeSignature0 = "E00002FF", UnicodeSignature1 = "4000ACFF", UnicodeSignature2 = "00000001", UnicodeSignature3 = "00000000", CodePageSignature0 = "0000019F", CodePageSignature1 = "00000000" };
+
+            font1.Append(panose1Number1);
+            font1.Append(fontCharSet1);
+            font1.Append(fontFamily1);
+            font1.Append(pitch1);
+            font1.Append(fontSignature1);
+
+            Font font2 = new Font() { Name = "Times New Roman" };
+            Panose1Number panose1Number2 = new Panose1Number() { Val = "02020603050405020304" };
+            FontCharSet fontCharSet2 = new FontCharSet() { Val = "CC" };
+            FontFamily fontFamily2 = new FontFamily() { Val = FontFamilyValues.Roman };
+            Pitch pitch2 = new Pitch() { Val = FontPitchValues.Variable };
+            FontSignature fontSignature2 = new FontSignature() { UnicodeSignature0 = "E0002AFF", UnicodeSignature1 = "C0007841", UnicodeSignature2 = "00000009", UnicodeSignature3 = "00000000", CodePageSignature0 = "000001FF", CodePageSignature1 = "00000000" };
+
+            font2.Append(panose1Number2);
+            font2.Append(fontCharSet2);
+            font2.Append(fontFamily2);
+            font2.Append(pitch2);
+            font2.Append(fontSignature2);
+
+            Font font3 = new Font() { Name = "Tahoma" };
+            Panose1Number panose1Number3 = new Panose1Number() { Val = "020B0604030504040204" };
+            FontCharSet fontCharSet3 = new FontCharSet() { Val = "00" };
+            FontFamily fontFamily3 = new FontFamily() { Val = FontFamilyValues.Swiss };
+            NotTrueType notTrueType1 = new NotTrueType();
+            Pitch pitch3 = new Pitch() { Val = FontPitchValues.Variable };
+            FontSignature fontSignature3 = new FontSignature() { UnicodeSignature0 = "00000003", UnicodeSignature1 = "00000000", UnicodeSignature2 = "00000000", UnicodeSignature3 = "00000000", CodePageSignature0 = "00000001", CodePageSignature1 = "00000000" };
+
+            font3.Append(panose1Number3);
+            font3.Append(fontCharSet3);
+            font3.Append(fontFamily3);
+            font3.Append(notTrueType1);
+            font3.Append(pitch3);
+            font3.Append(fontSignature3);
+
+            Font font4 = new Font() { Name = "Cambria" };
+            Panose1Number panose1Number4 = new Panose1Number() { Val = "02040503050406030204" };
+            FontCharSet fontCharSet4 = new FontCharSet() { Val = "CC" };
+            FontFamily fontFamily4 = new FontFamily() { Val = FontFamilyValues.Roman };
+            Pitch pitch4 = new Pitch() { Val = FontPitchValues.Variable };
+            FontSignature fontSignature4 = new FontSignature() { UnicodeSignature0 = "E00002FF", UnicodeSignature1 = "400004FF", UnicodeSignature2 = "00000000", UnicodeSignature3 = "00000000", CodePageSignature0 = "0000019F", CodePageSignature1 = "00000000" };
+
+            font4.Append(panose1Number4);
+            font4.Append(fontCharSet4);
+            font4.Append(fontFamily4);
+            font4.Append(pitch4);
+            font4.Append(fontSignature4);
+
+            fonts1.Append(font1);
+            fonts1.Append(font2);
+            fonts1.Append(font3);
+            fonts1.Append(font4);
+
+            fontTablePart1.Fonts = fonts1;
+        }
+
+        private void SetPackageProperties(OpenXmlPackage document)
+        {
+            document.PackageProperties.Creator = "7751_svc_admin";
+            document.PackageProperties.Revision = "3";
+            document.PackageProperties.Created = System.Xml.XmlConvert.ToDateTime("2018-08-03T13:25:00Z", System.Xml.XmlDateTimeSerializationMode.RoundtripKind);
+            document.PackageProperties.Modified = System.Xml.XmlConvert.ToDateTime("2018-08-06T05:33:00Z", System.Xml.XmlDateTimeSerializationMode.RoundtripKind);
+            document.PackageProperties.LastModifiedBy = "7751_svc_admin";
+        }
+
+
     }
 }
+

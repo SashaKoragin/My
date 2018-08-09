@@ -6,6 +6,7 @@
   <?define Loggers_TargetDir=$(var.Loggers.TargetDir)?>
   <?define LibaryXMLAuto_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\LibaryXMLAuto\bin\Debug\"?>
   <?define SqlLibaryIfns_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\SqlLibaryIfns\bin\Debug\"?>
+  <?define LibaryDocumentGenerator_TargetDir=$(var.LibaryDocumentGenerator.TargetDir)?>
 	<Product Id="*" Name="SetupServiceTestIfns $(var.CurrentVersion)" Codepage="1251" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="ServiceIfns" UpgradeCode="a9ade744-7ad3-477c-9cb3-759214eb7f56">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
@@ -110,11 +111,12 @@
 		<Component Id="TestIFNSService.exe.config" Guid="3fc7cbe8-a2da-4d99-b66f-073d89bd44a3">
 		  <File Id="TestIFNSService.exe.config" Name="TestIFNSService.exe.config" Source="$(var.TestIFNSService_TargetDir)TestIFNSService.exe.config" KeyPath="yes" Vital="yes" />
       <util:XmlFile Id="ServeceXml" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PathJurnal'[\]]//@value" Value="[Path]XmlBacup.xml" SelectionLanguage="XPath" Sequence="1" />
-      <util:XmlFile Id="ServeceXml1" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='TestDB'[\]]//@value" Value="[TestDb]" SelectionLanguage="XPath" Sequence="1" />
-      <util:XmlFile Id="ServeceXml2" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='WorkDB'[\]]//@value" Value="[WorkDb]" SelectionLanguage="XPath" Sequence="1" />
+      <util:XmlFile Id="ServeceXml1" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='TestDb'[\]]//@value" Value="[TestDb]" SelectionLanguage="XPath" Sequence="1" />
+      <util:XmlFile Id="ServeceXml2" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='WorkDb'[\]]//@value" Value="[WorkDb]" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="DataBase" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Connect'[\]]//@value" Value="Data Source=[DataBase];Initial Catalog=Taxes51;Integrated Security=True;MultipleActiveResultSets=True" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="Report" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='SaveReport'[\]]//@value" Value="[PathReport]" SelectionLanguage="XPath" Sequence="1" />
-    </Component>
+      <util:XmlFile Id="ReportMassTemplate" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='ReportMassTemplate'[\]]//@value" Value="[PathReportFull]" SelectionLanguage="XPath" Sequence="1"/>
+      </Component>
 		<Component Id="TestIFNSLibary.dll" Guid="bae45c5b-9bd2-4d6a-a979-dc0d7c13d0cf">
 		  <File Id="TestIFNSLibary.dll" Name="TestIFNSLibary.dll" Source="$(var.TestIFNSLibary_TargetDir)TestIFNSLibary.dll" />
 		</Component>
@@ -144,6 +146,9 @@
 		</Component>
 		<Component Id="Newtonsoft.Json.dll" Guid="4b16e079-f550-4f34-9033-69340d9ac3ef">
 		  <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.TestIFNSService_TargetDir)Newtonsoft.Json.dll" />
+		</Component>
+		<Component Id="LibaryDocumentGenerator.dll" Guid="44dbe2c4-54db-4e75-acb7-8037722d00b1">
+		  <File Id="LibaryDocumentGenerator.dll" Name="LibaryDocumentGenerator.dll" Source="$(var.LibaryDocumentGenerator_TargetDir)LibaryDocumentGenerator.dll" />
 		</Component>
 		</ComponentGroup>
 	</Fragment>

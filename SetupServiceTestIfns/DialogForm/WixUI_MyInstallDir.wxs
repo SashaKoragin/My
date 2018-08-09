@@ -65,11 +65,15 @@ Patch dialog sequence:
                     <Property Id="TestDb" Value="\\i7751-w00000745\SrezDBF" />
                 </Control>
                 <Control Id="Title2" Type="Text" Text="Настройки для Rest приложения:" Height="17" Width="140" X="11" Y="120"/>
-                <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="70" X="11" Y="146"/>
-              <Control Id="Db" Type="Edit" X="90" Y="146" Height="15" Width="194" Property="DataBase">
+                <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="80" X="11" Y="146"/>
+              <Control Id="Db" Type="Edit" X="90" Y="146" Height="15" Width="240" Property="DataBase">
                 <Property Id="DataBase" Value="i7751-app001"/>
               </Control>
-                <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
+              <Control Id="ReportBdkText" Type="Text" Text="Путь для отчетов:" Height="15" Width="80" X="11" Y="172"/>
+              <Control Id="ReportBdkEdit" Type="Edit" X="90" Y="172" Height="15" Width="240" Property="PathReportFull">
+                <Property Id="PathReportFull" Value="\\10.177.238.240\Network-Disk\!!! PUBLIC !!!\TestingSystem\"/>
+              </Control>
+              <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
                     <Publish Event="NewDialog" Value="VerifyReadyDlg" Order="10" />
                 </Control>
                 <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)">
