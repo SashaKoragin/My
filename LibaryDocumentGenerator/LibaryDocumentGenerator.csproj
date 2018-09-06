@@ -38,38 +38,37 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Documents\Template\ModelFullWord\ModelInBdk.cs" />
-    <Compile Include="Documents\Template\ModelFullWord\ModelOutBdk.cs" />
-    <Compile Include="Documents\Template\ModelFullWord\WordConstant.cs" />
-    <Compile Include="Documents\Template\ModelTemplate\IModelTemplateFull.cs" />
-    <Compile Include="Documents\Template\ModelTemplate\ModelTemplateFull.cs" />
-    <Compile Include="Documents\Word\Generate\StartGenerate\DocumentsWord.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\BodyDocument\BodyDocument.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\FottersDocument\FottersDocument.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\FottersDocument\Single.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\HeadersDocument\HeadersDocuments.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\Libary\FottersGenerator\FottersAdd.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\Libary\Page\Page.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\Libary\Paragraphs\GenerateParagraph.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\Libary\Paragraphs\GenerateRun.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\Libary\Tables\CellBorders.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\Libary\Tables\CellsTablesXml.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\Libary\Tables\RowTableXml.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\Libary\Tables\StyleCells.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\Libary\Tables\Tables.cs" />
-    <Compile Include="Documents\Word\Generate\UseDocument\SettingPage\SettingPages.cs" />
+    <Compile Include="Documents\Constant\WordConstant.cs" />
+    <Compile Include="Documents\Document\Doc.cs" />
+    <Compile Include="Documents\FileLogica\FileLogica.cs" />
+    <Compile Include="Documents\Model\IModel.cs" />
+    <Compile Include="Documents\Model\OutBdkModel.cs" />
+    <Compile Include="Documents\Template\ITemplate.cs" />
+    <Compile Include="Documents\Template\TemplateOutBdk.cs" />
+    <Compile Include="GenerateDocument\GenerateWord\GenerateDocument.cs" />
+    <Compile Include="ProgrammView\Word\Libary\FottersGenerator\FotterGenerate.cs" />
+    <Compile Include="ProgrammView\Word\Libary\PageGenerator\PageGenerate.cs" />
+    <Compile Include="ProgrammView\Word\Libary\ParagraphsGenerator\ParagraphGenerate.cs" />
+    <Compile Include="ProgrammView\Word\Libary\ParagraphsGenerator\RunGenerate.cs" />
+    <Compile Include="ProgrammView\Word\Libary\TablesGenrerator\CellBorders.cs" />
+    <Compile Include="ProgrammView\Word\Libary\TablesGenrerator\CellGenerate.cs" />
+    <Compile Include="ProgrammView\Word\Libary\TablesGenrerator\CellStyle.cs" />
+    <Compile Include="ProgrammView\Word\Libary\TablesGenrerator\RowGenerate.cs" />
+    <Compile Include="ProgrammView\Word\Libary\TablesGenrerator\TablesGenerate.cs" />
+    <Compile Include="ProgrammView\Word\Template\BodyDocument\BodyDocument.cs" />
+    <Compile Include="ProgrammView\Word\Template\FottersDocument\Fotters.cs" />
+    <Compile Include="ProgrammView\Word\Template\HeadersDocument\HeadersDocuments.cs" />
+    <Compile Include="ProgrammView\Word\Template\SettingPage\PageSetting.cs" />
+    <Compile Include="ProgrammView\Word\Template\SingleDocument\Single.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Documents\Word\Generate\Constants\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\StudioBlend\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
@@ -79,6 +78,10 @@
     <ProjectReference Include="..\..\..\StudioBlend\WPFLib\SqlLibaryIfns\SqlLibaryIfns.csproj">
       <Project>{128c2bf1-de92-4bb8-bda0-eefc5eab66d2}</Project>
       <Name>SqlLibaryIfns</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EfDatabaseLogica\EfDatabaseLogica.csproj">
+      <Project>{b4857225-5431-4fba-8480-3c681bf2dc25}</Project>
+      <Name>EfDatabaseLogica</Name>
     </ProjectReference>
     <ProjectReference Include="..\Loggers\Loggers.csproj">
       <Project>{9bac233e-ed3d-493e-b7f6-f26f8091968d}</Project>

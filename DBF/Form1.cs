@@ -278,8 +278,6 @@ namespace DBF
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Doc doc = new Doc();
-            doc.CreatePackage("C:\\Testing\\test.docx");
         }
 
 

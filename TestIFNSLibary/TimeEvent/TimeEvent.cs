@@ -1,9 +1,10 @@
 ﻿using System;
-using SqlLibaryIfns.SqlZapros.Report;
 using SqlLibaryIfns.ExcelReport.Report;
 using System.Threading.Tasks;
 using System.Timers;
-using SqlLibaryIfns.SqlSelect.SqlReshenia;
+using LibaryXMLAutoModelServiceWcfCommand.TestIfnsService;
+using SqlLibaryIfns.SqlSelect.ModelSqlFullService;
+using SqlLibaryIfns.SqlZapros.SqlConnections;
 using TestIFNSLibary.PathJurnalAndUse;
 using TestIFNSLibary.WebSevice.Bakcup;
 
@@ -77,9 +78,9 @@ namespace TestIFNSLibary.TimeEvent
                     DateTime date = DateTime.Now;
                     if (date.Hour == parametr.Hours && date.Minute == parametr.Minutes)
                     {
-                        var sql = new ReportSqlQbe();
                         var xlsx = new ReportExcel();
-                        xlsx.ReportSave(Parametr.Report,"Требования","Требования",sql.ReportQbe(Parametr.ConnectionString, ProcedureReshenie.SqlFullTreb));
+                        var sqlconnect = new SqlConnectionType();
+                        xlsx.ReportSave(Parametr.Report,"Требования","Требования", sqlconnect.ReportQbe(Parametr.ConnectionString, ((ServiceWcf)sqlconnect.SelectFullParametrSqlReader(Parametr.ConectWork, ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf), ModelSqlFullService.ParamCommand("2"))).ServiceWcfCommand.Command));
                     }
                 }
                 catch (Exception ex)

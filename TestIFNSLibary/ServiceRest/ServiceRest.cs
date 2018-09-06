@@ -8,14 +8,15 @@ using TestIFNSLibary.PathJurnalAndUse;
 using TestIFNSLibary.PostRequest.Face;
 using SqlLibaryIfns.SqlEntytiCommand.TaskUse;
 using SqlLibaryIfns.SqlZapros.SobytieSql;
-using SqlLibaryIfns.SqlZapros.ZaprosSelectNotParam;
 using System.IO;
-using LibaryDocumentGenerator.Documents.Word.Generate.StartGenerate;
+using LibaryDocumentGenerator.GenerateDocument.GenerateWord;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
+using LibaryXMLAutoModelServiceWcfCommand.TestIfnsService;
 using SqlLibaryIfns.ExcelReport.Report;
 using SqlLibaryIfns.SqlModelReport.SqlReshenue;
-using SqlLibaryIfns.SqlSelect.SqlReshenia;
-
+using SqlLibaryIfns.SqlSelect.ModelSqlFullService;
+using SqlLibaryIfns.SqlZapros.SqlConnections;
+using SqlLibaryIfns.ZaprosSelectNotParam;
 
 
 namespace TestIFNSLibary.ServiceRest
@@ -106,7 +107,7 @@ namespace TestIFNSLibary.ServiceRest
             {
                 case "Work":
                     return
-                        await Task.Factory.StartNew<string>(() => resselect.SysNumReshenie(Parametr.ConectWork, seting));
+                        await Task.Factory.StartNew<string>(() =>resselect.SysNumReshenie(Parametr.ConectWork, seting));
                 case "Test":
                       return await Task.Factory.StartNew<string>(() => resselect.SysNumReshenie(Parametr.ConectTest, seting));
                 default:
@@ -134,7 +135,8 @@ namespace TestIFNSLibary.ServiceRest
             switch (setting.Db)
             {
                 case "Work":
-                    return await Task.Factory.StartNew(() => selectfull.BdkSqlSelect(Parametr.ConectWork, SqlLibaryIfns.SqlSelect.SqlBdkIt.SqlBdkIt.SelectAnalisBdk));
+                    var sqlconnect = new SqlConnectionType();
+                    return await Task.Factory.StartNew(() => selectfull.BdkSqlSelect(Parametr.ConectWork, ((ServiceWcf)sqlconnect.SelectFullParametrSqlReader(Parametr.ConectWork, ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf), ModelSqlFullService.ParamCommand("7"))).ServiceWcfCommand.Command));
                default:
                     return null;
             }
@@ -159,11 +161,11 @@ namespace TestIFNSLibary.ServiceRest
         public string StartNewOpenXmlTemplate(FullSetting setting)
         {
             try
-            {   Parametr para = new Parametr();
+            {
                 Task.Factory.StartNew(() =>
                 {
-                    DocumentsWord report = new DocumentsWord();
-                    report.StartWordBdk(Parametr.ConectTest, Parametr.ConnectionString, Parametr.ReportMassTemplate, setting);
+                    GenerateDocument report = new GenerateDocument();
+                    report.GenerateOutBdk(Parametr.ConectWork, Parametr.ConnectionString, Parametr.ReportMassTemplate, setting);
                 });
                 return "Документы для печати запущены и сохраняются в папку "+ Parametr.ReportMassTemplate;
             }

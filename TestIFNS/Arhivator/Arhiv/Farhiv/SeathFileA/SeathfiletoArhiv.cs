@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Data;
+using DocumentFormat.OpenXml.Office2010.PowerPoint;
 
 namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.SeathFileA
 {
@@ -18,13 +19,15 @@ namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.SeathFileA
                 var formarhiv = ((Arhivator) Application.OpenForms["Arhivator"]);
                 var files = new List<FileInfo>();
                 var datetimefile = new List<string>();
-                formarhiv?.BeginInvoke(
-                    new MethodInvoker(() => formarhiv.toolStripStatusLabel1.Text = @"Собираем файлы для архивации!!!"));
                 foreach (
                     var dirarr in
                     from ListViewItem str in pathing
                     select Directory.GetFiles(str.Text, sovpad).Select(Path.GetFullPath).ToArray())
                 {
+                    formarhiv?.BeginInvoke(new MethodInvoker(() => formarhiv.toolStripStatusLabel1.Text = $@"Собираем файлы для архивации по пути {Path.GetDirectoryName(dirarr[0])}!!!"));
+                    formarhiv?.BeginInvoke(
+                            new MethodInvoker(
+                                delegate { formarhiv.Stat.Value = 0; }));
                     var proc = (100.0f / dirarr.Length);
                     foreach (var file in dirarr)
                     {

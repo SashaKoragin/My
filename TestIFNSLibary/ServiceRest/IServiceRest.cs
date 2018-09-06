@@ -2,7 +2,6 @@
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 using LibaryXMLAutoModelXmlSql.Model.FaceError;
 using TestIFNSLibary.PostRequest.Face;
