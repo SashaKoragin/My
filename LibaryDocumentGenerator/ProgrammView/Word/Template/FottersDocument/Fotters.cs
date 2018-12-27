@@ -12,13 +12,13 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.FottersDocument
         /// </summary>
         /// <param name="mainDocument">Документ</param>
         /// <param name="tamplate">Шаблон</param>
-        public void FottersAddDocument(MainDocumentPart mainDocument, LibaryXMLAutoReports.TemplateSheme.Template tamplate)
+        public void FottersAddDocument(MainDocumentPart mainDocument, LibaryXMLAutoReports.FullTemplateSheme.Document tamplate)
         {
             var fotters = FotterGenerate.AddFotters(mainDocument);
            var paragraph = new RunGenerate();
             Footer footer = new Footer();
-            footer.Append(paragraph.RunParagraphGeneratorStandart(tamplate.Stone.Stone4, "20", JustificationValues.Left, 0, "0", false, true));
-            footer.Append(paragraph.RunParagraphGeneratorStandart(tamplate.Stone.Stone5, "20", JustificationValues.Left, 0, "0", false, true));
+            footer.Append(paragraph.RunParagraphGeneratorStandart(tamplate.Templates.Stone.Stone4, "20", JustificationValues.Left, 0, "0", false, true));
+            footer.Append(paragraph.RunParagraphGeneratorStandart(tamplate.Templates.Stone.Stone5, "20", JustificationValues.Left, 0, "0", false, true));
             fotters.Footer = footer;
         }
     }

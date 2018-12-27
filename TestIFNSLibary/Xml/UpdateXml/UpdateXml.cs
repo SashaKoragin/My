@@ -3,18 +3,24 @@ using System.Xml;
 
 namespace TestIFNSLibary.Xml.UpdateXml
 {
-   public class UpdateXml
+   public class UpdateXml : IDisposable
     {
+        private XmlDocument Doc { get; set; }
+        public UpdateXml()
+        {
+            Dispose();
+            Doc = new XmlDocument();
+        }
+
         /// <summary>
         /// Открывает документ xml
         /// </summary>
         /// <param name="path">Путь к Xml</param>
         /// <returns>Документ</returns>
-        public static XmlDocument Document(string path)
+        public XmlDocument Document(string path)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(path);
-            return doc;
+            Doc.Load(path);
+            return Doc;
         }
 
         /// <summary>
@@ -24,7 +30,7 @@ namespace TestIFNSLibary.Xml.UpdateXml
         /// <param name="nameAtribute">Имя атрибута</param>
         /// <param name="znacenie">Значение атрибута</param>
         /// <returns>XML атрибут который можно добавить</returns>
-        internal static XmlAttribute AtributeAddString(XmlDocument xmlDocument, string nameAtribute, string znacenie)
+        internal XmlAttribute AtributeAddString(XmlDocument xmlDocument, string nameAtribute, string znacenie)
         {
             XmlAttribute atributeinn = xmlDocument.CreateAttribute(nameAtribute);
             XmlText inntext = xmlDocument.CreateTextNode(znacenie);
@@ -73,6 +79,7 @@ namespace TestIFNSLibary.Xml.UpdateXml
             var doc = Document(path);
             doc.DocumentElement.SelectSingleNode("//@Status").InnerText = boolen;
             doc.Save(path);
+            
         }
         /// <summary>
         /// Запись Даты на статусе
@@ -85,5 +92,9 @@ namespace TestIFNSLibary.Xml.UpdateXml
             doc.Save(path);
         }
 
+        public void Dispose()
+        {
+            Doc = null;
+        }
     }
 }

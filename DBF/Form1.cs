@@ -7,9 +7,7 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.Threading;
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
+using AcceptPTPRcazn;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Italic = DocumentFormat.OpenXml.Wordprocessing.Italic;
 using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
@@ -57,7 +55,7 @@ namespace DBF
             // string sql = "select statistics.ID_FILE, * from NA left Join statistics on NA.ID_BOSS=statistics.ID_BOSS left Join 2016\\Sved2016 t1 on t1.ID_FILE=statistics.ID_FILE left join 2016\\Sv_summ2016 t2 on t2.ID_FILE=statistics.ID_FILE Where ИНН = '7728262893' and ГОДДОХ ='2016'";  //Join statistics on NA.ID_BOSS=statistics.ID_BOSS left Join 2016\\Sved2016.dbf t1 on t1.ID_FILE=statistics.ID_FILE left join 2016\\Sv_summ2016 t2 on t2.ID_FILE=statistics.ID_FILE
             // string sql = "select distinct t1.ИННФЛ,t1.ФАМИЛИЯ,t1.ИМЯ,t1.ОТЧЕСТВО,t1.ДАТАРОЖД,t1.ГРАЖД,t1.СЕРНОМДОК,t2.* from NA left Join statistics on NA.ID_BOSS=statistics.ID_BOSS left Join 2017\\Sved2017 t1 on t1.ID_FILE=statistics.ID_FILE left join 2017\\Sv_summ2017 t2 on t2.ID_DOK=t1.ID_DOK  Where t1.ИННФЛ ='7728262893' and ГОДДОХ = '2016'"; //1
 
-            string sql1 = "Update statistics set АРХИВ = STRTRAN(АРХИВ,'w40000650','app127')"; //5
+           // string sql1 = "Update statistics set АРХИВ = STRTRAN(АРХИВ,'w40000650','app127')"; //5
 
            // string sql2 = "Update statistics set АРХИВ = STRTRAN(АРХИВ,'w40000722','w40000650')"; //5
 
@@ -278,6 +276,7 @@ namespace DBF
 
         private void button6_Click(object sender, EventArgs e)
         {
+
         }
 
 

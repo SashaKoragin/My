@@ -19,7 +19,7 @@ namespace LibaryDocumentGenerator.Documents.Template
     /// </summary>
     public class TemplateOutBdk : ITemplate
     {
-        public void CreateDocum(string path, LibaryXMLAutoReports.TemplateSheme.Template template, object obj)
+        public void CreateDocum(string path, LibaryXMLAutoReports.FullTemplateSheme.Document template, object obj)
         {
             var data = (FN71)obj;
             using (WordprocessingDocument package = WordprocessingDocument.Create(path, WordprocessingDocumentType.Document))
@@ -30,7 +30,7 @@ namespace LibaryDocumentGenerator.Documents.Template
             }
         }
 
-        public void CreateWord(WordprocessingDocument package, LibaryXMLAutoReports.TemplateSheme.Template template, object obj)
+        public void CreateWord(WordprocessingDocument package, LibaryXMLAutoReports.FullTemplateSheme.Document template, object obj)
         {
             var data = (FN71)obj;
             MainDocumentPart mainDocumentPart = package.AddMainDocumentPart();

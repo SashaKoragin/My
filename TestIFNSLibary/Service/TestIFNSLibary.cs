@@ -76,8 +76,11 @@ namespace TestIFNSLibary.Service
         {
             Task task = new Task((() =>
             {
-                BakcupingDb bakcuping = new BakcupingDb();
-                bakcuping.Backup(Parametr.WorkDB, Parametr.TestDB);
+                Parametr param = new Parametr();
+                using (BakcupingDb bakcuping = new BakcupingDb())
+                {
+                    bakcuping.Backup(param.WorkDB, param.TestDB,param.PathJurnal);
+                }
             }));
             task.Start();
         }

@@ -2,7 +2,9 @@
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
+using LibaryXMLAuto.ModelServiceWcfCommand.AngularModel;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
+using LibaryXMLAuto.Reports.FullTemplateSheme;
 using LibaryXMLAutoModelXmlSql.Model.FaceError;
 using TestIFNSLibary.PostRequest.Face;
 
@@ -43,14 +45,6 @@ namespace TestIFNSLibary.ServiceRest
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StoreProcedureReshenie", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> StoreProcedure(FullSetting setting);
         /// <summary>
-        /// Подгрузка сведений на сайт 
-        /// </summary>
-        /// <param name="setting">Настройки подкгрузки</param>
-        /// <returns>Возврат модели JSON в виде строки</returns>
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/LoadTreb", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> LoaderReshenie(FullSetting setting);
-        /// <summary>
         /// Загрузка файла на компьютер с сервера
         /// </summary>
         /// <param name="filename">Имя файла</param>
@@ -74,12 +68,56 @@ namespace TestIFNSLibary.ServiceRest
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ProcedureBdk", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> StoreProcedureBdk(FullSetting setting);
-
         /// <summary>
         /// Создание шаблона для исходящих сообщений БДК
         /// </summary>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StartOpenXmlTest", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         string StartNewOpenXmlTemplate(FullSetting setting);
+        /// <summary>
+        /// Процедуры Предпроверки
+        /// </summary>
+        /// <param name="setting">Параметры</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ProcedureSoprovod", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> StoreProcedureSoprovod(FullSetting setting);
+
+        /// <summary>
+        /// Создание шаблона для выборок данных
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ServiceCommand", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> ModelServiceCommand(FullSetting setting);
+        /// <summary>
+        /// Общаяя схема передачи данных на сайт
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ModelSqlSelect", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> ModelSqlSelect(AngularModel command);
+        /// <summary>
+        /// Общаяя схема передачи файла по средством Angular
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AngularFileDonload", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> AngularDonloadFile(AngularModelFileDonload angular);
+        /// <summary>
+        /// Добавление шаблона в БД
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddTemplate", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AngularAddTemplate(AngularTemplate angular);
+        /// <summary>
+        /// Создание процессов КРСБ
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreteKrsb", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AngularCreateKrsb(FullSetting setting);
+        /// <summary>
+        /// Выполнения процедур по КРСБ
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ProcedureAnalizKrsb", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> StoreProcedureKrsb(FullSetting setting);
     }
 }

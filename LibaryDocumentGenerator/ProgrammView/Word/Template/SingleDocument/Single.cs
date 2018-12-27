@@ -12,7 +12,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SingleDocument
         /// </summary>
         /// <param name="tamplate">Шаблон</param>
         /// <returns></returns>
-        public Body AddSingle(LibaryXMLAutoReports.TemplateSheme.Template tamplate)
+        public Body AddSingle(LibaryXMLAutoReports.FullTemplateSheme.Document tamplate)
         {
             Body body = new Body();
             Table table = new Table();
@@ -20,10 +20,10 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SingleDocument
             ObservableCollection<TableCell> cellcCollection = new ObservableCollection<TableCell>();
             ObservableCollection<Paragraph> paragraphcCollection = new ObservableCollection<Paragraph>();
             var paragraphGenerate = new RunGenerate();
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Stone.Stone1, "26"));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Stone.Stone2, "26"));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Stone.Stone1, "26"));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Stone.Stone2, "26"));
             cellcCollection.Add(CellGenerate.GenerateCell(ref paragraphcCollection, "5000", TableWidthUnitValues.Dxa));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Stone.Stone3, "26"));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Stone.Stone3, "26"));
             cellcCollection.Add(CellGenerate.GenerateCell(ref paragraphcCollection, "100", TableWidthUnitValues.Auto, "2400"));
             table.Append(rows.GenerateRow(ref cellcCollection));
             body.Append(table);

@@ -21,7 +21,7 @@
     Settings.AddParameterlessConstructorToDbContext = true; // If true, then DbContext will have a default (parameterless) constructor which automatically passes in the connection string name, if false then no parameterless constructor will be created.
     //Settings.DefaultConstructorArgument = "EnvironmentConnectionStrings.MyDbContext"; //defaults to "Name=" + ConnectionStringName
     Settings.ConfigurationClassName = "Configuration"; // Configuration, Mapping, Map, etc. This is appended to the Poco class name to configure the mappings.
-    Settings.FilenameSearchOrder = new[] { "web.config","App.config" }; // Add more here if required. The config files are searched for in the local project first, then the whole solution second.
+    Settings.FilenameSearchOrder = new[] { "web.config", "App.config" }; // Add more here if required. The config files are searched for in the local project first, then the whole solution second.
     Settings.GenerateSeparateFiles = false;
     Settings.EntityClassesModifiers        = "public"; // "public partial";
     Settings.ConfigurationClassesModifiers = "public"; // "public partial";

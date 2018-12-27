@@ -7,9 +7,23 @@ namespace TestIFNSLibary.PathJurnalAndUse
     [DataContract]
    public class Parametr
     {
+        /// <summary>
+        /// При инициализации обновляется Конфиг и подтягиваются переменные
+        /// </summary>
         public Parametr()
         {
             ConfigurationManager.RefreshSection(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.SectionInformation.Name);
+            PathJurnal = ConfigurationManager.AppSettings["PathJurnal"];
+            TestDB = ConfigurationManager.AppSettings["TestDb"];
+            WorkDB = ConfigurationManager.AppSettings["WorkDb"];
+            Hours = Convert.ToInt32(ConfigurationManager.AppSettings["Hours"]);
+            Minutes = Convert.ToInt32(ConfigurationManager.AppSettings["Minutes"]);
+            Log = ConfigurationManager.AppSettings["Log4Net"];
+            ConnectionString = ConfigurationManager.AppSettings["Connect"];
+            ConectTest = ConfigurationManager.AppSettings["ConectTest"];
+            ConectWork = ConfigurationManager.AppSettings["ConectWork"];
+            Report = ConfigurationManager.AppSettings["SaveReport"];
+            ReportMassTemplate = ConfigurationManager.AppSettings["ReportMassTemplate"];
         }
 
         public void SettingEdit(string testDb, string workDb, int hours, int minutes)
@@ -25,51 +39,51 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// <summary>
         /// Путь к журналу
         /// </summary>
-        public static string PathJurnal = ConfigurationManager.AppSettings["PathJurnal"];
+        public string  PathJurnal { get; set; }
         /// <summary>
         /// Путь к локальной Базе данных
         /// </summary>
         [DataMember]
-        public string TestDB { get; set; } = ConfigurationManager.AppSettings["TestDb"];
+        public string TestDB { get; set; }
         /// <summary>
         /// Путь к удаленной Базе данных
         /// </summary>
         [DataMember]
-        public string WorkDB { get; set; } = ConfigurationManager.AppSettings["WorkDb"];
+        public string WorkDB { get; set; }
         /// <summary>
         /// Часы
         /// </summary>
         [DataMember]
-        public int Hours { get; set; } = Convert.ToInt32( ConfigurationManager.AppSettings["Hours"]);
+        public int Hours { get; set; }
         /// <summary>
         /// Минуты
         /// </summary>
         [DataMember]
-        public int Minutes { get; set; } = Convert.ToInt32( ConfigurationManager.AppSettings["Minutes"]);
+        public int Minutes { get; set; }
         /// <summary>
         /// Файл Лога
         /// </summary>
-        public static string Log = ConfigurationManager.AppSettings["Log4Net"];
+        public string Log { get; set; }
         /// <summary>
         /// Соединение с рабочей Базой данных Taxes51
         /// </summary>
-        public static string ConnectionString = ConfigurationManager.AppSettings["Connect"];
+        public string ConnectionString { get; set; }
         /// <summary>
         /// Соединение с тестовой БД RISK_TEST
         /// </summary>
-        public static string ConectTest = ConfigurationManager.AppSettings["ConectTest"];
+        public string ConectTest { get; set; }
 
         /// <summary>
         /// Соединение с рабочей БД BDK77737751000070020000019757
         /// </summary>
-        public static string ConectWork = ConfigurationManager.AppSettings["ConectWork"];
+        public string ConectWork { get; set; }
         /// <summary>
         /// Сохранение отчетов в автомате
         /// </summary>
-        public static string Report = ConfigurationManager.AppSettings["SaveReport"];
+        public string Report { get; set; }
         /// <summary>
         /// Путь для массовой печати
         /// </summary>
-        public static string ReportMassTemplate = ConfigurationManager.AppSettings["ReportMassTemplate"];
+        public string ReportMassTemplate { get; set; }
     }
 }

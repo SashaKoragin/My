@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
-using System.Web;
 using System.Xml.Serialization;
+using TestIFNSLibary.PathJurnalAndUse;
 using TestIFNSLibary.Xml.XmlDS;
 
 namespace TestIFNSLibary.Xml
 {
     class Xml
     {
-        
+        Parametr ParametrService = new Parametr();
         public static XmlSerializer Formatter = new XmlSerializer(typeof(Bakcup));
         public bool YesandNo()
         {
-                using (FileStream fs = new FileStream(PathJurnalAndUse.Parametr.PathJurnal, FileMode.Open))
+            
+                using (FileStream fs = new FileStream(ParametrService.PathJurnal, FileMode.Open))
                 {
                     Bakcup newpeople = (Bakcup)Formatter.Deserialize(fs);
                     return newpeople.Status;
@@ -23,7 +22,7 @@ namespace TestIFNSLibary.Xml
 
         public DateTime DateBakcup()
         {
-                using (FileStream fs = new FileStream(PathJurnalAndUse.Parametr.PathJurnal, FileMode.Open))
+                using (FileStream fs = new FileStream(ParametrService.PathJurnal, FileMode.Open))
             {
                 Bakcup newpeople = (Bakcup)Formatter.Deserialize(fs);
                 return newpeople.Date;
@@ -32,7 +31,7 @@ namespace TestIFNSLibary.Xml
 
         public BakcupJurnal[] Jurnal()
         {
-            using (FileStream fs = new FileStream(PathJurnalAndUse.Parametr.PathJurnal, FileMode.Open))
+            using (FileStream fs = new FileStream(ParametrService.PathJurnal, FileMode.Open))
             {
                 Bakcup newpeople = (Bakcup)Formatter.Deserialize(fs);
                 return newpeople.Jurnal;

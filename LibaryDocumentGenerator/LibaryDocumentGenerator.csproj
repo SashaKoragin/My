@@ -50,6 +50,7 @@
     <Compile Include="Documents\Model\OutBdkModel.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />
     <Compile Include="Documents\Template\TemplateOutBdk.cs" />
+    <Compile Include="DonloadFile\Angular\AngularRestEf.cs" />
     <Compile Include="GenerateDocument\GenerateWord\GenerateDocument.cs" />
     <Compile Include="ProgrammView\Word\Libary\FottersGenerator\FotterGenerate.cs" />
     <Compile Include="ProgrammView\Word\Libary\PageGenerator\PageGenerate.cs" />
@@ -79,9 +80,9 @@
       <Project>{128c2bf1-de92-4bb8-bda0-eefc5eab66d2}</Project>
       <Name>SqlLibaryIfns</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EfDatabaseLogica\EfDatabaseLogica.csproj">
-      <Project>{b4857225-5431-4fba-8480-3c681bf2dc25}</Project>
-      <Name>EfDatabaseLogica</Name>
+    <ProjectReference Include="..\EfDatabase\EfDatabase.csproj">
+      <Project>{578cf45e-310b-4e2e-9c94-5a9f16b736ae}</Project>
+      <Name>EfDatabase</Name>
     </ProjectReference>
     <ProjectReference Include="..\Loggers\Loggers.csproj">
       <Project>{9bac233e-ed3d-493e-b7f6-f26f8091968d}</Project>

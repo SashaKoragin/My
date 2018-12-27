@@ -52,8 +52,10 @@ namespace TestIFNSLibary.TimeEvent
                     DateTime date = DateTime.Now;
                     if (date.Hour == parametr.Hours && date.Minute == parametr.Minutes)
                     {
-                        BakcupingDb bakcuping = new BakcupingDb();
-                        bakcuping.Backup(parametr.WorkDB, parametr.TestDB);
+                        using (BakcupingDb bakcuping = new BakcupingDb())
+                        {
+                            bakcuping.Backup(parametr.WorkDB, parametr.TestDB, parametr.PathJurnal);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -65,6 +67,7 @@ namespace TestIFNSLibary.TimeEvent
         /// <summary>
         /// Автоматическая задача сбора данных по Требованиям по которым не выставленны решения
         /// Задача Sql и Excel 
+        /// Доделала Dispose метод
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -78,9 +81,11 @@ namespace TestIFNSLibary.TimeEvent
                     DateTime date = DateTime.Now;
                     if (date.Hour == parametr.Hours && date.Minute == parametr.Minutes)
                     {
-                        var xlsx = new ReportExcel();
-                        var sqlconnect = new SqlConnectionType();
-                        xlsx.ReportSave(Parametr.Report,"Требования","Требования", sqlconnect.ReportQbe(Parametr.ConnectionString, ((ServiceWcf)sqlconnect.SelectFullParametrSqlReader(Parametr.ConectWork, ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf), ModelSqlFullService.ParamCommand("2"))).ServiceWcfCommand.Command));
+                        using (var xlsx = new ReportExcel())
+                        {
+                            var sqlconnect = new SqlConnectionType();
+                            xlsx.ReportSave(parametr.Report, "Требования", "Требования", sqlconnect.ReportQbe(parametr.ConnectionString, ((ServiceWcf)sqlconnect.SelectFullParametrSqlReader(parametr.ConectWork, ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf), ModelSqlFullService.ParamCommand("2"))).ServiceWcfCommand.Command));
+                        }
                     }
                 }
                 catch (Exception ex)

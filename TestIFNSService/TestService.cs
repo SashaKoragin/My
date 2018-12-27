@@ -1,8 +1,12 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.ServiceProcess;
+using Microsoft.AspNet.SignalR;
+using Microsoft.Owin;
+using Microsoft.Owin.Hosting;
 using TestIFNSLibary.Service;
-
+using TestIFNSLibary.SignalR;
+[assembly: OwinStartup(typeof(Startup))]
 namespace TestIFNSService
 {
     public partial class TestService : ServiceBase
@@ -19,9 +23,11 @@ namespace TestIFNSService
         {
             if (Servicehost != null)
             {
-                Servicehost.Close();
+               Servicehost.Close();
                ServiceRest.Close();
             }
+            var url = "http://localhost:8059";
+            WebApp.Start(url);
             ServiceRest = new WebServiceHost(typeof(TestIFNSLibary.ServiceRest.ServiceRest));
             Servicehost = new ServiceHost(typeof(CommandDbf));
             ServiceRest.Open();

@@ -37,6 +37,7 @@ namespace Ifns51.Risk
     public interface IRisksContext : System.IDisposable
     {
         System.Data.Entity.DbSet<AhalisBdk> AhalisBdks { get; set; } // AhalisBdk
+        System.Data.Entity.DbSet<AnalizNo> AnalizNoes { get; set; } // AnalizNO
         System.Data.Entity.DbSet<BankAccExclusion> BankAccExclusions { get; set; } // BANK_ACC_EXCLUSION
         System.Data.Entity.DbSet<BankAccPlan> BankAccPlans { get; set; } // BANK_ACC_PLAN
         System.Data.Entity.DbSet<BankDocument> BankDocuments { get; set; } // BANK_DOCUMENT
@@ -47,6 +48,11 @@ namespace Ifns51.Risk
         System.Data.Entity.DbSet<ClassOtdel> ClassOtdels { get; set; } // ClassOtdel
         System.Data.Entity.DbSet<ConfigCode> ConfigCodes { get; set; } // CONFIG_CODE
         System.Data.Entity.DbSet<DbConfig> DbConfigs { get; set; } // DB_CONFIG
+        System.Data.Entity.DbSet<DelaPriemObu> DelaPriemObus { get; set; } // DelaPriemObu
+        System.Data.Entity.DbSet<Delo> Deloes { get; set; } // Delo
+        System.Data.Entity.DbSet<DocTemplate> DocTemplates { get; set; } // DocTemplate
+        System.Data.Entity.DbSet<DocumentDetalization> DocumentDetalizations { get; set; } // DocumentDetalization
+        System.Data.Entity.DbSet<DocumentReglament> DocumentReglaments { get; set; } // DocumentReglament
         System.Data.Entity.DbSet<Face> Faces { get; set; } // Face
         System.Data.Entity.DbSet<Fn1341> Fn1341 { get; set; } // fn1341
         System.Data.Entity.DbSet<Fn1341Trust> Fn1341Trust { get; set; } // FN1341_TRUST
@@ -61,9 +67,14 @@ namespace Ifns51.Risk
         System.Data.Entity.DbSet<JobDataInt> JobDataInts { get; set; } // JOB_DATA_INT
         System.Data.Entity.DbSet<JobDataStr> JobDataStrs { get; set; } // JOB_DATA_STR
         System.Data.Entity.DbSet<JobDatum> JobDatums { get; set; } // JOB_DATA
+        System.Data.Entity.DbSet<KbkAnaliz> KbkAnalizs { get; set; } // KbkAnaliz
         System.Data.Entity.DbSet<LotusDoc> LotusDocs { get; set; } // LOTUS_DOCS
         System.Data.Entity.DbSet<LotusFile> LotusFiles { get; set; } // LOTUS_FILE
         System.Data.Entity.DbSet<LotusSequence> LotusSequences { get; set; } // LOTUS_SEQUENCE
+        System.Data.Entity.DbSet<MessageDate> MessageDates { get; set; } // MessageDate
+        System.Data.Entity.DbSet<MessageStatusUh> MessageStatusUhs { get; set; } // MessageStatusUh
+        System.Data.Entity.DbSet<MessageStrahovieAndOtkaz> MessageStrahovieAndOtkazs { get; set; } // MessageStrahovieAndOtkaz
+        System.Data.Entity.DbSet<MessageVivod> MessageVivods { get; set; } // MessageVivod
         System.Data.Entity.DbSet<NameDocument> NameDocuments { get; set; } // NameDocument
         System.Data.Entity.DbSet<RbReport> RbReports { get; set; } // RB_REPORT
         System.Data.Entity.DbSet<ReportFilter> ReportFilters { get; set; } // REPORT_FILTER
@@ -108,6 +119,8 @@ namespace Ifns51.Risk
         System.Data.Entity.DbSet<SmevReq> SmevReqs { get; set; } // SMEV_REQ
         System.Data.Entity.DbSet<SmevResponse> SmevResponses { get; set; } // SMEV_RESPONSE
         System.Data.Entity.DbSet<SobytieOtdel> SobytieOtdels { get; set; } // SobytieOtdel
+        System.Data.Entity.DbSet<StatusAnaliz> StatusAnalizs { get; set; } // StatusAnaliz
+        System.Data.Entity.DbSet<StatusPriem> StatusPriems { get; set; } // StatusPriem
         System.Data.Entity.DbSet<StatusTrebOnIcass> StatusTrebOnIcasses { get; set; } // StatusTrebOnIcass
         System.Data.Entity.DbSet<Stone> Stones { get; set; } // Stone
         System.Data.Entity.DbSet<TableSysNumReshen> TableSysNumReshens { get; set; } // TableSysNumReshen
@@ -141,6 +154,7 @@ namespace Ifns51.Risk
     public class RisksContext : System.Data.Entity.DbContext, IRisksContext
     {
         public System.Data.Entity.DbSet<AhalisBdk> AhalisBdks { get; set; } // AhalisBdk
+        public System.Data.Entity.DbSet<AnalizNo> AnalizNoes { get; set; } // AnalizNO
         public System.Data.Entity.DbSet<BankAccExclusion> BankAccExclusions { get; set; } // BANK_ACC_EXCLUSION
         public System.Data.Entity.DbSet<BankAccPlan> BankAccPlans { get; set; } // BANK_ACC_PLAN
         public System.Data.Entity.DbSet<BankDocument> BankDocuments { get; set; } // BANK_DOCUMENT
@@ -151,6 +165,11 @@ namespace Ifns51.Risk
         public System.Data.Entity.DbSet<ClassOtdel> ClassOtdels { get; set; } // ClassOtdel
         public System.Data.Entity.DbSet<ConfigCode> ConfigCodes { get; set; } // CONFIG_CODE
         public System.Data.Entity.DbSet<DbConfig> DbConfigs { get; set; } // DB_CONFIG
+        public System.Data.Entity.DbSet<DelaPriemObu> DelaPriemObus { get; set; } // DelaPriemObu
+        public System.Data.Entity.DbSet<Delo> Deloes { get; set; } // Delo
+        public System.Data.Entity.DbSet<DocTemplate> DocTemplates { get; set; } // DocTemplate
+        public System.Data.Entity.DbSet<DocumentDetalization> DocumentDetalizations { get; set; } // DocumentDetalization
+        public System.Data.Entity.DbSet<DocumentReglament> DocumentReglaments { get; set; } // DocumentReglament
         public System.Data.Entity.DbSet<Face> Faces { get; set; } // Face
         public System.Data.Entity.DbSet<Fn1341> Fn1341 { get; set; } // fn1341
         public System.Data.Entity.DbSet<Fn1341Trust> Fn1341Trust { get; set; } // FN1341_TRUST
@@ -165,9 +184,14 @@ namespace Ifns51.Risk
         public System.Data.Entity.DbSet<JobDataInt> JobDataInts { get; set; } // JOB_DATA_INT
         public System.Data.Entity.DbSet<JobDataStr> JobDataStrs { get; set; } // JOB_DATA_STR
         public System.Data.Entity.DbSet<JobDatum> JobDatums { get; set; } // JOB_DATA
+        public System.Data.Entity.DbSet<KbkAnaliz> KbkAnalizs { get; set; } // KbkAnaliz
         public System.Data.Entity.DbSet<LotusDoc> LotusDocs { get; set; } // LOTUS_DOCS
         public System.Data.Entity.DbSet<LotusFile> LotusFiles { get; set; } // LOTUS_FILE
         public System.Data.Entity.DbSet<LotusSequence> LotusSequences { get; set; } // LOTUS_SEQUENCE
+        public System.Data.Entity.DbSet<MessageDate> MessageDates { get; set; } // MessageDate
+        public System.Data.Entity.DbSet<MessageStatusUh> MessageStatusUhs { get; set; } // MessageStatusUh
+        public System.Data.Entity.DbSet<MessageStrahovieAndOtkaz> MessageStrahovieAndOtkazs { get; set; } // MessageStrahovieAndOtkaz
+        public System.Data.Entity.DbSet<MessageVivod> MessageVivods { get; set; } // MessageVivod
         public System.Data.Entity.DbSet<NameDocument> NameDocuments { get; set; } // NameDocument
         public System.Data.Entity.DbSet<RbReport> RbReports { get; set; } // RB_REPORT
         public System.Data.Entity.DbSet<ReportFilter> ReportFilters { get; set; } // REPORT_FILTER
@@ -212,6 +236,8 @@ namespace Ifns51.Risk
         public System.Data.Entity.DbSet<SmevReq> SmevReqs { get; set; } // SMEV_REQ
         public System.Data.Entity.DbSet<SmevResponse> SmevResponses { get; set; } // SMEV_RESPONSE
         public System.Data.Entity.DbSet<SobytieOtdel> SobytieOtdels { get; set; } // SobytieOtdel
+        public System.Data.Entity.DbSet<StatusAnaliz> StatusAnalizs { get; set; } // StatusAnaliz
+        public System.Data.Entity.DbSet<StatusPriem> StatusPriems { get; set; } // StatusPriem
         public System.Data.Entity.DbSet<StatusTrebOnIcass> StatusTrebOnIcasses { get; set; } // StatusTrebOnIcass
         public System.Data.Entity.DbSet<Stone> Stones { get; set; } // Stone
         public System.Data.Entity.DbSet<TableSysNumReshen> TableSysNumReshens { get; set; } // TableSysNumReshen
@@ -272,6 +298,7 @@ namespace Ifns51.Risk
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new AhalisBdkConfiguration());
+            modelBuilder.Configurations.Add(new AnalizNoConfiguration());
             modelBuilder.Configurations.Add(new BankAccExclusionConfiguration());
             modelBuilder.Configurations.Add(new BankAccPlanConfiguration());
             modelBuilder.Configurations.Add(new BankDocumentConfiguration());
@@ -282,6 +309,11 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new ClassOtdelConfiguration());
             modelBuilder.Configurations.Add(new ConfigCodeConfiguration());
             modelBuilder.Configurations.Add(new DbConfigConfiguration());
+            modelBuilder.Configurations.Add(new DelaPriemObuConfiguration());
+            modelBuilder.Configurations.Add(new DeloConfiguration());
+            modelBuilder.Configurations.Add(new DocTemplateConfiguration());
+            modelBuilder.Configurations.Add(new DocumentDetalizationConfiguration());
+            modelBuilder.Configurations.Add(new DocumentReglamentConfiguration());
             modelBuilder.Configurations.Add(new FaceConfiguration());
             modelBuilder.Configurations.Add(new Fn1341Configuration());
             modelBuilder.Configurations.Add(new Fn1341TrustConfiguration());
@@ -296,9 +328,14 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new JobDataIntConfiguration());
             modelBuilder.Configurations.Add(new JobDataStrConfiguration());
             modelBuilder.Configurations.Add(new JobDatumConfiguration());
+            modelBuilder.Configurations.Add(new KbkAnalizConfiguration());
             modelBuilder.Configurations.Add(new LotusDocConfiguration());
             modelBuilder.Configurations.Add(new LotusFileConfiguration());
             modelBuilder.Configurations.Add(new LotusSequenceConfiguration());
+            modelBuilder.Configurations.Add(new MessageDateConfiguration());
+            modelBuilder.Configurations.Add(new MessageStatusUhConfiguration());
+            modelBuilder.Configurations.Add(new MessageStrahovieAndOtkazConfiguration());
+            modelBuilder.Configurations.Add(new MessageVivodConfiguration());
             modelBuilder.Configurations.Add(new NameDocumentConfiguration());
             modelBuilder.Configurations.Add(new RbReportConfiguration());
             modelBuilder.Configurations.Add(new ReportFilterConfiguration());
@@ -343,6 +380,8 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new SmevReqConfiguration());
             modelBuilder.Configurations.Add(new SmevResponseConfiguration());
             modelBuilder.Configurations.Add(new SobytieOtdelConfiguration());
+            modelBuilder.Configurations.Add(new StatusAnalizConfiguration());
+            modelBuilder.Configurations.Add(new StatusPriemConfiguration());
             modelBuilder.Configurations.Add(new StatusTrebOnIcassConfiguration());
             modelBuilder.Configurations.Add(new StoneConfiguration());
             modelBuilder.Configurations.Add(new TableSysNumReshenConfiguration());
@@ -358,6 +397,7 @@ namespace Ifns51.Risk
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
             modelBuilder.Configurations.Add(new AhalisBdkConfiguration(schema));
+            modelBuilder.Configurations.Add(new AnalizNoConfiguration(schema));
             modelBuilder.Configurations.Add(new BankAccExclusionConfiguration(schema));
             modelBuilder.Configurations.Add(new BankAccPlanConfiguration(schema));
             modelBuilder.Configurations.Add(new BankDocumentConfiguration(schema));
@@ -368,6 +408,11 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new ClassOtdelConfiguration(schema));
             modelBuilder.Configurations.Add(new ConfigCodeConfiguration(schema));
             modelBuilder.Configurations.Add(new DbConfigConfiguration(schema));
+            modelBuilder.Configurations.Add(new DelaPriemObuConfiguration(schema));
+            modelBuilder.Configurations.Add(new DeloConfiguration(schema));
+            modelBuilder.Configurations.Add(new DocTemplateConfiguration(schema));
+            modelBuilder.Configurations.Add(new DocumentDetalizationConfiguration(schema));
+            modelBuilder.Configurations.Add(new DocumentReglamentConfiguration(schema));
             modelBuilder.Configurations.Add(new FaceConfiguration(schema));
             modelBuilder.Configurations.Add(new Fn1341Configuration(schema));
             modelBuilder.Configurations.Add(new Fn1341TrustConfiguration(schema));
@@ -382,9 +427,14 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new JobDataIntConfiguration(schema));
             modelBuilder.Configurations.Add(new JobDataStrConfiguration(schema));
             modelBuilder.Configurations.Add(new JobDatumConfiguration(schema));
+            modelBuilder.Configurations.Add(new KbkAnalizConfiguration(schema));
             modelBuilder.Configurations.Add(new LotusDocConfiguration(schema));
             modelBuilder.Configurations.Add(new LotusFileConfiguration(schema));
             modelBuilder.Configurations.Add(new LotusSequenceConfiguration(schema));
+            modelBuilder.Configurations.Add(new MessageDateConfiguration(schema));
+            modelBuilder.Configurations.Add(new MessageStatusUhConfiguration(schema));
+            modelBuilder.Configurations.Add(new MessageStrahovieAndOtkazConfiguration(schema));
+            modelBuilder.Configurations.Add(new MessageVivodConfiguration(schema));
             modelBuilder.Configurations.Add(new NameDocumentConfiguration(schema));
             modelBuilder.Configurations.Add(new RbReportConfiguration(schema));
             modelBuilder.Configurations.Add(new ReportFilterConfiguration(schema));
@@ -429,6 +479,8 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new SmevReqConfiguration(schema));
             modelBuilder.Configurations.Add(new SmevResponseConfiguration(schema));
             modelBuilder.Configurations.Add(new SobytieOtdelConfiguration(schema));
+            modelBuilder.Configurations.Add(new StatusAnalizConfiguration(schema));
+            modelBuilder.Configurations.Add(new StatusPriemConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusTrebOnIcassConfiguration(schema));
             modelBuilder.Configurations.Add(new StoneConfiguration(schema));
             modelBuilder.Configurations.Add(new TableSysNumReshenConfiguration(schema));
@@ -531,6 +583,68 @@ namespace Ifns51.Risk
         public System.DateTime? D41 { get; set; } // D41
         public string S875 { get; set; } // S875 (length: 300)
         public int? D3970 { get; set; } // D3970
+    }
+
+    // AnalizNO
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AnalizNo
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int D3979 { get; set; } // D3979
+        public int D3972 { get; set; } // D3972
+        public byte Color { get; set; } // Color
+        public byte? DateAnaliz { get; set; } // DateAnaliz
+        public byte? StrahovieAndOtkazAnaliz { get; set; } // StrahovieAndOtkazAnaliz
+        public byte? StatusUhAnaliz { get; set; } // StatusUhAnaliz
+        public byte? Vivod { get; set; } // Vivod
+        public int? D6 { get; set; } // D6
+        public int D15602 { get; set; } // D1560_2
+        public int? D15601 { get; set; } // D1560_1
+        public System.DateTime DatePeredachi { get; set; } // DatePeredachi
+        public System.DateTime DateZakritia { get; set; } // DateZakritia
+        public string N134 { get; set; } // N134 (length: 12)
+        public string D3 { get; set; } // D3 (length: 9)
+        public string Kbk { get; set; } // Kbk (length: 20)
+        public string OktmoOld { get; set; } // OKTMO_old (length: 8)
+        public string D093 { get; set; } // D09_3 (length: 10)
+        public int? N11 { get; set; } // N1_1
+        public string N279 { get; set; } // N279 (length: 4)
+        public string OktmoNew { get; set; } // OKTMO_new (length: 8)
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+        public string Error { get; set; } // Error (length: 1024)
+        public System.DateTime? DateError { get; set; } // DateError
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Delo pointed by [AnalizNO].([D3979]) (FK_AnalizNO_Delo)
+        /// </summary>
+        public virtual Delo Delo { get; set; } // FK_AnalizNO_Delo
+
+        /// <summary>
+        /// Parent MessageDate pointed by [AnalizNO].([DateAnaliz]) (FK_AnalizNO_MessageDate)
+        /// </summary>
+        public virtual MessageDate MessageDate { get; set; } // FK_AnalizNO_MessageDate
+
+        /// <summary>
+        /// Parent MessageStatusUh pointed by [AnalizNO].([StatusUhAnaliz]) (FK_AnalizNO_MessageStatusUh)
+        /// </summary>
+        public virtual MessageStatusUh MessageStatusUh { get; set; } // FK_AnalizNO_MessageStatusUh
+
+        /// <summary>
+        /// Parent MessageStrahovieAndOtkaz pointed by [AnalizNO].([StrahovieAndOtkazAnaliz]) (FK_AnalizNO_MessageStrahovieAndOtkaz)
+        /// </summary>
+        public virtual MessageStrahovieAndOtkaz MessageStrahovieAndOtkaz { get; set; } // FK_AnalizNO_MessageStrahovieAndOtkaz
+
+        /// <summary>
+        /// Parent MessageVivod pointed by [AnalizNO].([Vivod]) (FK_AnalizNO_MessageVivod)
+        /// </summary>
+        public virtual MessageVivod MessageVivod { get; set; } // FK_AnalizNO_MessageVivod
+
+        public AnalizNo()
+        {
+            DateCreate = System.DateTime.Now;
+        }
     }
 
     // BANK_ACC_EXCLUSION
@@ -677,6 +791,7 @@ namespace Ifns51.Risk
 
         public Body()
         {
+            DateCreate = System.DateTime.Now;
             Templates = new System.Collections.Generic.List<Template>();
         }
     }
@@ -820,6 +935,123 @@ namespace Ifns51.Risk
         {
             RiskFn71 = new System.Collections.Generic.List<RiskFn71>();
         }
+    }
+
+    // DelaPriemObu
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class DelaPriemObu
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string IdDeloObu { get; set; } // IdDeloObu (length: 255)
+        public int? IdMessages { get; set; } // IdMessages
+
+        public DelaPriemObu()
+        {
+            IdMessages = 1;
+        }
+    }
+
+    // Delo
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Delo
+    {
+        public int Id { get; set; } // Id
+        public int D3979 { get; set; } // D3979 (Primary key)
+        public byte? Status1Priem { get; set; } // Status1Priem
+        public byte? Status1Analiz { get; set; } // Status1Analiz
+        public System.DateTime? D85 { get; set; } // D85
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child AnalizNoes where [AnalizNO].[D3979] point to this entity (FK_AnalizNO_Delo)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<AnalizNo> AnalizNoes { get; set; } // AnalizNO.FK_AnalizNO_Delo
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent StatusAnaliz pointed by [Delo].([Status1Analiz]) (FK_Delo_StatusAnaliz)
+        /// </summary>
+        public virtual StatusAnaliz StatusAnaliz { get; set; } // FK_Delo_StatusAnaliz
+
+        /// <summary>
+        /// Parent StatusPriem pointed by [Delo].([Status1Priem]) (FK_Delo_StatusPriem)
+        /// </summary>
+        public virtual StatusPriem StatusPriem { get; set; } // FK_Delo_StatusPriem
+
+        public Delo()
+        {
+            D85 = System.DateTime.Now;
+            AnalizNoes = new System.Collections.Generic.List<AnalizNo>();
+        }
+    }
+
+    // DocTemplate
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class DocTemplate
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Mesage { get; set; } // Mesage (length: 255)
+        public byte[] Templ { get; set; } // Templ (length: 2147483647)
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+    }
+
+    // DocumentDetalization
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class DocumentDetalization
+    {
+        public int Id { get; set; } // Id
+        public int N4411 { get; set; } // N441__1 (Primary key)
+        public int? IdProcedure { get; set; } // IdProcedure
+        public int? N3331 { get; set; } // N333__1
+        public int? IdUser { get; set; } // IdUser
+        public byte? IdGroup { get; set; } // IdGroup
+        public byte? IdDocument { get; set; } // IdDocument
+        public string N77 { get; set; } // N77 (length: 128)
+        public string Coment { get; set; } // Coment (length: 128)
+        public System.DateTime? N4414 { get; set; } // N441__4
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent DocumentReglament pointed by [DocumentDetalization].([N4411]) (FK_DocumentDetalization_DocumentReglament)
+        /// </summary>
+        public virtual DocumentReglament DocumentReglament { get; set; } // FK_DocumentDetalization_DocumentReglament
+    }
+
+    // DocumentReglament
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class DocumentReglament
+    {
+        public int Id { get; set; } // Id
+        public int N4411 { get; set; } // N441__1 (Primary key)
+        public int? Status1 { get; set; } // Status1
+        public string MesErSt1 { get; set; } // MesErSt1 (length: 255)
+        public System.DateTime? DSt1 { get; set; } // DSt1
+        public int? Status2 { get; set; } // Status2
+        public string MesErSt2 { get; set; } // MesErSt2 (length: 255)
+        public System.DateTime? DSt2 { get; set; } // DSt2
+        public System.DateTime? D85 { get; set; } // D85
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Parent (One-to-One) DocumentReglament pointed by [DocumentDetalization].[N441__1] (FK_DocumentDetalization_DocumentReglament)
+        /// </summary>
+        public virtual DocumentDetalization DocumentDetalization { get; set; } // DocumentDetalization.FK_DocumentDetalization_DocumentReglament
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent StatusTrebOnIcass pointed by [DocumentReglament].([Status1]) (FK_DocumentReglament_StatusTrebOnIcass)
+        /// </summary>
+        public virtual StatusTrebOnIcass StatusTrebOnIcass_Status1 { get; set; } // FK_DocumentReglament_StatusTrebOnIcass
+
+        /// <summary>
+        /// Parent StatusTrebOnIcass pointed by [DocumentReglament].([Status2]) (FK_DocumentReglament_StatusTrebOnIcass_2)
+        /// </summary>
+        public virtual StatusTrebOnIcass StatusTrebOnIcass_Status2 { get; set; } // FK_DocumentReglament_StatusTrebOnIcass_2
     }
 
     // Face
@@ -1105,6 +1337,7 @@ namespace Ifns51.Risk
 
         public Header()
         {
+            DateCreate = System.DateTime.Now;
             Templates = new System.Collections.Generic.List<Template>();
         }
     }
@@ -1255,6 +1488,21 @@ namespace Ifns51.Risk
         /// Parent ShedJob pointed by [JOB_DATA].([ShedJobId]) (FK_JOB_DATA_SHED_JOB)
         /// </summary>
         public virtual ShedJob ShedJob { get; set; } // FK_JOB_DATA_SHED_JOB
+    }
+
+    // KbkAnaliz
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KbkAnaliz
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Kbk { get; set; } // Kbk (length: 20)
+        public byte? Statuskbk { get; set; } // Statuskbk
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        public KbkAnaliz()
+        {
+            DateCreate = System.DateTime.Now;
+        }
     }
 
     // LOTUS_DOCS
@@ -1412,12 +1660,95 @@ namespace Ifns51.Risk
         }
     }
 
+    // MessageDate
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class MessageDate
+    {
+        public int Id { get; set; } // Id
+        public byte Priznak { get; set; } // Priznak (Primary key)
+        public string MessageDate_ { get; set; } // MessageDate (length: 255)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child AnalizNoes where [AnalizNO].[DateAnaliz] point to this entity (FK_AnalizNO_MessageDate)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<AnalizNo> AnalizNoes { get; set; } // AnalizNO.FK_AnalizNO_MessageDate
+
+        public MessageDate()
+        {
+            AnalizNoes = new System.Collections.Generic.List<AnalizNo>();
+        }
+    }
+
+    // MessageStatusUh
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class MessageStatusUh
+    {
+        public int Id { get; set; } // Id
+        public byte Priznak { get; set; } // Priznak (Primary key)
+        public string MessageStatusUh_ { get; set; } // MessageStatusUh (length: 255)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child AnalizNoes where [AnalizNO].[StatusUhAnaliz] point to this entity (FK_AnalizNO_MessageStatusUh)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<AnalizNo> AnalizNoes { get; set; } // AnalizNO.FK_AnalizNO_MessageStatusUh
+
+        public MessageStatusUh()
+        {
+            AnalizNoes = new System.Collections.Generic.List<AnalizNo>();
+        }
+    }
+
+    // MessageStrahovieAndOtkaz
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class MessageStrahovieAndOtkaz
+    {
+        public int Id { get; set; } // Id
+        public byte Priznak { get; set; } // Priznak (Primary key)
+        public string MessageStrahovieAndOtkaz_ { get; set; } // MessageStrahovieAndOtkaz (length: 255)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child AnalizNoes where [AnalizNO].[StrahovieAndOtkazAnaliz] point to this entity (FK_AnalizNO_MessageStrahovieAndOtkaz)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<AnalizNo> AnalizNoes { get; set; } // AnalizNO.FK_AnalizNO_MessageStrahovieAndOtkaz
+
+        public MessageStrahovieAndOtkaz()
+        {
+            AnalizNoes = new System.Collections.Generic.List<AnalizNo>();
+        }
+    }
+
+    // MessageVivod
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class MessageVivod
+    {
+        public int Id { get; set; } // Id
+        public byte Priznak { get; set; } // Priznak (Primary key)
+        public string MessageVivod_ { get; set; } // MessageVivod (length: 255)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child AnalizNoes where [AnalizNO].[Vivod] point to this entity (FK_AnalizNO_MessageVivod)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<AnalizNo> AnalizNoes { get; set; } // AnalizNO.FK_AnalizNO_MessageVivod
+
+        public MessageVivod()
+        {
+            AnalizNoes = new System.Collections.Generic.List<AnalizNo>();
+        }
+    }
+
     // NameDocument
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class NameDocument
     {
-        public int Id { get; set; } // Id (Primary key)
-        public int IdNamedocument { get; set; } // IdNamedocument
+        public int IdNamedocument { get; set; } // IdNamedocument (Primary key)
         public string NameDocument_ { get; set; } // NameDocument (length: 128)
         public string ManualDoc { get; set; } // ManualDoc (length: 128)
         public int IdTemplate { get; set; } // IdTemplate
@@ -1439,6 +1770,7 @@ namespace Ifns51.Risk
 
         public NameDocument()
         {
+            DateCreate = System.DateTime.Now;
             WordDocuments = new System.Collections.Generic.List<WordDocument>();
         }
     }
@@ -3578,6 +3910,48 @@ namespace Ifns51.Risk
         }
     }
 
+    // StatusAnaliz
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class StatusAnaliz
+    {
+        public int Id { get; set; } // Id
+        public byte Priznak { get; set; } // Priznak (Primary key)
+        public string MessageAnaliz { get; set; } // MessageAnaliz (length: 255)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Deloes where [Delo].[Status1Analiz] point to this entity (FK_Delo_StatusAnaliz)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Delo> Deloes { get; set; } // Delo.FK_Delo_StatusAnaliz
+
+        public StatusAnaliz()
+        {
+            Deloes = new System.Collections.Generic.List<Delo>();
+        }
+    }
+
+    // StatusPriem
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class StatusPriem
+    {
+        public int Id { get; set; } // Id
+        public byte Priznak { get; set; } // Priznak (Primary key)
+        public string MessagePriem { get; set; } // MessagePriem (length: 255)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Deloes where [Delo].[Status1Priem] point to this entity (FK_Delo_StatusPriem)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Delo> Deloes { get; set; } // Delo.FK_Delo_StatusPriem
+
+        public StatusPriem()
+        {
+            Deloes = new System.Collections.Generic.List<Delo>();
+        }
+    }
+
     // StatusTrebOnIcass
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class StatusTrebOnIcass
@@ -3596,6 +3970,14 @@ namespace Ifns51.Risk
         /// </summary>
         public virtual System.Collections.Generic.ICollection<AhalisBdk> AhalisBdks_Idok { get; set; } // AhalisBdk.FK_AhalisBdk1_StatusTrebOnIcass
         /// <summary>
+        /// Child DocumentReglaments where [DocumentReglament].[Status1] point to this entity (FK_DocumentReglament_StatusTrebOnIcass)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<DocumentReglament> DocumentReglaments_Status1 { get; set; } // DocumentReglament.FK_DocumentReglament_StatusTrebOnIcass
+        /// <summary>
+        /// Child DocumentReglaments where [DocumentReglament].[Status2] point to this entity (FK_DocumentReglament_StatusTrebOnIcass_2)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<DocumentReglament> DocumentReglaments_Status2 { get; set; } // DocumentReglament.FK_DocumentReglament_StatusTrebOnIcass_2
+        /// <summary>
         /// Child TableSysNumReshens where [TableSysNumReshen].[IdStatus_1] point to this entity (FK_TableSysNumReshen_StatusTrebOnIcass)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<TableSysNumReshen> TableSysNumReshens_IdStatus1 { get; set; } // TableSysNumReshen.FK_TableSysNumReshen_StatusTrebOnIcass
@@ -3608,6 +3990,8 @@ namespace Ifns51.Risk
         {
             AhalisBdks_Idanalis = new System.Collections.Generic.List<AhalisBdk>();
             AhalisBdks_Idok = new System.Collections.Generic.List<AhalisBdk>();
+            DocumentReglaments_Status1 = new System.Collections.Generic.List<DocumentReglament>();
+            DocumentReglaments_Status2 = new System.Collections.Generic.List<DocumentReglament>();
             TableSysNumReshens_IdStatus1 = new System.Collections.Generic.List<TableSysNumReshen>();
             TableSysNumReshens_IdStatus2 = new System.Collections.Generic.List<TableSysNumReshen>();
         }
@@ -3636,8 +4020,21 @@ namespace Ifns51.Risk
 
         public Stone()
         {
+            DateCreate = System.DateTime.Now;
             Templates = new System.Collections.Generic.List<Template>();
         }
+    }
+
+    // The table 'TableInfoDelo' is not usable by entity framework because it
+    // does not have a primary key. It is listed here for completeness.
+    // TableInfoDelo
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class TableInfoDelo
+    {
+        public string IdDelo { get; set; } // IdDelo (length: 255)
+        public int? Id { get; set; } // Id
+        public int? Id2 { get; set; } // Id2
+        public string Cmd { get; set; } // Cmd (length: 64)
     }
 
     // TableSysNumReshen
@@ -3709,6 +4106,7 @@ namespace Ifns51.Risk
 
         public Template()
         {
+            DateCreateTemplate = System.DateTime.Now;
             NameDocuments = new System.Collections.Generic.List<NameDocument>();
         }
     }
@@ -3723,6 +4121,7 @@ namespace Ifns51.Risk
         public string N280 { get; set; } // N280 (length: 256)
         public System.DateTime? D85 { get; set; } // D85
         public string D981 { get; set; } // D981 (length: 128)
+        public System.Guid? Guid { get; set; } // GUID
 
     }
 
@@ -3791,7 +4190,7 @@ namespace Ifns51.Risk
         public System.Guid Numerdocument { get; set; } // Numerdocument
         public int IdNamedocument { get; set; } // IdNamedocument
         public string Namefile { get; set; } // Namefile (length: 128)
-        public byte[] Document { get; set; } // Document
+        public byte[] Document { get; set; } // Document (length: 2147483647)
         public string TypeFile { get; set; } // TypeFile (length: 5)
         public System.DateTime? DateCreate { get; set; } // DateCreate
 
@@ -3801,11 +4200,6 @@ namespace Ifns51.Risk
         /// Parent NameDocument pointed by [WordDocument].([IdNamedocument]) (FK_WordDocument_NameDocument)
         /// </summary>
         public virtual NameDocument NameDocument { get; set; } // FK_WordDocument_NameDocument
-
-        public WordDocument()
-        {
-            DateCreate = System.DateTime.Now;
-        }
     }
 
     // XL_REPORT
@@ -3953,6 +4347,54 @@ namespace Ifns51.Risk
         }
     }
 
+    // AnalizNO
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AnalizNoConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AnalizNo>
+    {
+        public AnalizNoConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AnalizNoConfiguration(string schema)
+        {
+            ToTable("AnalizNO", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.D3979).HasColumnName(@"D3979").HasColumnType("int").IsRequired();
+            Property(x => x.D3972).HasColumnName(@"D3972").HasColumnType("int").IsRequired();
+            Property(x => x.Color).HasColumnName(@"Color").HasColumnType("tinyint").IsRequired();
+            Property(x => x.DateAnaliz).HasColumnName(@"DateAnaliz").HasColumnType("tinyint").IsOptional();
+            Property(x => x.StrahovieAndOtkazAnaliz).HasColumnName(@"StrahovieAndOtkazAnaliz").HasColumnType("tinyint").IsOptional();
+            Property(x => x.StatusUhAnaliz).HasColumnName(@"StatusUhAnaliz").HasColumnType("tinyint").IsOptional();
+            Property(x => x.Vivod).HasColumnName(@"Vivod").HasColumnType("tinyint").IsOptional();
+            Property(x => x.D6).HasColumnName(@"D6").HasColumnType("int").IsOptional();
+            Property(x => x.D15602).HasColumnName(@"D1560_2").HasColumnType("int").IsRequired();
+            Property(x => x.D15601).HasColumnName(@"D1560_1").HasColumnType("int").IsOptional();
+            Property(x => x.DatePeredachi).HasColumnName(@"DatePeredachi").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.DateZakritia).HasColumnName(@"DateZakritia").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.D3).HasColumnName(@"D3").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.Kbk).HasColumnName(@"Kbk").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.OktmoOld).HasColumnName(@"OKTMO_old").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(8);
+            Property(x => x.D093).HasColumnName(@"D09_3").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.N11).HasColumnName(@"N1_1").HasColumnType("int").IsOptional();
+            Property(x => x.N279).HasColumnName(@"N279").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.OktmoNew).HasColumnName(@"OKTMO_new").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(8);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.Error).HasColumnName(@"Error").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.DateError).HasColumnName(@"DateError").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasOptional(a => a.MessageDate).WithMany(b => b.AnalizNoes).HasForeignKey(c => c.DateAnaliz).WillCascadeOnDelete(false); // FK_AnalizNO_MessageDate
+            HasOptional(a => a.MessageStatusUh).WithMany(b => b.AnalizNoes).HasForeignKey(c => c.StatusUhAnaliz).WillCascadeOnDelete(false); // FK_AnalizNO_MessageStatusUh
+            HasOptional(a => a.MessageStrahovieAndOtkaz).WithMany(b => b.AnalizNoes).HasForeignKey(c => c.StrahovieAndOtkazAnaliz).WillCascadeOnDelete(false); // FK_AnalizNO_MessageStrahovieAndOtkaz
+            HasOptional(a => a.MessageVivod).WithMany(b => b.AnalizNoes).HasForeignKey(c => c.Vivod).WillCascadeOnDelete(false); // FK_AnalizNO_MessageVivod
+            HasRequired(a => a.Delo).WithMany(b => b.AnalizNoes).HasForeignKey(c => c.D3979); // FK_AnalizNO_Delo
+        }
+    }
+
     // BANK_ACC_EXCLUSION
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class BankAccExclusionConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<BankAccExclusion>
@@ -4053,7 +4495,7 @@ namespace Ifns51.Risk
             ToTable("Body", schema);
             HasKey(x => x.IdBody);
 
-            Property(x => x.IdBody).HasColumnName(@"IdBody").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdBody).HasColumnName(@"IdBody").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.BodyGl1).HasColumnName(@"BodyGl1").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.BodyGl2).HasColumnName(@"BodyGl2").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.BodyGl3).HasColumnName(@"BodyGl3").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
@@ -4162,6 +4604,133 @@ namespace Ifns51.Risk
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Code).HasColumnName(@"CODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(15);
             Property(x => x.Title).HasColumnName(@"TITLE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(150);
+        }
+    }
+
+    // DelaPriemObu
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class DelaPriemObuConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<DelaPriemObu>
+    {
+        public DelaPriemObuConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DelaPriemObuConfiguration(string schema)
+        {
+            ToTable("DelaPriemObu", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdDeloObu).HasColumnName(@"IdDeloObu").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+            Property(x => x.IdMessages).HasColumnName(@"IdMessages").HasColumnType("int").IsOptional();
+        }
+    }
+
+    // Delo
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class DeloConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Delo>
+    {
+        public DeloConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DeloConfiguration(string schema)
+        {
+            ToTable("Delo", schema);
+            HasKey(x => x.D3979);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.D3979).HasColumnName(@"D3979").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Status1Priem).HasColumnName(@"Status1Priem").HasColumnType("tinyint").IsOptional();
+            Property(x => x.Status1Analiz).HasColumnName(@"Status1Analiz").HasColumnType("tinyint").IsOptional();
+            Property(x => x.D85).HasColumnName(@"D85").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasOptional(a => a.StatusAnaliz).WithMany(b => b.Deloes).HasForeignKey(c => c.Status1Analiz).WillCascadeOnDelete(false); // FK_Delo_StatusAnaliz
+            HasOptional(a => a.StatusPriem).WithMany(b => b.Deloes).HasForeignKey(c => c.Status1Priem); // FK_Delo_StatusPriem
+        }
+    }
+
+    // DocTemplate
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class DocTemplateConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<DocTemplate>
+    {
+        public DocTemplateConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DocTemplateConfiguration(string schema)
+        {
+            ToTable("DocTemplate", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Mesage).HasColumnName(@"Mesage").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+            Property(x => x.Templ).HasColumnName(@"Templ").HasColumnType("image").IsOptional().HasMaxLength(2147483647);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // DocumentDetalization
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class DocumentDetalizationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<DocumentDetalization>
+    {
+        public DocumentDetalizationConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DocumentDetalizationConfiguration(string schema)
+        {
+            ToTable("DocumentDetalization", schema);
+            HasKey(x => x.N4411);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.N4411).HasColumnName(@"N441__1").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdProcedure).HasColumnName(@"IdProcedure").HasColumnType("int").IsOptional();
+            Property(x => x.N3331).HasColumnName(@"N333__1").HasColumnType("int").IsOptional();
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+            Property(x => x.IdGroup).HasColumnName(@"IdGroup").HasColumnType("tinyint").IsOptional();
+            Property(x => x.IdDocument).HasColumnName(@"IdDocument").HasColumnType("tinyint").IsOptional();
+            Property(x => x.N77).HasColumnName(@"N77").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.Coment).HasColumnName(@"Coment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.N4414).HasColumnName(@"N441__4").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.DocumentReglament).WithOptional(b => b.DocumentDetalization).WillCascadeOnDelete(false); // FK_DocumentDetalization_DocumentReglament
+        }
+    }
+
+    // DocumentReglament
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class DocumentReglamentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<DocumentReglament>
+    {
+        public DocumentReglamentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DocumentReglamentConfiguration(string schema)
+        {
+            ToTable("DocumentReglament", schema);
+            HasKey(x => x.N4411);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.N4411).HasColumnName(@"N441__1").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Status1).HasColumnName(@"Status1").HasColumnType("int").IsOptional();
+            Property(x => x.MesErSt1).HasColumnName(@"MesErSt1").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+            Property(x => x.DSt1).HasColumnName(@"DSt1").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.Status2).HasColumnName(@"Status2").HasColumnType("int").IsOptional();
+            Property(x => x.MesErSt2).HasColumnName(@"MesErSt2").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+            Property(x => x.DSt2).HasColumnName(@"DSt2").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.D85).HasColumnName(@"D85").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasOptional(a => a.StatusTrebOnIcass_Status1).WithMany(b => b.DocumentReglaments_Status1).HasForeignKey(c => c.Status1); // FK_DocumentReglament_StatusTrebOnIcass
+            HasOptional(a => a.StatusTrebOnIcass_Status2).WithMany(b => b.DocumentReglaments_Status2).HasForeignKey(c => c.Status2).WillCascadeOnDelete(false); // FK_DocumentReglament_StatusTrebOnIcass_2
         }
     }
 
@@ -4350,7 +4919,7 @@ namespace Ifns51.Risk
             ToTable("Headers", schema);
             HasKey(x => x.IdHeaders);
 
-            Property(x => x.IdHeaders).HasColumnName(@"IdHeaders").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdHeaders).HasColumnName(@"IdHeaders").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.TextHeade1).HasColumnName(@"TextHeade1").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.TextHeade2).HasColumnName(@"TextHeade2").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.TextHeade3).HasColumnName(@"TextHeade3").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
@@ -4481,6 +5050,27 @@ namespace Ifns51.Risk
         }
     }
 
+    // KbkAnaliz
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KbkAnalizConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<KbkAnaliz>
+    {
+        public KbkAnalizConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public KbkAnalizConfiguration(string schema)
+        {
+            ToTable("KbkAnaliz", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Kbk).HasColumnName(@"Kbk").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Statuskbk).HasColumnName(@"Statuskbk").HasColumnType("tinyint").IsOptional();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
     // LOTUS_DOCS
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class LotusDocConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LotusDoc>
@@ -4556,6 +5146,86 @@ namespace Ifns51.Risk
         }
     }
 
+    // MessageDate
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class MessageDateConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessageDate>
+    {
+        public MessageDateConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MessageDateConfiguration(string schema)
+        {
+            ToTable("MessageDate", schema);
+            HasKey(x => x.Priznak);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Priznak).HasColumnName(@"Priznak").HasColumnType("tinyint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MessageDate_).HasColumnName(@"MessageDate").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+        }
+    }
+
+    // MessageStatusUh
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class MessageStatusUhConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessageStatusUh>
+    {
+        public MessageStatusUhConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MessageStatusUhConfiguration(string schema)
+        {
+            ToTable("MessageStatusUh", schema);
+            HasKey(x => x.Priznak);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Priznak).HasColumnName(@"Priznak").HasColumnType("tinyint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MessageStatusUh_).HasColumnName(@"MessageStatusUh").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+        }
+    }
+
+    // MessageStrahovieAndOtkaz
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class MessageStrahovieAndOtkazConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessageStrahovieAndOtkaz>
+    {
+        public MessageStrahovieAndOtkazConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MessageStrahovieAndOtkazConfiguration(string schema)
+        {
+            ToTable("MessageStrahovieAndOtkaz", schema);
+            HasKey(x => x.Priznak);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Priznak).HasColumnName(@"Priznak").HasColumnType("tinyint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MessageStrahovieAndOtkaz_).HasColumnName(@"MessageStrahovieAndOtkaz").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+        }
+    }
+
+    // MessageVivod
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class MessageVivodConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessageVivod>
+    {
+        public MessageVivodConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MessageVivodConfiguration(string schema)
+        {
+            ToTable("MessageVivod", schema);
+            HasKey(x => x.Priznak);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Priznak).HasColumnName(@"Priznak").HasColumnType("tinyint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MessageVivod_).HasColumnName(@"MessageVivod").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+        }
+    }
+
     // NameDocument
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class NameDocumentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<NameDocument>
@@ -4568,10 +5238,9 @@ namespace Ifns51.Risk
         public NameDocumentConfiguration(string schema)
         {
             ToTable("NameDocument", schema);
-            HasKey(x => x.Id);
+            HasKey(x => x.IdNamedocument);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.IdNamedocument).HasColumnName(@"IdNamedocument").HasColumnType("int").IsRequired();
+            Property(x => x.IdNamedocument).HasColumnName(@"IdNamedocument").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.NameDocument_).HasColumnName(@"NameDocument").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.ManualDoc).HasColumnName(@"ManualDoc").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.IdTemplate).HasColumnName(@"IdTemplate").HasColumnType("int").IsRequired();
@@ -5658,6 +6327,46 @@ namespace Ifns51.Risk
         }
     }
 
+    // StatusAnaliz
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class StatusAnalizConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StatusAnaliz>
+    {
+        public StatusAnalizConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public StatusAnalizConfiguration(string schema)
+        {
+            ToTable("StatusAnaliz", schema);
+            HasKey(x => x.Priznak);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Priznak).HasColumnName(@"Priznak").HasColumnType("tinyint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MessageAnaliz).HasColumnName(@"MessageAnaliz").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+        }
+    }
+
+    // StatusPriem
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class StatusPriemConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StatusPriem>
+    {
+        public StatusPriemConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public StatusPriemConfiguration(string schema)
+        {
+            ToTable("StatusPriem", schema);
+            HasKey(x => x.Priznak);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Priznak).HasColumnName(@"Priznak").HasColumnType("tinyint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MessagePriem).HasColumnName(@"MessagePriem").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(255);
+        }
+    }
+
     // StatusTrebOnIcass
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class StatusTrebOnIcassConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StatusTrebOnIcass>
@@ -5691,7 +6400,7 @@ namespace Ifns51.Risk
             ToTable("Stone", schema);
             HasKey(x => x.IdStone);
 
-            Property(x => x.IdStone).HasColumnName(@"IdStone").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdStone).HasColumnName(@"IdStone").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Stone1).HasColumnName(@"Stone1").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.Stone2).HasColumnName(@"Stone2").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.Stone3).HasColumnName(@"Stone3").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
@@ -5746,7 +6455,7 @@ namespace Ifns51.Risk
             ToTable("Template", schema);
             HasKey(x => x.IdTemplate);
 
-            Property(x => x.IdTemplate).HasColumnName(@"IdTemplate").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdTemplate).HasColumnName(@"IdTemplate").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.IdHeaders).HasColumnName(@"IdHeaders").HasColumnType("int").IsRequired();
             Property(x => x.IdBody).HasColumnName(@"IdBody").HasColumnType("int").IsRequired();
             Property(x => x.IdStone).HasColumnName(@"IdStone").HasColumnType("int").IsRequired();
@@ -5779,6 +6488,7 @@ namespace Ifns51.Risk
             Property(x => x.N280).HasColumnName(@"N280").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.D85).HasColumnName(@"D85").HasColumnType("smalldatetime").IsOptional();
             Property(x => x.D981).HasColumnName(@"D981").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.Guid).HasColumnName(@"GUID").HasColumnType("uniqueidentifier").IsOptional();
 
         }
     }
@@ -5845,7 +6555,7 @@ namespace Ifns51.Risk
             Property(x => x.Numerdocument).HasColumnName(@"Numerdocument").HasColumnType("uniqueidentifier").IsRequired();
             Property(x => x.IdNamedocument).HasColumnName(@"IdNamedocument").HasColumnType("int").IsRequired();
             Property(x => x.Namefile).HasColumnName(@"Namefile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
-            Property(x => x.Document).HasColumnName(@"Document").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.Document).HasColumnName(@"Document").HasColumnType("image").IsOptional().HasMaxLength(2147483647);
             Property(x => x.TypeFile).HasColumnName(@"TypeFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(5);
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
 

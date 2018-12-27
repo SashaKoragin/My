@@ -9,7 +9,7 @@ namespace LibaryDocumentGenerator.Documents.Model
     /// </summary>
     public class OutBdkModel : IModel
     {
-        public LibaryXMLAutoReports.TemplateSheme.Document DocumentTemplate { get; set; }
+        public LibaryXMLAutoReports.FullTemplateSheme.Document DocumentTemplate { get; set; }
 
         public object Report { get; set; }
 

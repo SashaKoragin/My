@@ -2,31 +2,27 @@
 using System.Data;
 using System.Web;
 using System.Windows;
-
+using AcceptPTPRcazn;
+using RcptOFK;
+using RDUved12;
+using ReceptionOFK5;
 namespace DBF
 {
-   public class Test : System.Web.UI.Page
+   public class Test
     {
-        public void Download(DataTable dt)
+        public void Start()
         {
-            try
-            {
-                Byte[] bytes = (Byte[])dt.Rows[0]["ImageColumn"];
-                Response.Buffer = true;
-                Response.Charset = "";
-                Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                Response.ContentType = "application / vnd.ms - word";
-                Response.AddHeader("content-disposition", "attachment;filename="
-                + "sdfdf");
-                Response.BinaryWrite(bytes);
-                Response.Flush();
-                Response.End();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                
-            }
+            AcceptPTPRcazn.clsAcceptPTPRClass  dll= new clsAcceptPTPRClass();
+            dll.AcceptPTPR()
+            RcptOFK.cWorkClass clas = new cWorkClass();
+            RDUved12.axdUved12Class uved = new axdUved12Class();
+            RDUved12.cMakeProtocolClass prot = new cMakeProtocolClass();
+            RDUved12.cRcptFileClass cl = new cRcptFileClass();
+            ReceptionOFK5.cConvertClass v = new cConvertClass();
+            ReceptionOFK5.cWPClass f = new cWPClass();
+            ReceptionOFK5.clsBDPDClass r = new clsBDPDClass;
+            
+
         }
     }
 }

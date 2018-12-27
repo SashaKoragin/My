@@ -14,7 +14,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.HeadersDocument
         /// <param name="n279">Номер инспекции</param>
         /// <param name="n280">Наименование плательщика</param>
         /// <returns></returns>
-        public Body DocumentsHeaders(LibaryXMLAutoReports.TemplateSheme.Template tamplate, string n279 = null, string n280 = null)
+        public Body DocumentsHeaders(LibaryXMLAutoReports.FullTemplateSheme.Document tamplate, string n279 = null, string n280 = null)
         {
             Body body = new Body();
             Table table = new Table();
@@ -22,16 +22,16 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.HeadersDocument
             ObservableCollection<TableCell> cellcCollection = new ObservableCollection<TableCell>();
             ObservableCollection<Paragraph> paragraphcCollection = new ObservableCollection<Paragraph>();
             var paragraphGenerate = new RunGenerate();
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade1, "20", JustificationValues.Center, 1));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade2, "20", JustificationValues.Center));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade3, "20", JustificationValues.Center));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade4, "20", JustificationValues.Center, 1));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade5, "16", JustificationValues.Center, 1));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade6, "16", JustificationValues.Center, 1));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade7, "16", JustificationValues.Center));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade8, "16", JustificationValues.Center));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade9, "16", JustificationValues.Center));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Headers.TextHeade10, "16", JustificationValues.Center));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade1, "20", JustificationValues.Center, 1));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade2, "20", JustificationValues.Center));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade3, "20", JustificationValues.Center));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade4, "20", JustificationValues.Center, 1));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade5, "16", JustificationValues.Center, 1));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade6, "16", JustificationValues.Center, 1));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade7, "16", JustificationValues.Center));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade8, "16", JustificationValues.Center));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade9, "16", JustificationValues.Center));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade10, "16", JustificationValues.Center));
             cellcCollection.Add(CellGenerate.GenerateCell(ref paragraphcCollection, "100", TableWidthUnitValues.Auto, "0", "200", TableVerticalAlignmentValues.Top, null, 3));
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart());
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(n280, "26", JustificationValues.Center, 0, "0", true));

@@ -6,7 +6,7 @@
   <?define Loggers_TargetDir=$(var.Loggers.TargetDir)?>
   <?define LibaryXMLAuto_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\LibaryXMLAuto\bin\Debug\"?>
   <?define SqlLibaryIfns_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\SqlLibaryIfns\bin\Debug\"?>
-  <?define LibaryDocumentGenerator_TargetDir=$(var.LibaryDocumentGenerator.TargetDir)?>
+  <?define LibaryDocumentGenerator_TargetDir=$(var.LibaryDocumentGenerator.TargetDir)?><?define EfDatabase_TargetDir=$(var.EfDatabase.TargetDir)?>
 	<Product Id="*" Name="SetupServiceTestIfns $(var.CurrentVersion)" Codepage="1251" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="ServiceIfns" UpgradeCode="a9ade744-7ad3-477c-9cb3-759214eb7f56">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
@@ -115,7 +115,7 @@
       <util:XmlFile Id="ServeceXml2" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='WorkDb'[\]]//@value" Value="[WorkDb]" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="DataBase" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Connect'[\]]//@value" Value="Data Source=[DataBase];Initial Catalog=Taxes51;Integrated Security=True;MultipleActiveResultSets=True" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="Report" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='SaveReport'[\]]//@value" Value="[PathReport]" SelectionLanguage="XPath" Sequence="1" />
-      <util:XmlFile Id="ReportMassTemplate" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='ReportMassTemplate'[\]]//@value" Value="[PathReportFull]" SelectionLanguage="XPath" Sequence="1"/>
+      <util:XmlFile Id="ReportMassTemplate" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='ReportMassTemplate'[\]]//@value" Value="[PathReportFull]" SelectionLanguage="XPath" Sequence="1" />
       </Component>
 		<Component Id="TestIFNSLibary.dll" Guid="bae45c5b-9bd2-4d6a-a979-dc0d7c13d0cf">
 		  <File Id="TestIFNSLibary.dll" Name="TestIFNSLibary.dll" Source="$(var.TestIFNSLibary_TargetDir)TestIFNSLibary.dll" />
@@ -135,9 +135,6 @@
 		<Component Id="ClosedXML.dll" Guid="2455be23-133f-444d-91d6-37c500bee57a">
 		  <File Id="ClosedXML.dll" Name="ClosedXML.dll" Source="$(var.TestIFNSService_TargetDir)ClosedXML.dll" />
 		</Component>
-		<Component Id="DocumentFormat.OpenXml.dll" Guid="86576c53-5197-4bf8-9f83-626e94e3892b">
-		  <File Id="DocumentFormat.OpenXml.dll" Name="DocumentFormat.OpenXml.dll" Source="$(var.SqlLibaryIfns_TargetDir)DocumentFormat.OpenXml.dll" />
-		</Component>
 		<Component Id="ExcelNumberFormat.dll" Guid="41db810a-bd13-4f23-9651-6f923976efcf">
 		  <File Id="ExcelNumberFormat.dll" Name="ExcelNumberFormat.dll" Source="$(var.TestIFNSService_TargetDir)ExcelNumberFormat.dll" />
 		</Component>
@@ -149,6 +146,18 @@
 		</Component>
 		<Component Id="LibaryDocumentGenerator.dll" Guid="44dbe2c4-54db-4e75-acb7-8037722d00b1">
 		  <File Id="LibaryDocumentGenerator.dll" Name="LibaryDocumentGenerator.dll" Source="$(var.LibaryDocumentGenerator_TargetDir)LibaryDocumentGenerator.dll" />
+		</Component>
+		<Component Id="EntityFramework.dll" Guid="43abbb68-8340-407f-aa89-91c49ada2f2e">
+		  <File Id="EntityFramework.dll" Name="EntityFramework.dll" Source="$(var.TestIFNSService_TargetDir)EntityFramework.dll" />
+		</Component>
+		<Component Id="EfDatabase.dll" Guid="c7667cd4-edfb-43bc-bae8-62ecf9c3eb41">
+		  <File Id="EfDatabase.dll" Name="EfDatabase.dll" Source="$(var.EfDatabase_TargetDir)EfDatabase.dll" />
+		</Component>
+		<Component Id="EntityFramework.SqlServer.dll" Guid="5AB67F89-B8DE-4605-AF29-37BA6769DD44">
+		  <File Id="EntityFramework.SqlServer.dll" Name="EntityFramework.SqlServer.dll" Source="$(var.TestIFNSService_TargetDir)EntityFramework.SqlServer.dll" />
+		</Component>
+		<Component Id="DocumentFormat.OpenXml.dll" Guid="ac6932b8-62f9-457b-87ba-e8aaa354677d">
+		  <File Id="DocumentFormat.OpenXml.dll" Name="DocumentFormat.OpenXml.dll" Source="$(var.LibaryDocumentGenerator_TargetDir)DocumentFormat.OpenXml.dll" />
 		</Component>
 		</ComponentGroup>
 	</Fragment>

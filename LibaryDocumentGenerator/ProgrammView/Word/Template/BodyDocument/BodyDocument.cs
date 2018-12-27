@@ -13,11 +13,11 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.BodyDocument
         /// </summary>
         /// <param name="tamplate">Шаблон</param>
         /// <returns></returns>
-        public Body TextDocument(LibaryXMLAutoReports.TemplateSheme.Template tamplate)
+        public Body TextDocument(LibaryXMLAutoReports.FullTemplateSheme.Document tamplate)
         {
             Body body = new Body();
             var paragraphGenerate = new RunGenerate();
-            body.Append(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Body.BodyGl1, "26", JustificationValues.Both, 0, "1000"));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Body.BodyGl1, "26", JustificationValues.Both, 0, "1000"));
             return body;
         }
 

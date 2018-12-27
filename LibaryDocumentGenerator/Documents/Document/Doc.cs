@@ -1,5 +1,5 @@
 ﻿using System;
-using EfDatabaseLogica.AddTable.AddOutBdk;
+using EfDatabase.AddTable.AddOutBdk;
 using LibaryDocumentGenerator.Documents.Model;
 using LibaryDocumentGenerator.Documents.Template;
 using LibaryXMLAutoReports.ReportsBdk;
@@ -27,9 +27,9 @@ namespace LibaryDocumentGenerator.Documents.Document
                 try
                 {
                     string fullpath = Model.PathSave +fn71.N279 + "_CountBDK_" + fn71.FN1723_2.Length + Constant.WordConstant.Formatword;
-                    Template.CreateDocum(fullpath, Model.DocumentTemplate.NameDocument.Template, fn71);
+                    Template.CreateDocum(fullpath, Model.DocumentTemplate, fn71);
                     var savefile = new AddOutBdk();
-                    savefile.SaveFile(fullpath, Model.DocumentTemplate.NameDocument.IdNamedocument);
+                    savefile.SaveFile(fullpath, Model.DocumentTemplate.IdNamedocument);
                     savefile.SaveReestr(fn71);
                     savefile.Dispose();
                 }

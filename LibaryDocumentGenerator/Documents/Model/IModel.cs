@@ -11,7 +11,7 @@ namespace LibaryDocumentGenerator.Documents.Model
         /// <summary>
         /// Сам шаблон
         /// </summary>
-        LibaryXMLAutoReports.TemplateSheme.Document DocumentTemplate { get; set; }
+        LibaryXMLAutoReports.FullTemplateSheme.Document DocumentTemplate { get; set; }
         /// <summary>
         /// Путь к папке с сохранениями
         /// </summary>
