@@ -11,8 +11,16 @@ using TestIFNSLibary.PostRequest.Face;
 namespace TestIFNSLibary.ServiceRest
 {
     [ServiceContract]
-    interface IServiceRest 
+    interface IServiceRest
     {
+        /// <summary>
+        /// Авторизация на сайте
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AuthServiceDomain", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<ModelUser> AuthService(FullSetting setting);
         /// <summary>
         /// Получение данных на сайт по средством пост запроса на сервис WCF
         /// </summary>
@@ -82,7 +90,14 @@ namespace TestIFNSLibary.ServiceRest
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ProcedureSoprovod", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> StoreProcedureSoprovod(FullSetting setting);
-
+        /// <summary>
+        /// Процедуры Камерального отдела №5
+        /// </summary>
+        /// <param name="setting">Параметры</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StoreProcedureKam5", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> StoreProcedureKam5(FullSetting setting);
         /// <summary>
         /// Создание шаблона для выборок данных
         /// </summary>

@@ -30,7 +30,10 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
             sectionProperties.Append(pageMargin);
             sectionProperties.Append(titlePage);
             sectionProperties.Append(section);
-            sectionProperties.Append(AddFooterReference(mainDocument, count));
+            if (count != 0)
+            {
+                sectionProperties.Append(AddFooterReference(mainDocument, count));
+            }
             body.Append(sectionProperties);
         }
 

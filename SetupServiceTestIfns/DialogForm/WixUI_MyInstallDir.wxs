@@ -19,7 +19,7 @@ Patch dialog sequence:
  - WixUI_VerifyReadyDlg
 
 -->
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define TestIFNSService_TargetDir=$(var.TestIFNSService.TargetDir)?>
     <Fragment>
         <UI Id="WixUI_MyInstallDir">
             <TextStyle Id="WixUI_Font_Normal" FaceName="Tahoma" Size="8" />
@@ -64,14 +64,14 @@ Patch dialog sequence:
                 <Control Id="ResultFolder" Type="Edit" X="90" Y="75" Width="194" Height="15" Property="TestDb" Sunken="no" ToolTip="Use Folder Result ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">
                     <Property Id="TestDb" Value="\\i7751-w00000745\SrezDBF" />
                 </Control>
-                <Control Id="Title2" Type="Text" Text="Настройки для Rest приложения:" Height="17" Width="140" X="11" Y="120"/>
-                <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="80" X="11" Y="146"/>
+                <Control Id="Title2" Type="Text" Text="Настройки для Rest приложения:" Height="17" Width="140" X="11" Y="120" />
+                <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="80" X="11" Y="146" />
               <Control Id="Db" Type="Edit" X="90" Y="146" Height="15" Width="240" Property="DataBase">
-                <Property Id="DataBase" Value="i7751-app001"/>
+                <Property Id="DataBase" Value="i7751-app001" />
               </Control>
-              <Control Id="ReportBdkText" Type="Text" Text="Путь для отчетов:" Height="15" Width="80" X="11" Y="172"/>
+              <Control Id="ReportBdkText" Type="Text" Text="Путь для отчетов:" Height="15" Width="80" X="11" Y="172" />
               <Control Id="ReportBdkEdit" Type="Edit" X="90" Y="172" Height="15" Width="240" Property="PathReportFull">
-                <Property Id="PathReportFull" Value="\\10.177.238.240\Network-Disk\!!! PUBLIC !!!\TestingSystem\"/>
+                <Property Id="PathReportFull" Value="\\10.177.238.240\Network-Disk\!!! PUBLIC !!!\TestingSystem\" />
               </Control>
               <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
                     <Publish Event="NewDialog" Value="VerifyReadyDlg" Order="10" />
@@ -105,4 +105,23 @@ Patch dialog sequence:
         </UI>
         <UIRef Id="WixUI_Common" />
     </Fragment>
+    <!--<Fragment>
+      <ComponentGroup Id="Scripts_files" Directory="Scripts">
+        <Component Id="Scripts_jquery_1.6.4.js" Guid="484febf2-2a77-4716-a87e-5d682865097c">
+          <File Id="Scripts_jquery_1.6.4.js" Name="jquery-1.6.4.js" Source="$(var.TestIFNSService_TargetDir)Scripts\jquery-1.6.4.js" />
+        </Component>
+        <Component Id="Scripts_jquery_1.6.4.min.js" Guid="aac404b2-6d17-48dd-b5c2-3220ff1b0501">
+          <File Id="Scripts_jquery_1.6.4.min.js" Name="jquery-1.6.4.min.js" Source="$(var.TestIFNSService_TargetDir)Scripts\jquery-1.6.4.min.js" />
+        </Component>
+        <Component Id="Scripts_jquery.signalR_2.4.0.js" Guid="f74e3101-bc0c-4ec3-a531-c27f9d82e773">
+          <File Id="Scripts_jquery.signalR_2.4.0.js" Name="jquery.signalR-2.4.0.js" Source="$(var.TestIFNSService_TargetDir)Scripts\jquery.signalR-2.4.0.js" />
+        </Component>
+        <Component Id="Scripts_jquery.signalR_2.4.0.min.js" Guid="eff9814b-e0f9-4f8f-a486-2d1b52a8cded">
+          <File Id="Scripts_jquery.signalR_2.4.0.min.js" Name="jquery.signalR-2.4.0.min.js" Source="$(var.TestIFNSService_TargetDir)Scripts\jquery.signalR-2.4.0.min.js" />
+        </Component>
+        <Component Id="Scripts_jquery_1.6.4_vsdoc.js" Guid="730f1958-2137-46c3-b1a1-59f24295cf23">
+          <File Id="Scripts_jquery_1.6.4_vsdoc.js" Name="jquery-1.6.4-vsdoc.js" Source="$(var.TestIFNSService_TargetDir)Scripts\jquery-1.6.4-vsdoc.js" />
+        </Component>
+      </ComponentGroup>
+    </Fragment>-->
 </Wix>

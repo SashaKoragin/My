@@ -6,7 +6,7 @@
   <?define Loggers_TargetDir=$(var.Loggers.TargetDir)?>
   <?define LibaryXMLAuto_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\LibaryXMLAuto\bin\Debug\"?>
   <?define SqlLibaryIfns_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\SqlLibaryIfns\bin\Debug\"?>
-  <?define LibaryDocumentGenerator_TargetDir=$(var.LibaryDocumentGenerator.TargetDir)?><?define EfDatabase_TargetDir=$(var.EfDatabase.TargetDir)?>
+  <?define LibaryDocumentGenerator_TargetDir=$(var.LibaryDocumentGenerator.TargetDir)?><?define EfDatabase_TargetDir=$(var.EfDatabase.TargetDir)?><?define SignalRLibary_TargetDir=$(var.SignalRLibary.TargetDir)?>
 	<Product Id="*" Name="SetupServiceTestIfns $(var.CurrentVersion)" Codepage="1251" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="ServiceIfns" UpgradeCode="a9ade744-7ad3-477c-9cb3-759214eb7f56">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
@@ -34,6 +34,7 @@
       <ComponentRef Id="ClearUnistallation" />
       <ComponentRef Id="CreateFolderReport" />
       <ComponentRef Id="CreateLog" />
+			<!--<ComponentGroupRef Id="Scripts_files" />-->
 		</Feature>
 	</Product>
     
@@ -46,7 +47,7 @@
 			</Directory>
 		</Directory>
 	</Fragment>
-
+  
   <Fragment>
     <DirectoryRef Id="INSTALLLOCATION">
       <Directory Id="PathReport" Name="Report">
@@ -159,6 +160,33 @@
 		<Component Id="DocumentFormat.OpenXml.dll" Guid="ac6932b8-62f9-457b-87ba-e8aaa354677d">
 		  <File Id="DocumentFormat.OpenXml.dll" Name="DocumentFormat.OpenXml.dll" Source="$(var.LibaryDocumentGenerator_TargetDir)DocumentFormat.OpenXml.dll" />
 		</Component>
+		<Component Id="Microsoft.Owin.dll" Guid="3c6f444e-63d3-4a70-9e5c-20bf1010741a">
+		  <File Id="Microsoft.Owin.dll" Name="Microsoft.Owin.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.Owin.dll" />
+		</Component>
+		<Component Id="SignalRLibary.dll" Guid="69b86fcb-d2e4-48d4-8bf5-cf117ae01ea1">
+		  <File Id="SignalRLibary.dll" Name="SignalRLibary.dll" Source="$(var.SignalRLibary_TargetDir)SignalRLibary.dll" />
+		</Component>
+		<Component Id="Microsoft.Owin.Hosting.dll" Guid="5f657704-fef7-4e65-941f-04809e6b9e3e">
+		  <File Id="Microsoft.Owin.Hosting.dll" Name="Microsoft.Owin.Hosting.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.Owin.Hosting.dll" />
+		</Component>
+		<Component Id="Owin.dll" Guid="ae24a36b-1c01-481f-80b2-9fca5f6194f4">
+		  <File Id="Owin.dll" Name="Owin.dll" Source="$(var.TestIFNSService_TargetDir)Owin.dll" />
+		</Component>
+		<Component Id="Microsoft.AspNet.SignalR.Core.dll" Guid="6a50bdc6-3bb1-4311-b171-ebdd9941cf70">
+		  <File Id="Microsoft.AspNet.SignalR.Core.dll" Name="Microsoft.AspNet.SignalR.Core.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.AspNet.SignalR.Core.dll" />
+		</Component>
+		<Component Id="Microsoft.Owin.Security.dll" Guid="d9bbb81a-0abc-4600-b6da-f4dce3d58db9">
+		  <File Id="Microsoft.Owin.Security.dll" Name="Microsoft.Owin.Security.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.Owin.Security.dll" />
+		</Component>
+		<Component Id="Microsoft.Owin.Cors.dll" Guid="6141f034-9413-42b5-a5a5-828696d6d7fd">
+		  <File Id="Microsoft.Owin.Cors.dll" Name="Microsoft.Owin.Cors.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.Owin.Cors.dll" />
+		</Component>
+		<Component Id="System.Web.Cors.dll" Guid="e99e12ac-c9d7-490a-912e-7142d9c683b6">
+		  <File Id="System.Web.Cors.dll" Name="System.Web.Cors.dll" Source="$(var.TestIFNSService_TargetDir)System.Web.Cors.dll" />
+		</Component>
+    <Component Id="Microsoft.Owin.Host.HttpListener.dll" Guid="1AFDD859-4A91-4B1A-9EC1-E2E3BDC198CF">
+      <File Id="Microsoft.Owin.Host.HttpListener.dll" Name="Microsoft.Owin.Host.HttpListener.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.Owin.Host.HttpListener.dll" />
+    </Component>
 		</ComponentGroup>
 	</Fragment>
   <Fragment>

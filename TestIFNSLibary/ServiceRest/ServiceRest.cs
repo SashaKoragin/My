@@ -19,7 +19,7 @@ using SqlLibaryIfns.SqlZapros.SqlConnections;
 using SqlLibaryIfns.ZaprosSelectNotParam;
 using LibaryDocumentGenerator.DonloadFile.Angular;
 using LibaryXMLAuto.Reports.FullTemplateSheme;
-using TestIFNSLibary.SignalR;
+
 
 namespace TestIFNSLibary.ServiceRest
 {
@@ -31,17 +31,21 @@ namespace TestIFNSLibary.ServiceRest
         public async Task<Face> SqlFaceError()
         {
             var selectfull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectfull.FaceError(_parametrService.ConnectionString, SqlLibaryIfns.SqlSelect.SqlFaceMergin.FaceSelectError.FaceError));
+            return
+                await Task.Factory.StartNew(
+                    () =>
+                        selectfull.FaceError(_parametrService.ConnectionString,
+                            SqlLibaryIfns.SqlSelect.SqlFaceMergin.FaceSelectError.FaceError));
         }
 
         public string AddFace(FaceAdd face)
         {
             try
             {
-                Sobytie sobytie = new Sobytie { Messages = null };
+                Sobytie sobytie = new Sobytie() {Messages = null};
                 using (var con = new SqlConnection(_parametrService.ConnectionString))
                 {
-                    con.InfoMessage +=sobytie.Con_InfoMessage;
+                    con.InfoMessage += sobytie.Con_InfoMessage;
                     using (var cmd = new SqlCommand(SqlLibaryIfns.SqlSelect.SqlFaceMergin.FaceSelectError.AddFace, con))
                     {
                         cmd.Parameters.Add("@Old", SqlDbType.Int).Value = Convert.ToInt32(face.N1Old);
@@ -62,11 +66,12 @@ namespace TestIFNSLibary.ServiceRest
         {
             try
             {
-                Sobytie sobytie = new Sobytie { Messages = null };
+                Sobytie sobytie = new Sobytie {Messages = null};
                 using (var con = new SqlConnection(_parametrService.ConnectionString))
                 {
                     con.InfoMessage += sobytie.Con_InfoMessage;
-                    using (var cmd = new SqlCommand(SqlLibaryIfns.SqlSelect.SqlFaceMergin.FaceSelectError.FaceDelete, con))
+                    using (
+                        var cmd = new SqlCommand(SqlLibaryIfns.SqlSelect.SqlFaceMergin.FaceSelectError.FaceDelete, con))
                     {
                         cmd.Parameters.Add("@idint", SqlDbType.Int).Value = Convert.ToInt32(id);
                         cmd.Connection.Open();
@@ -80,6 +85,7 @@ namespace TestIFNSLibary.ServiceRest
                 return e.Message;
             }
         }
+
         /// <summary>
         /// Выполнение процедуры на сервере Sql в зависимости от настроек Test или Work
         /// </summary>
@@ -98,6 +104,7 @@ namespace TestIFNSLibary.ServiceRest
                     return null;
             }
         }
+
         /// <summary>
         /// Загрузка файла с сервера по средством C#
         /// </summary>
@@ -105,9 +112,10 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<Stream> DonloadFile(string filename)
         {
-          DonloadsFile donloads = new DonloadsFile();
-          return await donloads.SelectDonloadsFile(_parametrService.Report, filename, _parametrService.ConectWork);
+            DonloadsFile donloads = new DonloadsFile();
+            return await donloads.SelectDonloadsFile(_parametrService.Report, filename, _parametrService.ConectWork);
         }
+
         /// <summary>
         /// Подгрузка БДК Статистики
         /// </summary>
@@ -120,11 +128,19 @@ namespace TestIFNSLibary.ServiceRest
             {
                 case "Work":
                     var sqlconnect = new SqlConnectionType();
-                    return await Task.Factory.StartNew(() => selectfull.BdkSqlSelect(_parametrService.ConectWork, ((ServiceWcf)sqlconnect.SelectFullParametrSqlReader(_parametrService.ConectWork, ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf), ModelSqlFullService.ParamCommand("7"))).ServiceWcfCommand.Command));
-               default:
+                    return
+                        await Task.Factory.StartNew(
+                            () =>
+                                selectfull.BdkSqlSelect(_parametrService.ConectWork,
+                                ((ServiceWcf)
+                                    sqlconnect.SelectFullParametrSqlReader(_parametrService.ConectWork,
+                                        ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf),
+                                        ModelSqlFullService.ParamCommand("7"))).ServiceWcfCommand.Command));
+                default:
                     return null;
             }
         }
+
         /// <summary>
         /// Выполнения процедур по БДК блоку
         /// </summary>
@@ -141,6 +157,7 @@ namespace TestIFNSLibary.ServiceRest
                     return null;
             }
         }
+
         /// <summary>
         /// Выполнения процедур Предпроверки
         /// </summary>
@@ -187,9 +204,10 @@ namespace TestIFNSLibary.ServiceRest
                 Task.Factory.StartNew(() =>
                 {
                     GenerateDocument report = new GenerateDocument();
-                    report.GenerateOutBdk(_parametrService.ConectWork, _parametrService.ConnectionString, _parametrService.ReportMassTemplate, setting);
+                    report.GenerateOutBdk(_parametrService.ConectWork, _parametrService.ConnectionString,
+                        _parametrService.ReportMassTemplate, setting);
                 });
-                return "Документы для печати запущены и сохраняются в папку "+ _parametrService.ReportMassTemplate;
+                return "Документы для печати запущены и сохраняются в папку " + _parametrService.ReportMassTemplate;
             }
             catch (Exception e)
             {
@@ -197,6 +215,7 @@ namespace TestIFNSLibary.ServiceRest
                 return e.Message;
             }
         }
+
         /// <summary>
         /// Получение выборки для генерации командя на сайте
         /// </summary>
@@ -207,6 +226,7 @@ namespace TestIFNSLibary.ServiceRest
             var selectfull = new SelectFull();
             return await Task.Factory.StartNew(() => selectfull.ServiceCommand(_parametrService.ConectWork, setting));
         }
+
         /// <summary>
         /// Обработка всех комманд с сервера и возврат данных надо тестить
         /// </summary>
@@ -218,6 +238,7 @@ namespace TestIFNSLibary.ServiceRest
             var selectfull = new SelectFull();
             return await Task.Factory.StartNew(() => selectfull.SqlSelect(connect, command));
         }
+
         /// <summary>
         /// Метод передачи файла на сайт
         /// </summary>
@@ -228,6 +249,7 @@ namespace TestIFNSLibary.ServiceRest
             var efangular = new AngularRestEf();
             return await Task.Factory.StartNew(() => efangular.DonloadFile(angular));
         }
+
         /// <summary>
         /// Метод добавления шаблона в БД
         /// </summary>
@@ -244,5 +266,30 @@ namespace TestIFNSLibary.ServiceRest
             var efangular = new AngularRestEf();
             return await Task.Factory.StartNew(() => efangular.CreateKrsb(_parametrService.ConectWork, setting));
         }
+
+        public async Task<Stream> StoreProcedureKam5(FullSetting setting)
+        {
+            var taskcommand = new TaskResult();
+            DonloadsFile donloads = new DonloadsFile();
+            switch (setting.Db)
+            {
+                case "Work":
+                    return await donloads.SelectDonloadsFile(_parametrService.Report, "Камеральный №5.xlsx", null, await taskcommand.TaskSqlProcedureKam5(_parametrService.ConectWork, setting));
+                default:
+                    return null;
+            }
+        }
+        
+        /// <summary >
+        /// Авторизация на сайте ВАЖНО ПОКА НЕ ПОЛУЧИЛОСЬ ПЕРЕДАТЬ ДАТУ С СЕРВЕРА ОШИБКА ФОРМАТА
+        /// </summary>
+        /// <param name="setting">Настройки там пользователь Login Password</param>
+        /// <returns></returns>
+        public async Task<ModelUser> AuthService(FullSetting setting)
+        {
+            AuthUser.AuthUser authuser = new AuthUser.AuthUser();
+            return await Task.Factory.StartNew(() => authuser.AuthUserService(setting));
+        }
+
+        }
     }
-}

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using DocumentFormat.OpenXml.Wordprocessing;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator;
@@ -28,8 +29,21 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.HeadersDocument
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade4, "20", JustificationValues.Center, 1));
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade5, "16", JustificationValues.Center, 1));
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade6, "16", JustificationValues.Center, 1));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade7, "16", JustificationValues.Center));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade8, "16", JustificationValues.Center));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade7, "16", JustificationValues.Center, 0, "0", false, false, false));
+           // paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(" ","8", JustificationValues.Left,0,"0",false,false,true));
+            if (tamplate.Templates.Headers.TextHeade8.Length > 40)
+            {
+                var t1 = tamplate.Templates.Headers.TextHeade8.Substring(0, 40);
+                var t2 = tamplate.Templates.Headers.TextHeade8.Substring(40);
+                paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(t1, "16",
+                    JustificationValues.Center));
+                paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(t2, "16",
+                    JustificationValues.Center));
+            }
+            else
+            {
+                paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade8, "16", JustificationValues.Center));
+            }
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade9, "16", JustificationValues.Center));
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade10, "16", JustificationValues.Center));
             cellcCollection.Add(CellGenerate.GenerateCell(ref paragraphcCollection, "100", TableWidthUnitValues.Auto, "0", "200", TableVerticalAlignmentValues.Top, null, 3));

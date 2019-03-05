@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TestIFNSLibary.SignalR
+namespace SignalRLibary.SignalR
 {
-   public class BasicChatConnect<T>
+    public class BasicChatConnect<T>
     {
+
+
         private readonly Dictionary<T, HashSet<string>> _connections =
-            new Dictionary<T, HashSet<string>>();
-        //Количество пользователей
+       new Dictionary<T, HashSet<string>>();
+
         public int Count
         {
             get
@@ -18,11 +17,7 @@ namespace TestIFNSLibary.SignalR
                 return _connections.Count;
             }
         }
-        /// <summary>
-        /// Добавление пользователя
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="connectionId"></param>
+
         public void Add(T key, string connectionId)
         {
             lock (_connections)
@@ -51,7 +46,7 @@ namespace TestIFNSLibary.SignalR
 
             return Enumerable.Empty<string>();
         }
-        //Удаление пользователя при Disconect
+
         public void Remove(T key, string connectionId)
         {
             lock (_connections)

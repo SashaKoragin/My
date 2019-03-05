@@ -8,7 +8,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SingleDocument
    public class Single
     {
         /// <summary>
-        /// Поле кто подписывает документ 
+        /// Поле кто подписывает документ Руководство  
         /// </summary>
         /// <param name="tamplate">Шаблон</param>
         /// <returns></returns>

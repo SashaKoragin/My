@@ -152,6 +152,10 @@
       <Project>{9bac233e-ed3d-493e-b7f6-f26f8091968d}</Project>
       <Name>Loggers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SignalRLibary\SignalRLibary.csproj">
+      <Project>{381752f0-f34d-4d3e-96ad-92b7ba6cf213}</Project>
+      <Name>SignalRLibary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestIFNSLibary\TestIFNSLibary.csproj">
       <Project>{5ae84e79-d255-4484-a265-a3831f1a7915}</Project>
       <Name>TestIFNSLibary</Name>

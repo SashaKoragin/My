@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
 {
@@ -10,34 +11,41 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
         /// <param name="textparagraph">Текст по умолчанию null вернет пустой параграв</param>
         /// <param name="fontsize">Размер шрифта по умолчанию 10 20 делить на 2</param>
         /// <param name="justifications">Выравнивание по умолчанию Слева</param>
-        /// <param name="style">Стиль текста 0 обычный по умолчанию: 1 Жирный:</param>
+        /// <param name="style">Стиль текста 0 обычный по умолчанию: 1 Жирный:, 2 Подчеркнутый</param>
         /// <param name="leftident">Отступ слева</param>
         /// <param name="breake">Кнопка Enter после вставки</param>
+        /// <param name="isfoters">Вставка в Foters</param>
+        /// <param name="isContextualSpacing">Не добавлять пробел между обзацами одного и того-ж стиля</param>
         /// <returns>Возвращаем созданный параграф либо пустой либо заполненный</returns>
-        public Paragraph RunParagraphGeneratorStandart(string textparagraph = null, string fontsize = "10", JustificationValues justifications = JustificationValues.Left, int style = 0, string leftident = "0", bool breake = false, bool isfoters = false)
+        public Paragraph RunParagraphGeneratorStandart(string textparagraph = " ", string fontsize = "20", JustificationValues justifications = JustificationValues.Left, int style = 0, string leftident = "0", bool breake = false, bool isfoters = false,  bool isContextualSpacing = true)
         {
-            Paragraph paragraph = new Paragraph();
             ParagraphProperties paragraphProperties = new ParagraphProperties();
-            if (textparagraph == null)
-            {
-                paragraph.Append(paragraphProperties);
-                return paragraph;
-            }
+            FontSize fontSize = new FontSize { Val = fontsize };
+            Run run = new Run();
+            RunProperties runProperties = new RunProperties();
+            Paragraph paragraph = new Paragraph();
+
+            Indentation indental = new Indentation() { FirstLine = leftident };
+            Justification justification = new Justification() { Val = justifications };
+
+                ContextualSpacing spasing = new ContextualSpacing() { Val = isContextualSpacing };
+                SpacingBetweenLines sp = new SpacingBetweenLines();
+                sp.After = "100";
+                paragraphProperties.Append(sp);
+                paragraphProperties.Append(spasing);
+
+            Text text = new Text() { Text = textparagraph , Space = SpaceProcessingModeValues.Preserve };
+
             if (isfoters)
             {
                 ParagraphStyleId paragraphStyleId = new ParagraphStyleId() { Val = "Footer" };
                 paragraphProperties.Append(paragraphStyleId);
             }
-            Indentation indental = new Indentation() { FirstLine = leftident };
-            Justification justification = new Justification() { Val = justifications };
-            ContextualSpacing spasing = new ContextualSpacing() { Val = true };
-            paragraphProperties.Append(spasing);
+           
             paragraphProperties.Append(indental);
             paragraphProperties.Append(justification);
             paragraph.Append(paragraphProperties);
 
-            Run run = new Run();
-            RunProperties runProperties = new RunProperties();
             RunFonts runFonts = new RunFonts
             {
                 Ascii = "Times New Roman",
@@ -45,20 +53,17 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
                 EastAsia = "Times New Roman",
                 ComplexScript = "Times New Roman"
             };
-            FontSize fontSize = new FontSize { Val = fontsize };
-            FontSizeComplexScript fontSizeComplexScript = new FontSizeComplexScript { Val = fontsize };
-
+         
             if (style != 0)
             {
                 AddStyleText(ref runProperties, style);
             }
-
+            FontSizeComplexScript fontSizeComplexScript = new FontSizeComplexScript { Val = fontsize };
             runProperties.Append(runFonts);
             runProperties.Append(fontSize);
             runProperties.Append(fontSizeComplexScript);
 
-            Text text = new Text();
-            text.Text = textparagraph;
+
 
             run.Append(runProperties);
             run.Append(text);
@@ -86,6 +91,12 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
                     Bold bold = new Bold();
                     property.Append(bold);
                     break;
+                case 2:
+                    Underline underline = new Underline() {Val = UnderlineValues.Single};
+                    Italic italic = new Italic();
+                    property.Append(underline);
+                    property.Append(italic);
+                    break;
             }
         }
 
@@ -107,6 +118,46 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
             }
             paragraph.Append(run);
             return paragraph;
+        }
+        /// <summary>
+        /// Возвращаем форматированный тектс для вставки в параграф
+        /// </summary>
+        /// <param name="textparagraph">Текст добавленый в параграф</param>
+        /// <param name="fontsize">Размер шрифта</param>
+        /// <param name="style">Стиль текста 0 обычный по умолчанию: 1 Жирный:, 2 Подчеркнутый</param>
+        /// <returns></returns>
+        public Run RunText(string textparagraph = " ", string fontsize = "20", int style = 0)
+        {
+            FontSize fontSize = new FontSize { Val = fontsize };
+            Run run = new Run();
+            RunProperties runProperties = new RunProperties();
+
+            Text text = new Text() { Text = textparagraph, Space = SpaceProcessingModeValues.Preserve };
+
+
+
+
+            RunFonts runFonts = new RunFonts
+            {
+                Ascii = "Times New Roman",
+                HighAnsi = "Times New Roman",
+                EastAsia = "Times New Roman",
+                ComplexScript = "Times New Roman"
+            };
+
+            if (style != 0)
+            {
+                AddStyleText(ref runProperties, style);
+            }
+            FontSizeComplexScript fontSizeComplexScript = new FontSizeComplexScript { Val = fontsize };
+            runProperties.Append(runFonts);
+            runProperties.Append(fontSize);
+            runProperties.Append(fontSizeComplexScript);
+
+            run.Append(runProperties);
+            run.Append(text);
+
+            return run;
         }
     }
 }

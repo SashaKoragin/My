@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
@@ -61,16 +62,26 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
         /// <param name="leftmargin">Левый отступ в пикселях</param>
         /// <param name="rightmargin">Правый отступ в пикселях</param>
         /// <param name="borders">Стиль отражение границы ячейки</param>
-        /// <param name="number">Количество объединенных ячеек</param>
+        /// <param name="gridNumber">Объединение ячеек</param>
+        /// <param name="verticalmerge">1 Начало объединения 2 конец объединения</param>
         /// <returns></returns>
-        public static TableCell GenerateCell(Paragraph paragraph, string width, TableWidthUnitValues type, string leftmargin = "0", string rightmargin = "0", TableVerticalAlignmentValues verticalAlignment = TableVerticalAlignmentValues.Bottom, TableCellBorders borders = null, int number = 0)
+        public static TableCell GenerateCell(Paragraph paragraph, string width, TableWidthUnitValues type, string leftmargin = "0", string rightmargin = "0", TableVerticalAlignmentValues verticalAlignment = TableVerticalAlignmentValues.Bottom, TableCellBorders borders = null, int gridNumber = 0, int verticalmerge = 0)
         {
             TableCell tableCell = new TableCell();
             TableCellProperties tableCellProperties = new TableCellProperties();
             TableCellWidth tableCellWidth = new TableCellWidth() { Width = width, Type = type };
-            GridSpan gridSpan = new GridSpan() { Val = number };
+            GridSpan gridSpan = new GridSpan() { Val = gridNumber };
             TableCellVerticalAlignment tcVA = new TableCellVerticalAlignment() { Val = verticalAlignment };
-
+            if (verticalmerge == 1)
+            {
+                VerticalMerge vertical = new VerticalMerge() {Val = MergedCellValues.Restart };
+                tableCellProperties.Append(vertical);
+            }
+            if (verticalmerge == 2)
+            {
+                VerticalMerge vertical = new VerticalMerge() { Val = MergedCellValues.Continue };
+                tableCellProperties.Append(vertical);
+            }
             TableCellMargin tableCellMargin = new TableCellMargin();
 
             if (leftmargin != "0")
@@ -88,6 +99,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
             tableCellProperties.Append(tableCellWidth);
             tableCellProperties.Append(tableCellMargin);
             tableCellProperties.Append(gridSpan);
+            
             if (borders != null)
             {
                 tableCellProperties.Append(borders);

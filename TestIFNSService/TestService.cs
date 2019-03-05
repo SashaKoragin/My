@@ -5,7 +5,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Hosting;
 using TestIFNSLibary.Service;
-using TestIFNSLibary.SignalR;
+using SignalRLibary.SignalR;
 [assembly: OwinStartup(typeof(Startup))]
 namespace TestIFNSService
 {
@@ -26,7 +26,7 @@ namespace TestIFNSService
                Servicehost.Close();
                ServiceRest.Close();
             }
-            var url = "http://localhost:8059";
+            var url = "http://+:8059";
             WebApp.Start(url);
             ServiceRest = new WebServiceHost(typeof(TestIFNSLibary.ServiceRest.ServiceRest));
             Servicehost = new ServiceHost(typeof(CommandDbf));
