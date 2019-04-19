@@ -24,6 +24,7 @@ namespace TestIFNSLibary.PathJurnalAndUse
             ConectWork = ConfigurationManager.AppSettings["ConectWork"];
             Report = ConfigurationManager.AppSettings["SaveReport"];
             ReportMassTemplate = ConfigurationManager.AppSettings["ReportMassTemplate"];
+            Inventarization = ConfigurationManager.ConnectionStrings["Inventarization"].ConnectionString;
         }
 
         public void SettingEdit(string testDb, string workDb, int hours, int minutes)
@@ -85,5 +86,9 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// Путь для массовой печати
         /// </summary>
         public string ReportMassTemplate { get; set; }
+        /// <summary>
+        /// Строка соединения с Инвентаризации
+        /// </summary>
+        public string Inventarization { get; set; }
     }
 }

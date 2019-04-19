@@ -99,13 +99,13 @@ namespace SignalRLibary.SignalR
             Clients.Client(conectionId).Welcome(welcomeuser);
         }
 
-        public static void SqlServer(string usernameguid, string message)
+        public static async void SqlServer(string usernameguid, string message)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<ServiceMessage>();
             var conId = _connections.GetConnections(usernameguid);
             foreach (var id in conId)
             {
-                context.Clients.Client(id).SqlServer(message);
+              await context.Clients.Client(id).SqlServer(message);
             }
         }
     }

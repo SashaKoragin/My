@@ -41,7 +41,13 @@
     <Reference Include="EntityFramework.SqlServer.6.0.0.0.Fakes">
       <HintPath>FakesAssemblies\EntityFramework.SqlServer.6.0.0.0.Fakes.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>C:\Nuget\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -51,6 +57,12 @@
     <Compile Include="AddTable\AddOutBdk\AddOutBdk.cs" />
     <Compile Include="AddTable\AddTemplate\AddTemplate.cs" />
     <Compile Include="AddTable\PredPro\PredProverkaTempl.cs" />
+    <Compile Include="Inventarization\BaseLogica\Autorization\Autorization.cs" />
+    <Compile Include="Inventarization\Base\Inventarization.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Inventarization.tt</DependentUpon>
+    </Compile>
     <Compile Include="SyteIfnsRisk.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -59,6 +71,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Inventarization\Base\Inventarization.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Inventarization.cs</LastGenOutput>
+    </Content>
     <Content Include="SyteIfnsRisk.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SyteIfnsRisk.cs</LastGenOutput>
@@ -68,6 +84,8 @@
     <None Include="App.config" />
     <None Include="EF.Reverse.POCO.Core.ttinclude" />
     <None Include="EF.Reverse.POCO.ttinclude" />
+    <None Include="Inventarization\Base\EF.Reverse.POCO.Core.ttinclude" />
+    <None Include="Inventarization\Base\EF.Reverse.POCO.ttinclude" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +104,7 @@
       <Name>Loggers</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

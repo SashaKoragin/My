@@ -81,6 +81,8 @@
   <ItemGroup>
     <Compile Include="AuthUser\AuthUser.cs" />
     <Compile Include="Cross\CorsEnablingBehavior.cs" />
+    <Compile Include="Inventarka\IInventarka.cs" />
+    <Compile Include="Inventarka\Inventarka.cs" />
     <Compile Include="PostRequest\Face\FaceAdd.cs" />
     <Compile Include="ServiceRest\IServiceRest.cs" />
     <Compile Include="ServiceRest\ServiceRest.cs" />
@@ -123,6 +125,10 @@
     <ProjectReference Include="..\..\..\StudioBlend\WPFLib\SqlLibaryIfns\SqlLibaryIfns.csproj">
       <Project>{128c2bf1-de92-4bb8-bda0-eefc5eab66d2}</Project>
       <Name>SqlLibaryIfns</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EfDatabase\EfDatabase.csproj">
+      <Project>{578cf45e-310b-4e2e-9c94-5a9f16b736ae}</Project>
+      <Name>EfDatabase</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibaryDocumentGenerator\LibaryDocumentGenerator.csproj">
       <Project>{939b256e-591b-40cc-8097-5d34456404cd}</Project>

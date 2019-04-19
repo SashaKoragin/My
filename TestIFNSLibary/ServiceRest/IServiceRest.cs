@@ -134,5 +134,13 @@ namespace TestIFNSLibary.ServiceRest
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ProcedureAnalizKrsb", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> StoreProcedureKrsb(FullSetting setting);
+        /// <summary>
+        /// Сервуры и компьютеры
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ServerList", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> ServerList(FullSetting setting);
+
     }
 }

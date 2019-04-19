@@ -290,6 +290,15 @@ namespace TestIFNSLibary.ServiceRest
             AuthUser.AuthUser authuser = new AuthUser.AuthUser();
             return await Task.Factory.StartNew(() => authuser.AuthUserService(setting));
         }
-
+        /// <summary>
+        /// G
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ServerList(FullSetting setting)
+        {
+            var connect = setting.Db == "Work" ? _parametrService.ConectWork : _parametrService.ConectTest;
+            var selectfull = new SelectFull();
+            return await Task.Factory.StartNew(() => selectfull.SqlSelect(connect, setting));
         }
+    }
     }
