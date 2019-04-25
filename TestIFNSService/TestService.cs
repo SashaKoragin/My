@@ -1,12 +1,13 @@
-﻿using System.Runtime.Remoting.Channels;
-using System.ServiceModel;
+﻿using System.ServiceModel;
+using System.ServiceModel.Security;
 using System.ServiceModel.Web;
 using System.ServiceProcess;
-using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Hosting;
 using TestIFNSLibary.Service;
 using SignalRLibary.SignalR;
+using static System.ServiceModel.Security.UserNamePasswordValidationMode;
+
 [assembly: OwinStartup(typeof(Startup))]
 namespace TestIFNSService
 {
@@ -32,6 +33,7 @@ namespace TestIFNSService
             var url = "http://+:8059";
             WebApp.Start(url);
             ServiceRest = new WebServiceHost(typeof(TestIFNSLibary.ServiceRest.ServiceRest));
+           
             Inventarization = new WebServiceHost(typeof(TestIFNSLibary.Inventarka.Inventarka));
             Servicehost = new ServiceHost(typeof(CommandDbf));
             ServiceRest.Open();

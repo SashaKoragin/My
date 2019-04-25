@@ -49,6 +49,7 @@ namespace SignalRLibary.SignalR
             {
                 string name = Context.QueryString["user"];
                 string guid = Context.QueryString["guid"];
+                
                 _connections.Add(name+guid, Context.ConnectionId);
                 Welcome("Добро пожаловать пользователь: " + name, Context.ConnectionId);
                 Loggers.Log4NetLogger.Info(new Exception("Подключился пользователь: Имя - " + name+ " Номер - "+ guid));
@@ -99,7 +100,7 @@ namespace SignalRLibary.SignalR
             Clients.Client(conectionId).Welcome(welcomeuser);
         }
 
-        public static async void SqlServer(string usernameguid, string message)
+        public static async Task SqlServer(string usernameguid, string message)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<ServiceMessage>();
             var conId = _connections.GetConnections(usernameguid);

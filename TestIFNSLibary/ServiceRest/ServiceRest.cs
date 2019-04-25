@@ -9,6 +9,7 @@ using TestIFNSLibary.PostRequest.Face;
 using SqlLibaryIfns.SqlEntytiCommand.TaskUse;
 using SqlLibaryIfns.SqlZapros.SobytieSql;
 using System.IO;
+using System.Threading;
 using LibaryDocumentGenerator.GenerateDocument.GenerateWord;
 using LibaryXMLAuto.ModelServiceWcfCommand.AngularModel;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
@@ -23,7 +24,7 @@ using LibaryXMLAuto.Reports.FullTemplateSheme;
 
 namespace TestIFNSLibary.ServiceRest
 {
-    [ServiceBehavior(UseSynchronizationContext = true, IncludeExceptionDetailInFaults = true)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple, UseSynchronizationContext = false)]
     public class ServiceRest : IServiceRest
     {
         readonly Parametr _parametrService = new Parametr();
@@ -279,17 +280,6 @@ namespace TestIFNSLibary.ServiceRest
                     return null;
             }
         }
-        
-        /// <summary >
-        /// Авторизация на сайте ВАЖНО ПОКА НЕ ПОЛУЧИЛОСЬ ПЕРЕДАТЬ ДАТУ С СЕРВЕРА ОШИБКА ФОРМАТА
-        /// </summary>
-        /// <param name="setting">Настройки там пользователь Login Password</param>
-        /// <returns></returns>
-        public async Task<ModelUser> AuthService(FullSetting setting)
-        {
-            AuthUser.AuthUser authuser = new AuthUser.AuthUser();
-            return await Task.Factory.StartNew(() => authuser.AuthUserService(setting));
-        }
         /// <summary>
         /// G
         /// </summary>
@@ -300,5 +290,47 @@ namespace TestIFNSLibary.ServiceRest
             var selectfull = new SelectFull();
             return await Task.Factory.StartNew(() => selectfull.SqlSelect(connect, setting));
         }
+        /// <summary>
+        /// Авторизация на сервере
+        /// </summary>
+        /// <param name="setting">Настройки</param>
+        /// <param name="callback"></param>
+        /// <param name="asyncState"></param>
+        /// <returns></returns>
+        public IAsyncResult BeginSampleMethod(FullSetting setting, AsyncCallback callback, object asyncState)
+        {
+            AuthUser.AuthUser authuser = new AuthUser.AuthUser(); 
+            return new CompletedAsyncResult<ModelUser>(authuser.AuthUserService(setting));
+        }
+
+        public ModelUser EndSampleMethod(IAsyncResult r)
+        {
+            CompletedAsyncResult<ModelUser> result = r as CompletedAsyncResult<ModelUser>;
+            return result.Data;
+        }
     }
+    class CompletedAsyncResult<T> : IAsyncResult
+    {
+        T data;
+
+        public CompletedAsyncResult(T data)
+        { this.data = data; }
+
+        public T Data
+        { get { return data; } }
+
+        #region IAsyncResult Members
+        public object AsyncState
+        { get { return (object)data; } }
+
+        public WaitHandle AsyncWaitHandle
+        { get { throw new Exception("The method or operation is not implemented."); } }
+
+        public bool CompletedSynchronously
+        { get { return true; } }
+
+        public bool IsCompleted
+        { get { return true; } }
+        #endregion
     }
+}

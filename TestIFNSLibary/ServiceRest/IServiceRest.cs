@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
@@ -10,17 +11,16 @@ using TestIFNSLibary.PostRequest.Face;
 
 namespace TestIFNSLibary.ServiceRest
 {
-    [ServiceContract]
+    [ServiceContract(SessionMode = SessionMode.NotAllowed)]
     interface IServiceRest
     {
-        /// <summary>
-        /// Авторизация на сайте
-        /// </summary>
-        /// <param name="setting"></param>
-        /// <returns></returns>
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AuthServiceDomain", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<ModelUser> AuthService(FullSetting setting);
+        [OperationContract(AsyncPattern = true)]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AuthServiceDomain", 
+            ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        IAsyncResult BeginSampleMethod(FullSetting setting, AsyncCallback callback, object asyncState);
+
+        ModelUser EndSampleMethod(IAsyncResult result);
+
         /// <summary>
         /// Получение данных на сайт по средством пост запроса на сервис WCF
         /// </summary>
