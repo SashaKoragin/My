@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ServiceWcf" type="ModelSelect">
+		<xs:annotation>
+			<xs:documentation>Модель запросов и параметров</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParametrsSelect" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Параметр выборки модели</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" default="0">
+				<xs:annotation>
+					<xs:documentation>Параметр выборки из таблицы LogicaSelect</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LogicaSelect" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Общая выборка из таблицы LogicaSelect</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int" default="0">
+				<xs:annotation>
+					<xs:documentation>Порядковый номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SelectInfo" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Описание выборки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SelectedParametr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Выборка параметров (модель)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SelectUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Выборка пользователя (генерация пользователем модели)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DataCreate" default="1991-09-14T00:00:00Z">
+				<xs:annotation>
+					<xs:documentation>Дата создания </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime"/>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Parametrs" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Параметры для генерации пользователем</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Value" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameTable" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя таблицы</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameColumn" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование колонки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Info" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Совместно Table.columns</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeColumn" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тип колонки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ModelSelect">
+		<xs:annotation>
+			<xs:documentation>Общая модель выборок</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ParametrsSelect" minOccurs="0"/>
+			<xs:element ref="LogicaSelect" minOccurs="0"/>
+			<xs:element ref="Parametrs" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

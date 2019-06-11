@@ -51,17 +51,28 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddTable\AddKrsb\AddKrsb.cs" />
     <Compile Include="AddTable\AddOutBdk\AddOutBdk.cs" />
     <Compile Include="AddTable\AddTemplate\AddTemplate.cs" />
     <Compile Include="AddTable\PredPro\PredProverkaTempl.cs" />
+    <Compile Include="Inventarization\BaseLogica\AddObjectDb\AddObjectDb.cs" />
+    <Compile Include="Inventarization\BaseLogica\AddObjectDb\ModelReturn.cs" />
     <Compile Include="Inventarization\BaseLogica\Autorization\Autorization.cs" />
+    <Compile Include="Inventarization\BaseLogica\HistoryLog\HistoryLog.cs" />
+    <Compile Include="Inventarization\BaseLogica\Select\Select.cs" />
+    <Compile Include="Inventarization\BaseLogica\Select\SelectSql.cs" />
     <Compile Include="Inventarization\Base\Inventarization.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Inventarization.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventarization\DataTransferObject\ParametrModelSelect\ParametrsModel.cs">
+      <DependentUpon>ParametrsModel.xsd</DependentUpon>
     </Compile>
     <Compile Include="SyteIfnsRisk.cs">
       <AutoGen>True</AutoGen>
@@ -86,6 +97,9 @@
     <None Include="EF.Reverse.POCO.ttinclude" />
     <None Include="Inventarization\Base\EF.Reverse.POCO.Core.ttinclude" />
     <None Include="Inventarization\Base\EF.Reverse.POCO.ttinclude" />
+    <None Include="Inventarization\DataTransferObject\ParametrModelSelect\ParametrsModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +120,8 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="BeforeBuild" DependsOnTargets="CreateDTOSheme">
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -113,4 +129,18 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="CreateDTOSheme">
+    <ItemGroup>
+      <XsdFiles Include="Inventarization\DataTransferObject\ParametrModelSelect\*.xsd" />
+    </ItemGroup>
+    <Message Importance="high" Text="CreateDTOSheme" />
+    <GetFrameworkSdkPath>
+      <Output TaskParameter="Path" PropertyName="WindowsSdkPath" />
+    </GetFrameworkSdkPath>
+    <PropertyGroup>
+      <XsdToolPath>$(WindowsSdkPath)bin\NETFX 4.6 Tools</XsdToolPath>
+    </PropertyGroup>
+    <Message Importance="high" Text="Processing XSD schemas" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdFiles.FullPath)&quot; /classes /f /t /namespace:$(RootNamespace)ParametrsModel /outputdir:Inventarization\DataTransferObject\ParametrModelSelect\" />
+  </Target>
 </Project>

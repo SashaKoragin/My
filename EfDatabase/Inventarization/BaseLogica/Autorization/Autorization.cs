@@ -26,7 +26,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Autorization
                var  query = from Users in Inventarization.Users where Users.Passwords == user.Passwords && Users.NameUser == user.NameUser
                         join Otdels in Inventarization.Otdels on Users.IdOtdel equals Otdels.IdOtdel
                         join Rules in  Inventarization.Rules on Users.IdRule equals Rules.IdRule
-                        select new
+                        select new 
                         {
                             Users,
                             Otdels,
@@ -34,7 +34,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Autorization
                         };
             if (query.Any())
             {
-                return json.JsonLibary(query.Single());
+                return json.JsonLibaryIgnoreDate(query.Single());
             }
             return null;
         }
