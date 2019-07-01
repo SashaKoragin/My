@@ -61,6 +61,35 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             log.GenerateHistory(usersAdd.IdHistory, 1, "Добавление нового пользователя: " + usersAdd.IdUser);
             return new ModelReturn("Добавили пользователя: " + usersAdd.IdUser, usersAdd.IdHistory);
         }
+        /// <summary>
+        /// Добавление отдела без лога данных проверим как работает
+        /// </summary>
+        /// <param name="otdel">Отдел</param>
+        /// <returns></returns>
+        public ModelReturn AddAndEditOtdel(Otdel otdel)
+        {
+            otdel.User = null;
+            var qvery = from Otdels in Inventarization.Otdels
+                where Otdels.IdOtdel == otdel.IdOtdel
+                select new {Otdels};
+            if (qvery.Any())
+            {
+                Inventarization.Entry(otdel).State = EntityState.Modified;
+                Inventarization.SaveChanges();
+                return new ModelReturn("Обновили отдел: "+otdel.IdOtdel);
+            }
+            var otdelAdd = new Otdel()
+            {
+                IdOtdel = otdel.IdOtdel,
+                IdUser = otdel.IdUser,
+                NameOtdel = otdel.NameOtdel,
+
+            };
+            Inventarization.Otdels.Add(otdelAdd);
+            Inventarization.SaveChanges();
+            return new ModelReturn("Добавили отдел: " + otdelAdd.IdOtdel);
+        }
+
 
         /// <summary>
         /// Добавление или обновление Принтера
@@ -86,6 +115,7 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             var printerAdd = new Printer()
             {
                 IdPrinter = printer.IdPrinter,
+                IdUser = printer.IdUser,
                 IdProizvoditel = printer.IdProizvoditel,
                 IdModel = printer.IdModel,
                 IdNumberKabinet = printer.IdNumberKabinet,
@@ -127,6 +157,7 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             var scanerAdd = new ScanerAndCamer()
             {
                 IdScaner = scaner.IdScaner,
+                IdUser = scaner.IdUser,
                 IdProizvoditel = scaner.IdProizvoditel,
                 IdModel = scaner.IdModel,
                 IdNumberKabinet = scaner.IdNumberKabinet,
@@ -168,6 +199,7 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             var mfuAdd = new Mfu()
             {
                 IdMfu = mfu.IdMfu,
+                IdUser = mfu.IdUser,
                 IdProizvoditel = mfu.IdProizvoditel,
                 IdModel = mfu.IdModel,
                 IdNumberKabinet = mfu.IdNumberKabinet,
@@ -210,6 +242,7 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             var sysblokAdd = new SysBlock()
             {
                 IdSysBlock = sysblok.IdSysBlock,
+                IdUser = sysblok.IdUser,
                 IdModelSysBlock = sysblok.IdModelSysBlock,
                 IdNumberKabinet = sysblok.IdNumberKabinet,
                 ServiceNum = sysblok.ServiceNum,
@@ -251,6 +284,7 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             var monitorAdd = new Monitor()
             {
                 IdMonitor = monitor.IdMonitor,
+                IdUser = monitor.IdUser,
                 IdModelMonitor = monitor.IdModelMonitor,
                 IdNumberKabinet = monitor.IdNumberKabinet,
                 SerNum = monitor.SerNum,

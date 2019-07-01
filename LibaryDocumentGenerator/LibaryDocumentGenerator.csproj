@@ -47,12 +47,14 @@
     <Compile Include="Documents\Document\Doc.cs" />
     <Compile Include="Documents\FileLogica\FileLogica.cs" />
     <Compile Include="Documents\Model\IModel.cs" />
+    <Compile Include="Documents\Model\MigrationReportModel.cs" />
     <Compile Include="Documents\Model\OutBdkModel.cs" />
+    <Compile Include="Documents\Template\InvoiceInventarka.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />
-    <Compile Include="Documents\Template\TemplateDocMatCen.cs" />
     <Compile Include="Documents\Template\TemplateOutBdk.cs" />
     <Compile Include="DonloadFile\Angular\AngularRestEf.cs" />
     <Compile Include="GenerateDocument\GenerateWord\GenerateDocument.cs" />
+    <Compile Include="ProgrammView\FullDocument\DocumentsFull.cs" />
     <Compile Include="ProgrammView\Word\Libary\FottersGenerator\FotterGenerate.cs" />
     <Compile Include="ProgrammView\Word\Libary\PageGenerator\PageGenerate.cs" />
     <Compile Include="ProgrammView\Word\Libary\ParagraphsGenerator\ParagraphGenerate.cs" />
@@ -63,7 +65,6 @@
     <Compile Include="ProgrammView\Word\Libary\TablesGenrerator\RowGenerate.cs" />
     <Compile Include="ProgrammView\Word\Libary\TablesGenrerator\TablesGenerate.cs" />
     <Compile Include="ProgrammView\Word\Template\BodyDocument\BodyDocument.cs" />
-    <Compile Include="ProgrammView\Word\Template\DocMatCen\DocMatCen.cs" />
     <Compile Include="ProgrammView\Word\Template\FottersDocument\Fotters.cs" />
     <Compile Include="ProgrammView\Word\Template\HeadersDocument\HeadersDocuments.cs" />
     <Compile Include="ProgrammView\Word\Template\SettingPage\PageSetting.cs" />

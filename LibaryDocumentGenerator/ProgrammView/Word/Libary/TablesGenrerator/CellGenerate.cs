@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
 
@@ -57,7 +59,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
         /// Возвращает ячейку с настройками может применятся для создания строки
         /// </summary>
         /// <param name="paragraph">1 Параграф для добавления в ячейку</param>
-        /// <param name="width">Длина ячейки</param>
+        /// <param name="width">Длина ячейки 567 - 1 см </param>
         /// <param name="type">Тип выравнивания</param>
         /// <param name="leftmargin">Левый отступ в пикселях</param>
         /// <param name="rightmargin">Правый отступ в пикселях</param>
@@ -123,6 +125,16 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
                 cell.Append(para);
             }
             paragraph.Clear();
+        }
+        /// <summary>
+        /// Формула расчета длины ячейки
+        /// </summary>
+        /// <param name="sm">Сантиметры,милиметры</param>
+        /// <returns></returns>
+        public static string FormulWidthCell(double sm)
+        {
+            var width = sm * 567;
+            return Math.Round(width).ToString();
         }
     }
 }

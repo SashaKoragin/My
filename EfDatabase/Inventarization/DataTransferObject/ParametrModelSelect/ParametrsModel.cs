@@ -20,20 +20,56 @@ namespace EfDatabaseParametrsModel {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute("ServiceWcf", Namespace="", IsNullable=false)]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class ServiceWcf : ModelSelect {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ModelSelect {
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public ParametrsSelect ParametrsSelect;
+        private ParametrsSelect parametrsSelectField;
+        
+        private LogicaSelect logicaSelectField;
+        
+        private Parametrs[] parametrsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public LogicaSelect LogicaSelect;
+        public ParametrsSelect ParametrsSelect {
+            get {
+                return this.parametrsSelectField;
+            }
+            set {
+                this.parametrsSelectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public LogicaSelect LogicaSelect {
+            get {
+                return this.logicaSelectField;
+            }
+            set {
+                this.logicaSelectField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Parametrs", IsNullable=true)]
-        public Parametrs[] Parametrs;
+        public Parametrs[] Parametrs {
+            get {
+                return this.parametrsField;
+            }
+            set {
+                this.parametrsField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -45,13 +81,22 @@ namespace EfDatabaseParametrsModel {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
     public partial class ParametrsSelect {
         
+        private int idField;
+        
+        public ParametrsSelect() {
+            this.idField = 0;
+        }
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.ComponentModel.DefaultValueAttribute(0)]
-        public int Id;
-        
-        public ParametrsSelect() {
-            this.Id = 0;
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
         }
     }
     
@@ -64,31 +109,61 @@ namespace EfDatabaseParametrsModel {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
     public partial class LogicaSelect {
         
+        private int idField;
+        
+        private string selectInfoField;
+        
+        private string selectedParametrField;
+        
+        private string selectUserField;
+        
+        public LogicaSelect() {
+            this.idField = 0;
+        }
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.ComponentModel.DefaultValueAttribute(0)]
-        public int Id;
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SelectInfo;
+        public string SelectInfo {
+            get {
+                return this.selectInfoField;
+            }
+            set {
+                this.selectInfoField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SelectedParametr;
+        public string SelectedParametr {
+            get {
+                return this.selectedParametrField;
+            }
+            set {
+                this.selectedParametrField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SelectUser;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(typeof(System.DateTime), "1991-09-14T00:00:00Z")]
-        public System.DateTime DataCreate;
-        
-        public LogicaSelect() {
-            this.Id = 0;
-            this.DataCreate = new System.DateTime(628204032000000000);
+        public string SelectUser {
+            get {
+                return this.selectUserField;
+            }
+            set {
+                this.selectUserField = value;
+            }
         }
     }
     
@@ -101,24 +176,69 @@ namespace EfDatabaseParametrsModel {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
     public partial class Parametrs {
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Value;
+        private string valueField;
+        
+        private string nameTableField;
+        
+        private string nameColumnField;
+        
+        private string infoField;
+        
+        private string typeColumnField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameTable;
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameColumn;
+        public string NameTable {
+            get {
+                return this.nameTableField;
+            }
+            set {
+                this.nameTableField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Info;
+        public string NameColumn {
+            get {
+                return this.nameColumnField;
+            }
+            set {
+                this.nameColumnField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TypeColumn;
+        public string Info {
+            get {
+                return this.infoField;
+            }
+            set {
+                this.infoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string TypeColumn {
+            get {
+                return this.typeColumnField;
+            }
+            set {
+                this.typeColumnField = value;
+            }
+        }
     }
 }

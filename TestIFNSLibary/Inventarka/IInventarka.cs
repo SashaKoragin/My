@@ -155,7 +155,6 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllModel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> Model();
-
         /// <summary>
         /// Все кабинеты
         /// http://localhost:8182/Inventarka/AllKabinet
@@ -190,7 +189,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditPrinter", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditPrinter(Printer printer);
+        ModelReturn AddAndEditPrinter(EfDatabase.Inventarization.Base.Printer printer);
 
         /// <summary>
         /// Добавление сканера
@@ -200,7 +199,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditScaner", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditScaner(ScanerAndCamer scaner);
+        ModelReturn AddAndEditScaner(EfDatabase.Inventarization.Base.ScanerAndCamer scaner);
 
         /// <summary>
         /// Добавление или обновление мфу
@@ -210,7 +209,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditMfu", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditMfu(Mfu mfu);
+        ModelReturn AddAndEditMfu(EfDatabase.Inventarization.Base.Mfu mfu);
 
         /// <summary>
         /// Добавление или обновление Системного блока
@@ -220,7 +219,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditSysBlok", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditSysBlok(SysBlock sysblock);
+        ModelReturn AddAndEditSysBlok(EfDatabase.Inventarization.Base.SysBlock sysblock);
 
         /// <summary>
         /// Добавление или обновление Монитора
@@ -232,5 +231,35 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditMonitor", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn AddAndEditMonitor(Monitor monitor);
 
-    }
+        /// <summary>
+        /// Добавление или обновление Монитора
+        /// http://localhost:8182/Inventarka/AddAndEditOtdel
+        /// </summary>
+        /// <param name="otdel"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditOtdel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn AddAndEditOtdel(EfDatabase.Inventarization.Base.Otdel otdel);
+
+
+        /// <summary>
+        /// Добавление или обновление Монитора
+        /// http://localhost:8182/Inventarka/SelectXml
+        /// </summary>
+        /// <param name="logica"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectXml", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SelectXml(EfDatabaseParametrsModel.LogicaSelect logica);
+
+
+        /// <summary>
+        /// Добавление или обновление Монитора
+        /// http://localhost:8182/Inventarka/Invoice
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/Invoice", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+         void GenerateDocuments(EfDatabaseInvoice.Report report);
+   }
 }

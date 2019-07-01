@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:element name="ServiceWcf" type="ModelSelect">
+	<xs:element name="ServiceWcf">
 		<xs:annotation>
 			<xs:documentation>Модель запросов и параметров</xs:documentation>
 		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="ModelSelect"/>
+			</xs:complexContent>
+		</xs:complexType>
 	</xs:element>
 	<xs:element name="ParametrsSelect" nillable="true">
 		<xs:annotation>
@@ -33,7 +38,7 @@
 					<xs:documentation>Порядковый номер</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="SelectInfo" type="xs:string">
+			<xs:attribute name="SelectInfo" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Описание выборки</xs:documentation>
 				</xs:annotation>
@@ -47,14 +52,6 @@
 				<xs:annotation>
 					<xs:documentation>Выборка пользователя (генерация пользователем модели)</xs:documentation>
 				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="DataCreate" default="1991-09-14T00:00:00Z">
-				<xs:annotation>
-					<xs:documentation>Дата создания </xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:dateTime"/>
-				</xs:simpleType>
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>

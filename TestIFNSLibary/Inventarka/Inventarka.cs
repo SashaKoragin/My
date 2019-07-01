@@ -5,15 +5,20 @@ using EfDatabase.Inventarization.BaseLogica.AddObjectDb;
 using EfDatabase.Inventarization.BaseLogica.Autorization;
 using EfDatabase.Inventarization.BaseLogica.Select;
 using EfDatabaseParametrsModel;
+using LibaryDocumentGenerator.Documents.Template;
 using SqlLibaryIfns.Inventarization.ModelParametr;
 using SqlLibaryIfns.Inventarization.Select;
+using SqlLibaryIfns.ZaprosSelectNotParam;
 using TestIFNSLibary.PathJurnalAndUse;
+using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
+using Otdel = EfDatabase.Inventarization.Base.Otdel;
 
 
 namespace TestIFNSLibary.Inventarka
 {
    public class Inventarka : IInventarka
     {
+        readonly Parametr _parametrService = new Parametr();
         /// <summary>
         /// Запрос всех отделов
         /// </summary>
@@ -59,7 +64,7 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="printer">Принтер</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditPrinter(Printer printer)
+        public ModelReturn AddAndEditPrinter(EfDatabase.Inventarization.Base.Printer printer)
         {
             AddObjectDb add = new AddObjectDb();
             return add.AddAndEditPrinter(printer);
@@ -69,7 +74,7 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="scaner">Принтер</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditScaner(ScanerAndCamer scaner)
+        public ModelReturn AddAndEditScaner(EfDatabase.Inventarization.Base.ScanerAndCamer scaner)
         {
             AddObjectDb add = new AddObjectDb();
             return add.AddAndEditScaner(scaner);
@@ -79,7 +84,7 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="mfu"></param>
         /// <returns></returns>
-        public ModelReturn AddAndEditMfu(Mfu mfu)
+        public ModelReturn AddAndEditMfu(EfDatabase.Inventarization.Base.Mfu mfu)
         {
             AddObjectDb add = new AddObjectDb();
             return add.AddAndEditMfu(mfu);
@@ -89,10 +94,20 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="sysblock"></param>
         /// <returns></returns>
-        public ModelReturn AddAndEditSysBlok(SysBlock sysblock)
+        public ModelReturn AddAndEditSysBlok(EfDatabase.Inventarization.Base.SysBlock sysblock)
         {
             AddObjectDb add = new AddObjectDb();
             return add.AddAndEditSysBlok(sysblock);
+        }
+        /// <summary>
+        /// Добавление или редактирование отдела
+        /// </summary>
+        /// <param name="otdel">отдел</param>
+        /// <returns></returns>
+        public ModelReturn AddAndEditOtdel(Otdel otdel)
+        {
+            AddObjectDb add = new AddObjectDb();
+            return add.AddAndEditOtdel(otdel);
         }
         /// <summary>
         /// Добавление или обновление Монитора
@@ -239,6 +254,26 @@ namespace TestIFNSLibary.Inventarka
         {
             SelectSql select = new SelectSql();
             return await Task.Factory.StartNew(() =>  select.SqlSelect(model));
+        }
+        /// <summary>
+        /// Выборка
+        /// </summary>
+        /// <param name="logica"></param>
+        /// <returns></returns>
+        public async Task<string> SelectXml(LogicaSelect logica)
+        {
+            var selectfull = new SelectFull();
+            return await Task.Factory.StartNew(() => selectfull.SqlModelInventory(_parametrService.Inventarization,logica));
+        }
+        /// <summary>
+        /// Генерация накладной
+        /// </summary>
+        public void GenerateDocuments(EfDatabaseInvoice.Report report)
+        {
+            Report rep = new Report();
+            InvoiceInventarka invoice = new InvoiceInventarka();
+            rep.ReportInvoice(ref report);
+            invoice.CreateDocum("C:\\Testing\\",report,null);
         }
     }
 }

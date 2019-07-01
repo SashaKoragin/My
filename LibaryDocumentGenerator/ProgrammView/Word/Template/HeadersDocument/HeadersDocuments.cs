@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator;
 
+
 namespace LibaryDocumentGenerator.ProgrammView.Word.Template.HeadersDocument
 {
    public class HeadersDocuments
@@ -14,8 +15,9 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.HeadersDocument
         /// <param name="tamplate">Шаблон шапки</param>
         /// <param name="n279">Номер инспекции</param>
         /// <param name="n280">Наименование плательщика</param>
+        /// <param name="senderOtd">В какой отдел направляется</param>
         /// <returns></returns>
-        public Body DocumentsHeaders(LibaryXMLAutoReports.FullTemplateSheme.Document tamplate, string n279 = null, string n280 = null)
+        public Body DocumentsHeaders(LibaryXMLAutoReports.FullTemplateSheme.Document tamplate, string n279 = null, string n280 = null,string senderOtd = null)
         {
             Body body = new Body();
             Table table = new Table();
@@ -30,7 +32,6 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.HeadersDocument
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade5, "16", JustificationValues.Center, 1));
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade6, "16", JustificationValues.Center, 1));
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Headers.TextHeade7, "16", JustificationValues.Center, 0, "0", false, false, false));
-           // paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(" ","8", JustificationValues.Left,0,"0",false,false,true));
             if (tamplate.Templates.Headers.TextHeade8.Length > 40)
             {
                 var t1 = tamplate.Templates.Headers.TextHeade8.Substring(0, 40);

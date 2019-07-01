@@ -57,9 +57,6 @@ namespace EfDatabase.Inventarization.Base
         System.Data.Entity.DbSet<CopySave> CopySaves { get; set; } // CopySave
 
 
-        System.Data.Entity.DbSet<FullInventarization> FullInventarizations { get; set; } // FullInventarization
-
-
         System.Data.Entity.DbSet<FullModel> FullModels { get; set; } // FullModel
 
 
@@ -90,7 +87,7 @@ namespace EfDatabase.Inventarization.Base
         System.Data.Entity.DbSet<Monitor> Monitors { get; set; } // Monitors
 
 
-        System.Data.Entity.DbSet<NameMonitor> NameMonitors { get; set; } // NameMonitors
+        System.Data.Entity.DbSet<NameMonitor> NameMonitors { get; set; } // NameMonitor
 
 
         System.Data.Entity.DbSet<NameSysBlock> NameSysBlocks { get; set; } // NameSysBlock
@@ -160,9 +157,6 @@ namespace EfDatabase.Inventarization.Base
         public System.Data.Entity.DbSet<CopySave> CopySaves { get; set; } // CopySave
 
 
-        public System.Data.Entity.DbSet<FullInventarization> FullInventarizations { get; set; } // FullInventarization
-
-
         public System.Data.Entity.DbSet<FullModel> FullModels { get; set; } // FullModel
 
 
@@ -193,7 +187,7 @@ namespace EfDatabase.Inventarization.Base
         public System.Data.Entity.DbSet<Monitor> Monitors { get; set; } // Monitors
 
 
-        public System.Data.Entity.DbSet<NameMonitor> NameMonitors { get; set; } // NameMonitors
+        public System.Data.Entity.DbSet<NameMonitor> NameMonitors { get; set; } // NameMonitor
 
 
         public System.Data.Entity.DbSet<NameSysBlock> NameSysBlocks { get; set; } // NameSysBlock
@@ -296,8 +290,6 @@ namespace EfDatabase.Inventarization.Base
 
             modelBuilder.Configurations.Add(new CopySaveConfiguration());
 
-            modelBuilder.Configurations.Add(new FullInventarizationConfiguration());
-
             modelBuilder.Configurations.Add(new FullModelConfiguration());
 
             modelBuilder.Configurations.Add(new FullMonitorSysBlokConfiguration());
@@ -347,8 +339,6 @@ namespace EfDatabase.Inventarization.Base
             modelBuilder.Configurations.Add(new ClassificationConfiguration(schema));
 
             modelBuilder.Configurations.Add(new CopySaveConfiguration(schema));
-
-            modelBuilder.Configurations.Add(new FullInventarizationConfiguration(schema));
 
             modelBuilder.Configurations.Add(new FullModelConfiguration(schema));
 
@@ -501,13 +491,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Серийный номер
+        /// Серийный номер CopySave
         ///</summary>
         public string SerNum { get; set; } // SerNum (length: 64)
 
 
         ///<summary>
-        /// Инвентарный номер
+        /// Инвентарный номер CopySave
         ///</summary>
         public string InventarNum { get; set; } // InventarNum (length: 64)
 
@@ -541,148 +531,6 @@ namespace EfDatabase.Inventarization.Base
 
 
             Mfus = new System.Collections.Generic.List<Mfu>();
-        }
-
-    }
-
-
-
-    // FullInventarization
-
-
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
-
-    public class FullInventarization
-    {
-
-
-
-        ///<summary>
-        /// Уникальный номер в таблице
-        ///</summary>
-        public int Id { get; set; } // Id (Primary key)
-
-
-        ///<summary>
-        /// Уникальный номер пользователя
-        ///</summary>
-        public int? IdUser { get; set; } // IdUser
-
-
-        ///<summary>
-        /// Уникальный номер монитора
-        ///</summary>
-        public int? IdMonitor { get; set; } // IdMonitor
-
-
-        ///<summary>
-        /// Уникальный номер системного блока
-        ///</summary>
-        public int? IdSysBlock { get; set; } // IdSysBlock
-
-
-        ///<summary>
-        /// Уникальный номер сканера
-        ///</summary>
-        public int? IdScaner { get; set; } // IdScaner
-
-
-        ///<summary>
-        /// Уникальный номер принтера
-        ///</summary>
-        public int? IdPrinter { get; set; } // IdPrinter
-
-
-        ///<summary>
-        /// Уникальный номер МФУ
-        ///</summary>
-        public int? IdMfu { get; set; } // IdMfu
-
-
-        ///<summary>
-        /// Уникальный номер ИБП (на будущее)
-        ///</summary>
-        public int? IdIBP { get; set; } // IdIBP
-
-
-        ///<summary>
-        /// Уникальный номер Штрих кодов сканер (на будущее))
-        ///</summary>
-        public int? IdStrih { get; set; } // IdStrih
-
-
-        ///<summary>
-        /// Уникальный номер МФУ
-        ///</summary>
-        public bool? StatusActual { get; set; } // StatusActual
-
-
-        ///<summary>
-        /// Коментарий
-        ///</summary>
-        public string Coment { get; set; } // Coment (length: 254)
-
-
-        ///<summary>
-        /// Дата создания
-        ///</summary>
-        public System.DateTime? DataCreate { get; set; } // DataCreate
-
-
-
-
-        // Foreign keys
-
-
-
-        /// <summary>
-        /// Parent Mfu pointed by [FullInventarization].([IdMfu]) (FK_Mfu_FullInventarization)
-        /// </summary>
-
-        public virtual Mfu Mfu { get; set; } // FK_Mfu_FullInventarization
-
-
-        /// <summary>
-        /// Parent Monitor pointed by [FullInventarization].([IdMonitor]) (FK_Monitors_FullInventarization)
-        /// </summary>
-
-        public virtual Monitor Monitor { get; set; } // FK_Monitors_FullInventarization
-
-
-        /// <summary>
-        /// Parent Printer pointed by [FullInventarization].([IdPrinter]) (FK_Printer_FullInventarization)
-        /// </summary>
-
-        public virtual Printer Printer { get; set; } // FK_Printer_FullInventarization
-
-
-        /// <summary>
-        /// Parent ScanerAndCamer pointed by [FullInventarization].([IdScaner]) (FK_ScanerAndCamer_FullInventarization)
-        /// </summary>
-
-        public virtual ScanerAndCamer ScanerAndCamer { get; set; } // FK_ScanerAndCamer_FullInventarization
-
-
-        /// <summary>
-        /// Parent SysBlock pointed by [FullInventarization].([IdSysBlock]) (FK_SysBlock_FullInventarization)
-        /// </summary>
-
-        public virtual SysBlock SysBlock { get; set; } // FK_SysBlock_FullInventarization
-
-
-        /// <summary>
-        /// Parent User pointed by [FullInventarization].([IdUser]) (FK_FullInventarization_Users)
-        /// </summary>
-
-        public virtual User User { get; set; } // FK_FullInventarization_Users
-
-
-
-        public FullInventarization()
-        {
-
-            DataCreate = System.DateTime.Now;
-
         }
 
     }
@@ -1162,7 +1010,7 @@ namespace EfDatabase.Inventarization.Base
         ///<summary>
         /// Описание выборки
         ///</summary>
-        public string SelectInfo { get; set; } // SelectInfo (length: 64)
+        public string SelectInfo { get; set; } // SelectInfo (length: 512)
 
 
         ///<summary>
@@ -1214,13 +1062,19 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Ун производителя
+        /// Уникальный номер пользователя
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+
+        ///<summary>
+        /// Ун производителя МФУ
         ///</summary>
         public int? IdProizvoditel { get; set; } // IdProizvoditel
 
 
         ///<summary>
-        /// Ун модели
+        /// Ун модели МФУ
         ///</summary>
         public int? IdModel { get; set; } // IdModel
 
@@ -1232,7 +1086,7 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Заводской номер
+        /// Заводской номер МФУ
         ///</summary>
         public string ZavNumber { get; set; } // ZavNumber (length: 128)
 
@@ -1244,13 +1098,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Инвентарный номер
+        /// Инвентарный номер МФУ
         ///</summary>
         public string InventarNumber { get; set; } // InventarNumber (length: 128)
 
 
         ///<summary>
-        /// Изменненый инвентарный номер
+        /// Изменненый инвентарный номер МФУ
         ///</summary>
         public string IzmInventarNumber { get; set; } // IzmInventarNumber (length: 128)
 
@@ -1290,19 +1144,6 @@ namespace EfDatabase.Inventarization.Base
         ///</summary>
         public System.DateTime? DataCreate { get; set; } // DataCreate
 
-
-
-        // Reverse navigation
-
-
-
-        /// <summary>
-        /// Child FullInventarizations where [FullInventarization].[IdMfu] point to this entity (FK_Mfu_FullInventarization)
-        /// </summary>
-
-        [JsonIgnore]
-
-        public virtual System.Collections.Generic.ICollection<FullInventarization> FullInventarizations { get; set; } // FullInventarization.FK_Mfu_FullInventarization
 
 
 
@@ -1345,6 +1186,13 @@ namespace EfDatabase.Inventarization.Base
         public virtual Statusing Statusing { get; set; } // FK_Statusing_Mfu
 
 
+        /// <summary>
+        /// Parent User pointed by [Mfu].([IdUser]) (FK_Mfu_Users)
+        /// </summary>
+
+        public virtual User User { get; set; } // FK_Mfu_Users
+
+
 
         public Mfu()
         {
@@ -1353,8 +1201,6 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
-
-            FullInventarizations = new System.Collections.Generic.List<FullInventarization>();
         }
 
     }
@@ -1372,9 +1218,15 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Уникальный номер в таблице
+        /// Уникальный номер монитора
         ///</summary>
         public int IdMonitor { get; set; } // IdMonitor (Primary key)
+
+
+        ///<summary>
+        /// Уникальный номер пользователя
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
 
 
         ///<summary>
@@ -1426,19 +1278,6 @@ namespace EfDatabase.Inventarization.Base
 
 
 
-        // Reverse navigation
-
-
-
-        /// <summary>
-        /// Child FullInventarizations where [FullInventarization].[IdMonitor] point to this entity (FK_Monitors_FullInventarization)
-        /// </summary>
-
-        [JsonIgnore]
-
-        public virtual System.Collections.Generic.ICollection<FullInventarization> FullInventarizations { get; set; } // FullInventarization.FK_Monitors_FullInventarization
-
-
 
         // Foreign keys
 
@@ -1452,10 +1291,10 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
-        /// Parent NameMonitor pointed by [Monitors].([IdModelMonitor]) (FK_Monitors_NameMonitors)
+        /// Parent NameMonitor pointed by [Monitors].([IdModelMonitor]) (FK_Monitors_NameMonitor)
         /// </summary>
 
-        public virtual NameMonitor NameMonitor { get; set; } // FK_Monitors_NameMonitors
+        public virtual NameMonitor NameMonitor { get; set; } // FK_Monitors_NameMonitor
 
 
         /// <summary>
@@ -1463,6 +1302,13 @@ namespace EfDatabase.Inventarization.Base
         /// </summary>
 
         public virtual Statusing Statusing { get; set; } // FK_Statusing_Monitors
+
+
+        /// <summary>
+        /// Parent User pointed by [Monitors].([IdUser]) (FK_Monitors_Users)
+        /// </summary>
+
+        public virtual User User { get; set; } // FK_Monitors_Users
 
 
 
@@ -1473,15 +1319,13 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
-
-            FullInventarizations = new System.Collections.Generic.List<FullInventarization>();
         }
 
     }
 
 
 
-    // NameMonitors
+    // NameMonitor
 
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
@@ -1492,7 +1336,7 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Уникальный номер в таблице
+        /// Уникальный номер
         ///</summary>
         public int IdModelMonitor { get; set; } // IdModelMonitor (Primary key)
 
@@ -1500,7 +1344,7 @@ namespace EfDatabase.Inventarization.Base
         ///<summary>
         /// Название мониторов
         ///</summary>
-        public string NameMonitor_ { get; set; } // NameMonitor (length: 128)
+        public string Name { get; set; } // Name (length: 128)
 
 
         ///<summary>
@@ -1515,12 +1359,12 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
-        /// Child Monitors where [Monitors].[IdModelMonitor] point to this entity (FK_Monitors_NameMonitors)
+        /// Child Monitors where [Monitors].[IdModelMonitor] point to this entity (FK_Monitors_NameMonitor)
         /// </summary>
 
         [JsonIgnore]
 
-        public virtual System.Collections.Generic.ICollection<Monitor> Monitors { get; set; } // Monitors.FK_Monitors_NameMonitors
+        public virtual System.Collections.Generic.ICollection<Monitor> Monitors { get; set; } // Monitors.FK_Monitors_NameMonitor
 
 
 
@@ -1612,6 +1456,12 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
+        /// Константа начальника отдела
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+
+        ///<summary>
         /// Наименование отдела
         ///</summary>
         public string NameOtdel { get; set; } // NameOtdel (length: 256)
@@ -1636,6 +1486,17 @@ namespace EfDatabase.Inventarization.Base
 
         public virtual System.Collections.Generic.ICollection<User> Users { get; set; } // Users.FK_Otdel_Users
 
+
+
+        // Foreign keys
+
+
+
+        /// <summary>
+        /// Parent User pointed by [Otdel].([IdUser]) (FK_Users_Otdel)
+        /// </summary>
+
+        public virtual User User { get; set; } // FK_Users_Otdel
 
 
 
@@ -1669,7 +1530,7 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Имя должности
+        /// Наименование должности
         ///</summary>
         public string NamePosition { get; set; } // NamePosition (length: 256)
 
@@ -1726,7 +1587,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Ун производителя
+        /// Уникальный номер пользователя
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+
+        ///<summary>
+        /// Ун производителя принтера
         ///</summary>
         public int? IdProizvoditel { get; set; } // IdProizvoditel
 
@@ -1744,25 +1611,25 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Заводской номер
+        /// Заводской номер принтера
         ///</summary>
         public string ZavNumber { get; set; } // ZavNumber (length: 128)
 
 
         ///<summary>
-        /// Сервисный номер
+        /// Сервисный номер принтера
         ///</summary>
         public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
 
 
         ///<summary>
-        /// Инвентарный номер
+        /// Инвентарный номер принтера
         ///</summary>
         public string InventarNumber { get; set; } // InventarNumber (length: 128)
 
 
         ///<summary>
-        /// Изменненый инвентарный номер
+        /// Изменненый инвентарный номер принтера
         ///</summary>
         public string IzmInventarNumber { get; set; } // IzmInventarNumber (length: 128)
 
@@ -1798,19 +1665,6 @@ namespace EfDatabase.Inventarization.Base
 
 
 
-        // Reverse navigation
-
-
-
-        /// <summary>
-        /// Child FullInventarizations where [FullInventarization].[IdPrinter] point to this entity (FK_Printer_FullInventarization)
-        /// </summary>
-
-        [JsonIgnore]
-
-        public virtual System.Collections.Generic.ICollection<FullInventarization> FullInventarizations { get; set; } // FullInventarization.FK_Printer_FullInventarization
-
-
 
         // Foreign keys
 
@@ -1844,6 +1698,13 @@ namespace EfDatabase.Inventarization.Base
         public virtual Statusing Statusing { get; set; } // FK_Statusing_Printer
 
 
+        /// <summary>
+        /// Parent User pointed by [Printer].([IdUser]) (FK_Printer_Users)
+        /// </summary>
+
+        public virtual User User { get; set; } // FK_Printer_Users
+
+
 
         public Printer()
         {
@@ -1852,8 +1713,6 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
-
-            FullInventarizations = new System.Collections.Generic.List<FullInventarization>();
         }
 
     }
@@ -1934,7 +1793,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Ун производителя
+        /// Уникальный номер пользователя
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+
+        ///<summary>
+        /// Ун производителя сканера
         ///</summary>
         public int? IdProizvoditel { get; set; } // IdProizvoditel
 
@@ -1952,25 +1817,25 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Заводской номер
+        /// Заводской номер сканера
         ///</summary>
         public string ZavNumber { get; set; } // ZavNumber (length: 128)
 
 
         ///<summary>
-        /// Сервисный номер
+        /// Сервисный номер сканера
         ///</summary>
         public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
 
 
         ///<summary>
-        /// Инвентарный номер
+        /// Инвентарный номер сканера
         ///</summary>
         public string InventarNumber { get; set; } // InventarNumber (length: 128)
 
 
         ///<summary>
-        /// Изменненый инвентарный номер
+        /// Изменненый инвентарный номер сканера
         ///</summary>
         public string IzmInventarNumber { get; set; } // IzmInventarNumber (length: 128)
 
@@ -2006,19 +1871,6 @@ namespace EfDatabase.Inventarization.Base
 
 
 
-        // Reverse navigation
-
-
-
-        /// <summary>
-        /// Child FullInventarizations where [FullInventarization].[IdScaner] point to this entity (FK_ScanerAndCamer_FullInventarization)
-        /// </summary>
-
-        [JsonIgnore]
-
-        public virtual System.Collections.Generic.ICollection<FullInventarization> FullInventarizations { get; set; } // FullInventarization.FK_ScanerAndCamer_FullInventarization
-
-
 
         // Foreign keys
 
@@ -2052,6 +1904,13 @@ namespace EfDatabase.Inventarization.Base
         public virtual Statusing Statusing { get; set; } // FK_Statusing_Scaner
 
 
+        /// <summary>
+        /// Parent User pointed by [ScanerAndCamer].([IdUser]) (FK_ScanerAndCamer_Users)
+        /// </summary>
+
+        public virtual User User { get; set; } // FK_ScanerAndCamer_Users
+
+
 
         public ScanerAndCamer()
         {
@@ -2060,8 +1919,6 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
-
-            FullInventarizations = new System.Collections.Generic.List<FullInventarization>();
         }
 
     }
@@ -2182,13 +2039,19 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Уникальный номер
+        /// Уникальный номер системного блока
         ///</summary>
         public int IdSysBlock { get; set; } // IdSysBlock (Primary key)
 
 
         ///<summary>
-        /// Ун модели
+        /// Уникальный номер пользователя
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+
+        ///<summary>
+        /// Ун модели системного блока
         ///</summary>
         public int? IdModelSysBlock { get; set; } // IdModelSysBlock
 
@@ -2206,13 +2069,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Серийный номер
+        /// Серийный номер системного блока
         ///</summary>
         public string SerNum { get; set; } // SerNum (length: 128)
 
 
         ///<summary>
-        /// Инвентарный номер
+        /// Инвентарный номер системного блока
         ///</summary>
         public string InventarNumSysBlok { get; set; } // InventarNumSysBlok (length: 128)
 
@@ -2254,19 +2117,6 @@ namespace EfDatabase.Inventarization.Base
 
 
 
-        // Reverse navigation
-
-
-
-        /// <summary>
-        /// Child FullInventarizations where [FullInventarization].[IdSysBlock] point to this entity (FK_SysBlock_FullInventarization)
-        /// </summary>
-
-        [JsonIgnore]
-
-        public virtual System.Collections.Generic.ICollection<FullInventarization> FullInventarizations { get; set; } // FullInventarization.FK_SysBlock_FullInventarization
-
-
 
         // Foreign keys
 
@@ -2293,6 +2143,13 @@ namespace EfDatabase.Inventarization.Base
         public virtual Statusing Statusing { get; set; } // FK_Statusing_SysBlock
 
 
+        /// <summary>
+        /// Parent User pointed by [SysBlock].([IdUser]) (FK_SysBlock_Users)
+        /// </summary>
+
+        public virtual User User { get; set; } // FK_SysBlock_Users
+
+
 
         public SysBlock()
         {
@@ -2301,8 +2158,6 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
-
-            FullInventarizations = new System.Collections.Generic.List<FullInventarization>();
         }
 
     }
@@ -2329,6 +2184,12 @@ namespace EfDatabase.Inventarization.Base
         /// Имя пользователя
         ///</summary>
         public string Name { get; set; } // Name (length: 256)
+
+
+        ///<summary>
+        /// Сокращенное имя пользователя
+        ///</summary>
+        public string SmallName { get; set; } // SmallName (length: 128)
 
 
         ///<summary>
@@ -2415,12 +2276,52 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
-        /// Child FullInventarizations where [FullInventarization].[IdUser] point to this entity (FK_FullInventarization_Users)
+        /// Child Mfus where [Mfu].[IdUser] point to this entity (FK_Mfu_Users)
         /// </summary>
 
         [JsonIgnore]
 
-        public virtual System.Collections.Generic.ICollection<FullInventarization> FullInventarizations { get; set; } // FullInventarization.FK_FullInventarization_Users
+        public virtual System.Collections.Generic.ICollection<Mfu> Mfus { get; set; } // Mfu.FK_Mfu_Users
+
+        /// <summary>
+        /// Child Monitors where [Monitors].[IdUser] point to this entity (FK_Monitors_Users)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Monitor> Monitors { get; set; } // Monitors.FK_Monitors_Users
+
+        /// <summary>
+        /// Child Otdels where [Otdel].[IdUser] point to this entity (FK_Users_Otdel)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Otdel> Otdels { get; set; } // Otdel.FK_Users_Otdel
+
+        /// <summary>
+        /// Child Printers where [Printer].[IdUser] point to this entity (FK_Printer_Users)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Printer> Printers { get; set; } // Printer.FK_Printer_Users
+
+        /// <summary>
+        /// Child ScanerAndCamers where [ScanerAndCamer].[IdUser] point to this entity (FK_ScanerAndCamer_Users)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer.FK_ScanerAndCamer_Users
+
+        /// <summary>
+        /// Child SysBlocks where [SysBlock].[IdUser] point to this entity (FK_SysBlock_Users)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<SysBlock> SysBlocks { get; set; } // SysBlock.FK_SysBlock_Users
 
 
 
@@ -2458,7 +2359,17 @@ namespace EfDatabase.Inventarization.Base
             DataCreate = System.DateTime.Now;
 
 
-            FullInventarizations = new System.Collections.Generic.List<FullInventarization>();
+            Mfus = new System.Collections.Generic.List<Mfu>();
+
+            Monitors = new System.Collections.Generic.List<Monitor>();
+
+            Otdels = new System.Collections.Generic.List<Otdel>();
+
+            Printers = new System.Collections.Generic.List<Printer>();
+
+            ScanerAndCamers = new System.Collections.Generic.List<ScanerAndCamer>();
+
+            SysBlocks = new System.Collections.Generic.List<SysBlock>();
         }
 
     }
@@ -2533,72 +2444,6 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
 
-
-
-        }
-    }
-
-
-    // FullInventarization
-
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
-
-    public class FullInventarizationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<FullInventarization>
-    {
-        public FullInventarizationConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public FullInventarizationConfiguration(string schema)
-        {
-
-            ToTable("FullInventarization", schema);
-
-            HasKey(x => x.Id);
-
-
-
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-
-            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
-
-            Property(x => x.IdMonitor).HasColumnName(@"IdMonitor").HasColumnType("int").IsOptional();
-
-            Property(x => x.IdSysBlock).HasColumnName(@"IdSysBlock").HasColumnType("int").IsOptional();
-
-            Property(x => x.IdScaner).HasColumnName(@"IdScaner").HasColumnType("int").IsOptional();
-
-            Property(x => x.IdPrinter).HasColumnName(@"IdPrinter").HasColumnType("int").IsOptional();
-
-            Property(x => x.IdMfu).HasColumnName(@"IdMfu").HasColumnType("int").IsOptional();
-
-            Property(x => x.IdIBP).HasColumnName(@"IdIBP").HasColumnType("int").IsOptional();
-
-            Property(x => x.IdStrih).HasColumnName(@"IdStrih").HasColumnType("int").IsOptional();
-
-            Property(x => x.StatusActual).HasColumnName(@"StatusActual").HasColumnType("bit").IsOptional();
-
-            Property(x => x.Coment).HasColumnName(@"Coment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(254);
-
-            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
-
-
-
-            // Foreign keys
-
-
-            HasOptional(a => a.Mfu).WithMany(b => b.FullInventarizations).HasForeignKey(c => c.IdMfu).WillCascadeOnDelete(false); // FK_Mfu_FullInventarization
-
-            HasOptional(a => a.Monitor).WithMany(b => b.FullInventarizations).HasForeignKey(c => c.IdMonitor).WillCascadeOnDelete(false); // FK_Monitors_FullInventarization
-
-            HasOptional(a => a.Printer).WithMany(b => b.FullInventarizations).HasForeignKey(c => c.IdPrinter).WillCascadeOnDelete(false); // FK_Printer_FullInventarization
-
-            HasOptional(a => a.ScanerAndCamer).WithMany(b => b.FullInventarizations).HasForeignKey(c => c.IdScaner).WillCascadeOnDelete(false); // FK_ScanerAndCamer_FullInventarization
-
-            HasOptional(a => a.SysBlock).WithMany(b => b.FullInventarizations).HasForeignKey(c => c.IdSysBlock).WillCascadeOnDelete(false); // FK_SysBlock_FullInventarization
-
-            HasOptional(a => a.User).WithMany(b => b.FullInventarizations).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_FullInventarization_Users
 
 
         }
@@ -2873,7 +2718,7 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
-            Property(x => x.SelectInfo).HasColumnName(@"SelectInfo").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SelectInfo).HasColumnName(@"SelectInfo").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
 
             Property(x => x.SelectedParametr).HasColumnName(@"SelectedParametr").HasColumnType("nvarchar(max)").IsOptional();
 
@@ -2908,6 +2753,8 @@ namespace EfDatabase.Inventarization.Base
 
 
             Property(x => x.IdMfu).HasColumnName(@"IdMfu").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
 
             Property(x => x.IdProizvoditel).HasColumnName(@"IdProizvoditel").HasColumnType("int").IsOptional();
 
@@ -2950,6 +2797,8 @@ namespace EfDatabase.Inventarization.Base
 
             HasOptional(a => a.Statusing).WithMany(b => b.Mfus).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Mfu
 
+            HasOptional(a => a.User).WithMany(b => b.Mfus).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Mfu_Users
+
 
         }
     }
@@ -2977,6 +2826,8 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdMonitor).HasColumnName(@"IdMonitor").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+
             Property(x => x.IdModelMonitor).HasColumnName(@"IdModelMonitor").HasColumnType("int").IsOptional();
 
             Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
@@ -3000,16 +2851,18 @@ namespace EfDatabase.Inventarization.Base
 
             HasOptional(a => a.Kabinet).WithMany(b => b.Monitors).HasForeignKey(c => c.IdNumberKabinet).WillCascadeOnDelete(false); // FK_Monitors_Kabinet
 
-            HasOptional(a => a.NameMonitor).WithMany(b => b.Monitors).HasForeignKey(c => c.IdModelMonitor).WillCascadeOnDelete(false); // FK_Monitors_NameMonitors
+            HasOptional(a => a.NameMonitor).WithMany(b => b.Monitors).HasForeignKey(c => c.IdModelMonitor).WillCascadeOnDelete(false); // FK_Monitors_NameMonitor
 
             HasOptional(a => a.Statusing).WithMany(b => b.Monitors).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Monitors
+
+            HasOptional(a => a.User).WithMany(b => b.Monitors).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Monitors_Users
 
 
         }
     }
 
 
-    // NameMonitors
+    // NameMonitor
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
 
@@ -3023,7 +2876,7 @@ namespace EfDatabase.Inventarization.Base
         public NameMonitorConfiguration(string schema)
         {
 
-            ToTable("NameMonitors", schema);
+            ToTable("NameMonitor", schema);
 
             HasKey(x => x.IdModelMonitor);
 
@@ -3031,7 +2884,7 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdModelMonitor).HasColumnName(@"IdModelMonitor").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
-            Property(x => x.NameMonitor_).HasColumnName(@"NameMonitor").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(128);
 
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
 
@@ -3095,10 +2948,18 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdOtdel).HasColumnName(@"IdOtdel").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+
             Property(x => x.NameOtdel).HasColumnName(@"NameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
 
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
 
+
+
+            // Foreign keys
+
+
+            HasOptional(a => a.User).WithMany(b => b.Otdels).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Users_Otdel
 
 
         }
@@ -3159,6 +3020,8 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdPrinter).HasColumnName(@"IdPrinter").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+
             Property(x => x.IdProizvoditel).HasColumnName(@"IdProizvoditel").HasColumnType("int").IsOptional();
 
             Property(x => x.IdModel).HasColumnName(@"IdModel").HasColumnType("int").IsOptional();
@@ -3195,6 +3058,8 @@ namespace EfDatabase.Inventarization.Base
             HasOptional(a => a.Kabinet).WithMany(b => b.Printers).HasForeignKey(c => c.IdNumberKabinet).WillCascadeOnDelete(false); // FK_Printer_Kabinet
 
             HasOptional(a => a.Statusing).WithMany(b => b.Printers).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Printer
+
+            HasOptional(a => a.User).WithMany(b => b.Printers).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Printer_Users
 
 
         }
@@ -3255,6 +3120,8 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdScaner).HasColumnName(@"IdScaner").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+
             Property(x => x.IdProizvoditel).HasColumnName(@"IdProizvoditel").HasColumnType("int").IsOptional();
 
             Property(x => x.IdModel).HasColumnName(@"IdModel").HasColumnType("int").IsOptional();
@@ -3291,6 +3158,8 @@ namespace EfDatabase.Inventarization.Base
             HasOptional(a => a.Kabinet).WithMany(b => b.ScanerAndCamers).HasForeignKey(c => c.IdNumberKabinet).WillCascadeOnDelete(false); // FK_ScanerAndCamer_Kabinet
 
             HasOptional(a => a.Statusing).WithMany(b => b.ScanerAndCamers).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Scaner
+
+            HasOptional(a => a.User).WithMany(b => b.ScanerAndCamers).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_ScanerAndCamer_Users
 
 
         }
@@ -3353,6 +3222,8 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdSysBlock).HasColumnName(@"IdSysBlock").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+
             Property(x => x.IdModelSysBlock).HasColumnName(@"IdModelSysBlock").HasColumnType("int").IsOptional();
 
             Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
@@ -3386,6 +3257,8 @@ namespace EfDatabase.Inventarization.Base
 
             HasOptional(a => a.Statusing).WithMany(b => b.SysBlocks).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_SysBlock
 
+            HasOptional(a => a.User).WithMany(b => b.SysBlocks).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_SysBlock_Users
+
 
         }
     }
@@ -3414,6 +3287,8 @@ namespace EfDatabase.Inventarization.Base
             Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.SmallName).HasColumnName(@"SmallName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
 
             Property(x => x.IdOtdel).HasColumnName(@"IdOtdel").HasColumnType("int").IsOptional();
 

@@ -31,5 +31,19 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage
             page.SettingParagraph(ref body, mainDocument);
             return body;
         }
+        /// <summary>
+        /// Параметры документа горизонтальные
+        /// </summary>
+        /// <returns></returns>
+        public Body ParametrPageHorizont()
+        {
+            Body body = new Body();
+            var page = new PageGenerate();
+            page.ParamInvoiceDocument(ref body);
+            return body;
+
+        }
+
+
     }
 }

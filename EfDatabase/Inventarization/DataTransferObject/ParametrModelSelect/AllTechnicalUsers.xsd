@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="AllTechnicalUsersAndOtdel" type="AllTechnicalUsersAndOtdel">
+		<xs:annotation>
+			<xs:documentation>Техника на пользователя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AllTechnicalUsersAndOtdel">
+		<xs:annotation>
+			<xs:documentation>Техника на пользователя</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Users" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Otdel" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Users">
+		<xs:annotation>
+			<xs:documentation>Пользователь</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Monitors" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Mfu" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Printer" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ScanerAndCamer" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="SysBlock" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Monitors">
+		<xs:annotation>
+			<xs:documentation>Мониторы</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet"/>
+				<xs:element ref="NameMonitor"/>
+			</xs:sequence>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Mfu">
+		<xs:annotation>
+			<xs:documentation>Мфу</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet"/>
+				<xs:element ref="FullProizvoditel"/>
+				<xs:element ref="FullModel"/>
+			</xs:sequence>
+			<xs:attribute name="ZavNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Заводской номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ScanerAndCamer">
+		<xs:annotation>
+			<xs:documentation>Сканеры и камеры</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet"/>
+				<xs:element ref="FullProizvoditel"/>
+				<xs:element ref="FullModel"/>
+			</xs:sequence>
+			<xs:attribute name="ZavNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Заводской номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SysBlock">
+		<xs:annotation>
+			<xs:documentation>Системные блоки</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet"/>
+				<xs:element ref="NameSysBlock"/>
+			</xs:sequence>
+			<xs:attribute name="ServiceNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер системного блока</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Адресс</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Printer">
+		<xs:annotation>
+			<xs:documentation>Принтеры</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet"/>
+				<xs:element ref="FullProizvoditel"/>
+				<xs:element ref="FullModel"/>
+			</xs:sequence>
+			<xs:attribute name="ZavNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Заводской номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NameMonitor">
+		<xs:annotation>
+			<xs:documentation>Имена мониторов</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FullProizvoditel">
+		<xs:annotation>
+			<xs:documentation>Производитель сканера</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameProizvoditel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование производителя сканера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FullModel">
+		<xs:annotation>
+			<xs:documentation>Модель сканера</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameModel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Kabinet">
+		<xs:annotation>
+			<xs:documentation>Кабинет</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NumberKabinet" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер кабинета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NameSysBlock">
+		<xs:annotation>
+			<xs:documentation>Наименование системного блока</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameComputer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование системного блока</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CopySave">
+		<xs:annotation>
+			<xs:documentation>Copy Save</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameCopySave" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование Copy Save</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Otdel">
+		<xs:annotation>
+			<xs:documentation>Отделы</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Users" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

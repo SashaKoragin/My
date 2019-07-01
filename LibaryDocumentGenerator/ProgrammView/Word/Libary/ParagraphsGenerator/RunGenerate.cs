@@ -11,7 +11,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
         /// <param name="textparagraph">Текст по умолчанию null вернет пустой параграв</param>
         /// <param name="fontsize">Размер шрифта по умолчанию 10 20 делить на 2</param>
         /// <param name="justifications">Выравнивание по умолчанию Слева</param>
-        /// <param name="style">Стиль текста 0 обычный по умолчанию: 1 Жирный:, 2 Подчеркнутый</param>
+        /// <param name="style">Стиль текста 0 обычный по умолчанию: 1 Жирный:, 2 Подчеркнутый,</param>
         /// <param name="leftident">Отступ слева</param>
         /// <param name="breake">Кнопка Enter после вставки</param>
         /// <param name="isfoters">Вставка в Foters</param>
@@ -19,6 +19,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
         /// <returns>Возвращаем созданный параграф либо пустой либо заполненный</returns>
         public Paragraph RunParagraphGeneratorStandart(string textparagraph = " ", string fontsize = "20", JustificationValues justifications = JustificationValues.Left, int style = 0, string leftident = "0", bool breake = false, bool isfoters = false,  bool isContextualSpacing = true)
         {
+
             ParagraphProperties paragraphProperties = new ParagraphProperties();
             FontSize fontSize = new FontSize { Val = fontsize };
             Run run = new Run();
@@ -92,10 +93,14 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
                     property.Append(bold);
                     break;
                 case 2:
-                    Underline underline = new Underline() {Val = UnderlineValues.Single};
                     Italic italic = new Italic();
+                    Underline underline = new Underline() {Val = UnderlineValues.Single};
                     property.Append(underline);
                     property.Append(italic);
+                    break;
+                case 3:
+                    Italic italic1 = new Italic();
+                    property.Append(italic1);
                     break;
             }
         }

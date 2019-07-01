@@ -64,6 +64,7 @@
     <Compile Include="Inventarization\BaseLogica\AddObjectDb\ModelReturn.cs" />
     <Compile Include="Inventarization\BaseLogica\Autorization\Autorization.cs" />
     <Compile Include="Inventarization\BaseLogica\HistoryLog\HistoryLog.cs" />
+    <Compile Include="Inventarization\BaseLogica\Select\Report.cs" />
     <Compile Include="Inventarization\BaseLogica\Select\Select.cs" />
     <Compile Include="Inventarization\BaseLogica\Select\SelectSql.cs" />
     <Compile Include="Inventarization\Base\Inventarization.cs">
@@ -71,8 +72,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inventarization.tt</DependentUpon>
     </Compile>
+    <Compile Include="Inventarization\DataTransferObject\ParametrModelSelect\AllTechnicalUsers.cs">
+      <DependentUpon>AllTechnicalUsers.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventarization\DataTransferObject\ParametrModelSelect\ParametrsModel.cs">
       <DependentUpon>ParametrsModel.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventarization\ReportSheme\Invoice\ReportShemeInvoice.cs">
+      <DependentUpon>ReportShemeInvoice.xsd</DependentUpon>
     </Compile>
     <Compile Include="SyteIfnsRisk.cs">
       <AutoGen>True</AutoGen>
@@ -97,7 +104,13 @@
     <None Include="EF.Reverse.POCO.ttinclude" />
     <None Include="Inventarization\Base\EF.Reverse.POCO.Core.ttinclude" />
     <None Include="Inventarization\Base\EF.Reverse.POCO.ttinclude" />
+    <None Include="Inventarization\DataTransferObject\ParametrModelSelect\AllTechnicalUsers.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventarization\DataTransferObject\ParametrModelSelect\ParametrsModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventarization\ReportSheme\Invoice\ReportShemeInvoice.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -132,6 +145,7 @@
   <Target Name="CreateDTOSheme">
     <ItemGroup>
       <XsdFiles Include="Inventarization\DataTransferObject\ParametrModelSelect\*.xsd" />
+      <XsdReportInvoice Include="Inventarization\ReportSheme\Invoice\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -141,6 +155,7 @@
       <XsdToolPath>$(WindowsSdkPath)bin\NETFX 4.6 Tools</XsdToolPath>
     </PropertyGroup>
     <Message Importance="high" Text="Processing XSD schemas" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdFiles.FullPath)&quot; /classes /f /t /namespace:$(RootNamespace)ParametrsModel /outputdir:Inventarization\DataTransferObject\ParametrModelSelect\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdFiles.FullPath)&quot; /c /namespace:$(RootNamespace)ParametrsModel /outputdir:Inventarization\DataTransferObject\ParametrModelSelect\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportInvoice.FullPath)&quot; /c /namespace:$(RootNamespace)Invoice /outputdir:Inventarization\ReportSheme\Invoice\" />
   </Target>
 </Project>

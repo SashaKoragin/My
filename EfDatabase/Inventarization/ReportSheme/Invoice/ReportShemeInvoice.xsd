@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ReportSheme" type="Report">
+		<xs:annotation>
+			<xs:documentation>Схема отчета на внутреннее перемещение</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Report">
+		<xs:annotation>
+			<xs:documentation>Отчет</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ParamRequest"/>
+			<xs:element ref="Main" minOccurs="0"/>
+			<xs:element ref="Body" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ParamRequest">
+		<xs:annotation>
+			<xs:documentation>Параметры запроса</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdSelect" default="0">
+				<xs:annotation>
+					<xs:documentation>Выборка из таблицы индекс</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="IdOut" default="0">
+				<xs:annotation>
+					<xs:documentation>Id сформировавшего отчет </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="IdUsers" default="0">
+				<xs:annotation>
+					<xs:documentation>Id Пользователя</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Main" abstract="0" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Гланая</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Formed" minOccurs="0"/>
+				<xs:element ref="Received" minOccurs="0"/>
+				<xs:element ref="Organization" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Formed">
+		<xs:annotation>
+			<xs:documentation>Кто формировал запрос</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="UserName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя сформировавшего отчет</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сокращенное имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NamePosition" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование должности</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Received">
+		<xs:annotation>
+			<xs:documentation>Получатели</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="UserName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование Пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сокращенное имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ChiefName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Начальник отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ChiefSmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сокращенное имя начальника</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ChiefPosition" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность начальника отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Body" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Тело отчета (тоесть суть)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameCategory" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование категории техники</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Model" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Модель техники</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Category" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Категория техники</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberKabinet" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер кабинета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Organization">
+		<xs:annotation>
+			<xs:documentation>Организация</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameOrganization" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

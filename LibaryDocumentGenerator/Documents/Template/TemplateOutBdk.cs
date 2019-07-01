@@ -17,7 +17,7 @@ namespace LibaryDocumentGenerator.Documents.Template
     /// <summary>
     /// Шаблон OutBdk разкладки модели FN71
     /// </summary>
-    public class TemplateOutBdk : ITemplate
+    public class TemplateOutBdk : ITemplate<LibaryXMLAutoReports.FullTemplateSheme.Document>
     {
         public void CreateDocum(string path, LibaryXMLAutoReports.FullTemplateSheme.Document template, object obj)
         {

@@ -75,5 +75,18 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
             }
             return new FooterReference() { Type = HeaderFooterValues.First, Id = mainDocument.GetIdOfPart(mainDocument.FooterParts.FirstOrDefault()) };
         }
+        /// <summary>
+        /// Настройка документа в горизонтальную ориентацию
+        /// </summary>
+        /// <param name="body">Тело документа для настройки</param>
+        public void ParamInvoiceDocument(ref Body body)
+        {
+            SectionProperties sectionProperties = new SectionProperties();
+            PageSize pageSize = new PageSize() { Width = 16800U, Height = 11900U, Orient = PageOrientationValues.Landscape };
+            PageMargin pageMargin = new PageMargin() { Top = 500, Right = 500, Bottom = 500, Left = 500, Header = 710U, Footer = 700U, Gutter = 0U };
+            sectionProperties.Append(pageSize);
+            sectionProperties.Append(pageMargin);
+            body.Append(sectionProperties);
+        }
     }
 }

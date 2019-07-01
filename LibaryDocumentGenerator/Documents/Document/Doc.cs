@@ -15,7 +15,7 @@ namespace LibaryDocumentGenerator.Documents.Document
         /// <summary>
         /// Интерфейс шаблонов данных
         /// </summary>
-        public ITemplate Template { get; set; }
+        public ITemplate<LibaryXMLAutoReports.FullTemplateSheme.Document> Template { get; set; }
         /// <summary>
         /// Метод генерации документа OutBdk нужно добавлять новые методы на генерацию новых документов
         /// </summary>
