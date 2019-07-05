@@ -44,10 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Documents\Constant\WordConstant.cs" />
+    <Compile Include="Documents\DocumentMigration\DocumentMigration.cs" />
     <Compile Include="Documents\Document\Doc.cs" />
     <Compile Include="Documents\FileLogica\FileLogica.cs" />
     <Compile Include="Documents\Model\IModel.cs" />
-    <Compile Include="Documents\Model\MigrationReportModel.cs" />
     <Compile Include="Documents\Model\OutBdkModel.cs" />
     <Compile Include="Documents\Template\InvoiceInventarka.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />

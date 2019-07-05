@@ -15,25 +15,17 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
         /// <param name="body"></param>
         /// <param name="mainDocument"></param>
         /// <param name="count">Параметр от которого зависит колонтитул</param>
-        public void SettingPage(ref Body body, MainDocumentPart mainDocument, int count = 0)
+        public void SettingPage(ref Body body, MainDocumentPart mainDocument)
         {
-
             SectionProperties sectionProperties = new SectionProperties();
             PageSize pageSize = new PageSize() { Width = 11900U, Height = 16840U };
-
-            SectionType section = new SectionType() { Val = SectionMarkValues.Continuous };
-
             PageMargin pageMargin = new PageMargin() { Top = 1440, Right = 700U, Bottom = -1400, Left = 1470U, Header = 710U, Footer = 700U, Gutter = 0U };
             TitlePage titlePage = new TitlePage();
-
             sectionProperties.Append(pageSize);
             sectionProperties.Append(pageMargin);
             sectionProperties.Append(titlePage);
-            sectionProperties.Append(section);
-            if (count != 0)
-            {
-                sectionProperties.Append(AddFooterReference(mainDocument, count));
-            }
+            sectionProperties.Append(new FooterReference() { Type = HeaderFooterValues.Default, Id = mainDocument.GetIdOfPart(mainDocument.FooterParts.FirstOrDefault()) });
+            sectionProperties.Append(new FooterReference() { Type = HeaderFooterValues.First, Id = mainDocument.GetIdOfPart(mainDocument.FooterParts.FirstOrDefault()) });
             body.Append(sectionProperties);
         }
 
@@ -58,22 +50,6 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
             paragraphProperties.Append(sectionProperties);
             paragraph.Append(paragraphProperties);
             body.Append(paragraph);
-        }
-
-        /// <summary>
-        /// Ссылка на колонтитул добавление его на страницу
-        /// Примечание работает только для 2 страниц если есть 3 тоReference надо менять на Even
-        /// </summary>
-        /// <param name="mainDocument">Документ откуда вытягиваем колонтитул</param>
-        /// <param name="count">Колличество от которого зависит на кокой странице колонтитул</param>
-        /// <returns></returns>
-        public FooterReference AddFooterReference(MainDocumentPart mainDocument, int count = 0)
-        {
-            if (count > 19)
-            {
-                return new FooterReference() { Type = HeaderFooterValues.Default, Id = mainDocument.GetIdOfPart(mainDocument.FooterParts.FirstOrDefault()) };
-            }
-            return new FooterReference() { Type = HeaderFooterValues.First, Id = mainDocument.GetIdOfPart(mainDocument.FooterParts.FirstOrDefault()) };
         }
         /// <summary>
         /// Настройка документа в горизонтальную ориентацию

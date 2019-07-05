@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LibaryXMLAuto.ModelServiceWcfCommand.AngularModel;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 using LibaryXMLAuto.Reports.FullTemplateSheme;
+using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlSql.Model.FaceError;
 using TestIFNSLibary.PostRequest.Face;
 
@@ -141,6 +142,13 @@ namespace TestIFNSLibary.ServiceRest
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ServerList", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> ServerList(FullSetting setting);
+        /// <summary>
+        /// Сервис отчетов по ошибкам о миграции НП
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/MigrationError", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> MigrationReports(MigrationParse json);
 
     }
 }

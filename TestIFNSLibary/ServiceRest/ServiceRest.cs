@@ -10,6 +10,7 @@ using SqlLibaryIfns.SqlEntytiCommand.TaskUse;
 using SqlLibaryIfns.SqlZapros.SobytieSql;
 using System.IO;
 using System.Threading;
+using LibaryDocumentGenerator.Documents.DocumentMigration;
 using LibaryDocumentGenerator.GenerateDocument.GenerateWord;
 using LibaryXMLAuto.ModelServiceWcfCommand.AngularModel;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
@@ -20,6 +21,7 @@ using SqlLibaryIfns.SqlZapros.SqlConnections;
 using SqlLibaryIfns.ZaprosSelectNotParam;
 using LibaryDocumentGenerator.DonloadFile.Angular;
 using LibaryXMLAuto.Reports.FullTemplateSheme;
+using LibaryXMLAutoModelXmlAuto.MigrationReport;
 
 
 namespace TestIFNSLibary.ServiceRest
@@ -307,6 +309,28 @@ namespace TestIFNSLibary.ServiceRest
         {
             CompletedAsyncResult<ModelUser> result = r as CompletedAsyncResult<ModelUser>;
             return result.Data;
+        }
+        /// <summary>
+        /// Сервис подготовки документов ошибок о миграции
+        /// </summary>
+        /// <param name="json">Json отчет</param>
+        /// <returns></returns>
+        public async Task<string> MigrationReports(MigrationParse json)
+        {
+            try
+            {
+                await Task.Factory.StartNew(() =>
+                 {
+                     var docmigration = new DocumentMigration();
+                     docmigration.MigrationDoc(_parametrService.ConectWork, _parametrService.ReportMassTemplate, json);
+                 });
+                return "Документы для печати запущены и сохраняются в папку " + _parametrService.ReportMassTemplate;
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+                return e.Message;
+            }
         }
     }
     class CompletedAsyncResult<T> : IAsyncResult

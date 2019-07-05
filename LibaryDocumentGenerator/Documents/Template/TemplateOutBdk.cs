@@ -41,7 +41,7 @@ namespace LibaryDocumentGenerator.Documents.Template
             Fotters fotters = new Fotters();
             PageSetting settingpage = new PageSetting();
             fotters.FottersAddDocument(mainDocumentPart, template);
-            document.Append(settingpage.AddSetting(mainDocumentPart, data.FN1723_2.Length));
+            document.Append(settingpage.AddSetting(mainDocumentPart));
             document.Append(headers.DocumentsHeaders(template, data.N279, data.N280));
             document.Append(body.TextDocument(template));
             document.Append(body.DocumentIshBdkTableBody(data));

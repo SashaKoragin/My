@@ -10,13 +10,12 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage
         /// Создания настройки страницы надо создавать первым
         /// </summary>
         /// <param name="mainDocument">Документ</param>
-        /// <param name="count">Количество от которого зависит колонтитул надо тестить 0 колонтитул на 1 странице</param>
         /// <returns></returns>
-        public Body AddSetting(MainDocumentPart mainDocument, int count = 0)
+        public Body AddSetting(MainDocumentPart mainDocument)
         {
             Body body = new Body();
             var page = new PageGenerate();
-            page.SettingPage(ref body, mainDocument, count);
+            page.SettingPage(ref body, mainDocument);
             return body;
         }
         /// <summary>
@@ -43,7 +42,5 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage
             return body;
 
         }
-
-
     }
 }

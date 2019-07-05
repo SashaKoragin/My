@@ -82,8 +82,7 @@ namespace DBF
 
         private void button4_Click(object sender, EventArgs e)
         {
-            TemplateDocMatCen doc = new LibaryDocumentGenerator.Documents.Template.TemplateDocMatCen();
-            doc.CreateDocum("C:\\WWW.docx",null,null);
+          
         }
     }
     }
