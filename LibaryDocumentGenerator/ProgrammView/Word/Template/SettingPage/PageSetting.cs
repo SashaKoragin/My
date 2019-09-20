@@ -42,5 +42,17 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage
             return body;
 
         }
+        /// <summary>
+        /// Параметры вертикального выравнивания
+        /// </summary>
+        /// <returns></returns>
+        public Body DocumentSettingVertical()
+        {
+            Body body = new Body();
+            var page = new PageGenerate();
+            page.DocumentVerticalMarginStandart(ref body);
+            return body;
+        }
+      
     }
 }

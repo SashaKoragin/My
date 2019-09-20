@@ -51,6 +51,11 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
+			<xs:attribute name="IdNameDocument" type="xs:int" default="0">
+				<xs:annotation>
+					<xs:documentation>Наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Main" abstract="0" nillable="true">
@@ -62,6 +67,7 @@
 				<xs:element ref="Formed" minOccurs="0"/>
 				<xs:element ref="Received" minOccurs="0"/>
 				<xs:element ref="Organization" minOccurs="0"/>
+				<xs:element ref="Barcode" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -184,6 +190,11 @@
 					<xs:documentation>Ip Адрес</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Примечание</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Organization">
@@ -192,6 +203,23 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name="NameOrganization" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Barcode">
+		<xs:annotation>
+			<xs:documentation>Штрихкод</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Код для генерации штрихкода</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PathBarcode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Путь к штрихкоду</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

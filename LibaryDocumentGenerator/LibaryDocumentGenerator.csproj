@@ -34,27 +34,42 @@
       <HintPath>C:\Nuget\DocumentFormat.OpenXml.2.8.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="zxing, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>C:\Nuget\ZXing.Net.0.16.4\lib\net45\zxing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>C:\Nuget\ZXing.Net.0.16.4\lib\net45\zxing.presentation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Barcode\GenerateBarcode.cs" />
     <Compile Include="Documents\Constant\WordConstant.cs" />
     <Compile Include="Documents\DocumentMigration\DocumentMigration.cs" />
     <Compile Include="Documents\Document\Doc.cs" />
     <Compile Include="Documents\FileLogica\FileLogica.cs" />
     <Compile Include="Documents\Model\IModel.cs" />
     <Compile Include="Documents\Model\OutBdkModel.cs" />
+    <Compile Include="Documents\Template\BookAccountingInventarka.cs" />
     <Compile Include="Documents\Template\InvoiceInventarka.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />
+    <Compile Include="Documents\Template\TelephoneHelp.cs" />
     <Compile Include="Documents\Template\TemplateOutBdk.cs" />
     <Compile Include="DonloadFile\Angular\AngularRestEf.cs" />
     <Compile Include="GenerateDocument\GenerateWord\GenerateDocument.cs" />
     <Compile Include="ProgrammView\FullDocument\DocumentsFull.cs" />
+    <Compile Include="ProgrammView\Word\Libary\Drawing\AddDriwing.cs" />
     <Compile Include="ProgrammView\Word\Libary\FottersGenerator\FotterGenerate.cs" />
     <Compile Include="ProgrammView\Word\Libary\PageGenerator\PageGenerate.cs" />
     <Compile Include="ProgrammView\Word\Libary\ParagraphsGenerator\ParagraphGenerate.cs" />

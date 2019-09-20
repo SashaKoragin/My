@@ -69,6 +69,14 @@ namespace EfDatabaseParametrsModel {
         
         private SysBlock[] sysBlockField;
         
+        private BlockPower[] blockPowerField;
+        
+        private Telephon telephonField;
+        
+        private int idUserField;
+        
+        private bool idUserFieldSpecified;
+        
         private string nameField;
         
         /// <remarks/>
@@ -127,6 +135,49 @@ namespace EfDatabaseParametrsModel {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("BlockPower")]
+        public BlockPower[] BlockPower {
+            get {
+                return this.blockPowerField;
+            }
+            set {
+                this.blockPowerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Telephon Telephon {
+            get {
+                return this.telephonField;
+            }
+            set {
+                this.telephonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int IdUser {
+            get {
+                return this.idUserField;
+            }
+            set {
+                this.idUserField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IdUserSpecified {
+            get {
+                return this.idUserFieldSpecified;
+            }
+            set {
+                this.idUserFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name {
             get {
@@ -154,6 +205,8 @@ namespace EfDatabaseParametrsModel {
         private string serNumField;
         
         private string inventarNumMonitorField;
+        
+        private string comentField;
         
         /// <remarks/>
         public Kabinet Kabinet {
@@ -194,6 +247,17 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.inventarNumMonitorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
             }
         }
     }
@@ -263,6 +327,8 @@ namespace EfDatabaseParametrsModel {
         
         private string serviceNumberField;
         
+        private string comentField;
+        
         /// <remarks/>
         public Kabinet Kabinet {
             get {
@@ -312,6 +378,17 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.serviceNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
             }
         }
     }
@@ -381,6 +458,8 @@ namespace EfDatabaseParametrsModel {
         
         private string serviceNumberField;
         
+        private string comentField;
+        
         /// <remarks/>
         public Kabinet Kabinet {
             get {
@@ -432,6 +511,17 @@ namespace EfDatabaseParametrsModel {
                 this.serviceNumberField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -454,6 +544,8 @@ namespace EfDatabaseParametrsModel {
         private string serviceNumberField;
         
         private string inventarNumberField;
+        
+        private string comentField;
         
         /// <remarks/>
         public Kabinet Kabinet {
@@ -517,6 +609,17 @@ namespace EfDatabaseParametrsModel {
                 this.inventarNumberField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -541,6 +644,8 @@ namespace EfDatabaseParametrsModel {
         private string nameComputerField;
         
         private string ipAdressField;
+        
+        private string comentField;
         
         /// <remarks/>
         public Kabinet Kabinet {
@@ -616,6 +721,17 @@ namespace EfDatabaseParametrsModel {
                 this.ipAdressField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -648,11 +764,244 @@ namespace EfDatabaseParametrsModel {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class BlockPower {
+        
+        private Kabinet kabinetField;
+        
+        private ProizvoditelBlockPower proizvoditelBlockPowerField;
+        
+        private ModelBlockPower modelBlockPowerField;
+        
+        private string zavNumberField;
+        
+        private string inventarNumberField;
+        
+        private string serviceNumberField;
+        
+        private string comentField;
+        
+        /// <remarks/>
+        public Kabinet Kabinet {
+            get {
+                return this.kabinetField;
+            }
+            set {
+                this.kabinetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ProizvoditelBlockPower ProizvoditelBlockPower {
+            get {
+                return this.proizvoditelBlockPowerField;
+            }
+            set {
+                this.proizvoditelBlockPowerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ModelBlockPower ModelBlockPower {
+            get {
+                return this.modelBlockPowerField;
+            }
+            set {
+                this.modelBlockPowerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ZavNumber {
+            get {
+                return this.zavNumberField;
+            }
+            set {
+                this.zavNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string InventarNumber {
+            get {
+                return this.inventarNumberField;
+            }
+            set {
+                this.inventarNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ServiceNumber {
+            get {
+                return this.serviceNumberField;
+            }
+            set {
+                this.serviceNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class ProizvoditelBlockPower {
+        
+        private string nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class ModelBlockPower {
+        
+        private string nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class Telephon {
+        
+        private Kabinet kabinetField;
+        
+        private string nameTelephoneField;
+        
+        private string serNumberField;
+        
+        private string ipTelephonField;
+        
+        private string macTelephonField;
+        
+        private string comentField;
+        
+        /// <remarks/>
+        public Kabinet Kabinet {
+            get {
+                return this.kabinetField;
+            }
+            set {
+                this.kabinetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameTelephone {
+            get {
+                return this.nameTelephoneField;
+            }
+            set {
+                this.nameTelephoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNumber {
+            get {
+                return this.serNumberField;
+            }
+            set {
+                this.serNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IpTelephon {
+            get {
+                return this.ipTelephonField;
+            }
+            set {
+                this.ipTelephonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string MacTelephon {
+            get {
+                return this.macTelephonField;
+            }
+            set {
+                this.macTelephonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Otdel {
         
         private Users[] usersField;
         
         private string nameOtdelField;
+        
+        private string idUserField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Users")]
@@ -673,6 +1022,17 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.nameOtdelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IdUser {
+            get {
+                return this.idUserField;
+            }
+            set {
+                this.idUserField = value;
             }
         }
     }

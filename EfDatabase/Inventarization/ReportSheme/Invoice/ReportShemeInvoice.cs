@@ -77,10 +77,13 @@ namespace EfDatabaseInvoice {
         
         private int idUsersField;
         
+        private int idNameDocumentField;
+        
         public ParamRequest() {
             this.idSelectField = 0;
             this.idOutField = 0;
             this.idUsersField = 0;
+            this.idNameDocumentField = 0;
         }
         
         /// <remarks/>
@@ -118,6 +121,18 @@ namespace EfDatabaseInvoice {
                 this.idUsersField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int IdNameDocument {
+            get {
+                return this.idNameDocumentField;
+            }
+            set {
+                this.idNameDocumentField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -134,6 +149,8 @@ namespace EfDatabaseInvoice {
         private Received receivedField;
         
         private Organization organizationField;
+        
+        private Barcode barcodeField;
         
         /// <remarks/>
         public Formed Formed {
@@ -162,6 +179,16 @@ namespace EfDatabaseInvoice {
             }
             set {
                 this.organizationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Barcode Barcode {
+            get {
+                return this.barcodeField;
+            }
+            set {
+                this.barcodeField = value;
             }
         }
     }
@@ -345,6 +372,55 @@ namespace EfDatabaseInvoice {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class Barcode {
+        
+        private int idField;
+        
+        private bool idFieldSpecified;
+        
+        private string pathBarcodeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IdSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string PathBarcode {
+            get {
+                return this.pathBarcodeField;
+            }
+            set {
+                this.pathBarcodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
     public partial class Body {
         
@@ -367,6 +443,8 @@ namespace EfDatabaseInvoice {
         private string nameComputerField;
         
         private string ipAdressField;
+        
+        private string comentField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -475,6 +553,17 @@ namespace EfDatabaseInvoice {
             }
             set {
                 this.ipAdressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
             }
         }
     }

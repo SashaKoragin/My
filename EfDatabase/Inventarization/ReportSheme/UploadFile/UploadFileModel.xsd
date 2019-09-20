@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="UploadFile" type="UploadFile">
+		<xs:annotation>
+			<xs:documentation>Загрузка файла на сервер</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UploadFile">
+		<xs:annotation>
+			<xs:documentation>Тип файла</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Upload" maxOccurs="unbounded"/>
+			<xs:element ref="ClassFileToServer"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="NameFile" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Имя файла</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ExpansionFile" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Расширение файла</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BlobFile" type="xs:base64Binary">
+		<xs:annotation>
+			<xs:documentation>Base64 файла</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MimeFile" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>MIME файла</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Upload">
+		<xs:annotation>
+			<xs:documentation>Массив файлов</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="IdDocument"/>
+				<xs:element ref="MimeFile"/>
+				<xs:element ref="ExpansionFile"/>
+				<xs:element ref="NameFile"/>
+				<xs:element ref="BlobFile"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IdDocument" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун документа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ClassFileToServer" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Классификация файла Накладная Книга и т д для раскладки на сервере</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

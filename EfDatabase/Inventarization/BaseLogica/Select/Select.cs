@@ -35,15 +35,6 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string UsersAll()
         {
             SerializeJson json = new SerializeJson();
-            //var queryable = from Users in Inventarization.Users
-            //                join rules in Inventarization.Rules on Users.IdRule equals rules.IdRule into left
-            //                from Rules in left.DefaultIfEmpty()
-            //                join otdel in Inventarization.Otdels on Users.IdOtdel equals otdel.IdOtdel into left1
-            //                from Otdel in left1.DefaultIfEmpty()
-            //                join position in Inventarization.Positions on Users.IdPosition equals position.IdPosition into left2
-            //                from Position in left2.DefaultIfEmpty()
-            //                select
-            //                new { Users };
             return json.JsonLibaryIgnoreDate(Inventarization.Users);
 
         }
@@ -175,6 +166,70 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         {
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventarization.NameMonitors);
+        }
+        /// <summary>
+        /// Выгрузка телефонов
+        /// </summary>
+        /// <returns></returns>
+        public string Telephon()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventarization.Telephons);
+        }
+        /// <summary>
+        /// Выгрузка бесперебойников
+        /// </summary>
+        /// <returns></returns>
+        public string BlockPower()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventarization.BlockPowers);
+        }
+        /// <summary>
+        /// Выгрузка поставщиков
+        /// </summary>
+        /// <returns></returns>
+        public string Supply()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibary(Inventarization.Supplies);
+        }
+        /// <summary>
+        /// Выгрузка моделей бесперебойных блоков
+        /// </summary>
+        /// <returns></returns>
+        public string ModelBlockPower()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventarization.ModelBlockPowers);
+        }
+
+        /// <summary>
+        /// Выгрузка производителей бесперебойных блоков
+        /// </summary>
+        /// <returns></returns>
+        public string ProizvoditelBlockPower()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventarization.ProizvoditelBlockPowers);
+        }
+        /// <summary>
+        /// Статистика актулизации пользователей
+        /// </summary>
+        /// <returns></returns>
+        public string ActualsUsersKladr()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventarization.UsersIsActualsStats);
+        }
+        /// <summary>
+        /// Получение всей классификации
+        /// </summary>
+        /// <returns></returns>
+        public string AllClasification()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventarization.Classifications);
         }
 
         /// <summary>

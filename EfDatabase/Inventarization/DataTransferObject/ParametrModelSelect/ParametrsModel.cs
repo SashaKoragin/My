@@ -186,6 +186,10 @@ namespace EfDatabaseParametrsModel {
         
         private string typeColumnField;
         
+        private bool isVisibleField;
+        
+        private bool isVisibleFieldSpecified;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Value {
@@ -238,6 +242,28 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.typeColumnField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsVisible {
+            get {
+                return this.isVisibleField;
+            }
+            set {
+                this.isVisibleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsVisibleSpecified {
+            get {
+                return this.isVisibleFieldSpecified;
+            }
+            set {
+                this.isVisibleFieldSpecified = value;
             }
         }
     }

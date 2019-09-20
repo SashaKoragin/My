@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Errors" type="FullError">
+		<xs:annotation>
+			<xs:documentation>Ошибки по инвенторизации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="FullError">
+		<xs:annotation>
+			<xs:documentation>Ошибки по инвенторизации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Error" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ErrorUSerNotActul" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="AnaliticaSysBlokAndMonitors" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="UsersNotTechnical" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ErrorUSerNotActul">
+		<xs:annotation>
+			<xs:documentation>Ошибки не актуальных пользователей</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdUser" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Пользователь</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StatusActual" type="xs:byte">
+				<xs:annotation>
+					<xs:documentation>Статус</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameCategory" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование категории</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Model" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Модель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Category" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Категория</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberKabinet" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер кабинета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Error">
+		<xs:annotation>
+			<xs:documentation>Ошибки по технике</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Error" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Описание ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameCategory" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование категории</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Model" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Модель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Category" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Категория</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberKabinet" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер кабинета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Адресс</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AnaliticaSysBlokAndMonitors">
+		<xs:annotation>
+			<xs:documentation>Аналитика мониторы и Системные блоки</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="UsersSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Пользователь Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TabelNumberSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Табель Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameSupplySysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Поставка Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameKontractSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Контракт Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DatePostavkiSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Дата поставки Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberKabinetSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер кабинета Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StatusingSysBlock">
+				<xs:annotation>
+					<xs:documentation>Статус системного блока</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputerSysBlock" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumSysBlock" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный № Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNumSysBlock" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный № Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный № Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ComputerNameSysBlock" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdressSysBlock" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Адресс Сис.Блок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameNameMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Пользователь Монитор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TabelNumberNameMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Табель Монитор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameSupplyNameMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Поставка Монитор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameKontractNameMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Контракт Монитор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DatePostavkiNameMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Дата поставки Монитор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberKabinetNameMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер кабинета Монитор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StatusingMonitors">
+				<xs:annotation>
+					<xs:documentation>Статус монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование Монитор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNumNameMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный № Монитор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumMonitorNameMonitor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный № Монитор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UsersNotTechnical">
+		<xs:annotation>
+			<xs:documentation>Отсутствует техника у пользователя</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdUser" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Полное Ноиенование пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сокращенное имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TabelNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Табельный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NamePosition" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

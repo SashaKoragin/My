@@ -51,16 +51,22 @@ namespace EfDatabase.Inventarization.Base
     public interface IInventarizationContext : System.IDisposable
     {
 
+        System.Data.Entity.DbSet<BlockPower> BlockPowers { get; set; } // BlockPower
+
+
+        System.Data.Entity.DbSet<BookAccounting> BookAccountings { get; set; } // BookAccounting
+
+
         System.Data.Entity.DbSet<Classification> Classifications { get; set; } // Classification
 
 
         System.Data.Entity.DbSet<CopySave> CopySaves { get; set; } // CopySave
 
 
+        System.Data.Entity.DbSet<Document> Documents { get; set; } // Document
+
+
         System.Data.Entity.DbSet<FullModel> FullModels { get; set; } // FullModel
-
-
-        System.Data.Entity.DbSet<FullMonitorSysBlok> FullMonitorSysBloks { get; set; } // FullMonitorSysBlok
 
 
         System.Data.Entity.DbSet<FullProizvoditel> FullProizvoditels { get; set; } // FullProizvoditel
@@ -75,6 +81,9 @@ namespace EfDatabase.Inventarization.Base
         System.Data.Entity.DbSet<InfoTable> InfoTables { get; set; } // InfoTable
 
 
+        System.Data.Entity.DbSet<InfoView> InfoViews { get; set; } // InfoView
+
+
         System.Data.Entity.DbSet<Kabinet> Kabinets { get; set; } // Kabinet
 
 
@@ -84,13 +93,22 @@ namespace EfDatabase.Inventarization.Base
         System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
 
 
+        System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
+
+
         System.Data.Entity.DbSet<Monitor> Monitors { get; set; } // Monitors
+
+
+        System.Data.Entity.DbSet<Namedocument> Namedocuments { get; set; } // Namedocument
 
 
         System.Data.Entity.DbSet<NameMonitor> NameMonitors { get; set; } // NameMonitor
 
 
         System.Data.Entity.DbSet<NameSysBlock> NameSysBlocks { get; set; } // NameSysBlock
+
+
+        System.Data.Entity.DbSet<Organization> Organizations { get; set; } // Organization
 
 
         System.Data.Entity.DbSet<Otdel> Otdels { get; set; } // Otdel
@@ -102,6 +120,9 @@ namespace EfDatabase.Inventarization.Base
         System.Data.Entity.DbSet<Printer> Printers { get; set; } // Printer
 
 
+        System.Data.Entity.DbSet<ProizvoditelBlockPower> ProizvoditelBlockPowers { get; set; } // ProizvoditelBlockPower
+
+
         System.Data.Entity.DbSet<Rule> Rules { get; set; } // Rules
 
 
@@ -111,10 +132,19 @@ namespace EfDatabase.Inventarization.Base
         System.Data.Entity.DbSet<Statusing> Statusings { get; set; } // Statusing
 
 
+        System.Data.Entity.DbSet<Supply> Supplies { get; set; } // Supply
+
+
         System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
 
 
+        System.Data.Entity.DbSet<Telephon> Telephons { get; set; } // Telephon
+
+
         System.Data.Entity.DbSet<User> Users { get; set; } // Users
+
+
+        System.Data.Entity.DbSet<UsersIsActualsStat> UsersIsActualsStats { get; set; } // UsersIsActualsStat
 
 
 
@@ -151,16 +181,22 @@ namespace EfDatabase.Inventarization.Base
     public class InventarizationContext : System.Data.Entity.DbContext, IInventarizationContext
     {
 
+        public System.Data.Entity.DbSet<BlockPower> BlockPowers { get; set; } // BlockPower
+
+
+        public System.Data.Entity.DbSet<BookAccounting> BookAccountings { get; set; } // BookAccounting
+
+
         public System.Data.Entity.DbSet<Classification> Classifications { get; set; } // Classification
 
 
         public System.Data.Entity.DbSet<CopySave> CopySaves { get; set; } // CopySave
 
 
+        public System.Data.Entity.DbSet<Document> Documents { get; set; } // Document
+
+
         public System.Data.Entity.DbSet<FullModel> FullModels { get; set; } // FullModel
-
-
-        public System.Data.Entity.DbSet<FullMonitorSysBlok> FullMonitorSysBloks { get; set; } // FullMonitorSysBlok
 
 
         public System.Data.Entity.DbSet<FullProizvoditel> FullProizvoditels { get; set; } // FullProizvoditel
@@ -175,6 +211,9 @@ namespace EfDatabase.Inventarization.Base
         public System.Data.Entity.DbSet<InfoTable> InfoTables { get; set; } // InfoTable
 
 
+        public System.Data.Entity.DbSet<InfoView> InfoViews { get; set; } // InfoView
+
+
         public System.Data.Entity.DbSet<Kabinet> Kabinets { get; set; } // Kabinet
 
 
@@ -184,13 +223,22 @@ namespace EfDatabase.Inventarization.Base
         public System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
 
 
+        public System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
+
+
         public System.Data.Entity.DbSet<Monitor> Monitors { get; set; } // Monitors
+
+
+        public System.Data.Entity.DbSet<Namedocument> Namedocuments { get; set; } // Namedocument
 
 
         public System.Data.Entity.DbSet<NameMonitor> NameMonitors { get; set; } // NameMonitor
 
 
         public System.Data.Entity.DbSet<NameSysBlock> NameSysBlocks { get; set; } // NameSysBlock
+
+
+        public System.Data.Entity.DbSet<Organization> Organizations { get; set; } // Organization
 
 
         public System.Data.Entity.DbSet<Otdel> Otdels { get; set; } // Otdel
@@ -202,6 +250,9 @@ namespace EfDatabase.Inventarization.Base
         public System.Data.Entity.DbSet<Printer> Printers { get; set; } // Printer
 
 
+        public System.Data.Entity.DbSet<ProizvoditelBlockPower> ProizvoditelBlockPowers { get; set; } // ProizvoditelBlockPower
+
+
         public System.Data.Entity.DbSet<Rule> Rules { get; set; } // Rules
 
 
@@ -211,10 +262,19 @@ namespace EfDatabase.Inventarization.Base
         public System.Data.Entity.DbSet<Statusing> Statusings { get; set; } // Statusing
 
 
+        public System.Data.Entity.DbSet<Supply> Supplies { get; set; } // Supply
+
+
         public System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
 
 
+        public System.Data.Entity.DbSet<Telephon> Telephons { get; set; } // Telephon
+
+
         public System.Data.Entity.DbSet<User> Users { get; set; } // Users
+
+
+        public System.Data.Entity.DbSet<UsersIsActualsStat> UsersIsActualsStats { get; set; } // UsersIsActualsStat
 
 
 
@@ -286,13 +346,17 @@ namespace EfDatabase.Inventarization.Base
 
 
 
+            modelBuilder.Configurations.Add(new BlockPowerConfiguration());
+
+            modelBuilder.Configurations.Add(new BookAccountingConfiguration());
+
             modelBuilder.Configurations.Add(new ClassificationConfiguration());
 
             modelBuilder.Configurations.Add(new CopySaveConfiguration());
 
-            modelBuilder.Configurations.Add(new FullModelConfiguration());
+            modelBuilder.Configurations.Add(new DocumentConfiguration());
 
-            modelBuilder.Configurations.Add(new FullMonitorSysBlokConfiguration());
+            modelBuilder.Configurations.Add(new FullModelConfiguration());
 
             modelBuilder.Configurations.Add(new FullProizvoditelConfiguration());
 
@@ -302,17 +366,25 @@ namespace EfDatabase.Inventarization.Base
 
             modelBuilder.Configurations.Add(new InfoTableConfiguration());
 
+            modelBuilder.Configurations.Add(new InfoViewConfiguration());
+
             modelBuilder.Configurations.Add(new KabinetConfiguration());
 
             modelBuilder.Configurations.Add(new LogicaSelectConfiguration());
 
             modelBuilder.Configurations.Add(new MfuConfiguration());
 
+            modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration());
+
             modelBuilder.Configurations.Add(new MonitorConfiguration());
+
+            modelBuilder.Configurations.Add(new NamedocumentConfiguration());
 
             modelBuilder.Configurations.Add(new NameMonitorConfiguration());
 
             modelBuilder.Configurations.Add(new NameSysBlockConfiguration());
+
+            modelBuilder.Configurations.Add(new OrganizationConfiguration());
 
             modelBuilder.Configurations.Add(new OtdelConfiguration());
 
@@ -320,15 +392,23 @@ namespace EfDatabase.Inventarization.Base
 
             modelBuilder.Configurations.Add(new PrinterConfiguration());
 
+            modelBuilder.Configurations.Add(new ProizvoditelBlockPowerConfiguration());
+
             modelBuilder.Configurations.Add(new RuleConfiguration());
 
             modelBuilder.Configurations.Add(new ScanerAndCamerConfiguration());
 
             modelBuilder.Configurations.Add(new StatusingConfiguration());
 
+            modelBuilder.Configurations.Add(new SupplyConfiguration());
+
             modelBuilder.Configurations.Add(new SysBlockConfiguration());
 
+            modelBuilder.Configurations.Add(new TelephonConfiguration());
+
             modelBuilder.Configurations.Add(new UserConfiguration());
+
+            modelBuilder.Configurations.Add(new UsersIsActualsStatConfiguration());
 
 
         }
@@ -336,13 +416,17 @@ namespace EfDatabase.Inventarization.Base
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
 
+            modelBuilder.Configurations.Add(new BlockPowerConfiguration(schema));
+
+            modelBuilder.Configurations.Add(new BookAccountingConfiguration(schema));
+
             modelBuilder.Configurations.Add(new ClassificationConfiguration(schema));
 
             modelBuilder.Configurations.Add(new CopySaveConfiguration(schema));
 
-            modelBuilder.Configurations.Add(new FullModelConfiguration(schema));
+            modelBuilder.Configurations.Add(new DocumentConfiguration(schema));
 
-            modelBuilder.Configurations.Add(new FullMonitorSysBlokConfiguration(schema));
+            modelBuilder.Configurations.Add(new FullModelConfiguration(schema));
 
             modelBuilder.Configurations.Add(new FullProizvoditelConfiguration(schema));
 
@@ -352,17 +436,25 @@ namespace EfDatabase.Inventarization.Base
 
             modelBuilder.Configurations.Add(new InfoTableConfiguration(schema));
 
+            modelBuilder.Configurations.Add(new InfoViewConfiguration(schema));
+
             modelBuilder.Configurations.Add(new KabinetConfiguration(schema));
 
             modelBuilder.Configurations.Add(new LogicaSelectConfiguration(schema));
 
             modelBuilder.Configurations.Add(new MfuConfiguration(schema));
 
+            modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration(schema));
+
             modelBuilder.Configurations.Add(new MonitorConfiguration(schema));
+
+            modelBuilder.Configurations.Add(new NamedocumentConfiguration(schema));
 
             modelBuilder.Configurations.Add(new NameMonitorConfiguration(schema));
 
             modelBuilder.Configurations.Add(new NameSysBlockConfiguration(schema));
+
+            modelBuilder.Configurations.Add(new OrganizationConfiguration(schema));
 
             modelBuilder.Configurations.Add(new OtdelConfiguration(schema));
 
@@ -370,15 +462,23 @@ namespace EfDatabase.Inventarization.Base
 
             modelBuilder.Configurations.Add(new PrinterConfiguration(schema));
 
+            modelBuilder.Configurations.Add(new ProizvoditelBlockPowerConfiguration(schema));
+
             modelBuilder.Configurations.Add(new RuleConfiguration(schema));
 
             modelBuilder.Configurations.Add(new ScanerAndCamerConfiguration(schema));
 
             modelBuilder.Configurations.Add(new StatusingConfiguration(schema));
 
+            modelBuilder.Configurations.Add(new SupplyConfiguration(schema));
+
             modelBuilder.Configurations.Add(new SysBlockConfiguration(schema));
 
+            modelBuilder.Configurations.Add(new TelephonConfiguration(schema));
+
             modelBuilder.Configurations.Add(new UserConfiguration(schema));
+
+            modelBuilder.Configurations.Add(new UsersIsActualsStatConfiguration(schema));
 
 
             return modelBuilder;
@@ -408,6 +508,215 @@ namespace EfDatabase.Inventarization.Base
 
     #region POCO classes
 
+
+
+
+    // BlockPower
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class BlockPower
+    {
+
+
+
+        ///<summary>
+        /// Ун бесперебойника
+        ///</summary>
+        public int IdBlockPowers { get; set; } // IdBlockPowers (Primary key)
+
+
+        ///<summary>
+        /// Ун пользователя
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+
+        ///<summary>
+        /// Ун производителя
+        ///</summary>
+        public int? IdProizvoditelBP { get; set; } // IdProizvoditelBP
+
+
+        ///<summary>
+        /// Ун модели
+        ///</summary>
+        public int? IdModelBP { get; set; } // IdModelBP
+
+
+        ///<summary>
+        /// Ун поставки
+        ///</summary>
+        public int? IdSupply { get; set; } // IdSupply
+
+
+        ///<summary>
+        /// Ун кабинета
+        ///</summary>
+        public int? IdNumberKabinet { get; set; } // IdNumberKabinet
+
+
+        ///<summary>
+        /// Заводской номер
+        ///</summary>
+        public string ZavNumber { get; set; } // ZavNumber (length: 128)
+
+
+        ///<summary>
+        /// Сервисный номер
+        ///</summary>
+        public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
+
+
+        ///<summary>
+        /// Инвентарный номер
+        ///</summary>
+        public string InventarNumber { get; set; } // InventarNumber (length: 128)
+
+
+        ///<summary>
+        /// Коментарий
+        ///</summary>
+        public string Coment { get; set; } // Coment (length: 254)
+
+
+        ///<summary>
+        /// Ун статуса
+        ///</summary>
+        public int? IdStatus { get; set; } // IdStatus
+
+
+        ///<summary>
+        /// Ун истории
+        ///</summary>
+        public string IdHistory { get; set; } // IdHistory (length: 64)
+
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+
+        // Foreign keys
+
+
+
+        /// <summary>
+        /// Parent Kabinet pointed by [BlockPower].([IdNumberKabinet]) (FK_BlockPower_Kabinet)
+        /// </summary>
+
+        public virtual Kabinet Kabinet { get; set; } // FK_BlockPower_Kabinet
+
+
+        /// <summary>
+        /// Parent ModelBlockPower pointed by [BlockPower].([IdModelBP]) (FK_BlockPower_ModelBlockPower)
+        /// </summary>
+
+        public virtual ModelBlockPower ModelBlockPower { get; set; } // FK_BlockPower_ModelBlockPower
+
+
+        /// <summary>
+        /// Parent ProizvoditelBlockPower pointed by [BlockPower].([IdProizvoditelBP]) (FK_BlockPower_ProizvoditelBlockPower)
+        /// </summary>
+
+        public virtual ProizvoditelBlockPower ProizvoditelBlockPower { get; set; } // FK_BlockPower_ProizvoditelBlockPower
+
+
+        /// <summary>
+        /// Parent Statusing pointed by [BlockPower].([IdStatus]) (FK_Statusing_BlockPower)
+        /// </summary>
+
+        public virtual Statusing Statusing { get; set; } // FK_Statusing_BlockPower
+
+
+        /// <summary>
+        /// Parent Supply pointed by [BlockPower].([IdSupply]) (FK_BlockPower_Supply)
+        /// </summary>
+
+        public virtual Supply Supply { get; set; } // FK_BlockPower_Supply
+
+
+        /// <summary>
+        /// Parent User pointed by [BlockPower].([IdUser]) (FK_BlockPower_Users)
+        /// </summary>
+
+        public virtual User User { get; set; } // FK_BlockPower_Users
+
+
+
+        public BlockPower()
+        {
+
+            IdHistory = System.Guid.NewGuid().ToString();
+
+            DataCreate = System.DateTime.Now;
+
+        }
+
+    }
+
+
+
+    // BookAccounting
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class BookAccounting
+    {
+
+
+        public int IdBook { get; set; } // IdBook (Primary key)
+
+        public int? IdNameBook { get; set; } // IdNameBook
+
+        public int? IdKeys { get; set; } // IdKeys
+
+        public int? IdModel { get; set; } // IdModel
+
+        public string ClassName { get; set; } // ClassName (length: 256)
+
+        public string NameModel { get; set; } // NameModel (length: 256)
+
+        public bool? IsFileExists { get; set; } // IsFileExists
+
+        public string NameBook { get; set; } // NameBook (length: 128)
+
+        public byte[] Book { get; set; } // Book (length: 2147483647)
+
+        public string TypeFile { get; set; } // TypeFile (length: 5)
+
+        public bool? IsActual { get; set; } // IsActual
+
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+
+
+
+        // Foreign keys
+
+
+
+        /// <summary>
+        /// Parent Namedocument pointed by [BookAccounting].([IdNameBook]) (FK_BookAccounting_Namedocument)
+        /// </summary>
+
+        public virtual Namedocument Namedocument { get; set; } // FK_BookAccounting_Namedocument
+
+
+
+        public BookAccounting()
+        {
+
+            DateCreate = System.DateTime.Now;
+
+        }
+
+    }
 
 
 
@@ -537,6 +846,108 @@ namespace EfDatabase.Inventarization.Base
 
 
 
+    // Document
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class Document
+    {
+
+
+
+        ///<summary>
+        /// Уникальный номер
+        ///</summary>
+        public int Id { get; set; } // Id (Primary key)
+
+
+        ///<summary>
+        /// Ун наименования документа
+        ///</summary>
+        public int? IdNamedocument { get; set; } // IdNamedocument
+
+
+        ///<summary>
+        /// Ун пользователя
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+
+        ///<summary>
+        /// Содержание
+        ///</summary>
+        public string InfoUserFile { get; set; } // InfoUserFile (length: 256)
+
+
+        ///<summary>
+        /// Присутствие файла
+        ///</summary>
+        public bool? IsFileExists { get; set; } // IsFileExists
+
+
+        ///<summary>
+        /// Имя файла
+        ///</summary>
+        public string Namefile { get; set; } // Namefile (length: 128)
+
+
+        ///<summary>
+        /// Документ
+        ///</summary>
+        public byte[] Document_ { get; set; } // Document (length: 2147483647)
+
+
+        ///<summary>
+        /// Тип документа
+        ///</summary>
+        public string TypeFile { get; set; } // TypeFile (length: 5)
+
+
+        ///<summary>
+        /// Актуальность документа
+        ///</summary>
+        public bool? IsActual { get; set; } // IsActual
+
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+
+
+
+        // Foreign keys
+
+
+
+        /// <summary>
+        /// Parent Namedocument pointed by [Document].([IdNamedocument]) (FK_Document_Namedocument)
+        /// </summary>
+
+        public virtual Namedocument Namedocument { get; set; } // FK_Document_Namedocument
+
+
+        /// <summary>
+        /// Parent User pointed by [Document].([IdUser]) (FK_Users_Document)
+        /// </summary>
+
+        public virtual User User { get; set; } // FK_Users_Document
+
+
+
+        public Document()
+        {
+
+            DateCreate = System.DateTime.Now;
+
+        }
+
+    }
+
+
+
     // FullModel
 
 
@@ -621,54 +1032,6 @@ namespace EfDatabase.Inventarization.Base
             Printers = new System.Collections.Generic.List<Printer>();
 
             ScanerAndCamers = new System.Collections.Generic.List<ScanerAndCamer>();
-        }
-
-    }
-
-
-
-    // FullMonitorSysBlok
-
-
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
-
-    public class FullMonitorSysBlok
-    {
-
-
-
-        ///<summary>
-        /// Уникальный номер
-        ///</summary>
-        public int Id { get; set; } // Id (Primary key)
-
-
-        ///<summary>
-        /// Инвентарный номер системного блока
-        ///</summary>
-        public string InventarNumSysBlok { get; set; } // InventarNumSysBlok (length: 128)
-
-
-        ///<summary>
-        /// Инвентарный номер монитора
-        ///</summary>
-        public string InventarNumMonitor { get; set; } // InventarNumMonitor (length: 128)
-
-
-        ///<summary>
-        /// Дата записи
-        ///</summary>
-        public System.DateTime? DataCreate { get; set; } // DataCreate
-
-
-
-
-
-        public FullMonitorSysBlok()
-        {
-
-            DataCreate = System.DateTime.Now;
-
         }
 
     }
@@ -894,6 +1257,44 @@ namespace EfDatabase.Inventarization.Base
 
 
 
+    // InfoView
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class InfoView
+    {
+
+
+        public int Id { get; set; } // Id (Primary key)
+
+        public string NameView { get; set; } // NameView (length: 64)
+
+        public string NameViewColumns { get; set; } // NameViewColumns (length: 64)
+
+        public string InfoColumn { get; set; } // InfoColumn (length: 256)
+
+        public string FormatView { get; set; } // FormatView (length: 16)
+
+        public bool? IsVisible { get; set; } // IsVisible
+
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+
+
+        public InfoView()
+        {
+
+            DataCreate = System.DateTime.Now;
+
+        }
+
+    }
+
+
+
     // Kabinet
 
 
@@ -926,6 +1327,14 @@ namespace EfDatabase.Inventarization.Base
         // Reverse navigation
 
 
+
+        /// <summary>
+        /// Child BlockPowers where [BlockPower].[IdNumberKabinet] point to this entity (FK_BlockPower_Kabinet)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<BlockPower> BlockPowers { get; set; } // BlockPower.FK_BlockPower_Kabinet
 
         /// <summary>
         /// Child Mfus where [Mfu].[IdNumberKabinet] point to this entity (FK_Mfu_Kabinet)
@@ -967,6 +1376,14 @@ namespace EfDatabase.Inventarization.Base
 
         public virtual System.Collections.Generic.ICollection<SysBlock> SysBlocks { get; set; } // SysBlock.FK_SysBlock_Kabinet
 
+        /// <summary>
+        /// Child Telephons where [Telephon].[IdNumberKabinet] point to this entity (FK_Telephon_Kabinet)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Telephon> Telephons { get; set; } // Telephon.FK_Telephon_Kabinet
+
 
 
 
@@ -975,6 +1392,8 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
+
+            BlockPowers = new System.Collections.Generic.List<BlockPower>();
 
             Mfus = new System.Collections.Generic.List<Mfu>();
 
@@ -985,6 +1404,8 @@ namespace EfDatabase.Inventarization.Base
             ScanerAndCamers = new System.Collections.Generic.List<ScanerAndCamer>();
 
             SysBlocks = new System.Collections.Generic.List<SysBlock>();
+
+            Telephons = new System.Collections.Generic.List<Telephon>();
         }
 
     }
@@ -1000,34 +1421,14 @@ namespace EfDatabase.Inventarization.Base
     {
 
 
-
-        ///<summary>
-        /// Порядковый номер
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
 
-
-        ///<summary>
-        /// Описание выборки
-        ///</summary>
         public string SelectInfo { get; set; } // SelectInfo (length: 512)
 
-
-        ///<summary>
-        /// Выборка параметров (модель)
-        ///</summary>
         public string SelectedParametr { get; set; } // SelectedParametr
 
-
-        ///<summary>
-        /// Выборка пользователя (генерация пользователем модели)
-        ///</summary>
         public string SelectUser { get; set; } // SelectUser
 
-
-        ///<summary>
-        /// Дата создания
-        ///</summary>
         public System.DateTime? DataCreate { get; set; } // DataCreate
 
 
@@ -1077,6 +1478,12 @@ namespace EfDatabase.Inventarization.Base
         /// Ун модели МФУ
         ///</summary>
         public int? IdModel { get; set; } // IdModel
+
+
+        ///<summary>
+        /// Ун поставщика
+        ///</summary>
+        public int? IdSupply { get; set; } // IdSupply
 
 
         ///<summary>
@@ -1187,6 +1594,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
+        /// Parent Supply pointed by [Mfu].([IdSupply]) (FK_Mfu_Supply)
+        /// </summary>
+
+        public virtual Supply Supply { get; set; } // FK_Mfu_Supply
+
+
+        /// <summary>
         /// Parent User pointed by [Mfu].([IdUser]) (FK_Mfu_Users)
         /// </summary>
 
@@ -1201,6 +1615,63 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
+        }
+
+    }
+
+
+
+    // ModelBlockPower
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class ModelBlockPower
+    {
+
+
+
+        ///<summary>
+        /// Ун модели
+        ///</summary>
+        public int IdModelBP { get; set; } // IdModelBP (Primary key)
+
+
+        ///<summary>
+        /// Наименование модели
+        ///</summary>
+        public string Name { get; set; } // Name (length: 512)
+
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+        // Reverse navigation
+
+
+
+        /// <summary>
+        /// Child BlockPowers where [BlockPower].[IdModelBP] point to this entity (FK_BlockPower_ModelBlockPower)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<BlockPower> BlockPowers { get; set; } // BlockPower.FK_BlockPower_ModelBlockPower
+
+
+
+
+        public ModelBlockPower()
+        {
+
+            DataCreate = System.DateTime.Now;
+
+
+            BlockPowers = new System.Collections.Generic.List<BlockPower>();
         }
 
     }
@@ -1233,6 +1704,12 @@ namespace EfDatabase.Inventarization.Base
         /// Ун модели монитора
         ///</summary>
         public int? IdModelMonitor { get; set; } // IdModelMonitor
+
+
+        ///<summary>
+        /// Ун поставщика
+        ///</summary>
+        public int? IdSupply { get; set; } // IdSupply
 
 
         ///<summary>
@@ -1305,6 +1782,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
+        /// Parent Supply pointed by [Monitors].([IdSupply]) (FK_Monitors_Supply)
+        /// </summary>
+
+        public virtual Supply Supply { get; set; } // FK_Monitors_Supply
+
+
+        /// <summary>
         /// Parent User pointed by [Monitors].([IdUser]) (FK_Monitors_Users)
         /// </summary>
 
@@ -1319,6 +1803,73 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
+        }
+
+    }
+
+
+
+    // Namedocument
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class Namedocument
+    {
+
+
+
+        ///<summary>
+        /// Ун документа
+        ///</summary>
+        public int IdNamedocument { get; set; } // IdNamedocument (Primary key)
+
+
+        ///<summary>
+        /// Наименование документа
+        ///</summary>
+        public string NameDocument { get; set; } // NameDocument (length: 128)
+
+
+        ///<summary>
+        /// Дата создания документа
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+
+
+        // Reverse navigation
+
+
+
+        /// <summary>
+        /// Child BookAccountings where [BookAccounting].[IdNameBook] point to this entity (FK_BookAccounting_Namedocument)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<BookAccounting> BookAccountings { get; set; } // BookAccounting.FK_BookAccounting_Namedocument
+
+        /// <summary>
+        /// Child Documents where [Document].[IdNamedocument] point to this entity (FK_Document_Namedocument)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Document> Documents { get; set; } // Document.FK_Document_Namedocument
+
+
+
+
+        public Namedocument()
+        {
+
+            DateCreate = System.DateTime.Now;
+
+
+            BookAccountings = new System.Collections.Generic.List<BookAccounting>();
+
+            Documents = new System.Collections.Generic.List<Document>();
         }
 
     }
@@ -1433,6 +1984,40 @@ namespace EfDatabase.Inventarization.Base
 
 
             SysBlocks = new System.Collections.Generic.List<SysBlock>();
+        }
+
+    }
+
+
+
+    // Organization
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class Organization
+    {
+
+
+        public int Id { get; set; } // Id (Primary key)
+
+        public string NameOrganization { get; set; } // NameOrganization (length: 512)
+
+        public string NameFace { get; set; } // NameFace (length: 512)
+
+        public string NameDepartament { get; set; } // NameDepartament (length: 512)
+
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+
+
+        public Organization()
+        {
+
+            DataCreate = System.DateTime.Now;
+
         }
 
     }
@@ -1605,6 +2190,12 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
+        /// Ун поставщика
+        ///</summary>
+        public int? IdSupply { get; set; } // IdSupply
+
+
+        ///<summary>
         /// Ун номера кабинета
         ///</summary>
         public int? IdNumberKabinet { get; set; } // IdNumberKabinet
@@ -1699,6 +2290,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
+        /// Parent Supply pointed by [Printer].([IdSupply]) (FK_Printer_Supply)
+        /// </summary>
+
+        public virtual Supply Supply { get; set; } // FK_Printer_Supply
+
+
+        /// <summary>
         /// Parent User pointed by [Printer].([IdUser]) (FK_Printer_Users)
         /// </summary>
 
@@ -1713,6 +2311,63 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
+        }
+
+    }
+
+
+
+    // ProizvoditelBlockPower
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class ProizvoditelBlockPower
+    {
+
+
+
+        ///<summary>
+        /// Ун производителя
+        ///</summary>
+        public int IdProizvoditelBP { get; set; } // IdProizvoditelBP (Primary key)
+
+
+        ///<summary>
+        /// Наименование производителя
+        ///</summary>
+        public string Name { get; set; } // Name (length: 512)
+
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+        // Reverse navigation
+
+
+
+        /// <summary>
+        /// Child BlockPowers where [BlockPower].[IdProizvoditelBP] point to this entity (FK_BlockPower_ProizvoditelBlockPower)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<BlockPower> BlockPowers { get; set; } // BlockPower.FK_BlockPower_ProizvoditelBlockPower
+
+
+
+
+        public ProizvoditelBlockPower()
+        {
+
+            DataCreate = System.DateTime.Now;
+
+
+            BlockPowers = new System.Collections.Generic.List<BlockPower>();
         }
 
     }
@@ -1811,6 +2466,12 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
+        /// Ун поставщика
+        ///</summary>
+        public int? IdSupply { get; set; } // IdSupply
+
+
+        ///<summary>
         /// Ун номера кабинета
         ///</summary>
         public int? IdNumberKabinet { get; set; } // IdNumberKabinet
@@ -1905,6 +2566,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
+        /// Parent Supply pointed by [ScanerAndCamer].([IdSupply]) (FK_ScanerAndCamer_Supply)
+        /// </summary>
+
+        public virtual Supply Supply { get; set; } // FK_ScanerAndCamer_Supply
+
+
+        /// <summary>
         /// Parent User pointed by [ScanerAndCamer].([IdUser]) (FK_ScanerAndCamer_Users)
         /// </summary>
 
@@ -1965,6 +2633,14 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
+        /// Child BlockPowers where [BlockPower].[IdStatus] point to this entity (FK_Statusing_BlockPower)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<BlockPower> BlockPowers { get; set; } // BlockPower.FK_Statusing_BlockPower
+
+        /// <summary>
         /// Child Mfus where [Mfu].[IdStatus] point to this entity (FK_Statusing_Mfu)
         /// </summary>
 
@@ -2004,6 +2680,14 @@ namespace EfDatabase.Inventarization.Base
 
         public virtual System.Collections.Generic.ICollection<SysBlock> SysBlocks { get; set; } // SysBlock.FK_Statusing_SysBlock
 
+        /// <summary>
+        /// Child Telephons where [Telephon].[IdStatus] point to this entity (FK_Statusing_Telephon)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Telephon> Telephons { get; set; } // Telephon.FK_Statusing_Telephon
+
 
 
 
@@ -2012,6 +2696,8 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
+
+            BlockPowers = new System.Collections.Generic.List<BlockPower>();
 
             Mfus = new System.Collections.Generic.List<Mfu>();
 
@@ -2022,6 +2708,137 @@ namespace EfDatabase.Inventarization.Base
             ScanerAndCamers = new System.Collections.Generic.List<ScanerAndCamer>();
 
             SysBlocks = new System.Collections.Generic.List<SysBlock>();
+
+            Telephons = new System.Collections.Generic.List<Telephon>();
+        }
+
+    }
+
+
+
+    // Supply
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class Supply
+    {
+
+
+
+        ///<summary>
+        /// Ун поставки
+        ///</summary>
+        public int IdSupply { get; set; } // IdSupply (Primary key)
+
+
+        ///<summary>
+        /// Наименование поставки
+        ///</summary>
+        public string NameSupply { get; set; } // NameSupply (length: 512)
+
+
+        ///<summary>
+        /// Наименование контракта
+        ///</summary>
+        public string NameKontract { get; set; } // NameKontract (length: 512)
+
+
+        ///<summary>
+        /// Наименование контракта
+        ///</summary>
+        public System.DateTime? DatePostavki { get; set; } // DatePostavki
+
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+        // Reverse navigation
+
+
+
+        /// <summary>
+        /// Child BlockPowers where [BlockPower].[IdSupply] point to this entity (FK_BlockPower_Supply)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<BlockPower> BlockPowers { get; set; } // BlockPower.FK_BlockPower_Supply
+
+        /// <summary>
+        /// Child Mfus where [Mfu].[IdSupply] point to this entity (FK_Mfu_Supply)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Mfu> Mfus { get; set; } // Mfu.FK_Mfu_Supply
+
+        /// <summary>
+        /// Child Monitors where [Monitors].[IdSupply] point to this entity (FK_Monitors_Supply)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Monitor> Monitors { get; set; } // Monitors.FK_Monitors_Supply
+
+        /// <summary>
+        /// Child Printers where [Printer].[IdSupply] point to this entity (FK_Printer_Supply)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Printer> Printers { get; set; } // Printer.FK_Printer_Supply
+
+        /// <summary>
+        /// Child ScanerAndCamers where [ScanerAndCamer].[IdSupply] point to this entity (FK_ScanerAndCamer_Supply)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer.FK_ScanerAndCamer_Supply
+
+        /// <summary>
+        /// Child SysBlocks where [SysBlock].[IdSupply] point to this entity (FK_SysBlock_Supply)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<SysBlock> SysBlocks { get; set; } // SysBlock.FK_SysBlock_Supply
+
+        /// <summary>
+        /// Child Telephons where [Telephon].[IdSupply] point to this entity (FK_Telephon_Supply)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Telephon> Telephons { get; set; } // Telephon.FK_Telephon_Supply
+
+
+
+
+        public Supply()
+        {
+
+            DataCreate = System.DateTime.Now;
+
+
+            BlockPowers = new System.Collections.Generic.List<BlockPower>();
+
+            Mfus = new System.Collections.Generic.List<Mfu>();
+
+            Monitors = new System.Collections.Generic.List<Monitor>();
+
+            Printers = new System.Collections.Generic.List<Printer>();
+
+            ScanerAndCamers = new System.Collections.Generic.List<ScanerAndCamer>();
+
+            SysBlocks = new System.Collections.Generic.List<SysBlock>();
+
+            Telephons = new System.Collections.Generic.List<Telephon>();
         }
 
     }
@@ -2054,6 +2871,12 @@ namespace EfDatabase.Inventarization.Base
         /// Ун модели системного блока
         ///</summary>
         public int? IdModelSysBlock { get; set; } // IdModelSysBlock
+
+
+        ///<summary>
+        /// Ун поставщика
+        ///</summary>
+        public int? IdSupply { get; set; } // IdSupply
 
 
         ///<summary>
@@ -2144,6 +2967,13 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
+        /// Parent Supply pointed by [SysBlock].([IdSupply]) (FK_SysBlock_Supply)
+        /// </summary>
+
+        public virtual Supply Supply { get; set; } // FK_SysBlock_Supply
+
+
+        /// <summary>
         /// Parent User pointed by [SysBlock].([IdUser]) (FK_SysBlock_Users)
         /// </summary>
 
@@ -2158,6 +2988,142 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
+        }
+
+    }
+
+
+
+    // Telephon
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class Telephon
+    {
+
+
+
+        ///<summary>
+        /// Уникальный номер телефона
+        ///</summary>
+        public int IdTelephon { get; set; } // IdTelephon (Primary key)
+
+
+        ///<summary>
+        /// Ун поставщика
+        ///</summary>
+        public int? IdSupply { get; set; } // IdSupply
+
+
+        ///<summary>
+        /// Ун кабинета
+        ///</summary>
+        public int? IdNumberKabinet { get; set; } // IdNumberKabinet
+
+
+        ///<summary>
+        /// Наименование телефона
+        ///</summary>
+        public string NameTelephone { get; set; } // NameTelephone (length: 128)
+
+
+        ///<summary>
+        /// Номер телефона
+        ///</summary>
+        public string Telephon_ { get; set; } // Telephon (length: 32)
+
+
+        ///<summary>
+        /// Городской номер телефона
+        ///</summary>
+        public string TelephonUndeground { get; set; } // TelephonUndeground (length: 32)
+
+
+        ///<summary>
+        /// Серийный номер
+        ///</summary>
+        public string SerNumber { get; set; } // SerNumber (length: 64)
+
+
+        ///<summary>
+        /// Ip телефона
+        ///</summary>
+        public string IpTelephon { get; set; } // IpTelephon (length: 64)
+
+
+        ///<summary>
+        /// Мак Адресс телефона
+        ///</summary>
+        public string MacTelephon { get; set; } // MacTelephon (length: 64)
+
+
+        ///<summary>
+        /// Коментарий
+        ///</summary>
+        public string Coment { get; set; } // Coment (length: 254)
+
+
+        ///<summary>
+        /// Ун статуса
+        ///</summary>
+        public int? IdStatus { get; set; } // IdStatus
+
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+        // Reverse navigation
+
+
+
+        /// <summary>
+        /// Child Users where [Users].[IdTelephon] point to this entity (FK_Users_Telephon)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<User> Users { get; set; } // Users.FK_Users_Telephon
+
+
+
+        // Foreign keys
+
+
+
+        /// <summary>
+        /// Parent Kabinet pointed by [Telephon].([IdNumberKabinet]) (FK_Telephon_Kabinet)
+        /// </summary>
+
+        public virtual Kabinet Kabinet { get; set; } // FK_Telephon_Kabinet
+
+
+        /// <summary>
+        /// Parent Statusing pointed by [Telephon].([IdStatus]) (FK_Statusing_Telephon)
+        /// </summary>
+
+        public virtual Statusing Statusing { get; set; } // FK_Statusing_Telephon
+
+
+        /// <summary>
+        /// Parent Supply pointed by [Telephon].([IdSupply]) (FK_Telephon_Supply)
+        /// </summary>
+
+        public virtual Supply Supply { get; set; } // FK_Telephon_Supply
+
+
+
+        public Telephon()
+        {
+
+            DataCreate = System.DateTime.Now;
+
+
+            Users = new System.Collections.Generic.List<User>();
         }
 
     }
@@ -2217,27 +3183,9 @@ namespace EfDatabase.Inventarization.Base
 
 
         ///<summary>
-        /// Телефон
+        /// Уникальный номер телефона
         ///</summary>
-        public string Telephon { get; set; } // Telephon (length: 32)
-
-
-        ///<summary>
-        /// Городской телефон
-        ///</summary>
-        public string TelephonUndeground { get; set; } // TelephonUndeground (length: 32)
-
-
-        ///<summary>
-        /// Ip телефона
-        ///</summary>
-        public string IpTelephon { get; set; } // IpTelephon (length: 64)
-
-
-        ///<summary>
-        /// Mac телефона
-        ///</summary>
-        public string MacTelephon { get; set; } // MacTelephon (length: 64)
+        public int? IdTelephon { get; set; } // IdTelephon
 
 
         ///<summary>
@@ -2274,6 +3222,22 @@ namespace EfDatabase.Inventarization.Base
         // Reverse navigation
 
 
+
+        /// <summary>
+        /// Child BlockPowers where [BlockPower].[IdUser] point to this entity (FK_BlockPower_Users)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<BlockPower> BlockPowers { get; set; } // BlockPower.FK_BlockPower_Users
+
+        /// <summary>
+        /// Child Documents where [Document].[IdUser] point to this entity (FK_Users_Document)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Document> Documents { get; set; } // Document.FK_Users_Document
 
         /// <summary>
         /// Child Mfus where [Mfu].[IdUser] point to this entity (FK_Mfu_Users)
@@ -2350,6 +3314,13 @@ namespace EfDatabase.Inventarization.Base
         public virtual Rule Rule { get; set; } // FK_Users_Rules
 
 
+        /// <summary>
+        /// Parent Telephon pointed by [Users].([IdTelephon]) (FK_Users_Telephon)
+        /// </summary>
+
+        public virtual Telephon Telephon { get; set; } // FK_Users_Telephon
+
+
 
         public User()
         {
@@ -2358,6 +3329,10 @@ namespace EfDatabase.Inventarization.Base
 
             DataCreate = System.DateTime.Now;
 
+
+            BlockPowers = new System.Collections.Generic.List<BlockPower>();
+
+            Documents = new System.Collections.Generic.List<Document>();
 
             Mfus = new System.Collections.Generic.List<Mfu>();
 
@@ -2375,11 +3350,211 @@ namespace EfDatabase.Inventarization.Base
     }
 
 
+
+    // UsersIsActualsStat
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class UsersIsActualsStat
+    {
+
+
+
+        ///<summary>
+        /// Уникальный номер
+        ///</summary>
+        public int Id { get; set; } // Id (Primary key)
+
+
+        ///<summary>
+        /// Действие актулизации
+        ///</summary>
+        public string ChangeType { get; set; } // ChangeType (length: 100)
+
+
+        ///<summary>
+        /// Ун пользователя
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+
+        ///<summary>
+        /// Имя пользователя
+        ///</summary>
+        public string NameUsers { get; set; } // NameUsers (length: 256)
+
+
+        ///<summary>
+        /// Маленькое имя пользователя
+        ///</summary>
+        public string SmallNameUsers { get; set; } // SmallNameUsers (length: 256)
+
+
+        ///<summary>
+        /// Ун отдела
+        ///</summary>
+        public int? IdOtdel { get; set; } // IdOtdel
+
+
+        ///<summary>
+        /// Ун должности
+        ///</summary>
+        public int? IdPosition { get; set; } // IdPosition
+
+
+        ///<summary>
+        /// Табельный номер
+        ///</summary>
+        public string TabelNumber { get; set; } // TabelNumber (length: 32)
+
+
+        ///<summary>
+        /// Актуальность
+        ///</summary>
+        public bool? StatusActual { get; set; } // StatusActual
+
+
+        ///<summary>
+        /// Дата обновления
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+
+
+
+    }
+
+
     #endregion
 
 
     #region POCO Configuration
 
+
+
+    // BlockPower
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class BlockPowerConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<BlockPower>
+    {
+        public BlockPowerConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public BlockPowerConfiguration(string schema)
+        {
+
+            ToTable("BlockPower", schema);
+
+            HasKey(x => x.IdBlockPowers);
+
+
+
+            Property(x => x.IdBlockPowers).HasColumnName(@"IdBlockPowers").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdProizvoditelBP).HasColumnName(@"IdProizvoditelBP").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdModelBP).HasColumnName(@"IdModelBP").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdSupply).HasColumnName(@"IdSupply").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
+
+            Property(x => x.ZavNumber).HasColumnName(@"ZavNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.ServiceNumber).HasColumnName(@"ServiceNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.InventarNumber).HasColumnName(@"InventarNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.Coment).HasColumnName(@"Coment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(254);
+
+            Property(x => x.IdStatus).HasColumnName(@"IdStatus").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdHistory).HasColumnName(@"IdHistory").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+            // Foreign keys
+
+
+            HasOptional(a => a.Kabinet).WithMany(b => b.BlockPowers).HasForeignKey(c => c.IdNumberKabinet).WillCascadeOnDelete(false); // FK_BlockPower_Kabinet
+
+            HasOptional(a => a.ModelBlockPower).WithMany(b => b.BlockPowers).HasForeignKey(c => c.IdModelBP).WillCascadeOnDelete(false); // FK_BlockPower_ModelBlockPower
+
+            HasOptional(a => a.ProizvoditelBlockPower).WithMany(b => b.BlockPowers).HasForeignKey(c => c.IdProizvoditelBP).WillCascadeOnDelete(false); // FK_BlockPower_ProizvoditelBlockPower
+
+            HasOptional(a => a.Statusing).WithMany(b => b.BlockPowers).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_BlockPower
+
+            HasOptional(a => a.Supply).WithMany(b => b.BlockPowers).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_BlockPower_Supply
+
+            HasOptional(a => a.User).WithMany(b => b.BlockPowers).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_BlockPower_Users
+
+
+        }
+    }
+
+
+    // BookAccounting
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class BookAccountingConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<BookAccounting>
+    {
+        public BookAccountingConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public BookAccountingConfiguration(string schema)
+        {
+
+            ToTable("BookAccounting", schema);
+
+            HasKey(x => x.IdBook);
+
+
+
+            Property(x => x.IdBook).HasColumnName(@"IdBook").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.IdNameBook).HasColumnName(@"IdNameBook").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdKeys).HasColumnName(@"IdKeys").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdModel).HasColumnName(@"IdModel").HasColumnType("int").IsOptional();
+
+            Property(x => x.ClassName).HasColumnName(@"ClassName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.NameModel).HasColumnName(@"NameModel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.IsFileExists).HasColumnName(@"IsFileExists").HasColumnType("bit").IsOptional();
+
+            Property(x => x.NameBook).HasColumnName(@"NameBook").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.Book).HasColumnName(@"Book").HasColumnType("image").IsOptional().HasMaxLength(2147483647);
+
+            Property(x => x.TypeFile).HasColumnName(@"TypeFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(5);
+
+            Property(x => x.IsActual).HasColumnName(@"IsActual").HasColumnType("bit").IsOptional();
+
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+            // Foreign keys
+
+
+            HasOptional(a => a.Namedocument).WithMany(b => b.BookAccountings).HasForeignKey(c => c.IdNameBook).WillCascadeOnDelete(false); // FK_BookAccounting_Namedocument
+
+
+        }
+    }
 
 
     // Classification
@@ -2450,6 +3625,60 @@ namespace EfDatabase.Inventarization.Base
     }
 
 
+    // Document
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class DocumentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Document>
+    {
+        public DocumentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DocumentConfiguration(string schema)
+        {
+
+            ToTable("Document", schema);
+
+            HasKey(x => x.Id);
+
+
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.IdNamedocument).HasColumnName(@"IdNamedocument").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+
+            Property(x => x.InfoUserFile).HasColumnName(@"InfoUserFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.IsFileExists).HasColumnName(@"IsFileExists").HasColumnType("bit").IsOptional();
+
+            Property(x => x.Namefile).HasColumnName(@"Namefile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.Document_).HasColumnName(@"Document").HasColumnType("image").IsOptional().HasMaxLength(2147483647);
+
+            Property(x => x.TypeFile).HasColumnName(@"TypeFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(5);
+
+            Property(x => x.IsActual).HasColumnName(@"IsActual").HasColumnType("bit").IsOptional();
+
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+            // Foreign keys
+
+
+            HasOptional(a => a.Namedocument).WithMany(b => b.Documents).HasForeignKey(c => c.IdNamedocument).WillCascadeOnDelete(false); // FK_Document_Namedocument
+
+            HasOptional(a => a.User).WithMany(b => b.Documents).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Users_Document
+
+
+        }
+    }
+
+
     // FullModel
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
@@ -2484,40 +3713,6 @@ namespace EfDatabase.Inventarization.Base
 
 
             HasRequired(a => a.Classification).WithMany(b => b.FullModels).HasForeignKey(c => c.IdClasification).WillCascadeOnDelete(false); // FK_Classification_FullModel
-
-
-        }
-    }
-
-
-    // FullMonitorSysBlok
-
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
-
-    public class FullMonitorSysBlokConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<FullMonitorSysBlok>
-    {
-        public FullMonitorSysBlokConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public FullMonitorSysBlokConfiguration(string schema)
-        {
-
-            ToTable("FullMonitorSysBlok", schema);
-
-            HasKey(x => x.Id);
-
-
-
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-
-            Property(x => x.InventarNumSysBlok).HasColumnName(@"InventarNumSysBlok").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
-
-            Property(x => x.InventarNumMonitor).HasColumnName(@"InventarNumMonitor").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
-
-            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
-
 
 
         }
@@ -2664,6 +3859,46 @@ namespace EfDatabase.Inventarization.Base
     }
 
 
+    // InfoView
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class InfoViewConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<InfoView>
+    {
+        public InfoViewConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public InfoViewConfiguration(string schema)
+        {
+
+            ToTable("InfoView", schema);
+
+            HasKey(x => x.Id);
+
+
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.NameView).HasColumnName(@"NameView").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+
+            Property(x => x.NameViewColumns).HasColumnName(@"NameViewColumns").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+
+            Property(x => x.InfoColumn).HasColumnName(@"InfoColumn").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.FormatView).HasColumnName(@"FormatView").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(16);
+
+            Property(x => x.IsVisible).HasColumnName(@"IsVisible").HasColumnType("bit").IsOptional();
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+        }
+    }
+
+
     // Kabinet
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
@@ -2760,6 +3995,8 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdModel).HasColumnName(@"IdModel").HasColumnType("int").IsOptional();
 
+            Property(x => x.IdSupply).HasColumnName(@"IdSupply").HasColumnType("int").IsOptional();
+
             Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
 
             Property(x => x.ZavNumber).HasColumnName(@"ZavNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
@@ -2797,7 +4034,41 @@ namespace EfDatabase.Inventarization.Base
 
             HasOptional(a => a.Statusing).WithMany(b => b.Mfus).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Mfu
 
+            HasOptional(a => a.Supply).WithMany(b => b.Mfus).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_Mfu_Supply
+
             HasOptional(a => a.User).WithMany(b => b.Mfus).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Mfu_Users
+
+
+        }
+    }
+
+
+    // ModelBlockPower
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class ModelBlockPowerConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ModelBlockPower>
+    {
+        public ModelBlockPowerConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ModelBlockPowerConfiguration(string schema)
+        {
+
+            ToTable("ModelBlockPower", schema);
+
+            HasKey(x => x.IdModelBP);
+
+
+
+            Property(x => x.IdModelBP).HasColumnName(@"IdModelBP").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
 
 
         }
@@ -2830,6 +4101,8 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdModelMonitor).HasColumnName(@"IdModelMonitor").HasColumnType("int").IsOptional();
 
+            Property(x => x.IdSupply).HasColumnName(@"IdSupply").HasColumnType("int").IsOptional();
+
             Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
 
             Property(x => x.SerNum).HasColumnName(@"SerNum").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
@@ -2855,7 +4128,41 @@ namespace EfDatabase.Inventarization.Base
 
             HasOptional(a => a.Statusing).WithMany(b => b.Monitors).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Monitors
 
+            HasOptional(a => a.Supply).WithMany(b => b.Monitors).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_Monitors_Supply
+
             HasOptional(a => a.User).WithMany(b => b.Monitors).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Monitors_Users
+
+
+        }
+    }
+
+
+    // Namedocument
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class NamedocumentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Namedocument>
+    {
+        public NamedocumentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public NamedocumentConfiguration(string schema)
+        {
+
+            ToTable("Namedocument", schema);
+
+            HasKey(x => x.IdNamedocument);
+
+
+
+            Property(x => x.IdNamedocument).HasColumnName(@"IdNamedocument").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.NameDocument).HasColumnName(@"NameDocument").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
 
 
         }
@@ -2917,6 +4224,42 @@ namespace EfDatabase.Inventarization.Base
             Property(x => x.IdModelSysBlock).HasColumnName(@"IdModelSysBlock").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
             Property(x => x.NameComputer).HasColumnName(@"NameComputer").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+        }
+    }
+
+
+    // Organization
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class OrganizationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Organization>
+    {
+        public OrganizationConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public OrganizationConfiguration(string schema)
+        {
+
+            ToTable("Organization", schema);
+
+            HasKey(x => x.Id);
+
+
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.NameOrganization).HasColumnName(@"NameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.NameFace).HasColumnName(@"NameFace").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.NameDepartament).HasColumnName(@"NameDepartament").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
 
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
 
@@ -3026,6 +4369,8 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdModel).HasColumnName(@"IdModel").HasColumnType("int").IsOptional();
 
+            Property(x => x.IdSupply).HasColumnName(@"IdSupply").HasColumnType("int").IsOptional();
+
             Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
 
             Property(x => x.ZavNumber).HasColumnName(@"ZavNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
@@ -3059,7 +4404,41 @@ namespace EfDatabase.Inventarization.Base
 
             HasOptional(a => a.Statusing).WithMany(b => b.Printers).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Printer
 
+            HasOptional(a => a.Supply).WithMany(b => b.Printers).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_Printer_Supply
+
             HasOptional(a => a.User).WithMany(b => b.Printers).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Printer_Users
+
+
+        }
+    }
+
+
+    // ProizvoditelBlockPower
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class ProizvoditelBlockPowerConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ProizvoditelBlockPower>
+    {
+        public ProizvoditelBlockPowerConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ProizvoditelBlockPowerConfiguration(string schema)
+        {
+
+            ToTable("ProizvoditelBlockPower", schema);
+
+            HasKey(x => x.IdProizvoditelBP);
+
+
+
+            Property(x => x.IdProizvoditelBP).HasColumnName(@"IdProizvoditelBP").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
 
 
         }
@@ -3126,6 +4505,8 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdModel).HasColumnName(@"IdModel").HasColumnType("int").IsOptional();
 
+            Property(x => x.IdSupply).HasColumnName(@"IdSupply").HasColumnType("int").IsOptional();
+
             Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
 
             Property(x => x.ZavNumber).HasColumnName(@"ZavNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
@@ -3158,6 +4539,8 @@ namespace EfDatabase.Inventarization.Base
             HasOptional(a => a.Kabinet).WithMany(b => b.ScanerAndCamers).HasForeignKey(c => c.IdNumberKabinet).WillCascadeOnDelete(false); // FK_ScanerAndCamer_Kabinet
 
             HasOptional(a => a.Statusing).WithMany(b => b.ScanerAndCamers).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Scaner
+
+            HasOptional(a => a.Supply).WithMany(b => b.ScanerAndCamers).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_ScanerAndCamer_Supply
 
             HasOptional(a => a.User).WithMany(b => b.ScanerAndCamers).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_ScanerAndCamer_Users
 
@@ -3200,6 +4583,42 @@ namespace EfDatabase.Inventarization.Base
     }
 
 
+    // Supply
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class SupplyConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Supply>
+    {
+        public SupplyConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public SupplyConfiguration(string schema)
+        {
+
+            ToTable("Supply", schema);
+
+            HasKey(x => x.IdSupply);
+
+
+
+            Property(x => x.IdSupply).HasColumnName(@"IdSupply").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.NameSupply).HasColumnName(@"NameSupply").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.NameKontract).HasColumnName(@"NameKontract").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.DatePostavki).HasColumnName(@"DatePostavki").HasColumnType("date").IsOptional();
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+        }
+    }
+
+
     // SysBlock
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
@@ -3225,6 +4644,8 @@ namespace EfDatabase.Inventarization.Base
             Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
 
             Property(x => x.IdModelSysBlock).HasColumnName(@"IdModelSysBlock").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdSupply).HasColumnName(@"IdSupply").HasColumnType("int").IsOptional();
 
             Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
 
@@ -3257,7 +4678,69 @@ namespace EfDatabase.Inventarization.Base
 
             HasOptional(a => a.Statusing).WithMany(b => b.SysBlocks).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_SysBlock
 
+            HasOptional(a => a.Supply).WithMany(b => b.SysBlocks).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_SysBlock_Supply
+
             HasOptional(a => a.User).WithMany(b => b.SysBlocks).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_SysBlock_Users
+
+
+        }
+    }
+
+
+    // Telephon
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class TelephonConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Telephon>
+    {
+        public TelephonConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public TelephonConfiguration(string schema)
+        {
+
+            ToTable("Telephon", schema);
+
+            HasKey(x => x.IdTelephon);
+
+
+
+            Property(x => x.IdTelephon).HasColumnName(@"IdTelephon").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.IdSupply).HasColumnName(@"IdSupply").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
+
+            Property(x => x.NameTelephone).HasColumnName(@"NameTelephone").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.Telephon_).HasColumnName(@"Telephon").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+
+            Property(x => x.TelephonUndeground).HasColumnName(@"TelephonUndeground").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+
+            Property(x => x.SerNumber).HasColumnName(@"SerNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+
+            Property(x => x.IpTelephon).HasColumnName(@"IpTelephon").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+
+            Property(x => x.MacTelephon).HasColumnName(@"MacTelephon").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+
+            Property(x => x.Coment).HasColumnName(@"Coment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(254);
+
+            Property(x => x.IdStatus).HasColumnName(@"IdStatus").HasColumnType("int").IsOptional();
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+            // Foreign keys
+
+
+            HasOptional(a => a.Kabinet).WithMany(b => b.Telephons).HasForeignKey(c => c.IdNumberKabinet).WillCascadeOnDelete(false); // FK_Telephon_Kabinet
+
+            HasOptional(a => a.Statusing).WithMany(b => b.Telephons).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Telephon
+
+            HasOptional(a => a.Supply).WithMany(b => b.Telephons).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_Telephon_Supply
 
 
         }
@@ -3298,13 +4781,7 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.TabelNumber).HasColumnName(@"TabelNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
 
-            Property(x => x.Telephon).HasColumnName(@"Telephon").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
-
-            Property(x => x.TelephonUndeground).HasColumnName(@"TelephonUndeground").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
-
-            Property(x => x.IpTelephon).HasColumnName(@"IpTelephon").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
-
-            Property(x => x.MacTelephon).HasColumnName(@"MacTelephon").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.IdTelephon).HasColumnName(@"IdTelephon").HasColumnType("int").IsOptional();
 
             Property(x => x.NameUser).HasColumnName(@"NameUser").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
 
@@ -3326,6 +4803,54 @@ namespace EfDatabase.Inventarization.Base
             HasOptional(a => a.Position).WithMany(b => b.Users).HasForeignKey(c => c.IdPosition).WillCascadeOnDelete(false); // FK_Users_Position
 
             HasOptional(a => a.Rule).WithMany(b => b.Users).HasForeignKey(c => c.IdRule).WillCascadeOnDelete(false); // FK_Users_Rules
+
+            HasOptional(a => a.Telephon).WithMany(b => b.Users).HasForeignKey(c => c.IdTelephon).WillCascadeOnDelete(false); // FK_Users_Telephon
+
+
+        }
+    }
+
+
+    // UsersIsActualsStat
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class UsersIsActualsStatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<UsersIsActualsStat>
+    {
+        public UsersIsActualsStatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public UsersIsActualsStatConfiguration(string schema)
+        {
+
+            ToTable("UsersIsActualsStat", schema);
+
+            HasKey(x => x.Id);
+
+
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.ChangeType).HasColumnName(@"ChangeType").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+
+            Property(x => x.NameUsers).HasColumnName(@"NameUsers").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.SmallNameUsers).HasColumnName(@"SmallNameUsers").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.IdOtdel).HasColumnName(@"IdOtdel").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdPosition).HasColumnName(@"IdPosition").HasColumnType("int").IsOptional();
+
+            Property(x => x.TabelNumber).HasColumnName(@"TabelNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+
+            Property(x => x.StatusActual).HasColumnName(@"StatusActual").HasColumnType("bit").IsOptional();
+
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
 
 
         }

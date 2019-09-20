@@ -10,11 +10,9 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
 
         /// <summary>
         /// Настройка страницы и колонтитул на 1 странице 
-        /// при создании явных 2 страниц будет ошибка создания с телефонным номером и ФИО колонтитула
         /// </summary>
         /// <param name="body"></param>
         /// <param name="mainDocument"></param>
-        /// <param name="count">Параметр от которого зависит колонтитул</param>
         public void SettingPage(ref Body body, MainDocumentPart mainDocument)
         {
             SectionProperties sectionProperties = new SectionProperties();
@@ -60,6 +58,32 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
             SectionProperties sectionProperties = new SectionProperties();
             PageSize pageSize = new PageSize() { Width = 16800U, Height = 11900U, Orient = PageOrientationValues.Landscape };
             PageMargin pageMargin = new PageMargin() { Top = 500, Right = 500, Bottom = 500, Left = 500, Header = 710U, Footer = 700U, Gutter = 0U };
+            sectionProperties.Append(pageSize);
+            sectionProperties.Append(pageMargin);
+            body.Append(sectionProperties);
+        }
+        /// <summary>
+        /// Обычный документ вертикальное выравнивание
+        /// </summary>
+        /// <param name="body"></param>
+        public void DocumentVerticalMargin(ref Body body)
+        {
+            SectionProperties sectionProperties = new SectionProperties();
+            PageSize pageSize = new PageSize() { Width = 11907U, Height = 16839U, Orient = PageOrientationValues.Portrait };
+            PageMargin pageMargin = new PageMargin() { Top = 500, Right = 500, Bottom = 500, Left = 500 };
+            sectionProperties.Append(pageSize);
+            sectionProperties.Append(pageMargin);
+            body.Append(sectionProperties);
+        }
+        /// <summary>
+        /// Обычный документ вертикальное выравнивание стандартный размер полей
+        /// </summary>
+        /// <param name="body"></param>
+        public void DocumentVerticalMarginStandart(ref Body body)
+        {
+            SectionProperties sectionProperties = new SectionProperties();
+            PageSize pageSize = new PageSize() { Width = 11907U, Height = 16839U, Orient = PageOrientationValues.Portrait };
+            PageMargin pageMargin = new PageMargin() { Top = 567, Right = 567, Bottom = 567, Left = 1135 };
             sectionProperties.Append(pageSize);
             sectionProperties.Append(pageMargin);
             body.Append(sectionProperties);

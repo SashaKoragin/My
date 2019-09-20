@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EfDatabaseInvoice;
+using EfDatabaseXsdBookAccounting;
 
 namespace EfDatabase.Inventarization.BaseLogica.Select
 {
@@ -15,7 +17,17 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public void ReportInvoice(ref EfDatabaseInvoice.Report report)
         {
             SelectSql select = new SelectSql();
+            AddObjectDb.AddObjectDb adddoc = new AddObjectDb.AddObjectDb();
             select.ReportInvoce(ref report);
+            report.Main.Barcode = new Barcode();
+            report.Main.Barcode.Id = adddoc.AddDocument(report.ParamRequest.IdNameDocument, report.Main.Received.UserName,report.ParamRequest.IdUsers);
+        }
+
+        public void BookInvoce(ref BareCodeBook barecode, BookModels bookModels)
+        {
+            barecode.NameModel = bookModels.Model;
+            AddObjectDb.AddObjectDb adddoc = new AddObjectDb.AddObjectDb();
+            barecode.Id = adddoc.AddBookAccounting(bookModels);
         }
     }
 }

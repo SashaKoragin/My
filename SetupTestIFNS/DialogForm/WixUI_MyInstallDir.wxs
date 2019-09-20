@@ -74,16 +74,16 @@ Patch dialog sequence:
           <Dialog Id="NDFLConect" Width="370" Height="270" Title="Выбор пути к папке Stat 2NDFL!!!">
             <Control Id="Title" Type="Text" X="10" Y="6" Width="400" Height="15" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}В данном окне пишется путь WCF Серверу и к БД расположенные на нем!!!"/>
             <Control Id="Title1" Type="Text" X="20" Y="50" Width="200" Height="15" Transparent="yes" NoPrefix="yes" Text="Папка Stat расположена:"/>
-            <Control Id="SimpleEdit" Type="Edit" X="20" Y="80" Width="200" Height="16" Property="SimpleEditProperty" Sunken="no">
+            <Control Id="SimpleEdit" Type="Edit" X="20" Y="80" Width="200" Height="16" Property="SimpleEditProperty" Text="[SimpleEditProperty]" Sunken="no">
               <Property Id="SimpleEditProperty" Value="\\i7751-w00000745\SrezDBF"/>
             </Control>
             <Control Id ="Comment" Type="Text" X="20" Y="100" Width="200" Height="15" Transparent="yes" NoPrefix="yes" Text="Настройки к расположению файлов 2NDFL"/>
             <Control Id="ResultComment" Type="Text" X="20" Y="120" Width="200" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь к Result"/>
-            <Control Id="ResultFolder" Type="Edit" X="90" Y="120" Width="200" Height="15"  Property="Result" Sunken="no" ToolTip="Use Folder Result ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">
+            <Control Id="ResultFolder" Type="Edit" X="90" Y="120" Width="200" Height="15"  Property="Result" Text="[Result]" Sunken="no" ToolTip="Use Folder Result ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">
               <Property Id ="Result" Value="\\i7751-w40000650\2NDFL\Result_{0}"/>
             </Control>
             <Control Id="ResultAutoComment" Type="Text" X="20" Y="140" Width="200" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь к ResultAuto"/>
-            <Control Id="ResultAutoFolder" Type="Edit" X="90" Y="140" Width="200" Height="15" Property="ResultAuto" Sunken="no" ToolTip="Use Folder ResultAUTO ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">
+            <Control Id="ResultAutoFolder" Type="Edit" X="90" Y="140" Width="200" Height="15" Property="ResultAuto" Text="[ResultAuto]" Sunken="no" ToolTip="Use Folder ResultAUTO ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">
               <Property Id ="ResultAuto" Value="\\i7751-w40000650\2NDFL\Result_Auto_{0}"/>
             </Control>
             <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">

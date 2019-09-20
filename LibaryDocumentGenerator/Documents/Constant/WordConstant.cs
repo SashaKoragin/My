@@ -12,5 +12,9 @@ namespace LibaryDocumentGenerator.Documents.Constant
         /// Константа Word Расширения
         /// </summary>
         public static string Formatword = ".docx";
+        /// <summary>
+        /// Константа PNG
+        /// </summary>
+        public static string Formatpng = ".png";
     }
 }

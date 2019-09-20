@@ -6,7 +6,9 @@
   <?define Loggers_TargetDir=$(var.Loggers.TargetDir)?>
   <?define LibaryXMLAuto_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\LibaryXMLAuto\bin\Debug\"?>
   <?define SqlLibaryIfns_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\SqlLibaryIfns\bin\Debug\"?>
-  <?define LibaryDocumentGenerator_TargetDir=$(var.LibaryDocumentGenerator.TargetDir)?><?define EfDatabase_TargetDir=$(var.EfDatabase.TargetDir)?><?define SignalRLibary_TargetDir=$(var.SignalRLibary.TargetDir)?>
+  <?define LibaryDocumentGenerator_TargetDir=$(var.LibaryDocumentGenerator.TargetDir)?>
+  <?define EfDatabase_TargetDir=$(var.EfDatabase.TargetDir)?>
+  <?define SignalRLibary_TargetDir=$(var.SignalRLibary.TargetDir)?>
 	<Product Id="*" Name="SetupServiceTestIfns $(var.CurrentVersion)" Codepage="1251" Language="1049" Version="$(var.CurrentVersion)" Manufacturer="ServiceIfns" UpgradeCode="a9ade744-7ad3-477c-9cb3-759214eb7f56">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
@@ -117,7 +119,9 @@
       <util:XmlFile Id="DataBase" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='Connect'[\]]//@value" Value="Data Source=[DataBase];Initial Catalog=Taxes51;Integrated Security=True;MultipleActiveResultSets=True" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="Report" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='SaveReport'[\]]//@value" Value="[PathReport]" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="ReportMassTemplate" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='ReportMassTemplate'[\]]//@value" Value="[PathReportFull]" SelectionLanguage="XPath" Sequence="1" />
-      </Component>
+      <util:XmlFile Id="ConnectImns51" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='ConnectImns51'[\]]//@value" Value="[DbPathKadr]" SelectionLanguage="XPath" Sequence="1" />
+      <util:XmlFile Id="ConnectInventory" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//connectionStrings//add[\[]@name='Inventarization'[\]]//@connectionString" Value="[DbPathInventory]" SelectionLanguage="XPath" Sequence="1" />
+    </Component>
 		<Component Id="TestIFNSLibary.dll" Guid="bae45c5b-9bd2-4d6a-a979-dc0d7c13d0cf">
 		  <File Id="TestIFNSLibary.dll" Name="TestIFNSLibary.dll" Source="$(var.TestIFNSLibary_TargetDir)TestIFNSLibary.dll" />
 		</Component>
@@ -187,6 +191,9 @@
     <Component Id="Microsoft.Owin.Host.HttpListener.dll" Guid="1AFDD859-4A91-4B1A-9EC1-E2E3BDC198CF">
       <File Id="Microsoft.Owin.Host.HttpListener.dll" Name="Microsoft.Owin.Host.HttpListener.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.Owin.Host.HttpListener.dll" />
     </Component>
+      <Component Id="zxing.dlll" Guid="76E50B26-165A-4C6E-BD2E-2A9E193AB528">
+        <File Id="zxing.dll" Name="zxing.dll" Source="$(var.TestIFNSService_TargetDir)zxing.dll" />
+      </Component>
 		</ComponentGroup>
 	</Fragment>
   <Fragment>

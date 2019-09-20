@@ -1,8 +1,4 @@
-﻿using System;
-using System.Data;
-using System.IO;
-using System.Linq.Expressions;
-using LibaryDocumentGenerator.ProgrammView.Word.Template.HeadersDocument;
+﻿using LibaryDocumentGenerator.ProgrammView.Word.Template.HeadersDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.BodyDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.FottersDocument;

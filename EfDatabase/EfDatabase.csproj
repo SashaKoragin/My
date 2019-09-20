@@ -78,8 +78,24 @@
     <Compile Include="Inventarization\DataTransferObject\ParametrModelSelect\ParametrsModel.cs">
       <DependentUpon>ParametrsModel.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventarization\ReportSheme\BookAccounting\Books.cs">
+      <DependentUpon>Books.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventarization\ReportSheme\ErrorInventory\ErrorInventory.cs">
+      <DependentUpon>ErrorInventory.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventarization\ReportSheme\Invoice\DocumentInventory.cs">
+      <DependentUpon>DocumentInventory.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventarization\ReportSheme\Invoice\ReportShemeInvoice.cs">
       <DependentUpon>ReportShemeInvoice.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventarization\ReportSheme\ReturnModelError\ModelError.cs" />
+    <Compile Include="Inventarization\ReportSheme\TelephoneHelp\TelephoneHelp.cs">
+      <DependentUpon>TelephoneHelp.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventarization\ReportSheme\UploadFile\UploadFileModel.cs">
+      <DependentUpon>UploadFileModel.xsd</DependentUpon>
     </Compile>
     <Compile Include="SyteIfnsRisk.cs">
       <AutoGen>True</AutoGen>
@@ -110,7 +126,22 @@
     <None Include="Inventarization\DataTransferObject\ParametrModelSelect\ParametrsModel.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Inventarization\ReportSheme\BookAccounting\Books.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventarization\ReportSheme\ErrorInventory\ErrorInventory.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventarization\ReportSheme\Invoice\DocumentInventory.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventarization\ReportSheme\Invoice\ReportShemeInvoice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventarization\ReportSheme\TelephoneHelp\TelephoneHelp.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventarization\ReportSheme\UploadFile\UploadFileModel.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -146,6 +177,10 @@
     <ItemGroup>
       <XsdFiles Include="Inventarization\DataTransferObject\ParametrModelSelect\*.xsd" />
       <XsdReportInvoice Include="Inventarization\ReportSheme\Invoice\*.xsd" />
+      <XsdReportFile Include="Inventarization\ReportSheme\UploadFile\*.xsd" />
+      <XsdReportError Include="Inventarization\ReportSheme\ErrorInventory\*.xsd" />
+      <XsdTelephoneHelp Include="Inventarization\ReportSheme\TelephoneHelp\*.xsd" />
+      <XsdBookAccounting Include="Inventarization\ReportSheme\BookAccounting\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -157,5 +192,9 @@
     <Message Importance="high" Text="Processing XSD schemas" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdFiles.FullPath)&quot; /c /namespace:$(RootNamespace)ParametrsModel /outputdir:Inventarization\DataTransferObject\ParametrModelSelect\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportInvoice.FullPath)&quot; /c /namespace:$(RootNamespace)Invoice /outputdir:Inventarization\ReportSheme\Invoice\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportFile.FullPath)&quot; /c /f /namespace:$(RootNamespace)UploadFile /outputdir:Inventarization\ReportSheme\UploadFile\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportError.FullPath)&quot; /c /namespace:$(RootNamespace)ErrorInventory /outputdir:Inventarization\ReportSheme\ErrorInventory\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdTelephoneHelp.FullPath)&quot; /c /namespace:$(RootNamespace)TelephoneHelp /outputdir:Inventarization\ReportSheme\TelephoneHelp\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdBookAccounting.FullPath)&quot; /c /f /namespace:$(RootNamespace)XsdBookAccounting /outputdir:Inventarization\ReportSheme\BookAccounting\" />
   </Target>
 </Project>

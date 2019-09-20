@@ -85,6 +85,11 @@
 					<xs:documentation>Тип колонки</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="IsVisible" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Видимость элемента</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="ModelSelect">

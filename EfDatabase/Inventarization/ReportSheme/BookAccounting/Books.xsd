@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Book" type="Book">
+		<xs:annotation>
+			<xs:documentation>Книга учета материальных ценностей</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Book">
+		<xs:annotation>
+			<xs:documentation>Книга учета материальных ценностей</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="BookModels" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Organization" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Данная вещь для Книг учета Структурное подразделение</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="BareCodeBook" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BookModels">
+		<xs:annotation>
+			<xs:documentation>Модель последней актуальной книги</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="RowNum" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Номер строки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Keys" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Уникальный ключ</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование категории</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун по ключу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Model" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Модель техники</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdBook" type="xs:int" default="0">
+				<xs:annotation>
+					<xs:documentation>Ун последней книги</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Organization">
+		<xs:annotation>
+			<xs:documentation>Структурное подразделение</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Supply" minOccurs="0"/>
+				<xs:element ref="Position" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="NameOrganization" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameFace" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Материально ответственное лицо</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameDepartament" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование ответственного отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Supply">
+		<xs:annotation>
+			<xs:documentation>Поставка</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameKontract" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наимеование контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DaysPostavki" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>День поставки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Years" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Год поставки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameSupply" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование поставки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Position">
+		<xs:annotation>
+			<xs:documentation>Позиция для книги учета</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Users" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="IdPosition" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун позиции</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Users">
+		<xs:annotation>
+			<xs:documentation>Пользователь</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="SmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BareCodeBook">
+		<xs:annotation>
+			<xs:documentation>Штрихкод книги</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун штрихкода</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FullPathSave" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Полный путь сохранения штрихкода</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameModel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование модели оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

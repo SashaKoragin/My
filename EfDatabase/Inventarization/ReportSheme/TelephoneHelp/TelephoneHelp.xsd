@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="TelephoneHelp" type="TelephoneHelp">
+		<xs:annotation>
+			<xs:documentation>Телефонный справочник</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TelephonHeaders">
+		<xs:annotation>
+			<xs:documentation>Шапка телефонного справочника</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Telephon" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Классификация</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="TelephoneHelp">
+		<xs:annotation>
+			<xs:documentation>Класс справочника</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="TelephonHeaders" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="TelephonBody" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Telephon">
+		<xs:annotation>
+			<xs:documentation>Телефоны</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Классификация шапки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Telephon" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Телефон внутренний</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TelephonUndeground" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Телефон городской</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Kabinet">
+		<xs:annotation>
+			<xs:documentation>Кабинеты</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NumberKabinet" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер кабинета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TelephonBody">
+		<xs:annotation>
+			<xs:documentation>Основная информация</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Users" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Users">
+		<xs:annotation>
+			<xs:documentation>Сотрудники</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Position"/>
+				<xs:element ref="Telephon" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberKabinet" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Телефон если отсутствует у пользователя кабинет</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Position">
+		<xs:annotation>
+			<xs:documentation>Должность</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NamePosition" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование должности</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

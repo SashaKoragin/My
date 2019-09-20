@@ -26,7 +26,14 @@
 				<xs:element ref="Printer" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="ScanerAndCamer" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="SysBlock" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="BlockPower" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Telephon" minOccurs="0"/>
 			</xs:sequence>
+			<xs:attribute name="IdUser" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 			<xs:attribute name="Name" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Имя пользователя</xs:documentation>
@@ -40,7 +47,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="Kabinet"/>
+				<xs:element ref="Kabinet" minOccurs="0"/>
 				<xs:element ref="NameMonitor"/>
 			</xs:sequence>
 			<xs:attribute name="SerNum" type="xs:string">
@@ -53,6 +60,11 @@
 					<xs:documentation>Инвентарный номер монитора</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Mfu">
@@ -61,7 +73,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="Kabinet"/>
+				<xs:element ref="Kabinet" minOccurs="0"/>
 				<xs:element ref="FullProizvoditel"/>
 				<xs:element ref="FullModel"/>
 			</xs:sequence>
@@ -75,6 +87,11 @@
 					<xs:documentation>Сервисный номер</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="ScanerAndCamer">
@@ -83,7 +100,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="Kabinet"/>
+				<xs:element ref="Kabinet" minOccurs="0"/>
 				<xs:element ref="FullProizvoditel"/>
 				<xs:element ref="FullModel"/>
 			</xs:sequence>
@@ -102,6 +119,11 @@
 					<xs:documentation>Инвентарный номер</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="SysBlock">
@@ -110,7 +132,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="Kabinet"/>
+				<xs:element ref="Kabinet" minOccurs="0"/>
 				<xs:element ref="NameSysBlock"/>
 			</xs:sequence>
 			<xs:attribute name="ServiceNum" type="xs:string">
@@ -138,6 +160,11 @@
 					<xs:documentation>Ip Адресс</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Printer">
@@ -146,7 +173,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="Kabinet"/>
+				<xs:element ref="Kabinet" minOccurs="0"/>
 				<xs:element ref="FullProizvoditel"/>
 				<xs:element ref="FullModel"/>
 			</xs:sequence>
@@ -158,6 +185,11 @@
 			<xs:attribute name="ServiceNumber" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -255,6 +287,102 @@
 			<xs:attribute name="NameOtdel" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdUser">
+				<xs:annotation>
+					<xs:documentation>Ун начальника</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BlockPower">
+		<xs:annotation>
+			<xs:documentation>ИБП</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet" minOccurs="0"/>
+				<xs:element ref="ProizvoditelBlockPower"/>
+				<xs:element ref="ModelBlockPower"/>
+			</xs:sequence>
+			<xs:attribute name="ZavNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Заводской номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProizvoditelBlockPower">
+		<xs:annotation>
+			<xs:documentation>Производитель ИБП</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование производителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModelBlockPower">
+		<xs:annotation>
+			<xs:documentation>Модель ИБП</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование производителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Telephon">
+		<xs:annotation>
+			<xs:documentation>Телефон</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="NameTelephone" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование телефона</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер телефона</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpTelephon" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Телефона</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MacTelephon" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>MAC Телефона</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

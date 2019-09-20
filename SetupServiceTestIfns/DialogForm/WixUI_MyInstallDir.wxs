@@ -56,22 +56,31 @@ Patch dialog sequence:
             <!--Начало моего окна-->
             <Dialog Id="NDFLConect" Width="370" Height="270" Title="Настройка обновление актуальности копии!!!">
                 <Control Id="Title" Type="Text" X="10" Y="8" Width="400" Height="15" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}В данном окне пишется пути к рабочей БД чтобы взять с нее копию!!!" />
-                <Control Id="Title1" Type="Text" X="15" Y="56" Width="106" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь к Work DB:" />
-                <Control Id="SimpleEdit" Type="Edit" X="90" Y="52" Width="195" Height="15" Property="WorkDb" Sunken="no">
+                <Control Id="Title1" Type="Text" X="15" Y="30" Width="106" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь к Work DB:" />
+                <Control Id="SimpleEdit" Type="Edit" X="90" Y="30" Width="195" Height="15" Property="WorkDb" Text="[WorkDb]" Sunken="no">
                     <Property Id="WorkDb" Value="\\i7751-app127\2NDFL\stat" />
                 </Control>
-                <Control Id="ResultComment" Type="Text" X="15" Y="75" Width="60" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь Теsт DB:" />
-                <Control Id="ResultFolder" Type="Edit" X="90" Y="75" Width="194" Height="15" Property="TestDb" Sunken="no" ToolTip="Use Folder Result ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">
+                <Control Id="ResultComment" Type="Text" X="15" Y="50" Width="60" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь Теsт DB:" />
+                <Control Id="ResultFolder" Type="Edit" X="90" Y="50" Width="194" Height="15" Property="TestDb" Text="[TestDb]" Sunken="no" ToolTip="Use Folder Result ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">
                     <Property Id="TestDb" Value="\\i7751-w00000745\SrezDBF" />
                 </Control>
-                <Control Id="Title2" Type="Text" Text="Настройки для Rest приложения:" Height="17" Width="140" X="11" Y="120" />
-                <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="80" X="11" Y="146" />
-              <Control Id="Db" Type="Edit" X="90" Y="146" Height="15" Width="240" Property="DataBase">
+                <Control Id="Title2" Type="Text" Text="Настройки для Rest приложения:" Height="17" Width="140" X="11" Y="70" />
+                <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="80" X="11" Y="90" />
+              <Control Id="Db" Type="Edit" X="90" Y="90" Height="15" Width="240" Property="DataBase" Text="[DataBase]">
                 <Property Id="DataBase" Value="i7751-app001" />
               </Control>
-              <Control Id="ReportBdkText" Type="Text" Text="Путь для отчетов:" Height="15" Width="80" X="11" Y="172" />
-              <Control Id="ReportBdkEdit" Type="Edit" X="90" Y="172" Height="15" Width="240" Property="PathReportFull">
+              <Control Id="ReportBdkText" Type="Text" Text="Путь для отчетов:" Height="15" Width="80" X="11" Y="110" />
+              <Control Id="ReportBdkEdit" Type="Edit" X="90" Y="110" Height="15" Width="240" Property="PathReportFull" Text="[PathReportFull]">
                 <Property Id="PathReportFull" Value="\\10.177.238.240\Network-Disk\!!! PUBLIC !!!\TestingSystem\" />
+              </Control>
+              <Control Id="InventoryParametr" Type="Text" Text="Настройки для БД инвенторизация:" Height="17" Width="140" X="11" Y="130" />
+              <Control Id="KadrText1" Type="Text" Text="Server IMNS:" Height="15" ToolTip="Строка соединения с БД Кадрами" Width="65" X="10" Y="150" />
+              <Control Id="KadrDbEdit" Type="Edit" X="75" Y="150" Height="15" Width="280" Property="DbPathKadr" Text="[DbPathKadr]">
+                <Property Id="DbPathKadr" Value="Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True" />
+              </Control>
+              <Control Id="InventoryText1" Type="Text" Text="Server Invent:" Height="15" ToolTip="Строка соединения с БД Инвенторизация" Width="65" X="10" Y="170" />
+              <Control Id="InventoryDbEdit" Type="Edit" X="75" Y="170" Height="15" Width="280" Property="DbPathInventory" Text="[DbPathInventory]">
+                <Property Id="DbPathInventory" Value="Data Source=i7751-app127;Initial Catalog=Inventarka;Integrated Security=True;MultipleActiveResultSets=True" />
               </Control>
               <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
                     <Publish Event="NewDialog" Value="VerifyReadyDlg" Order="10" />
