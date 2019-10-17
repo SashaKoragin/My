@@ -10,7 +10,9 @@ using SqlLibaryIfns.SqlEntytiCommand.TaskUse;
 using SqlLibaryIfns.SqlZapros.SobytieSql;
 using System.IO;
 using System.Threading;
+using EfDatabase.Inventarization.BaseLogica.Select;
 using LibaryDocumentGenerator.Documents.DocumentMigration;
+using LibaryDocumentGenerator.Documents.Template;
 using LibaryDocumentGenerator.GenerateDocument.GenerateWord;
 using LibaryXMLAuto.ModelServiceWcfCommand.AngularModel;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
@@ -22,6 +24,7 @@ using SqlLibaryIfns.ZaprosSelectNotParam;
 using LibaryDocumentGenerator.DonloadFile.Angular;
 using LibaryXMLAuto.Reports.FullTemplateSheme;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
+using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
 
 
 namespace TestIFNSLibary.ServiceRest
@@ -319,12 +322,12 @@ namespace TestIFNSLibary.ServiceRest
         {
             try
             {
-                await Task.Factory.StartNew(() =>
-                 {
-                     var docmigration = new DocumentMigration();
-                     docmigration.MigrationDoc(_parametrService.ConectWork, _parametrService.ReportMassTemplate, json);
-                 });
-                return "Документы для печати запущены и сохраняются в папку " + _parametrService.ReportMassTemplate;
+             return  await Task.Factory.StartNew(() =>
+                {
+                    var docmigration = new DocumentMigration();
+                    docmigration.MigrationDoc(_parametrService.ConectWork, _parametrService.ReportMassTemplate, json);
+                    return "Документы для печати запущены и сохраняются в папку " + _parametrService.ReportMassTemplate;
+                });
             }
             catch (Exception e)
             {
@@ -332,6 +335,36 @@ namespace TestIFNSLibary.ServiceRest
                 return e.Message;
             }
         }
+
+        /// <summary>
+        /// Формирование заявок пляшем от АИС 3
+        /// </summary>
+        /// <param name="userRule">Спаршенные данные АИС 3</param>
+        /// <returns></returns>
+        public async Task<string> GenerateTemplateRule(UserRules userRule)
+        {
+            try
+            {
+             return  await Task.Factory.StartNew(() =>
+                {
+                    var sql = new SelectSql();
+                    var templateword = new TemplateUserRule();
+                    var ruletemplate = new RuleTemplate() { SenderUsers = new SenderUsers() };
+                    var modelselect = sql.SendersUsers(ref ruletemplate);
+                    sql.UserRuleModel(ref ruletemplate, userRule, modelselect);
+                    templateword.CreateDocum(_parametrService.ReportMassTemplate, ruletemplate, null);
+                    return "Заявки запущены и сохраняются в папку " + _parametrService.ReportMassTemplate;
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+                return e.Message;
+            }
+        }
+    }
+
+
     }
     class CompletedAsyncResult<T> : IAsyncResult
     {
@@ -357,4 +390,3 @@ namespace TestIFNSLibary.ServiceRest
         { get { return true; } }
         #endregion
     }
-}

@@ -150,5 +150,13 @@ namespace TestIFNSLibary.ServiceRest
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/MigrationError", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> MigrationReports(MigrationParse json);
 
+        /// <summary>
+        /// Автоматическое формирование заявок на открытие доступа
+        /// http://localhost:8181/ServiceRest/GenerateTemplateRule
+        /// </summary>
+        /// <param name="userRule">Данные с ролями от программы AutomatAis3Full </param>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateTemplateRule", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> GenerateTemplateRule(UserRules userRule);
     }
 }

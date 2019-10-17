@@ -60,6 +60,9 @@ namespace EfDatabase.Inventarization.Base
         System.Data.Entity.DbSet<Classification> Classifications { get; set; } // Classification
 
 
+        System.Data.Entity.DbSet<ComputerIpAdressSynhronization> ComputerIpAdressSynhronizations { get; set; } // ComputerIpAdressSynhronization
+
+
         System.Data.Entity.DbSet<CopySave> CopySaves { get; set; } // CopySave
 
 
@@ -82,6 +85,9 @@ namespace EfDatabase.Inventarization.Base
 
 
         System.Data.Entity.DbSet<InfoView> InfoViews { get; set; } // InfoView
+
+
+        System.Data.Entity.DbSet<IsProcessComplete> IsProcessCompletes { get; set; } // IsProcessComplete
 
 
         System.Data.Entity.DbSet<Kabinet> Kabinets { get; set; } // Kabinet
@@ -112,6 +118,9 @@ namespace EfDatabase.Inventarization.Base
 
 
         System.Data.Entity.DbSet<Otdel> Otdels { get; set; } // Otdel
+
+
+        System.Data.Entity.DbSet<OtdelPadeg> OtdelPadegs { get; set; } // OtdelPadeg
 
 
         System.Data.Entity.DbSet<Position> Positions { get; set; } // Position
@@ -190,6 +199,9 @@ namespace EfDatabase.Inventarization.Base
         public System.Data.Entity.DbSet<Classification> Classifications { get; set; } // Classification
 
 
+        public System.Data.Entity.DbSet<ComputerIpAdressSynhronization> ComputerIpAdressSynhronizations { get; set; } // ComputerIpAdressSynhronization
+
+
         public System.Data.Entity.DbSet<CopySave> CopySaves { get; set; } // CopySave
 
 
@@ -212,6 +224,9 @@ namespace EfDatabase.Inventarization.Base
 
 
         public System.Data.Entity.DbSet<InfoView> InfoViews { get; set; } // InfoView
+
+
+        public System.Data.Entity.DbSet<IsProcessComplete> IsProcessCompletes { get; set; } // IsProcessComplete
 
 
         public System.Data.Entity.DbSet<Kabinet> Kabinets { get; set; } // Kabinet
@@ -242,6 +257,9 @@ namespace EfDatabase.Inventarization.Base
 
 
         public System.Data.Entity.DbSet<Otdel> Otdels { get; set; } // Otdel
+
+
+        public System.Data.Entity.DbSet<OtdelPadeg> OtdelPadegs { get; set; } // OtdelPadeg
 
 
         public System.Data.Entity.DbSet<Position> Positions { get; set; } // Position
@@ -352,6 +370,8 @@ namespace EfDatabase.Inventarization.Base
 
             modelBuilder.Configurations.Add(new ClassificationConfiguration());
 
+            modelBuilder.Configurations.Add(new ComputerIpAdressSynhronizationConfiguration());
+
             modelBuilder.Configurations.Add(new CopySaveConfiguration());
 
             modelBuilder.Configurations.Add(new DocumentConfiguration());
@@ -367,6 +387,8 @@ namespace EfDatabase.Inventarization.Base
             modelBuilder.Configurations.Add(new InfoTableConfiguration());
 
             modelBuilder.Configurations.Add(new InfoViewConfiguration());
+
+            modelBuilder.Configurations.Add(new IsProcessCompleteConfiguration());
 
             modelBuilder.Configurations.Add(new KabinetConfiguration());
 
@@ -387,6 +409,8 @@ namespace EfDatabase.Inventarization.Base
             modelBuilder.Configurations.Add(new OrganizationConfiguration());
 
             modelBuilder.Configurations.Add(new OtdelConfiguration());
+
+            modelBuilder.Configurations.Add(new OtdelPadegConfiguration());
 
             modelBuilder.Configurations.Add(new PositionConfiguration());
 
@@ -422,6 +446,8 @@ namespace EfDatabase.Inventarization.Base
 
             modelBuilder.Configurations.Add(new ClassificationConfiguration(schema));
 
+            modelBuilder.Configurations.Add(new ComputerIpAdressSynhronizationConfiguration(schema));
+
             modelBuilder.Configurations.Add(new CopySaveConfiguration(schema));
 
             modelBuilder.Configurations.Add(new DocumentConfiguration(schema));
@@ -437,6 +463,8 @@ namespace EfDatabase.Inventarization.Base
             modelBuilder.Configurations.Add(new InfoTableConfiguration(schema));
 
             modelBuilder.Configurations.Add(new InfoViewConfiguration(schema));
+
+            modelBuilder.Configurations.Add(new IsProcessCompleteConfiguration(schema));
 
             modelBuilder.Configurations.Add(new KabinetConfiguration(schema));
 
@@ -457,6 +485,8 @@ namespace EfDatabase.Inventarization.Base
             modelBuilder.Configurations.Add(new OrganizationConfiguration(schema));
 
             modelBuilder.Configurations.Add(new OtdelConfiguration(schema));
+
+            modelBuilder.Configurations.Add(new OtdelPadegConfiguration(schema));
 
             modelBuilder.Configurations.Add(new PositionConfiguration(schema));
 
@@ -771,6 +801,44 @@ namespace EfDatabase.Inventarization.Base
 
 
             FullModels = new System.Collections.Generic.List<FullModel>();
+        }
+
+    }
+
+
+
+    // ComputerIpAdressSynhronization
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class ComputerIpAdressSynhronization
+    {
+
+
+        public int Id { get; set; } // Id (Primary key)
+
+        public string NameHost { get; set; } // NameHost (length: 256)
+
+        public string IpAdress { get; set; } // IpAdress (length: 256)
+
+        public string StatusIp { get; set; } // StatusIp (length: 256)
+
+        public string MacAdress { get; set; } // MacAdress (length: 256)
+
+        public string UserName { get; set; } // UserName (length: 256)
+
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+
+
+
+
+        public ComputerIpAdressSynhronization()
+        {
+
+            DateCreate = System.DateTime.Now;
+
         }
 
     }
@@ -1290,6 +1358,32 @@ namespace EfDatabase.Inventarization.Base
             DataCreate = System.DateTime.Now;
 
         }
+
+    }
+
+
+
+    // IsProcessComplete
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class IsProcessComplete
+    {
+
+
+        public int Id { get; set; } // Id (Primary key)
+
+        public string NameProcess { get; set; } // NameProcess (length: 256)
+
+        public bool? IsComplete { get; set; } // IsComplete
+
+        public System.DateTime? DataStart { get; set; } // DataStart
+
+        public System.DateTime? DataFinish { get; set; } // DataFinish
+
+
+
 
     }
 
@@ -2064,6 +2158,14 @@ namespace EfDatabase.Inventarization.Base
 
 
         /// <summary>
+        /// Parent (One-to-One) Otdel pointed by [OtdelPadeg].[IdOtdel] (FK_Otdel_OtdelPadeg)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual OtdelPadeg OtdelPadeg { get; set; } // OtdelPadeg.FK_Otdel_OtdelPadeg
+
+        /// <summary>
         /// Child Users where [Users].[IdOtdel] point to this entity (FK_Otdel_Users)
         /// </summary>
 
@@ -2092,6 +2194,57 @@ namespace EfDatabase.Inventarization.Base
 
 
             Users = new System.Collections.Generic.List<User>();
+        }
+
+    }
+
+
+
+    // OtdelPadeg
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class OtdelPadeg
+    {
+
+
+        public int IdOtdel { get; set; } // IdOtdel (Primary key)
+
+        public string InameOtdel { get; set; } // InameOtdel (length: 256)
+
+        public string RnameOtdel { get; set; } // RnameOtdel (length: 256)
+
+        public string DnameOtdel { get; set; } // DnameOtdel (length: 256)
+
+        public string VnameOtdel { get; set; } // VnameOtdel (length: 256)
+
+        public string TnameOtdel { get; set; } // TnameOtdel (length: 256)
+
+        public string PnameOtdel { get; set; } // PnameOtdel (length: 256)
+
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+
+        // Foreign keys
+
+
+
+        /// <summary>
+        /// Parent Otdel pointed by [OtdelPadeg].([IdOtdel]) (FK_Otdel_OtdelPadeg)
+        /// </summary>
+
+        public virtual Otdel Otdel { get; set; } // FK_Otdel_OtdelPadeg
+
+
+
+        public OtdelPadeg()
+        {
+
+            DataCreate = System.DateTime.Now;
+
         }
 
     }
@@ -3589,6 +3742,46 @@ namespace EfDatabase.Inventarization.Base
     }
 
 
+    // ComputerIpAdressSynhronization
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class ComputerIpAdressSynhronizationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ComputerIpAdressSynhronization>
+    {
+        public ComputerIpAdressSynhronizationConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ComputerIpAdressSynhronizationConfiguration(string schema)
+        {
+
+            ToTable("ComputerIpAdressSynhronization", schema);
+
+            HasKey(x => x.Id);
+
+
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.NameHost).HasColumnName(@"NameHost").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.IpAdress).HasColumnName(@"IpAdress").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.StatusIp).HasColumnName(@"StatusIp").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.MacAdress).HasColumnName(@"MacAdress").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.UserName).HasColumnName(@"UserName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+        }
+    }
+
+
     // CopySave
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
@@ -3892,6 +4085,42 @@ namespace EfDatabase.Inventarization.Base
             Property(x => x.IsVisible).HasColumnName(@"IsVisible").HasColumnType("bit").IsOptional();
 
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+        }
+    }
+
+
+    // IsProcessComplete
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class IsProcessCompleteConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<IsProcessComplete>
+    {
+        public IsProcessCompleteConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public IsProcessCompleteConfiguration(string schema)
+        {
+
+            ToTable("IsProcessComplete", schema);
+
+            HasKey(x => x.Id);
+
+
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.NameProcess).HasColumnName(@"NameProcess").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.IsComplete).HasColumnName(@"IsComplete").HasColumnType("bit").IsOptional();
+
+            Property(x => x.DataStart).HasColumnName(@"DataStart").HasColumnType("smalldatetime").IsOptional();
+
+            Property(x => x.DataFinish).HasColumnName(@"DataFinish").HasColumnType("smalldatetime").IsOptional();
 
 
 
@@ -4303,6 +4532,54 @@ namespace EfDatabase.Inventarization.Base
 
 
             HasOptional(a => a.User).WithMany(b => b.Otdels).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Users_Otdel
+
+
+        }
+    }
+
+
+    // OtdelPadeg
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class OtdelPadegConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<OtdelPadeg>
+    {
+        public OtdelPadegConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public OtdelPadegConfiguration(string schema)
+        {
+
+            ToTable("OtdelPadeg", schema);
+
+            HasKey(x => x.IdOtdel);
+
+
+
+            Property(x => x.IdOtdel).HasColumnName(@"IdOtdel").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.InameOtdel).HasColumnName(@"InameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.RnameOtdel).HasColumnName(@"RnameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.DnameOtdel).HasColumnName(@"DnameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.VnameOtdel).HasColumnName(@"VnameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.TnameOtdel).HasColumnName(@"TnameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.PnameOtdel).HasColumnName(@"PnameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+            // Foreign keys
+
+
+            HasRequired(a => a.Otdel).WithOptional(b => b.OtdelPadeg).WillCascadeOnDelete(false); // FK_Otdel_OtdelPadeg
 
 
         }

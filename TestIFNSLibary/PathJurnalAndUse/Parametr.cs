@@ -26,6 +26,8 @@ namespace TestIFNSLibary.PathJurnalAndUse
             ReportMassTemplate = ConfigurationManager.AppSettings["ReportMassTemplate"];
             Inventarization = ConfigurationManager.ConnectionStrings["Inventarization"].ConnectionString;
             ConnectImns51 = ConfigurationManager.AppSettings["ConnectImns51"];
+            PathDomain = ConfigurationManager.AppSettings["PathDomain"];
+            FindWorkStations = ConfigurationManager.AppSettings["FindWorkStations"];
         }
 
         public void SettingEdit(string testDb, string workDb, int hours, int minutes)
@@ -95,5 +97,13 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// Строка соединения с IMNS51 Кадры
         /// </summary>
         public string ConnectImns51 { get; set; }
+        /// <summary>
+        /// Путь к домену
+        /// </summary>
+        public string PathDomain { get; set; }
+        /// <summary>
+        /// Поиск рабочих станций
+        /// </summary>
+        public string FindWorkStations { get; set; }
     }
 }

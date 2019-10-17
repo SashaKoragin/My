@@ -66,6 +66,7 @@
     <Compile Include="Documents\Template\ITemplate.cs" />
     <Compile Include="Documents\Template\TelephoneHelp.cs" />
     <Compile Include="Documents\Template\TemplateOutBdk.cs" />
+    <Compile Include="Documents\Template\TemplateUserRule.cs" />
     <Compile Include="DonloadFile\Angular\AngularRestEf.cs" />
     <Compile Include="GenerateDocument\GenerateWord\GenerateDocument.cs" />
     <Compile Include="ProgrammView\FullDocument\DocumentsFull.cs" />
@@ -108,7 +109,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

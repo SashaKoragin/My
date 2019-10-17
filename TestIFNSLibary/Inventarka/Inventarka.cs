@@ -27,13 +27,14 @@ using NameSysBlock = EfDatabase.Inventarization.Base.NameSysBlock;
 using Otdel = EfDatabase.Inventarization.Base.Otdel;
 using ProizvoditelBlockPower = EfDatabase.Inventarization.Base.ProizvoditelBlockPower;
 using Supply = EfDatabase.Inventarization.Base.Supply;
+using User = EfDatabase.Inventarization.Base.User;
 
 
 namespace TestIFNSLibary.Inventarka
 {
-   public class Inventarka : IInventarka
-    {
-        readonly Parametr _parametrService = new Parametr();
+   public class Inventarka  : IInventarka
+   {
+       private readonly Parametr _parametrService = new Parametr();
         /// <summary>
         /// Запрос всех отделов
         /// </summary>
@@ -466,6 +467,24 @@ namespace TestIFNSLibary.Inventarka
             }
             return "Возникла не предвиденная ошибка смотри Log.txt";
         }
+       /// <summary>
+       /// Актулизация Ip Адресов в БД
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> ActualComputerIp()
+       {
+            try
+            {
+                SelectSql select = new SelectSql();
+                return await Task.Factory.StartNew(() => select.ActualIp());
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+                return e.Message;
+            }
+        }
+
         /// <summary>
         /// Выгрузка телефонов
         /// </summary>

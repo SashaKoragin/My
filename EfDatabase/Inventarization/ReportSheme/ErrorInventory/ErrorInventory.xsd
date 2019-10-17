@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="InventarNotHostName">
+		<xs:annotation>
+			<xs:documentation>Имена не совпадают с именами</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdSysBlock" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун системного блока</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Invent" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Три знака инвентарки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Три знака имени</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="Errors" type="FullError">
 		<xs:annotation>
 			<xs:documentation>Ошибки по инвенторизации</xs:documentation>
@@ -15,6 +52,11 @@
 			<xs:element ref="ErrorUSerNotActul" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="AnaliticaSysBlokAndMonitors" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="UsersNotTechnical" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="IsProcessComplete" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ComputerIpAdressSynhronization" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="InventarNotHostName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="DoubleComputersName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="SynhronizationIp" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="ErrorUSerNotActul">
@@ -137,6 +179,11 @@
 			<xs:attribute name="IpAdress" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Ip Адресс</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -296,6 +343,164 @@
 			<xs:attribute name="NameOtdel" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IsProcessComplete">
+		<xs:annotation>
+			<xs:documentation>Аналитика запущенных процосов</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун процесса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameProcess" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование процесса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsComplete" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Статус</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DataStart" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата запуска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DataFinish" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата завершения</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ComputerIpAdressSynhronization">
+		<xs:annotation>
+			<xs:documentation>Данные полученные из домена</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Уникальный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameHost" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера домена</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Адресс</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StatusIp" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Статус</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MacAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Мак. Адресс</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UserName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateCreate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата записи</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DoubleComputersName">
+		<xs:annotation>
+			<xs:documentation>Ошибки дубли</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdSysBlock" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Уникальный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNumSysBlok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SynhronizationIp">
+		<xs:annotation>
+			<xs:documentation>Синхронизация IP Адрессов</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Task" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Описание задачи</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdSysBlock" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун системного блока</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdUser" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ActualIpAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Адрес в AD</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdressOld" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Старый Ip Адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdressNew" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Новый Ip Адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Dates" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата записи</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

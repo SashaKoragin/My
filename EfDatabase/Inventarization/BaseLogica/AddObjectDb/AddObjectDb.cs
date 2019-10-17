@@ -937,7 +937,41 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             }
             return new ModelReturn("При обновлении/добавлении данных 'CopySave для МФУ' по : " + nameCopySaveAddadnModified.IdCopySave + " произошла ошибка смотри log.txt");
         }
+        /// <summary>
+        /// Сигнал завершения процесса задачи
+        /// </summary>
+        /// <param name="idprocess">Ун процесса</param>
+        /// <param name="iscomplete">Завершен ли процесс или начат</param>
+        public void IsProcessComplete(int idprocess, bool iscomplete)
+        {
+            var process = Inventarization.IsProcessCompletes.FirstOrDefault(x => x.Id == idprocess);
+            if (process != null)
+            {
+                process.IsComplete = iscomplete;
+                process.DataStart = iscomplete ? process.DataStart : DateTime.Now;
+                process.DataFinish = iscomplete ? DateTime.Now : (DateTime?) null;
+            }
+               Inventarization.Entry(process).State = EntityState.Modified;
+               Inventarization.SaveChanges();
+        }
 
+        /// <summary>
+        /// Очистка всех записей и сброса индекса перед добавлением 
+        /// </summary>
+        public void ClearsHostSynhronization()
+        {
+            Inventarization.ComputerIpAdressSynhronizations.RemoveRange(Inventarization.ComputerIpAdressSynhronizations);
+            Inventarization.Database.ExecuteSqlCommand("DBCC CHECKIDENT ([ComputerIpAdressSynhronization], RESEED, 0)");
+        }
+        /// <summary>
+        /// Добавление записей в таблицу
+        /// </summary>
+        /// <param name="host">Host</param>
+        public void AddHostSynhronization(ComputerIpAdressSynhronization host)
+        {
+            Inventarization.ComputerIpAdressSynhronizations.Add(host);
+            Inventarization.SaveChanges();
+        }
 
 
         /// <summary>

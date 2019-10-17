@@ -3,6 +3,7 @@ using SqlLibaryIfns.ExcelReport.Report;
 using System.Threading.Tasks;
 using System.Timers;
 using LibaryXMLAutoModelServiceWcfCommand.TestIfnsService;
+using SqlLibaryIfns.PingIp;
 using SqlLibaryIfns.SqlSelect.ModelSqlFullService;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
 using TestIFNSLibary.PathJurnalAndUse;
@@ -34,7 +35,7 @@ namespace TestIFNSLibary.TimeEvent
                 Enabled = true,
                 AutoReset = true
             };
-            selectsqlreport.Elapsed += ReportSql;
+            selectsqlreport.Elapsed += FindHostNameIp;
             selectsqlreport.Start();
         }
         /// <summary>
@@ -65,13 +66,10 @@ namespace TestIFNSLibary.TimeEvent
             });
         }
         /// <summary>
-        /// Автоматическая задача сбора данных по Требованиям по которым не выставленны решения
-        /// Задача Sql и Excel 
-        /// Доделала Dispose метод
+        /// Автоматическая задача сбора Ip Адресов пляшем от домена поиск и ping
+        ///  Задача поиска компьютеров и добавление их в БД
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public async void ReportSql(object sender, EventArgs e)
+        public async void FindHostNameIp(object sender, EventArgs e)
         {
             await Task.Factory.StartNew(() =>
             {
@@ -81,10 +79,14 @@ namespace TestIFNSLibary.TimeEvent
                     DateTime date = DateTime.Now;
                     if (date.Hour == parametr.Hours && date.Minute == parametr.Minutes)
                     {
-                        using (var xlsx = new ReportExcel())
+                        try
                         {
-                            var sqlconnect = new SqlConnectionType();
-                            xlsx.ReportSave(parametr.Report, "Требования", "Требования", sqlconnect.ReportQbe(parametr.ConnectionString, ((ServiceWcf)sqlconnect.SelectFullParametrSqlReader(parametr.ConectWork, ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf), ModelSqlFullService.ParamCommand("2"))).ServiceWcfCommand.Command));
+                          PingIp ping = new PingIp();
+                          ping.FindIpHost(parametr.PathDomain,parametr.FindWorkStations);
+                        }
+                        catch (Exception exception)
+                        {
+                            Loggers.Log4NetLogger.Error(exception);
                         }
                     }
                 }

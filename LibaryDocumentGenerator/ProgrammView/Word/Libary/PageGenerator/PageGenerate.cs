@@ -88,5 +88,19 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
             sectionProperties.Append(pageMargin);
             body.Append(sectionProperties);
         }
+
+        /// <summary>
+        /// Настройка документа в горизонтальную ориентацию
+        /// </summary>
+        /// <param name="body">Тело документа для настройки</param>
+        /// <param name="margin"></param>
+        public void ParamDocumentEditMargin(ref Body body, PageMargin margin)
+        {
+            SectionProperties sectionProperties = new SectionProperties();
+            PageSize pageSize = new PageSize() { Width = 16800U, Height = 11900U, Orient = PageOrientationValues.Landscape };
+            sectionProperties.Append(pageSize);
+            sectionProperties.Append(margin);
+            body.Append(sectionProperties);
+        }
     }
 }

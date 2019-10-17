@@ -7,7 +7,9 @@ using EfDatabase.Inventarization.BaseLogica.AddObjectDb;
 using EfDatabase.Inventarization.ReportSheme.ReturnModelError;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
+using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using SqlLibaryIfns.Inventarization.ModelParametr;
+using User = EfDatabase.Inventarization.Base.User;
 
 namespace TestIFNSLibary.Inventarka
 {
@@ -386,6 +388,13 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ActualUsers", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> ActualUsers();
         /// <summary>
+        /// Актулизация пользователей с БД кадрами
+        /// http://localhost:8182/Inventarka/ActualComputerIp
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ActualComputerIp", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> ActualComputerIp();
+        /// <summary>
         /// Добавление или обновление Телефона
         /// http://localhost:8182/Inventarka/AddAndEditTelephone
         /// </summary>
@@ -403,10 +412,6 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditBlockPower", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn AddAndEditBlockPower(EfDatabase.Inventarization.Base.BlockPower blockpower);
-
-
-
-
         /// <summary>
         /// Добавление или обновление наименование системного блока
         /// http://localhost:8182/Inventarka/AddAndEditNameSysBlock
@@ -517,5 +522,6 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameCopySave", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn AddAndEditNameCopySave(EfDatabase.Inventarization.Base.CopySave nameCopySave);
 
-    }
+
+   }
 }

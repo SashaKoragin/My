@@ -89,7 +89,7 @@ namespace LibaryDocumentGenerator.Barcode
         {
             string[] pngPaths;
             using (Stream strfile = new MemoryStream(bytestream))
-              {
+            {
                 TiffBitmapDecoder tifDecoder = new TiffBitmapDecoder(strfile,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.Default);
                 pngPaths = new string[tifDecoder.Frames.Count];
                 for (int i = 0; i < tifDecoder.Frames.Count; i++)

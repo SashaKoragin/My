@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.IO;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+using System.Runtime.InteropServices;
 using EfDatabase.Inventarization.Base;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
-using LibaryXMLAuto.ModelXmlSql.ConvertModel.DesirializationSql;
-using LibaryXMLAutoReports.ReportsBdk;
+using LibaryXMLAutoModelXmlAuto.MigrationReport;
+using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
+using Newtonsoft.Json.Linq;
 
 
 namespace EfDatabase.Inventarization.BaseLogica.Select
@@ -46,6 +45,69 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
             }
 
         }
+        /// <summary>
+        /// Запрос на лиц кто согласовывает надо добавлять в xml
+        /// </summary>
+        /// <param name="template">Шаблон возврата</param>
+       public ModelSelect SendersUsers(ref RuleTemplate template)
+       {
+           try
+           {
+                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(13) };
+                template.SenderUsers.Security = Inventarization.Database.SqlQuery<Security>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], 3),
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел безопасности"),
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).ToList()[0];
+                template.SenderUsers.ItOtdel = Inventarization.Database.SqlQuery<ItOtdel>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], 4),
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел информатизации"),
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).ToList()[0];
+                return model; 
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
+        /// <summary>
+        /// Вытягивание данных на отдел и пользователей
+        /// </summary>
+        /// <param name="template">Шаблон раскладки</param>
+        /// <param name="userRule">Спаршенные данные</param>
+        /// <param name="sqlselect">Запрос к БД для выборки данных</param>
+       public void UserRuleModel(ref RuleTemplate template, UserRules userRule, ModelSelect sqlselect)
+        {
+            var groupelement = userRule.User.GroupBy(x => new {x.Dates, x.Number,x.Otdel}).Select(x => new {x.Key.Number, x.Key.Dates,x.Key.Otdel}).ToList();
+            int i = 0;
+            foreach (var gr in groupelement)
+            {
+                if (template.Otdel == null)
+                {
+                    template.Otdel = new LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel[groupelement.Count];
+                }
+                template.Otdel[i] = Inventarization.Database.SqlQuery<LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel>(sqlselect.LogicaSelect.SelectUser, new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[0], 1),
+                          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[1], gr.Otdel.Replace("№ ","№")),
+                          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[2], gr.Number)).ToList()[0];
+                template.Otdel[i].Dates = gr.Dates;
+                var user = userRule.User.Where(userrule =>(userrule.Dates == gr.Dates) && (userrule.Number == gr.Number) && (userrule.Otdel == gr.Otdel)).ToList();
+                int j = 0;
+                foreach (var userule in user)
+                {
+                    if (template.Otdel[i].Users == null)
+                    {
+                        template.Otdel[i].Users = new LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Users[user.Count];
+                    }
+                    template.Otdel[i].Users[j] = Inventarization.Database.SqlQuery<LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Users>(sqlselect.LogicaSelect.SelectUser, new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[0], 2),
+                          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[1], userule.SysName.Split('@')[0]),
+                          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).ToList()[0];
+                    template.Otdel[i].Users[j].RuleTemplate = userule.Rule.Select(elem=> $"{elem.Types}: {elem.Name}").Aggregate(
+                        (element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : ", ") + next);
+                    j++;
+                }
+                i++;
+            }
+
+        }
+
 
         /// <summary>
         /// Модель отчета из БД которая отправится в Open Xml
@@ -102,8 +164,25 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
                return "Во время актулизации произошла ошибка смотрите Log.txt";
            }
        }
-
-
+        /// <summary>
+        /// Актулизация Ip Адресов в БД
+        /// </summary>
+        /// <returns></returns>
+       public string ActualIp()
+       {
+            try
+            {
+                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(19) };
+                var resultcommand = new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0],DBNull.Value) {Direction = ParameterDirection.Output, Size = 8000};
+                Inventarization.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser,resultcommand);
+                return (string)resultcommand.Value;
+            }
+            catch (Exception exception)
+            {
+                Loggers.Log4NetLogger.Error(exception);
+                return exception.Message;
+            }
+        }
 
 
         /// <summary>

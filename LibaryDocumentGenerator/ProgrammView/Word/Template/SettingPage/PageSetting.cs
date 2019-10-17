@@ -53,6 +53,17 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage
             page.DocumentVerticalMarginStandart(ref body);
             return body;
         }
-      
+        /// <summary>
+        /// Параметры документа горизонтальные
+        /// </summary>
+        /// <returns></returns>
+        public Body ParametrPageHorizontEditMargin(PageMargin margin)
+        {
+            Body body = new Body();
+            var page = new PageGenerate();
+            page.ParamDocumentEditMargin(ref body,margin);
+            return body;
+
+        }
     }
 }
