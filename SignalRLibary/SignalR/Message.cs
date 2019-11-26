@@ -1,11 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Owin;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.Owin.Cors;
 using System.Linq;
-using System.Security.Claims;
 
 namespace SignalRLibary.SignalR
 {
@@ -15,6 +15,7 @@ namespace SignalRLibary.SignalR
         {
             try
             {
+                
                 app.Map("/signalr", map =>
                 {
                     map.UseCors(CorsOptions.AllowAll);
@@ -23,14 +24,14 @@ namespace SignalRLibary.SignalR
                         EnableDetailedErrors = true
                     };
                     map.RunSignalR(hubConfiguration);
+                    
                 });
-              //  GlobalHost.HubPipeline.RequireAuthentication();
+                //  GlobalHost.HubPipeline.RequireAuthentication();
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-
         }
     }
 
@@ -134,5 +135,6 @@ namespace SignalRLibary.SignalR
         /// </summary>
         public string Message;
     }
+
 }
 

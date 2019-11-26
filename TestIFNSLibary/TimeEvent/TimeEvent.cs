@@ -21,49 +21,14 @@ namespace TestIFNSLibary.TimeEvent
         /// </summary>
         public TimeEvent()
         {
-            var timerstart = new Timer
+           var selectdomaincomputers = new Timer()
             {
                 Interval = 60000,
                 Enabled = true,
                 AutoReset = true
             };
-            timerstart.Elapsed += Bakcup;
-            timerstart.Start();
-           var selectsqlreport = new Timer()
-            {
-                Interval = 60000,
-                Enabled = true,
-                AutoReset = true
-            };
-            selectsqlreport.Elapsed += FindHostNameIp;
-            selectsqlreport.Start();
-        }
-        /// <summary>
-        /// Автоматическая задача резервного копирования 2NDFL
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void Bakcup(object sender, EventArgs e)
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    Parametr parametr = new Parametr();
-                    DateTime date = DateTime.Now;
-                    if (date.Hour == parametr.Hours && date.Minute == parametr.Minutes)
-                    {
-                        using (BakcupingDb bakcuping = new BakcupingDb())
-                        {
-                            bakcuping.Backup(parametr.WorkDB, parametr.TestDB, parametr.PathJurnal);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Loggers.Log4NetLogger.Error(ex);
-                }
-            });
+            selectdomaincomputers.Elapsed += FindHostNameIp;
+            selectdomaincomputers.Start();
         }
         /// <summary>
         /// Автоматическая задача сбора Ip Адресов пляшем от домена поиск и ping

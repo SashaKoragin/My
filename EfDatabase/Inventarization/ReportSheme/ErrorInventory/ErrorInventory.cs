@@ -28,6 +28,8 @@ namespace EfDatabaseErrorInventory {
         
         private bool idSysBlockFieldSpecified;
         
+        private string nameUsersField;
+        
         private string serNumField;
         
         private string nameComputerField;
@@ -37,6 +39,10 @@ namespace EfDatabaseErrorInventory {
         private string inventField;
         
         private string nameField;
+        
+        private string comentField;
+        
+        private string nameStatusField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -57,6 +63,17 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idSysBlockFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameUsers {
+            get {
+                return this.nameUsersField;
+            }
+            set {
+                this.nameUsersField = value;
             }
         }
         
@@ -114,6 +131,28 @@ namespace EfDatabaseErrorInventory {
                 this.nameField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameStatus {
+            get {
+                return this.nameStatusField;
+            }
+            set {
+                this.nameStatusField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -141,6 +180,12 @@ namespace EfDatabaseErrorInventory {
         private DoubleComputersName[] doubleComputersNameField;
         
         private SynhronizationIp[] synhronizationIpField;
+        
+        private NameHostIpAdress[] nameHostIpAdressField;
+        
+        private HistoryLog[] historyLogField;
+        
+        private TecnicalOtdel[] tecnicalOtdelField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Error")]
@@ -238,6 +283,39 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.synhronizationIpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("NameHostIpAdress")]
+        public NameHostIpAdress[] NameHostIpAdress {
+            get {
+                return this.nameHostIpAdressField;
+            }
+            set {
+                this.nameHostIpAdressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("HistoryLog")]
+        public HistoryLog[] HistoryLog {
+            get {
+                return this.historyLogField;
+            }
+            set {
+                this.historyLogField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("TecnicalOtdel")]
+        public TecnicalOtdel[] TecnicalOtdel {
+            get {
+                return this.tecnicalOtdelField;
+            }
+            set {
+                this.tecnicalOtdelField = value;
             }
         }
     }
@@ -1501,6 +1579,413 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.datesFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class NameHostIpAdress {
+        
+        private int idSysBlockField;
+        
+        private bool idSysBlockFieldSpecified;
+        
+        private string userNameField;
+        
+        private string inventarNumSysBlokField;
+        
+        private string nameComputerField;
+        
+        private string ipAdressField;
+        
+        private string nameHostField;
+        
+        private string ipAdresDomainField;
+        
+        private string comentField;
+        
+        private string nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int IdSysBlock {
+            get {
+                return this.idSysBlockField;
+            }
+            set {
+                this.idSysBlockField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IdSysBlockSpecified {
+            get {
+                return this.idSysBlockFieldSpecified;
+            }
+            set {
+                this.idSysBlockFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string UserName {
+            get {
+                return this.userNameField;
+            }
+            set {
+                this.userNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string InventarNumSysBlok {
+            get {
+                return this.inventarNumSysBlokField;
+            }
+            set {
+                this.inventarNumSysBlokField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameComputer {
+            get {
+                return this.nameComputerField;
+            }
+            set {
+                this.nameComputerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IpAdress {
+            get {
+                return this.ipAdressField;
+            }
+            set {
+                this.ipAdressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameHost {
+            get {
+                return this.nameHostField;
+            }
+            set {
+                this.nameHostField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IpAdresDomain {
+            get {
+                return this.ipAdresDomainField;
+            }
+            set {
+                this.ipAdresDomainField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class HistoryLog {
+        
+        private int idModelField;
+        
+        private bool idModelFieldSpecified;
+        
+        private string nameField;
+        
+        private string nameModelClassField;
+        
+        private string nameModelField;
+        
+        private string oldModelColumsField;
+        
+        private string newModelColumsField;
+        
+        private string zavNumberField;
+        
+        private string inventarNumberField;
+        
+        private System.DateTime dataCreateField;
+        
+        private bool dataCreateFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int IdModel {
+            get {
+                return this.idModelField;
+            }
+            set {
+                this.idModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IdModelSpecified {
+            get {
+                return this.idModelFieldSpecified;
+            }
+            set {
+                this.idModelFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameModelClass {
+            get {
+                return this.nameModelClassField;
+            }
+            set {
+                this.nameModelClassField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameModel {
+            get {
+                return this.nameModelField;
+            }
+            set {
+                this.nameModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string OldModelColums {
+            get {
+                return this.oldModelColumsField;
+            }
+            set {
+                this.oldModelColumsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NewModelColums {
+            get {
+                return this.newModelColumsField;
+            }
+            set {
+                this.newModelColumsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ZavNumber {
+            get {
+                return this.zavNumberField;
+            }
+            set {
+                this.zavNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string InventarNumber {
+            get {
+                return this.inventarNumberField;
+            }
+            set {
+                this.inventarNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DataCreate {
+            get {
+                return this.dataCreateField;
+            }
+            set {
+                this.dataCreateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataCreateSpecified {
+            get {
+                return this.dataCreateFieldSpecified;
+            }
+            set {
+                this.dataCreateFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class TecnicalOtdel {
+        
+        private string nameOtdelField;
+        
+        private string nameField;
+        
+        private string nameClassField;
+        
+        private string nameComputerField;
+        
+        private string serNumField;
+        
+        private string inventarNumSysBlokField;
+        
+        private string numberKabinetField;
+        
+        private string comentField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameOtdel {
+            get {
+                return this.nameOtdelField;
+            }
+            set {
+                this.nameOtdelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameClass {
+            get {
+                return this.nameClassField;
+            }
+            set {
+                this.nameClassField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameComputer {
+            get {
+                return this.nameComputerField;
+            }
+            set {
+                this.nameComputerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNum {
+            get {
+                return this.serNumField;
+            }
+            set {
+                this.serNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string InventarNumSysBlok {
+            get {
+                return this.inventarNumSysBlokField;
+            }
+            set {
+                this.inventarNumSysBlokField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NumberKabinet {
+            get {
+                return this.numberKabinetField;
+            }
+            set {
+                this.numberKabinetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
             }
         }
     }

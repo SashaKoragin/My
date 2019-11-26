@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
 {
     [DataContract]
-   public class ModelReturn
+   public class ModelReturn<T> where T:class 
     {
-        public ModelReturn(string message,int index = 0, string guid = null )
+        public ModelReturn(string message, T model = null, int index = 0, string guid = null )
         {
             Guid = guid;
             Index = index;
             Message = message;
+            Model = model;
         }
         [DataMember]
-        private string Guid { get; set; }
+        public string Guid { get; set; }
 
         [DataMember]
-        private int Index { get; set; }
+        public int Index { get; set; }
 
         [DataMember]
-        private string Message { get; set; }
+        public string Message { get; set; }
+
+        [DataMember]
+        public T Model { get; set;}
     }
 }

@@ -73,6 +73,8 @@ namespace EfDatabaseParametrsModel {
         
         private Telephon telephonField;
         
+        private Swithe[] switheField;
+        
         private int idUserField;
         
         private bool idUserFieldSpecified;
@@ -152,6 +154,17 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.telephonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Swithe")]
+        public Swithe[] Swithe {
+            get {
+                return this.switheField;
+            }
+            set {
+                this.switheField = value;
             }
         }
         
@@ -319,6 +332,8 @@ namespace EfDatabaseParametrsModel {
         
         private Kabinet kabinetField;
         
+        private CopySave copySaveField;
+        
         private FullProizvoditel fullProizvoditelField;
         
         private FullModel fullModelField;
@@ -336,6 +351,16 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.kabinetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public CopySave CopySave {
+            get {
+                return this.copySaveField;
+            }
+            set {
+                this.copySaveField = value;
             }
         }
         
@@ -389,6 +414,55 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.comentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class CopySave {
+        
+        private string nameCopySaveField;
+        
+        private string serNumField;
+        
+        private string inventarNumField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameCopySave {
+            get {
+                return this.nameCopySaveField;
+            }
+            set {
+                this.nameCopySaveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNum {
+            get {
+                return this.serNumField;
+            }
+            set {
+                this.serNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string InventarNum {
+            get {
+                return this.inventarNumField;
+            }
+            set {
+                this.inventarNumField = value;
             }
         }
     }
@@ -995,6 +1069,128 @@ namespace EfDatabaseParametrsModel {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class Swithe {
+        
+        private Kabinet kabinetField;
+        
+        private ModelSwithe modelSwitheField;
+        
+        private string serviceNumField;
+        
+        private string serNumField;
+        
+        private string inventarNumField;
+        
+        private string comentField;
+        
+        /// <remarks/>
+        public Kabinet Kabinet {
+            get {
+                return this.kabinetField;
+            }
+            set {
+                this.kabinetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ModelSwithe ModelSwithe {
+            get {
+                return this.modelSwitheField;
+            }
+            set {
+                this.modelSwitheField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ServiceNum {
+            get {
+                return this.serviceNumField;
+            }
+            set {
+                this.serviceNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNum {
+            get {
+                return this.serNumField;
+            }
+            set {
+                this.serNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string InventarNum {
+            get {
+                return this.inventarNumField;
+            }
+            set {
+                this.inventarNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class ModelSwithe {
+        
+        private string nameModelField;
+        
+        private string countPortField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameModel {
+            get {
+                return this.nameModelField;
+            }
+            set {
+                this.nameModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string CountPort {
+            get {
+                return this.countPortField;
+            }
+            set {
+                this.countPortField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Otdel {
         
         private Users[] usersField;
@@ -1033,55 +1229,6 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.idUserField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.81.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class CopySave {
-        
-        private string nameCopySaveField;
-        
-        private string serNumField;
-        
-        private string inventarNumField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameCopySave {
-            get {
-                return this.nameCopySaveField;
-            }
-            set {
-                this.nameCopySaveField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SerNum {
-            get {
-                return this.serNumField;
-            }
-            set {
-                this.serNumField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string InventarNum {
-            get {
-                return this.inventarNumField;
-            }
-            set {
-                this.inventarNumField = value;
             }
         }
     }

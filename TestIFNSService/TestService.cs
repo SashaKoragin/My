@@ -1,12 +1,11 @@
 ﻿using System.ServiceModel;
-using System.ServiceModel.Security;
 using System.ServiceModel.Web;
 using System.ServiceProcess;
 using Microsoft.Owin;
 using Microsoft.Owin.Hosting;
 using TestIFNSLibary.Service;
 using SignalRLibary.SignalR;
-using static System.ServiceModel.Security.UserNamePasswordValidationMode;
+
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace TestIFNSService

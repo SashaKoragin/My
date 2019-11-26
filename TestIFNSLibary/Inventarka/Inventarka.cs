@@ -74,77 +74,110 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.ActualsUsersKladr());
         }
-
-
         /// <summary>
         /// Добавление или обновление пользователя
         /// </summary>
         /// <param name="user">Пользователь</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditUser(User user)
+        public ModelReturn<User> AddAndEditUser(User user, string userIdEdit)
         {
+
             AddObjectDb add = new AddObjectDb();
-           return add.AddAndEditUser(user);
+            var model = add.AddAndEditUser(user,SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeUser(model.Model); }
+            return model;
         }
         /// <summary>
         /// Добавление или обновление принтера
         /// </summary>
         /// <param name="printer">Принтер</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditPrinter(EfDatabase.Inventarization.Base.Printer printer)
+        public ModelReturn<EfDatabase.Inventarization.Base.Printer> AddAndEditPrinter(EfDatabase.Inventarization.Base.Printer printer, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditPrinter(printer);
+            var model = add.AddAndEditPrinter(printer, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribePrinter(model.Model); }
+            return model;
         }
+        /// <summary>
+        /// Добавление или обновление Коммутаторов
+        /// </summary>
+        /// <param name="swith">Коммутатор</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
+        /// <returns></returns>
+        public ModelReturn<EfDatabase.Inventarization.Base.Swithe> AddAndEditSwith(EfDatabase.Inventarization.Base.Swithe swith, string userIdEdit)
+       {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditSwiths(swith, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSwithe(model.Model); }
+            return model;
+        }
+
         /// <summary>
         /// Добавление или обновление принтера
         /// </summary>
-        /// <param name="scaner">Принтер</param>
+        /// <param name="scaner">Сканер</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditScaner(EfDatabase.Inventarization.Base.ScanerAndCamer scaner)
+        public ModelReturn<EfDatabase.Inventarization.Base.ScanerAndCamer> AddAndEditScaner(EfDatabase.Inventarization.Base.ScanerAndCamer scaner, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditScaner(scaner);
+            var model = add.AddAndEditScaner(scaner, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeScanerAndCamer(model.Model); }
+            return model;
         }
         /// <summary>
         /// Добавление или обновление скнера
         /// </summary>
-        /// <param name="mfu"></param>
+        /// <param name="mfu">МФУ</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditMfu(EfDatabase.Inventarization.Base.Mfu mfu)
+        public ModelReturn<EfDatabase.Inventarization.Base.Mfu> AddAndEditMfu(EfDatabase.Inventarization.Base.Mfu mfu, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditMfu(mfu);
+            var model = add.AddAndEditMfu(mfu, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMfu(model.Model); }
+            return model;
         }
         /// <summary>
         /// Добавление или обновление Системного блока
         /// </summary>
-        /// <param name="sysblock"></param>
+        /// <param name="sysblock">Системный блок</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditSysBlok(EfDatabase.Inventarization.Base.SysBlock sysblock)
+        public ModelReturn<EfDatabase.Inventarization.Base.SysBlock> AddAndEditSysBlok(EfDatabase.Inventarization.Base.SysBlock sysblock, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditSysBlok(sysblock);
+            var model = add.AddAndEditSysBlok(sysblock, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSysBlok(model.Model); }
+            return model;
         }
         /// <summary>
         /// Добавление или редактирование отдела
         /// </summary>
         /// <param name="otdel">отдел</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditOtdel(Otdel otdel)
+        public ModelReturn<Otdel> AddAndEditOtdel(Otdel otdel)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditOtdel(otdel);
+            var model = add.AddAndEditOtdel(otdel);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOtdel(model.Model); }
+            return model;
         }
         /// <summary>
         /// Добавление или обновление Монитора
         /// </summary>
         /// <param name="monitor"></param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditMonitor(Monitor monitor)
+        public ModelReturn<Monitor> AddAndEditMonitor(Monitor monitor, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditMonitors(monitor);
+            var model = add.AddAndEditMonitors(monitor, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMonitor(model.Model); }
+            return model;
         }
         /// <summary>
         /// Запрос всех пользователей
@@ -175,6 +208,26 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Printers());
         }
+        /// <summary>
+        /// Выгрузка всех моделей коммутаторов
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllModelSwithes()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.ModelSwitch());
+        }
+
+        /// <summary>
+        /// Загрузка всех комутаторов
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllSwithes()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.Swithes());
+        }
+
         /// <summary>
         /// Запрос на все сканеры
         /// </summary>
@@ -294,15 +347,23 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         public async Task<Stream> GenerateTelephoneHelper(ModelSelect telephonehelper)
         {
+            try
+            {
             SelectSql select = new SelectSql();
             var selectfull = new SelectFull();
             TelephoneHelp invoice = new TelephoneHelp();
             return await Task.Factory.StartNew(() =>
-            {
-                select.SqlSelect(telephonehelper);
+            { 
+                telephonehelper.LogicaSelect = select.SqlSelectModel(telephonehelper.ParametrsSelect.Id);
                 invoice.CreateDocum(_parametrService.Report, (EfDatabaseTelephoneHelp.TelephoneHelp)selectfull.GenerateShemeXsdSql<string,string>(_parametrService.Inventarization, telephonehelper.LogicaSelect), null);
                 return invoice.FileArray();
             });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
         }
         /// <summary>
         /// Генерация книги учета материальных ценностей
@@ -325,7 +386,7 @@ namespace TestIFNSLibary.Inventarka
                            ParametrsSelect = new ParametrsSelect {Id = 12},
                            LogicaSelect = new LogicaSelect() {Id = 12}
                          };
-                    select.SqlSelect(modelSelect);
+                    modelSelect.LogicaSelect = select.SqlSelectModel(modelSelect.ParametrsSelect.Id);
                     Dictionary<string, string> parametr = new Dictionary<string, string>
                     {
                         {modelSelect.LogicaSelect.SelectedParametr.Split(',')[0], bookModels.Name},
@@ -382,7 +443,7 @@ namespace TestIFNSLibary.Inventarka
             return null;
         }
 
-        public ModelReturn DeleteDocument(int iddoc)
+        public string DeleteDocument(int iddoc)
         {
                 AddObjectDb delete = new AddObjectDb();
                 return delete.DeleteDocument(iddoc);            
@@ -534,87 +595,115 @@ namespace TestIFNSLibary.Inventarka
         /// Добавление или обновление телефона
         /// </summary>
         /// <param name="telephon">Телефон</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditTelephon(EfDatabase.Inventarization.Base.Telephon telephon)
+        public ModelReturn<EfDatabase.Inventarization.Base.Telephon> AddAndEditTelephon(EfDatabase.Inventarization.Base.Telephon telephon,string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditTelephone(telephon);
+            var model =  add.AddAndEditTelephone(telephon, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if(model.Model != null){ SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTelephone(model.Model);}
+            return model;
         }
         /// <summary>
         /// Добавление или обновление ИБП
         /// </summary>
         /// <param name="blockpower">ИБП</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditBlockPower(EfDatabase.Inventarization.Base.BlockPower blockpower)
+        public ModelReturn<EfDatabase.Inventarization.Base.BlockPower> AddAndEditBlockPower(EfDatabase.Inventarization.Base.BlockPower blockpower, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditPowerBlock(blockpower);
+            var model = add.AddAndEditPowerBlock(blockpower, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeBlockPower(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameSysBlock(NameSysBlock nameSysBlock)
+        public ModelReturn<NameSysBlock> AddAndEditNameSysBlock(NameSysBlock nameSysBlock)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameSysBlock(nameSysBlock);
+            var model = add.AddAndEditNameSysBlock(nameSysBlock);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameSysBlock(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameMonitor(EfDatabase.Inventarization.Base.NameMonitor nameMonitor)
+        public ModelReturn<EfDatabase.Inventarization.Base.NameMonitor> AddAndEditNameMonitor(EfDatabase.Inventarization.Base.NameMonitor nameMonitor)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameMonitor(nameMonitor);
+            var model = add.AddAndEditNameMonitor(nameMonitor);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameMonitor(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameModelBlokPower(ModelBlockPower nameModelBlokPower)
+        public ModelReturn<ModelBlockPower> AddAndEditNameModelBlokPower(ModelBlockPower nameModelBlokPower)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameModelBlokPower(nameModelBlokPower);
+            var model = add.AddAndEditNameModelBlokPower(nameModelBlokPower);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelBlockPower(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameProizvoditelBlockPower(ProizvoditelBlockPower nameProizvoditelBlockPower)
+        public ModelReturn<ProizvoditelBlockPower> AddAndEditNameProizvoditelBlockPower(ProizvoditelBlockPower nameProizvoditelBlockPower)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameProizvoditelBlockPower(nameProizvoditelBlockPower);
+            var model = add.AddAndEditNameProizvoditelBlockPower(nameProizvoditelBlockPower);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelBlockPower(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameSupply(Supply nameSupply)
+        public ModelReturn<Supply> AddAndEditNameSupply(Supply nameSupply)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameSupply(nameSupply);
+            var model = add.AddAndEditNameSupply(nameSupply);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSupply(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameStatus(Statusing nameStatus)
+        public ModelReturn<Statusing> AddAndEditNameStatus(Statusing nameStatus)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameStatus(nameStatus);
+            var model = add.AddAndEditNameStatus(nameStatus);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusing(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameKabinet(Kabinet nameKabinet)
+        public ModelReturn<Kabinet> AddAndEditNameKabinet(Kabinet nameKabinet)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameKabinetr(nameKabinet);
+            var model = add.AddAndEditNameKabinetr(nameKabinet);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeKabinet(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameFullModel(FullModel nameFullModel)
+        public ModelReturn<FullModel> AddAndEditNameFullModel(FullModel nameFullModel)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameFullModel(nameFullModel);
+            var model = add.AddAndEditNameFullModel(nameFullModel);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullModel(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameClassification(Classification nameClassification)
+        public ModelReturn<Classification> AddAndEditNameClassification(Classification nameClassification)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameClassification(nameClassification);
+            var model = add.AddAndEditNameClassification(nameClassification);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeClassification(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameFullProizvoditel(FullProizvoditel nameFullProizvoditel)
+        public ModelReturn<FullProizvoditel> AddAndEditNameFullProizvoditel(FullProizvoditel nameFullProizvoditel)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameFullProizvoditel(nameFullProizvoditel);
+            var model = add.AddAndEditNameFullProizvoditel(nameFullProizvoditel);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullProizvoditel(model.Model); }
+            return model;
         }
 
-        public ModelReturn AddAndEditNameCopySave(CopySave nameCopySave)
+        public ModelReturn<CopySave> AddAndEditNameCopySave(CopySave nameCopySave)
         {
             AddObjectDb add = new AddObjectDb();
-            return add.AddAndEditNameCopySave(nameCopySave);
+            var model = add.AddAndEditNameCopySave(nameCopySave);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeCopySave(model.Model); }
+            return model;
         }
 
         public async Task<string> AllClasification()
@@ -623,6 +712,12 @@ namespace TestIFNSLibary.Inventarka
             return await Task.Factory.StartNew(() => auto.AllClasification());
         }
 
-
+        public ModelReturn<EfDatabase.Inventarization.Base.ModelSwithe> AddAndEditModelSwith(EfDatabase.Inventarization.Base.ModelSwithe modelswith)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditModelSwithe(modelswith);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSwithe(model.Model); }
+            return model;
+        }
     }
 }

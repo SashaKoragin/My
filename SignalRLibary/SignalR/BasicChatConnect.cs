@@ -6,8 +6,7 @@ namespace SignalRLibary.SignalR
     public class BasicChatConnect<T>
     {
 
-
-        private readonly Dictionary<T, HashSet<string>> _connections =
+       private readonly Dictionary<T, HashSet<string>> _connections =
        new Dictionary<T, HashSet<string>>();
 
         public int Count
@@ -49,6 +48,7 @@ namespace SignalRLibary.SignalR
 
         public void Remove(T key, string connectionId)
         {
+
             lock (_connections)
             {
                 HashSet<string> connections;
@@ -67,6 +67,20 @@ namespace SignalRLibary.SignalR
                     }
                 }
             }
+        }
+        /// <summary>
+        /// Получение пользователя по контексту
+        /// </summary>
+        /// <param name="connectionId">Контекст</param>
+        /// <returns></returns>
+        public T GetUsersToContext(string connectionId)
+        {
+            T user ;
+            lock (_connections)
+            {
+                user = _connections.FirstOrDefault(x => x.Value.Contains(connectionId)).Key;
+            }
+            return user;
         }
     }
 }

@@ -102,6 +102,9 @@ namespace EfDatabase.Inventarization.Base
         System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
 
 
+        System.Data.Entity.DbSet<ModelSwithe> ModelSwithes { get; set; } // ModelSwithes
+
+
         System.Data.Entity.DbSet<Monitor> Monitors { get; set; } // Monitors
 
 
@@ -142,6 +145,9 @@ namespace EfDatabase.Inventarization.Base
 
 
         System.Data.Entity.DbSet<Supply> Supplies { get; set; } // Supply
+
+
+        System.Data.Entity.DbSet<Swithe> Swithes { get; set; } // Swithes
 
 
         System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
@@ -241,6 +247,9 @@ namespace EfDatabase.Inventarization.Base
         public System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
 
 
+        public System.Data.Entity.DbSet<ModelSwithe> ModelSwithes { get; set; } // ModelSwithes
+
+
         public System.Data.Entity.DbSet<Monitor> Monitors { get; set; } // Monitors
 
 
@@ -281,6 +290,9 @@ namespace EfDatabase.Inventarization.Base
 
 
         public System.Data.Entity.DbSet<Supply> Supplies { get; set; } // Supply
+
+
+        public System.Data.Entity.DbSet<Swithe> Swithes { get; set; } // Swithes
 
 
         public System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
@@ -398,6 +410,8 @@ namespace EfDatabase.Inventarization.Base
 
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration());
 
+            modelBuilder.Configurations.Add(new ModelSwitheConfiguration());
+
             modelBuilder.Configurations.Add(new MonitorConfiguration());
 
             modelBuilder.Configurations.Add(new NamedocumentConfiguration());
@@ -425,6 +439,8 @@ namespace EfDatabase.Inventarization.Base
             modelBuilder.Configurations.Add(new StatusingConfiguration());
 
             modelBuilder.Configurations.Add(new SupplyConfiguration());
+
+            modelBuilder.Configurations.Add(new SwitheConfiguration());
 
             modelBuilder.Configurations.Add(new SysBlockConfiguration());
 
@@ -474,6 +490,8 @@ namespace EfDatabase.Inventarization.Base
 
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration(schema));
 
+            modelBuilder.Configurations.Add(new ModelSwitheConfiguration(schema));
+
             modelBuilder.Configurations.Add(new MonitorConfiguration(schema));
 
             modelBuilder.Configurations.Add(new NamedocumentConfiguration(schema));
@@ -501,6 +519,8 @@ namespace EfDatabase.Inventarization.Base
             modelBuilder.Configurations.Add(new StatusingConfiguration(schema));
 
             modelBuilder.Configurations.Add(new SupplyConfiguration(schema));
+
+            modelBuilder.Configurations.Add(new SwitheConfiguration(schema));
 
             modelBuilder.Configurations.Add(new SysBlockConfiguration(schema));
 
@@ -1192,34 +1212,20 @@ namespace EfDatabase.Inventarization.Base
     {
 
 
-
-        ///<summary>
-        /// Уникальный номер
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
 
-
-        ///<summary>
-        /// Уникальный номер в реестре истории
-        ///</summary>
         public string IdHistory { get; set; } // IdHistory (length: 64)
 
+        public int? IdModel { get; set; } // IdModel
 
-        ///<summary>
-        /// Ун пользователя внесший изменение
-        ///</summary>
+        public string NameModelClass { get; set; } // NameModelClass (length: 512)
+
         public int? IdUser { get; set; } // IdUser
 
+        public string OldModelColums { get; set; } // OldModelColums (length: 1024)
 
-        ///<summary>
-        /// Описание процесса что делал пользователь
-        ///</summary>
-        public string UserProcess { get; set; } // UserProcess (length: 512)
+        public string NewModelColums { get; set; } // NewModelColums (length: 1024)
 
-
-        ///<summary>
-        /// Дата создания
-        ///</summary>
         public System.DateTime? DataCreate { get; set; } // DataCreate
 
 
@@ -1463,6 +1469,14 @@ namespace EfDatabase.Inventarization.Base
         public virtual System.Collections.Generic.ICollection<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer.FK_ScanerAndCamer_Kabinet
 
         /// <summary>
+        /// Child Swithes where [Swithes].[IdNumberKabinet] point to this entity (FK_Swithes_Kabinet)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Swithe> Swithes { get; set; } // Swithes.FK_Swithes_Kabinet
+
+        /// <summary>
         /// Child SysBlocks where [SysBlock].[IdNumberKabinet] point to this entity (FK_SysBlock_Kabinet)
         /// </summary>
 
@@ -1496,6 +1510,8 @@ namespace EfDatabase.Inventarization.Base
             Printers = new System.Collections.Generic.List<Printer>();
 
             ScanerAndCamers = new System.Collections.Generic.List<ScanerAndCamer>();
+
+            Swithes = new System.Collections.Generic.List<Swithe>();
 
             SysBlocks = new System.Collections.Generic.List<SysBlock>();
 
@@ -1766,6 +1782,53 @@ namespace EfDatabase.Inventarization.Base
 
 
             BlockPowers = new System.Collections.Generic.List<BlockPower>();
+        }
+
+    }
+
+
+
+    // ModelSwithes
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class ModelSwithe
+    {
+
+
+        public int IdModelSwithes { get; set; } // IdModelSwithes (Primary key)
+
+        public string NameModel { get; set; } // NameModel (length: 128)
+
+        public string CountPort { get; set; } // CountPort (length: 128)
+
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+        // Reverse navigation
+
+
+
+        /// <summary>
+        /// Child Swithes where [Swithes].[IdModelSwithes] point to this entity (FK_Swithes_ModelSwithes)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Swithe> Swithes { get; set; } // Swithes.FK_Swithes_ModelSwithes
+
+
+
+
+        public ModelSwithe()
+        {
+
+            DataCreate = System.DateTime.Now;
+
+
+            Swithes = new System.Collections.Generic.List<Swithe>();
         }
 
     }
@@ -2098,6 +2161,18 @@ namespace EfDatabase.Inventarization.Base
         public string NameOrganization { get; set; } // NameOrganization (length: 512)
 
         public string NameFace { get; set; } // NameFace (length: 512)
+
+        public string InameOrganization { get; set; } // InameOrganization (length: 512)
+
+        public string RnameOrganization { get; set; } // RnameOrganization (length: 512)
+
+        public string DnameOrganization { get; set; } // DnameOrganization (length: 512)
+
+        public string VnameOrganization { get; set; } // VnameOrganization (length: 512)
+
+        public string TnameOrganization { get; set; } // TnameOrganization (length: 512)
+
+        public string PnameOrganization { get; set; } // PnameOrganization (length: 512)
 
         public string NameDepartament { get; set; } // NameDepartament (length: 512)
 
@@ -2826,6 +2901,14 @@ namespace EfDatabase.Inventarization.Base
         public virtual System.Collections.Generic.ICollection<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer.FK_Statusing_Scaner
 
         /// <summary>
+        /// Child Swithes where [Swithes].[IdStatus] point to this entity (FK_Statusing_Swithes)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Swithe> Swithes { get; set; } // Swithes.FK_Statusing_Swithes
+
+        /// <summary>
         /// Child SysBlocks where [SysBlock].[IdStatus] point to this entity (FK_Statusing_SysBlock)
         /// </summary>
 
@@ -2859,6 +2942,8 @@ namespace EfDatabase.Inventarization.Base
             Printers = new System.Collections.Generic.List<Printer>();
 
             ScanerAndCamers = new System.Collections.Generic.List<ScanerAndCamer>();
+
+            Swithes = new System.Collections.Generic.List<Swithe>();
 
             SysBlocks = new System.Collections.Generic.List<SysBlock>();
 
@@ -2955,6 +3040,14 @@ namespace EfDatabase.Inventarization.Base
         public virtual System.Collections.Generic.ICollection<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer.FK_ScanerAndCamer_Supply
 
         /// <summary>
+        /// Child Swithes where [Swithes].[IdSupply] point to this entity (FK_Swithes_Supply)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Swithe> Swithes { get; set; } // Swithes.FK_Swithes_Supply
+
+        /// <summary>
         /// Child SysBlocks where [SysBlock].[IdSupply] point to this entity (FK_SysBlock_Supply)
         /// </summary>
 
@@ -2989,10 +3082,136 @@ namespace EfDatabase.Inventarization.Base
 
             ScanerAndCamers = new System.Collections.Generic.List<ScanerAndCamer>();
 
+            Swithes = new System.Collections.Generic.List<Swithe>();
+
             SysBlocks = new System.Collections.Generic.List<SysBlock>();
 
             Telephons = new System.Collections.Generic.List<Telephon>();
         }
+
+    }
+
+
+
+    // Swithes
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class Swithe
+    {
+
+
+        public int IdSwithes { get; set; } // IdSwithes (Primary key)
+
+        public int? IdUser { get; set; } // IdUser
+
+        public int? IdModelSwithes { get; set; } // IdModelSwithes
+
+        public int? IdSupply { get; set; } // IdSupply
+
+        public int? IdNumberKabinet { get; set; } // IdNumberKabinet
+
+        public string ServiceNum { get; set; } // ServiceNum (length: 128)
+
+        public string SerNum { get; set; } // SerNum (length: 128)
+
+        public string InventarNum { get; set; } // InventarNum (length: 128)
+
+        public string Coment { get; set; } // Coment (length: 254)
+
+        public int? IdStatus { get; set; } // IdStatus
+
+        public string IdHistory { get; set; } // IdHistory (length: 64)
+
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+
+
+
+        // Foreign keys
+
+
+
+        /// <summary>
+        /// Parent Kabinet pointed by [Swithes].([IdNumberKabinet]) (FK_Swithes_Kabinet)
+        /// </summary>
+
+        public virtual Kabinet Kabinet { get; set; } // FK_Swithes_Kabinet
+
+
+        /// <summary>
+        /// Parent ModelSwithe pointed by [Swithes].([IdModelSwithes]) (FK_Swithes_ModelSwithes)
+        /// </summary>
+
+        public virtual ModelSwithe ModelSwithe { get; set; } // FK_Swithes_ModelSwithes
+
+
+        /// <summary>
+        /// Parent Statusing pointed by [Swithes].([IdStatus]) (FK_Statusing_Swithes)
+        /// </summary>
+
+        public virtual Statusing Statusing { get; set; } // FK_Statusing_Swithes
+
+
+        /// <summary>
+        /// Parent Supply pointed by [Swithes].([IdSupply]) (FK_Swithes_Supply)
+        /// </summary>
+
+        public virtual Supply Supply { get; set; } // FK_Swithes_Supply
+
+
+        /// <summary>
+        /// Parent User pointed by [Swithes].([IdUser]) (FK_Swithes_Users)
+        /// </summary>
+
+        public virtual User User { get; set; } // FK_Swithes_Users
+
+
+
+        public Swithe()
+        {
+
+            IdHistory = System.Guid.NewGuid().ToString();
+
+            DataCreate = System.DateTime.Now;
+
+        }
+
+    }
+
+
+
+    // The table 'SynhronizationIp' is not usable by entity framework because it
+    // does not have a primary key. It is listed here for completeness.
+
+    // SynhronizationIp
+
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class SynhronizationIp
+    {
+
+
+        public string Task { get; set; } // Task (length: 64)
+
+        public int? IdSysBlock { get; set; } // IdSysBlock
+
+        public int? IdUser { get; set; } // IdUser
+
+        public string ActualIpAdress { get; set; } // ActualIpAdress (length: 128)
+
+        public string NameComputer { get; set; } // NameComputer (length: 128)
+
+        public string IpAdressOld { get; set; } // IpAdressOld (length: 128)
+
+        public string IpAdressNew { get; set; } // IpAdressNew (length: 128)
+
+        public System.DateTime? Dates { get; set; } // Dates
+
+
+
 
     }
 
@@ -3433,6 +3652,14 @@ namespace EfDatabase.Inventarization.Base
         public virtual System.Collections.Generic.ICollection<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer.FK_ScanerAndCamer_Users
 
         /// <summary>
+        /// Child Swithes where [Swithes].[IdUser] point to this entity (FK_Swithes_Users)
+        /// </summary>
+
+        [JsonIgnore]
+
+        public virtual System.Collections.Generic.ICollection<Swithe> Swithes { get; set; } // Swithes.FK_Swithes_Users
+
+        /// <summary>
         /// Child SysBlocks where [SysBlock].[IdUser] point to this entity (FK_SysBlock_Users)
         /// </summary>
 
@@ -3496,6 +3723,8 @@ namespace EfDatabase.Inventarization.Base
             Printers = new System.Collections.Generic.List<Printer>();
 
             ScanerAndCamers = new System.Collections.Generic.List<ScanerAndCamer>();
+
+            Swithes = new System.Collections.Generic.List<Swithe>();
 
             SysBlocks = new System.Collections.Generic.List<SysBlock>();
         }
@@ -3968,9 +4197,15 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.IdHistory).HasColumnName(@"IdHistory").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
 
+            Property(x => x.IdModel).HasColumnName(@"IdModel").HasColumnType("int").IsOptional();
+
+            Property(x => x.NameModelClass).HasColumnName(@"NameModelClass").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
             Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
 
-            Property(x => x.UserProcess).HasColumnName(@"UserProcess").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.OldModelColums).HasColumnName(@"OldModelColums").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+
+            Property(x => x.NewModelColums).HasColumnName(@"NewModelColums").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
 
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
 
@@ -4304,6 +4539,40 @@ namespace EfDatabase.Inventarization.Base
     }
 
 
+    // ModelSwithes
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class ModelSwitheConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ModelSwithe>
+    {
+        public ModelSwitheConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ModelSwitheConfiguration(string schema)
+        {
+
+            ToTable("ModelSwithes", schema);
+
+            HasKey(x => x.IdModelSwithes);
+
+
+
+            Property(x => x.IdModelSwithes).HasColumnName(@"IdModelSwithes").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.NameModel).HasColumnName(@"NameModel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.CountPort).HasColumnName(@"CountPort").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+        }
+    }
+
+
     // Monitors
 
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
@@ -4487,6 +4756,18 @@ namespace EfDatabase.Inventarization.Base
             Property(x => x.NameOrganization).HasColumnName(@"NameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
 
             Property(x => x.NameFace).HasColumnName(@"NameFace").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.InameOrganization).HasColumnName(@"InameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.RnameOrganization).HasColumnName(@"RnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.DnameOrganization).HasColumnName(@"DnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.VnameOrganization).HasColumnName(@"VnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.TnameOrganization).HasColumnName(@"TnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+
+            Property(x => x.PnameOrganization).HasColumnName(@"PnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
 
             Property(x => x.NameDepartament).HasColumnName(@"NameDepartament").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
 
@@ -4890,6 +5171,70 @@ namespace EfDatabase.Inventarization.Base
 
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
 
+
+
+        }
+    }
+
+
+    // Swithes
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+
+    public class SwitheConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Swithe>
+    {
+        public SwitheConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public SwitheConfiguration(string schema)
+        {
+
+            ToTable("Swithes", schema);
+
+            HasKey(x => x.IdSwithes);
+
+
+
+            Property(x => x.IdSwithes).HasColumnName(@"IdSwithes").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdModelSwithes).HasColumnName(@"IdModelSwithes").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdSupply).HasColumnName(@"IdSupply").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdNumberKabinet).HasColumnName(@"IdNumberKabinet").HasColumnType("int").IsOptional();
+
+            Property(x => x.ServiceNum).HasColumnName(@"ServiceNum").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.SerNum).HasColumnName(@"SerNum").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.InventarNum).HasColumnName(@"InventarNum").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+
+            Property(x => x.Coment).HasColumnName(@"Coment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(254);
+
+            Property(x => x.IdStatus).HasColumnName(@"IdStatus").HasColumnType("int").IsOptional();
+
+            Property(x => x.IdHistory).HasColumnName(@"IdHistory").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+
+
+
+            // Foreign keys
+
+
+            HasOptional(a => a.Kabinet).WithMany(b => b.Swithes).HasForeignKey(c => c.IdNumberKabinet).WillCascadeOnDelete(false); // FK_Swithes_Kabinet
+
+            HasOptional(a => a.ModelSwithe).WithMany(b => b.Swithes).HasForeignKey(c => c.IdModelSwithes).WillCascadeOnDelete(false); // FK_Swithes_ModelSwithes
+
+            HasOptional(a => a.Statusing).WithMany(b => b.Swithes).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Swithes
+
+            HasOptional(a => a.Supply).WithMany(b => b.Swithes).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_Swithes_Supply
+
+            HasOptional(a => a.User).WithMany(b => b.Swithes).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_Swithes_Users
 
 
         }

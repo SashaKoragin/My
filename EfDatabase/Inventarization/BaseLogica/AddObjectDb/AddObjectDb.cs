@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using EfDatabase.Inventarization.Base;
 using EfDatabase.Inventarization.ReportSheme.ReturnModelError;
 using EfDatabaseUploadFile;
@@ -31,9 +25,10 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
         /// Добавление или обновление пользователя
         /// </summary>
         /// <param name="user"></param>
-        public ModelReturn AddAndEditUser(User user)
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<User> AddAndEditUser(User user,int? idUser)
         {
-            HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
+            var log = new HistoryLog.HistoryLog();
             var usersAddadnModified = new User()
             {
                 IdUser = user.IdUser,
@@ -48,36 +43,41 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 Passwords = user.Passwords,
                 StatusActual = user.StatusActual,
                 IdHistory = user.IdHistory,
-
             };
             try
             {
-                if ((from Users in Inventarization.Users
-                 where Users.IdUser == usersAddadnModified.IdUser
-                 select new {Users}).Any())
-               {
-                  Inventarization.Entry(usersAddadnModified).State = EntityState.Modified;
+                using (var context = new InventarizationContext())
+                {
+                    var modeldb = from Users in context.Users where Users.IdUser == user.IdUser select new {Users};
+                    if (modeldb.Any())
+                    {
+                        Inventarization.Entry(usersAddadnModified).State = EntityState.Modified;
+                        Inventarization.SaveChanges();
+                        log.GenerateHistory(usersAddadnModified.IdHistory, usersAddadnModified.IdUser, "Пользователь",idUser, 
+                            "Нет смысла отслеживать проходит через синхронизацию",
+                            "Нет смысла отслеживать проходит через синхронизацию");
+                        return new ModelReturn<User>("Обновили пользователя: " + usersAddadnModified.IdUser, user);
+                    }
+                }
+                Inventarization.Users.Add(usersAddadnModified);
                   Inventarization.SaveChanges();
-                  log.GenerateHistory(usersAddadnModified.IdHistory, 1, "Обновление данных о пользователе: " + usersAddadnModified.IdUser);
-                  return new ModelReturn("Обновили пользователя: " + usersAddadnModified.IdUser);  //"Обновили пользователя: " + user.IdUser;
-               }
-                  Inventarization.Users.Add(usersAddadnModified);
-                  Inventarization.SaveChanges();
-                  log.GenerateHistory(usersAddadnModified.IdHistory, 1, "Добавление нового пользователя: " + usersAddadnModified.IdUser);
-                  return new ModelReturn("Добавили пользователя: " + usersAddadnModified.IdUser, usersAddadnModified.IdUser, usersAddadnModified.IdHistory);
+                  user.IdUser = usersAddadnModified.IdUser;
+                  user.IdHistory = usersAddadnModified.IdHistory;
+                  log.GenerateHistory(usersAddadnModified.IdHistory, usersAddadnModified.IdUser, "Пользователь", idUser, "Нет смысла отслеживать проходит через синхронизацию", "Нет смысла отслеживать проходит через синхронизацию");
+                return new ModelReturn<User>("Добавили пользователя: " + usersAddadnModified.IdUser, user, usersAddadnModified.IdUser, usersAddadnModified.IdHistory);
              }
              catch (Exception e)
              {
                 Loggers.Log4NetLogger.Error(e);
              }
-             return new ModelReturn("При обновлении/добавлении данных 'Пользователь' по : " + usersAddadnModified.IdOtdel + " произошла ошибка смотри log.txt");
+             return new ModelReturn<User>("При обновлении/добавлении данных 'Пользователь' по : " + usersAddadnModified.IdOtdel + " произошла ошибка смотри log.txt");
         }
         /// <summary>
         /// Добавление отдела без лога данных проверим как работает
         /// </summary>
         /// <param name="otdel">Отдел</param>
         /// <returns></returns>
-        public ModelReturn AddAndEditOtdel(Otdel otdel)
+        public ModelReturn<Otdel> AddAndEditOtdel(Otdel otdel)
         {
             var otdelAddadnModified = new Otdel()
             {
@@ -93,17 +93,18 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                   Inventarization.Entry(otdelAddadnModified).State = EntityState.Modified;
                   Inventarization.SaveChanges();
-                  return new ModelReturn("Обновили отдел: "+ otdelAddadnModified.IdOtdel);
+                  return new ModelReturn<Otdel>("Обновили отдел: "+ otdelAddadnModified.IdOtdel, otdel);
                 }
                   Inventarization.Otdels.Add(otdelAddadnModified);
                   Inventarization.SaveChanges();
-                  return new ModelReturn("Добавили отдел: " + otdelAddadnModified.IdOtdel, otdelAddadnModified.IdOtdel);
+                  otdel.IdOtdel = otdelAddadnModified.IdOtdel;
+                  return new ModelReturn<Otdel>("Добавили отдел: " + otdelAddadnModified.IdOtdel, otdel, otdelAddadnModified.IdOtdel);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Отдел' по : " + otdelAddadnModified.IdOtdel + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Otdel>("При обновлении/добавлении данных 'Отдел' по : " + otdelAddadnModified.IdOtdel + " произошла ошибка смотри log.txt");
         }
 
 
@@ -111,7 +112,8 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
         /// Добавление или обновление Принтера
         /// </summary>
         /// <param name="printer"></param>
-        public ModelReturn AddAndEditPrinter(Printer printer)
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<Printer> AddAndEditPrinter(Printer printer, int? idUser)
         {
             HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
             var printerAddadnModified = new Printer()
@@ -133,32 +135,95 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             };
             try
             {
-              if ((from Printers in Inventarization.Printers
-                 where Printers.IdPrinter == printerAddadnModified.IdPrinter
-                 select new {Printers}).Any())
+              var newmodel = $"Пользователь: {printer.User?.Name}; Кабинет: {printer.Kabinet?.NumberKabinet}; Коментарий: {printer.Coment}; Статус: {printer.Statusing?.Name}";
+              using (var context = new InventarizationContext())
+              {
+                var modeldb = from Printers in context.Printers where Printers.IdPrinter == printer.IdPrinter select new {Printers};
+                if (modeldb.Any())
                 {
-                 Inventarization.Entry(printerAddadnModified).State = EntityState.Modified;
-                 Inventarization.SaveChanges();
-                 log.GenerateHistory(printer.IdHistory, 1, "Обновление данных о пользователе: Пользователь принтер");
-                 return new ModelReturn("Обновили принтер: " + printer.IdPrinter);
+                    var oldmodel = $"Пользователь: {modeldb.First().Printers?.User?.Name}; Кабинет: {modeldb.First().Printers?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Printers.Coment}; Статус: {modeldb.First().Printers?.Statusing?.Name}";
+                    Inventarization.Entry(printerAddadnModified).State = EntityState.Modified;
+                    Inventarization.SaveChanges();
+                    log.GenerateHistory(printer.IdHistory, printer.IdPrinter, "Принтер", idUser,
+                       oldmodel,
+                       newmodel);
+                    return new ModelReturn<Printer>("Обновили принтер: " + printer.IdPrinter, printer);
                 }
+              }
                 Inventarization.Printers.Add(printerAddadnModified);
                 Inventarization.SaveChanges();
-                log.GenerateHistory(printerAddadnModified.IdHistory, 1, "Добавление нового пользователя: Пользователь принтер");
-                return new ModelReturn("Добавили принтер: " + printerAddadnModified.IdPrinter, printerAddadnModified.IdPrinter, printerAddadnModified.IdHistory);
+                printer.IdPrinter = printerAddadnModified.IdPrinter;
+                printer.IdHistory = printerAddadnModified.IdHistory;
+                log.GenerateHistory(printer.IdHistory, printer.IdPrinter, "Принтер", idUser,
+                      $"Отсутствует модель при добавлении нового устройства", newmodel);
+                return new ModelReturn<Printer>("Добавили принтер: " + printerAddadnModified.IdPrinter, printer, printerAddadnModified.IdPrinter, printerAddadnModified.IdHistory);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Принтер' по : " + printerAddadnModified.IdPrinter + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Printer>("При обновлении/добавлении данных 'Принтер' по : " + printerAddadnModified.IdPrinter + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление или обновление Коммутатора
+        /// </summary>
+        /// <param name="swithe"></param>
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<Swithe> AddAndEditSwiths(Swithe swithe, int? idUser)
+        {
+            HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
+            var switheAddadnModified = new Swithe()
+            {
+                IdSwithes = swithe.IdSwithes,
+                IdUser = swithe.IdUser,
+                IdModelSwithes = swithe.IdModelSwithes,
+                IdNumberKabinet = swithe.IdNumberKabinet,
+                IdSupply = swithe.IdSupply,
+                ServiceNum = swithe.ServiceNum,
+                SerNum = swithe.SerNum,
+                InventarNum = swithe.InventarNum,
+                Coment = swithe.Coment,
+                IdStatus = swithe.IdStatus,
+                IdHistory = swithe.IdHistory
+            };
+            try
+            {
+                var newmodel = $"Пользователь: {swithe.User?.Name}; Кабинет: {swithe.Kabinet?.NumberKabinet}; Коментарий: {swithe.Coment}; Статус: {swithe.Statusing?.Name}";
+                using (var context = new InventarizationContext())
+                {
+                    var modeldb = from Swithes in context.Swithes where Swithes.IdSwithes == swithe.IdSwithes select new {Swithes};
+                    if (modeldb.Any())
+                    {
+                        var oldmodel = $"Пользователь: {modeldb.First().Swithes?.User?.Name}; Кабинет: {modeldb.First().Swithes?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Swithes.Coment}; Статус: {modeldb.First().Swithes?.Statusing?.Name}";
+                        Inventarization.Entry(switheAddadnModified).State = EntityState.Modified;
+                        Inventarization.SaveChanges();
+                        log.GenerateHistory(swithe.IdHistory, swithe.IdSwithes, "Коммутатор", idUser,
+                            oldmodel,
+                            newmodel);
+                        return new ModelReturn<Swithe>("Обновили коммутатор: " + swithe.IdSwithes, swithe);
+                    }
+                }
+                Inventarization.Swithes.Add(switheAddadnModified);
+                Inventarization.SaveChanges();
+                swithe.IdSwithes = switheAddadnModified.IdSwithes;
+                swithe.IdHistory = switheAddadnModified.IdHistory;
+                log.GenerateHistory(swithe.IdHistory, swithe.IdSwithes, "Коммутатор", idUser,
+                       $"Отсутствует модель при добавлении нового устройства", newmodel);
+                return new ModelReturn<Swithe>("Добавили Коммутатор: " + switheAddadnModified.IdSwithes, swithe, switheAddadnModified.IdSwithes, switheAddadnModified.IdHistory);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<Swithe>("При обновлении/добавлении данных 'Коммутатор' по : " + switheAddadnModified.IdSwithes + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление Сканера
         /// </summary>
         /// <param name="scaner"></param>
-        public ModelReturn AddAndEditScaner(ScanerAndCamer scaner)
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<ScanerAndCamer> AddAndEditScaner(ScanerAndCamer scaner, int? idUser)
         {
             HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
             var scanerAddadnModified = new ScanerAndCamer()
@@ -180,32 +245,43 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             };
             try
             {
-              if ((from Scaner in Inventarization.ScanerAndCamers
-                     where Scaner.IdScaner == scanerAddadnModified.IdScaner
-                     select new{Scaner}).Any())
-               {
-                Inventarization.Entry(scanerAddadnModified).State = EntityState.Modified;
-                Inventarization.SaveChanges();
-                log.GenerateHistory(scanerAddadnModified.IdHistory, 1, "Обновление данных о пользователе: Пользователь сканер");
-                return new ModelReturn("Обновили сканер: " + scanerAddadnModified.IdScaner);
-               }
+                var newmodel = $"Пользователь: {scaner.User?.Name}; Кабинет: {scaner.Kabinet?.NumberKabinet}; Коментарий: {scaner.Coment}; Статус: {scaner.Statusing?.Name}";
+                using (var context = new InventarizationContext())
+                {
+                    var modeldb = from Scaner in context.ScanerAndCamers where Scaner.IdScaner == scaner.IdScaner select new {Scaner};
+                    if (modeldb.Any())
+                    {
+                        var oldmodel = $"Пользователь: {modeldb.First().Scaner?.User?.Name}; Кабинет: {modeldb.First().Scaner?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Scaner.Coment}; Статус: {modeldb.First().Scaner?.Statusing?.Name}";
+                        Inventarization.Entry(scanerAddadnModified).State = EntityState.Modified;
+                        Inventarization.SaveChanges();
+                        log.GenerateHistory(scaner.IdHistory, scaner.IdScaner, "Сканер или камера", idUser,
+                            oldmodel,
+                            newmodel);
+                        return new ModelReturn<ScanerAndCamer>("Обновили сканер: " + scanerAddadnModified.IdScaner, scaner);
+                    }
+                }
                 Inventarization.ScanerAndCamers.Add(scanerAddadnModified);
                 Inventarization.SaveChanges();
-                log.GenerateHistory(scanerAddadnModified.IdHistory, 1, "Добавление нового пользователя: Пользователь сканер");
-                return new ModelReturn("Добавили сканер: " + scanerAddadnModified.IdScaner, scanerAddadnModified.IdScaner, scanerAddadnModified.IdHistory);
+                scaner.IdScaner = scanerAddadnModified.IdScaner;
+                scaner.IdHistory = scanerAddadnModified.IdHistory;
+                log.GenerateHistory(scaner.IdHistory, scaner.IdScaner, "Сканер или камера", idUser,
+                        $"Отсутствует модель при добавлении нового устройства",
+                        newmodel);
+                return new ModelReturn<ScanerAndCamer>("Добавили сканер: " + scanerAddadnModified.IdScaner, scaner, scanerAddadnModified.IdScaner, scanerAddadnModified.IdHistory);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Cканер' по : " + scanerAddadnModified.IdScaner + " произошла ошибка смотри log.txt");
+            return new ModelReturn<ScanerAndCamer>("При обновлении/добавлении данных 'Cканер' по : " + scanerAddadnModified.IdScaner + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление МФУ
         /// </summary>
         /// <param name="mfu"></param>
-        public ModelReturn AddAndEditMfu(Mfu mfu)
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<Mfu> AddAndEditMfu(Mfu mfu, int? idUser)
         {
             HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
             var mfuAddadnModified = new Mfu()
@@ -228,32 +304,43 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             };
             try
             {
-             if ((from Mfu in Inventarization.Mfus
-                  where Mfu.IdMfu == mfuAddadnModified.IdMfu
-                  select new {Mfu}).Any())
-             {
-                Inventarization.Entry(mfuAddadnModified).State = EntityState.Modified;
-                Inventarization.SaveChanges();
-                log.GenerateHistory(mfuAddadnModified.IdHistory, 1, "Обновление данных о пользователе: Пользователь МФУ");
-                return new ModelReturn("Обновили МФУ: " + mfuAddadnModified.IdMfu);
-             }
+                var newmodel = $"Пользователь: {mfu.User?.Name}; Кабинет: {mfu.Kabinet?.NumberKabinet}; Коментарий: {mfu.Coment}; Статус: {mfu.Statusing?.Name}";
+                using (var context = new InventarizationContext())
+                {
+                    var modeldb = from Mfu in context.Mfus where Mfu.IdMfu == mfu.IdMfu select new {Mfu};
+                    if (modeldb.Any())
+                    {
+                        var oldmodel = $"Пользователь: {modeldb.First().Mfu?.User?.Name}; Кабинет: {modeldb.First().Mfu?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Mfu.Coment}; Статус: {modeldb.First().Mfu?.Statusing?.Name}";
+                        Inventarization.Entry(mfuAddadnModified).State = EntityState.Modified;
+                        Inventarization.SaveChanges();
+                        log.GenerateHistory(mfu.IdHistory, mfu.IdMfu, "МФУ", idUser,
+                            oldmodel,
+                            newmodel);
+                        return new ModelReturn<Mfu>("Обновили МФУ: " + mfuAddadnModified.IdMfu, mfu);
+                    }
+                }
                 Inventarization.Mfus.Add(mfuAddadnModified);
                 Inventarization.SaveChanges();
-                log.GenerateHistory(mfuAddadnModified.IdHistory, 1, "Добавление нового пользователя: Пользователь МФУ");
-                return new ModelReturn("Добавили МФУ: " + mfuAddadnModified.IdMfu, mfuAddadnModified.IdMfu, mfuAddadnModified.IdHistory);
+                mfu.IdMfu = mfuAddadnModified.IdMfu;
+                mfu.IdHistory = mfuAddadnModified.IdHistory;
+                log.GenerateHistory(mfu.IdHistory, mfu.IdMfu, "МФУ", idUser,
+                    $"Отсутствует модель при добавлении нового устройства",
+                    newmodel);
+                return new ModelReturn<Mfu>("Добавили МФУ: " + mfuAddadnModified.IdMfu, mfu, mfuAddadnModified.IdMfu, mfuAddadnModified.IdHistory);
              }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'МФУ' по : " + mfuAddadnModified.IdMfu + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Mfu>("При обновлении/добавлении данных 'МФУ' по : " + mfuAddadnModified.IdMfu + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление Системного блока
         /// </summary>
         /// <param name="sysblok"></param>
-        public ModelReturn AddAndEditSysBlok(SysBlock sysblok)
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<SysBlock> AddAndEditSysBlok(SysBlock sysblok, int? idUser)
         {
             HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
             var sysblokAddadnModified = new SysBlock()
@@ -274,25 +361,35 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             };
             try
             {
-              if ((from SysBlocks in Inventarization.SysBlocks
-                     where SysBlocks.IdSysBlock == sysblokAddadnModified.IdSysBlock
-                     select new {SysBlocks}).Any())
-                 {
-                  Inventarization.Entry(sysblokAddadnModified).State = EntityState.Modified;
+                var newmodel = $"Пользователь: {sysblok.User?.Name} Имя компьютера: {sysblok.NameComputer} Кабинет: {sysblok.Kabinet?.NumberKabinet} Коментарий: {sysblok.Coment} Статус: {sysblok.Statusing?.Name}";
+                using (var context = new InventarizationContext())
+                {
+                    var modeldb = from SysBlocks in context.SysBlocks where SysBlocks.IdSysBlock == sysblok.IdSysBlock select new {SysBlocks};
+                    if (modeldb.Any())
+                    {
+                        var oldmodel = $"Пользователь: {modeldb.First().SysBlocks?.User?.Name} Имя компьютера: {modeldb.First().SysBlocks?.NameComputer} Кабинет: {modeldb.First().SysBlocks?.Kabinet?.NumberKabinet} Коментарий: {modeldb.First().SysBlocks.Coment} Статус: {modeldb.First().SysBlocks?.Statusing?.Name}";
+                        Inventarization.Entry(sysblokAddadnModified).State = EntityState.Modified;
+                        Inventarization.SaveChanges();
+                        log.GenerateHistory(sysblok.IdHistory, sysblok.IdSysBlock, "Системный блок", idUser,
+                            oldmodel,
+                            newmodel);
+                        return new ModelReturn<SysBlock>("Обновили Системный блок: " + sysblokAddadnModified.IdSysBlock, sysblok);
+                    }
+                }
+                Inventarization.SysBlocks.Add(sysblokAddadnModified);
                   Inventarization.SaveChanges();
-                  log.GenerateHistory(sysblokAddadnModified.IdHistory, 1, "Обновление данных о системном блоке: Пользователь Системный блок");
-                  return new ModelReturn("Обновили Системный блок: " + sysblokAddadnModified.IdSysBlock);
-                 }
-                  Inventarization.SysBlocks.Add(sysblokAddadnModified);
-                  Inventarization.SaveChanges();
-                  log.GenerateHistory(sysblokAddadnModified.IdHistory, 1, "Добавление системного блока: Пользователь Системный блок");
-                  return new ModelReturn("Добавили Системный блок: " + sysblokAddadnModified.IdSysBlock, sysblokAddadnModified.IdSysBlock, sysblokAddadnModified.IdHistory);
+                  sysblok.IdSysBlock= sysblokAddadnModified.IdSysBlock;
+                  sysblok.IdHistory = sysblokAddadnModified.IdHistory;
+                  log.GenerateHistory(sysblok.IdHistory, sysblok.IdSysBlock, "Системный блок", idUser,
+                     $"Отсутствует модель при добавлении нового устройства",
+                     newmodel);
+                  return new ModelReturn<SysBlock>("Добавили Системный блок: " + sysblokAddadnModified.IdSysBlock, sysblok, sysblokAddadnModified.IdSysBlock, sysblokAddadnModified.IdHistory);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Системный блок' по : " + sysblokAddadnModified.IdSysBlock+ " произошла ошибка смотри log.txt");
+            return new ModelReturn<SysBlock>("При обновлении/добавлении данных 'Системный блок' по : " + sysblokAddadnModified.IdSysBlock+ " произошла ошибка смотри log.txt");
         }
 
 
@@ -300,7 +397,8 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
         /// Добавление или обновление Монитора
         /// </summary>
         /// <param name="monitor"></param>
-        public ModelReturn AddAndEditMonitors(Monitor monitor)
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<Monitor> AddAndEditMonitors(Monitor monitor, int? idUser)
         {
             HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
             var monitorAddadnModified = new Monitor()
@@ -318,33 +416,45 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             };
             try
             {
-             if ((from Monitor in Inventarization.Monitors
-                 where Monitor.IdMonitor == monitorAddadnModified.IdMonitor
-                 select new { Monitor }).Any())
-               {
-                 Inventarization.Entry(monitorAddadnModified).State = EntityState.Modified;
+                var newmodel = $"Пользователь: {monitor.User?.Name}; Кабинет: {monitor.Kabinet?.NumberKabinet}; Коментарий: {monitor.Coment}; Статус: {monitor.Statusing?.Name}";
+                using (var context = new InventarizationContext())
+                {
+                    var modeldb = from Monitor in context.Monitors where Monitor.IdMonitor == monitor.IdMonitor select new {Monitor};
+                    if (modeldb.Any())
+                    {
+                        var oldmodel = $"Пользователь: {modeldb.First().Monitor?.User?.Name}; Кабинет: {modeldb.First().Monitor?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Monitor.Coment}; Статус: {modeldb.First().Monitor?.Statusing?.Name}";
+                        Inventarization.Entry(monitorAddadnModified).State = EntityState.Modified;
+                        Inventarization.SaveChanges();
+                        log.GenerateHistory(monitor.IdHistory, monitor.IdMonitor, "Монитор", idUser,
+                            oldmodel,
+                            newmodel);
+                        return new ModelReturn<Monitor>("Обновили Монитор: " + monitorAddadnModified.IdMonitor, monitor);
+                    }
+                }
+                Inventarization.Monitors.Add(monitorAddadnModified);
                  Inventarization.SaveChanges();
-                 log.GenerateHistory(monitorAddadnModified.IdHistory, 1, "Обновление данных о мониторе: Пользователь Монитор");
-                 return new ModelReturn("Обновили Монитор: " + monitorAddadnModified.IdMonitor);
-               }
-                 Inventarization.Monitors.Add(monitorAddadnModified);
-                 Inventarization.SaveChanges();
-                 log.GenerateHistory(monitorAddadnModified.IdHistory, 1, "Добавление монитора: Пользователь Монитор");
-                 return new ModelReturn("Добавили Монитор: " + monitorAddadnModified.IdMonitor, monitorAddadnModified.IdMonitor, monitorAddadnModified.IdHistory);
+                 monitor.IdMonitor = monitorAddadnModified.IdMonitor;
+                 monitor.IdHistory = monitorAddadnModified.IdHistory;
+                 log.GenerateHistory(monitor.IdHistory, monitor.IdMonitor, "Монитор", idUser,
+                    $"Отсутствует модель при добавлении нового устройства",
+                    newmodel);
+                 return new ModelReturn<Monitor>("Добавили Монитор: " + monitorAddadnModified.IdMonitor, monitor, monitorAddadnModified.IdMonitor, monitorAddadnModified.IdHistory);
              }
              catch (Exception e)
              {
                 Loggers.Log4NetLogger.Error(e);
              }
-            return new ModelReturn("При обновлении/добавлении данных 'Монитор' по : " + monitorAddadnModified.IdMonitor + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Monitor>("При обновлении/добавлении данных 'Монитор' по : " + monitorAddadnModified.IdMonitor + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление Телефона
         /// </summary>
         /// <param name="telephone"></param>
-        public ModelReturn AddAndEditTelephone(Telephon telephone)
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<Telephon> AddAndEditTelephone(Telephon telephone, int? idUser)
         {
+            HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
             var telephoneAddadnModified = new Telephon()
             {
                 IdTelephon = telephone.IdTelephon,
@@ -361,24 +471,34 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             };
             try
             {
-              if ((from Telephone in Inventarization.Telephons
-                 where Telephone.IdTelephon == telephoneAddadnModified.IdTelephon
-                 select new { Telephone }).Any())
-               {
-                  Inventarization.Entry(telephoneAddadnModified).State = EntityState.Modified;
+                var newmodel = $"Кабинет: {telephone.Kabinet?.NumberKabinet}; Коментарий: {telephone.Coment}; Статус: {telephone.Statusing?.Name}";
+                using (var context = new InventarizationContext())
+                {
+                    var modeldb = from Telephone in context.Telephons where Telephone.IdTelephon == telephone.IdTelephon select new {Telephone};
+                    if (modeldb.Any())
+                    {
+                        var oldmodel = $"Кабинет: {modeldb.First().Telephone?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Telephone.Coment}; Статус: {modeldb.First().Telephone?.Statusing?.Name}";
+                        Inventarization.Entry(telephoneAddadnModified).State = EntityState.Modified;
+                        Inventarization.SaveChanges();
+                        log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
+                            oldmodel,
+                            newmodel);
+                        return new ModelReturn<Telephon>("Обновили Телефон: " + telephoneAddadnModified.IdTelephon,telephone);
+                    }
+                }
+                Inventarization.Telephons.Add(telephoneAddadnModified);
                   Inventarization.SaveChanges();
-                  return new ModelReturn("Обновили Телефон: " + telephoneAddadnModified.IdTelephon);
-               }
-
-            Inventarization.Telephons.Add(telephoneAddadnModified);
-            Inventarization.SaveChanges();
-            return new ModelReturn("Добавили Телефон: " + telephoneAddadnModified.IdTelephon, telephoneAddadnModified.IdTelephon);
+                  telephone.IdTelephon = telephoneAddadnModified.IdTelephon;
+                  log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
+                     $"Отсутствует модель при добавлении нового устройства",
+                     newmodel);
+                 return new ModelReturn<Telephon>("Добавили Телефон: " + telephoneAddadnModified.IdTelephon, telephone, telephoneAddadnModified.IdTelephon);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Телефон' по : " + telephoneAddadnModified.IdTelephon + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Telephon>("При обновлении/добавлении данных 'Телефон' по : " + telephoneAddadnModified.IdTelephon + " произошла ошибка смотри log.txt");
         }
 
 
@@ -386,7 +506,8 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
         /// Добавление или обновление ИБП
         /// </summary>
         /// <param name="blokpower"></param>
-        public ModelReturn AddAndEditPowerBlock(BlockPower blokpower)
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<BlockPower> AddAndEditPowerBlock(BlockPower blokpower, int? idUser)
         {
             HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
             var blockpoweraddadnModified = new BlockPower()
@@ -407,29 +528,36 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             };
             try
             {
-               if ((from BlockPowers in Inventarization.BlockPowers
-                    where BlockPowers.IdBlockPowers == blockpoweraddadnModified.IdBlockPowers
-                    select new { BlockPowers }).Any())
-                  {
-                    Inventarization.Entry(blockpoweraddadnModified).State = EntityState.Modified;
+                var newmodel = $"Пользователь: {blokpower.User?.Name}; Кабинет: {blokpower.Kabinet?.NumberKabinet}; Коментарий: {blokpower.Coment}; Статус: {blokpower.Statusing?.Name}";
+                using (var context = new InventarizationContext())
+                {
+                    var modeldb = from BlockPowers in context.BlockPowers where BlockPowers.IdBlockPowers == blokpower.IdBlockPowers select new {BlockPowers};
+                    if (modeldb.Any())
+                    {
+                        var oldmodel = $"Пользователь: {modeldb.First().BlockPowers?.User?.Name}; Кабинет: {modeldb.First().BlockPowers?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().BlockPowers.Coment}; Статус: {modeldb.First().BlockPowers?.Statusing?.Name}";
+                        Inventarization.Entry(blockpoweraddadnModified).State = EntityState.Modified;
+                        Inventarization.SaveChanges();
+                        log.GenerateHistory(blokpower.IdHistory, blokpower.IdBlockPowers, "ИБП", idUser,
+                            oldmodel,
+                            newmodel);
+                        return new ModelReturn<BlockPower>("Обновили ИБП: " + blockpoweraddadnModified.IdBlockPowers, blokpower);
+                    }
+                }
+                Inventarization.BlockPowers.Add(blockpoweraddadnModified);
                     Inventarization.SaveChanges();
-                    log.GenerateHistory(blockpoweraddadnModified.IdHistory, 1, "Обновление данных о ИБП: Пользователь ИБП");
-                    return new ModelReturn("Обновили ИБП: " + blockpoweraddadnModified.IdBlockPowers);
-                  }
-                    Inventarization.BlockPowers.Add(blockpoweraddadnModified);
-                    Inventarization.SaveChanges();
-                    log.GenerateHistory(blockpoweraddadnModified.IdHistory, 1, "Добавление ИБП: Пользователь ИБП");
-                    return new ModelReturn("Добавили Монитор: " + blockpoweraddadnModified.IdModelBP, blockpoweraddadnModified.IdBlockPowers, blockpoweraddadnModified.IdHistory);
+                    blokpower.IdBlockPowers = blockpoweraddadnModified.IdBlockPowers;
+                    blokpower.IdHistory = blockpoweraddadnModified.IdHistory;
+                    log.GenerateHistory(blokpower.IdHistory, blokpower.IdBlockPowers, "ИБП", idUser,
+                       $"Отсутствует модель при добавлении нового устройства",
+                       newmodel);
+                    return new ModelReturn<BlockPower>("Добавили Монитор: " + blockpoweraddadnModified.IdModelBP, blokpower, blockpoweraddadnModified.IdBlockPowers, blockpoweraddadnModified.IdHistory);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'ИБП' по : " + blockpoweraddadnModified.IdModelBP + " произошла ошибка смотри log.txt");
+            return new ModelReturn<BlockPower>("При обновлении/добавлении данных 'ИБП' по : " + blockpoweraddadnModified.IdModelBP + " произошла ошибка смотри log.txt");
         }
-
-
-
 
         /// <summary>
         /// Добавление документа пустого
@@ -539,22 +667,22 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
             };
         }
 
-
+        ////////////////////////////////
         /// <summary>
         /// Удаление документа
         /// </summary>
         /// <param name="iddoc">Ун документа</param>
         /// <returns></returns>
-        public ModelReturn DeleteDocument(int iddoc)
+        public string DeleteDocument(int iddoc)
         {
             Document doc = Inventarization.Documents.FirstOrDefault(docum => docum.Id == iddoc);
             if (doc != null)
             {
                 Inventarization.Documents.Remove(doc);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Удалили документ за номером: " + iddoc);
+                return "Удалили документ за номером: " + iddoc;
             }
-            return new ModelReturn(null);
+            return null;
         }
         /// <summary>
         /// Загрузка документа на внутреенее перемещение
@@ -581,7 +709,7 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
         /// Добавление или обновление наименование системных блоков
         /// </summary>
         /// <param name="nameSysBlock">Наименование системного блока</param>
-        public ModelReturn AddAndEditNameSysBlock(NameSysBlock nameSysBlock)
+        public ModelReturn<NameSysBlock> AddAndEditNameSysBlock(NameSysBlock nameSysBlock)
         {
             var nameSysBlockAddadnModified = new NameSysBlock()
             {
@@ -596,24 +724,25 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameSysBlockAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование системных блоков: " + nameSysBlockAddadnModified.IdModelSysBlock);
+                    return new ModelReturn<NameSysBlock>("Обновили справочник наименование системных блоков: " + nameSysBlockAddadnModified.IdModelSysBlock, nameSysBlock);
                 }
                 Inventarization.NameSysBlocks.Add(nameSysBlockAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новое имя системного блока: " + nameSysBlockAddadnModified.IdModelSysBlock, nameSysBlockAddadnModified.IdModelSysBlock);
+                nameSysBlock.IdModelSysBlock = nameSysBlockAddadnModified.IdModelSysBlock;
+                return new ModelReturn<NameSysBlock>("Добавили новое имя системного блока: " + nameSysBlockAddadnModified.IdModelSysBlock, nameSysBlock, nameSysBlockAddadnModified.IdModelSysBlock);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Наименование системного блока' по : " + nameSysBlockAddadnModified.IdModelSysBlock + " произошла ошибка смотри log.txt");
+            return new ModelReturn<NameSysBlock>("При обновлении/добавлении данных 'Наименование системного блока' по : " + nameSysBlockAddadnModified.IdModelSysBlock + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление наименование монитора
         /// </summary>
         /// <param name="nameMonitor">Наименование монитора</param>
-        public ModelReturn AddAndEditNameMonitor(NameMonitor nameMonitor)
+        public ModelReturn<NameMonitor> AddAndEditNameMonitor(NameMonitor nameMonitor)
         {
             var nameMonitorAddadnModified = new NameMonitor()
             {
@@ -628,24 +757,25 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameMonitorAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование мониторов: " + nameMonitorAddadnModified.IdModelMonitor);
+                    return new ModelReturn<NameMonitor>("Обновили справочник наименование мониторов: " + nameMonitorAddadnModified.IdModelMonitor, nameMonitor);
                 }
                 Inventarization.NameMonitors.Add(nameMonitorAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новое имя монитора: " + nameMonitorAddadnModified.IdModelMonitor, nameMonitorAddadnModified.IdModelMonitor);
+                nameMonitor.IdModelMonitor = nameMonitorAddadnModified.IdModelMonitor;
+                return new ModelReturn<NameMonitor>("Добавили новое имя монитора: " + nameMonitorAddadnModified.IdModelMonitor, nameMonitor, nameMonitorAddadnModified.IdModelMonitor);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Наименование мониторов' по : " + nameMonitorAddadnModified.IdModelMonitor + " произошла ошибка смотри log.txt");
+            return new ModelReturn<NameMonitor>("При обновлении/добавлении данных 'Наименование мониторов' по : " + nameMonitorAddadnModified.IdModelMonitor + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление модели ИБП
         /// </summary>
         /// <param name="nameModelBlokPower">Наименование модели ИБП</param>
-        public ModelReturn AddAndEditNameModelBlokPower(ModelBlockPower nameModelBlokPower)
+        public ModelReturn<ModelBlockPower> AddAndEditNameModelBlokPower(ModelBlockPower nameModelBlokPower)
         {
             var nameModelBlokPowerAddadnModified = new ModelBlockPower()
             {
@@ -660,24 +790,25 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameModelBlokPowerAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование модели ИБП: " + nameModelBlokPowerAddadnModified.IdModelBP);
+                    return new ModelReturn<ModelBlockPower>("Обновили справочник наименование модели ИБП: " + nameModelBlokPowerAddadnModified.IdModelBP, nameModelBlokPower);
                 }
                 Inventarization.ModelBlockPowers.Add(nameModelBlokPowerAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новое имя модели ИБП: " + nameModelBlokPowerAddadnModified.IdModelBP, nameModelBlokPowerAddadnModified.IdModelBP);
+                nameModelBlokPower.IdModelBP = nameModelBlokPowerAddadnModified.IdModelBP;
+                return new ModelReturn<ModelBlockPower>("Добавили новое имя модели ИБП: " + nameModelBlokPowerAddadnModified.IdModelBP, nameModelBlokPower, nameModelBlokPowerAddadnModified.IdModelBP);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Наименование модели ИБП' по : " + nameModelBlokPowerAddadnModified.IdModelBP + " произошла ошибка смотри log.txt");
+            return new ModelReturn<ModelBlockPower>("При обновлении/добавлении данных 'Наименование модели ИБП' по : " + nameModelBlokPowerAddadnModified.IdModelBP + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление производителя ИБП
         /// </summary>
         /// <param name="nameProizvoditelBlockPower">Наименование производителя ИБП</param>
-        public ModelReturn AddAndEditNameProizvoditelBlockPower(ProizvoditelBlockPower nameProizvoditelBlockPower)
+        public ModelReturn<ProizvoditelBlockPower> AddAndEditNameProizvoditelBlockPower(ProizvoditelBlockPower nameProizvoditelBlockPower)
         {
             var nameProizvoditelBlockPowerAddadnModified = new ProizvoditelBlockPower()
             {
@@ -692,24 +823,25 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameProizvoditelBlockPowerAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование производителя ИБП: " + nameProizvoditelBlockPowerAddadnModified.IdProizvoditelBP);
+                    return new ModelReturn<ProizvoditelBlockPower>("Обновили справочник наименование производителя ИБП: " + nameProizvoditelBlockPowerAddadnModified.IdProizvoditelBP, nameProizvoditelBlockPower);
                 }
                 Inventarization.ProizvoditelBlockPowers.Add(nameProizvoditelBlockPowerAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новое имя производителя ИБП: " + nameProizvoditelBlockPowerAddadnModified.IdProizvoditelBP, nameProizvoditelBlockPowerAddadnModified.IdProizvoditelBP);
+                nameProizvoditelBlockPower.IdProizvoditelBP = nameProizvoditelBlockPowerAddadnModified.IdProizvoditelBP;
+                return new ModelReturn<ProizvoditelBlockPower>("Добавили новое имя производителя ИБП: " + nameProizvoditelBlockPowerAddadnModified.IdProizvoditelBP, nameProizvoditelBlockPower, nameProizvoditelBlockPowerAddadnModified.IdProizvoditelBP);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Наименование производителя ИБП' по : " + nameProizvoditelBlockPowerAddadnModified.IdProizvoditelBP + " произошла ошибка смотри log.txt");
+            return new ModelReturn<ProizvoditelBlockPower>("При обновлении/добавлении данных 'Наименование производителя ИБП' по : " + nameProizvoditelBlockPowerAddadnModified.IdProizvoditelBP + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление наименование партии
         /// </summary>
         /// <param name="nameSupply">Наименование наименование партии</param>
-        public ModelReturn AddAndEditNameSupply(Supply nameSupply)
+        public ModelReturn<Supply> AddAndEditNameSupply(Supply nameSupply)
         {
 
             var nameSupplyAddadnModified = new Supply()
@@ -728,24 +860,60 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameSupplyAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование Партии: " + nameSupplyAddadnModified.IdSupply);
+                    return new ModelReturn<Supply>("Обновили справочник наименование Партии: " + nameSupplyAddadnModified.IdSupply, nameSupply);
                 }
                 Inventarization.Supplies.Add(nameSupplyAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новое имя Партии: " + nameSupplyAddadnModified.IdSupply, nameSupplyAddadnModified.IdSupply);
+                nameSupply.IdSupply = nameSupplyAddadnModified.IdSupply;
+                return new ModelReturn<Supply>("Добавили новое имя Партии: " + nameSupplyAddadnModified.IdSupply, nameSupply, nameSupplyAddadnModified.IdSupply);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Наименование Партии' по : " + nameSupplyAddadnModified.IdSupply + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Supply>("При обновлении/добавлении данных 'Наименование Партии' по : " + nameSupplyAddadnModified.IdSupply + " произошла ошибка смотри log.txt");
         }
+
+        /// <summary>
+        /// Добавление или обновление Модели коммутатора
+        /// </summary>
+        /// <param name="modelSwithes">Наименование модели коммутатора</param>
+        public ModelReturn<ModelSwithe> AddAndEditModelSwithe(ModelSwithe modelSwithes)
+        {
+            var nameModelSwitheAddadnModified = new ModelSwithe()
+            {
+                IdModelSwithes = modelSwithes.IdModelSwithes,
+                NameModel = modelSwithes.NameModel,
+                CountPort = modelSwithes.CountPort
+            };
+            try
+            {
+                if ((from ModelSwithes in Inventarization.ModelSwithes
+                     where ModelSwithes.IdModelSwithes == nameModelSwitheAddadnModified.IdModelSwithes
+                     select new { ModelSwithes }).Any())
+                {
+                    Inventarization.Entry(nameModelSwitheAddadnModified).State = EntityState.Modified;
+                    Inventarization.SaveChanges();
+                    return new ModelReturn<ModelSwithe>("Обновили справочник наименование моделей Коммутаторов: " + nameModelSwitheAddadnModified.IdModelSwithes, modelSwithes);
+                }
+                Inventarization.ModelSwithes.Add(nameModelSwitheAddadnModified);
+                Inventarization.SaveChanges();
+                modelSwithes.IdModelSwithes = nameModelSwitheAddadnModified.IdModelSwithes;
+                return new ModelReturn<ModelSwithe>("Добавили новую модель Коммутатора: " + nameModelSwitheAddadnModified.IdModelSwithes, modelSwithes, nameModelSwitheAddadnModified.IdModelSwithes);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ModelSwithe>("При обновлении/добавлении данных 'моделей Коммутаторов' по : " + nameModelSwitheAddadnModified.IdModelSwithes + " произошла ошибка смотри log.txt");
+        }
+
 
         /// <summary>
         /// Добавление или обновление наименование статуса
         /// </summary>
         /// <param name="nameStatus">Наименование наименование статуса</param>
-        public ModelReturn AddAndEditNameStatus(Statusing nameStatus)
+        public ModelReturn<Statusing> AddAndEditNameStatus(Statusing nameStatus)
         {
             var nameStatusingAddadnModified = new Statusing()
             {
@@ -761,24 +929,25 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameStatusingAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование Статуса: " + nameStatusingAddadnModified.IdStatus);
+                    return new ModelReturn<Statusing>("Обновили справочник наименование Статуса: " + nameStatusingAddadnModified.IdStatus, nameStatus);
                 }
                 Inventarization.Statusings.Add(nameStatusingAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новое имя Статуса: " + nameStatusingAddadnModified.IdStatus, nameStatusingAddadnModified.IdStatus);
+                nameStatus.IdStatus = nameStatusingAddadnModified.IdStatus;
+                return new ModelReturn<Statusing>("Добавили новое имя Статуса: " + nameStatusingAddadnModified.IdStatus, nameStatus, nameStatusingAddadnModified.IdStatus);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Наименование Статуса' по : " + nameStatusingAddadnModified.IdStatus + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Statusing>("При обновлении/добавлении данных 'Наименование Статуса' по : " + nameStatusingAddadnModified.IdStatus + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление номера кабинета
         /// </summary>
         /// <param name="nameKabinet">Наименование номера кабинета</param>
-        public ModelReturn AddAndEditNameKabinetr(Kabinet nameKabinet)
+        public ModelReturn<Kabinet> AddAndEditNameKabinetr(Kabinet nameKabinet)
         {
             var nameKabinetAddadnModified = new Kabinet()
             {
@@ -793,17 +962,18 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameKabinetAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник номера Кабинетов: " + nameKabinetAddadnModified.IdNumberKabinet);
+                    return new ModelReturn<Kabinet>("Обновили справочник номера Кабинетов: " + nameKabinetAddadnModified.IdNumberKabinet, nameKabinet);
                 }
                 Inventarization.Kabinets.Add(nameKabinetAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новый номер Кабинета: " + nameKabinetAddadnModified.IdNumberKabinet, nameKabinetAddadnModified.IdNumberKabinet);
+                nameKabinet.IdNumberKabinet = nameKabinetAddadnModified.IdNumberKabinet;
+                return new ModelReturn<Kabinet>("Добавили новый номер Кабинета: " + nameKabinetAddadnModified.IdNumberKabinet, nameKabinet, nameKabinetAddadnModified.IdNumberKabinet);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Номер Кабинета' по : " + nameKabinetAddadnModified.IdNumberKabinet + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Kabinet>("При обновлении/добавлении данных 'Номер Кабинета' по : " + nameKabinetAddadnModified.IdNumberKabinet + " произошла ошибка смотри log.txt");
         }
 
 
@@ -811,7 +981,7 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
         /// Добавление или обновление наименование модели принтера(МФУ)
         /// </summary>
         /// <param name="nameFullModel">Наименование наименование модели принтера(МФУ)</param>
-        public ModelReturn AddAndEditNameFullModel(FullModel nameFullModel)
+        public ModelReturn<FullModel> AddAndEditNameFullModel(FullModel nameFullModel)
         {
             var nameFullModelAddadnModified = new FullModel()
             {
@@ -827,24 +997,25 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameFullModelAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование модели принтера(МФУ): " + nameFullModelAddadnModified.IdModel);
+                    return new ModelReturn<FullModel>("Обновили справочник наименование модели принтера(МФУ): " + nameFullModelAddadnModified.IdModel, nameFullModel);
                 }
                 Inventarization.FullModels.Add(nameFullModelAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новое имя модели принтера(МФУ): " + nameFullModelAddadnModified.IdModel, nameFullModelAddadnModified.IdModel);
+                nameFullModel.IdModel = nameFullModelAddadnModified.IdModel;
+                return new ModelReturn<FullModel>("Добавили новое имя модели принтера(МФУ): " + nameFullModelAddadnModified.IdModel, nameFullModel, nameFullModelAddadnModified.IdModel);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Наименование модели принтера(МФУ)' по : " + nameFullModelAddadnModified.IdModel + " произошла ошибка смотри log.txt");
+            return new ModelReturn<FullModel>("При обновлении/добавлении данных 'Наименование модели принтера(МФУ)' по : " + nameFullModelAddadnModified.IdModel + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление наименование классификации принтера(МФУ)
         /// </summary>
         /// <param name="nameClassification">Наименование наименование классификации принтера(МФУ)</param>
-        public ModelReturn AddAndEditNameClassification(Classification nameClassification)
+        public ModelReturn<Classification> AddAndEditNameClassification(Classification nameClassification)
         {
             var nameClassificationAddadnModified = new Classification()
             {
@@ -859,24 +1030,25 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameClassificationAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование классификации принтера(МФУ): " + nameClassificationAddadnModified.IdClasification);
+                    return new ModelReturn<Classification>("Обновили справочник наименование классификации принтера(МФУ): " + nameClassificationAddadnModified.IdClasification, nameClassification);
                 }
                 Inventarization.Classifications.Add(nameClassificationAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новое имя классификации принтера(МФУ): " + nameClassificationAddadnModified.IdClasification, nameClassificationAddadnModified.IdClasification);
+                nameClassification.IdClasification = nameClassificationAddadnModified.IdClasification;
+                return new ModelReturn<Classification>("Добавили новое имя классификации принтера(МФУ): " + nameClassificationAddadnModified.IdClasification, nameClassification, nameClassificationAddadnModified.IdClasification);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Наименование классификации принтера(МФУ)' по : " + nameClassificationAddadnModified.IdClasification + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Classification>("При обновлении/добавлении данных 'Наименование классификации принтера(МФУ)' по : " + nameClassificationAddadnModified.IdClasification + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление наименование производителя принтера(МФУ)
         /// </summary>
         /// <param name="nameFullProizvoditel">Наименование наименование производителя принтера(МФУ)</param>
-        public ModelReturn AddAndEditNameFullProizvoditel(FullProizvoditel nameFullProizvoditel)
+        public ModelReturn<FullProizvoditel> AddAndEditNameFullProizvoditel(FullProizvoditel nameFullProizvoditel)
         {
             var nameFullProizvoditelAddadnModified = new FullProizvoditel()
             {
@@ -891,24 +1063,25 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameFullProizvoditelAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование производителя принтера(МФУ): " + nameFullProizvoditelAddadnModified.IdProizvoditel);
+                    return new ModelReturn<FullProizvoditel>("Обновили справочник наименование производителя принтера(МФУ): " + nameFullProizvoditelAddadnModified.IdProizvoditel, nameFullProizvoditel);
                 }
                 Inventarization.FullProizvoditels.Add(nameFullProizvoditelAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новое имя производителя принтера(МФУ): " + nameFullProizvoditelAddadnModified.IdProizvoditel, nameFullProizvoditelAddadnModified.IdProizvoditel);
+                nameFullProizvoditel.IdProizvoditel = nameFullProizvoditelAddadnModified.IdProizvoditel;
+                return new ModelReturn<FullProizvoditel>("Добавили новое имя производителя принтера(МФУ): " + nameFullProizvoditelAddadnModified.IdProizvoditel, nameFullProizvoditel, nameFullProizvoditelAddadnModified.IdProizvoditel);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'Наименование производителя принтера(МФУ)' по : " + nameFullProizvoditelAddadnModified.IdProizvoditel + " произошла ошибка смотри log.txt");
+            return new ModelReturn<FullProizvoditel>("При обновлении/добавлении данных 'Наименование производителя принтера(МФУ)' по : " + nameFullProizvoditelAddadnModified.IdProizvoditel + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
         /// Добавление или обновление CopySave для МФУ
         /// </summary>
         /// <param name="nameCopySave">Наименование CopySave для МФУ</param>
-        public ModelReturn AddAndEditNameCopySave(CopySave nameCopySave)
+        public ModelReturn<CopySave> AddAndEditNameCopySave(CopySave nameCopySave)
         {
             var nameCopySaveAddadnModified = new CopySave()
             {
@@ -925,17 +1098,18 @@ namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
                 {
                     Inventarization.Entry(nameCopySaveAddadnModified).State = EntityState.Modified;
                     Inventarization.SaveChanges();
-                    return new ModelReturn("Обновили справочник наименование CopySave для МФУ: " + nameCopySaveAddadnModified.IdCopySave);
+                    return new ModelReturn<CopySave>("Обновили справочник наименование CopySave для МФУ: " + nameCopySaveAddadnModified.IdCopySave, nameCopySave);
                 }
                 Inventarization.CopySaves.Add(nameCopySaveAddadnModified);
                 Inventarization.SaveChanges();
-                return new ModelReturn("Добавили новый CopySave для МФУ: " + nameCopySaveAddadnModified.IdCopySave, nameCopySaveAddadnModified.IdCopySave);
+                nameCopySave.IdCopySave = nameCopySaveAddadnModified.IdCopySave;
+                return new ModelReturn<CopySave>("Добавили новый CopySave для МФУ: " + nameCopySaveAddadnModified.IdCopySave, nameCopySave, nameCopySaveAddadnModified.IdCopySave);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn("При обновлении/добавлении данных 'CopySave для МФУ' по : " + nameCopySaveAddadnModified.IdCopySave + " произошла ошибка смотри log.txt");
+            return new ModelReturn<CopySave>("При обновлении/добавлении данных 'CopySave для МФУ' по : " + nameCopySaveAddadnModified.IdCopySave + " произошла ошибка смотри log.txt");
         }
         /// <summary>
         /// Сигнал завершения процесса задачи

@@ -28,6 +28,7 @@
 				<xs:element ref="SysBlock" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="BlockPower" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="Telephon" minOccurs="0"/>
+				<xs:element ref="Swithe" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 			<xs:attribute name="IdUser" type="xs:int">
 				<xs:annotation>
@@ -74,6 +75,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="Kabinet" minOccurs="0"/>
+				<xs:element ref="CopySave" minOccurs="0"/>
 				<xs:element ref="FullProizvoditel"/>
 				<xs:element ref="FullModel"/>
 			</xs:sequence>
@@ -383,6 +385,54 @@
 			<xs:attribute name="Coment" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Коментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Swithe">
+		<xs:annotation>
+			<xs:documentation>Коммутаторы</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet" minOccurs="0"/>
+				<xs:element ref="ModelSwithe" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="ServiceNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModelSwithe">
+		<xs:annotation>
+			<xs:documentation>Модель комутатора</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameModel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CountPort" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Количество портов</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

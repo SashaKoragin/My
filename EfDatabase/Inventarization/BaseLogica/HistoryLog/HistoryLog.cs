@@ -20,15 +20,21 @@ namespace EfDatabase.Inventarization.BaseLogica.HistoryLog
         /// Генерация истории 
         /// </summary>
         /// <param name="guidhistory">GUID объекта</param>
-        /// <param name="user">Id поьзователя</param>
-        /// <param name="process">Описание процесса</param>
-        public void GenerateHistory(string guidhistory,int user,string process)
+        /// <param name="idmodel">Уникальный номер модели</param>
+        /// <param name="nameModel">Наименование классификации</param>
+        /// <param name="iduser">Id поьзователя</param>
+        /// <param name="oldmodel">Старая модель</param>
+        /// <param name="newmodel">Новая модель</param>
+        public void GenerateHistory(string guidhistory,int idmodel,string nameModel,int? iduser,string oldmodel,string newmodel)
         {
             History history = new History()
             {
                 IdHistory = guidhistory,
-                IdUser = user,
-                UserProcess = process
+                IdModel = idmodel,
+                NameModelClass = nameModel,
+                IdUser = iduser,
+                OldModelColums = oldmodel,
+                NewModelColums = newmodel
             };
             WriteHistory(history);
         }

@@ -35,6 +35,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestIFNSLibary", "TestIFNSLibary\TestIFNSLibary.csproj", "{5AE84E79-D255-4484-A265-A3831F1A7915}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestIFNSService", "TestIFNSService\TestIFNSService.csproj", "{85744CDE-C192-43D8-8560-2246503FE1F5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{381752F0-F34D-4D3E-96AD-92B7BA6CF213} = {381752F0-F34D-4D3E-96AD-92B7BA6CF213}
+	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupServiceTestIfns", "SetupServiceTestIfns\SetupServiceTestIfns.wixproj", "{D9A6F8CC-2678-4E05-AED2-41536039585B}"
 EndProject

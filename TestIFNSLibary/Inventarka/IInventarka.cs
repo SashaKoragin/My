@@ -118,6 +118,24 @@ namespace TestIFNSLibary.Inventarka
         Task<string> AllPrinters();
 
         /// <summary>
+        /// Все коммутаторы
+        /// http://localhost:8182/Inventarka/AllSwithes
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllSwithes", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllSwithes();
+
+        /// <summary>
+        /// Все модели коммутаторов
+        /// http://localhost:8182/Inventarka/AllModelSwithes
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllModelSwithes", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllModelSwithes();
+
+        /// <summary>
         /// Все сканеры
         /// http://localhost:8182/Inventarka/AllScaners
         /// </summary>
@@ -258,59 +276,86 @@ namespace TestIFNSLibary.Inventarka
         /// http://localhost:8182/Inventarka/AddAndEditUser
         /// </summary>
         /// <param name="user">Пользователь</param>
+        /// <param name="userIdEdit">Кто редактировал</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditUser", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditUser(User user);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditUser?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<User> AddAndEditUser(User user,string userIdEdit);
         /// <summary>
         /// Добавление принтера
         /// http://localhost:8182/Inventarka/AddAndEditPrinter
         /// </summary>
         /// <param name="printer"></param>
+        /// <param name="userIdEdit">Кто редактировал</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditPrinter", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditPrinter(EfDatabase.Inventarization.Base.Printer printer);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditPrinter?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventarization.Base.Printer> AddAndEditPrinter(EfDatabase.Inventarization.Base.Printer printer, string userIdEdit);
 
+        /// <summary>
+        /// Добавление Коммутатора
+        /// http://localhost:8182/Inventarka/AddAndEditSwith
+        /// </summary>
+        /// <param name="swith"></param>
+        /// <param name="userIdEdit">Кто редактировал</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditSwith?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventarization.Base.Swithe> AddAndEditSwith(EfDatabase.Inventarization.Base.Swithe swith, string userIdEdit);
+
+        /// <summary>
+        /// Добавление модели Коммутатора
+        /// http://localhost:8182/Inventarka/AddAndEditModelSwith
+        /// </summary>
+        /// <param name="modelswith"></param>
+        /// <returns></returns>
+        [OperationContract]
+       [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditModelSwith",
+           ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+       ModelReturn<EfDatabase.Inventarization.Base.ModelSwithe> AddAndEditModelSwith(EfDatabase.Inventarization.Base.ModelSwithe modelswith);
         /// <summary>
         /// Добавление сканера
         /// http://localhost:8182/Inventarka/AddAndEditScaner
         /// </summary>
         /// <param name="scaner"></param>
+        /// <param name="userIdEdit">Кто редактировал</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditScaner", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditScaner(EfDatabase.Inventarization.Base.ScanerAndCamer scaner);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditScaner?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventarization.Base.ScanerAndCamer> AddAndEditScaner(EfDatabase.Inventarization.Base.ScanerAndCamer scaner, string userIdEdit);
 
         /// <summary>
         /// Добавление или обновление мфу
         /// http://localhost:8182/Inventarka/AddAndEditMfu
         /// </summary>
         /// <param name="mfu"></param>
+        /// <param name="userIdEdit">Кто редактировал</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditMfu", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditMfu(EfDatabase.Inventarization.Base.Mfu mfu);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditMfu?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventarization.Base.Mfu> AddAndEditMfu(EfDatabase.Inventarization.Base.Mfu mfu, string userIdEdit);
 
         /// <summary>
         /// Добавление или обновление Системного блока
         /// http://localhost:8182/Inventarka/AddAndEditSysBlok
         /// </summary>
         /// <param name="sysblock"></param>
+        /// <param name="userIdEdit">Кто редактировал</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditSysBlok", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditSysBlok(EfDatabase.Inventarization.Base.SysBlock sysblock);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditSysBlok?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventarization.Base.SysBlock> AddAndEditSysBlok(EfDatabase.Inventarization.Base.SysBlock sysblock, string userIdEdit);
 
         /// <summary>
         /// Добавление или обновление Монитора
         /// http://localhost:8182/Inventarka/AddAndEditMonitor
         /// </summary>
         /// <param name="monitor"></param>
+        /// <param name="userIdEdit">Кто редактировал</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditMonitor", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditMonitor(Monitor monitor);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditMonitor?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<Monitor> AddAndEditMonitor(Monitor monitor, string userIdEdit);
 
         /// <summary>
         /// Добавление или обновление Монитора
@@ -320,7 +365,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditOtdel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditOtdel(EfDatabase.Inventarization.Base.Otdel otdel);
+        ModelReturn<EfDatabase.Inventarization.Base.Otdel> AddAndEditOtdel(EfDatabase.Inventarization.Base.Otdel otdel);
 
 
         /// <summary>
@@ -340,7 +385,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteDocument", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn DeleteDocument(int iddoc);
+        string DeleteDocument(int iddoc);
 
         /// <summary>
         /// Загрузка документа на внутренее перемещение
@@ -396,22 +441,25 @@ namespace TestIFNSLibary.Inventarka
         Task<string> ActualComputerIp();
         /// <summary>
         /// Добавление или обновление Телефона
-        /// http://localhost:8182/Inventarka/AddAndEditTelephone
+        /// http://localhost:8182/Inventarka/AddAndEditTelephone?userIdEdit={userIdEdit}
+        /// Но зачем мне сдесь Id Users SignalR? не понял если только уведомления отсылать в статический класс Возможно!!!
         /// </summary>
-        /// <param name="telephon"></param>
+        /// <param name="telephon">Телефон</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditTelephone", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditTelephon(EfDatabase.Inventarization.Base.Telephon telephon);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditTelephone?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventarization.Base.Telephon> AddAndEditTelephon(EfDatabase.Inventarization.Base.Telephon telephon, string userIdEdit);
         /// <summary>
         /// Добавление или обновление Телефона
         /// http://localhost:8182/Inventarka/AddAndEditBlockPower
         /// </summary>
-        /// <param name="blockpower"></param>
+        /// <param name="blockpower">Источник бесперебойного питания</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditBlockPower", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditBlockPower(EfDatabase.Inventarization.Base.BlockPower blockpower);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditBlockPower?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventarization.Base.BlockPower> AddAndEditBlockPower(EfDatabase.Inventarization.Base.BlockPower blockpower, string userIdEdit);
         /// <summary>
         /// Добавление или обновление наименование системного блока
         /// http://localhost:8182/Inventarka/AddAndEditNameSysBlock
@@ -420,7 +468,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameSysBlock", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameSysBlock(EfDatabase.Inventarization.Base.NameSysBlock nameSysBlock);
+        ModelReturn<EfDatabase.Inventarization.Base.NameSysBlock> AddAndEditNameSysBlock(EfDatabase.Inventarization.Base.NameSysBlock nameSysBlock);
 
         /// <summary>
         /// Добавление или обновление наименование монитора
@@ -430,7 +478,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameMonitor", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameMonitor(EfDatabase.Inventarization.Base.NameMonitor nameMonitor);
+        ModelReturn<EfDatabase.Inventarization.Base.NameMonitor> AddAndEditNameMonitor(EfDatabase.Inventarization.Base.NameMonitor nameMonitor);
 
         /// <summary>
         /// Добавление или обновление наименование модель ИБП
@@ -440,7 +488,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameModelBlokPower", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameModelBlokPower(EfDatabase.Inventarization.Base.ModelBlockPower nameModelBlokPower);
+        ModelReturn<EfDatabase.Inventarization.Base.ModelBlockPower> AddAndEditNameModelBlokPower(EfDatabase.Inventarization.Base.ModelBlockPower nameModelBlokPower);
 
         /// <summary>
         /// Добавление или обновление наименование производителя ИБП
@@ -450,7 +498,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameProizvoditelBlockPower", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameProizvoditelBlockPower(EfDatabase.Inventarization.Base.ProizvoditelBlockPower nameProizvoditelBlockPower);
+        ModelReturn<EfDatabase.Inventarization.Base.ProizvoditelBlockPower> AddAndEditNameProizvoditelBlockPower(EfDatabase.Inventarization.Base.ProizvoditelBlockPower nameProizvoditelBlockPower);
 
         /// <summary>
         /// Добавление или обновление наименование наименование партии
@@ -460,7 +508,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameSupply", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameSupply(EfDatabase.Inventarization.Base.Supply nameSupply);
+        ModelReturn<EfDatabase.Inventarization.Base.Supply> AddAndEditNameSupply(EfDatabase.Inventarization.Base.Supply nameSupply);
 
         /// <summary>
         /// Добавление или обновление наименование статуса
@@ -470,7 +518,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameStatus", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameStatus(EfDatabase.Inventarization.Base.Statusing nameStatus);
+        ModelReturn<EfDatabase.Inventarization.Base.Statusing> AddAndEditNameStatus(EfDatabase.Inventarization.Base.Statusing nameStatus);
 
         /// <summary>
         /// Добавление или обновление наименование кабинета
@@ -480,7 +528,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameKabinet", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameKabinet(EfDatabase.Inventarization.Base.Kabinet nameKabinet);
+        ModelReturn<EfDatabase.Inventarization.Base.Kabinet> AddAndEditNameKabinet(EfDatabase.Inventarization.Base.Kabinet nameKabinet);
 
         /// <summary>
         /// Добавление или обновление наименование модели принтера(МФУ)
@@ -490,7 +538,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameFullModel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameFullModel(EfDatabase.Inventarization.Base.FullModel nameFullModel);
+        ModelReturn<EfDatabase.Inventarization.Base.FullModel> AddAndEditNameFullModel(EfDatabase.Inventarization.Base.FullModel nameFullModel);
 
         /// <summary>
         /// Добавление или обновление наименование классификации принтера(МФУ)
@@ -500,7 +548,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameClassification", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameClassification(EfDatabase.Inventarization.Base.Classification nameClassification);
+        ModelReturn<EfDatabase.Inventarization.Base.Classification> AddAndEditNameClassification(EfDatabase.Inventarization.Base.Classification nameClassification);
 
         /// <summary> 
         /// Добавление или обновление наименование производителя принтера(МФУ) 
@@ -510,7 +558,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameFullProizvoditel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameFullProizvoditel(EfDatabase.Inventarization.Base.FullProizvoditel nameFullProizvoditel);
+        ModelReturn<EfDatabase.Inventarization.Base.FullProizvoditel> AddAndEditNameFullProizvoditel(EfDatabase.Inventarization.Base.FullProizvoditel nameFullProizvoditel);
 
         /// <summary> 
         /// Добавление или обновление CopySave для МФУ
@@ -520,7 +568,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditNameCopySave", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn AddAndEditNameCopySave(EfDatabase.Inventarization.Base.CopySave nameCopySave);
+        ModelReturn<EfDatabase.Inventarization.Base.CopySave> AddAndEditNameCopySave(EfDatabase.Inventarization.Base.CopySave nameCopySave);
 
 
    }

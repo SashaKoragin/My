@@ -57,6 +57,21 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventarization.Printers);
         }
+        /// <summary>
+        /// Выгрузка всех Коммутаторов
+        /// </summary>
+        /// <returns></returns>
+        public string Swithes()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventarization.Swithes);
+        }
+
+        public string ModelSwitch()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventarization.ModelSwithes);
+        }
 
         /// <summary>
         /// Запрос всех сканеров с БД

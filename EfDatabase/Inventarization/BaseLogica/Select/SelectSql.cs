@@ -26,7 +26,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
             Inventarization = new InventarizationContext();
         }
         /// <summary>
-        /// Генерация модели с параметрами для дальнейших выборок
+        /// Генерация модели с параметрами для пользовательских выборок
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -49,17 +49,20 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         /// Запрос на лиц кто согласовывает надо добавлять в xml
         /// </summary>
         /// <param name="template">Шаблон возврата</param>
-       public ModelSelect SendersUsers(ref RuleTemplate template)
+        public ModelSelect SendersUsers(ref RuleTemplate template)
        {
            try
            {
                 ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(13) };
                 template.SenderUsers.Security = Inventarization.Database.SqlQuery<Security>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], 3),
                           new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел безопасности"),
-                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).ToList()[0];
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).FirstOrDefault();
                 template.SenderUsers.ItOtdel = Inventarization.Database.SqlQuery<ItOtdel>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], 4),
                           new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел информатизации"),
-                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).ToList()[0];
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).FirstOrDefault();
+                template.SenderUsers.SenderRukovodstvo = Inventarization.Database.SqlQuery<SenderRukovodstvo>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], 5),
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Руководство"),
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).FirstOrDefault();
                 return model; 
             }
             catch (Exception e)
@@ -76,7 +79,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         /// <param name="sqlselect">Запрос к БД для выборки данных</param>
        public void UserRuleModel(ref RuleTemplate template, UserRules userRule, ModelSelect sqlselect)
         {
-            var groupelement = userRule.User.GroupBy(x => new {x.Dates, x.Number,x.Otdel}).Select(x => new {x.Key.Number, x.Key.Dates,x.Key.Otdel}).ToList();
+            var groupelement = userRule.User.Where(x=>x.Number!="Скрипт").GroupBy(x => new {x.Dates, x.Number,x.Otdel}).Select(x => new {x.Key.Number, x.Key.Dates,x.Key.Otdel}).ToList();
             int i = 0;
             foreach (var gr in groupelement)
             {
@@ -86,21 +89,26 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
                 }
                 template.Otdel[i] = Inventarization.Database.SqlQuery<LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel>(sqlselect.LogicaSelect.SelectUser, new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[0], 1),
                           new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[1], gr.Otdel.Replace("№ ","№")),
-                          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[2], gr.Number)).ToList()[0];
+                          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[2], gr.Number)).FirstOrDefault();
                 template.Otdel[i].Dates = gr.Dates;
-                var user = userRule.User.Where(userrule =>(userrule.Dates == gr.Dates) && (userrule.Number == gr.Number) && (userrule.Otdel == gr.Otdel)).ToList();
+                var user = userRule.User.Where(userrule => (userrule.Dates == gr.Dates) && (userrule.Number == gr.Number) && (userrule.Otdel == gr.Otdel)).Select(u => new { u.Dates, u.Fio, u.SysName, u.Dolj, u.Otdel, u.Number }).Distinct().ToList();
                 int j = 0;
                 foreach (var userule in user)
                 {
+                    var ruleall = userRule.User.Where(u =>
+                                  u.Dates == userule.Dates && u.Dolj == userule.Dolj && u.Otdel == userule.Otdel &&
+                                  u.Fio == userule.Fio && u.SysName == userule.SysName && u.Number == userule.Number).
+                                  Select(x => x.Rule).Aggregate((element, next) => element.Concat(next).ToArray());
                     if (template.Otdel[i].Users == null)
                     {
                         template.Otdel[i].Users = new LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Users[user.Count];
                     }
                     template.Otdel[i].Users[j] = Inventarization.Database.SqlQuery<LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Users>(sqlselect.LogicaSelect.SelectUser, new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[0], 2),
                           new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[1], userule.SysName.Split('@')[0]),
-                          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).ToList()[0];
-                    template.Otdel[i].Users[j].RuleTemplate = userule.Rule.Select(elem=> $"{elem.Types}: {elem.Name}").Aggregate(
+                          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).FirstOrDefault();
+                    template.Otdel[i].Users[j].RuleTemplate = ruleall.Select(elem=> $"{elem.Types}: {elem.Name}").Aggregate(
                         (element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : ", ") + next);
+                    template.Otdel[i].Users[j].Pushed = ruleall[0].Pushed;
                     j++;
                 }
                 i++;
@@ -190,7 +198,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         /// </summary>
         /// <param name="id">Параметр индекса в таблицы</param>
         /// <returns></returns>
-       private EfDatabaseParametrsModel.LogicaSelect SqlSelectModel(int id)
+       public EfDatabaseParametrsModel.LogicaSelect SqlSelectModel(int id)
        {
             return Inventarization.Database.SqlQuery<EfDatabaseParametrsModel.LogicaSelect>(String.Format(ProcedureSelect, id)).ToList()[0];
        }
