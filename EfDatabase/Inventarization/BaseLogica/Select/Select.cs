@@ -19,6 +19,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
             Inventarization?.Dispose();
             Inventarization = new InventarizationContext();
         }
+
         /// <summary>
         /// Запрос на список отделов
         /// </summary>
@@ -27,6 +28,16 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         {
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventarization.Otdels);
+        }
+
+        /// <summary>
+        /// Загрузка всех ролей пользователя для выбора!
+        /// </summary>
+        /// <returns></returns>
+        public string RuleAll()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventarization.Rules);
         }
         /// <summary>
         /// Запрос всех пользователей

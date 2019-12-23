@@ -188,7 +188,15 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.UsersAll());
         }
-
+        /// <summary>
+        /// Запрос на все роли
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllRules()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.RuleAll());
+        }
         /// <summary>
         /// Запрос всех должностей
         /// </summary>
@@ -653,6 +661,10 @@ namespace TestIFNSLibary.Inventarka
         public ModelReturn<Supply> AddAndEditNameSupply(Supply nameSupply)
         {
             AddObjectDb add = new AddObjectDb();
+            if (nameSupply.DatePostavki != null)
+            {
+                nameSupply.DatePostavki = nameSupply.DatePostavki.Value.AddHours(4);
+            }
             var model = add.AddAndEditNameSupply(nameSupply);
             if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSupply(model.Model); }
             return model;

@@ -432,11 +432,11 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                 TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 1));
             cellcCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Дата записи", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(1.4),
                 TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 1));
-            cellcCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Документ", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(3.2),
+            cellcCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Документ", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(4.2),
                 TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2));
-            cellcCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("От кого получено (кому отпущено)", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(4.6),
+            cellcCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("От кого получено (кому отпущено)", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(4.0),
                 TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 1));
-            cellcCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Приход", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(1.9),
+            cellcCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Приход", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(1.5),
                 TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 1));
             cellcCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Расход", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(1.7),
                 TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 1));

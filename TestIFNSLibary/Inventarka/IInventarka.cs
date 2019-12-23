@@ -72,6 +72,14 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllOtdels", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> AllOtdels();
         /// <summary>
+        /// Все роли в БД
+        /// http://localhost:8182/Inventarka/AllRules
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET",RequestFormat = WebMessageFormat.Json,UriTemplate = "/AllRules",ResponseFormat = WebMessageFormat.Json,BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllRules();
+        /// <summary>
         /// Все пользователи 
         /// http://localhost:8182/Inventarka/AllUsers
         /// </summary>
