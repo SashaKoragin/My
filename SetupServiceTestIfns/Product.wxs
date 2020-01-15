@@ -4,8 +4,8 @@
   <?define TestIFNSLibary_TargetDir=$(var.TestIFNSLibary.TargetDir)?>
   <?define CurrentVersion="!(bind.fileVersion.TestIFNSService.exe)"?>
   <?define Loggers_TargetDir=$(var.Loggers.TargetDir)?>
-  <?define LibaryXMLAuto_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\LibaryXMLAuto\bin\Debug\"?>
-  <?define SqlLibaryIfns_TargetDir="D:\Visual Studio 2012\StudioBlend\WPFLib\SqlLibaryIfns\bin\Debug\"?>
+  <?define LibaryXMLAuto_TargetDir="D:\ProjectC#\WPFLib\WPFLib\LibaryXMLAuto\bin\Debug\"?>
+  <?define SqlLibaryIfns_TargetDir="D:\ProjectC#\WPFLib\WPFLib\SqlLibaryIfns\bin\Debug\"?>
   <?define LibaryDocumentGenerator_TargetDir=$(var.LibaryDocumentGenerator.TargetDir)?>
   <?define EfDatabase_TargetDir=$(var.EfDatabase.TargetDir)?>
   <?define SignalRLibary_TargetDir=$(var.SignalRLibary.TargetDir)?>

@@ -66,13 +66,9 @@
     <Compile Include="Sql\ProcedureInventorization\UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\StudioBlend\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
-      <Project>{A2BC3AE2-4A61-4E9E-9FA4-96A02677C79C}</Project>
+    <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
+      <Project>{a2bc3ae2-4a61-4e9e-9fa4-96a02677c79c}</Project>
       <Name>LibaryXMLAuto</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\StudioBlend\WPFLib\SqlLibaryIfns\SqlLibaryIfns.csproj">
-      <Project>{128c2bf1-de92-4bb8-bda0-eefc5eab66d2}</Project>
-      <Name>SqlLibaryIfns</Name>
     </ProjectReference>
     <ProjectReference Include="..\EfDatabase\EfDatabase.csproj">
       <Project>{578cf45e-310b-4e2e-9c94-5a9f16b736ae}</Project>

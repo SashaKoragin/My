@@ -91,11 +91,11 @@
     <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\StudioBlend\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
+    <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
       <Project>{a2bc3ae2-4a61-4e9e-9fa4-96a02677c79c}</Project>
       <Name>LibaryXMLAuto</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\StudioBlend\WPFLib\SqlLibaryIfns\SqlLibaryIfns.csproj">
+    <ProjectReference Include="..\..\WPFLib\WPFLib\SqlLibaryIfns\SqlLibaryIfns.csproj">
       <Project>{128c2bf1-de92-4bb8-bda0-eefc5eab66d2}</Project>
       <Name>SqlLibaryIfns</Name>
     </ProjectReference>

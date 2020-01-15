@@ -153,7 +153,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\StudioBlend\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
+    <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
       <Project>{a2bc3ae2-4a61-4e9e-9fa4-96a02677c79c}</Project>
       <Name>LibaryXMLAuto</Name>
     </ProjectReference>
@@ -187,7 +187,7 @@
       <Output TaskParameter="Path" PropertyName="WindowsSdkPath" />
     </GetFrameworkSdkPath>
     <PropertyGroup>
-      <XsdToolPath>$(WindowsSdkPath)bin\NETFX 4.6 Tools</XsdToolPath>
+      <XsdToolPath>$(WindowsSdkPath)bin\NETFX 4.7 Tools</XsdToolPath>
     </PropertyGroup>
     <Message Importance="high" Text="Processing XSD schemas" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdFiles.FullPath)&quot; /c /namespace:$(RootNamespace)ParametrsModel /outputdir:Inventarization\DataTransferObject\ParametrModelSelect\" />

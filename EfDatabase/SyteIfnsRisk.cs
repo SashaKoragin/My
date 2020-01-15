@@ -36,46 +36,107 @@ namespace Ifns51.Risk
 
     public interface IRisksContext : System.IDisposable
     {
+        System.Data.Entity.DbSet<Actstat> Actstats { get; set; } // ACTSTAT
+        System.Data.Entity.DbSet<Addrobj> Addrobjs { get; set; } // ADDROBJ
         System.Data.Entity.DbSet<AhalisBdk> AhalisBdks { get; set; } // AhalisBdk
+        System.Data.Entity.DbSet<AisHandler> AisHandlers { get; set; } // AIS_HANDLER
+        System.Data.Entity.DbSet<AisHd> AisHds { get; set; } // AIS_HD
+        System.Data.Entity.DbSet<AisProcess> AisProcesses { get; set; } // AIS_PROCESS
+        System.Data.Entity.DbSet<AisProcessLog> AisProcessLogs { get; set; } // AIS_PROCESS_LOG
         System.Data.Entity.DbSet<AnalizNo> AnalizNoes { get; set; } // AnalizNO
+        System.Data.Entity.DbSet<AsActstat> AsActstats { get; set; } // AS_ACTSTAT
+        System.Data.Entity.DbSet<AsAddrobj> AsAddrobjs { get; set; } // AS_ADDROBJ
+        System.Data.Entity.DbSet<AsCenterst> AsCentersts { get; set; } // AS_CENTERST
+        System.Data.Entity.DbSet<AsCurentst> AsCurentsts { get; set; } // AS_CURENTST
+        System.Data.Entity.DbSet<AsDelAddrobj> AsDelAddrobjs { get; set; } // AS_DEL_ADDROBJ
+        System.Data.Entity.DbSet<AsDelHouse> AsDelHouses { get; set; } // AS_DEL_HOUSE
+        System.Data.Entity.DbSet<AsDelHouseint> AsDelHouseints { get; set; } // AS_DEL_HOUSEINT
+        System.Data.Entity.DbSet<AsDelLandmark> AsDelLandmarks { get; set; } // AS_DEL_LANDMARK
+        System.Data.Entity.DbSet<AsDelNormdoc> AsDelNormdocs { get; set; } // AS_DEL_NORMDOC
+        System.Data.Entity.DbSet<AsEststat> AsEststats { get; set; } // AS_ESTSTAT
+        System.Data.Entity.DbSet<AsFlattype> AsFlattypes { get; set; } // AS_FLATTYPE
+        System.Data.Entity.DbSet<AsHouse> AsHouses { get; set; } // AS_HOUSE
+        System.Data.Entity.DbSet<AsHouseint> AsHouseints { get; set; } // AS_HOUSEINT
+        System.Data.Entity.DbSet<AsHststat> AsHststats { get; set; } // AS_HSTSTAT
+        System.Data.Entity.DbSet<AsIntvstat> AsIntvstats { get; set; } // AS_INTVSTAT
+        System.Data.Entity.DbSet<AsLandmark> AsLandmarks { get; set; } // AS_LANDMARK
+        System.Data.Entity.DbSet<AsNdoctype> AsNdoctypes { get; set; } // AS_NDOCTYPE
+        System.Data.Entity.DbSet<AsNormdoc> AsNormdocs { get; set; } // AS_NORMDOC
+        System.Data.Entity.DbSet<AsOperstat> AsOperstats { get; set; } // AS_OPERSTAT
+        System.Data.Entity.DbSet<AsRoom> AsRooms { get; set; } // AS_ROOM
+        System.Data.Entity.DbSet<AsRoomtype> AsRoomtypes { get; set; } // AS_ROOMTYPE
+        System.Data.Entity.DbSet<AsSocrbase> AsSocrbases { get; set; } // AS_SOCRBASE
+        System.Data.Entity.DbSet<AsStead> AsSteads { get; set; } // AS_STEAD
+        System.Data.Entity.DbSet<AsStrstat> AsStrstats { get; set; } // AS_STRSTAT
+        System.Data.Entity.DbSet<AsVersion> AsVersions { get; set; } // AS_VERSION
         System.Data.Entity.DbSet<BankAccExclusion> BankAccExclusions { get; set; } // BANK_ACC_EXCLUSION
         System.Data.Entity.DbSet<BankAccPlan> BankAccPlans { get; set; } // BANK_ACC_PLAN
         System.Data.Entity.DbSet<BankDocument> BankDocuments { get; set; } // BANK_DOCUMENT
         System.Data.Entity.DbSet<BankOperation> BankOperations { get; set; } // BANK_OPERATIONS
+        System.Data.Entity.DbSet<Bnkseek> Bnkseeks { get; set; } // BNKSEEK
         System.Data.Entity.DbSet<Body> Bodies { get; set; } // Body
         System.Data.Entity.DbSet<CbrBank> CbrBanks { get; set; } // CBR_BANKS
         System.Data.Entity.DbSet<CbrBankRelevance> CbrBankRelevances { get; set; } // CBR_BANK_RELEVANCE
+        System.Data.Entity.DbSet<Centerst> Centersts { get; set; } // CENTERST
         System.Data.Entity.DbSet<ClassOtdel> ClassOtdels { get; set; } // ClassOtdel
         System.Data.Entity.DbSet<ConfigCode> ConfigCodes { get; set; } // CONFIG_CODE
+        System.Data.Entity.DbSet<Curentst> Curentsts { get; set; } // CURENTST
         System.Data.Entity.DbSet<DbConfig> DbConfigs { get; set; } // DB_CONFIG
         System.Data.Entity.DbSet<DelaPriemObu> DelaPriemObus { get; set; } // DelaPriemObu
         System.Data.Entity.DbSet<Delo> Deloes { get; set; } // Delo
         System.Data.Entity.DbSet<DocTemplate> DocTemplates { get; set; } // DocTemplate
         System.Data.Entity.DbSet<DocumentDetalization> DocumentDetalizations { get; set; } // DocumentDetalization
         System.Data.Entity.DbSet<DocumentReglament> DocumentReglaments { get; set; } // DocumentReglament
+        System.Data.Entity.DbSet<Eststat> Eststats { get; set; } // ESTSTAT
         System.Data.Entity.DbSet<Face> Faces { get; set; } // Face
+        System.Data.Entity.DbSet<FiasLoad> FiasLoads { get; set; } // FIAS_LOAD
+        System.Data.Entity.DbSet<FiasVersion> FiasVersions { get; set; } // FIAS_VERSION
+        System.Data.Entity.DbSet<FileIcon> FileIcons { get; set; } // FILE_ICON
+        System.Data.Entity.DbSet<Flattype> Flattypes { get; set; } // FLATTYPE
         System.Data.Entity.DbSet<Fn1341> Fn1341 { get; set; } // fn1341
         System.Data.Entity.DbSet<Fn1341Trust> Fn1341Trust { get; set; } // FN1341_TRUST
         System.Data.Entity.DbSet<Fn18441> Fn18441 { get; set; } // FN18441
         System.Data.Entity.DbSet<Fn1903> Fn1903 { get; set; } // FN1903
         System.Data.Entity.DbSet<Fn3042> Fn3042 { get; set; } // FN3042
-        System.Data.Entity.DbSet<Fn72Web> Fn72Web { get; set; } // FN72_WEB
+        System.Data.Entity.DbSet<Fn502> Fn502 { get; set; } // FN50_2
+        System.Data.Entity.DbSet<Fn503> Fn503 { get; set; } // FN50_3
         System.Data.Entity.DbSet<GroupOtdel> GroupOtdels { get; set; } // GroupOtdel
         System.Data.Entity.DbSet<Header> Headers { get; set; } // Headers
+        System.Data.Entity.DbSet<House> Houses { get; set; } // HOUSE
+        System.Data.Entity.DbSet<Hststat> Hststats { get; set; } // HSTSTAT
         System.Data.Entity.DbSet<Incass> Incasses { get; set; } // Incass
+        System.Data.Entity.DbSet<Intvstat> Intvstats { get; set; } // INTVSTAT
+        System.Data.Entity.DbSet<IteratorRe> IteratorRes { get; set; } // ITERATOR_RES
         System.Data.Entity.DbSet<JobDataDt> JobDataDts { get; set; } // JOB_DATA_DT
         System.Data.Entity.DbSet<JobDataInt> JobDataInts { get; set; } // JOB_DATA_INT
         System.Data.Entity.DbSet<JobDataStr> JobDataStrs { get; set; } // JOB_DATA_STR
+        System.Data.Entity.DbSet<JobDataXml> JobDataXmls { get; set; } // JOB_DATA_XML
         System.Data.Entity.DbSet<JobDatum> JobDatums { get; set; } // JOB_DATA
+        System.Data.Entity.DbSet<KaoCerhistory> KaoCerhistories { get; set; } // KAO_CERHISTORY
+        System.Data.Entity.DbSet<KaoRhistory> KaoRhistories { get; set; } // KAO_RHISTORY
+        System.Data.Entity.DbSet<KaoRogue> KaoRogues { get; set; } // KAO_ROGUE
+        System.Data.Entity.DbSet<KaoRogueAbo> KaoRogueAboes { get; set; } // KAO_ROGUE_ABO
+        System.Data.Entity.DbSet<KaoRogueCert> KaoRogueCerts { get; set; } // KAO_ROGUE_CERT
         System.Data.Entity.DbSet<KbkAnaliz> KbkAnalizs { get; set; } // KbkAnaliz
+        System.Data.Entity.DbSet<Landmark> Landmarks { get; set; } // LANDMARK
+        System.Data.Entity.DbSet<LockNg> LockNgs { get; set; } // LOCK_NG
         System.Data.Entity.DbSet<LotusDoc> LotusDocs { get; set; } // LOTUS_DOCS
         System.Data.Entity.DbSet<LotusFile> LotusFiles { get; set; } // LOTUS_FILE
+        System.Data.Entity.DbSet<LotusMovement> LotusMovements { get; set; } // LOTUS_MOVEMENT
+        System.Data.Entity.DbSet<LotusMovementHistory> LotusMovementHistories { get; set; } // LOTUS_MOVEMENT_HISTORY
         System.Data.Entity.DbSet<LotusSequence> LotusSequences { get; set; } // LOTUS_SEQUENCE
         System.Data.Entity.DbSet<MessageDate> MessageDates { get; set; } // MessageDate
         System.Data.Entity.DbSet<MessageStatusUh> MessageStatusUhs { get; set; } // MessageStatusUh
         System.Data.Entity.DbSet<MessageStrahovieAndOtkaz> MessageStrahovieAndOtkazs { get; set; } // MessageStrahovieAndOtkaz
         System.Data.Entity.DbSet<MessageVivod> MessageVivods { get; set; } // MessageVivod
         System.Data.Entity.DbSet<NameDocument> NameDocuments { get; set; } // NameDocument
+        System.Data.Entity.DbSet<NdflInv> NdflInvs { get; set; } // NDFL_INV
+        System.Data.Entity.DbSet<Ndoctype> Ndoctypes { get; set; } // NDOCTYPE
+        System.Data.Entity.DbSet<Normdoc> Normdocs { get; set; } // NORMDOC
+        System.Data.Entity.DbSet<Operstat> Operstats { get; set; } // OPERSTAT
+        System.Data.Entity.DbSet<RbCourt> RbCourts { get; set; } // RB_COURT
+        System.Data.Entity.DbSet<RbCourtType> RbCourtTypes { get; set; } // RB_COURT_TYPE
+        System.Data.Entity.DbSet<RbDeclCode> RbDeclCodes { get; set; } // RB_DECL_CODES
         System.Data.Entity.DbSet<RbReport> RbReports { get; set; } // RB_REPORT
         System.Data.Entity.DbSet<ReportFilter> ReportFilters { get; set; } // REPORT_FILTER
         System.Data.Entity.DbSet<ReqType> ReqTypes { get; set; } // REQ_TYPE
@@ -88,6 +149,7 @@ namespace Ifns51.Risk
         System.Data.Entity.DbSet<RiskDossier> RiskDossiers { get; set; } // RISK_DOSSIER
         System.Data.Entity.DbSet<RiskFailure> RiskFailures { get; set; } // RISK_FAILURE
         System.Data.Entity.DbSet<RiskField> RiskFields { get; set; } // RISK_FIELDS
+        System.Data.Entity.DbSet<RiskFn1048> RiskFn1048 { get; set; } // RISK_FN1048
         System.Data.Entity.DbSet<RiskFn1836> RiskFn1836 { get; set; } // RISK_FN1836
         System.Data.Entity.DbSet<RiskFn1844> RiskFn1844 { get; set; } // RISK_FN1844
         System.Data.Entity.DbSet<RiskFn1903> RiskFn1903 { get; set; } // RISK_FN1903
@@ -101,11 +163,18 @@ namespace Ifns51.Risk
         System.Data.Entity.DbSet<RiskFn71> RiskFn71 { get; set; } // RISK_FN71
         System.Data.Entity.DbSet<RiskFn72> RiskFn72 { get; set; } // RISK_FN72
         System.Data.Entity.DbSet<RiskFn74> RiskFn74 { get; set; } // RISK_FN74
+        System.Data.Entity.DbSet<RiskIncomeTaxation> RiskIncomeTaxations { get; set; } // RISK_INCOME_TAXATION
         System.Data.Entity.DbSet<RiskLock> RiskLocks { get; set; } // RISK_LOCK
         System.Data.Entity.DbSet<RiskMime> RiskMimes { get; set; } // RISK_MIME
+        System.Data.Entity.DbSet<RiskNdfl> RiskNdfls { get; set; } // RISK_NDFL
+        System.Data.Entity.DbSet<RiskNdfl2> RiskNdfl2 { get; set; } // RISK_NDFL2
+        System.Data.Entity.DbSet<RiskProxy> RiskProxies { get; set; } // RISK_PROXY
         System.Data.Entity.DbSet<RiskVersion> RiskVersions { get; set; } // RISK_VERSION
         System.Data.Entity.DbSet<RiskWeb> RiskWebs { get; set; } // RISK_WEB
         System.Data.Entity.DbSet<RiskYear> RiskYears { get; set; } // RISK_YEAR
+        System.Data.Entity.DbSet<Room> Rooms { get; set; } // ROOM
+        System.Data.Entity.DbSet<Roomtype> Roomtypes { get; set; } // ROOMTYPE
+        System.Data.Entity.DbSet<ServerIfn> ServerIfns { get; set; } // ServerIfns
         System.Data.Entity.DbSet<ServiceWcfCommand> ServiceWcfCommands { get; set; } // ServiceWcfCommand
         System.Data.Entity.DbSet<ShedJob> ShedJobs { get; set; } // SHED_JOB
         System.Data.Entity.DbSet<ShedJobDatum> ShedJobDatums { get; set; } // SHED_JOB_DATA
@@ -119,18 +188,31 @@ namespace Ifns51.Risk
         System.Data.Entity.DbSet<SmevReq> SmevReqs { get; set; } // SMEV_REQ
         System.Data.Entity.DbSet<SmevResponse> SmevResponses { get; set; } // SMEV_RESPONSE
         System.Data.Entity.DbSet<SobytieOtdel> SobytieOtdels { get; set; } // SobytieOtdel
+        System.Data.Entity.DbSet<Socrbase> Socrbases { get; set; } // SOCRBASE
         System.Data.Entity.DbSet<StatusAnaliz> StatusAnalizs { get; set; } // StatusAnaliz
         System.Data.Entity.DbSet<StatusPriem> StatusPriems { get; set; } // StatusPriem
         System.Data.Entity.DbSet<StatusTrebOnIcass> StatusTrebOnIcasses { get; set; } // StatusTrebOnIcass
+        System.Data.Entity.DbSet<Stead> Steads { get; set; } // STEAD
         System.Data.Entity.DbSet<Stone> Stones { get; set; } // Stone
+        System.Data.Entity.DbSet<Strstat> Strstats { get; set; } // STRSTAT
         System.Data.Entity.DbSet<TableSysNumReshen> TableSysNumReshens { get; set; } // TableSysNumReshen
         System.Data.Entity.DbSet<Template> Templates { get; set; } // Template
         System.Data.Entity.DbSet<UseTableTemplateBdk> UseTableTemplateBdks { get; set; } // UseTableTemplateBdk
-        System.Data.Entity.DbSet<VatDatum> VatDatums { get; set; } // VAT_DATA
         System.Data.Entity.DbSet<VidDelaException> VidDelaExceptions { get; set; } // VidDelaException
+        System.Data.Entity.DbSet<WhdDecl> WhdDecls { get; set; } // WHD_DECL
+        System.Data.Entity.DbSet<WhdFn212> WhdFn212 { get; set; } // WHD_FN212
+        System.Data.Entity.DbSet<WhdGauge> WhdGauges { get; set; } // WHD_GAUGE
+        System.Data.Entity.DbSet<WhdVnp> WhdVnps { get; set; } // WHD_VNP
+        System.Data.Entity.DbSet<WhfAccreq> WhfAccreqs { get; set; } // WHF_ACCREQ
+        System.Data.Entity.DbSet<WhfGap> WhfGaps { get; set; } // WHF_GAPS
+        System.Data.Entity.DbSet<WhfVat> WhfVats { get; set; } // WHF_VAT
+        System.Data.Entity.DbSet<WhtOperation> WhtOperations { get; set; } // WHT_OPERATIONS
+        System.Data.Entity.DbSet<WhtThreshold> WhtThresholds { get; set; } // WHT_THRESHOLDS
         System.Data.Entity.DbSet<WordDocument> WordDocuments { get; set; } // WordDocument
+        System.Data.Entity.DbSet<Xlcolor> Xlcolors { get; set; } // XLCOLOR
         System.Data.Entity.DbSet<XlReport> XlReports { get; set; } // XL_REPORT
         System.Data.Entity.DbSet<XlReportAcl> XlReportAcls { get; set; } // XL_REPORT_ACL
+        System.Data.Entity.DbSet<XmlParam> XmlParams { get; set; } // XML_PARAMS
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
@@ -153,46 +235,107 @@ namespace Ifns51.Risk
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class RisksContext : System.Data.Entity.DbContext, IRisksContext
     {
+        public System.Data.Entity.DbSet<Actstat> Actstats { get; set; } // ACTSTAT
+        public System.Data.Entity.DbSet<Addrobj> Addrobjs { get; set; } // ADDROBJ
         public System.Data.Entity.DbSet<AhalisBdk> AhalisBdks { get; set; } // AhalisBdk
+        public System.Data.Entity.DbSet<AisHandler> AisHandlers { get; set; } // AIS_HANDLER
+        public System.Data.Entity.DbSet<AisHd> AisHds { get; set; } // AIS_HD
+        public System.Data.Entity.DbSet<AisProcess> AisProcesses { get; set; } // AIS_PROCESS
+        public System.Data.Entity.DbSet<AisProcessLog> AisProcessLogs { get; set; } // AIS_PROCESS_LOG
         public System.Data.Entity.DbSet<AnalizNo> AnalizNoes { get; set; } // AnalizNO
+        public System.Data.Entity.DbSet<AsActstat> AsActstats { get; set; } // AS_ACTSTAT
+        public System.Data.Entity.DbSet<AsAddrobj> AsAddrobjs { get; set; } // AS_ADDROBJ
+        public System.Data.Entity.DbSet<AsCenterst> AsCentersts { get; set; } // AS_CENTERST
+        public System.Data.Entity.DbSet<AsCurentst> AsCurentsts { get; set; } // AS_CURENTST
+        public System.Data.Entity.DbSet<AsDelAddrobj> AsDelAddrobjs { get; set; } // AS_DEL_ADDROBJ
+        public System.Data.Entity.DbSet<AsDelHouse> AsDelHouses { get; set; } // AS_DEL_HOUSE
+        public System.Data.Entity.DbSet<AsDelHouseint> AsDelHouseints { get; set; } // AS_DEL_HOUSEINT
+        public System.Data.Entity.DbSet<AsDelLandmark> AsDelLandmarks { get; set; } // AS_DEL_LANDMARK
+        public System.Data.Entity.DbSet<AsDelNormdoc> AsDelNormdocs { get; set; } // AS_DEL_NORMDOC
+        public System.Data.Entity.DbSet<AsEststat> AsEststats { get; set; } // AS_ESTSTAT
+        public System.Data.Entity.DbSet<AsFlattype> AsFlattypes { get; set; } // AS_FLATTYPE
+        public System.Data.Entity.DbSet<AsHouse> AsHouses { get; set; } // AS_HOUSE
+        public System.Data.Entity.DbSet<AsHouseint> AsHouseints { get; set; } // AS_HOUSEINT
+        public System.Data.Entity.DbSet<AsHststat> AsHststats { get; set; } // AS_HSTSTAT
+        public System.Data.Entity.DbSet<AsIntvstat> AsIntvstats { get; set; } // AS_INTVSTAT
+        public System.Data.Entity.DbSet<AsLandmark> AsLandmarks { get; set; } // AS_LANDMARK
+        public System.Data.Entity.DbSet<AsNdoctype> AsNdoctypes { get; set; } // AS_NDOCTYPE
+        public System.Data.Entity.DbSet<AsNormdoc> AsNormdocs { get; set; } // AS_NORMDOC
+        public System.Data.Entity.DbSet<AsOperstat> AsOperstats { get; set; } // AS_OPERSTAT
+        public System.Data.Entity.DbSet<AsRoom> AsRooms { get; set; } // AS_ROOM
+        public System.Data.Entity.DbSet<AsRoomtype> AsRoomtypes { get; set; } // AS_ROOMTYPE
+        public System.Data.Entity.DbSet<AsSocrbase> AsSocrbases { get; set; } // AS_SOCRBASE
+        public System.Data.Entity.DbSet<AsStead> AsSteads { get; set; } // AS_STEAD
+        public System.Data.Entity.DbSet<AsStrstat> AsStrstats { get; set; } // AS_STRSTAT
+        public System.Data.Entity.DbSet<AsVersion> AsVersions { get; set; } // AS_VERSION
         public System.Data.Entity.DbSet<BankAccExclusion> BankAccExclusions { get; set; } // BANK_ACC_EXCLUSION
         public System.Data.Entity.DbSet<BankAccPlan> BankAccPlans { get; set; } // BANK_ACC_PLAN
         public System.Data.Entity.DbSet<BankDocument> BankDocuments { get; set; } // BANK_DOCUMENT
         public System.Data.Entity.DbSet<BankOperation> BankOperations { get; set; } // BANK_OPERATIONS
+        public System.Data.Entity.DbSet<Bnkseek> Bnkseeks { get; set; } // BNKSEEK
         public System.Data.Entity.DbSet<Body> Bodies { get; set; } // Body
         public System.Data.Entity.DbSet<CbrBank> CbrBanks { get; set; } // CBR_BANKS
         public System.Data.Entity.DbSet<CbrBankRelevance> CbrBankRelevances { get; set; } // CBR_BANK_RELEVANCE
+        public System.Data.Entity.DbSet<Centerst> Centersts { get; set; } // CENTERST
         public System.Data.Entity.DbSet<ClassOtdel> ClassOtdels { get; set; } // ClassOtdel
         public System.Data.Entity.DbSet<ConfigCode> ConfigCodes { get; set; } // CONFIG_CODE
+        public System.Data.Entity.DbSet<Curentst> Curentsts { get; set; } // CURENTST
         public System.Data.Entity.DbSet<DbConfig> DbConfigs { get; set; } // DB_CONFIG
         public System.Data.Entity.DbSet<DelaPriemObu> DelaPriemObus { get; set; } // DelaPriemObu
         public System.Data.Entity.DbSet<Delo> Deloes { get; set; } // Delo
         public System.Data.Entity.DbSet<DocTemplate> DocTemplates { get; set; } // DocTemplate
         public System.Data.Entity.DbSet<DocumentDetalization> DocumentDetalizations { get; set; } // DocumentDetalization
         public System.Data.Entity.DbSet<DocumentReglament> DocumentReglaments { get; set; } // DocumentReglament
+        public System.Data.Entity.DbSet<Eststat> Eststats { get; set; } // ESTSTAT
         public System.Data.Entity.DbSet<Face> Faces { get; set; } // Face
+        public System.Data.Entity.DbSet<FiasLoad> FiasLoads { get; set; } // FIAS_LOAD
+        public System.Data.Entity.DbSet<FiasVersion> FiasVersions { get; set; } // FIAS_VERSION
+        public System.Data.Entity.DbSet<FileIcon> FileIcons { get; set; } // FILE_ICON
+        public System.Data.Entity.DbSet<Flattype> Flattypes { get; set; } // FLATTYPE
         public System.Data.Entity.DbSet<Fn1341> Fn1341 { get; set; } // fn1341
         public System.Data.Entity.DbSet<Fn1341Trust> Fn1341Trust { get; set; } // FN1341_TRUST
         public System.Data.Entity.DbSet<Fn18441> Fn18441 { get; set; } // FN18441
         public System.Data.Entity.DbSet<Fn1903> Fn1903 { get; set; } // FN1903
         public System.Data.Entity.DbSet<Fn3042> Fn3042 { get; set; } // FN3042
-        public System.Data.Entity.DbSet<Fn72Web> Fn72Web { get; set; } // FN72_WEB
+        public System.Data.Entity.DbSet<Fn502> Fn502 { get; set; } // FN50_2
+        public System.Data.Entity.DbSet<Fn503> Fn503 { get; set; } // FN50_3
         public System.Data.Entity.DbSet<GroupOtdel> GroupOtdels { get; set; } // GroupOtdel
         public System.Data.Entity.DbSet<Header> Headers { get; set; } // Headers
+        public System.Data.Entity.DbSet<House> Houses { get; set; } // HOUSE
+        public System.Data.Entity.DbSet<Hststat> Hststats { get; set; } // HSTSTAT
         public System.Data.Entity.DbSet<Incass> Incasses { get; set; } // Incass
+        public System.Data.Entity.DbSet<Intvstat> Intvstats { get; set; } // INTVSTAT
+        public System.Data.Entity.DbSet<IteratorRe> IteratorRes { get; set; } // ITERATOR_RES
         public System.Data.Entity.DbSet<JobDataDt> JobDataDts { get; set; } // JOB_DATA_DT
         public System.Data.Entity.DbSet<JobDataInt> JobDataInts { get; set; } // JOB_DATA_INT
         public System.Data.Entity.DbSet<JobDataStr> JobDataStrs { get; set; } // JOB_DATA_STR
+        public System.Data.Entity.DbSet<JobDataXml> JobDataXmls { get; set; } // JOB_DATA_XML
         public System.Data.Entity.DbSet<JobDatum> JobDatums { get; set; } // JOB_DATA
+        public System.Data.Entity.DbSet<KaoCerhistory> KaoCerhistories { get; set; } // KAO_CERHISTORY
+        public System.Data.Entity.DbSet<KaoRhistory> KaoRhistories { get; set; } // KAO_RHISTORY
+        public System.Data.Entity.DbSet<KaoRogue> KaoRogues { get; set; } // KAO_ROGUE
+        public System.Data.Entity.DbSet<KaoRogueAbo> KaoRogueAboes { get; set; } // KAO_ROGUE_ABO
+        public System.Data.Entity.DbSet<KaoRogueCert> KaoRogueCerts { get; set; } // KAO_ROGUE_CERT
         public System.Data.Entity.DbSet<KbkAnaliz> KbkAnalizs { get; set; } // KbkAnaliz
+        public System.Data.Entity.DbSet<Landmark> Landmarks { get; set; } // LANDMARK
+        public System.Data.Entity.DbSet<LockNg> LockNgs { get; set; } // LOCK_NG
         public System.Data.Entity.DbSet<LotusDoc> LotusDocs { get; set; } // LOTUS_DOCS
         public System.Data.Entity.DbSet<LotusFile> LotusFiles { get; set; } // LOTUS_FILE
+        public System.Data.Entity.DbSet<LotusMovement> LotusMovements { get; set; } // LOTUS_MOVEMENT
+        public System.Data.Entity.DbSet<LotusMovementHistory> LotusMovementHistories { get; set; } // LOTUS_MOVEMENT_HISTORY
         public System.Data.Entity.DbSet<LotusSequence> LotusSequences { get; set; } // LOTUS_SEQUENCE
         public System.Data.Entity.DbSet<MessageDate> MessageDates { get; set; } // MessageDate
         public System.Data.Entity.DbSet<MessageStatusUh> MessageStatusUhs { get; set; } // MessageStatusUh
         public System.Data.Entity.DbSet<MessageStrahovieAndOtkaz> MessageStrahovieAndOtkazs { get; set; } // MessageStrahovieAndOtkaz
         public System.Data.Entity.DbSet<MessageVivod> MessageVivods { get; set; } // MessageVivod
         public System.Data.Entity.DbSet<NameDocument> NameDocuments { get; set; } // NameDocument
+        public System.Data.Entity.DbSet<NdflInv> NdflInvs { get; set; } // NDFL_INV
+        public System.Data.Entity.DbSet<Ndoctype> Ndoctypes { get; set; } // NDOCTYPE
+        public System.Data.Entity.DbSet<Normdoc> Normdocs { get; set; } // NORMDOC
+        public System.Data.Entity.DbSet<Operstat> Operstats { get; set; } // OPERSTAT
+        public System.Data.Entity.DbSet<RbCourt> RbCourts { get; set; } // RB_COURT
+        public System.Data.Entity.DbSet<RbCourtType> RbCourtTypes { get; set; } // RB_COURT_TYPE
+        public System.Data.Entity.DbSet<RbDeclCode> RbDeclCodes { get; set; } // RB_DECL_CODES
         public System.Data.Entity.DbSet<RbReport> RbReports { get; set; } // RB_REPORT
         public System.Data.Entity.DbSet<ReportFilter> ReportFilters { get; set; } // REPORT_FILTER
         public System.Data.Entity.DbSet<ReqType> ReqTypes { get; set; } // REQ_TYPE
@@ -205,6 +348,7 @@ namespace Ifns51.Risk
         public System.Data.Entity.DbSet<RiskDossier> RiskDossiers { get; set; } // RISK_DOSSIER
         public System.Data.Entity.DbSet<RiskFailure> RiskFailures { get; set; } // RISK_FAILURE
         public System.Data.Entity.DbSet<RiskField> RiskFields { get; set; } // RISK_FIELDS
+        public System.Data.Entity.DbSet<RiskFn1048> RiskFn1048 { get; set; } // RISK_FN1048
         public System.Data.Entity.DbSet<RiskFn1836> RiskFn1836 { get; set; } // RISK_FN1836
         public System.Data.Entity.DbSet<RiskFn1844> RiskFn1844 { get; set; } // RISK_FN1844
         public System.Data.Entity.DbSet<RiskFn1903> RiskFn1903 { get; set; } // RISK_FN1903
@@ -218,11 +362,18 @@ namespace Ifns51.Risk
         public System.Data.Entity.DbSet<RiskFn71> RiskFn71 { get; set; } // RISK_FN71
         public System.Data.Entity.DbSet<RiskFn72> RiskFn72 { get; set; } // RISK_FN72
         public System.Data.Entity.DbSet<RiskFn74> RiskFn74 { get; set; } // RISK_FN74
+        public System.Data.Entity.DbSet<RiskIncomeTaxation> RiskIncomeTaxations { get; set; } // RISK_INCOME_TAXATION
         public System.Data.Entity.DbSet<RiskLock> RiskLocks { get; set; } // RISK_LOCK
         public System.Data.Entity.DbSet<RiskMime> RiskMimes { get; set; } // RISK_MIME
+        public System.Data.Entity.DbSet<RiskNdfl> RiskNdfls { get; set; } // RISK_NDFL
+        public System.Data.Entity.DbSet<RiskNdfl2> RiskNdfl2 { get; set; } // RISK_NDFL2
+        public System.Data.Entity.DbSet<RiskProxy> RiskProxies { get; set; } // RISK_PROXY
         public System.Data.Entity.DbSet<RiskVersion> RiskVersions { get; set; } // RISK_VERSION
         public System.Data.Entity.DbSet<RiskWeb> RiskWebs { get; set; } // RISK_WEB
         public System.Data.Entity.DbSet<RiskYear> RiskYears { get; set; } // RISK_YEAR
+        public System.Data.Entity.DbSet<Room> Rooms { get; set; } // ROOM
+        public System.Data.Entity.DbSet<Roomtype> Roomtypes { get; set; } // ROOMTYPE
+        public System.Data.Entity.DbSet<ServerIfn> ServerIfns { get; set; } // ServerIfns
         public System.Data.Entity.DbSet<ServiceWcfCommand> ServiceWcfCommands { get; set; } // ServiceWcfCommand
         public System.Data.Entity.DbSet<ShedJob> ShedJobs { get; set; } // SHED_JOB
         public System.Data.Entity.DbSet<ShedJobDatum> ShedJobDatums { get; set; } // SHED_JOB_DATA
@@ -236,18 +387,31 @@ namespace Ifns51.Risk
         public System.Data.Entity.DbSet<SmevReq> SmevReqs { get; set; } // SMEV_REQ
         public System.Data.Entity.DbSet<SmevResponse> SmevResponses { get; set; } // SMEV_RESPONSE
         public System.Data.Entity.DbSet<SobytieOtdel> SobytieOtdels { get; set; } // SobytieOtdel
+        public System.Data.Entity.DbSet<Socrbase> Socrbases { get; set; } // SOCRBASE
         public System.Data.Entity.DbSet<StatusAnaliz> StatusAnalizs { get; set; } // StatusAnaliz
         public System.Data.Entity.DbSet<StatusPriem> StatusPriems { get; set; } // StatusPriem
         public System.Data.Entity.DbSet<StatusTrebOnIcass> StatusTrebOnIcasses { get; set; } // StatusTrebOnIcass
+        public System.Data.Entity.DbSet<Stead> Steads { get; set; } // STEAD
         public System.Data.Entity.DbSet<Stone> Stones { get; set; } // Stone
+        public System.Data.Entity.DbSet<Strstat> Strstats { get; set; } // STRSTAT
         public System.Data.Entity.DbSet<TableSysNumReshen> TableSysNumReshens { get; set; } // TableSysNumReshen
         public System.Data.Entity.DbSet<Template> Templates { get; set; } // Template
         public System.Data.Entity.DbSet<UseTableTemplateBdk> UseTableTemplateBdks { get; set; } // UseTableTemplateBdk
-        public System.Data.Entity.DbSet<VatDatum> VatDatums { get; set; } // VAT_DATA
         public System.Data.Entity.DbSet<VidDelaException> VidDelaExceptions { get; set; } // VidDelaException
+        public System.Data.Entity.DbSet<WhdDecl> WhdDecls { get; set; } // WHD_DECL
+        public System.Data.Entity.DbSet<WhdFn212> WhdFn212 { get; set; } // WHD_FN212
+        public System.Data.Entity.DbSet<WhdGauge> WhdGauges { get; set; } // WHD_GAUGE
+        public System.Data.Entity.DbSet<WhdVnp> WhdVnps { get; set; } // WHD_VNP
+        public System.Data.Entity.DbSet<WhfAccreq> WhfAccreqs { get; set; } // WHF_ACCREQ
+        public System.Data.Entity.DbSet<WhfGap> WhfGaps { get; set; } // WHF_GAPS
+        public System.Data.Entity.DbSet<WhfVat> WhfVats { get; set; } // WHF_VAT
+        public System.Data.Entity.DbSet<WhtOperation> WhtOperations { get; set; } // WHT_OPERATIONS
+        public System.Data.Entity.DbSet<WhtThreshold> WhtThresholds { get; set; } // WHT_THRESHOLDS
         public System.Data.Entity.DbSet<WordDocument> WordDocuments { get; set; } // WordDocument
+        public System.Data.Entity.DbSet<Xlcolor> Xlcolors { get; set; } // XLCOLOR
         public System.Data.Entity.DbSet<XlReport> XlReports { get; set; } // XL_REPORT
         public System.Data.Entity.DbSet<XlReportAcl> XlReportAcls { get; set; } // XL_REPORT_ACL
+        public System.Data.Entity.DbSet<XmlParam> XmlParams { get; set; } // XML_PARAMS
 
         static RisksContext()
         {
@@ -297,46 +461,107 @@ namespace Ifns51.Risk
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Configurations.Add(new ActstatConfiguration());
+            modelBuilder.Configurations.Add(new AddrobjConfiguration());
             modelBuilder.Configurations.Add(new AhalisBdkConfiguration());
+            modelBuilder.Configurations.Add(new AisHandlerConfiguration());
+            modelBuilder.Configurations.Add(new AisHdConfiguration());
+            modelBuilder.Configurations.Add(new AisProcessConfiguration());
+            modelBuilder.Configurations.Add(new AisProcessLogConfiguration());
             modelBuilder.Configurations.Add(new AnalizNoConfiguration());
+            modelBuilder.Configurations.Add(new AsActstatConfiguration());
+            modelBuilder.Configurations.Add(new AsAddrobjConfiguration());
+            modelBuilder.Configurations.Add(new AsCenterstConfiguration());
+            modelBuilder.Configurations.Add(new AsCurentstConfiguration());
+            modelBuilder.Configurations.Add(new AsDelAddrobjConfiguration());
+            modelBuilder.Configurations.Add(new AsDelHouseConfiguration());
+            modelBuilder.Configurations.Add(new AsDelHouseintConfiguration());
+            modelBuilder.Configurations.Add(new AsDelLandmarkConfiguration());
+            modelBuilder.Configurations.Add(new AsDelNormdocConfiguration());
+            modelBuilder.Configurations.Add(new AsEststatConfiguration());
+            modelBuilder.Configurations.Add(new AsFlattypeConfiguration());
+            modelBuilder.Configurations.Add(new AsHouseConfiguration());
+            modelBuilder.Configurations.Add(new AsHouseintConfiguration());
+            modelBuilder.Configurations.Add(new AsHststatConfiguration());
+            modelBuilder.Configurations.Add(new AsIntvstatConfiguration());
+            modelBuilder.Configurations.Add(new AsLandmarkConfiguration());
+            modelBuilder.Configurations.Add(new AsNdoctypeConfiguration());
+            modelBuilder.Configurations.Add(new AsNormdocConfiguration());
+            modelBuilder.Configurations.Add(new AsOperstatConfiguration());
+            modelBuilder.Configurations.Add(new AsRoomConfiguration());
+            modelBuilder.Configurations.Add(new AsRoomtypeConfiguration());
+            modelBuilder.Configurations.Add(new AsSocrbaseConfiguration());
+            modelBuilder.Configurations.Add(new AsSteadConfiguration());
+            modelBuilder.Configurations.Add(new AsStrstatConfiguration());
+            modelBuilder.Configurations.Add(new AsVersionConfiguration());
             modelBuilder.Configurations.Add(new BankAccExclusionConfiguration());
             modelBuilder.Configurations.Add(new BankAccPlanConfiguration());
             modelBuilder.Configurations.Add(new BankDocumentConfiguration());
             modelBuilder.Configurations.Add(new BankOperationConfiguration());
+            modelBuilder.Configurations.Add(new BnkseekConfiguration());
             modelBuilder.Configurations.Add(new BodyConfiguration());
             modelBuilder.Configurations.Add(new CbrBankConfiguration());
             modelBuilder.Configurations.Add(new CbrBankRelevanceConfiguration());
+            modelBuilder.Configurations.Add(new CenterstConfiguration());
             modelBuilder.Configurations.Add(new ClassOtdelConfiguration());
             modelBuilder.Configurations.Add(new ConfigCodeConfiguration());
+            modelBuilder.Configurations.Add(new CurentstConfiguration());
             modelBuilder.Configurations.Add(new DbConfigConfiguration());
             modelBuilder.Configurations.Add(new DelaPriemObuConfiguration());
             modelBuilder.Configurations.Add(new DeloConfiguration());
             modelBuilder.Configurations.Add(new DocTemplateConfiguration());
             modelBuilder.Configurations.Add(new DocumentDetalizationConfiguration());
             modelBuilder.Configurations.Add(new DocumentReglamentConfiguration());
+            modelBuilder.Configurations.Add(new EststatConfiguration());
             modelBuilder.Configurations.Add(new FaceConfiguration());
+            modelBuilder.Configurations.Add(new FiasLoadConfiguration());
+            modelBuilder.Configurations.Add(new FiasVersionConfiguration());
+            modelBuilder.Configurations.Add(new FileIconConfiguration());
+            modelBuilder.Configurations.Add(new FlattypeConfiguration());
             modelBuilder.Configurations.Add(new Fn1341Configuration());
             modelBuilder.Configurations.Add(new Fn1341TrustConfiguration());
             modelBuilder.Configurations.Add(new Fn18441Configuration());
             modelBuilder.Configurations.Add(new Fn1903Configuration());
             modelBuilder.Configurations.Add(new Fn3042Configuration());
-            modelBuilder.Configurations.Add(new Fn72WebConfiguration());
+            modelBuilder.Configurations.Add(new Fn502Configuration());
+            modelBuilder.Configurations.Add(new Fn503Configuration());
             modelBuilder.Configurations.Add(new GroupOtdelConfiguration());
             modelBuilder.Configurations.Add(new HeaderConfiguration());
+            modelBuilder.Configurations.Add(new HouseConfiguration());
+            modelBuilder.Configurations.Add(new HststatConfiguration());
             modelBuilder.Configurations.Add(new IncassConfiguration());
+            modelBuilder.Configurations.Add(new IntvstatConfiguration());
+            modelBuilder.Configurations.Add(new IteratorReConfiguration());
             modelBuilder.Configurations.Add(new JobDataDtConfiguration());
             modelBuilder.Configurations.Add(new JobDataIntConfiguration());
             modelBuilder.Configurations.Add(new JobDataStrConfiguration());
+            modelBuilder.Configurations.Add(new JobDataXmlConfiguration());
             modelBuilder.Configurations.Add(new JobDatumConfiguration());
+            modelBuilder.Configurations.Add(new KaoCerhistoryConfiguration());
+            modelBuilder.Configurations.Add(new KaoRhistoryConfiguration());
+            modelBuilder.Configurations.Add(new KaoRogueConfiguration());
+            modelBuilder.Configurations.Add(new KaoRogueAboConfiguration());
+            modelBuilder.Configurations.Add(new KaoRogueCertConfiguration());
             modelBuilder.Configurations.Add(new KbkAnalizConfiguration());
+            modelBuilder.Configurations.Add(new LandmarkConfiguration());
+            modelBuilder.Configurations.Add(new LockNgConfiguration());
             modelBuilder.Configurations.Add(new LotusDocConfiguration());
             modelBuilder.Configurations.Add(new LotusFileConfiguration());
+            modelBuilder.Configurations.Add(new LotusMovementConfiguration());
+            modelBuilder.Configurations.Add(new LotusMovementHistoryConfiguration());
             modelBuilder.Configurations.Add(new LotusSequenceConfiguration());
             modelBuilder.Configurations.Add(new MessageDateConfiguration());
             modelBuilder.Configurations.Add(new MessageStatusUhConfiguration());
             modelBuilder.Configurations.Add(new MessageStrahovieAndOtkazConfiguration());
             modelBuilder.Configurations.Add(new MessageVivodConfiguration());
             modelBuilder.Configurations.Add(new NameDocumentConfiguration());
+            modelBuilder.Configurations.Add(new NdflInvConfiguration());
+            modelBuilder.Configurations.Add(new NdoctypeConfiguration());
+            modelBuilder.Configurations.Add(new NormdocConfiguration());
+            modelBuilder.Configurations.Add(new OperstatConfiguration());
+            modelBuilder.Configurations.Add(new RbCourtConfiguration());
+            modelBuilder.Configurations.Add(new RbCourtTypeConfiguration());
+            modelBuilder.Configurations.Add(new RbDeclCodeConfiguration());
             modelBuilder.Configurations.Add(new RbReportConfiguration());
             modelBuilder.Configurations.Add(new ReportFilterConfiguration());
             modelBuilder.Configurations.Add(new ReqTypeConfiguration());
@@ -349,6 +574,7 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new RiskDossierConfiguration());
             modelBuilder.Configurations.Add(new RiskFailureConfiguration());
             modelBuilder.Configurations.Add(new RiskFieldConfiguration());
+            modelBuilder.Configurations.Add(new RiskFn1048Configuration());
             modelBuilder.Configurations.Add(new RiskFn1836Configuration());
             modelBuilder.Configurations.Add(new RiskFn1844Configuration());
             modelBuilder.Configurations.Add(new RiskFn1903Configuration());
@@ -362,11 +588,18 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new RiskFn71Configuration());
             modelBuilder.Configurations.Add(new RiskFn72Configuration());
             modelBuilder.Configurations.Add(new RiskFn74Configuration());
+            modelBuilder.Configurations.Add(new RiskIncomeTaxationConfiguration());
             modelBuilder.Configurations.Add(new RiskLockConfiguration());
             modelBuilder.Configurations.Add(new RiskMimeConfiguration());
+            modelBuilder.Configurations.Add(new RiskNdflConfiguration());
+            modelBuilder.Configurations.Add(new RiskNdfl2Configuration());
+            modelBuilder.Configurations.Add(new RiskProxyConfiguration());
             modelBuilder.Configurations.Add(new RiskVersionConfiguration());
             modelBuilder.Configurations.Add(new RiskWebConfiguration());
             modelBuilder.Configurations.Add(new RiskYearConfiguration());
+            modelBuilder.Configurations.Add(new RoomConfiguration());
+            modelBuilder.Configurations.Add(new RoomtypeConfiguration());
+            modelBuilder.Configurations.Add(new ServerIfnConfiguration());
             modelBuilder.Configurations.Add(new ServiceWcfCommandConfiguration());
             modelBuilder.Configurations.Add(new ShedJobConfiguration());
             modelBuilder.Configurations.Add(new ShedJobDatumConfiguration());
@@ -380,62 +613,136 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new SmevReqConfiguration());
             modelBuilder.Configurations.Add(new SmevResponseConfiguration());
             modelBuilder.Configurations.Add(new SobytieOtdelConfiguration());
+            modelBuilder.Configurations.Add(new SocrbaseConfiguration());
             modelBuilder.Configurations.Add(new StatusAnalizConfiguration());
             modelBuilder.Configurations.Add(new StatusPriemConfiguration());
             modelBuilder.Configurations.Add(new StatusTrebOnIcassConfiguration());
+            modelBuilder.Configurations.Add(new SteadConfiguration());
             modelBuilder.Configurations.Add(new StoneConfiguration());
+            modelBuilder.Configurations.Add(new StrstatConfiguration());
             modelBuilder.Configurations.Add(new TableSysNumReshenConfiguration());
             modelBuilder.Configurations.Add(new TemplateConfiguration());
             modelBuilder.Configurations.Add(new UseTableTemplateBdkConfiguration());
-            modelBuilder.Configurations.Add(new VatDatumConfiguration());
             modelBuilder.Configurations.Add(new VidDelaExceptionConfiguration());
+            modelBuilder.Configurations.Add(new WhdDeclConfiguration());
+            modelBuilder.Configurations.Add(new WhdFn212Configuration());
+            modelBuilder.Configurations.Add(new WhdGaugeConfiguration());
+            modelBuilder.Configurations.Add(new WhdVnpConfiguration());
+            modelBuilder.Configurations.Add(new WhfAccreqConfiguration());
+            modelBuilder.Configurations.Add(new WhfGapConfiguration());
+            modelBuilder.Configurations.Add(new WhfVatConfiguration());
+            modelBuilder.Configurations.Add(new WhtOperationConfiguration());
+            modelBuilder.Configurations.Add(new WhtThresholdConfiguration());
             modelBuilder.Configurations.Add(new WordDocumentConfiguration());
+            modelBuilder.Configurations.Add(new XlcolorConfiguration());
             modelBuilder.Configurations.Add(new XlReportConfiguration());
             modelBuilder.Configurations.Add(new XlReportAclConfiguration());
+            modelBuilder.Configurations.Add(new XmlParamConfiguration());
         }
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
+            modelBuilder.Configurations.Add(new ActstatConfiguration(schema));
+            modelBuilder.Configurations.Add(new AddrobjConfiguration(schema));
             modelBuilder.Configurations.Add(new AhalisBdkConfiguration(schema));
+            modelBuilder.Configurations.Add(new AisHandlerConfiguration(schema));
+            modelBuilder.Configurations.Add(new AisHdConfiguration(schema));
+            modelBuilder.Configurations.Add(new AisProcessConfiguration(schema));
+            modelBuilder.Configurations.Add(new AisProcessLogConfiguration(schema));
             modelBuilder.Configurations.Add(new AnalizNoConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsActstatConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsAddrobjConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsCenterstConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsCurentstConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsDelAddrobjConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsDelHouseConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsDelHouseintConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsDelLandmarkConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsDelNormdocConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsEststatConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsFlattypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsHouseConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsHouseintConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsHststatConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsIntvstatConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsLandmarkConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsNdoctypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsNormdocConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsOperstatConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsRoomConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsRoomtypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsSocrbaseConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsSteadConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsStrstatConfiguration(schema));
+            modelBuilder.Configurations.Add(new AsVersionConfiguration(schema));
             modelBuilder.Configurations.Add(new BankAccExclusionConfiguration(schema));
             modelBuilder.Configurations.Add(new BankAccPlanConfiguration(schema));
             modelBuilder.Configurations.Add(new BankDocumentConfiguration(schema));
             modelBuilder.Configurations.Add(new BankOperationConfiguration(schema));
+            modelBuilder.Configurations.Add(new BnkseekConfiguration(schema));
             modelBuilder.Configurations.Add(new BodyConfiguration(schema));
             modelBuilder.Configurations.Add(new CbrBankConfiguration(schema));
             modelBuilder.Configurations.Add(new CbrBankRelevanceConfiguration(schema));
+            modelBuilder.Configurations.Add(new CenterstConfiguration(schema));
             modelBuilder.Configurations.Add(new ClassOtdelConfiguration(schema));
             modelBuilder.Configurations.Add(new ConfigCodeConfiguration(schema));
+            modelBuilder.Configurations.Add(new CurentstConfiguration(schema));
             modelBuilder.Configurations.Add(new DbConfigConfiguration(schema));
             modelBuilder.Configurations.Add(new DelaPriemObuConfiguration(schema));
             modelBuilder.Configurations.Add(new DeloConfiguration(schema));
             modelBuilder.Configurations.Add(new DocTemplateConfiguration(schema));
             modelBuilder.Configurations.Add(new DocumentDetalizationConfiguration(schema));
             modelBuilder.Configurations.Add(new DocumentReglamentConfiguration(schema));
+            modelBuilder.Configurations.Add(new EststatConfiguration(schema));
             modelBuilder.Configurations.Add(new FaceConfiguration(schema));
+            modelBuilder.Configurations.Add(new FiasLoadConfiguration(schema));
+            modelBuilder.Configurations.Add(new FiasVersionConfiguration(schema));
+            modelBuilder.Configurations.Add(new FileIconConfiguration(schema));
+            modelBuilder.Configurations.Add(new FlattypeConfiguration(schema));
             modelBuilder.Configurations.Add(new Fn1341Configuration(schema));
             modelBuilder.Configurations.Add(new Fn1341TrustConfiguration(schema));
             modelBuilder.Configurations.Add(new Fn18441Configuration(schema));
             modelBuilder.Configurations.Add(new Fn1903Configuration(schema));
             modelBuilder.Configurations.Add(new Fn3042Configuration(schema));
-            modelBuilder.Configurations.Add(new Fn72WebConfiguration(schema));
+            modelBuilder.Configurations.Add(new Fn502Configuration(schema));
+            modelBuilder.Configurations.Add(new Fn503Configuration(schema));
             modelBuilder.Configurations.Add(new GroupOtdelConfiguration(schema));
             modelBuilder.Configurations.Add(new HeaderConfiguration(schema));
+            modelBuilder.Configurations.Add(new HouseConfiguration(schema));
+            modelBuilder.Configurations.Add(new HststatConfiguration(schema));
             modelBuilder.Configurations.Add(new IncassConfiguration(schema));
+            modelBuilder.Configurations.Add(new IntvstatConfiguration(schema));
+            modelBuilder.Configurations.Add(new IteratorReConfiguration(schema));
             modelBuilder.Configurations.Add(new JobDataDtConfiguration(schema));
             modelBuilder.Configurations.Add(new JobDataIntConfiguration(schema));
             modelBuilder.Configurations.Add(new JobDataStrConfiguration(schema));
+            modelBuilder.Configurations.Add(new JobDataXmlConfiguration(schema));
             modelBuilder.Configurations.Add(new JobDatumConfiguration(schema));
+            modelBuilder.Configurations.Add(new KaoCerhistoryConfiguration(schema));
+            modelBuilder.Configurations.Add(new KaoRhistoryConfiguration(schema));
+            modelBuilder.Configurations.Add(new KaoRogueConfiguration(schema));
+            modelBuilder.Configurations.Add(new KaoRogueAboConfiguration(schema));
+            modelBuilder.Configurations.Add(new KaoRogueCertConfiguration(schema));
             modelBuilder.Configurations.Add(new KbkAnalizConfiguration(schema));
+            modelBuilder.Configurations.Add(new LandmarkConfiguration(schema));
+            modelBuilder.Configurations.Add(new LockNgConfiguration(schema));
             modelBuilder.Configurations.Add(new LotusDocConfiguration(schema));
             modelBuilder.Configurations.Add(new LotusFileConfiguration(schema));
+            modelBuilder.Configurations.Add(new LotusMovementConfiguration(schema));
+            modelBuilder.Configurations.Add(new LotusMovementHistoryConfiguration(schema));
             modelBuilder.Configurations.Add(new LotusSequenceConfiguration(schema));
             modelBuilder.Configurations.Add(new MessageDateConfiguration(schema));
             modelBuilder.Configurations.Add(new MessageStatusUhConfiguration(schema));
             modelBuilder.Configurations.Add(new MessageStrahovieAndOtkazConfiguration(schema));
             modelBuilder.Configurations.Add(new MessageVivodConfiguration(schema));
             modelBuilder.Configurations.Add(new NameDocumentConfiguration(schema));
+            modelBuilder.Configurations.Add(new NdflInvConfiguration(schema));
+            modelBuilder.Configurations.Add(new NdoctypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new NormdocConfiguration(schema));
+            modelBuilder.Configurations.Add(new OperstatConfiguration(schema));
+            modelBuilder.Configurations.Add(new RbCourtConfiguration(schema));
+            modelBuilder.Configurations.Add(new RbCourtTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new RbDeclCodeConfiguration(schema));
             modelBuilder.Configurations.Add(new RbReportConfiguration(schema));
             modelBuilder.Configurations.Add(new ReportFilterConfiguration(schema));
             modelBuilder.Configurations.Add(new ReqTypeConfiguration(schema));
@@ -448,6 +755,7 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new RiskDossierConfiguration(schema));
             modelBuilder.Configurations.Add(new RiskFailureConfiguration(schema));
             modelBuilder.Configurations.Add(new RiskFieldConfiguration(schema));
+            modelBuilder.Configurations.Add(new RiskFn1048Configuration(schema));
             modelBuilder.Configurations.Add(new RiskFn1836Configuration(schema));
             modelBuilder.Configurations.Add(new RiskFn1844Configuration(schema));
             modelBuilder.Configurations.Add(new RiskFn1903Configuration(schema));
@@ -461,11 +769,18 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new RiskFn71Configuration(schema));
             modelBuilder.Configurations.Add(new RiskFn72Configuration(schema));
             modelBuilder.Configurations.Add(new RiskFn74Configuration(schema));
+            modelBuilder.Configurations.Add(new RiskIncomeTaxationConfiguration(schema));
             modelBuilder.Configurations.Add(new RiskLockConfiguration(schema));
             modelBuilder.Configurations.Add(new RiskMimeConfiguration(schema));
+            modelBuilder.Configurations.Add(new RiskNdflConfiguration(schema));
+            modelBuilder.Configurations.Add(new RiskNdfl2Configuration(schema));
+            modelBuilder.Configurations.Add(new RiskProxyConfiguration(schema));
             modelBuilder.Configurations.Add(new RiskVersionConfiguration(schema));
             modelBuilder.Configurations.Add(new RiskWebConfiguration(schema));
             modelBuilder.Configurations.Add(new RiskYearConfiguration(schema));
+            modelBuilder.Configurations.Add(new RoomConfiguration(schema));
+            modelBuilder.Configurations.Add(new RoomtypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new ServerIfnConfiguration(schema));
             modelBuilder.Configurations.Add(new ServiceWcfCommandConfiguration(schema));
             modelBuilder.Configurations.Add(new ShedJobConfiguration(schema));
             modelBuilder.Configurations.Add(new ShedJobDatumConfiguration(schema));
@@ -479,18 +794,31 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new SmevReqConfiguration(schema));
             modelBuilder.Configurations.Add(new SmevResponseConfiguration(schema));
             modelBuilder.Configurations.Add(new SobytieOtdelConfiguration(schema));
+            modelBuilder.Configurations.Add(new SocrbaseConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusAnalizConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusPriemConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusTrebOnIcassConfiguration(schema));
+            modelBuilder.Configurations.Add(new SteadConfiguration(schema));
             modelBuilder.Configurations.Add(new StoneConfiguration(schema));
+            modelBuilder.Configurations.Add(new StrstatConfiguration(schema));
             modelBuilder.Configurations.Add(new TableSysNumReshenConfiguration(schema));
             modelBuilder.Configurations.Add(new TemplateConfiguration(schema));
             modelBuilder.Configurations.Add(new UseTableTemplateBdkConfiguration(schema));
-            modelBuilder.Configurations.Add(new VatDatumConfiguration(schema));
             modelBuilder.Configurations.Add(new VidDelaExceptionConfiguration(schema));
+            modelBuilder.Configurations.Add(new WhdDeclConfiguration(schema));
+            modelBuilder.Configurations.Add(new WhdFn212Configuration(schema));
+            modelBuilder.Configurations.Add(new WhdGaugeConfiguration(schema));
+            modelBuilder.Configurations.Add(new WhdVnpConfiguration(schema));
+            modelBuilder.Configurations.Add(new WhfAccreqConfiguration(schema));
+            modelBuilder.Configurations.Add(new WhfGapConfiguration(schema));
+            modelBuilder.Configurations.Add(new WhfVatConfiguration(schema));
+            modelBuilder.Configurations.Add(new WhtOperationConfiguration(schema));
+            modelBuilder.Configurations.Add(new WhtThresholdConfiguration(schema));
             modelBuilder.Configurations.Add(new WordDocumentConfiguration(schema));
+            modelBuilder.Configurations.Add(new XlcolorConfiguration(schema));
             modelBuilder.Configurations.Add(new XlReportConfiguration(schema));
             modelBuilder.Configurations.Add(new XlReportAclConfiguration(schema));
+            modelBuilder.Configurations.Add(new XmlParamConfiguration(schema));
             return modelBuilder;
         }
     }
@@ -509,6 +837,250 @@ namespace Ifns51.Risk
     #endregion
 
     #region POCO classes
+
+    // ACTSTAT
+    ///<summary>
+    /// ACTSTAT (ActualStatus) – содержит перечень статусов
+    /// актуальности записи адресного элемента по ФИАС
+    /// Внутренняя таблица для загрузки, после переносится в таблицу ACTSTAT
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Actstat
+    {
+
+        ///<summary>
+        /// Идентификатор статуса
+        /// (ключ)
+        ///</summary>
+        public int Actstatid { get; set; } // ACTSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        /// 0 – Не актуальный
+        /// 1 – Актуальный (последняя
+        /// запись по адресному
+        /// объекту)
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 100)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Addrobjs where [ADDROBJ].[ACTSTATID] point to this entity (FK_ADDROBJ_ACTSTAT)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Addrobj> Addrobjs { get; set; } // ADDROBJ.FK_ADDROBJ_ACTSTAT
+
+        public Actstat()
+        {
+            Addrobjs = new System.Collections.Generic.List<Addrobj>();
+        }
+    }
+
+    // ADDROBJ
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Addrobj
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи. Ключевое поле.
+        ///</summary>
+        public System.Guid Aoid { get; set; } // AOID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор адресного объекта
+        ///</summary>
+        public System.Guid Aoguid { get; set; } // AOGUID
+
+        ///<summary>
+        /// Формализованное наименование
+        ///</summary>
+        public string Formalname { get; set; } // FORMALNAME (length: 120)
+
+        ///<summary>
+        /// Код региона
+        ///</summary>
+        public string Regioncode { get; set; } // REGIONCODE (length: 2)
+
+        ///<summary>
+        /// Код автономии
+        ///</summary>
+        public string Autocode { get; set; } // AUTOCODE (length: 1)
+
+        ///<summary>
+        /// Код района
+        ///</summary>
+        public string Areacode { get; set; } // AREACODE (length: 3)
+
+        ///<summary>
+        /// Код города
+        ///</summary>
+        public string Citycode { get; set; } // CITYCODE (length: 3)
+
+        ///<summary>
+        /// Код внутригородского района
+        ///</summary>
+        public string Ctarcode { get; set; } // CTARCODE (length: 3)
+
+        ///<summary>
+        /// Код населенного пункта
+        ///</summary>
+        public string Placecode { get; set; } // PLACECODE (length: 3)
+
+        ///<summary>
+        /// Код улицы
+        ///</summary>
+        public string Streetcode { get; set; } // STREETCODE (length: 4)
+
+        ///<summary>
+        /// Код дополнительного адресообразующего элемента
+        ///</summary>
+        public string Extrcode { get; set; } // EXTRCODE (length: 4)
+
+        ///<summary>
+        /// Код подчиненного дополнительного адресообразующего элемента
+        ///</summary>
+        public string Sextcode { get; set; } // SEXTCODE (length: 3)
+
+        ///<summary>
+        /// Официальное наименование
+        ///</summary>
+        public string Offname { get; set; } // OFFNAME (length: 120)
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Код ИФНС ФЛ
+        ///</summary>
+        public string Ifnsfl { get; set; } // IFNSFL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ФЛ
+        ///</summary>
+        public string Terrifnsfl { get; set; } // TERRIFNSFL (length: 4)
+
+        ///<summary>
+        /// Код ИФНС ЮЛ
+        ///</summary>
+        public string Ifnsul { get; set; } // IFNSUL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ЮЛ
+        ///</summary>
+        public string Terrifnsul { get; set; } // TERRIFNSUL (length: 4)
+
+        ///<summary>
+        /// OKATO
+        ///</summary>
+        public string Okato { get; set; } // OKATO (length: 11)
+
+        ///<summary>
+        /// OKTMO
+        ///</summary>
+        public string Oktmo { get; set; } // OKTMO (length: 11)
+
+        ///<summary>
+        /// Дата  внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE
+
+        ///<summary>
+        /// Краткое наименование типа объекта
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (length: 10)
+
+        ///<summary>
+        /// Уровень адресного объекта
+        ///</summary>
+        public int Aolevel { get; set; } // AOLEVEL
+
+        ///<summary>
+        /// Идентификатор объекта родительского объекта
+        ///</summary>
+        public System.Guid? Parentguid { get; set; } // PARENTGUID
+
+        ///<summary>
+        /// Идентификатор записи связывания с предыдушей исторической записью
+        ///</summary>
+        public System.Guid? Previd { get; set; } // PREVID
+
+        ///<summary>
+        /// Идентификатор записи  связывания с последующей исторической записью
+        ///</summary>
+        public System.Guid? Nextid { get; set; } // NEXTID
+
+        ///<summary>
+        /// Код адресного объекта одной строкой с признаком актуальности из КЛАДР 4.0.
+        ///</summary>
+        public string Code { get; set; } // CODE (length: 17)
+
+        ///<summary>
+        /// Код адресного объекта из КЛАДР 4.0 одной строкой без признака актуальности (последних двух цифр)
+        ///</summary>
+        public string Plaincode { get; set; } // PLAINCODE (length: 15)
+
+        ///<summary>
+        /// Статус актуальности адресного объекта ФИАС. Актуальный адрес на текущую дату.
+        ///</summary>
+        public int Actstatid { get; set; } // ACTSTATID
+
+        ///<summary>
+        /// Статус центра
+        ///</summary>
+        public int Centerstid { get; set; } // CENTERSTID
+
+        ///<summary>
+        /// Статус действия над записью – причина появления записи (см. описание таблицы OperationStatus)
+        ///</summary>
+        public int Operstatid { get; set; } // OPERSTATID
+
+        ///<summary>
+        /// Статус актуальности КЛАДР 4 (последние две цифры в коде)
+        ///</summary>
+        public int Curentstid { get; set; } // CURENTSTID
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdocid { get; set; } // NORMDOCID
+
+        ///<summary>
+        /// Признак действующего адресного объекта
+        ///</summary>
+        public bool Livestatus { get; set; } // LIVESTATUS
+        public string Plancode { get; set; } // PLANCODE (length: 4)
+        public string Cadnum { get; set; } // CADNUM (length: 100)
+        public int? Divtype { get; set; } // DIVTYPE
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Actstat pointed by [ADDROBJ].([Actstatid]) (FK_ADDROBJ_ACTSTAT)
+        /// </summary>
+        public virtual Actstat Actstat { get; set; } // FK_ADDROBJ_ACTSTAT
+
+        /// <summary>
+        /// Parent Centerst pointed by [ADDROBJ].([Centerstid]) (FK_ADDROBJ_centerst)
+        /// </summary>
+        public virtual Centerst Centerst { get; set; } // FK_ADDROBJ_centerst
+
+        /// <summary>
+        /// Parent Curentst pointed by [ADDROBJ].([Curentstid]) (FK_ADDROBJ_ADDROBJ)
+        /// </summary>
+        public virtual Curentst Curentst { get; set; } // FK_ADDROBJ_ADDROBJ
+    }
 
     // AhalisBdk
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
@@ -549,6 +1121,176 @@ namespace Ifns51.Risk
         /// Parent StatusTrebOnIcass pointed by [AhalisBdk].([Idok]) (FK_AhalisBdk1_StatusTrebOnIcass)
         /// </summary>
         public virtual StatusTrebOnIcass StatusTrebOnIcass_Idok { get; set; } // FK_AhalisBdk1_StatusTrebOnIcass
+    }
+
+    // AIS_HANDLER
+    ///<summary>
+    /// Обработчики АИС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AisHandler
+    {
+
+        ///<summary>
+        /// УН обработчика
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// Класс
+        ///</summary>
+        public string ClassName { get; set; } // CLASS_NAME (length: 100)
+
+        ///<summary>
+        /// Комментарий
+        ///</summary>
+        public string Title { get; set; } // TITLE (length: 1024)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child AisProcessLogs where [AIS_PROCESS_LOG].[HANDLER_ID] point to this entity (FK_AIS_PROCESS_LOG_AIS_HANDLER)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<AisProcessLog> AisProcessLogs { get; set; } // AIS_PROCESS_LOG.FK_AIS_PROCESS_LOG_AIS_HANDLER
+
+        public AisHandler()
+        {
+            AisProcessLogs = new System.Collections.Generic.List<AisProcessLog>();
+        }
+    }
+
+    // AIS_HD
+    ///<summary>
+    /// Результат обработки строки пользовательского задания
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AisHd
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН процесса
+        ///</summary>
+        public int ProcessId { get; set; } // PROCESS_ID
+
+        ///<summary>
+        /// Ключевое значение для поиска записи
+        ///</summary>
+        public string Kv { get; set; } // KV (length: 50)
+
+        ///<summary>
+        /// Результат обработки
+        ///</summary>
+        public int Re { get; set; } // RE
+
+        ///<summary>
+        /// Расширенные данные
+        ///</summary>
+        public string Data { get; set; } // DATA
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent AisProcess pointed by [AIS_HD].([ProcessId]) (FK_AIS_HD_AIS_PROCESS_LOG)
+        /// </summary>
+        public virtual AisProcess AisProcess { get; set; } // FK_AIS_HD_AIS_PROCESS_LOG
+    }
+
+    // AIS_PROCESS
+    ///<summary>
+    /// Процессы АИС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AisProcess
+    {
+
+        ///<summary>
+        /// УН процесса
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// GUID процесса из АИС
+        ///</summary>
+        public string Process { get; set; } // PROCESS (length: 64)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child AisHds where [AIS_HD].[PROCESS_ID] point to this entity (FK_AIS_HD_AIS_PROCESS_LOG)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<AisHd> AisHds { get; set; } // AIS_HD.FK_AIS_HD_AIS_PROCESS_LOG
+        /// <summary>
+        /// Child AisProcessLogs where [AIS_PROCESS_LOG].[PROCESS_ID] point to this entity (FK_AIS_PROCESS_LOG_AIS_PROCESS)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<AisProcessLog> AisProcessLogs { get; set; } // AIS_PROCESS_LOG.FK_AIS_PROCESS_LOG_AIS_PROCESS
+
+        public AisProcess()
+        {
+            AisHds = new System.Collections.Generic.List<AisHd>();
+            AisProcessLogs = new System.Collections.Generic.List<AisProcessLog>();
+        }
+    }
+
+    // AIS_PROCESS_LOG
+    ///<summary>
+    /// Журнал обработки пользовательских процессов АИС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AisProcessLog
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН процесса АИС
+        ///</summary>
+        public int ProcessId { get; set; } // PROCESS_ID
+
+        ///<summary>
+        /// УН обработчика
+        ///</summary>
+        public int HandlerId { get; set; } // HANDLER_ID
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime D85 { get; set; } // D85
+
+        ///<summary>
+        /// Результат обработки
+        ///</summary>
+        public int Re { get; set; } // RE
+
+        ///<summary>
+        /// Сообщение об ошибке
+        ///</summary>
+        public string Errmsg { get; set; } // ERRMSG (length: 1024)
+        public System.DateTime? D86 { get; set; } // D86
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent AisHandler pointed by [AIS_PROCESS_LOG].([HandlerId]) (FK_AIS_PROCESS_LOG_AIS_HANDLER)
+        /// </summary>
+        public virtual AisHandler AisHandler { get; set; } // FK_AIS_PROCESS_LOG_AIS_HANDLER
+
+        /// <summary>
+        /// Parent AisProcess pointed by [AIS_PROCESS_LOG].([ProcessId]) (FK_AIS_PROCESS_LOG_AIS_PROCESS)
+        /// </summary>
+        public virtual AisProcess AisProcess { get; set; } // FK_AIS_PROCESS_LOG_AIS_PROCESS
+
+        public AisProcessLog()
+        {
+            D85 = System.DateTime.Now;
+        }
     }
 
     // The table 'AnalizDuble' is not usable by entity framework because it
@@ -645,6 +1387,1095 @@ namespace Ifns51.Risk
         {
             DateCreate = System.DateTime.Now;
         }
+    }
+
+    // AS_ACTSTAT
+    ///<summary>
+    /// ACTSTAT (ActualStatus) – содержит перечень статусов
+    /// актуальности записи адресного элемента по ФИАС
+    /// Внутренняя таблица для загрузки, после переносится в таблицу ACTSTAT
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsActstat
+    {
+
+        ///<summary>
+        /// Идентификатор статуса
+        /// (ключ)
+        ///</summary>
+        public int Actstatid { get; set; } // ACTSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        /// 0 – Не актуальный
+        /// 1 – Актуальный (последняя
+        /// запись по адресному
+        /// объекту)
+        ///</summary>
+        public string Name { get; set; } // NAME (Primary key) (length: 100)
+    }
+
+    // AS_ADDROBJ
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsAddrobj
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи. Ключевое поле.
+        ///</summary>
+        public System.Guid Aoid { get; set; } // AOID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор адресного объекта
+        ///</summary>
+        public System.Guid Aoguid { get; set; } // AOGUID (Primary key)
+
+        ///<summary>
+        /// Формализованное наименование
+        ///</summary>
+        public string Formalname { get; set; } // FORMALNAME (Primary key) (length: 120)
+
+        ///<summary>
+        /// Код региона
+        ///</summary>
+        public string Regioncode { get; set; } // REGIONCODE (Primary key) (length: 2)
+
+        ///<summary>
+        /// Код автономии
+        ///</summary>
+        public string Autocode { get; set; } // AUTOCODE (Primary key) (length: 1)
+
+        ///<summary>
+        /// Код района
+        ///</summary>
+        public string Areacode { get; set; } // AREACODE (Primary key) (length: 3)
+
+        ///<summary>
+        /// Код города
+        ///</summary>
+        public string Citycode { get; set; } // CITYCODE (Primary key) (length: 3)
+
+        ///<summary>
+        /// Код внутригородского района
+        ///</summary>
+        public string Ctarcode { get; set; } // CTARCODE (Primary key) (length: 3)
+
+        ///<summary>
+        /// Код населенного пункта
+        ///</summary>
+        public string Placecode { get; set; } // PLACECODE (Primary key) (length: 3)
+
+        ///<summary>
+        /// Код улицы
+        ///</summary>
+        public string Streetcode { get; set; } // STREETCODE (length: 4)
+
+        ///<summary>
+        /// Код дополнительного адресообразующего элемента
+        ///</summary>
+        public string Extrcode { get; set; } // EXTRCODE (Primary key) (length: 4)
+
+        ///<summary>
+        /// Код подчиненного дополнительного адресообразующего элемента
+        ///</summary>
+        public string Sextcode { get; set; } // SEXTCODE (Primary key) (length: 3)
+
+        ///<summary>
+        /// Официальное наименование
+        ///</summary>
+        public string Offname { get; set; } // OFFNAME (length: 120)
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Код ИФНС ФЛ
+        ///</summary>
+        public string Ifnsfl { get; set; } // IFNSFL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ФЛ
+        ///</summary>
+        public string Terrifnsfl { get; set; } // TERRIFNSFL (length: 4)
+
+        ///<summary>
+        /// Код ИФНС ЮЛ
+        ///</summary>
+        public string Ifnsul { get; set; } // IFNSUL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ЮЛ
+        ///</summary>
+        public string Terrifnsul { get; set; } // TERRIFNSUL (length: 4)
+
+        ///<summary>
+        /// OKATO
+        ///</summary>
+        public string Okato { get; set; } // OKATO (length: 11)
+
+        ///<summary>
+        /// OKTMO
+        ///</summary>
+        public string Oktmo { get; set; } // OKTMO (length: 11)
+
+        ///<summary>
+        /// Дата  внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE (Primary key)
+
+        ///<summary>
+        /// Краткое наименование типа объекта
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (Primary key) (length: 10)
+
+        ///<summary>
+        /// Уровень адресного объекта
+        ///</summary>
+        public int Aolevel { get; set; } // AOLEVEL (Primary key)
+
+        ///<summary>
+        /// Идентификатор объекта родительского объекта
+        ///</summary>
+        public System.Guid? Parentguid { get; set; } // PARENTGUID
+
+        ///<summary>
+        /// Идентификатор записи связывания с предыдушей исторической записью
+        ///</summary>
+        public System.Guid? Previd { get; set; } // PREVID
+
+        ///<summary>
+        /// Идентификатор записи  связывания с последующей исторической записью
+        ///</summary>
+        public System.Guid? Nextid { get; set; } // NEXTID
+
+        ///<summary>
+        /// Код адресного объекта одной строкой с признаком актуальности из КЛАДР 4.0.
+        ///</summary>
+        public string Code { get; set; } // CODE (length: 17)
+
+        ///<summary>
+        /// Код адресного объекта из КЛАДР 4.0 одной строкой без признака актуальности (последних двух цифр)
+        ///</summary>
+        public string Plaincode { get; set; } // PLAINCODE (length: 15)
+
+        ///<summary>
+        /// Статус актуальности адресного объекта ФИАС. Актуальный адрес на текущую дату.
+        ///</summary>
+        public int Actstatid { get; set; } // ACTSTATID (Primary key)
+
+        ///<summary>
+        /// Статус центра
+        ///</summary>
+        public int Centerstid { get; set; } // CENTERSTID (Primary key)
+
+        ///<summary>
+        /// Статус действия над записью – причина появления записи (см. описание таблицы OperationStatus)
+        ///</summary>
+        public int Operstatid { get; set; } // OPERSTATID (Primary key)
+
+        ///<summary>
+        /// Статус актуальности КЛАДР 4 (последние две цифры в коде)
+        ///</summary>
+        public int Curentstid { get; set; } // CURENTSTID (Primary key)
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE (Primary key)
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE (Primary key)
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdocid { get; set; } // NORMDOCID
+
+        ///<summary>
+        /// Признак действующего адресного объекта
+        ///</summary>
+        public bool Livestatus { get; set; } // LIVESTATUS (Primary key)
+        public string Plancode { get; set; } // PLANCODE (length: 4)
+        public string Cadnum { get; set; } // CADNUM (length: 100)
+        public int? Divtype { get; set; } // DIVTYPE
+    }
+
+    // AS_CENTERST
+    ///<summary>
+    /// Для загрузки переченя возможных
+    /// статусов (центров) адресных объектов административных единиц.
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsCenterst
+    {
+
+        ///<summary>
+        /// Идентификатор статуса
+        ///</summary>
+        public int Centerstid { get; set; } // CENTERSTID (Primary key)
+
+        ///<summary>
+        /// Наименование статуса
+        ///</summary>
+        public string Name { get; set; } // NAME (Primary key) (length: 100)
+    }
+
+    // AS_CURENTST
+    ///<summary>
+    /// Таблица AS_CURENTST (CurrentStatus) – содержит перечень статусов
+    /// актуальности записи адресного элемента по классификатору КЛАДР4.0.
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsCurentst
+    {
+
+        ///<summary>
+        /// Идентификатор статуса
+        /// (ключ)
+        ///</summary>
+        public int Curentstid { get; set; } // CURENTSTID (Primary key)
+
+        ///<summary>
+        /// Наименование (0 -
+        /// актуальный, 1-50, 2-98 –
+        /// исторический (кроме 51),
+        /// 51 - переподчиненный, 99 -
+        /// несуществующий)
+        ///</summary>
+        public string Name { get; set; } // NAME (Primary key) (length: 100)
+    }
+
+    // AS_DEL_ADDROBJ
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelAddrobj
+    {
+        public System.Guid Aoid { get; set; } // AOID (Primary key)
+    }
+
+    // AS_DEL_HOUSE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelHouse
+    {
+        public System.Guid Houseid { get; set; } // HOUSEID (Primary key)
+    }
+
+    // AS_DEL_HOUSEINT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelHouseint
+    {
+        public System.Guid Houseintid { get; set; } // HOUSEINTID (Primary key)
+    }
+
+    // AS_DEL_LANDMARK
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelLandmark
+    {
+        public System.Guid Landid { get; set; } // LANDID (Primary key)
+    }
+
+    // AS_DEL_NORMDOC
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelNormdoc
+    {
+        public System.Guid Normdocid { get; set; } // NORMDOCID (Primary key)
+    }
+
+    // AS_ESTSTAT
+    ///<summary>
+    /// Таблица AS_ESTSTAT (EstateStatus) – содержит перечень возможных
+    /// видов владений.
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsEststat
+    {
+
+        ///<summary>
+        /// Признак владения
+        ///</summary>
+        public int Eststatid { get; set; } // ESTSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (Primary key) (length: 20)
+
+        ///<summary>
+        /// Краткое наименование
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (length: 20)
+    }
+
+    // AS_FLATTYPE
+    ///<summary>
+    /// Типы помещений в БД ФИАС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsFlattype
+    {
+
+        ///<summary>
+        /// УН типа помещения
+        ///</summary>
+        public int Fltypeid { get; set; } // FLTYPEID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 20)
+
+        ///<summary>
+        /// Краткое наименование
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (length: 20)
+    }
+
+    // AS_HOUSE
+    ///<summary>
+    /// Сведения по номерам домов улиц городов и населенных пунктов, номера земельных участков и т.п
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsHouse
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи дома
+        ///</summary>
+        public System.Guid Houseid { get; set; } // HOUSEID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор дома
+        ///</summary>
+        public System.Guid Houseguid { get; set; } // HOUSEGUID
+
+        ///<summary>
+        /// Guid записи родительского объекта (улицы, города, населенного пункта и т.п.
+        ///</summary>
+        public System.Guid Aoguid { get; set; } // AOGUID
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Код ИФНС ФЛ
+        ///</summary>
+        public string Ifnsfl { get; set; } // IFNSFL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ФЛ
+        ///</summary>
+        public string Terrifnsfl { get; set; } // TERRIFNSFL (length: 4)
+
+        ///<summary>
+        /// Код ИФНС ЮЛ
+        ///</summary>
+        public string Ifnsul { get; set; } // IFNSUL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ЮЛ
+        ///</summary>
+        public string Terrifnsul { get; set; } // TERRIFNSUL (length: 4)
+
+        ///<summary>
+        /// OKATO
+        ///</summary>
+        public string Okato { get; set; } // OKATO (length: 11)
+
+        ///<summary>
+        /// OKTMO
+        ///</summary>
+        public string Oktmo { get; set; } // OKTMO (length: 11)
+
+        ///<summary>
+        /// Дата время внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE
+
+        ///<summary>
+        /// Номер дома
+        ///</summary>
+        public string Housenum { get; set; } // HOUSENUM (length: 20)
+
+        ///<summary>
+        /// Признак владения
+        ///</summary>
+        public int Eststatid { get; set; } // ESTSTATID
+
+        ///<summary>
+        /// Номер корпуса
+        ///</summary>
+        public string Buildnum { get; set; } // BUILDNUM (length: 10)
+
+        ///<summary>
+        /// Номер строения
+        ///</summary>
+        public string Strucnum { get; set; } // STRUCNUM (length: 10)
+
+        ///<summary>
+        /// Признак строения
+        ///</summary>
+        public int? Strstatid { get; set; } // STRSTATID
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE
+
+        ///<summary>
+        /// Состояние дома
+        ///</summary>
+        public int Housestid { get; set; } // HOUSESTID
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdocid { get; set; } // NORMDOCID
+
+        ///<summary>
+        /// Счетчик записей домов для КЛАДР 4
+        ///</summary>
+        public int Counter { get; set; } // COUNTER
+    }
+
+    // AS_HOUSEINT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsHouseint
+    {
+
+        ///<summary>
+        /// Идентификатор записи интервала домов
+        ///</summary>
+        public System.Guid Houseintid { get; set; } // HOUSEINTID (Primary key)
+
+        ///<summary>
+        /// Статус интервала (обычный, четный, нечетный)
+        ///</summary>
+        public int Intvstatid { get; set; } // INTVSTATID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор интервала домов
+        ///</summary>
+        public System.Guid Intguid { get; set; } // INTGUID (Primary key)
+
+        ///<summary>
+        /// Значение начала интервала
+        ///</summary>
+        public int Intstart { get; set; } // INTSTART (Primary key)
+
+        ///<summary>
+        /// Значение окончания интервала
+        ///</summary>
+        public int Intend { get; set; } // INTEND (Primary key)
+
+        ///<summary>
+        /// Идентификатор объекта родительского объекта (улицы, города, населенного пункта и т.п.)
+        ///</summary>
+        public System.Guid Aoguid { get; set; } // AOGUID (Primary key)
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Код ИФНС ФЛ
+        ///</summary>
+        public string Ifnsfl { get; set; } // IFNSFL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ФЛ
+        ///</summary>
+        public string Terrifnsfl { get; set; } // TERRIFNSFL (length: 4)
+
+        ///<summary>
+        /// Код ИФНС ЮЛ
+        ///</summary>
+        public string Ifnsul { get; set; } // IFNSUL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ЮЛ
+        ///</summary>
+        public string Terrifnsul { get; set; } // TERRIFNSUL (length: 4)
+
+        ///<summary>
+        /// OKATO
+        ///</summary>
+        public string Okato { get; set; } // OKATO (length: 11)
+
+        ///<summary>
+        /// OKTMO
+        ///</summary>
+        public string Oktmo { get; set; } // OKTMO (length: 11)
+
+        ///<summary>
+        /// Дата  внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE (Primary key)
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE (Primary key)
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE (Primary key)
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdocid { get; set; } // NORMDOCID
+
+        ///<summary>
+        /// Счетчик записей домов для КЛАДР 4
+        ///</summary>
+        public int Counter { get; set; } // COUNTER (Primary key)
+    }
+
+    // AS_HSTSTAT
+    ///<summary>
+    /// Статус состояния домов
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsHststat
+    {
+
+        ///<summary>
+        /// Идентификатор статуса
+        ///</summary>
+        public int Housestid { get; set; } // HOUSESTID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 60)
+    }
+
+    // AS_INTVSTAT
+    ///<summary>
+    /// Состав и структура файла с информацией по статусу интервалов домов в БД ФИАС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsIntvstat
+    {
+
+        ///<summary>
+        /// Идентификатор статуса (обычный, четный, нечетный)
+        ///</summary>
+        public int Intvstatid { get; set; } // INTVSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (Primary key) (length: 60)
+    }
+
+    // AS_LANDMARK
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsLandmark
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи ориентира
+        ///</summary>
+        public System.Guid Landid { get; set; } // LANDID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор ориентира
+        ///</summary>
+        public System.Guid Landguid { get; set; } // LANDGUID (Primary key)
+
+        ///<summary>
+        /// Уникальный идентификатор родительского объекта (улицы, города, населенного пункта и т.п.)
+        ///</summary>
+        public System.Guid Aoguid { get; set; } // AOGUID (Primary key)
+
+        ///<summary>
+        /// Месторасположение ориентира
+        ///</summary>
+        public string Location { get; set; } // LOCATION (Primary key) (length: 500)
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Код ИФНС ФЛ
+        ///</summary>
+        public string Ifnsfl { get; set; } // IFNSFL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ФЛ
+        ///</summary>
+        public string Terrifnsfl { get; set; } // TERRIFNSFL (length: 4)
+
+        ///<summary>
+        /// Код ИФНС ЮЛ
+        ///</summary>
+        public string Ifnsul { get; set; } // IFNSUL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ЮЛ
+        ///</summary>
+        public string Terrifnsul { get; set; } // TERRIFNSUL (length: 4)
+
+        ///<summary>
+        /// OKATO
+        ///</summary>
+        public string Okato { get; set; } // OKATO (length: 11)
+
+        ///<summary>
+        /// OKTMO
+        ///</summary>
+        public string Oktmo { get; set; } // OKTMO (length: 11)
+
+        ///<summary>
+        /// Дата  внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE (Primary key)
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE (Primary key)
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE (Primary key)
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdocid { get; set; } // NORMDOCID
+    }
+
+    // AS_NDOCTYPE
+    ///<summary>
+    /// Тип нормативного документа
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsNdoctype
+    {
+
+        ///<summary>
+        /// Идентификатор записи (ключ)
+        ///</summary>
+        public int Ndtypeid { get; set; } // NDTYPEID (Primary key)
+
+        ///<summary>
+        /// Наименование типа нормативного документа
+        ///</summary>
+        public string Name { get; set; } // NAME (Primary key) (length: 250)
+    }
+
+    // AS_NORMDOC
+    ///<summary>
+    /// Сведения по нормативному документу, являющемуся основанием присвоения адресному элементу наименования
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsNormdoc
+    {
+
+        ///<summary>
+        /// Идентификатор нормативного документа
+        ///</summary>
+        public System.Guid Normdocid { get; set; } // NORMDOCID (Primary key)
+
+        ///<summary>
+        /// Наименование документа
+        ///</summary>
+        public string Docname { get; set; } // DOCNAME (length: 2147483647)
+
+        ///<summary>
+        /// Дата документа
+        ///</summary>
+        public System.DateTime? Docdate { get; set; } // DOCDATE
+
+        ///<summary>
+        /// Номер документа
+        ///</summary>
+        public string Docnum { get; set; } // DOCNUM (length: 20)
+
+        ///<summary>
+        /// Тип документа
+        ///</summary>
+        public int? Ndtypeid { get; set; } // NDTYPEID
+
+        ///<summary>
+        /// Идентификатор образа (внешний ключ)
+        ///</summary>
+        public System.Guid? Docimgid { get; set; } // DOCIMGID
+    }
+
+    // AS_OPERSTAT
+    ///<summary>
+    /// Статус действия
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsOperstat
+    {
+
+        ///<summary>
+        /// Идентификатор статуса (ключ)
+        ///</summary>
+        public int Operstatid { get; set; } // OPERSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (Primary key) (length: 100)
+    }
+
+    // AS_ROOM
+    ///<summary>
+    /// Сведения о помещениях
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsRoom
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи. Ключевое поле.
+        ///</summary>
+        public System.Guid Roomid { get; set; } // ROOMID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор адресного объекта (помещения)
+        ///</summary>
+        public System.Guid Roomguid { get; set; } // ROOMGUID
+
+        ///<summary>
+        /// Номер помещения или офиса
+        ///</summary>
+        public string Flatnumber { get; set; } // FLATNUMBER (length: 50)
+
+        ///<summary>
+        /// Тип помещения
+        ///</summary>
+        public int Flattype { get; set; } // FLATTYPE
+
+        ///<summary>
+        /// Номер комнаты
+        ///</summary>
+        public string Roomnumber { get; set; } // ROOMNUMBER (length: 50)
+
+        ///<summary>
+        /// Тип комнаты
+        ///</summary>
+        public int? Roomtype { get; set; } // ROOMTYPE
+
+        ///<summary>
+        /// Код региона
+        ///</summary>
+        public string Regioncode { get; set; } // REGIONCODE (length: 2)
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Дата  внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE
+
+        ///<summary>
+        /// Идентификатор родительского объекта (дома)
+        ///</summary>
+        public System.Guid Houseguid { get; set; } // HOUSEGUID
+
+        ///<summary>
+        /// Идентификатор записи связывания с предыдушей исторической записью
+        ///</summary>
+        public System.Guid? Previd { get; set; } // PREVID
+
+        ///<summary>
+        /// Идентификатор записи  связывания с последующей исторической записью
+        ///</summary>
+        public System.Guid? Nextid { get; set; } // NEXTID
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE
+
+        ///<summary>
+        /// Признак действующего адресного объекта
+        ///</summary>
+        public int Livestatus { get; set; } // LIVESTATUS
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdoc { get; set; } // NORMDOC
+
+        ///<summary>
+        /// Статус действия над записью – причина появления записи (см. описание таблицы OperationStatus):
+        /// 01 – Инициация;
+        /// 10 – Добавление;
+        /// 20 – Изменение;
+        /// 21 – Групповое изменение;
+        /// 30 – Удаление;
+        /// 31 - Удаление вследствие удаления вышестоящего объекта;
+        /// 40 – Присоединение адресного объекта (слияние);
+        /// 41 – Переподчинение вследствие слияния вышестоящего объекта;
+        /// 42 - Прекращение существования вследствие присоединения к другому адресному объекту;
+        /// 43 - Создание нового адресного объекта в результате слияния адресных объектов;
+        /// 50 – Переподчинение;
+        /// 51 – Переподчинение вследствие переподчинения вышестоящего объекта;
+        /// 60 – Прекращение существования вследствие дробления;
+        /// 61 – Создание нового адресного объекта в результате дробления
+        ///</summary>
+        public int Operstatus { get; set; } // OPERSTATUS
+
+        ///<summary>
+        /// Кадастровый номер помещения
+        ///</summary>
+        public string Cadnum { get; set; } // CADNUM (length: 100)
+
+        ///<summary>
+        /// Кадастровый номер комнаты в помещении
+        ///</summary>
+        public string Roomcadnum { get; set; } // ROOMCADNUM (length: 100)
+    }
+
+    // AS_ROOMTYPE
+    ///<summary>
+    /// Информация по типам комнат в БД ФИАС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsRoomtype
+    {
+
+        ///<summary>
+        /// УН типа комнаты
+        ///</summary>
+        public int Rmtypeid { get; set; } // RMTYPEID (Primary key)
+
+        ///<summary>
+        /// Наименование типа комнаты
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 20)
+
+        ///<summary>
+        /// Краткое наименование типа комнаты
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (length: 20)
+    }
+
+    // AS_SOCRBASE
+    ///<summary>
+    /// Тип адресного объекта
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsSocrbase
+    {
+
+        ///<summary>
+        /// Ключевое поле
+        ///</summary>
+        public string KodTSt { get; set; } // KOD_T_ST (Primary key) (length: 4)
+
+        ///<summary>
+        /// Уровень адресного объекта
+        ///</summary>
+        public int SocrbaseLevel { get; set; } // SOCRBASE_LEVEL (Primary key)
+
+        ///<summary>
+        /// Краткое наименование типа объекта
+        ///</summary>
+        public string Scname { get; set; } // SCNAME (length: 10)
+
+        ///<summary>
+        /// Полное наименование типа объекта
+        ///</summary>
+        public string Socrname { get; set; } // SOCRNAME (Primary key) (length: 50)
+    }
+
+    // AS_STEAD
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsStead
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи. Ключевое поле.
+        ///</summary>
+        public System.Guid Steadid { get; set; } // STEADID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор адресного объекта (земельного участка)
+        ///</summary>
+        public System.Guid Steadguid { get; set; } // STEADGUID
+
+        ///<summary>
+        /// Номер земельного участка
+        ///</summary>
+        public string Number { get; set; } // NUMBER (length: 120)
+
+        ///<summary>
+        /// Код региона
+        ///</summary>
+        public string Regioncode { get; set; } // REGIONCODE (length: 2)
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Код ИФНС ФЛ
+        ///</summary>
+        public string Ifnsfl { get; set; } // IFNSFL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ФЛ
+        ///</summary>
+        public string Terrifnsfl { get; set; } // TERRIFNSFL (length: 4)
+
+        ///<summary>
+        /// Код ИФНС ЮЛ
+        ///</summary>
+        public string Ifnsul { get; set; } // IFNSUL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ЮЛ
+        ///</summary>
+        public string Terrifnsul { get; set; } // TERRIFNSUL (length: 4)
+
+        ///<summary>
+        /// OKATO
+        ///</summary>
+        public string Okato { get; set; } // OKATO (length: 11)
+
+        ///<summary>
+        /// OKTMO
+        ///</summary>
+        public string Oktmo { get; set; } // OKTMO (length: 11)
+
+        ///<summary>
+        /// Дата  внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE
+
+        ///<summary>
+        /// Идентификатор объекта родительского объекта
+        ///</summary>
+        public System.Guid? Parentguid { get; set; } // PARENTGUID
+
+        ///<summary>
+        /// Идентификатор записи связывания с предыдушей исторической записью
+        ///</summary>
+        public System.Guid? Previd { get; set; } // PREVID
+
+        ///<summary>
+        /// Идентификатор записи  связывания с последующей исторической записью
+        ///</summary>
+        public System.Guid? Nextid { get; set; } // NEXTID
+
+        ///<summary>
+        /// Статус действия над записью – причина появления записи (см. описание таблицы OperationStatus):
+        /// 01 – Инициация;
+        /// 10 – Добавление;
+        /// 20 – Изменение;
+        /// 21 – Групповое изменение;
+        /// 30 – Удаление;
+        /// 31 - Удаление вследствие удаления вышестоящего объекта;
+        /// 40 – Присоединение адресного объекта (слияние);
+        /// 41 – Переподчинение вследствие слияния вышестоящего объекта;
+        /// 42 - Прекращение существования вследствие присоединения к другому адресному объекту;
+        /// 43 - Создание нового адресного объекта в результате слияния адресных объектов;
+        /// 50 – Переподчинение;
+        /// 51 – Переподчинение вследствие переподчинения вышестоящего объекта;
+        /// 60 – Прекращение существования вследствие дробления;
+        /// 61 – Создание нового адресного объекта в результате дробления
+        ///</summary>
+        public int Operstatus { get; set; } // OPERSTATUS
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdoc { get; set; } // NORMDOC
+
+        ///<summary>
+        /// Признак действующего адресного объекта
+        ///</summary>
+        public int Livestatus { get; set; } // LIVESTATUS
+
+        ///<summary>
+        /// Кадастровый номер
+        ///</summary>
+        public string Cadnum { get; set; } // CADNUM (length: 100)
+
+        ///<summary>
+        /// Тип адресации:
+        /// 0 - не определено
+        /// 1 - муниципальный;
+        /// 2 - административно-территориальный
+        ///</summary>
+        public int Divtype { get; set; } // DIVTYPE
+    }
+
+    // AS_STRSTAT
+    ///<summary>
+    /// Признак строения
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsStrstat
+    {
+
+        ///<summary>
+        /// Признак строения
+        ///</summary>
+        public int Strstatid { get; set; } // STRSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (Primary key) (length: 20)
+
+        ///<summary>
+        /// Краткое наименование
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (length: 20)
+    }
+
+    // AS_VERSION
+    ///<summary>
+    /// Версия справочника ФИАС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsVersion
+    {
+        public int AcVersionId { get; set; } // AC_VERSION_ID (Primary key)
+        public System.DateTime AcDt { get; set; } // AC_DT
     }
 
     // BANK_ACC_EXCLUSION
@@ -770,6 +2601,153 @@ namespace Ifns51.Risk
         public virtual RiskChecker RiskChecker { get; set; } // FK_BANK_OPERATIONS_RISK_CHECKER
     }
 
+    // BNKSEEK
+    ///<summary>
+    /// БИК РФ
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Bnkseek
+    {
+
+        ///<summary>
+        /// Внутренний код
+        ///</summary>
+        public string Vkey { get; set; } // VKEY (Primary key) (length: 8)
+
+        ///<summary>
+        /// Код контроля
+        ///</summary>
+        public string Real { get; set; } // REAL (length: 4)
+
+        ///<summary>
+        /// Тип участника расчетов
+        ///</summary>
+        public string Pzn { get; set; } // PZN (length: 2)
+
+        ///<summary>
+        /// Участник, пользователь системы электронных расчетов
+        ///</summary>
+        public short? Uer { get; set; } // UER
+
+        ///<summary>
+        /// Код территории по СОАТО
+        ///</summary>
+        public string Rgn { get; set; } // RGN (length: 2)
+
+        ///<summary>
+        /// Индекс
+        ///</summary>
+        public string Ind { get; set; } // IND (length: 6)
+
+        ///<summary>
+        /// Тип населенного пункта
+        ///</summary>
+        public short? Tnp { get; set; } // TNP
+
+        ///<summary>
+        /// Наименование населенного пункта
+        ///</summary>
+        public string Nnp { get; set; } // NNP (length: 25)
+
+        ///<summary>
+        /// Адрес в населенном пункте
+        ///</summary>
+        public string Adr { get; set; } // ADR (length: 30)
+
+        ///<summary>
+        /// Номер РКЦ
+        ///</summary>
+        public string Rkc { get; set; } // RKC (length: 9)
+
+        ///<summary>
+        /// Платежное наименование участника расчетов
+        ///</summary>
+        public string Namep { get; set; } // NAMEP (length: 45)
+
+        ///<summary>
+        /// Краткое наименование участника расчетов
+        ///</summary>
+        public string Namen { get; set; } // NAMEN (length: 30)
+
+        ///<summary>
+        /// Банковский идентификационный код (БИК)
+        ///</summary>
+        public string Newnum { get; set; } // NEWNUM (length: 9)
+
+        ///<summary>
+        /// Корсчет в системе расчетов с использованием БИК
+        ///</summary>
+        public string Newks { get; set; } // NEWKS (length: 9)
+
+        ///<summary>
+        /// 6-значный номер МФО
+        ///</summary>
+        public int? Permfo { get; set; } // PERMFO
+
+        ///<summary>
+        /// Cрок прохождения расчетно-денежных документов
+        ///</summary>
+        public string Srok { get; set; } // SROK (length: 2)
+
+        ///<summary>
+        /// Абонентский телеграф 1
+        ///</summary>
+        public string At1 { get; set; } // AT1 (length: 7)
+
+        ///<summary>
+        /// Абонентский телеграф 2
+        ///</summary>
+        public string At2 { get; set; } // AT2 (length: 7)
+
+        ///<summary>
+        /// Телефон
+        ///</summary>
+        public string Telef { get; set; } // TELEF (length: 25)
+
+        ///<summary>
+        /// Регистрационный номер участника расчетов
+        ///</summary>
+        public string Regn { get; set; } // REGN (length: 9)
+
+        ///<summary>
+        /// Код ОКПО
+        ///</summary>
+        public string Okpo { get; set; } // OKPO (length: 10)
+
+        ///<summary>
+        /// Дата последнего изменения
+        ///</summary>
+        public System.DateTime? DtIzm { get; set; } // DT_IZM
+        public string P { get; set; } // P (length: 1)
+
+        ///<summary>
+        /// N установки центра коммутации сообщений
+        ///</summary>
+        public string Cks { get; set; } // CKS (length: 6)
+
+        ///<summary>
+        /// Новый корсчет по новому плану счетов
+        ///</summary>
+        public string Ksnp { get; set; } // KSNP (length: 20)
+
+        ///<summary>
+        /// Внутренний код правопреемника
+        ///</summary>
+        public string Vkeydel { get; set; } // VKEYDEL (length: 8)
+        public System.DateTime? Datedel { get; set; } // DATEDEL
+        public string RClose { get; set; } // R_CLOSE (length: 2)
+
+        ///<summary>
+        /// Дата включения информации от участника расчетов в ЭБД
+        ///</summary>
+        public System.DateTime? DateCh { get; set; } // DATE_CH
+
+        ///<summary>
+        /// Дата нач.действ
+        ///</summary>
+        public System.DateTime? DtIzmr { get; set; } // DT_IZMR
+    }
+
     // Body
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class Body
@@ -826,7 +2804,12 @@ namespace Ifns51.Risk
         ///<summary>
         /// УН записи
         ///</summary>
-        public int CbrBankRelevanceId { get; set; } // CBR_BANK_RELEVANCE_ID (Primary key)
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// Класс, запрашивающий сведения
+        ///</summary>
+        public string Cls { get; set; } // CLS (length: 50)
 
         ///<summary>
         /// Дата запроса на web-сервис ЦБ РФ
@@ -837,6 +2820,38 @@ namespace Ifns51.Risk
         /// Дата актуальности справочника по данным ЦБ РФ.
         ///</summary>
         public System.DateTime D851 { get; set; } // D85_1
+    }
+
+    // CENTERST
+    ///<summary>
+    /// Таблица CENTERST (CenterStatus) – содержит перечень возможных
+    /// статусов (центров) адресных объектов административных единиц.
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Centerst
+    {
+
+        ///<summary>
+        /// Идентификатор статуса
+        ///</summary>
+        public int Centerstid { get; set; } // CENTERSTID (Primary key)
+
+        ///<summary>
+        /// Наименование статуса
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 100)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Addrobjs where [ADDROBJ].[CENTERSTID] point to this entity (FK_ADDROBJ_centerst)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Addrobj> Addrobjs { get; set; } // ADDROBJ.FK_ADDROBJ_centerst
+
+        public Centerst()
+        {
+            Addrobjs = new System.Collections.Generic.List<Addrobj>();
+        }
     }
 
     // ClassOtdel
@@ -897,6 +2912,43 @@ namespace Ifns51.Risk
         public ConfigCode()
         {
             Hide = false;
+        }
+    }
+
+    // CURENTST
+    ///<summary>
+    /// Таблица CURENTST (CurrentStatus) – содержит перечень статусов
+    /// актуальности записи адресного элемента по классификатору КЛАДР4.0.
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Curentst
+    {
+
+        ///<summary>
+        /// Идентификатор статуса
+        /// (ключ)
+        ///</summary>
+        public int Curentstid { get; set; } // CURENTSTID (Primary key)
+
+        ///<summary>
+        /// Наименование (0 -
+        /// актуальный, 1-50, 2-98 –
+        /// исторический (кроме 51),
+        /// 51 - переподчиненный, 99 -
+        /// несуществующий)
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 100)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Addrobjs where [ADDROBJ].[CURENTSTID] point to this entity (FK_ADDROBJ_ADDROBJ)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Addrobj> Addrobjs { get; set; } // ADDROBJ.FK_ADDROBJ_ADDROBJ
+
+        public Curentst()
+        {
+            Addrobjs = new System.Collections.Generic.List<Addrobj>();
         }
     }
 
@@ -1054,6 +3106,43 @@ namespace Ifns51.Risk
         public virtual StatusTrebOnIcass StatusTrebOnIcass_Status2 { get; set; } // FK_DocumentReglament_StatusTrebOnIcass_2
     }
 
+    // ESTSTAT
+    ///<summary>
+    /// Таблица ESTSTAT (EstateStatus) – содержит перечень возможных
+    /// видов владений.
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Eststat
+    {
+
+        ///<summary>
+        /// Признак владения
+        ///</summary>
+        public int Eststatid { get; set; } // ESTSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 20)
+
+        ///<summary>
+        /// Краткое наименование
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (length: 20)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Houses where [HOUSE].[ESTSTATID] point to this entity (FK_HOUSE_ESTSTAT)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<House> Houses { get; set; } // HOUSE.FK_HOUSE_ESTSTAT
+
+        public Eststat()
+        {
+            Houses = new System.Collections.Generic.List<House>();
+        }
+    }
+
     // Face
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class Face
@@ -1065,26 +3154,126 @@ namespace Ifns51.Risk
         public System.DateTime? DateFace { get; set; } // DateFace
     }
 
+    // FIAS_LOAD
+    ///<summary>
+    /// Устанавливает порядок загрузки таблиц при обработке справочника ФИАС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class FiasLoad
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int AcLoadId { get; set; } // AC_LOAD_ID (Primary key)
+
+        ///<summary>
+        /// Название таблицы
+        ///</summary>
+        public string TableTitle { get; set; } // TABLE_TITLE (length: 100)
+
+        ///<summary>
+        /// Очередность загрузки
+        ///</summary>
+        public int TableOrder { get; set; } // TABLE_ORDER
+        public int MergeType { get; set; } // MERGE_TYPE
+    }
+
+    // FIAS_VERSION
+    ///<summary>
+    /// Версия справочника
+    /// Формат DDMMYYYY = дата справочника.
+    /// Версия, указанная в этой таблице, не совпадает с версией ФИАС!
+    /// Формируется по дате файла.
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class FiasVersion
+    {
+
+        ///<summary>
+        /// УН версии в нашей базе
+        ///</summary>
+        public int FiasVersionId { get; set; } // FIAS_VERSION_ID (Primary key)
+
+        ///<summary>
+        /// Дата версии (DDMMYYYY)
+        ///</summary>
+        public int FiasVersionNum { get; set; } // FIAS_VERSION_NUM
+
+        ///<summary>
+        /// Дата загрузки справочника
+        ///</summary>
+        public System.DateTime? D85 { get; set; } // D85
+    }
+
+    // FILE_ICON
+    ///<summary>
+    /// Иконки файлов (графический образ). Кэш для импорта в лотус
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class FileIcon
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// Расширение, которому соответствует иконка
+        ///</summary>
+        public string Extension { get; set; } // EXTENSION (length: 50)
+
+        ///<summary>
+        /// Изображение
+        ///</summary>
+        public byte[] Img { get; set; } // IMG (length: 2147483647)
+    }
+
+    // FLATTYPE
+    ///<summary>
+    /// Типы помещений в БД ФИАС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Flattype
+    {
+
+        ///<summary>
+        /// УН типа помещения
+        ///</summary>
+        public int Fltypeid { get; set; } // FLTYPEID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 20)
+
+        ///<summary>
+        /// Краткое наименование
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (length: 20)
+    }
+
     // fn1341
     ///<summary>
-    /// Коды ВЭД
+    /// ОКВЭД, виды экономической деятельности
     ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class Fn1341
     {
 
         ///<summary>
-        /// УН ВЭД
+        /// УН ОКВЭД
         ///</summary>
         public int D3480 { get; set; } // D3480 (Primary key)
 
         ///<summary>
-        /// Код ВЭД
+        /// Код ОКВЭД
         ///</summary>
         public string D3481 { get; set; } // D3481 (length: 20)
 
         ///<summary>
-        /// Название вида деятельности
+        /// Наименование ОКВЭД
         ///</summary>
         public string D3482 { get; set; } // D3482 (length: 512)
 
@@ -1158,24 +3347,24 @@ namespace Ifns51.Risk
 
     // FN1903
     ///<summary>
-    /// Статус юридических лиц
+    /// Сведения о правоспособности (статусе) ЮЛ - (СЮЛСТ)
     ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class Fn1903
     {
 
         ///<summary>
-        /// УН записи о статусе лица
+        /// УН записи о правоспособности (статусе) ЮЛ
         ///</summary>
         public int S2123 { get; set; } // S2123 (Primary key)
 
         ///<summary>
-        /// Код статуса
+        /// Код
         ///</summary>
         public string S2125 { get; set; } // S2125 (length: 10)
 
         ///<summary>
-        /// Полное наименование статуса
+        /// Полное наименование
         ///</summary>
         public string S2126 { get; set; } // S2126 (length: 1000)
 
@@ -1253,40 +3442,163 @@ namespace Ifns51.Risk
         }
     }
 
-    // FN72_WEB
+    // FN50_2
     ///<summary>
-    /// Связка между таблицами FN72 и RISK_WEB
+    /// Банки - участники обмена в рамках Положения БР №365-П
     ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
-    public class Fn72Web
+    public class Fn502
     {
 
         ///<summary>
-        /// УН записи
+        /// Идентификатор банка
         ///</summary>
-        public int Id { get; set; } // ID (Primary key)
+        public decimal Id { get; set; } // ID (Primary key)
 
         ///<summary>
-        /// УН отдела
+        /// РегНомер банка
         ///</summary>
-        public int N274 { get; set; } // N274
+        public string RegN { get; set; } // RegN (length: 4)
 
         ///<summary>
-        /// УН доступного View
+        /// Номер филиала
         ///</summary>
-        public int RiskWebId { get; set; } // RISK_WEB_ID
+        public string NumF { get; set; } // NumF (length: 4)
+
+        ///<summary>
+        /// БИК
+        ///</summary>
+        public string Bik { get; set; } // BIK (length: 9)
+
+        ///<summary>
+        /// Наименование банка/филиала
+        ///</summary>
+        public string Name { get; set; } // Name (length: 160)
+
+        ///<summary>
+        /// Дата заключения соглашения
+        ///</summary>
+        public System.DateTime? AgrDateBegin { get; set; } // AgrDateBegin
+
+        ///<summary>
+        /// Дата изменения условий соглашения
+        ///</summary>
+        public System.DateTime? AgrDateChange { get; set; } // AgrDateChange
+
+        ///<summary>
+        /// Дата расторжения соглашения
+        ///</summary>
+        public System.DateTime? AgrDateEnd { get; set; } // AgrDateEnd
+
+        ///<summary>
+        /// Дата начала обмена
+        ///</summary>
+        public System.DateTime? DateBegin { get; set; } // DateBegin
+
+        ///<summary>
+        /// Дата временного приостановления обмена
+        ///</summary>
+        public System.DateTime? DatePause { get; set; } // DatePause
+
+        ///<summary>
+        /// Дата возобновления обмена
+        ///</summary>
+        public System.DateTime? DateRenewal { get; set; } // DateRenewal
+
+        ///<summary>
+        /// Дата прекращения обмена
+        ///</summary>
+        public System.DateTime? DateEnd { get; set; } // DateEnd
+
+        ///<summary>
+        /// Код условий соглашения (RPZ)
+        ///</summary>
+        public string Rpz { get; set; } // RPZ (length: 3)
+
+        ///<summary>
+        /// Состояние обмена: 0 - не ведется, 1 - ведется, 2 - в ограниченном режиме
+        ///</summary>
+        public byte Code { get; set; } // Code
+
+        ///<summary>
+        /// Состояние банка: 0 - ликвид, 1 - действ
+        ///</summary>
+        public bool BLiq { get; set; } // BLiq
+
+        ///<summary>
+        /// ИНН банка
+        ///</summary>
+        public string Inn { get; set; } // INN (length: 10)
+
+        ///<summary>
+        /// КПП банка (филиала банка)
+        ///</summary>
+        public string Kpp { get; set; } // KPP (length: 9)
+
+        ///<summary>
+        /// Дата дополнительного соглашения к договору
+        ///</summary>
+        public System.DateTime? DateDop { get; set; } // DateDop
+
+        ///<summary>
+        /// Дата начала функционирования банка в ограниченном режиме
+        ///</summary>
+        public System.DateTime? DateOgrRe { get; set; } // DateOgrRe
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Fn503 where [FN50_3].[ID] point to this entity (FK__FN50_3__ID__7854C86E)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Fn503> Fn503 { get; set; } // FN50_3.FK__FN50_3__ID__7854C86E
+
+        public Fn502()
+        {
+            Code = 0;
+            BLiq = false;
+            Fn503 = new System.Collections.Generic.List<Fn503>();
+        }
+    }
+
+    // FN50_3
+    ///<summary>
+    /// Филиалы банков - участники обмена в рамках Положения БР №365-П
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Fn503
+    {
+
+        ///<summary>
+        /// УН записи о филиале банка
+        ///</summary>
+        public int Un { get; set; } // UN (Primary key)
+
+        ///<summary>
+        /// Номер филиала
+        ///</summary>
+        public string NumF { get; set; } // NumF (length: 4)
+
+        ///<summary>
+        /// БИК филиала
+        ///</summary>
+        public string Bik { get; set; } // BIK (length: 9)
+
+        ///<summary>
+        /// Наименование филиала
+        ///</summary>
+        public string Name { get; set; } // Name (length: 160)
+
+        ///<summary>
+        /// Идентификатор банка
+        ///</summary>
+        public decimal Id { get; set; } // ID
 
         // Foreign keys
 
         /// <summary>
-        /// Parent RiskFn72 pointed by [FN72_WEB].([N274]) (FK_FN72_WEB_RISK_FN72)
+        /// Parent Fn502 pointed by [FN50_3].([Id]) (FK__FN50_3__ID__7854C86E)
         /// </summary>
-        public virtual RiskFn72 RiskFn72 { get; set; } // FK_FN72_WEB_RISK_FN72
-
-        /// <summary>
-        /// Parent RiskWeb pointed by [FN72_WEB].([RiskWebId]) (FK_FN72_WEB_RISK_WEB)
-        /// </summary>
-        public virtual RiskWeb RiskWeb { get; set; } // FK_FN72_WEB_RISK_WEB
+        public virtual Fn502 Fn502 { get; set; } // FK__FN50_3__ID__7854C86E
     }
 
     // GroupOtdel
@@ -1342,6 +3654,168 @@ namespace Ifns51.Risk
         }
     }
 
+    // HOUSE
+    ///<summary>
+    /// Сведения по номерам домов улиц городов и населенных пунктов, номера земельных участков и т.п
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class House
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи дома
+        ///</summary>
+        public System.Guid Houseid { get; set; } // HOUSEID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор дома
+        ///</summary>
+        public System.Guid Houseguid { get; set; } // HOUSEGUID
+
+        ///<summary>
+        /// Guid записи родительского объекта (улицы, города, населенного пункта и т.п.
+        ///</summary>
+        public System.Guid Aoguid { get; set; } // AOGUID
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Код ИФНС ФЛ
+        ///</summary>
+        public string Ifnsfl { get; set; } // IFNSFL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ФЛ
+        ///</summary>
+        public string Terrifnsfl { get; set; } // TERRIFNSFL (length: 4)
+
+        ///<summary>
+        /// Код ИФНС ЮЛ
+        ///</summary>
+        public string Ifnsul { get; set; } // IFNSUL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ЮЛ
+        ///</summary>
+        public string Terrifnsul { get; set; } // TERRIFNSUL (length: 4)
+
+        ///<summary>
+        /// OKATO
+        ///</summary>
+        public string Okato { get; set; } // OKATO (length: 11)
+
+        ///<summary>
+        /// OKTMO
+        ///</summary>
+        public string Oktmo { get; set; } // OKTMO (length: 11)
+
+        ///<summary>
+        /// Дата время внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE
+
+        ///<summary>
+        /// Номер дома
+        ///</summary>
+        public string Housenum { get; set; } // HOUSENUM (length: 20)
+
+        ///<summary>
+        /// Признак владения
+        ///</summary>
+        public int Eststatid { get; set; } // ESTSTATID
+
+        ///<summary>
+        /// Номер корпуса
+        ///</summary>
+        public string Buildnum { get; set; } // BUILDNUM (length: 10)
+
+        ///<summary>
+        /// Номер строения
+        ///</summary>
+        public string Strucnum { get; set; } // STRUCNUM (length: 10)
+
+        ///<summary>
+        /// Признак строения
+        ///</summary>
+        public int? Strstatid { get; set; } // STRSTATID
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE
+
+        ///<summary>
+        /// Состояние дома
+        ///</summary>
+        public int Housestid { get; set; } // HOUSESTID
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdocid { get; set; } // NORMDOCID
+
+        ///<summary>
+        /// Счетчик записей домов для КЛАДР 4
+        ///</summary>
+        public int Counter { get; set; } // COUNTER
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Eststat pointed by [HOUSE].([Eststatid]) (FK_HOUSE_ESTSTAT)
+        /// </summary>
+        public virtual Eststat Eststat { get; set; } // FK_HOUSE_ESTSTAT
+
+        /// <summary>
+        /// Parent Hststat pointed by [HOUSE].([Housestid]) (FK_HOUSE_HSTSTAT)
+        /// </summary>
+        public virtual Hststat Hststat { get; set; } // FK_HOUSE_HSTSTAT
+
+        /// <summary>
+        /// Parent Strstat pointed by [HOUSE].([Strstatid]) (FK_HOUSE_STRSTAT)
+        /// </summary>
+        public virtual Strstat Strstat { get; set; } // FK_HOUSE_STRSTAT
+    }
+
+    // HSTSTAT
+    ///<summary>
+    /// Статус состояния домов
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Hststat
+    {
+
+        ///<summary>
+        /// Идентификатор статуса
+        ///</summary>
+        public int Housestid { get; set; } // HOUSESTID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 60)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Houses where [HOUSE].[HOUSESTID] point to this entity (FK_HOUSE_HSTSTAT)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<House> Houses { get; set; } // HOUSE.FK_HOUSE_HSTSTAT
+
+        public Hststat()
+        {
+            Houses = new System.Collections.Generic.List<House>();
+        }
+    }
+
     // Incass
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class Incass
@@ -1359,6 +3833,70 @@ namespace Ifns51.Risk
         /// Parent Reshenie pointed by [Incass].([D851Res1]) (FK_Incass_Reshenie)
         /// </summary>
         public virtual Reshenie Reshenie { get; set; } // FK_Incass_Reshenie
+    }
+
+    // INTVSTAT
+    ///<summary>
+    /// Состав и структура файла с информацией по статусу интервалов домов в БД ФИАС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Intvstat
+    {
+
+        ///<summary>
+        /// Идентификатор статуса (обычный, четный, нечетный)
+        ///</summary>
+        public int Intvstatid { get; set; } // INTVSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 60)
+    }
+
+    // ITERATOR_RES
+    ///<summary>
+    /// Результаты итераций по таблицам
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class IteratorRe
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// OBJECT_ID таблицы, по которой осуществляется итерация
+        ///</summary>
+        public int ObjectId { get; set; } // OBJECT_ID
+
+        ///<summary>
+        /// УН записи в таблице
+        ///</summary>
+        public int RecordId { get; set; } // RECORD_ID
+
+        ///<summary>
+        /// Результат итерации
+        ///</summary>
+        public int Re { get; set; } // RE
+
+        ///<summary>
+        /// Сообщение об ошибке
+        ///</summary>
+        public string Err { get; set; } // ERR (length: 1024)
+
+        ///<summary>
+        /// Время первой записи
+        ///</summary>
+        public System.DateTime Df { get; set; } // DF
+
+        ///<summary>
+        /// Время следующей записи
+        ///</summary>
+        public System.DateTime? Dn { get; set; } // DN
+        public System.DateTime Dc { get; set; } // DC
     }
 
     // JOB_DATA_DT
@@ -1439,6 +3977,32 @@ namespace Ifns51.Risk
         public virtual JobDatum JobDatum { get; set; } // FK_JOB_DATA_STR_JOB_DATA
     }
 
+    // JOB_DATA_XML
+    ///<summary>
+    /// Отложенные задания - XML-данные
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class JobDataXml
+    {
+
+        ///<summary>
+        /// УН данного
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// XML-значение
+        ///</summary>
+        public string Value { get; set; } // VALUE
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent JobDatum pointed by [JOB_DATA_XML].([Id]) (FK_JOB_DATA_XML_JOB_DATA)
+        /// </summary>
+        public virtual JobDatum JobDatum { get; set; } // FK_JOB_DATA_XML_JOB_DATA
+    }
+
     // JOB_DATA
     ///<summary>
     /// Данные для shed_job - родительская таблица
@@ -1476,6 +4040,10 @@ namespace Ifns51.Risk
         /// Parent (One-to-One) JobDatum pointed by [JOB_DATA_STR].[ID] (FK_JOB_DATA_STR_JOB_DATA)
         /// </summary>
         public virtual JobDataStr JobDataStr { get; set; } // JOB_DATA_STR.FK_JOB_DATA_STR_JOB_DATA
+        /// <summary>
+        /// Parent (One-to-One) JobDatum pointed by [JOB_DATA_XML].[ID] (FK_JOB_DATA_XML_JOB_DATA)
+        /// </summary>
+        public virtual JobDataXml JobDataXml { get; set; } // JOB_DATA_XML.FK_JOB_DATA_XML_JOB_DATA
 
         // Foreign keys
 
@@ -1488,6 +4056,296 @@ namespace Ifns51.Risk
         /// Parent ShedJob pointed by [JOB_DATA].([ShedJobId]) (FK_JOB_DATA_SHED_JOB)
         /// </summary>
         public virtual ShedJob ShedJob { get; set; } // FK_JOB_DATA_SHED_JOB
+    }
+
+    // KAO_CERHISTORY
+    ///<summary>
+    /// История операций отзыва / восстановления сертификата
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoCerhistory
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН сертификата
+        ///</summary>
+        public int Cid { get; set; } // CID
+
+        ///<summary>
+        /// Дата операции
+        ///</summary>
+        public System.DateTime Dt { get; set; } // DT
+
+        ///<summary>
+        /// Флаг, указывающий, что речь идет об отзыве сертификата
+        ///</summary>
+        public bool Revocation { get; set; } // REVOCATION
+
+        ///<summary>
+        /// Результат операции отзыва / восстановления
+        ///</summary>
+        public int Re { get; set; } // RE
+
+        ///<summary>
+        /// Сообщение об ошибке
+        ///</summary>
+        public string Err { get; set; } // ERR (length: 1024)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent KaoRogueCert pointed by [KAO_CERHISTORY].([Cid]) (FK_KAO_CERHISTORY_KAO_ROGUE_CERT)
+        /// </summary>
+        public virtual KaoRogueCert KaoRogueCert { get; set; } // FK_KAO_CERHISTORY_KAO_ROGUE_CERT
+    }
+
+    // KAO_RHISTORY
+    ///<summary>
+    /// История запросов данных об абонентах в ИРУД
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRhistory
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН проверяемого лица
+        ///</summary>
+        public int RogueId { get; set; } // ROGUE_ID
+
+        ///<summary>
+        /// Результат обращения
+        ///</summary>
+        public int Re { get; set; } // RE
+
+        ///<summary>
+        /// Дата обращения
+        ///</summary>
+        public System.DateTime Dt { get; set; } // DT
+
+        ///<summary>
+        /// Сообщение об ошибке
+        ///</summary>
+        public string Err { get; set; } // ERR (length: 1024)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent KaoRogue pointed by [KAO_RHISTORY].([RogueId]) (FK_KAO_RHISTORY_KAO_ROGUE)
+        /// </summary>
+        public virtual KaoRogue KaoRogue { get; set; } // FK_KAO_RHISTORY_KAO_ROGUE
+
+        public KaoRhistory()
+        {
+            Dt = System.DateTime.Now;
+        }
+    }
+
+    // KAO_ROGUE
+    ///<summary>
+    /// Список финансовых помоек для отзыва сертификатов ЭЦП
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRogue
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// ИНН организации
+        ///</summary>
+        public string N134 { get; set; } // N134 (length: 12)
+
+        ///<summary>
+        /// Дата последней проверки на отзыв сертификата
+        ///</summary>
+        public System.DateTime Dt { get; set; } // DT
+        public int? Re { get; set; } // RE
+
+        ///<summary>
+        /// Автоматически отзывать сертификаты
+        ///</summary>
+        public bool AutoRevoke { get; set; } // AUTO_REVOKE
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child KaoRhistories where [KAO_RHISTORY].[ROGUE_ID] point to this entity (FK_KAO_RHISTORY_KAO_ROGUE)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<KaoRhistory> KaoRhistories { get; set; } // KAO_RHISTORY.FK_KAO_RHISTORY_KAO_ROGUE
+        /// <summary>
+        /// Child KaoRogueAboes where [KAO_ROGUE_ABO].[ROGUE_ID] point to this entity (FK_KAO_ROGUE_ABO_KAO_ROGUE)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<KaoRogueAbo> KaoRogueAboes { get; set; } // KAO_ROGUE_ABO.FK_KAO_ROGUE_ABO_KAO_ROGUE
+        /// <summary>
+        /// Child KaoRogueCerts where [KAO_ROGUE_CERT].[ROGUE_ID] point to this entity (FK_KAO_ROGUE_CERT_KAO_ROGUE)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<KaoRogueCert> KaoRogueCerts { get; set; } // KAO_ROGUE_CERT.FK_KAO_ROGUE_CERT_KAO_ROGUE
+
+        public KaoRogue()
+        {
+            AutoRevoke = true;
+            KaoRhistories = new System.Collections.Generic.List<KaoRhistory>();
+            KaoRogueAboes = new System.Collections.Generic.List<KaoRogueAbo>();
+            KaoRogueCerts = new System.Collections.Generic.List<KaoRogueCert>();
+        }
+    }
+
+    // KAO_ROGUE_ABO
+    ///<summary>
+    /// Помойки как абоненты спецоператоров связи
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRogueAbo
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН финансовой помойки
+        ///</summary>
+        public int RogueId { get; set; } // ROGUE_ID
+
+        ///<summary>
+        /// Код помойки у спецоператора
+        ///</summary>
+        public string Code { get; set; } // CODE (length: 100)
+
+        ///<summary>
+        /// Дата проверки сведений программой
+        ///</summary>
+        public System.DateTime? Dt { get; set; } // DT
+
+        ///<summary>
+        /// Результат последней обработки - загрузки сертификатов
+        ///</summary>
+        public int? Re { get; set; } // RE
+        public string Err { get; set; } // ERR (length: 1024)
+
+        ///<summary>
+        /// Дата сведений о модификации (дата сертификата, изменения или передачи в ИРУД)
+        ///</summary>
+        public System.DateTime? Md { get; set; } // MD
+
+        ///<summary>
+        /// Дата загрузки сведений о сертификатах
+        ///</summary>
+        public System.DateTime? Cld { get; set; } // CLD
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent KaoRogue pointed by [KAO_ROGUE_ABO].([RogueId]) (FK_KAO_ROGUE_ABO_KAO_ROGUE)
+        /// </summary>
+        public virtual KaoRogue KaoRogue { get; set; } // FK_KAO_ROGUE_ABO_KAO_ROGUE
+
+        public KaoRogueAbo()
+        {
+            Dt = System.DateTime.Now;
+        }
+    }
+
+    // KAO_ROGUE_CERT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRogueCert
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН помойки-владельца
+        ///</summary>
+        public int RogueId { get; set; } // ROGUE_ID
+
+        ///<summary>
+        /// УН сертификата в базе ИРУД
+        ///</summary>
+        public string Idcert { get; set; } // IDCERT (length: 20)
+
+        ///<summary>
+        /// Отпечаток
+        ///</summary>
+        public string Sha { get; set; } // SHA (length: 50)
+
+        ///<summary>
+        /// Дата начала действия сертификата
+        ///</summary>
+        public System.DateTime Db { get; set; } // DB
+
+        ///<summary>
+        /// Дата окончания действия сертификата
+        ///</summary>
+        public System.DateTime De { get; set; } // DE
+
+        ///<summary>
+        /// Владелец квалифицированной электронной подписи
+        ///</summary>
+        public string N18 { get; set; } // N18 (length: 1024)
+
+        ///<summary>
+        /// Поставщик сертификата
+        ///</summary>
+        public string Issuer { get; set; } // ISSUER (length: 1024)
+
+        ///<summary>
+        /// Сертификат ключей проверки электронной подписи
+        ///</summary>
+        public bool SigCheck { get; set; } // SIG_CHECK
+        public bool ForSign { get; set; } // FOR_SIGN
+        public bool ForEncryption { get; set; } // FOR_ENCRYPTION
+        public bool Revoked { get; set; } // REVOKED
+        public bool Compromised { get; set; } // COMPROMISED
+        public string Owner { get; set; } // OWNER (length: 1024)
+        public string N134 { get; set; } // N134 (length: 12)
+
+        ///<summary>
+        /// Дата отзыва сертификата с интерфейса ИРУД
+        ///</summary>
+        public System.DateTime? Rdc { get; set; } // RDC
+
+        ///<summary>
+        /// Образ сертификата
+        ///</summary>
+        public byte[] Img { get; set; } // IMG (length: 2147483647)
+        public string Err { get; set; } // ERR (length: 1024)
+        public int? Re { get; set; } // RE
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child KaoCerhistories where [KAO_CERHISTORY].[CID] point to this entity (FK_KAO_CERHISTORY_KAO_ROGUE_CERT)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<KaoCerhistory> KaoCerhistories { get; set; } // KAO_CERHISTORY.FK_KAO_CERHISTORY_KAO_ROGUE_CERT
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent KaoRogue pointed by [KAO_ROGUE_CERT].([RogueId]) (FK_KAO_ROGUE_CERT_KAO_ROGUE)
+        /// </summary>
+        public virtual KaoRogue KaoRogue { get; set; } // FK_KAO_ROGUE_CERT_KAO_ROGUE
+
+        public KaoRogueCert()
+        {
+            KaoCerhistories = new System.Collections.Generic.List<KaoCerhistory>();
+        }
     }
 
     // KbkAnaliz
@@ -1503,6 +4361,122 @@ namespace Ifns51.Risk
         {
             DateCreate = System.DateTime.Now;
         }
+    }
+
+    // LANDMARK
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Landmark
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи ориентира
+        ///</summary>
+        public System.Guid Landid { get; set; } // LANDID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор ориентира
+        ///</summary>
+        public System.Guid Landguid { get; set; } // LANDGUID
+
+        ///<summary>
+        /// Уникальный идентификатор родительского объекта (улицы, города, населенного пункта и т.п.)
+        ///</summary>
+        public System.Guid Aoguid { get; set; } // AOGUID
+
+        ///<summary>
+        /// Месторасположение ориентира
+        ///</summary>
+        public string Location { get; set; } // LOCATION (length: 500)
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Код ИФНС ФЛ
+        ///</summary>
+        public string Ifnsfl { get; set; } // IFNSFL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ФЛ
+        ///</summary>
+        public string Terrifnsfl { get; set; } // TERRIFNSFL (length: 4)
+
+        ///<summary>
+        /// Код ИФНС ЮЛ
+        ///</summary>
+        public string Ifnsul { get; set; } // IFNSUL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ЮЛ
+        ///</summary>
+        public string Terrifnsul { get; set; } // TERRIFNSUL (length: 4)
+
+        ///<summary>
+        /// OKATO
+        ///</summary>
+        public string Okato { get; set; } // OKATO (length: 11)
+
+        ///<summary>
+        /// OKTMO
+        ///</summary>
+        public string Oktmo { get; set; } // OKTMO (length: 11)
+
+        ///<summary>
+        /// Дата  внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdocid { get; set; } // NORMDOCID
+    }
+
+    // LOCK_NG
+    ///<summary>
+    /// Новая версия таблицы блокировки
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class LockNg
+    {
+
+        ///<summary>
+        /// УН блокировки
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// Дата блокировки
+        ///</summary>
+        public System.DateTime Ld { get; set; } // LD
+
+        ///<summary>
+        /// Код заблокировавшего обработчика
+        ///</summary>
+        public string HandlerCode { get; set; } // HANDLER_CODE (length: 100)
+
+        ///<summary>
+        /// Ключ блокировки
+        ///</summary>
+        public string Kv { get; set; } // KV (length: 100)
+
+        ///<summary>
+        /// Заблокировавшая машина
+        ///</summary>
+        public string Hst { get; set; } // HST (length: 100)
+        public System.DateTime Ed { get; set; } // ED
     }
 
     // LOTUS_DOCS
@@ -1605,6 +4579,93 @@ namespace Ifns51.Risk
             Mantissa = 5;
             LotusSequences = new System.Collections.Generic.List<LotusSequence>();
         }
+    }
+
+    // LOTUS_MOVEMENT
+    ///<summary>
+    /// Сведения о переносе документов из ТКС в Лотус
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class LotusMovement
+    {
+
+        ///<summary>
+        /// УН сведения о переносе документа
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН системы документооборота
+        ///</summary>
+        public string Iddocob { get; set; } // IDDOCOB (length: 100)
+
+        ///<summary>
+        /// NoteId документа в лотус
+        ///</summary>
+        public string LotusNoteid { get; set; } // LOTUS_NOTEID (length: 64)
+
+        ///<summary>
+        /// Входящий номер
+        ///</summary>
+        public string LotusNo { get; set; } // LOTUS_NO (length: 32)
+
+        ///<summary>
+        /// Дата входящего
+        ///</summary>
+        public System.DateTime? LotusDate { get; set; } // LOTUS_DATE
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child LotusMovementHistories where [LOTUS_MOVEMENT_HISTORY].[MID] point to this entity (FK_LOTUS_MOVEMENT_HISTORY_LOTUS_MOVEMENT)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<LotusMovementHistory> LotusMovementHistories { get; set; } // LOTUS_MOVEMENT_HISTORY.FK_LOTUS_MOVEMENT_HISTORY_LOTUS_MOVEMENT
+
+        public LotusMovement()
+        {
+            LotusMovementHistories = new System.Collections.Generic.List<LotusMovementHistory>();
+        }
+    }
+
+    // LOTUS_MOVEMENT_HISTORY
+    ///<summary>
+    /// История операций по переносу документов из ТКС в Лотус
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class LotusMovementHistory
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН записи о документе (ун записи об обращении)
+        ///</summary>
+        public int Mid { get; set; } // MID
+
+        ///<summary>
+        /// Результат переноса
+        ///</summary>
+        public int Status { get; set; } // STATUS
+
+        ///<summary>
+        /// Дата операции
+        ///</summary>
+        public System.DateTime D85 { get; set; } // D85
+
+        ///<summary>
+        /// Сообщение об ошибке
+        ///</summary>
+        public string Err { get; set; } // ERR (length: 1024)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent LotusMovement pointed by [LOTUS_MOVEMENT_HISTORY].([Mid]) (FK_LOTUS_MOVEMENT_HISTORY_LOTUS_MOVEMENT)
+        /// </summary>
+        public virtual LotusMovement LotusMovement { get; set; } // FK_LOTUS_MOVEMENT_HISTORY_LOTUS_MOVEMENT
     }
 
     // LOTUS_SEQUENCE
@@ -1775,6 +4836,337 @@ namespace Ifns51.Risk
         }
     }
 
+    // NDFL_INV
+    ///<summary>
+    /// Список полученных имущественных налоговых вычетов из НДФЛ
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class NdflInv
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН задания, в рамках которого произведен запрос
+        ///</summary>
+        public int ShedJobId { get; set; } // SHED_JOB_ID
+
+        ///<summary>
+        /// Код НО отправителя
+        ///</summary>
+        public string N279 { get; set; } // N279 (length: 4)
+
+        ///<summary>
+        /// ИНН плательщика
+        ///</summary>
+        public string N134 { get; set; } // N134 (length: 12)
+
+        ///<summary>
+        /// Дата представления декларации (заявления на выдачу уведомления)
+        ///</summary>
+        public System.DateTime D85 { get; set; } // D85
+
+        ///<summary>
+        /// Налоговый период
+        ///</summary>
+        public int D250 { get; set; } // D250
+
+        ///<summary>
+        /// Сведения о размере предоставленного имущественного налогового вычета  /Размер имущественного налогового вычета по расходам, направленным на новое строительство либо приобретение  объекта(в руб.)/Размер вычета, предоставленного в налоговом периоде
+        ///</summary>
+        public decimal Inv2203 { get; set; } // INV_220_3
+
+        ///<summary>
+        /// Сведения о размере предоставленного имущественного налогового вычета  /Размер имущественного налогового вычета по расходам, направленным на новое строительство либо приобретение  объекта(в руб.)/Предельный размер вычета
+        ///</summary>
+        public decimal Inv2203Limit { get; set; } // INV_220_3_LIMIT
+
+        ///<summary>
+        /// Сведения о размере предоставленного имущественного налогового вычета  /Размер имущественного налогового вычета по расходам, направленным на погашение процентов по целевым займам (кредитам), а также по кредитам, полученным в целях рефинансирования (перекредитования)(в руб.)/Предельный размер вычета в налоговом периоде
+        ///</summary>
+        public decimal Inv2204 { get; set; } // INV_220_4
+
+        ///<summary>
+        /// Сведения о размере предоставленного имущественного налогового вычета  /Размер имущественного налогового вычета по расходам, направленным на погашение процентов по целевым займам (кредитам), а также по кредитам, полученным в целях рефинансирования (перекредитования)(в руб.)/Предельный размер вычета в налоговом периоде
+        ///</summary>
+        public decimal Inv2204Limit { get; set; } // INV_220_4_LIMIT
+
+        ///<summary>
+        /// Адрес местонахождения/Индекс
+        ///</summary>
+        public string N315 { get; set; } // N315 (length: 12)
+
+        ///<summary>
+        /// Адрес местонахождения/Код региона
+        ///</summary>
+        public string D3201 { get; set; } // D320_1 (length: 100)
+
+        ///<summary>
+        /// Адрес местонахождения/Район
+        ///</summary>
+        public string D3202 { get; set; } // D320_2 (length: 100)
+
+        ///<summary>
+        /// Адрес местонахождения/Город
+        ///</summary>
+        public string D3203 { get; set; } // D320_3 (length: 100)
+
+        ///<summary>
+        /// Адрес местонахождения/Нас. пункт
+        ///</summary>
+        public string D3204 { get; set; } // D320_4 (length: 100)
+
+        ///<summary>
+        /// Адрес местонахождения/Улица
+        ///</summary>
+        public string N316 { get; set; } // N316 (length: 150)
+
+        ///<summary>
+        /// Адрес местонахождения/Дом
+        ///</summary>
+        public string N317 { get; set; } // N317 (length: 100)
+
+        ///<summary>
+        /// Адрес местонахождения/Корпус
+        ///</summary>
+        public string N318 { get; set; } // N318 (length: 100)
+
+        ///<summary>
+        /// Адрес местонахождения/Квартира
+        ///</summary>
+        public string N319 { get; set; } // N319 (length: 100)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ShedJob pointed by [NDFL_INV].([ShedJobId]) (FK_NDFL_INV_SHED_JOB)
+        /// </summary>
+        public virtual ShedJob ShedJob { get; set; } // FK_NDFL_INV_SHED_JOB
+
+        public NdflInv()
+        {
+            Inv2203 = 0m;
+            Inv2203Limit = 0m;
+            Inv2204 = 0m;
+            Inv2204Limit = 0m;
+        }
+    }
+
+    // NDOCTYPE
+    ///<summary>
+    /// Тип нормативного документа
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Ndoctype
+    {
+
+        ///<summary>
+        /// Идентификатор записи (ключ)
+        ///</summary>
+        public int Ndtypeid { get; set; } // NDTYPEID (Primary key)
+
+        ///<summary>
+        /// Наименование типа нормативного документа
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 250)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Normdocs where [NORMDOC].[NDTYPEID] point to this entity (FK_NORMDOC_NORMDOC)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<Normdoc> Normdocs { get; set; } // NORMDOC.FK_NORMDOC_NORMDOC
+
+        public Ndoctype()
+        {
+            Normdocs = new System.Collections.Generic.List<Normdoc>();
+        }
+    }
+
+    // NORMDOC
+    ///<summary>
+    /// Сведения по нормативному документу, являющемуся основанием присвоения адресному элементу наименования
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Normdoc
+    {
+
+        ///<summary>
+        /// Идентификатор нормативного документа
+        ///</summary>
+        public System.Guid Normdocid { get; set; } // NORMDOCID (Primary key)
+
+        ///<summary>
+        /// Наименование документа
+        ///</summary>
+        public string Docname { get; set; } // DOCNAME (length: 2147483647)
+
+        ///<summary>
+        /// Дата документа
+        ///</summary>
+        public System.DateTime? Docdate { get; set; } // DOCDATE
+
+        ///<summary>
+        /// Номер документа
+        ///</summary>
+        public string Docnum { get; set; } // DOCNUM (length: 20)
+
+        ///<summary>
+        /// Тип документа
+        ///</summary>
+        public int Ndtypeid { get; set; } // NDTYPEID
+
+        ///<summary>
+        /// Идентификатор образа (внешний ключ)
+        ///</summary>
+        public System.Guid? Docimgid { get; set; } // DOCIMGID
+
+        ///<summary>
+        /// Документ удален (1 - удален, 0 - не удален)
+        ///</summary>
+        public bool IsDelete { get; set; } // IS_DELETE
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent Ndoctype pointed by [NORMDOC].([Ndtypeid]) (FK_NORMDOC_NORMDOC)
+        /// </summary>
+        public virtual Ndoctype Ndoctype { get; set; } // FK_NORMDOC_NORMDOC
+
+        public Normdoc()
+        {
+            IsDelete = false;
+        }
+    }
+
+    // OPERSTAT
+    ///<summary>
+    /// Статус действия
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Operstat
+    {
+
+        ///<summary>
+        /// Идентификатор статуса (ключ)
+        ///</summary>
+        public int Operstatid { get; set; } // OPERSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 100)
+    }
+
+    // RB_COURT
+    ///<summary>
+    /// Справочник судов из налога 3
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RbCourt
+    {
+
+        ///<summary>
+        /// УН суда
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН типа суда
+        ///</summary>
+        public int TpId { get; set; } // TP_ID
+
+        ///<summary>
+        /// Название участка
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 512)
+
+        ///<summary>
+        /// Адрес
+        ///</summary>
+        public string Address { get; set; } // ADDRESS (length: 1024)
+
+        ///<summary>
+        /// Телефон
+        ///</summary>
+        public string Tel { get; set; } // TEL (length: 256)
+
+        ///<summary>
+        /// Эл. почта
+        ///</summary>
+        public string Email { get; set; } // EMAIL (length: 256)
+
+        ///<summary>
+        /// Код суда в ГАС Правосудие
+        ///</summary>
+        public string Code { get; set; } // CODE (length: 25)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent RbCourtType pointed by [RB_COURT].([TpId]) (FK_RB_COURT_RB_COURT)
+        /// </summary>
+        public virtual RbCourtType RbCourtType { get; set; } // FK_RB_COURT_RB_COURT
+    }
+
+    // RB_COURT_TYPE
+    ///<summary>
+    /// Справочник типы судов
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RbCourtType
+    {
+
+        ///<summary>
+        /// УН типа суда
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// Название типа суда
+        ///</summary>
+        public string Title { get; set; } // TITLE (length: 512)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child RbCourts where [RB_COURT].[TP_ID] point to this entity (FK_RB_COURT_RB_COURT)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<RbCourt> RbCourts { get; set; } // RB_COURT.FK_RB_COURT_RB_COURT
+
+        public RbCourtType()
+        {
+            RbCourts = new System.Collections.Generic.List<RbCourt>();
+        }
+    }
+
+    // RB_DECL_CODES
+    ///<summary>
+    /// Справочник. Коды периода предоставления декларации 6 НДФЛ
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RbDeclCode
+    {
+
+        ///<summary>
+        /// УН периода
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// Название периода
+        ///</summary>
+        public string Title { get; set; } // TITLE (length: 512)
+
+        ///<summary>
+        /// Количество месяцев, за которые предоставляется декларация
+        ///</summary>
+        public int Mnt { get; set; } // MNT
+    }
+
     // RB_REPORT
     ///<summary>
     /// Образы отчетов
@@ -1882,6 +5274,16 @@ namespace Ifns51.Risk
         /// Код запроса
         ///</summary>
         public string Code { get; set; } // CODE (length: 50)
+
+        ///<summary>
+        /// Тайм-аут при нефатальной ошибке
+        ///</summary>
+        public int? ErrTo { get; set; } // ERR_TO
+
+        ///<summary>
+        /// Время жизни фатальной ошибки
+        ///</summary>
+        public int? ErrTtl { get; set; } // ERR_TTL
 
         // Reverse navigation
 
@@ -2017,6 +5419,10 @@ namespace Ifns51.Risk
         /// </summary>
         public virtual System.Collections.Generic.ICollection<RiskFn236> RiskFn236 { get; set; } // RISK_FN236.FK_RISK_FN236_RISK_CHECKER
         /// <summary>
+        /// Child RiskNdfls where [RISK_NDFL].[RISK_CHECKER_ID] point to this entity (FK_RISK_NDFL_RISK_CHECKER)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<RiskNdfl> RiskNdfls { get; set; } // RISK_NDFL.FK_RISK_NDFL_RISK_CHECKER
+        /// <summary>
         /// Child RiskYears where [RISK_YEAR].[RISK_CHECKER_ID] point to this entity (FK_RISK_YEAR_RISK_CHECKER)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<RiskYear> RiskYears { get; set; } // RISK_YEAR.FK_RISK_YEAR_RISK_CHECKER
@@ -2031,6 +5437,7 @@ namespace Ifns51.Risk
             RiskFailures = new System.Collections.Generic.List<RiskFailure>();
             RiskFn205 = new System.Collections.Generic.List<RiskFn205>();
             RiskFn236 = new System.Collections.Generic.List<RiskFn236>();
+            RiskNdfls = new System.Collections.Generic.List<RiskNdfl>();
             RiskYears = new System.Collections.Generic.List<RiskYear>();
         }
     }
@@ -2369,6 +5776,59 @@ namespace Ifns51.Risk
         public RiskField()
         {
             JobDatums = new System.Collections.Generic.List<JobDatum>();
+        }
+    }
+
+    // RISK_FN1048
+    ///<summary>
+    /// Отчетные периоды
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskFn1048
+    {
+
+        ///<summary>
+        /// УН периода (номер квартала от 01.01.1900).
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН периода (номер квартала от 01.01.1900).
+        ///</summary>
+        public int D80 { get; set; } // D80
+
+        ///<summary>
+        /// Дата последней операции
+        ///</summary>
+        public System.DateTime D85 { get; set; } // D85
+
+        ///<summary>
+        /// Результат выполнения операции
+        ///</summary>
+        public int Re { get; set; } // RE
+
+        ///<summary>
+        /// Этап выполнения операции
+        ///</summary>
+        public int Stage { get; set; } // STAGE
+        public int ShedJobId { get; set; } // SHED_JOB_ID
+
+        ///<summary>
+        /// Сообщение об ошибке
+        ///</summary>
+        public string Err { get; set; } // ERR (length: 1024)
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ShedJob pointed by [RISK_FN1048].([ShedJobId]) (FK_RISK_FN1048_SHED_JOB)
+        /// </summary>
+        public virtual ShedJob ShedJob { get; set; } // FK_RISK_FN1048_SHED_JOB
+
+        public RiskFn1048()
+        {
+            D85 = System.DateTime.Now;
+            Re = 1;
         }
     }
 
@@ -3032,20 +6492,12 @@ namespace Ifns51.Risk
         ///</summary>
         public byte D19902 { get; set; } // D1990_2
 
-        // Reverse navigation
-
-        /// <summary>
-        /// Child Fn72Web where [FN72_WEB].[N274] point to this entity (FK_FN72_WEB_RISK_FN72)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<Fn72Web> Fn72Web { get; set; } // FN72_WEB.FK_FN72_WEB_RISK_FN72
-
         public RiskFn72()
         {
             D1989 = true;
             D1990 = false;
             D85 = System.DateTime.Now;
             D19902 = 0;
-            Fn72Web = new System.Collections.Generic.List<Fn72Web>();
         }
     }
 
@@ -3187,6 +6639,67 @@ namespace Ifns51.Risk
         }
     }
 
+    // RISK_INCOME_TAXATION
+    ///<summary>
+    /// Сведения о зарплате по ставкам
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskIncomeTaxation
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН года
+        ///</summary>
+        public int RiskYearId { get; set; } // RISK_YEAR_ID
+
+        ///<summary>
+        /// ИНН налогоплательщика (наемного сотрудника, в большинстве случаев)
+        ///</summary>
+        public string N134 { get; set; } // N134 (length: 12)
+
+        ///<summary>
+        /// Ставка налога
+        ///</summary>
+        public decimal TaxRate { get; set; } // TAX_RATE
+
+        ///<summary>
+        /// Общая сумма дохода
+        ///</summary>
+        public decimal Income { get; set; } // INCOME
+
+        ///<summary>
+        /// Облагаемая сумма дохода
+        ///</summary>
+        public decimal TaxableIncome { get; set; } // TAXABLE_INCOME
+
+        ///<summary>
+        /// Сумма налога исчисленная
+        ///</summary>
+        public decimal IncomeTax { get; set; } // INCOME_TAX
+
+        ///<summary>
+        /// Сумма налога удержанная
+        ///</summary>
+        public decimal DeductedTax { get; set; } // DEDUCTED_TAX
+
+        ///<summary>
+        /// Сумма налога перечисленная
+        ///</summary>
+        public decimal TransferredTax { get; set; } // TRANSFERRED_TAX
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent RiskYear pointed by [RISK_INCOME_TAXATION].([RiskYearId]) (FK_RISK_INCOME_TAXATION_RISK_YEAR)
+        /// </summary>
+        public virtual RiskYear RiskYear { get; set; } // FK_RISK_INCOME_TAXATION_RISK_YEAR
+    }
+
     // RISK_LOCK
     ///<summary>
     /// Блокировка для запросов в ЦОД
@@ -3270,6 +6783,115 @@ namespace Ifns51.Risk
         }
     }
 
+    // RISK_NDFL
+    ///<summary>
+    /// Сведения о форме 6-НДФЛ
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskNdfl
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+        public int RiskCheckerId { get; set; } // RISK_CHECKER_ID
+
+        ///<summary>
+        /// Год
+        ///</summary>
+        public int D250 { get; set; } // D250
+
+        ///<summary>
+        /// УН формы
+        ///</summary>
+        public int KindCode { get; set; } // KIND_CODE
+
+        ///<summary>
+        /// Количество работников
+        ///</summary>
+        public int Qty { get; set; } // QTY
+
+        ///<summary>
+        /// Удержан налог
+        ///</summary>
+        public decimal DeductedTax { get; set; } // DEDUCTED_TAX
+
+        ///<summary>
+        /// Не удержан налог
+        ///</summary>
+        public decimal RemaindedTax { get; set; } // REMAINDED_TAX
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent RiskChecker pointed by [RISK_NDFL].([RiskCheckerId]) (FK_RISK_NDFL_RISK_CHECKER)
+        /// </summary>
+        public virtual RiskChecker RiskChecker { get; set; } // FK_RISK_NDFL_RISK_CHECKER
+
+        public RiskNdfl()
+        {
+            Qty = 0;
+            DeductedTax = 0m;
+            RemaindedTax = 0m;
+        }
+    }
+
+    // RISK_NDFL2
+    ///<summary>
+    /// Деталировка зарплаты по 2-НДФЛ
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskNdfl2
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int ShedJobId { get; set; } // SHED_JOB_ID
+        public string N134 { get; set; } // N134 (length: 12)
+        public string RiskN134 { get; set; } // RiskN134 (length: 12)
+        public string RiskD3 { get; set; } // RiskD3 (length: 9)
+        public string RiskN18 { get; set; } // RiskN18 (length: 1024)
+        public string V743 { get; set; } // V743 (length: 8)
+        public decimal Income { get; set; } // INCOME
+        public decimal Tax { get; set; } // TAX
+        public decimal TaxRate { get; set; } // TAX_RATE
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ShedJob pointed by [RISK_NDFL2].([ShedJobId]) (FK_RISK_NDFL2_SHED_JOB)
+        /// </summary>
+        public virtual ShedJob ShedJob { get; set; } // FK_RISK_NDFL2_SHED_JOB
+    }
+
+    // RISK_PROXY
+    ///<summary>
+    /// Представитель сотрудника управления в базе инспекции
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskProxy
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН инспекции
+        ///</summary>
+        public string N279 { get; set; } // N279 (length: 4)
+
+        ///<summary>
+        /// Login доверителя (FN74.D686)
+        ///</summary>
+        public string CommiterD686 { get; set; } // COMMITER_D686 (length: 50)
+
+        ///<summary>
+        /// Login доверенного лица (FN74.D686)
+        ///</summary>
+        public string ProxyD686 { get; set; } // PROXY_D686 (length: 50)
+    }
+
     // RISK_VERSION
     ///<summary>
     /// Сведения о версии БД
@@ -3316,18 +6938,6 @@ namespace Ifns51.Risk
         /// Название группы
         ///</summary>
         public string Title { get; set; } // Title (length: 50)
-
-        // Reverse navigation
-
-        /// <summary>
-        /// Child Fn72Web where [FN72_WEB].[RISK_WEB_ID] point to this entity (FK_FN72_WEB_RISK_WEB)
-        /// </summary>
-        public virtual System.Collections.Generic.ICollection<Fn72Web> Fn72Web { get; set; } // FN72_WEB.FK_FN72_WEB_RISK_WEB
-
-        public RiskWeb()
-        {
-            Fn72Web = new System.Collections.Generic.List<Fn72Web>();
-        }
     }
 
     // RISK_YEAR
@@ -3363,12 +6973,166 @@ namespace Ifns51.Risk
         ///</summary>
         public int? QueryId { get; set; } // QUERY_ID
 
+        // Reverse navigation
+
+        /// <summary>
+        /// Child RiskIncomeTaxations where [RISK_INCOME_TAXATION].[RISK_YEAR_ID] point to this entity (FK_RISK_INCOME_TAXATION_RISK_YEAR)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<RiskIncomeTaxation> RiskIncomeTaxations { get; set; } // RISK_INCOME_TAXATION.FK_RISK_INCOME_TAXATION_RISK_YEAR
+
         // Foreign keys
 
         /// <summary>
         /// Parent RiskChecker pointed by [RISK_YEAR].([RiskCheckerId]) (FK_RISK_YEAR_RISK_CHECKER)
         /// </summary>
         public virtual RiskChecker RiskChecker { get; set; } // FK_RISK_YEAR_RISK_CHECKER
+
+        public RiskYear()
+        {
+            RiskIncomeTaxations = new System.Collections.Generic.List<RiskIncomeTaxation>();
+        }
+    }
+
+    // ROOM
+    ///<summary>
+    /// Сведения о помещениях
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Room
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи. Ключевое поле.
+        ///</summary>
+        public System.Guid Roomid { get; set; } // ROOMID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор адресного объекта (помещения)
+        ///</summary>
+        public System.Guid Roomguid { get; set; } // ROOMGUID
+
+        ///<summary>
+        /// Номер помещения или офиса
+        ///</summary>
+        public string Flatnumber { get; set; } // FLATNUMBER (length: 50)
+
+        ///<summary>
+        /// Тип помещения
+        ///</summary>
+        public int Flattype { get; set; } // FLATTYPE
+
+        ///<summary>
+        /// Номер комнаты
+        ///</summary>
+        public string Roomnumber { get; set; } // ROOMNUMBER (length: 50)
+
+        ///<summary>
+        /// Тип комнаты
+        ///</summary>
+        public int? Roomtype { get; set; } // ROOMTYPE
+
+        ///<summary>
+        /// Код региона
+        ///</summary>
+        public string Regioncode { get; set; } // REGIONCODE (length: 2)
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Дата  внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE
+
+        ///<summary>
+        /// Идентификатор родительского объекта (дома)
+        ///</summary>
+        public System.Guid Houseguid { get; set; } // HOUSEGUID
+
+        ///<summary>
+        /// Идентификатор записи связывания с предыдушей исторической записью
+        ///</summary>
+        public System.Guid? Previd { get; set; } // PREVID
+
+        ///<summary>
+        /// Идентификатор записи  связывания с последующей исторической записью
+        ///</summary>
+        public System.Guid? Nextid { get; set; } // NEXTID
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE
+
+        ///<summary>
+        /// Признак действующего адресного объекта
+        ///</summary>
+        public int Livestatus { get; set; } // LIVESTATUS
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdoc { get; set; } // NORMDOC
+
+        ///<summary>
+        /// Статус действия над записью – причина появления записи (см. описание таблицы OperationStatus):
+        /// 01 – Инициация;
+        /// 10 – Добавление;
+        /// 20 – Изменение;
+        /// 21 – Групповое изменение;
+        /// 30 – Удаление;
+        /// 31 - Удаление вследствие удаления вышестоящего объекта;
+        /// 40 – Присоединение адресного объекта (слияние);
+        /// 41 – Переподчинение вследствие слияния вышестоящего объекта;
+        /// 42 - Прекращение существования вследствие присоединения к другому адресному объекту;
+        /// 43 - Создание нового адресного объекта в результате слияния адресных объектов;
+        /// 50 – Переподчинение;
+        /// 51 – Переподчинение вследствие переподчинения вышестоящего объекта;
+        /// 60 – Прекращение существования вследствие дробления;
+        /// 61 – Создание нового адресного объекта в результате дробления
+        ///</summary>
+        public int Operstatus { get; set; } // OPERSTATUS
+
+        ///<summary>
+        /// Кадастровый номер помещения
+        ///</summary>
+        public string Cadnum { get; set; } // CADNUM (length: 100)
+
+        ///<summary>
+        /// Кадастровый номер комнаты в помещении
+        ///</summary>
+        public string Roomcadnum { get; set; } // ROOMCADNUM (length: 100)
+    }
+
+    // ROOMTYPE
+    ///<summary>
+    /// Информация по типам комнат в БД ФИАС
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Roomtype
+    {
+
+        ///<summary>
+        /// УН типа комнаты
+        ///</summary>
+        public int Rmtypeid { get; set; } // RMTYPEID (Primary key)
+
+        ///<summary>
+        /// Наименование типа комнаты
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 20)
+
+        ///<summary>
+        /// Краткое наименование типа комнаты
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (length: 20)
     }
 
     // The table 'SashaErrorTreb' is not usable by entity framework because it
@@ -3406,6 +7170,23 @@ namespace Ifns51.Risk
         public int? D865Treb { get; set; } // D865Treb
         public int? D270IshTreb { get; set; } // D270IshTreb
         public System.DateTime? DateCreate { get; set; } // DateCreate
+    }
+
+    // ServerIfns
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class ServerIfn
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string ServerName { get; set; } // ServerName (length: 64)
+        public string ServerDiscription { get; set; } // ServerDiscription (length: 64)
+        public string Children { get; set; } // Children (length: 64)
+        public string ServerIp { get; set; } // ServerIp (length: 64)
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+        public ServerIfn()
+        {
+            DataCreate = System.DateTime.Now;
+        }
     }
 
     // ServiceWcfCommand
@@ -3487,6 +7268,18 @@ namespace Ifns51.Risk
         /// </summary>
         public virtual System.Collections.Generic.ICollection<JobDatum> JobDatums { get; set; } // JOB_DATA.FK_JOB_DATA_SHED_JOB
         /// <summary>
+        /// Child NdflInvs where [NDFL_INV].[SHED_JOB_ID] point to this entity (FK_NDFL_INV_SHED_JOB)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<NdflInv> NdflInvs { get; set; } // NDFL_INV.FK_NDFL_INV_SHED_JOB
+        /// <summary>
+        /// Child RiskFn1048 where [RISK_FN1048].[SHED_JOB_ID] point to this entity (FK_RISK_FN1048_SHED_JOB)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<RiskFn1048> RiskFn1048 { get; set; } // RISK_FN1048.FK_RISK_FN1048_SHED_JOB
+        /// <summary>
+        /// Child RiskNdfl2 where [RISK_NDFL2].[SHED_JOB_ID] point to this entity (FK_RISK_NDFL2_SHED_JOB)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<RiskNdfl2> RiskNdfl2 { get; set; } // RISK_NDFL2.FK_RISK_NDFL2_SHED_JOB
+        /// <summary>
         /// Child ShedJobDatums where [SHED_JOB_DATA].[SHED_JOB_ID] point to this entity (FK_SHED_JOB_DATA_SHED_JOB)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<ShedJobDatum> ShedJobDatums { get; set; } // SHED_JOB_DATA.FK_SHED_JOB_DATA_SHED_JOB
@@ -3506,6 +7299,9 @@ namespace Ifns51.Risk
         {
             D85 = System.DateTime.Now;
             JobDatums = new System.Collections.Generic.List<JobDatum>();
+            NdflInvs = new System.Collections.Generic.List<NdflInv>();
+            RiskFn1048 = new System.Collections.Generic.List<RiskFn1048>();
+            RiskNdfl2 = new System.Collections.Generic.List<RiskNdfl2>();
             ShedJobDatums = new System.Collections.Generic.List<ShedJobDatum>();
             ShedJobLogs = new System.Collections.Generic.List<ShedJobLog>();
         }
@@ -3910,6 +7706,35 @@ namespace Ifns51.Risk
         }
     }
 
+    // SOCRBASE
+    ///<summary>
+    /// Тип адресного объекта
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Socrbase
+    {
+
+        ///<summary>
+        /// Ключевое поле
+        ///</summary>
+        public string KodTSt { get; set; } // KOD_T_ST (Primary key) (length: 4)
+
+        ///<summary>
+        /// Уровень адресного объекта
+        ///</summary>
+        public int SocrbaseLevel { get; set; } // SOCRBASE_LEVEL
+
+        ///<summary>
+        /// Краткое наименование типа объекта
+        ///</summary>
+        public string Scname { get; set; } // SCNAME (length: 10)
+
+        ///<summary>
+        /// Полное наименование типа объекта
+        ///</summary>
+        public string Socrname { get; set; } // SOCRNAME (length: 50)
+    }
+
     // StatusAnaliz
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class StatusAnaliz
@@ -3997,6 +7822,139 @@ namespace Ifns51.Risk
         }
     }
 
+    // STEAD
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Stead
+    {
+
+        ///<summary>
+        /// Уникальный идентификатор записи. Ключевое поле.
+        ///</summary>
+        public System.Guid Steadid { get; set; } // STEADID (Primary key)
+
+        ///<summary>
+        /// Глобальный уникальный идентификатор адресного объекта (земельного участка)
+        ///</summary>
+        public System.Guid Steadguid { get; set; } // STEADGUID
+
+        ///<summary>
+        /// Номер земельного участка
+        ///</summary>
+        public string Number { get; set; } // NUMBER (length: 120)
+
+        ///<summary>
+        /// Код региона
+        ///</summary>
+        public string Regioncode { get; set; } // REGIONCODE (length: 2)
+
+        ///<summary>
+        /// Почтовый индекс
+        ///</summary>
+        public string Postalcode { get; set; } // POSTALCODE (length: 6)
+
+        ///<summary>
+        /// Код ИФНС ФЛ
+        ///</summary>
+        public string Ifnsfl { get; set; } // IFNSFL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ФЛ
+        ///</summary>
+        public string Terrifnsfl { get; set; } // TERRIFNSFL (length: 4)
+
+        ///<summary>
+        /// Код ИФНС ЮЛ
+        ///</summary>
+        public string Ifnsul { get; set; } // IFNSUL (length: 4)
+
+        ///<summary>
+        /// Код территориального участка ИФНС ЮЛ
+        ///</summary>
+        public string Terrifnsul { get; set; } // TERRIFNSUL (length: 4)
+
+        ///<summary>
+        /// OKATO
+        ///</summary>
+        public string Okato { get; set; } // OKATO (length: 11)
+
+        ///<summary>
+        /// OKTMO
+        ///</summary>
+        public string Oktmo { get; set; } // OKTMO (length: 11)
+
+        ///<summary>
+        /// Дата  внесения записи
+        ///</summary>
+        public System.DateTime Updatedate { get; set; } // UPDATEDATE
+
+        ///<summary>
+        /// Идентификатор объекта родительского объекта
+        ///</summary>
+        public System.Guid? Parentguid { get; set; } // PARENTGUID
+
+        ///<summary>
+        /// Идентификатор записи связывания с предыдушей исторической записью
+        ///</summary>
+        public System.Guid? Previd { get; set; } // PREVID
+
+        ///<summary>
+        /// Идентификатор записи  связывания с последующей исторической записью
+        ///</summary>
+        public System.Guid? Nextid { get; set; } // NEXTID
+
+        ///<summary>
+        /// Статус действия над записью – причина появления записи (см. описание таблицы OperationStatus):
+        /// 01 – Инициация;
+        /// 10 – Добавление;
+        /// 20 – Изменение;
+        /// 21 – Групповое изменение;
+        /// 30 – Удаление;
+        /// 31 - Удаление вследствие удаления вышестоящего объекта;
+        /// 40 – Присоединение адресного объекта (слияние);
+        /// 41 – Переподчинение вследствие слияния вышестоящего объекта;
+        /// 42 - Прекращение существования вследствие присоединения к другому адресному объекту;
+        /// 43 - Создание нового адресного объекта в результате слияния адресных объектов;
+        /// 50 – Переподчинение;
+        /// 51 – Переподчинение вследствие переподчинения вышестоящего объекта;
+        /// 60 – Прекращение существования вследствие дробления;
+        /// 61 – Создание нового адресного объекта в результате дробления
+        ///</summary>
+        public int Operstatus { get; set; } // OPERSTATUS
+
+        ///<summary>
+        /// Начало действия записи
+        ///</summary>
+        public System.DateTime Startdate { get; set; } // STARTDATE
+
+        ///<summary>
+        /// Окончание действия записи
+        ///</summary>
+        public System.DateTime Enddate { get; set; } // ENDDATE
+
+        ///<summary>
+        /// Внешний ключ на нормативный документ
+        ///</summary>
+        public System.Guid? Normdoc { get; set; } // NORMDOC
+
+        ///<summary>
+        /// Признак действующего адресного объекта
+        ///</summary>
+        public int Livestatus { get; set; } // LIVESTATUS
+
+        ///<summary>
+        /// Кадастровый номер
+        ///</summary>
+        public string Cadnum { get; set; } // CADNUM (length: 100)
+
+        ///<summary>
+        /// Тип адресации:
+        /// 0 - не определено
+        /// 1 - муниципальный;
+        /// 2 - административно-территориальный
+        ///</summary>
+        public int Divtype { get; set; } // DIVTYPE
+    }
+
     // Stone
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class Stone
@@ -4022,6 +7980,42 @@ namespace Ifns51.Risk
         {
             DateCreate = System.DateTime.Now;
             Templates = new System.Collections.Generic.List<Template>();
+        }
+    }
+
+    // STRSTAT
+    ///<summary>
+    /// Признак строения
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Strstat
+    {
+
+        ///<summary>
+        /// Признак строения
+        ///</summary>
+        public int Strstatid { get; set; } // STRSTATID (Primary key)
+
+        ///<summary>
+        /// Наименование
+        ///</summary>
+        public string Name { get; set; } // NAME (length: 20)
+
+        ///<summary>
+        /// Краткое наименование
+        ///</summary>
+        public string Shortname { get; set; } // SHORTNAME (length: 20)
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Houses where [HOUSE].[STRSTATID] point to this entity (FK_HOUSE_STRSTAT)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<House> Houses { get; set; } // HOUSE.FK_HOUSE_STRSTAT
+
+        public Strstat()
+        {
+            Houses = new System.Collections.Generic.List<House>();
         }
     }
 
@@ -4125,61 +8119,181 @@ namespace Ifns51.Risk
 
     }
 
-    // VAT_DATA
-    ///<summary>
-    /// Таблица для анализа деклараций НДС
-    ///</summary>
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
-    public class VatDatum
-    {
-
-        ///<summary>
-        /// УН записи
-        ///</summary>
-        public int Id { get; set; } // ID (Primary key)
-
-        ///<summary>
-        /// УН задания для анализа
-        ///</summary>
-        public int ShedJobId { get; set; } // SHED_JOB_ID
-
-        ///<summary>
-        /// Код инспекции с данными
-        ///</summary>
-        public int N279 { get; set; } // N279
-
-        ///<summary>
-        /// УН декларации
-        ///</summary>
-        public int D270 { get; set; } // D270
-
-        ///<summary>
-        /// Код показателя
-        ///</summary>
-        public string RCode { get; set; } // R_CODE (length: 100)
-
-        ///<summary>
-        /// Порядок сортировки показателя
-        ///</summary>
-        public int Ord { get; set; } // ORD
-
-        ///<summary>
-        /// Название показателя
-        ///</summary>
-        public string RTitle { get; set; } // R_TITLE (length: 100)
-
-        ///<summary>
-        /// Значение показателя
-        ///</summary>
-        public string Amount { get; set; } // AMOUNT (length: 100)
-    }
-
     // VidDelaException
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class VidDelaException
     {
         public int Id { get; set; } // id (Primary key)
         public int? Vid { get; set; } // vid
+    }
+
+    // WHD_DECL
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhdDecl
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int D80 { get; set; } // D80
+        public int D270 { get; set; } // D270
+        public string N279 { get; set; } // N279 (length: 50)
+        public string RisksN134 { get; set; } // RisksN134 (length: 12)
+    }
+
+    // WHD_FN212
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhdFn212
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string N134 { get; set; } // N134 (length: 12)
+        public string N18 { get; set; } // N18 (length: 160)
+    }
+
+    // WHD_GAUGE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhdGauge
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int? Parentid { get; set; } // PARENTID
+        public string Code { get; set; } // CODE (length: 64)
+        public string Title { get; set; } // TITLE (length: 256)
+    }
+
+    // WHD_VNP
+    ///<summary>
+    /// Выездные налоговые проверки - документы из базы
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhdVnp
+    {
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// ИНН проверяемого лица
+        ///</summary>
+        public string N134 { get; set; } // N134 (length: 12)
+
+        ///<summary>
+        /// УН инспекции с документом о ВНП
+        ///</summary>
+        public string N279 { get; set; } // N279 (length: 4)
+
+        ///<summary>
+        /// УН документа ВНП
+        ///</summary>
+        public int N8491 { get; set; } // N849__1
+
+        ///<summary>
+        /// Номер документа ВНП
+        ///</summary>
+        public string N8496 { get; set; } // N849__6 (length: 25)
+
+        ///<summary>
+        /// Дата документа ВНП
+        ///</summary>
+        public System.DateTime? N8495 { get; set; } // N849__5
+
+        ///<summary>
+        /// Начало проверяемого периода
+        ///</summary>
+        public System.DateTime? N84910 { get; set; } // N849__10
+
+        ///<summary>
+        /// Окончание проверяемого периода
+        ///</summary>
+        public System.DateTime? N84911 { get; set; } // N849__11
+    }
+
+    // WHF_ACCREQ
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhfAccreq
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int D80 { get; set; } // D80
+        public string N279 { get; set; } // N279 (length: 4)
+        public int D270 { get; set; } // D270
+        public System.DateTime D40 { get; set; } // D40
+        public System.DateTime D41 { get; set; } // D41
+        public int D440 { get; set; } // D440
+        public string D38076 { get; set; } // D3807_6 (length: 4)
+        public string N89 { get; set; } // N89 (length: 30)
+        public string N134 { get; set; } // N134 (length: 12)
+        public bool Er { get; set; } // ER
+        public string N111 { get; set; } // N111 (length: 9)
+        public string Bankn134 { get; set; } // BANKN134 (length: 12)
+    }
+
+    // WHF_GAPS
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhfGap
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int D80 { get; set; } // D80
+        public int GaugeId { get; set; } // GAUGE_ID
+        public string N89 { get; set; } // N89 (length: 20)
+        public string N134 { get; set; } // N134 (length: 12)
+        public System.DateTime D40 { get; set; } // d40
+        public System.DateTime D41 { get; set; } // d41
+    }
+
+    // WHF_VAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhfVat
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public int D80 { get; set; } // D80
+        public string N134 { get; set; } // N134 (length: 12)
+        public int Declid { get; set; } // DECLID
+        public int Gaugeid { get; set; } // GAUGEID
+        public decimal Amount { get; set; } // AMOUNT
+    }
+
+    // WHT_OPERATIONS
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhtOperation
+    {
+        public int Id { get; set; } // id (Primary key)
+        public string RisksN134 { get; set; } // RisksN134 (length: 12)
+        public int D80 { get; set; } // D80
+        public int D40541 { get; set; } // D4054_1
+        public int? D2702 { get; set; } // D270_2
+        public int? D2701 { get; set; } // D270_1
+        public string N105 { get; set; } // N105 (length: 160)
+        public string N111 { get; set; } // N111 (length: 9)
+        public System.DateTime? D883 { get; set; } // D88_3
+        public System.DateTime? D884 { get; set; } // D88_4
+        public string N89 { get; set; } // N89 (length: 30)
+        public int? D250 { get; set; } // D250
+        public System.DateTime? D882 { get; set; } // d88_2
+        public string R096 { get; set; } // R096 (length: 30)
+        public string R097 { get; set; } // R097 (length: 30)
+        public string N1232 { get; set; } // N123_2 (length: 3)
+        public decimal? D832 { get; set; } // D83_2
+        public decimal? D833 { get; set; } // D83_3
+        public string N134 { get; set; } // N134 (length: 12)
+        public string R099 { get; set; } // R099 (length: 500)
+        public string R105 { get; set; } // R105 (length: 2500)
+
+        ///<summary>
+        /// Корсчет корреспондента
+        ///</summary>
+        public string R098 { get; set; } // R098 (length: 50)
+
+        ///<summary>
+        /// Документ-основание для операции - шифр
+        ///</summary>
+        public string D4232 { get; set; } // D4232 (length: 2)
+    }
+
+    // WHT_THRESHOLDS
+    ///<summary>
+    /// Разброс организаций по оборотам (средние, крупные)
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhtThreshold
+    {
+        public int Id { get; set; } // ID (Primary key)
+        public string Title { get; set; } // TITLE (length: 100)
+        public decimal MinValue { get; set; } // MinValue
+        public decimal MaxValue { get; set; } // MaxValue
     }
 
     // WordDocument
@@ -4200,6 +8314,26 @@ namespace Ifns51.Risk
         /// Parent NameDocument pointed by [WordDocument].([IdNamedocument]) (FK_WordDocument_NameDocument)
         /// </summary>
         public virtual NameDocument NameDocument { get; set; } // FK_WordDocument_NameDocument
+    }
+
+    // XLCOLOR
+    ///<summary>
+    /// Цвета в XL - сортировка
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Xlcolor
+    {
+
+        ///<summary>
+        /// ARGB-палитра
+        ///</summary>
+        public int Argb { get; set; } // ARGB (Primary key)
+
+        ///<summary>
+        /// Порядок сортировки - приоритеты
+        ///</summary>
+        public int Priority { get; set; } // PRIORITY
+        public string Comment { get; set; } // COMMENT (length: 250)
     }
 
     // XL_REPORT
@@ -4299,9 +8433,118 @@ namespace Ifns51.Risk
         public virtual XlReport XlReport { get; set; } // FK_XL_REPORT_ACL_XL_REPORT
     }
 
+    // XML_PARAMS
+    ///<summary>
+    /// Хранение XML-файлов с конфигами.
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class XmlParam
+    {
+
+        ///<summary>
+        /// УН параметра
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// Код параметра
+        ///</summary>
+        public string Code { get; set; } // CODE (length: 25)
+
+        ///<summary>
+        /// Данные для параметра
+        ///</summary>
+        public string Data { get; set; } // DATA
+
+        ///<summary>
+        /// Описание параметра
+        ///</summary>
+        public string Title { get; set; } // TITLE (length: 150)
+    }
+
     #endregion
 
     #region POCO Configuration
+
+    // ACTSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class ActstatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Actstat>
+    {
+        public ActstatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ActstatConfiguration(string schema)
+        {
+            ToTable("ACTSTAT", schema);
+            HasKey(x => x.Actstatid);
+
+            Property(x => x.Actstatid).HasColumnName(@"ACTSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+        }
+    }
+
+    // ADDROBJ
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AddrobjConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Addrobj>
+    {
+        public AddrobjConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AddrobjConfiguration(string schema)
+        {
+            ToTable("ADDROBJ", schema);
+            HasKey(x => x.Aoid);
+
+            Property(x => x.Aoid).HasColumnName(@"AOID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Aoguid).HasColumnName(@"AOGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Formalname).HasColumnName(@"FORMALNAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(120);
+            Property(x => x.Regioncode).HasColumnName(@"REGIONCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(2);
+            Property(x => x.Autocode).HasColumnName(@"AUTOCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(1);
+            Property(x => x.Areacode).HasColumnName(@"AREACODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3);
+            Property(x => x.Citycode).HasColumnName(@"CITYCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3);
+            Property(x => x.Ctarcode).HasColumnName(@"CTARCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3);
+            Property(x => x.Placecode).HasColumnName(@"PLACECODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3);
+            Property(x => x.Streetcode).HasColumnName(@"STREETCODE").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Extrcode).HasColumnName(@"EXTRCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Sextcode).HasColumnName(@"SEXTCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3);
+            Property(x => x.Offname).HasColumnName(@"OFFNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(120);
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ifnsfl).HasColumnName(@"IFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsfl).HasColumnName(@"TERRIFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Ifnsul).HasColumnName(@"IFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsul).HasColumnName(@"TERRIFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Okato).HasColumnName(@"OKATO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Oktmo).HasColumnName(@"OKTMO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.Aolevel).HasColumnName(@"AOLEVEL").HasColumnType("int").IsRequired();
+            Property(x => x.Parentguid).HasColumnName(@"PARENTGUID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Previd).HasColumnName(@"PREVID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Nextid).HasColumnName(@"NEXTID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Code).HasColumnName(@"CODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(17);
+            Property(x => x.Plaincode).HasColumnName(@"PLAINCODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(15);
+            Property(x => x.Actstatid).HasColumnName(@"ACTSTATID").HasColumnType("int").IsRequired();
+            Property(x => x.Centerstid).HasColumnName(@"CENTERSTID").HasColumnType("int").IsRequired();
+            Property(x => x.Operstatid).HasColumnName(@"OPERSTATID").HasColumnType("int").IsRequired();
+            Property(x => x.Curentstid).HasColumnName(@"CURENTSTID").HasColumnType("int").IsRequired();
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Livestatus).HasColumnName(@"LIVESTATUS").HasColumnType("bit").IsRequired();
+            Property(x => x.Plancode).HasColumnName(@"PLANCODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Cadnum).HasColumnName(@"CADNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Divtype).HasColumnName(@"DIVTYPE").HasColumnType("int").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.Actstat).WithMany(b => b.Addrobjs).HasForeignKey(c => c.Actstatid).WillCascadeOnDelete(false); // FK_ADDROBJ_ACTSTAT
+            HasRequired(a => a.Centerst).WithMany(b => b.Addrobjs).HasForeignKey(c => c.Centerstid).WillCascadeOnDelete(false); // FK_ADDROBJ_centerst
+            HasRequired(a => a.Curentst).WithMany(b => b.Addrobjs).HasForeignKey(c => c.Curentstid).WillCascadeOnDelete(false); // FK_ADDROBJ_ADDROBJ
+        }
+    }
 
     // AhalisBdk
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
@@ -4344,6 +8587,98 @@ namespace Ifns51.Risk
             // Foreign keys
             HasOptional(a => a.StatusTrebOnIcass_Idanalis).WithMany(b => b.AhalisBdks_Idanalis).HasForeignKey(c => c.Idanalis).WillCascadeOnDelete(false); // FK_AhalisBdk_StatusTrebOnIcass
             HasOptional(a => a.StatusTrebOnIcass_Idok).WithMany(b => b.AhalisBdks_Idok).HasForeignKey(c => c.Idok).WillCascadeOnDelete(false); // FK_AhalisBdk1_StatusTrebOnIcass
+        }
+    }
+
+    // AIS_HANDLER
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AisHandlerConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AisHandler>
+    {
+        public AisHandlerConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AisHandlerConfiguration(string schema)
+        {
+            ToTable("AIS_HANDLER", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ClassName).HasColumnName(@"CLASS_NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Title).HasColumnName(@"TITLE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+        }
+    }
+
+    // AIS_HD
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AisHdConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AisHd>
+    {
+        public AisHdConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AisHdConfiguration(string schema)
+        {
+            ToTable("AIS_HD", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ProcessId).HasColumnName(@"PROCESS_ID").HasColumnType("int").IsRequired();
+            Property(x => x.Kv).HasColumnName(@"KV").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.Re).HasColumnName(@"RE").HasColumnType("int").IsRequired();
+            Property(x => x.Data).HasColumnName(@"DATA").HasColumnType("xml").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.AisProcess).WithMany(b => b.AisHds).HasForeignKey(c => c.ProcessId); // FK_AIS_HD_AIS_PROCESS_LOG
+        }
+    }
+
+    // AIS_PROCESS
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AisProcessConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AisProcess>
+    {
+        public AisProcessConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AisProcessConfiguration(string schema)
+        {
+            ToTable("AIS_PROCESS", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Process).HasColumnName(@"PROCESS").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(64);
+        }
+    }
+
+    // AIS_PROCESS_LOG
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AisProcessLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AisProcessLog>
+    {
+        public AisProcessLogConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AisProcessLogConfiguration(string schema)
+        {
+            ToTable("AIS_PROCESS_LOG", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ProcessId).HasColumnName(@"PROCESS_ID").HasColumnType("int").IsRequired();
+            Property(x => x.HandlerId).HasColumnName(@"HANDLER_ID").HasColumnType("int").IsRequired();
+            Property(x => x.D85).HasColumnName(@"D85").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Re).HasColumnName(@"RE").HasColumnType("int").IsRequired();
+            Property(x => x.Errmsg).HasColumnName(@"ERRMSG").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.D86).HasColumnName(@"D86").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.AisHandler).WithMany(b => b.AisProcessLogs).HasForeignKey(c => c.HandlerId); // FK_AIS_PROCESS_LOG_AIS_HANDLER
+            HasRequired(a => a.AisProcess).WithMany(b => b.AisProcessLogs).HasForeignKey(c => c.ProcessId); // FK_AIS_PROCESS_LOG_AIS_PROCESS
         }
     }
 
@@ -4392,6 +8727,608 @@ namespace Ifns51.Risk
             HasOptional(a => a.MessageStrahovieAndOtkaz).WithMany(b => b.AnalizNoes).HasForeignKey(c => c.StrahovieAndOtkazAnaliz).WillCascadeOnDelete(false); // FK_AnalizNO_MessageStrahovieAndOtkaz
             HasOptional(a => a.MessageVivod).WithMany(b => b.AnalizNoes).HasForeignKey(c => c.Vivod).WillCascadeOnDelete(false); // FK_AnalizNO_MessageVivod
             HasRequired(a => a.Delo).WithMany(b => b.AnalizNoes).HasForeignKey(c => c.D3979); // FK_AnalizNO_Delo
+        }
+    }
+
+    // AS_ACTSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsActstatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsActstat>
+    {
+        public AsActstatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsActstatConfiguration(string schema)
+        {
+            ToTable("AS_ACTSTAT", schema);
+            HasKey(x => new { x.Actstatid, x.Name });
+
+            Property(x => x.Actstatid).HasColumnName(@"ACTSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_ADDROBJ
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsAddrobjConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsAddrobj>
+    {
+        public AsAddrobjConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsAddrobjConfiguration(string schema)
+        {
+            ToTable("AS_ADDROBJ", schema);
+            HasKey(x => new { x.Aoid, x.Aoguid, x.Formalname, x.Regioncode, x.Autocode, x.Areacode, x.Citycode, x.Ctarcode, x.Placecode, x.Extrcode, x.Sextcode, x.Updatedate, x.Shortname, x.Aolevel, x.Actstatid, x.Centerstid, x.Operstatid, x.Curentstid, x.Startdate, x.Enddate, x.Livestatus });
+
+            Property(x => x.Aoid).HasColumnName(@"AOID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Aoguid).HasColumnName(@"AOGUID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Formalname).HasColumnName(@"FORMALNAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(120).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Regioncode).HasColumnName(@"REGIONCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(2).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Autocode).HasColumnName(@"AUTOCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(1).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Areacode).HasColumnName(@"AREACODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Citycode).HasColumnName(@"CITYCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Ctarcode).HasColumnName(@"CTARCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Placecode).HasColumnName(@"PLACECODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Streetcode).HasColumnName(@"STREETCODE").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Extrcode).HasColumnName(@"EXTRCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(4).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Sextcode).HasColumnName(@"SEXTCODE").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(3).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Offname).HasColumnName(@"OFFNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(120);
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ifnsfl).HasColumnName(@"IFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsfl).HasColumnName(@"TERRIFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Ifnsul).HasColumnName(@"IFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsul).HasColumnName(@"TERRIFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Okato).HasColumnName(@"OKATO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Oktmo).HasColumnName(@"OKTMO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(10).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Aolevel).HasColumnName(@"AOLEVEL").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Parentguid).HasColumnName(@"PARENTGUID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Previd).HasColumnName(@"PREVID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Nextid).HasColumnName(@"NEXTID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Code).HasColumnName(@"CODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(17);
+            Property(x => x.Plaincode).HasColumnName(@"PLAINCODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(15);
+            Property(x => x.Actstatid).HasColumnName(@"ACTSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Centerstid).HasColumnName(@"CENTERSTID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Operstatid).HasColumnName(@"OPERSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Curentstid).HasColumnName(@"CURENTSTID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Livestatus).HasColumnName(@"LIVESTATUS").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Plancode).HasColumnName(@"PLANCODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Cadnum).HasColumnName(@"CADNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Divtype).HasColumnName(@"DIVTYPE").HasColumnType("int").IsOptional();
+        }
+    }
+
+    // AS_CENTERST
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsCenterstConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsCenterst>
+    {
+        public AsCenterstConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsCenterstConfiguration(string schema)
+        {
+            ToTable("AS_CENTERST", schema);
+            HasKey(x => new { x.Centerstid, x.Name });
+
+            Property(x => x.Centerstid).HasColumnName(@"CENTERSTID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_CURENTST
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsCurentstConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsCurentst>
+    {
+        public AsCurentstConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsCurentstConfiguration(string schema)
+        {
+            ToTable("AS_CURENTST", schema);
+            HasKey(x => new { x.Curentstid, x.Name });
+
+            Property(x => x.Curentstid).HasColumnName(@"CURENTSTID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_DEL_ADDROBJ
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelAddrobjConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsDelAddrobj>
+    {
+        public AsDelAddrobjConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsDelAddrobjConfiguration(string schema)
+        {
+            ToTable("AS_DEL_ADDROBJ", schema);
+            HasKey(x => x.Aoid);
+
+            Property(x => x.Aoid).HasColumnName(@"AOID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_DEL_HOUSE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelHouseConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsDelHouse>
+    {
+        public AsDelHouseConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsDelHouseConfiguration(string schema)
+        {
+            ToTable("AS_DEL_HOUSE", schema);
+            HasKey(x => x.Houseid);
+
+            Property(x => x.Houseid).HasColumnName(@"HOUSEID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_DEL_HOUSEINT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelHouseintConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsDelHouseint>
+    {
+        public AsDelHouseintConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsDelHouseintConfiguration(string schema)
+        {
+            ToTable("AS_DEL_HOUSEINT", schema);
+            HasKey(x => x.Houseintid);
+
+            Property(x => x.Houseintid).HasColumnName(@"HOUSEINTID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_DEL_LANDMARK
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelLandmarkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsDelLandmark>
+    {
+        public AsDelLandmarkConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsDelLandmarkConfiguration(string schema)
+        {
+            ToTable("AS_DEL_LANDMARK", schema);
+            HasKey(x => x.Landid);
+
+            Property(x => x.Landid).HasColumnName(@"LANDID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_DEL_NORMDOC
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsDelNormdocConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsDelNormdoc>
+    {
+        public AsDelNormdocConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsDelNormdocConfiguration(string schema)
+        {
+            ToTable("AS_DEL_NORMDOC", schema);
+            HasKey(x => x.Normdocid);
+
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_ESTSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsEststatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsEststat>
+    {
+        public AsEststatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsEststatConfiguration(string schema)
+        {
+            ToTable("AS_ESTSTAT", schema);
+            HasKey(x => new { x.Eststatid, x.Name });
+
+            Property(x => x.Eststatid).HasColumnName(@"ESTSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+        }
+    }
+
+    // AS_FLATTYPE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsFlattypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsFlattype>
+    {
+        public AsFlattypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsFlattypeConfiguration(string schema)
+        {
+            ToTable("AS_FLATTYPE", schema);
+            HasKey(x => x.Fltypeid);
+
+            Property(x => x.Fltypeid).HasColumnName(@"FLTYPEID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+        }
+    }
+
+    // AS_HOUSE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsHouseConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsHouse>
+    {
+        public AsHouseConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsHouseConfiguration(string schema)
+        {
+            ToTable("AS_HOUSE", schema);
+            HasKey(x => x.Houseid);
+
+            Property(x => x.Houseid).HasColumnName(@"HOUSEID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Houseguid).HasColumnName(@"HOUSEGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Aoguid).HasColumnName(@"AOGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ifnsfl).HasColumnName(@"IFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsfl).HasColumnName(@"TERRIFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Ifnsul).HasColumnName(@"IFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsul).HasColumnName(@"TERRIFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Okato).HasColumnName(@"OKATO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Oktmo).HasColumnName(@"OKTMO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Housenum).HasColumnName(@"HOUSENUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Eststatid).HasColumnName(@"ESTSTATID").HasColumnType("int").IsRequired();
+            Property(x => x.Buildnum).HasColumnName(@"BUILDNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.Strucnum).HasColumnName(@"STRUCNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.Strstatid).HasColumnName(@"STRSTATID").HasColumnType("int").IsOptional();
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Housestid).HasColumnName(@"HOUSESTID").HasColumnType("int").IsRequired();
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Counter).HasColumnName(@"COUNTER").HasColumnType("int").IsRequired();
+        }
+    }
+
+    // AS_HOUSEINT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsHouseintConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsHouseint>
+    {
+        public AsHouseintConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsHouseintConfiguration(string schema)
+        {
+            ToTable("AS_HOUSEINT", schema);
+            HasKey(x => new { x.Houseintid, x.Intvstatid, x.Intguid, x.Intstart, x.Intend, x.Aoguid, x.Updatedate, x.Startdate, x.Enddate, x.Counter });
+
+            Property(x => x.Houseintid).HasColumnName(@"HOUSEINTID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Intvstatid).HasColumnName(@"INTVSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Intguid).HasColumnName(@"INTGUID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Intstart).HasColumnName(@"INTSTART").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Intend).HasColumnName(@"INTEND").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Aoguid).HasColumnName(@"AOGUID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ifnsfl).HasColumnName(@"IFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsfl).HasColumnName(@"TERRIFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Ifnsul).HasColumnName(@"IFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsul).HasColumnName(@"TERRIFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Okato).HasColumnName(@"OKATO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Oktmo).HasColumnName(@"OKTMO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Counter).HasColumnName(@"COUNTER").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_HSTSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsHststatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsHststat>
+    {
+        public AsHststatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsHststatConfiguration(string schema)
+        {
+            ToTable("AS_HSTSTAT", schema);
+            HasKey(x => x.Housestid);
+
+            Property(x => x.Housestid).HasColumnName(@"HOUSESTID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(60);
+        }
+    }
+
+    // AS_INTVSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsIntvstatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsIntvstat>
+    {
+        public AsIntvstatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsIntvstatConfiguration(string schema)
+        {
+            ToTable("AS_INTVSTAT", schema);
+            HasKey(x => new { x.Intvstatid, x.Name });
+
+            Property(x => x.Intvstatid).HasColumnName(@"INTVSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(60).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_LANDMARK
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsLandmarkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsLandmark>
+    {
+        public AsLandmarkConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsLandmarkConfiguration(string schema)
+        {
+            ToTable("AS_LANDMARK", schema);
+            HasKey(x => new { x.Landid, x.Landguid, x.Aoguid, x.Location, x.Updatedate, x.Startdate, x.Enddate });
+
+            Property(x => x.Landid).HasColumnName(@"LANDID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Landguid).HasColumnName(@"LANDGUID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Aoguid).HasColumnName(@"AOGUID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Location).HasColumnName(@"LOCATION").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(500).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ifnsfl).HasColumnName(@"IFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsfl).HasColumnName(@"TERRIFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Ifnsul).HasColumnName(@"IFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsul).HasColumnName(@"TERRIFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Okato).HasColumnName(@"OKATO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Oktmo).HasColumnName(@"OKTMO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsOptional();
+        }
+    }
+
+    // AS_NDOCTYPE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsNdoctypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsNdoctype>
+    {
+        public AsNdoctypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsNdoctypeConfiguration(string schema)
+        {
+            ToTable("AS_NDOCTYPE", schema);
+            HasKey(x => new { x.Ndtypeid, x.Name });
+
+            Property(x => x.Ndtypeid).HasColumnName(@"NDTYPEID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(250).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_NORMDOC
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsNormdocConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsNormdoc>
+    {
+        public AsNormdocConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsNormdocConfiguration(string schema)
+        {
+            ToTable("AS_NORMDOC", schema);
+            HasKey(x => x.Normdocid);
+
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Docname).HasColumnName(@"DOCNAME").HasColumnType("text").IsOptional().IsUnicode(false).HasMaxLength(2147483647);
+            Property(x => x.Docdate).HasColumnName(@"DOCDATE").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.Docnum).HasColumnName(@"DOCNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Ndtypeid).HasColumnName(@"NDTYPEID").HasColumnType("int").IsOptional();
+            Property(x => x.Docimgid).HasColumnName(@"DOCIMGID").HasColumnType("uniqueidentifier").IsOptional();
+        }
+    }
+
+    // AS_OPERSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsOperstatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsOperstat>
+    {
+        public AsOperstatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsOperstatConfiguration(string schema)
+        {
+            ToTable("AS_OPERSTAT", schema);
+            HasKey(x => new { x.Operstatid, x.Name });
+
+            Property(x => x.Operstatid).HasColumnName(@"OPERSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_ROOM
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsRoomConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsRoom>
+    {
+        public AsRoomConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsRoomConfiguration(string schema)
+        {
+            ToTable("AS_ROOM", schema);
+            HasKey(x => x.Roomid);
+
+            Property(x => x.Roomid).HasColumnName(@"ROOMID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Roomguid).HasColumnName(@"ROOMGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Flatnumber).HasColumnName(@"FLATNUMBER").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.Flattype).HasColumnName(@"FLATTYPE").HasColumnType("int").IsRequired();
+            Property(x => x.Roomnumber).HasColumnName(@"ROOMNUMBER").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.Roomtype).HasColumnName(@"ROOMTYPE").HasColumnType("int").IsOptional();
+            Property(x => x.Regioncode).HasColumnName(@"REGIONCODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(2);
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Houseguid).HasColumnName(@"HOUSEGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Previd).HasColumnName(@"PREVID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Nextid).HasColumnName(@"NEXTID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Livestatus).HasColumnName(@"LIVESTATUS").HasColumnType("int").IsRequired();
+            Property(x => x.Normdoc).HasColumnName(@"NORMDOC").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Operstatus).HasColumnName(@"OPERSTATUS").HasColumnType("int").IsRequired();
+            Property(x => x.Cadnum).HasColumnName(@"CADNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Roomcadnum).HasColumnName(@"ROOMCADNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+        }
+    }
+
+    // AS_ROOMTYPE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsRoomtypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsRoomtype>
+    {
+        public AsRoomtypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsRoomtypeConfiguration(string schema)
+        {
+            ToTable("AS_ROOMTYPE", schema);
+            HasKey(x => x.Rmtypeid);
+
+            Property(x => x.Rmtypeid).HasColumnName(@"RMTYPEID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+        }
+    }
+
+    // AS_SOCRBASE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsSocrbaseConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsSocrbase>
+    {
+        public AsSocrbaseConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsSocrbaseConfiguration(string schema)
+        {
+            ToTable("AS_SOCRBASE", schema);
+            HasKey(x => new { x.KodTSt, x.SocrbaseLevel, x.Socrname });
+
+            Property(x => x.KodTSt).HasColumnName(@"KOD_T_ST").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(4).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.SocrbaseLevel).HasColumnName(@"SOCRBASE_LEVEL").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Scname).HasColumnName(@"SCNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.Socrname).HasColumnName(@"SOCRNAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AS_STEAD
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsSteadConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsStead>
+    {
+        public AsSteadConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsSteadConfiguration(string schema)
+        {
+            ToTable("AS_STEAD", schema);
+            HasKey(x => x.Steadid);
+
+            Property(x => x.Steadid).HasColumnName(@"STEADID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Steadguid).HasColumnName(@"STEADGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Number).HasColumnName(@"NUMBER").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(120);
+            Property(x => x.Regioncode).HasColumnName(@"REGIONCODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(2);
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ifnsfl).HasColumnName(@"IFNSFL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsfl).HasColumnName(@"TERRIFNSFL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Ifnsul).HasColumnName(@"IFNSUL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsul).HasColumnName(@"TERRIFNSUL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Okato).HasColumnName(@"OKATO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Oktmo).HasColumnName(@"OKTMO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Parentguid).HasColumnName(@"PARENTGUID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Previd).HasColumnName(@"PREVID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Nextid).HasColumnName(@"NEXTID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Operstatus).HasColumnName(@"OPERSTATUS").HasColumnType("int").IsRequired();
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Normdoc).HasColumnName(@"NORMDOC").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Livestatus).HasColumnName(@"LIVESTATUS").HasColumnType("int").IsRequired();
+            Property(x => x.Cadnum).HasColumnName(@"CADNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Divtype).HasColumnName(@"DIVTYPE").HasColumnType("int").IsRequired();
+        }
+    }
+
+    // AS_STRSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsStrstatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsStrstat>
+    {
+        public AsStrstatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsStrstatConfiguration(string schema)
+        {
+            ToTable("AS_STRSTAT", schema);
+            HasKey(x => new { x.Strstatid, x.Name });
+
+            Property(x => x.Strstatid).HasColumnName(@"STRSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+        }
+    }
+
+    // AS_VERSION
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class AsVersionConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AsVersion>
+    {
+        public AsVersionConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AsVersionConfiguration(string schema)
+        {
+            ToTable("AS_VERSION", schema);
+            HasKey(x => x.AcVersionId);
+
+            Property(x => x.AcVersionId).HasColumnName(@"AC_VERSION_ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.AcDt).HasColumnName(@"AC_DT").HasColumnType("smalldatetime").IsRequired();
         }
     }
 
@@ -4481,6 +9418,53 @@ namespace Ifns51.Risk
         }
     }
 
+    // BNKSEEK
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class BnkseekConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Bnkseek>
+    {
+        public BnkseekConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public BnkseekConfiguration(string schema)
+        {
+            ToTable("BNKSEEK", schema);
+            HasKey(x => x.Vkey);
+
+            Property(x => x.Vkey).HasColumnName(@"VKEY").HasColumnType("char").IsRequired().IsFixedLength().IsUnicode(false).HasMaxLength(8).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Real).HasColumnName(@"REAL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Pzn).HasColumnName(@"PZN").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(2);
+            Property(x => x.Uer).HasColumnName(@"UER").HasColumnType("smallint").IsOptional();
+            Property(x => x.Rgn).HasColumnName(@"RGN").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(2);
+            Property(x => x.Ind).HasColumnName(@"IND").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Tnp).HasColumnName(@"TNP").HasColumnType("smallint").IsOptional();
+            Property(x => x.Nnp).HasColumnName(@"NNP").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(25);
+            Property(x => x.Adr).HasColumnName(@"ADR").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(30);
+            Property(x => x.Rkc).HasColumnName(@"RKC").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.Namep).HasColumnName(@"NAMEP").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(45);
+            Property(x => x.Namen).HasColumnName(@"NAMEN").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(30);
+            Property(x => x.Newnum).HasColumnName(@"NEWNUM").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.Newks).HasColumnName(@"NEWKS").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.Permfo).HasColumnName(@"PERMFO").HasColumnType("int").IsOptional();
+            Property(x => x.Srok).HasColumnName(@"SROK").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(2);
+            Property(x => x.At1).HasColumnName(@"AT1").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(7);
+            Property(x => x.At2).HasColumnName(@"AT2").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(7);
+            Property(x => x.Telef).HasColumnName(@"TELEF").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(25);
+            Property(x => x.Regn).HasColumnName(@"REGN").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.Okpo).HasColumnName(@"OKPO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.DtIzm).HasColumnName(@"DT_IZM").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.P).HasColumnName(@"P").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(1);
+            Property(x => x.Cks).HasColumnName(@"CKS").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ksnp).HasColumnName(@"KSNP").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Vkeydel).HasColumnName(@"VKEYDEL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(8);
+            Property(x => x.Datedel).HasColumnName(@"DATEDEL").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.RClose).HasColumnName(@"R_CLOSE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(2);
+            Property(x => x.DateCh).HasColumnName(@"DATE_CH").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DtIzmr).HasColumnName(@"DT_IZMR").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
     // Body
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class BodyConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Body>
@@ -4536,11 +9520,31 @@ namespace Ifns51.Risk
         public CbrBankRelevanceConfiguration(string schema)
         {
             ToTable("CBR_BANK_RELEVANCE", schema);
-            HasKey(x => x.CbrBankRelevanceId);
+            HasKey(x => x.Id);
 
-            Property(x => x.CbrBankRelevanceId).HasColumnName(@"CBR_BANK_RELEVANCE_ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Cls).HasColumnName(@"CLS").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
             Property(x => x.D85).HasColumnName(@"D85").HasColumnType("smalldatetime").IsRequired();
             Property(x => x.D851).HasColumnName(@"D85_1").HasColumnType("smalldatetime").IsRequired();
+        }
+    }
+
+    // CENTERST
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class CenterstConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Centerst>
+    {
+        public CenterstConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CenterstConfiguration(string schema)
+        {
+            ToTable("CENTERST", schema);
+            HasKey(x => x.Centerstid);
+
+            Property(x => x.Centerstid).HasColumnName(@"CENTERSTID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
         }
     }
 
@@ -4584,6 +9588,25 @@ namespace Ifns51.Risk
             Property(x => x.Description).HasColumnName(@"DESCRIPTION").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
             Property(x => x.Hide).HasColumnName(@"HIDE").HasColumnType("bit").IsRequired();
             Property(x => x.Value).HasColumnName(@"VALUE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
+        }
+    }
+
+    // CURENTST
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class CurentstConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Curentst>
+    {
+        public CurentstConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CurentstConfiguration(string schema)
+        {
+            ToTable("CURENTST", schema);
+            HasKey(x => x.Curentstid);
+
+            Property(x => x.Curentstid).HasColumnName(@"CURENTSTID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
         }
     }
 
@@ -4734,6 +9757,26 @@ namespace Ifns51.Risk
         }
     }
 
+    // ESTSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class EststatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Eststat>
+    {
+        public EststatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public EststatConfiguration(string schema)
+        {
+            ToTable("ESTSTAT", schema);
+            HasKey(x => x.Eststatid);
+
+            Property(x => x.Eststatid).HasColumnName(@"ESTSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+        }
+    }
+
     // Face
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class FaceConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Face>
@@ -4753,6 +9796,87 @@ namespace Ifns51.Risk
             Property(x => x.N1New).HasColumnName(@"N1new").HasColumnType("int").IsOptional();
             Property(x => x.Messagee).HasColumnName(@"Messagee").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.DateFace).HasColumnName(@"DateFace").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // FIAS_LOAD
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class FiasLoadConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<FiasLoad>
+    {
+        public FiasLoadConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public FiasLoadConfiguration(string schema)
+        {
+            ToTable("FIAS_LOAD", schema);
+            HasKey(x => x.AcLoadId);
+
+            Property(x => x.AcLoadId).HasColumnName(@"AC_LOAD_ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TableTitle).HasColumnName(@"TABLE_TITLE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.TableOrder).HasColumnName(@"TABLE_ORDER").HasColumnType("int").IsRequired();
+            Property(x => x.MergeType).HasColumnName(@"MERGE_TYPE").HasColumnType("int").IsRequired();
+        }
+    }
+
+    // FIAS_VERSION
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class FiasVersionConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<FiasVersion>
+    {
+        public FiasVersionConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public FiasVersionConfiguration(string schema)
+        {
+            ToTable("FIAS_VERSION", schema);
+            HasKey(x => x.FiasVersionId);
+
+            Property(x => x.FiasVersionId).HasColumnName(@"FIAS_VERSION_ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.FiasVersionNum).HasColumnName(@"FIAS_VERSION_NUM").HasColumnType("int").IsRequired();
+            Property(x => x.D85).HasColumnName(@"D85").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // FILE_ICON
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class FileIconConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<FileIcon>
+    {
+        public FileIconConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public FileIconConfiguration(string schema)
+        {
+            ToTable("FILE_ICON", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Extension).HasColumnName(@"EXTENSION").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.Img).HasColumnName(@"IMG").HasColumnType("image").IsRequired().HasMaxLength(2147483647);
+        }
+    }
+
+    // FLATTYPE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class FlattypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Flattype>
+    {
+        public FlattypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public FlattypeConfiguration(string schema)
+        {
+            ToTable("FLATTYPE", schema);
+            HasKey(x => x.Fltypeid);
+
+            Property(x => x.Fltypeid).HasColumnName(@"FLTYPEID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
         }
     }
 
@@ -4860,27 +9984,64 @@ namespace Ifns51.Risk
         }
     }
 
-    // FN72_WEB
+    // FN50_2
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
-    public class Fn72WebConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Fn72Web>
+    public class Fn502Configuration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Fn502>
     {
-        public Fn72WebConfiguration()
+        public Fn502Configuration()
             : this("dbo")
         {
         }
 
-        public Fn72WebConfiguration(string schema)
+        public Fn502Configuration(string schema)
         {
-            ToTable("FN72_WEB", schema);
+            ToTable("FN50_2", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.N274).HasColumnName(@"N274").HasColumnType("int").IsRequired();
-            Property(x => x.RiskWebId).HasColumnName(@"RISK_WEB_ID").HasColumnType("int").IsRequired();
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("numeric").IsRequired().HasPrecision(20,0).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.RegN).HasColumnName(@"RegN").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.NumF).HasColumnName(@"NumF").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Bik).HasColumnName(@"BIK").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(160);
+            Property(x => x.AgrDateBegin).HasColumnName(@"AgrDateBegin").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.AgrDateChange).HasColumnName(@"AgrDateChange").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.AgrDateEnd).HasColumnName(@"AgrDateEnd").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateBegin).HasColumnName(@"DateBegin").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DatePause).HasColumnName(@"DatePause").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateRenewal).HasColumnName(@"DateRenewal").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateEnd).HasColumnName(@"DateEnd").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.Rpz).HasColumnName(@"RPZ").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(3);
+            Property(x => x.Code).HasColumnName(@"Code").HasColumnType("tinyint").IsRequired();
+            Property(x => x.BLiq).HasColumnName(@"BLiq").HasColumnType("bit").IsRequired();
+            Property(x => x.Inn).HasColumnName(@"INN").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.Kpp).HasColumnName(@"KPP").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.DateDop).HasColumnName(@"DateDop").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateOgrRe).HasColumnName(@"DateOgrRe").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // FN50_3
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class Fn503Configuration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Fn503>
+    {
+        public Fn503Configuration()
+            : this("dbo")
+        {
+        }
+
+        public Fn503Configuration(string schema)
+        {
+            ToTable("FN50_3", schema);
+            HasKey(x => x.Un);
+
+            Property(x => x.Un).HasColumnName(@"UN").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NumF).HasColumnName(@"NumF").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Bik).HasColumnName(@"BIK").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(160);
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("numeric").IsRequired().HasPrecision(20,0);
 
             // Foreign keys
-            HasRequired(a => a.RiskFn72).WithMany(b => b.Fn72Web).HasForeignKey(c => c.N274); // FK_FN72_WEB_RISK_FN72
-            HasRequired(a => a.RiskWeb).WithMany(b => b.Fn72Web).HasForeignKey(c => c.RiskWebId); // FK_FN72_WEB_RISK_WEB
+            HasRequired(a => a.Fn502).WithMany(b => b.Fn503).HasForeignKey(c => c.Id); // FK__FN50_3__ID__7854C86E
         }
     }
 
@@ -4934,6 +10095,68 @@ namespace Ifns51.Risk
         }
     }
 
+    // HOUSE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class HouseConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<House>
+    {
+        public HouseConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public HouseConfiguration(string schema)
+        {
+            ToTable("HOUSE", schema);
+            HasKey(x => x.Houseid);
+
+            Property(x => x.Houseid).HasColumnName(@"HOUSEID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Houseguid).HasColumnName(@"HOUSEGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Aoguid).HasColumnName(@"AOGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ifnsfl).HasColumnName(@"IFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsfl).HasColumnName(@"TERRIFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Ifnsul).HasColumnName(@"IFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsul).HasColumnName(@"TERRIFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Okato).HasColumnName(@"OKATO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Oktmo).HasColumnName(@"OKTMO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Housenum).HasColumnName(@"HOUSENUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Eststatid).HasColumnName(@"ESTSTATID").HasColumnType("int").IsRequired();
+            Property(x => x.Buildnum).HasColumnName(@"BUILDNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.Strucnum).HasColumnName(@"STRUCNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.Strstatid).HasColumnName(@"STRSTATID").HasColumnType("int").IsOptional();
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Housestid).HasColumnName(@"HOUSESTID").HasColumnType("int").IsRequired();
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Counter).HasColumnName(@"COUNTER").HasColumnType("int").IsRequired();
+
+            // Foreign keys
+            HasOptional(a => a.Strstat).WithMany(b => b.Houses).HasForeignKey(c => c.Strstatid).WillCascadeOnDelete(false); // FK_HOUSE_STRSTAT
+            HasRequired(a => a.Eststat).WithMany(b => b.Houses).HasForeignKey(c => c.Eststatid).WillCascadeOnDelete(false); // FK_HOUSE_ESTSTAT
+            HasRequired(a => a.Hststat).WithMany(b => b.Houses).HasForeignKey(c => c.Housestid).WillCascadeOnDelete(false); // FK_HOUSE_HSTSTAT
+        }
+    }
+
+    // HSTSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class HststatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Hststat>
+    {
+        public HststatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public HststatConfiguration(string schema)
+        {
+            ToTable("HSTSTAT", schema);
+            HasKey(x => x.Housestid);
+
+            Property(x => x.Housestid).HasColumnName(@"HOUSESTID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(60);
+        }
+    }
+
     // Incass
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class IncassConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Incass>
@@ -4957,6 +10180,50 @@ namespace Ifns51.Risk
 
             // Foreign keys
             HasOptional(a => a.Reshenie).WithMany(b => b.Incasses).HasForeignKey(c => c.D851Res1); // FK_Incass_Reshenie
+        }
+    }
+
+    // INTVSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class IntvstatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Intvstat>
+    {
+        public IntvstatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public IntvstatConfiguration(string schema)
+        {
+            ToTable("INTVSTAT", schema);
+            HasKey(x => x.Intvstatid);
+
+            Property(x => x.Intvstatid).HasColumnName(@"INTVSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(60);
+        }
+    }
+
+    // ITERATOR_RES
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class IteratorReConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<IteratorRe>
+    {
+        public IteratorReConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public IteratorReConfiguration(string schema)
+        {
+            ToTable("ITERATOR_RES", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ObjectId).HasColumnName(@"OBJECT_ID").HasColumnType("int").IsRequired();
+            Property(x => x.RecordId).HasColumnName(@"RECORD_ID").HasColumnType("int").IsRequired();
+            Property(x => x.Re).HasColumnName(@"RE").HasColumnType("int").IsRequired();
+            Property(x => x.Err).HasColumnName(@"ERR").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.Df).HasColumnName(@"DF").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Dn).HasColumnName(@"DN").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.Dc).HasColumnName(@"DC").HasColumnType("smalldatetime").IsRequired();
         }
     }
 
@@ -5026,6 +10293,28 @@ namespace Ifns51.Risk
         }
     }
 
+    // JOB_DATA_XML
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class JobDataXmlConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<JobDataXml>
+    {
+        public JobDataXmlConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public JobDataXmlConfiguration(string schema)
+        {
+            ToTable("JOB_DATA_XML", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Value).HasColumnName(@"VALUE").HasColumnType("xml").IsRequired();
+
+            // Foreign keys
+            HasRequired(a => a.JobDatum).WithOptional(b => b.JobDataXml); // FK_JOB_DATA_XML_JOB_DATA
+        }
+    }
+
     // JOB_DATA
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class JobDatumConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<JobDatum>
@@ -5050,6 +10339,146 @@ namespace Ifns51.Risk
         }
     }
 
+    // KAO_CERHISTORY
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoCerhistoryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<KaoCerhistory>
+    {
+        public KaoCerhistoryConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public KaoCerhistoryConfiguration(string schema)
+        {
+            ToTable("KAO_CERHISTORY", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Cid).HasColumnName(@"CID").HasColumnType("int").IsRequired();
+            Property(x => x.Dt).HasColumnName(@"DT").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Revocation).HasColumnName(@"REVOCATION").HasColumnType("bit").IsRequired();
+            Property(x => x.Re).HasColumnName(@"RE").HasColumnType("int").IsRequired();
+            Property(x => x.Err).HasColumnName(@"ERR").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+
+            // Foreign keys
+            HasRequired(a => a.KaoRogueCert).WithMany(b => b.KaoCerhistories).HasForeignKey(c => c.Cid).WillCascadeOnDelete(false); // FK_KAO_CERHISTORY_KAO_ROGUE_CERT
+        }
+    }
+
+    // KAO_RHISTORY
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRhistoryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<KaoRhistory>
+    {
+        public KaoRhistoryConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public KaoRhistoryConfiguration(string schema)
+        {
+            ToTable("KAO_RHISTORY", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.RogueId).HasColumnName(@"ROGUE_ID").HasColumnType("int").IsRequired();
+            Property(x => x.Re).HasColumnName(@"RE").HasColumnType("int").IsRequired();
+            Property(x => x.Dt).HasColumnName(@"DT").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Err).HasColumnName(@"ERR").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+
+            // Foreign keys
+            HasRequired(a => a.KaoRogue).WithMany(b => b.KaoRhistories).HasForeignKey(c => c.RogueId); // FK_KAO_RHISTORY_KAO_ROGUE
+        }
+    }
+
+    // KAO_ROGUE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRogueConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<KaoRogue>
+    {
+        public KaoRogueConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public KaoRogueConfiguration(string schema)
+        {
+            ToTable("KAO_ROGUE", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.Dt).HasColumnName(@"DT").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Re).HasColumnName(@"RE").HasColumnType("int").IsOptional();
+            Property(x => x.AutoRevoke).HasColumnName(@"AUTO_REVOKE").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // KAO_ROGUE_ABO
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRogueAboConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<KaoRogueAbo>
+    {
+        public KaoRogueAboConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public KaoRogueAboConfiguration(string schema)
+        {
+            ToTable("KAO_ROGUE_ABO", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.RogueId).HasColumnName(@"ROGUE_ID").HasColumnType("int").IsRequired();
+            Property(x => x.Code).HasColumnName(@"CODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Dt).HasColumnName(@"DT").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.Re).HasColumnName(@"RE").HasColumnType("int").IsOptional();
+            Property(x => x.Err).HasColumnName(@"ERR").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.Md).HasColumnName(@"MD").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.Cld).HasColumnName(@"CLD").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.KaoRogue).WithMany(b => b.KaoRogueAboes).HasForeignKey(c => c.RogueId); // FK_KAO_ROGUE_ABO_KAO_ROGUE
+        }
+    }
+
+    // KAO_ROGUE_CERT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRogueCertConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<KaoRogueCert>
+    {
+        public KaoRogueCertConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public KaoRogueCertConfiguration(string schema)
+        {
+            ToTable("KAO_ROGUE_CERT", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.RogueId).HasColumnName(@"ROGUE_ID").HasColumnType("int").IsRequired();
+            Property(x => x.Idcert).HasColumnName(@"IDCERT").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Sha).HasColumnName(@"SHA").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.Db).HasColumnName(@"DB").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.De).HasColumnName(@"DE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.N18).HasColumnName(@"N18").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.Issuer).HasColumnName(@"ISSUER").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.SigCheck).HasColumnName(@"SIG_CHECK").HasColumnType("bit").IsRequired();
+            Property(x => x.ForSign).HasColumnName(@"FOR_SIGN").HasColumnType("bit").IsRequired();
+            Property(x => x.ForEncryption).HasColumnName(@"FOR_ENCRYPTION").HasColumnType("bit").IsRequired();
+            Property(x => x.Revoked).HasColumnName(@"REVOKED").HasColumnType("bit").IsRequired();
+            Property(x => x.Compromised).HasColumnName(@"COMPROMISED").HasColumnType("bit").IsRequired();
+            Property(x => x.Owner).HasColumnName(@"OWNER").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.Rdc).HasColumnName(@"RDC").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.Img).HasColumnName(@"IMG").HasColumnType("image").IsOptional().HasMaxLength(2147483647);
+            Property(x => x.Err).HasColumnName(@"ERR").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.Re).HasColumnName(@"RE").HasColumnType("int").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.KaoRogue).WithMany(b => b.KaoRogueCerts).HasForeignKey(c => c.RogueId); // FK_KAO_ROGUE_CERT_KAO_ROGUE
+        }
+    }
+
     // KbkAnaliz
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class KbkAnalizConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<KbkAnaliz>
@@ -5068,6 +10497,61 @@ namespace Ifns51.Risk
             Property(x => x.Kbk).HasColumnName(@"Kbk").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
             Property(x => x.Statuskbk).HasColumnName(@"Statuskbk").HasColumnType("tinyint").IsOptional();
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // LANDMARK
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class LandmarkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Landmark>
+    {
+        public LandmarkConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LandmarkConfiguration(string schema)
+        {
+            ToTable("LANDMARK", schema);
+            HasKey(x => x.Landid);
+
+            Property(x => x.Landid).HasColumnName(@"LANDID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Landguid).HasColumnName(@"LANDGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Aoguid).HasColumnName(@"AOGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Location).HasColumnName(@"LOCATION").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(500);
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ifnsfl).HasColumnName(@"IFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsfl).HasColumnName(@"TERRIFNSFL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Ifnsul).HasColumnName(@"IFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsul).HasColumnName(@"TERRIFNSUL").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Okato).HasColumnName(@"OKATO").HasColumnType("char").IsOptional().IsFixedLength().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Oktmo).HasColumnName(@"OKTMO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsOptional();
+        }
+    }
+
+    // LOCK_NG
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class LockNgConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LockNg>
+    {
+        public LockNgConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LockNgConfiguration(string schema)
+        {
+            ToTable("LOCK_NG", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Ld).HasColumnName(@"LD").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.HandlerCode).HasColumnName(@"HANDLER_CODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Kv).HasColumnName(@"KV").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Hst).HasColumnName(@"HST").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Ed).HasColumnName(@"ED").HasColumnType("smalldatetime").IsRequired();
         }
     }
 
@@ -5116,6 +10600,53 @@ namespace Ifns51.Risk
             Property(x => x.Separator).HasColumnName(@"SEPARATOR").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(10);
             Property(x => x.Numindexpl).HasColumnName(@"NUMINDEXPL").HasColumnType("int").IsRequired();
             Property(x => x.Mantissa).HasColumnName(@"MANTISSA").HasColumnType("int").IsRequired();
+        }
+    }
+
+    // LOTUS_MOVEMENT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class LotusMovementConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LotusMovement>
+    {
+        public LotusMovementConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LotusMovementConfiguration(string schema)
+        {
+            ToTable("LOTUS_MOVEMENT", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Iddocob).HasColumnName(@"IDDOCOB").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.LotusNoteid).HasColumnName(@"LOTUS_NOTEID").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.LotusNo).HasColumnName(@"LOTUS_NO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.LotusDate).HasColumnName(@"LOTUS_DATE").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // LOTUS_MOVEMENT_HISTORY
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class LotusMovementHistoryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LotusMovementHistory>
+    {
+        public LotusMovementHistoryConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LotusMovementHistoryConfiguration(string schema)
+        {
+            ToTable("LOTUS_MOVEMENT_HISTORY", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Mid).HasColumnName(@"MID").HasColumnType("int").IsRequired();
+            Property(x => x.Status).HasColumnName(@"STATUS").HasColumnType("int").IsRequired();
+            Property(x => x.D85).HasColumnName(@"D85").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Err).HasColumnName(@"ERR").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+
+            // Foreign keys
+            HasRequired(a => a.LotusMovement).WithMany(b => b.LotusMovementHistories).HasForeignKey(c => c.Mid); // FK_LOTUS_MOVEMENT_HISTORY_LOTUS_MOVEMENT
         }
     }
 
@@ -5251,6 +10782,176 @@ namespace Ifns51.Risk
         }
     }
 
+    // NDFL_INV
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class NdflInvConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<NdflInv>
+    {
+        public NdflInvConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public NdflInvConfiguration(string schema)
+        {
+            ToTable("NDFL_INV", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ShedJobId).HasColumnName(@"SHED_JOB_ID").HasColumnType("int").IsRequired();
+            Property(x => x.N279).HasColumnName(@"N279").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.D85).HasColumnName(@"D85").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.D250).HasColumnName(@"D250").HasColumnType("int").IsRequired();
+            Property(x => x.Inv2203).HasColumnName(@"INV_220_3").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.Inv2203Limit).HasColumnName(@"INV_220_3_LIMIT").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.Inv2204).HasColumnName(@"INV_220_4").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.Inv2204Limit).HasColumnName(@"INV_220_4_LIMIT").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.N315).HasColumnName(@"N315").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.D3201).HasColumnName(@"D320_1").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.D3202).HasColumnName(@"D320_2").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.D3203).HasColumnName(@"D320_3").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.D3204).HasColumnName(@"D320_4").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.N316).HasColumnName(@"N316").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(150);
+            Property(x => x.N317).HasColumnName(@"N317").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.N318).HasColumnName(@"N318").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.N319).HasColumnName(@"N319").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+
+            // Foreign keys
+            HasRequired(a => a.ShedJob).WithMany(b => b.NdflInvs).HasForeignKey(c => c.ShedJobId); // FK_NDFL_INV_SHED_JOB
+        }
+    }
+
+    // NDOCTYPE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class NdoctypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Ndoctype>
+    {
+        public NdoctypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public NdoctypeConfiguration(string schema)
+        {
+            ToTable("NDOCTYPE", schema);
+            HasKey(x => x.Ndtypeid);
+
+            Property(x => x.Ndtypeid).HasColumnName(@"NDTYPEID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(250);
+        }
+    }
+
+    // NORMDOC
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class NormdocConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Normdoc>
+    {
+        public NormdocConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public NormdocConfiguration(string schema)
+        {
+            ToTable("NORMDOC", schema);
+            HasKey(x => x.Normdocid);
+
+            Property(x => x.Normdocid).HasColumnName(@"NORMDOCID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Docname).HasColumnName(@"DOCNAME").HasColumnType("text").IsOptional().IsUnicode(false).HasMaxLength(2147483647);
+            Property(x => x.Docdate).HasColumnName(@"DOCDATE").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.Docnum).HasColumnName(@"DOCNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Ndtypeid).HasColumnName(@"NDTYPEID").HasColumnType("int").IsRequired();
+            Property(x => x.Docimgid).HasColumnName(@"DOCIMGID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.IsDelete).HasColumnName(@"IS_DELETE").HasColumnType("bit").IsRequired();
+
+            // Foreign keys
+            HasRequired(a => a.Ndoctype).WithMany(b => b.Normdocs).HasForeignKey(c => c.Ndtypeid).WillCascadeOnDelete(false); // FK_NORMDOC_NORMDOC
+        }
+    }
+
+    // OPERSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class OperstatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Operstat>
+    {
+        public OperstatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public OperstatConfiguration(string schema)
+        {
+            ToTable("OPERSTAT", schema);
+            HasKey(x => x.Operstatid);
+
+            Property(x => x.Operstatid).HasColumnName(@"OPERSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+        }
+    }
+
+    // RB_COURT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RbCourtConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RbCourt>
+    {
+        public RbCourtConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RbCourtConfiguration(string schema)
+        {
+            ToTable("RB_COURT", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TpId).HasColumnName(@"TP_ID").HasColumnType("int").IsRequired();
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.Address).HasColumnName(@"ADDRESS").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.Tel).HasColumnName(@"TEL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.Email).HasColumnName(@"EMAIL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.Code).HasColumnName(@"CODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(25);
+
+            // Foreign keys
+            HasRequired(a => a.RbCourtType).WithMany(b => b.RbCourts).HasForeignKey(c => c.TpId).WillCascadeOnDelete(false); // FK_RB_COURT_RB_COURT
+        }
+    }
+
+    // RB_COURT_TYPE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RbCourtTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RbCourtType>
+    {
+        public RbCourtTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RbCourtTypeConfiguration(string schema)
+        {
+            ToTable("RB_COURT_TYPE", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Title).HasColumnName(@"TITLE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
+        }
+    }
+
+    // RB_DECL_CODES
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RbDeclCodeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RbDeclCode>
+    {
+        public RbDeclCodeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RbDeclCodeConfiguration(string schema)
+        {
+            ToTable("RB_DECL_CODES", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Title).HasColumnName(@"TITLE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.Mnt).HasColumnName(@"MNT").HasColumnType("int").IsRequired();
+        }
+    }
+
     // RB_REPORT
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class RbReportConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RbReport>
@@ -5313,6 +11014,8 @@ namespace Ifns51.Risk
             Property(x => x.ReqTtl).HasColumnName(@"REQ_TTL").HasColumnType("int").IsRequired();
             Property(x => x.CutOffDate).HasColumnName(@"CUT_OFF_DATE").HasColumnType("smalldatetime").IsOptional();
             Property(x => x.Code).HasColumnName(@"CODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.ErrTo).HasColumnName(@"ERR_TO").HasColumnType("int").IsOptional();
+            Property(x => x.ErrTtl).HasColumnName(@"ERR_TTL").HasColumnType("int").IsOptional();
         }
     }
 
@@ -5538,6 +11241,33 @@ namespace Ifns51.Risk
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Code).HasColumnName(@"CODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
             Property(x => x.Title).HasColumnName(@"TITLE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1000);
+        }
+    }
+
+    // RISK_FN1048
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskFn1048Configuration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RiskFn1048>
+    {
+        public RiskFn1048Configuration()
+            : this("dbo")
+        {
+        }
+
+        public RiskFn1048Configuration(string schema)
+        {
+            ToTable("RISK_FN1048", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.D80).HasColumnName(@"D80").HasColumnType("int").IsRequired();
+            Property(x => x.D85).HasColumnName(@"D85").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Re).HasColumnName(@"RE").HasColumnType("int").IsRequired();
+            Property(x => x.Stage).HasColumnName(@"STAGE").HasColumnType("int").IsRequired();
+            Property(x => x.ShedJobId).HasColumnName(@"SHED_JOB_ID").HasColumnType("int").IsRequired();
+            Property(x => x.Err).HasColumnName(@"ERR").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+
+            // Foreign keys
+            HasRequired(a => a.ShedJob).WithMany(b => b.RiskFn1048).HasForeignKey(c => c.ShedJobId); // FK_RISK_FN1048_SHED_JOB
         }
     }
 
@@ -5903,6 +11633,35 @@ namespace Ifns51.Risk
         }
     }
 
+    // RISK_INCOME_TAXATION
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskIncomeTaxationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RiskIncomeTaxation>
+    {
+        public RiskIncomeTaxationConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RiskIncomeTaxationConfiguration(string schema)
+        {
+            ToTable("RISK_INCOME_TAXATION", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.RiskYearId).HasColumnName(@"RISK_YEAR_ID").HasColumnType("int").IsRequired();
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.TaxRate).HasColumnName(@"TAX_RATE").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.Income).HasColumnName(@"INCOME").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.TaxableIncome).HasColumnName(@"TAXABLE_INCOME").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.IncomeTax).HasColumnName(@"INCOME_TAX").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.DeductedTax).HasColumnName(@"DEDUCTED_TAX").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.TransferredTax).HasColumnName(@"TRANSFERRED_TAX").HasColumnType("money").IsRequired().HasPrecision(19,4);
+
+            // Foreign keys
+            HasRequired(a => a.RiskYear).WithMany(b => b.RiskIncomeTaxations).HasForeignKey(c => c.RiskYearId); // FK_RISK_INCOME_TAXATION_RISK_YEAR
+        }
+    }
+
     // RISK_LOCK
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class RiskLockConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RiskLock>
@@ -5945,6 +11704,84 @@ namespace Ifns51.Risk
             Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Extension).HasColumnName(@"EXTENSION").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(16);
             Property(x => x.Mime).HasColumnName(@"MIME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(150);
+        }
+    }
+
+    // RISK_NDFL
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskNdflConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RiskNdfl>
+    {
+        public RiskNdflConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RiskNdflConfiguration(string schema)
+        {
+            ToTable("RISK_NDFL", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.RiskCheckerId).HasColumnName(@"RISK_CHECKER_ID").HasColumnType("int").IsRequired();
+            Property(x => x.D250).HasColumnName(@"D250").HasColumnType("int").IsRequired();
+            Property(x => x.KindCode).HasColumnName(@"KIND_CODE").HasColumnType("int").IsRequired();
+            Property(x => x.Qty).HasColumnName(@"QTY").HasColumnType("int").IsRequired();
+            Property(x => x.DeductedTax).HasColumnName(@"DEDUCTED_TAX").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.RemaindedTax).HasColumnName(@"REMAINDED_TAX").HasColumnType("money").IsRequired().HasPrecision(19,4);
+
+            // Foreign keys
+            HasRequired(a => a.RiskChecker).WithMany(b => b.RiskNdfls).HasForeignKey(c => c.RiskCheckerId); // FK_RISK_NDFL_RISK_CHECKER
+        }
+    }
+
+    // RISK_NDFL2
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskNdfl2Configuration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RiskNdfl2>
+    {
+        public RiskNdfl2Configuration()
+            : this("dbo")
+        {
+        }
+
+        public RiskNdfl2Configuration(string schema)
+        {
+            ToTable("RISK_NDFL2", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ShedJobId).HasColumnName(@"SHED_JOB_ID").HasColumnType("int").IsRequired();
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.RiskN134).HasColumnName(@"RiskN134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.RiskD3).HasColumnName(@"RiskD3").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.RiskN18).HasColumnName(@"RiskN18").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.V743).HasColumnName(@"V743").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(8);
+            Property(x => x.Income).HasColumnName(@"INCOME").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.Tax).HasColumnName(@"TAX").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.TaxRate).HasColumnName(@"TAX_RATE").HasColumnType("money").IsRequired().HasPrecision(19,4);
+
+            // Foreign keys
+            HasRequired(a => a.ShedJob).WithMany(b => b.RiskNdfl2).HasForeignKey(c => c.ShedJobId); // FK_RISK_NDFL2_SHED_JOB
+        }
+    }
+
+    // RISK_PROXY
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RiskProxyConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<RiskProxy>
+    {
+        public RiskProxyConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RiskProxyConfiguration(string schema)
+        {
+            ToTable("RISK_PROXY", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.N279).HasColumnName(@"N279").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.CommiterD686).HasColumnName(@"COMMITER_D686").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.ProxyD686).HasColumnName(@"PROXY_D686").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
         }
     }
 
@@ -6013,6 +11850,85 @@ namespace Ifns51.Risk
         }
     }
 
+    // ROOM
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RoomConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Room>
+    {
+        public RoomConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RoomConfiguration(string schema)
+        {
+            ToTable("ROOM", schema);
+            HasKey(x => x.Roomid);
+
+            Property(x => x.Roomid).HasColumnName(@"ROOMID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Roomguid).HasColumnName(@"ROOMGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Flatnumber).HasColumnName(@"FLATNUMBER").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.Flattype).HasColumnName(@"FLATTYPE").HasColumnType("int").IsRequired();
+            Property(x => x.Roomnumber).HasColumnName(@"ROOMNUMBER").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.Roomtype).HasColumnName(@"ROOMTYPE").HasColumnType("int").IsOptional();
+            Property(x => x.Regioncode).HasColumnName(@"REGIONCODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(2);
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Houseguid).HasColumnName(@"HOUSEGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Previd).HasColumnName(@"PREVID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Nextid).HasColumnName(@"NEXTID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Livestatus).HasColumnName(@"LIVESTATUS").HasColumnType("int").IsRequired();
+            Property(x => x.Normdoc).HasColumnName(@"NORMDOC").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Operstatus).HasColumnName(@"OPERSTATUS").HasColumnType("int").IsRequired();
+            Property(x => x.Cadnum).HasColumnName(@"CADNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Roomcadnum).HasColumnName(@"ROOMCADNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+        }
+    }
+
+    // ROOMTYPE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class RoomtypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Roomtype>
+    {
+        public RoomtypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public RoomtypeConfiguration(string schema)
+        {
+            ToTable("ROOMTYPE", schema);
+            HasKey(x => x.Rmtypeid);
+
+            Property(x => x.Rmtypeid).HasColumnName(@"RMTYPEID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
+        }
+    }
+
+    // ServerIfns
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class ServerIfnConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ServerIfn>
+    {
+        public ServerIfnConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ServerIfnConfiguration(string schema)
+        {
+            ToTable("ServerIfns", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ServerName).HasColumnName(@"ServerName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.ServerDiscription).HasColumnName(@"ServerDiscription").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.Children).HasColumnName(@"Children").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.ServerIp).HasColumnName(@"ServerIp").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
     // ServiceWcfCommand
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class ServiceWcfCommandConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ServiceWcfCommand>
@@ -6065,7 +11981,7 @@ namespace Ifns51.Risk
             Property(x => x.Err).HasColumnName(@"ERR").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1000);
 
             // Foreign keys
-            HasRequired(a => a.ReqType).WithMany(b => b.ShedJobs).HasForeignKey(c => c.ReqTypeId).WillCascadeOnDelete(false); // FK_SHED_JOB_REQ_TYPE
+            HasRequired(a => a.ReqType).WithMany(b => b.ShedJobs).HasForeignKey(c => c.ReqTypeId); // FK_SHED_JOB_REQ_TYPE
         }
     }
 
@@ -6276,7 +12192,7 @@ namespace Ifns51.Risk
             Property(x => x.SmevKey).HasColumnName(@"SMEV_KEY").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
 
             // Foreign keys
-            HasRequired(a => a.ReqType).WithMany(b => b.SmevReqs).HasForeignKey(c => c.ReqTypeId).WillCascadeOnDelete(false); // FK_SMEV_REQ_REQ_TYPE
+            HasRequired(a => a.ReqType).WithMany(b => b.SmevReqs).HasForeignKey(c => c.ReqTypeId); // FK_SMEV_REQ_REQ_TYPE
         }
     }
 
@@ -6324,6 +12240,27 @@ namespace Ifns51.Risk
             Property(x => x.IdSobytieSystem).HasColumnName(@"IdSobytieSystem").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.DescriptionSobytie).HasColumnName(@"DescriptionSobytie").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // SOCRBASE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class SocrbaseConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Socrbase>
+    {
+        public SocrbaseConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public SocrbaseConfiguration(string schema)
+        {
+            ToTable("SOCRBASE", schema);
+            HasKey(x => x.KodTSt);
+
+            Property(x => x.KodTSt).HasColumnName(@"KOD_T_ST").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(4).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.SocrbaseLevel).HasColumnName(@"SOCRBASE_LEVEL").HasColumnType("int").IsRequired();
+            Property(x => x.Scname).HasColumnName(@"SCNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(10);
+            Property(x => x.Socrname).HasColumnName(@"SOCRNAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
         }
     }
 
@@ -6386,6 +12323,45 @@ namespace Ifns51.Risk
         }
     }
 
+    // STEAD
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class SteadConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Stead>
+    {
+        public SteadConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public SteadConfiguration(string schema)
+        {
+            ToTable("STEAD", schema);
+            HasKey(x => x.Steadid);
+
+            Property(x => x.Steadid).HasColumnName(@"STEADID").HasColumnType("uniqueidentifier").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Steadguid).HasColumnName(@"STEADGUID").HasColumnType("uniqueidentifier").IsRequired();
+            Property(x => x.Number).HasColumnName(@"NUMBER").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(120);
+            Property(x => x.Regioncode).HasColumnName(@"REGIONCODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(2);
+            Property(x => x.Postalcode).HasColumnName(@"POSTALCODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(6);
+            Property(x => x.Ifnsfl).HasColumnName(@"IFNSFL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsfl).HasColumnName(@"TERRIFNSFL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Ifnsul).HasColumnName(@"IFNSUL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Terrifnsul).HasColumnName(@"TERRIFNSUL").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.Okato).HasColumnName(@"OKATO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Oktmo).HasColumnName(@"OKTMO").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(11);
+            Property(x => x.Updatedate).HasColumnName(@"UPDATEDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Parentguid).HasColumnName(@"PARENTGUID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Previd).HasColumnName(@"PREVID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Nextid).HasColumnName(@"NEXTID").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Operstatus).HasColumnName(@"OPERSTATUS").HasColumnType("int").IsRequired();
+            Property(x => x.Startdate).HasColumnName(@"STARTDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Enddate).HasColumnName(@"ENDDATE").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.Normdoc).HasColumnName(@"NORMDOC").HasColumnType("uniqueidentifier").IsOptional();
+            Property(x => x.Livestatus).HasColumnName(@"LIVESTATUS").HasColumnType("int").IsRequired();
+            Property(x => x.Cadnum).HasColumnName(@"CADNUM").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.Divtype).HasColumnName(@"DIVTYPE").HasColumnType("int").IsRequired();
+        }
+    }
+
     // Stone
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class StoneConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Stone>
@@ -6409,6 +12385,26 @@ namespace Ifns51.Risk
             Property(x => x.Stone6).HasColumnName(@"Stone6").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.Stone7).HasColumnName(@"Stone7").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // STRSTAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class StrstatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Strstat>
+    {
+        public StrstatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public StrstatConfiguration(string schema)
+        {
+            ToTable("STRSTAT", schema);
+            HasKey(x => x.Strstatid);
+
+            Property(x => x.Strstatid).HasColumnName(@"STRSTATID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"NAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.Shortname).HasColumnName(@"SHORTNAME").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(20);
         }
     }
 
@@ -6493,31 +12489,6 @@ namespace Ifns51.Risk
         }
     }
 
-    // VAT_DATA
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
-    public class VatDatumConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<VatDatum>
-    {
-        public VatDatumConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public VatDatumConfiguration(string schema)
-        {
-            ToTable("VAT_DATA", schema);
-            HasKey(x => x.Id);
-
-            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.ShedJobId).HasColumnName(@"SHED_JOB_ID").HasColumnType("int").IsRequired();
-            Property(x => x.N279).HasColumnName(@"N279").HasColumnType("int").IsRequired();
-            Property(x => x.D270).HasColumnName(@"D270").HasColumnType("int").IsRequired();
-            Property(x => x.RCode).HasColumnName(@"R_CODE").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
-            Property(x => x.Ord).HasColumnName(@"ORD").HasColumnType("int").IsRequired();
-            Property(x => x.RTitle).HasColumnName(@"R_TITLE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
-            Property(x => x.Amount).HasColumnName(@"AMOUNT").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(100);
-        }
-    }
-
     // VidDelaException
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class VidDelaExceptionConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<VidDelaException>
@@ -6534,6 +12505,232 @@ namespace Ifns51.Risk
 
             Property(x => x.Id).HasColumnName(@"id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Vid).HasColumnName(@"vid").HasColumnType("int").IsOptional();
+        }
+    }
+
+    // WHD_DECL
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhdDeclConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WhdDecl>
+    {
+        public WhdDeclConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public WhdDeclConfiguration(string schema)
+        {
+            ToTable("WHD_DECL", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.D80).HasColumnName(@"D80").HasColumnType("int").IsRequired();
+            Property(x => x.D270).HasColumnName(@"D270").HasColumnType("int").IsRequired();
+            Property(x => x.N279).HasColumnName(@"N279").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.RisksN134).HasColumnName(@"RisksN134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+        }
+    }
+
+    // WHD_FN212
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhdFn212Configuration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WhdFn212>
+    {
+        public WhdFn212Configuration()
+            : this("dbo")
+        {
+        }
+
+        public WhdFn212Configuration(string schema)
+        {
+            ToTable("WHD_FN212", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.N18).HasColumnName(@"N18").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(160);
+        }
+    }
+
+    // WHD_GAUGE
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhdGaugeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WhdGauge>
+    {
+        public WhdGaugeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public WhdGaugeConfiguration(string schema)
+        {
+            ToTable("WHD_GAUGE", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Parentid).HasColumnName(@"PARENTID").HasColumnType("int").IsOptional();
+            Property(x => x.Code).HasColumnName(@"CODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.Title).HasColumnName(@"TITLE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256);
+        }
+    }
+
+    // WHD_VNP
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhdVnpConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WhdVnp>
+    {
+        public WhdVnpConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public WhdVnpConfiguration(string schema)
+        {
+            ToTable("WHD_VNP", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.N279).HasColumnName(@"N279").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.N8491).HasColumnName(@"N849__1").HasColumnType("int").IsRequired();
+            Property(x => x.N8496).HasColumnName(@"N849__6").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(25);
+            Property(x => x.N8495).HasColumnName(@"N849__5").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.N84910).HasColumnName(@"N849__10").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.N84911).HasColumnName(@"N849__11").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // WHF_ACCREQ
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhfAccreqConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WhfAccreq>
+    {
+        public WhfAccreqConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public WhfAccreqConfiguration(string schema)
+        {
+            ToTable("WHF_ACCREQ", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.D80).HasColumnName(@"D80").HasColumnType("int").IsRequired();
+            Property(x => x.N279).HasColumnName(@"N279").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.D270).HasColumnName(@"D270").HasColumnType("int").IsRequired();
+            Property(x => x.D40).HasColumnName(@"D40").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.D41).HasColumnName(@"D41").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.D440).HasColumnName(@"D440").HasColumnType("int").IsRequired();
+            Property(x => x.D38076).HasColumnName(@"D3807_6").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(4);
+            Property(x => x.N89).HasColumnName(@"N89").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(30);
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.Er).HasColumnName(@"ER").HasColumnType("bit").IsRequired();
+            Property(x => x.N111).HasColumnName(@"N111").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.Bankn134).HasColumnName(@"BANKN134").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(12);
+        }
+    }
+
+    // WHF_GAPS
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhfGapConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WhfGap>
+    {
+        public WhfGapConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public WhfGapConfiguration(string schema)
+        {
+            ToTable("WHF_GAPS", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.D80).HasColumnName(@"D80").HasColumnType("int").IsRequired();
+            Property(x => x.GaugeId).HasColumnName(@"GAUGE_ID").HasColumnType("int").IsRequired();
+            Property(x => x.N89).HasColumnName(@"N89").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20);
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.D40).HasColumnName(@"d40").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.D41).HasColumnName(@"d41").HasColumnType("smalldatetime").IsRequired();
+        }
+    }
+
+    // WHF_VAT
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhfVatConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WhfVat>
+    {
+        public WhfVatConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public WhfVatConfiguration(string schema)
+        {
+            ToTable("WHF_VAT", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.D80).HasColumnName(@"D80").HasColumnType("int").IsRequired();
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.Declid).HasColumnName(@"DECLID").HasColumnType("int").IsRequired();
+            Property(x => x.Gaugeid).HasColumnName(@"GAUGEID").HasColumnType("int").IsRequired();
+            Property(x => x.Amount).HasColumnName(@"AMOUNT").HasColumnType("money").IsRequired().HasPrecision(19,4);
+        }
+    }
+
+    // WHT_OPERATIONS
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhtOperationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WhtOperation>
+    {
+        public WhtOperationConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public WhtOperationConfiguration(string schema)
+        {
+            ToTable("WHT_OPERATIONS", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.RisksN134).HasColumnName(@"RisksN134").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.D80).HasColumnName(@"D80").HasColumnType("int").IsRequired();
+            Property(x => x.D40541).HasColumnName(@"D4054_1").HasColumnType("int").IsRequired();
+            Property(x => x.D2702).HasColumnName(@"D270_2").HasColumnType("int").IsOptional();
+            Property(x => x.D2701).HasColumnName(@"D270_1").HasColumnType("int").IsOptional();
+            Property(x => x.N105).HasColumnName(@"N105").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(160);
+            Property(x => x.N111).HasColumnName(@"N111").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(9);
+            Property(x => x.D883).HasColumnName(@"D88_3").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.D884).HasColumnName(@"D88_4").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.N89).HasColumnName(@"N89").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(30);
+            Property(x => x.D250).HasColumnName(@"D250").HasColumnType("int").IsOptional();
+            Property(x => x.D882).HasColumnName(@"d88_2").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.R096).HasColumnName(@"R096").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(30);
+            Property(x => x.R097).HasColumnName(@"R097").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(30);
+            Property(x => x.N1232).HasColumnName(@"N123_2").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(3);
+            Property(x => x.D832).HasColumnName(@"D83_2").HasColumnType("money").IsOptional().HasPrecision(19,4);
+            Property(x => x.D833).HasColumnName(@"D83_3").HasColumnType("money").IsOptional().HasPrecision(19,4);
+            Property(x => x.N134).HasColumnName(@"N134").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(12);
+            Property(x => x.R099).HasColumnName(@"R099").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(500);
+            Property(x => x.R105).HasColumnName(@"R105").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(2500);
+            Property(x => x.R098).HasColumnName(@"R098").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.D4232).HasColumnName(@"D4232").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(2);
+        }
+    }
+
+    // WHT_THRESHOLDS
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class WhtThresholdConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WhtThreshold>
+    {
+        public WhtThresholdConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public WhtThresholdConfiguration(string schema)
+        {
+            ToTable("WHT_THRESHOLDS", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Title).HasColumnName(@"TITLE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.MinValue).HasColumnName(@"MinValue").HasColumnType("money").IsRequired().HasPrecision(19,4);
+            Property(x => x.MaxValue).HasColumnName(@"MaxValue").HasColumnType("money").IsRequired().HasPrecision(19,4);
         }
     }
 
@@ -6561,6 +12758,26 @@ namespace Ifns51.Risk
 
             // Foreign keys
             HasRequired(a => a.NameDocument).WithMany(b => b.WordDocuments).HasForeignKey(c => c.IdNamedocument).WillCascadeOnDelete(false); // FK_WordDocument_NameDocument
+        }
+    }
+
+    // XLCOLOR
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class XlcolorConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Xlcolor>
+    {
+        public XlcolorConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public XlcolorConfiguration(string schema)
+        {
+            ToTable("XLCOLOR", schema);
+            HasKey(x => x.Argb);
+
+            Property(x => x.Argb).HasColumnName(@"ARGB").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Priority).HasColumnName(@"PRIORITY").HasColumnType("int").IsRequired();
+            Property(x => x.Comment).HasColumnName(@"COMMENT").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(250);
         }
     }
 
@@ -6612,6 +12829,27 @@ namespace Ifns51.Risk
             // Foreign keys
             HasRequired(a => a.ReportFilter).WithMany(b => b.XlReportAcls).HasForeignKey(c => c.ReportFilterId).WillCascadeOnDelete(false); // FK_XL_REPORT_ACL_REPORT_FILTER
             HasRequired(a => a.XlReport).WithMany(b => b.XlReportAcls).HasForeignKey(c => c.XlReportId); // FK_XL_REPORT_ACL_XL_REPORT
+        }
+    }
+
+    // XML_PARAMS
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class XmlParamConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<XmlParam>
+    {
+        public XmlParamConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public XmlParamConfiguration(string schema)
+        {
+            ToTable("XML_PARAMS", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Code).HasColumnName(@"CODE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(25);
+            Property(x => x.Data).HasColumnName(@"DATA").HasColumnType("xml").IsRequired();
+            Property(x => x.Title).HasColumnName(@"TITLE").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(150);
         }
     }
 
