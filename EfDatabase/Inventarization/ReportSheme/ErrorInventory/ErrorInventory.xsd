@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="InventarNotHostName">
 		<xs:annotation>
@@ -95,6 +95,16 @@
 			<xs:attribute name="StatusActual" type="xs:byte">
 				<xs:annotation>
 					<xs:documentation>Статус</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StatusText">
+				<xs:annotation>
+					<xs:documentation>Статус пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ColorStatus">
+				<xs:annotation>
+					<xs:documentation>Цвет пользователя</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name="NameCategory" type="xs:string">

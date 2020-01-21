@@ -59,6 +59,7 @@ namespace EfDatabase.Inventarization.Base
         System.Data.Entity.DbSet<Rule> Rules { get; set; } // Rules
         System.Data.Entity.DbSet<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer
         System.Data.Entity.DbSet<Statusing> Statusings { get; set; } // Statusing
+        System.Data.Entity.DbSet<StatusUser> StatusUsers { get; set; } // StatusUser
         System.Data.Entity.DbSet<Supply> Supplies { get; set; } // Supply
         System.Data.Entity.DbSet<Swithe> Swithes { get; set; } // Swithes
         System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
@@ -118,6 +119,7 @@ namespace EfDatabase.Inventarization.Base
         public System.Data.Entity.DbSet<Rule> Rules { get; set; } // Rules
         public System.Data.Entity.DbSet<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer
         public System.Data.Entity.DbSet<Statusing> Statusings { get; set; } // Statusing
+        public System.Data.Entity.DbSet<StatusUser> StatusUsers { get; set; } // StatusUser
         public System.Data.Entity.DbSet<Supply> Supplies { get; set; } // Supply
         public System.Data.Entity.DbSet<Swithe> Swithes { get; set; } // Swithes
         public System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
@@ -209,6 +211,7 @@ namespace EfDatabase.Inventarization.Base
             modelBuilder.Configurations.Add(new RuleConfiguration());
             modelBuilder.Configurations.Add(new ScanerAndCamerConfiguration());
             modelBuilder.Configurations.Add(new StatusingConfiguration());
+            modelBuilder.Configurations.Add(new StatusUserConfiguration());
             modelBuilder.Configurations.Add(new SupplyConfiguration());
             modelBuilder.Configurations.Add(new SwitheConfiguration());
             modelBuilder.Configurations.Add(new SysBlockConfiguration());
@@ -250,6 +253,7 @@ namespace EfDatabase.Inventarization.Base
             modelBuilder.Configurations.Add(new RuleConfiguration(schema));
             modelBuilder.Configurations.Add(new ScanerAndCamerConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusingConfiguration(schema));
+            modelBuilder.Configurations.Add(new StatusUserConfiguration(schema));
             modelBuilder.Configurations.Add(new SupplyConfiguration(schema));
             modelBuilder.Configurations.Add(new SwitheConfiguration(schema));
             modelBuilder.Configurations.Add(new SysBlockConfiguration(schema));
@@ -1798,6 +1802,30 @@ namespace EfDatabase.Inventarization.Base
         }
     }
 
+    // StatusUser
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class StatusUser
+    {
+        public int IdStatusUser { get; set; } // IdStatusUser (Primary key)
+        public string StatusText { get; set; } // StatusText (length: 128)
+        public string ColorStatus { get; set; } // ColorStatus (length: 32)
+        public System.DateTime? DataCreate { get; set; } // DataCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child Users where [Users].[StatusActual] point to this entity (FK_Users_StatusUser)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<User> Users { get; set; } // Users.FK_Users_StatusUser
+
+        public StatusUser()
+        {
+            DataCreate = System.DateTime.Now;
+            Users = new System.Collections.Generic.List<User>();
+        }
+    }
+
     // Supply
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class Supply
@@ -2216,7 +2244,7 @@ namespace EfDatabase.Inventarization.Base
         ///<summary>
         /// Актуальный статус
         ///</summary>
-        public bool? StatusActual { get; set; } // StatusActual
+        public int? StatusActual { get; set; } // StatusActual
 
         ///<summary>
         /// Ун истории
@@ -2292,6 +2320,11 @@ namespace EfDatabase.Inventarization.Base
         /// Parent Rule pointed by [Users].([IdRule]) (FK_Users_Rules)
         /// </summary>
         public virtual Rule Rule { get; set; } // FK_Users_Rules
+
+        /// <summary>
+        /// Parent StatusUser pointed by [Users].([StatusActual]) (FK_Users_StatusUser)
+        /// </summary>
+        public virtual StatusUser StatusUser { get; set; } // FK_Users_StatusUser
 
         /// <summary>
         /// Parent Telephon pointed by [Users].([IdTelephon]) (FK_Users_Telephon)
@@ -3161,6 +3194,27 @@ namespace EfDatabase.Inventarization.Base
         }
     }
 
+    // StatusUser
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class StatusUserConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StatusUser>
+    {
+        public StatusUserConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public StatusUserConfiguration(string schema)
+        {
+            ToTable("StatusUser", schema);
+            HasKey(x => x.IdStatusUser);
+
+            Property(x => x.IdStatusUser).HasColumnName(@"IdStatusUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.StatusText).HasColumnName(@"StatusText").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.ColorStatus).HasColumnName(@"ColorStatus").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
     // Supply
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class SupplyConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Supply>
@@ -3315,7 +3369,7 @@ namespace EfDatabase.Inventarization.Base
             Property(x => x.IdTelephon).HasColumnName(@"IdTelephon").HasColumnType("int").IsOptional();
             Property(x => x.NameUser).HasColumnName(@"NameUser").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.Passwords).HasColumnName(@"Passwords").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
-            Property(x => x.StatusActual).HasColumnName(@"StatusActual").HasColumnType("bit").IsOptional();
+            Property(x => x.StatusActual).HasColumnName(@"StatusActual").HasColumnType("int").IsOptional();
             Property(x => x.IdHistory).HasColumnName(@"IdHistory").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
 
@@ -3323,6 +3377,7 @@ namespace EfDatabase.Inventarization.Base
             HasOptional(a => a.Otdel).WithMany(b => b.Users).HasForeignKey(c => c.IdOtdel).WillCascadeOnDelete(false); // FK_Otdel_Users
             HasOptional(a => a.Position).WithMany(b => b.Users).HasForeignKey(c => c.IdPosition).WillCascadeOnDelete(false); // FK_Users_Position
             HasOptional(a => a.Rule).WithMany(b => b.Users).HasForeignKey(c => c.IdRule).WillCascadeOnDelete(false); // FK_Users_Rules
+            HasOptional(a => a.StatusUser).WithMany(b => b.Users).HasForeignKey(c => c.StatusActual).WillCascadeOnDelete(false); // FK_Users_StatusUser
             HasOptional(a => a.Telephon).WithMany(b => b.Users).HasForeignKey(c => c.IdTelephon).WillCascadeOnDelete(false); // FK_Users_Telephon
         }
     }

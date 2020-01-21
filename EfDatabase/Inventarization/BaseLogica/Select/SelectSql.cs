@@ -151,25 +151,23 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
             }
         }
         /// <summary>
-        /// Актулизация пользователей модели
+        /// Актуализация пользователей модели
         /// </summary>
-        /// <param name="isNotAktualUser">xml в виде string c неактуальными пользователями</param>
-        /// <param name="isAktualUser">xml в виде string с актуальными пользователями</param>
+        /// <param name="isActualizationUser">xml в виде string с актуальными пользователями</param>
         /// <returns></returns>
-       public string ActualUserModel(string isNotAktualUser,string isAktualUser)
+        public string ActualUserModel(string isActualizationUser)
        {
            try
            {
                ModelSelect model = new ModelSelect {LogicaSelect = SqlSelectModel(5)};
                Inventarization.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser,
-                   new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0],isNotAktualUser),
-                   new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1],isAktualUser));
-               return "Актулизация произошла успешно!!!";
+                   new SqlParameter(model.LogicaSelect.SelectedParametr, isActualizationUser));
+               return "Актуализация произошла успешно!!!";
            }
            catch (Exception exception)
            {
                Loggers.Log4NetLogger.Error(exception);
-               return "Во время актулизации произошла ошибка смотрите Log.txt";
+               return "Во время актуализации произошла ошибка смотрите Log.txt";
            }
        }
         /// <summary>

@@ -516,7 +516,7 @@ namespace TestIFNSLibary.Inventarka
             return error;
         }
         /// <summary>
-        /// Актулизация пользователей
+        /// Актуализация пользователей
         /// </summary>
         /// <returns></returns>
         public async Task<string> ActualUsers()
@@ -525,10 +525,9 @@ namespace TestIFNSLibary.Inventarka
             {
                 SelectSql select = new SelectSql();
                 SqlConnectionType sql = new SqlConnectionType();
-                SelectImns selectimns = new SelectImns();
-                var isnotActualUser = sql.XmlString(_parametrService.ConnectImns51, selectimns.NotActualUsers);
-                var isActualUser = sql.XmlString(_parametrService.ConnectImns51, selectimns.ActualUsers);
-                return await Task.Factory.StartNew(() => select.ActualUserModel(isnotActualUser, isActualUser));
+                SelectImns selectFrames = new SelectImns();
+                var isActualizationUser = sql.XmlString(_parametrService.ConnectImns51, selectFrames.ActualUsers);
+                return await Task.Factory.StartNew(() => select.ActualUserModel(isActualizationUser));
             }
             catch (Exception e)
             {

@@ -492,6 +492,10 @@ namespace EfDatabaseErrorInventory {
         
         private bool statusActualFieldSpecified;
         
+        private string statusTextField;
+        
+        private string colorStatusField;
+        
         private string nameCategoryField;
         
         private string modelField;
@@ -562,6 +566,28 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.statusActualFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string StatusText {
+            get {
+                return this.statusTextField;
+            }
+            set {
+                this.statusTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ColorStatus {
+            get {
+                return this.colorStatusField;
+            }
+            set {
+                this.colorStatusField = value;
             }
         }
         
