@@ -39,8 +39,8 @@ private class CorsHeaderInjectingMessageInspector : IDispatchMessageInspector
     private static IDictionary<string, string> _headersToInject = new Dictionary<string, string>
           {
             { "Access-Control-Allow-Origin", "*" },
-            { "Access-Control-Request-Method", "POST,GET,PUT,DELETE,OPTIONS" },
-            { "Access-Control-Allow-Headers", "Content-Type, Accept, Authorization" }
+            { "Access-Control-Request-Method", "POST, GET, PUT, DELETE, OPTIONS" },
+            { "Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With" }
           };
             public void BeforeSendReply(ref Message reply, object correlationState)
             {

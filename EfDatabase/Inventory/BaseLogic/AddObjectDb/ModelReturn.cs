@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace EfDatabase.Inventarization.BaseLogica.AddObjectDb
+namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
 {
     [DataContract]
    public class ModelReturn<T> where T:class 

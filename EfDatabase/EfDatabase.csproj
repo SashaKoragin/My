@@ -60,41 +60,42 @@
     <Compile Include="AddTable\AddOutBdk\AddOutBdk.cs" />
     <Compile Include="AddTable\AddTemplate\AddTemplate.cs" />
     <Compile Include="AddTable\PredPro\PredProverkaTempl.cs" />
-    <Compile Include="Inventarization\BaseLogica\AddObjectDb\AddObjectDb.cs" />
-    <Compile Include="Inventarization\BaseLogica\AddObjectDb\ModelReturn.cs" />
-    <Compile Include="Inventarization\BaseLogica\Autorization\Autorization.cs" />
-    <Compile Include="Inventarization\BaseLogica\HistoryLog\HistoryLog.cs" />
-    <Compile Include="Inventarization\BaseLogica\Select\Report.cs" />
-    <Compile Include="Inventarization\BaseLogica\Select\Select.cs" />
-    <Compile Include="Inventarization\BaseLogica\Select\SelectSql.cs" />
-    <Compile Include="Inventarization\Base\Inventarization.cs">
+    <Compile Include="Inventory\BaseLogic\AddObjectDb\AddObjectDb.cs" />
+    <Compile Include="Inventory\BaseLogic\AddObjectDb\ModelReturn.cs" />
+    <Compile Include="Inventory\BaseLogic\Login\Login.cs" />
+    <Compile Include="Inventory\BaseLogic\DeleteObjectDb\DeleteObjectDb.cs" />
+    <Compile Include="Inventory\BaseLogic\HistoryLog\HistoryLog.cs" />
+    <Compile Include="Inventory\BaseLogic\Select\Report.cs" />
+    <Compile Include="Inventory\BaseLogic\Select\Select.cs" />
+    <Compile Include="Inventory\BaseLogic\Select\SelectSql.cs" />
+    <Compile Include="Inventory\Base\Inventory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Inventarization.tt</DependentUpon>
+      <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
-    <Compile Include="Inventarization\DataTransferObject\ParametrModelSelect\AllTechnicalUsers.cs">
+    <Compile Include="Inventory\DataTransferObject\ParametrModelSelect\AllTechnicalUsers.cs">
       <DependentUpon>AllTechnicalUsers.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Inventarization\DataTransferObject\ParametrModelSelect\ParametrsModel.cs">
+    <Compile Include="Inventory\DataTransferObject\ParametrModelSelect\ParametrsModel.cs">
       <DependentUpon>ParametrsModel.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Inventarization\ReportSheme\BookAccounting\Books.cs">
+    <Compile Include="Inventory\ReportXml\BookAccounting\Books.cs">
       <DependentUpon>Books.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Inventarization\ReportSheme\ErrorInventory\ErrorInventory.cs">
+    <Compile Include="Inventory\ReportXml\ErrorInventory\ErrorInventory.cs">
       <DependentUpon>ErrorInventory.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Inventarization\ReportSheme\Invoice\DocumentInventory.cs">
+    <Compile Include="Inventory\ReportXml\Invoice\DocumentInventory.cs">
       <DependentUpon>DocumentInventory.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Inventarization\ReportSheme\Invoice\ReportShemeInvoice.cs">
+    <Compile Include="Inventory\ReportXml\Invoice\ReportShemeInvoice.cs">
       <DependentUpon>ReportShemeInvoice.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Inventarization\ReportSheme\ReturnModelError\ModelError.cs" />
-    <Compile Include="Inventarization\ReportSheme\TelephoneHelp\TelephoneHelp.cs">
+    <Compile Include="Inventory\ReportXml\ReturnModelError\ModelError.cs" />
+    <Compile Include="Inventory\ReportXml\TelephoneHelp\TelephoneHelp.cs">
       <DependentUpon>TelephoneHelp.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Inventarization\ReportSheme\UploadFile\UploadFileModel.cs">
+    <Compile Include="Inventory\ReportXml\UploadFile\UploadFileModel.cs">
       <DependentUpon>UploadFileModel.xsd</DependentUpon>
     </Compile>
     <Compile Include="SyteIfnsRisk.cs">
@@ -105,9 +106,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Inventarization\Base\Inventarization.tt">
+    <Content Include="Inventory\Base\Inventory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Inventarization.cs</LastGenOutput>
+      <LastGenOutput>Inventory.cs</LastGenOutput>
     </Content>
     <Content Include="SyteIfnsRisk.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -118,30 +119,30 @@
     <None Include="App.config" />
     <None Include="EF.Reverse.POCO.Core.ttinclude" />
     <None Include="EF.Reverse.POCO.ttinclude" />
-    <None Include="Inventarization\Base\EF.Reverse.POCO.Core.ttinclude" />
-    <None Include="Inventarization\Base\EF.Reverse.POCO.ttinclude" />
-    <None Include="Inventarization\DataTransferObject\ParametrModelSelect\AllTechnicalUsers.xsd">
+    <None Include="Inventory\Base\EF.Reverse.POCO.Core.ttinclude" />
+    <None Include="Inventory\Base\EF.Reverse.POCO.ttinclude" />
+    <None Include="Inventory\DataTransferObject\ParametrModelSelect\AllTechnicalUsers.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventarization\DataTransferObject\ParametrModelSelect\ParametrsModel.xsd">
+    <None Include="Inventory\DataTransferObject\ParametrModelSelect\ParametrsModel.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventarization\ReportSheme\BookAccounting\Books.xsd">
+    <None Include="Inventory\ReportXml\BookAccounting\Books.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventarization\ReportSheme\ErrorInventory\ErrorInventory.xsd">
+    <None Include="Inventory\ReportXml\ErrorInventory\ErrorInventory.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventarization\ReportSheme\Invoice\DocumentInventory.xsd">
+    <None Include="Inventory\ReportXml\Invoice\DocumentInventory.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventarization\ReportSheme\Invoice\ReportShemeInvoice.xsd">
+    <None Include="Inventory\ReportXml\Invoice\ReportShemeInvoice.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventarization\ReportSheme\TelephoneHelp\TelephoneHelp.xsd">
+    <None Include="Inventory\ReportXml\TelephoneHelp\TelephoneHelp.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventarization\ReportSheme\UploadFile\UploadFileModel.xsd">
+    <None Include="Inventory\ReportXml\UploadFile\UploadFileModel.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -175,12 +176,12 @@
   -->
   <Target Name="CreateDTOSheme">
     <ItemGroup>
-      <XsdFiles Include="Inventarization\DataTransferObject\ParametrModelSelect\*.xsd" />
-      <XsdReportInvoice Include="Inventarization\ReportSheme\Invoice\*.xsd" />
-      <XsdReportFile Include="Inventarization\ReportSheme\UploadFile\*.xsd" />
-      <XsdReportError Include="Inventarization\ReportSheme\ErrorInventory\*.xsd" />
-      <XsdTelephoneHelp Include="Inventarization\ReportSheme\TelephoneHelp\*.xsd" />
-      <XsdBookAccounting Include="Inventarization\ReportSheme\BookAccounting\*.xsd" />
+      <XsdFiles Include="Inventory\DataTransferObject\ParametrModelSelect\*.xsd" />
+      <XsdReportInvoice Include="Inventory\ReportXml\Invoice\*.xsd" />
+      <XsdReportFile Include="Inventory\ReportXml\UploadFile\*.xsd" />
+      <XsdReportError Include="Inventory\ReportXml\ErrorInventory\*.xsd" />
+      <XsdTelephoneHelp Include="Inventory\ReportXml\TelephoneHelp\*.xsd" />
+      <XsdBookAccounting Include="Inventory\ReportXml\BookAccounting\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -190,11 +191,11 @@
       <XsdToolPath>$(WindowsSdkPath)bin\NETFX 4.7 Tools</XsdToolPath>
     </PropertyGroup>
     <Message Importance="high" Text="Processing XSD schemas" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdFiles.FullPath)&quot; /c /namespace:$(RootNamespace)ParametrsModel /outputdir:Inventarization\DataTransferObject\ParametrModelSelect\" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportInvoice.FullPath)&quot; /c /namespace:$(RootNamespace)Invoice /outputdir:Inventarization\ReportSheme\Invoice\" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportFile.FullPath)&quot; /c /f /namespace:$(RootNamespace)UploadFile /outputdir:Inventarization\ReportSheme\UploadFile\" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportError.FullPath)&quot; /c /namespace:$(RootNamespace)ErrorInventory /outputdir:Inventarization\ReportSheme\ErrorInventory\" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdTelephoneHelp.FullPath)&quot; /c /namespace:$(RootNamespace)TelephoneHelp /outputdir:Inventarization\ReportSheme\TelephoneHelp\" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdBookAccounting.FullPath)&quot; /c /f /namespace:$(RootNamespace)XsdBookAccounting /outputdir:Inventarization\ReportSheme\BookAccounting\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdFiles.FullPath)&quot; /c /namespace:$(RootNamespace)ParametrsModel /outputdir:Inventory\DataTransferObject\ParametrModelSelect\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportInvoice.FullPath)&quot; /c /namespace:$(RootNamespace)Invoice /outputdir:Inventory\ReportXml\Invoice\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportFile.FullPath)&quot; /c /f /namespace:$(RootNamespace)UploadFile /outputdir:Inventory\ReportXml\UploadFile\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportError.FullPath)&quot; /c /namespace:$(RootNamespace)ErrorInventory /outputdir:Inventory\ReportXml\ErrorInventory\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdTelephoneHelp.FullPath)&quot; /c /namespace:$(RootNamespace)TelephoneHelp /outputdir:Inventory\ReportXml\TelephoneHelp\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdBookAccounting.FullPath)&quot; /c /f /namespace:$(RootNamespace)XsdBookAccounting /outputdir:Inventory\ReportXml\BookAccounting\" />
   </Target>
 </Project>

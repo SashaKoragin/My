@@ -1,4 +1,4 @@
-﻿using EfDatabase.Inventarization.Base;
+﻿using EfDatabase.Inventory.Base;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,26 +8,26 @@ using System.Threading.Tasks;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 using LibaryXMLAutoInventarization.Model.ModelSelectAll;
 
-namespace EfDatabase.Inventarization.BaseLogica.Select
+namespace EfDatabase.Inventory.BaseLogic.Select
 {
    public class Select : IDisposable
     {
-        public InventarizationContext Inventarization { get; set; }
+        public InventoryContext Inventory { get; set; }
 
         public Select()
         {
-            Inventarization?.Dispose();
-            Inventarization = new InventarizationContext();
+            Inventory?.Dispose();
+            Inventory = new InventoryContext();
         }
 
         /// <summary>
         /// Запрос на список отделов
         /// </summary>
         /// <returns></returns>
-        public string OtdelAll()
+        public string DepartmentAll()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Otdels);
+            return json.JsonLibaryIgnoreDate(Inventory.Otdels);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string RuleAll()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Rules);
+            return json.JsonLibaryIgnoreDate(Inventory.Rules);
         }
         /// <summary>
         /// Запрос всех пользователей
@@ -46,7 +46,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string UsersAll()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Users);
+            return json.JsonLibaryIgnoreDate(Inventory.Users);
 
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string PositionUsers()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Positions);
+            return json.JsonLibaryIgnoreDate(Inventory.Positions);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Printers()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Printers);
+            return json.JsonLibaryIgnoreDate(Inventory.Printers);
         }
         /// <summary>
         /// Выгрузка всех Коммутаторов
@@ -75,13 +75,13 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Swithes()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Swithes);
+            return json.JsonLibaryIgnoreDate(Inventory.Swithes);
         }
 
         public string ModelSwitch()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.ModelSwithes);
+            return json.JsonLibaryIgnoreDate(Inventory.ModelSwithes);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Scaner()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.ScanerAndCamers);
+            return json.JsonLibaryIgnoreDate(Inventory.ScanerAndCamers);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Mfu()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Mfus);
+            return json.JsonLibaryIgnoreDate(Inventory.Mfus);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string SysBloks()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.SysBlocks);
+            return json.JsonLibaryIgnoreDate(Inventory.SysBlocks);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Monitors()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Monitors);
+            return json.JsonLibaryIgnoreDate(Inventory.Monitors);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string CopySave()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.CopySaves);
+            return json.JsonLibaryIgnoreDate(Inventory.CopySaves);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Proizvoditel()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.FullProizvoditels);
+            return json.JsonLibaryIgnoreDate(Inventory.FullProizvoditels);
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Kabinet()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Kabinets);
+            return json.JsonLibaryIgnoreDate(Inventory.Kabinets);
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Model()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.FullModels);
+            return json.JsonLibaryIgnoreDate(Inventory.FullModels);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Status()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Statusings);
+            return json.JsonLibaryIgnoreDate(Inventory.Statusings);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string NameSysBlock()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.NameSysBlocks);
+            return json.JsonLibaryIgnoreDate(Inventory.NameSysBlocks);
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string NameMonitor()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.NameMonitors);
+            return json.JsonLibaryIgnoreDate(Inventory.NameMonitors);
         }
         /// <summary>
         /// Выгрузка телефонов
@@ -200,7 +200,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Telephon()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Telephons);
+            return json.JsonLibaryIgnoreDate(Inventory.Telephons);
         }
         /// <summary>
         /// Выгрузка бесперебойников
@@ -209,7 +209,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string BlockPower()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.BlockPowers);
+            return json.JsonLibaryIgnoreDate(Inventory.BlockPowers);
         }
         /// <summary>
         /// Выгрузка поставщиков
@@ -218,7 +218,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string Supply()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibary(Inventarization.Supplies);
+            return json.JsonLibary(Inventory.Supplies);
         }
         /// <summary>
         /// Выгрузка моделей бесперебойных блоков
@@ -227,7 +227,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string ModelBlockPower()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.ModelBlockPowers);
+            return json.JsonLibaryIgnoreDate(Inventory.ModelBlockPowers);
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string ProizvoditelBlockPower()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.ProizvoditelBlockPowers);
+            return json.JsonLibaryIgnoreDate(Inventory.ProizvoditelBlockPowers);
         }
         /// <summary>
         /// Статистика актулизации пользователей
@@ -246,7 +246,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string ActualsUsersKladr()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.UsersIsActualsStats);
+            return json.JsonLibaryIgnoreDate(Inventory.UsersIsActualsStats);
         }
         /// <summary>
         /// Получение всей классификации
@@ -255,7 +255,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         public string AllClasification()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventarization.Classifications);
+            return json.JsonLibaryIgnoreDate(Inventory.Classifications);
         }
 
         /// <summary>
@@ -266,8 +266,8 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         {
             if (disposing)
             {
-                Inventarization?.Dispose();
-                Inventarization = null;
+                Inventory?.Dispose();
+                Inventory = null;
             }
         }
 

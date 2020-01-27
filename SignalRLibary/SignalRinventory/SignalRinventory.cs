@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using EfDatabase.Inventory.Base;
+using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -95,7 +97,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Пользователя
         /// </summary>
         /// <param name="user">Пользователь</param>
-        public static void SubscribeUser(EfDatabase.Inventarization.Base.User user)
+        public static void SubscribeUser(EfDatabase.Inventory.Base.User user)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Пользователя рассылка пошла: " + user.IdUser + " " + user.NameUser));
@@ -103,10 +105,98 @@ namespace SignalRLibary.SignalRinventory
             context.Clients.All.SubscribeUser(json.JsonLibaryIgnoreDate(user));
         }
         /// <summary>
+        /// Удаление пользователя подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelUser">Модель пользователей </param>
+        public static void SubscribeDeleteUser(ModelReturn<User> modelUser)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteUser(modelUser);
+        }
+        /// <summary>
+        /// Удаление системного блока подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelSysBlock">Модель системных блоков</param>
+        public static void SubscribeDeleteSystemUnit(ModelReturn<SysBlock> modelSysBlock)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteSystemUnit(modelSysBlock);
+        }
+        /// <summary>
+        /// Удаление монитора подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelMonitor">Модель мониторов</param>
+        public static void SubscribeDeleteMonitor(ModelReturn<Monitor> modelMonitor)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteMonitor(modelMonitor);
+        }
+
+        /// <summary>
+        /// Удаление принтера подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelPrinter">Модель принтеров</param>
+        public static void SubscribeDeletePrinter(ModelReturn<Printer> modelPrinter)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeletePrinter(modelPrinter);
+        }
+
+        /// <summary>
+        /// Удаление сканера или камеры подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelScanner">Модель сканеров или камер</param>
+        public static void SubscribeDeleteScannerAndCamera(ModelReturn<ScanerAndCamer> modelScanner)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteScannerAndCamera(modelScanner);
+        }
+
+        /// <summary>
+        /// Удаление МФУ подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelMfu">Модель сканеров или камер</param>
+        public static void SubscribeDeleteMfu(ModelReturn<Mfu> modelMfu)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteMfu(modelMfu);
+        }
+
+        /// <summary>
+        /// Удаление ИБП подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelBlockPower">Модель ИБП</param>
+        public static void SubscribeDeleteBlockPower(ModelReturn<BlockPower> modelBlockPower)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteBlockPower(modelBlockPower);
+        }
+
+        /// <summary>
+        /// Удаление коммутаторов подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelSwitches">Модель Коммутаторов</param>
+        public static void SubscribeDeleteSwitch(ModelReturn<Swithe> modelSwitches)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteSwitch(modelSwitches);
+        }
+
+        /// <summary>
+        /// Удаление телефонов подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelTelephone">Модель Телефонов</param>
+        public static void SubscribeDeleteTelephone(ModelReturn<Telephon> modelTelephone)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteTelephone(modelTelephone);
+        }
+
+        /// <summary>
         /// Подписка на изменение Отдел
         /// </summary>
         /// <param name="otdel">Отдел</param>
-        public static void SubscribeOtdel(EfDatabase.Inventarization.Base.Otdel otdel)
+        public static void SubscribeOtdel(EfDatabase.Inventory.Base.Otdel otdel)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Отдела рассылка пошла: " + otdel.IdOtdel + " " + otdel.NameOtdel));
@@ -117,7 +207,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение телефона
         /// </summary>
         /// <param name="telephone">Телефон</param>
-        public static void SubscribeTelephone(EfDatabase.Inventarization.Base.Telephon telephone)
+        public static void SubscribeTelephone(EfDatabase.Inventory.Base.Telephon telephone)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Телефона рассылка пошла: "+telephone.IdTelephon+" "+telephone.Coment));
@@ -128,7 +218,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение принтера
         /// </summary>
         /// <param name="printer">Принтер</param>
-        public static void SubscribePrinter(EfDatabase.Inventarization.Base.Printer printer)
+        public static void SubscribePrinter(EfDatabase.Inventory.Base.Printer printer)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Принтера рассылка пошла: " + printer.IdPrinter + " " + printer.Coment));
@@ -139,7 +229,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Коммутаторов
         /// </summary>
         /// <param name="swithe">Коммутатор</param>
-        public static void SubscribeSwithe(EfDatabase.Inventarization.Base.Swithe swithe)
+        public static void SubscribeSwithe(EfDatabase.Inventory.Base.Swithe swithe)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Комутаторов рассылка пошла: " + swithe.IdSwithes+ " " + swithe.Coment));
@@ -150,7 +240,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Сканера и Камер
         /// </summary>
         /// <param name="scaner">Сканер или Камера</param>
-        public static void SubscribeScanerAndCamer(EfDatabase.Inventarization.Base.ScanerAndCamer scaner)
+        public static void SubscribeScanerAndCamer(EfDatabase.Inventory.Base.ScanerAndCamer scaner)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Сканера рассылка пошла: " + scaner.IdScaner + " " + scaner.Coment));
@@ -161,7 +251,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение МФУ
         /// </summary>
         /// <param name="mfu">МФУ</param>
-        public static void SubscribeMfu(EfDatabase.Inventarization.Base.Mfu mfu)
+        public static void SubscribeMfu(EfDatabase.Inventory.Base.Mfu mfu)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель МФУ рассылка пошла: " + mfu.IdMfu + " " + mfu.Coment));
@@ -172,7 +262,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Системных блоков
         /// </summary>
         /// <param name="sysblok">Системный блок</param>
-        public static void SubscribeSysBlok(EfDatabase.Inventarization.Base.SysBlock sysblok)
+        public static void SubscribeSysBlok(EfDatabase.Inventory.Base.SysBlock sysblok)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Системного блока рассылка пошла: " + sysblok.IdSysBlock + " " + sysblok.Coment));
@@ -183,7 +273,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Мониторов
         /// </summary>
         /// <param name="monitor">Монитор</param>
-        public static void SubscribeMonitor(EfDatabase.Inventarization.Base.Monitor monitor)
+        public static void SubscribeMonitor(EfDatabase.Inventory.Base.Monitor monitor)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Монитора рассылка пошла: " + monitor.IdMonitor + " " + monitor.Coment));
@@ -194,7 +284,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение ИБП
         /// </summary>
         /// <param name="blokpower">ИБП</param>
-        public static void SubscribeBlockPower(EfDatabase.Inventarization.Base.BlockPower blokpower)
+        public static void SubscribeBlockPower(EfDatabase.Inventory.Base.BlockPower blokpower)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель ИБП рассылка пошла: " + blokpower.IdBlockPowers + " " + blokpower.Coment));
@@ -205,7 +295,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Наименование системного блока
         /// </summary>
         /// <param name="nameSysBlock">Наименование системного блока</param>
-        public static void SubscribeNameSysBlock(EfDatabase.Inventarization.Base.NameSysBlock nameSysBlock)
+        public static void SubscribeNameSysBlock(EfDatabase.Inventory.Base.NameSysBlock nameSysBlock)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Наименование системного блока рассылка пошла: " + nameSysBlock.NameComputer));
@@ -216,7 +306,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Наименование монитора
         /// </summary>
         /// <param name="nameMonitor">Наименование монитора</param>
-        public static void SubscribeNameMonitor(EfDatabase.Inventarization.Base.NameMonitor nameMonitor)
+        public static void SubscribeNameMonitor(EfDatabase.Inventory.Base.NameMonitor nameMonitor)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Наименование монитора рассылка пошла: " + nameMonitor.Name));
@@ -227,7 +317,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Наименование модели ИБП
         /// </summary>
         /// <param name="nameModelBlokPower">Наименование модели ИБП</param>
-        public static void SubscribeModelBlockPower(EfDatabase.Inventarization.Base.ModelBlockPower nameModelBlokPower)
+        public static void SubscribeModelBlockPower(EfDatabase.Inventory.Base.ModelBlockPower nameModelBlokPower)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Наименование модели ИБП рассылка пошла: " + nameModelBlokPower.Name));
@@ -238,7 +328,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Наименование производителя ИБП
         /// </summary>
         /// <param name="nameProizvoditelBlockPower">Наименование производителя ИБП</param>
-        public static void SubscribeProizvoditelBlockPower(EfDatabase.Inventarization.Base.ProizvoditelBlockPower nameProizvoditelBlockPower)
+        public static void SubscribeProizvoditelBlockPower(EfDatabase.Inventory.Base.ProizvoditelBlockPower nameProizvoditelBlockPower)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Наименование производителя ИБП рассылка пошла: " + nameProizvoditelBlockPower.Name));
@@ -249,7 +339,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Поставка-контракт
         /// </summary>
         /// <param name="nameSupply">Поставка-контракт</param>
-        public static void SubscribeSupply(EfDatabase.Inventarization.Base.Supply nameSupply)
+        public static void SubscribeSupply(EfDatabase.Inventory.Base.Supply nameSupply)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Поставка-контракт рассылка пошла: " + nameSupply.NameSupply));
@@ -260,7 +350,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Статуса
         /// </summary>
         /// <param name="nameStatus">Статуса</param>
-        public static void SubscribeStatusing(EfDatabase.Inventarization.Base.Statusing nameStatus)
+        public static void SubscribeStatusing(EfDatabase.Inventory.Base.Statusing nameStatus)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Статуса рассылка пошла: " + nameStatus.Name));
@@ -271,7 +361,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Кабинета
         /// </summary>
         /// <param name="nameKabinet">Кабинет</param>
-        public static void SubscribeKabinet(EfDatabase.Inventarization.Base.Kabinet nameKabinet)
+        public static void SubscribeKabinet(EfDatabase.Inventory.Base.Kabinet nameKabinet)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Кабинета рассылка пошла: " + nameKabinet.NumberKabinet));
@@ -282,7 +372,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Модель принтера,и т д
         /// </summary>
         /// <param name="nameFullModel">Модель</param>
-        public static void SubscribeFullModel(EfDatabase.Inventarization.Base.FullModel nameFullModel)
+        public static void SubscribeFullModel(EfDatabase.Inventory.Base.FullModel nameFullModel)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель принтера,и т д рассылка пошла: " + nameFullModel.NameModel));
@@ -293,7 +383,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Классификации оборудования
         /// </summary>
         /// <param name="nameClassification">Классификация</param>
-        public static void SubscribeClassification(EfDatabase.Inventarization.Base.Classification nameClassification)
+        public static void SubscribeClassification(EfDatabase.Inventory.Base.Classification nameClassification)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Классификации рассылка пошла: " + nameClassification.NameClass));
@@ -304,7 +394,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Производителя
         /// </summary>
         /// <param name="nameFullProizvoditel">Производителя</param>
-        public static void SubscribeFullProizvoditel(EfDatabase.Inventarization.Base.FullProizvoditel nameFullProizvoditel)
+        public static void SubscribeFullProizvoditel(EfDatabase.Inventory.Base.FullProizvoditel nameFullProizvoditel)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Производители рассылка пошла: " + nameFullProizvoditel.NameProizvoditel));
@@ -315,7 +405,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение CopySave
         /// </summary>
         /// <param name="nameCopySave">CopySave</param>
-        public static void SubscribeCopySave(EfDatabase.Inventarization.Base.CopySave nameCopySave)
+        public static void SubscribeCopySave(EfDatabase.Inventory.Base.CopySave nameCopySave)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель CopySave рассылка пошла: " + nameCopySave.NameCopySave));
@@ -326,7 +416,7 @@ namespace SignalRLibary.SignalRinventory
         /// Подписка на изменение Модель Коммутатора
         /// </summary>
         /// <param name="modelSwithes">Модель Коммутатора</param>
-        public static void SubscribeModelSwithe(EfDatabase.Inventarization.Base.ModelSwithe modelSwithes)
+        public static void SubscribeModelSwithe(EfDatabase.Inventory.Base.ModelSwithe modelSwithes)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Модель Коммутатора рассылка пошла: " + modelSwithes.NameModel));

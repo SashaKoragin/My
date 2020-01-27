@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using EfDatabase.Inventarization.BaseLogica.Select;
+﻿using System.Linq;
+using EfDatabase.Inventory.BaseLogic.Select;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestIFNSLibary.ServiceRest;

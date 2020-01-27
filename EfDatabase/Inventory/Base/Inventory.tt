@@ -13,8 +13,8 @@
     // Settings.ConnectionString = "Data Source=(local);Initial Catalog=Northwind;Integrated Security=True;Application Name=EntityFramework Reverse POCO Generator";
     // Settings.ProviderName = "System.Data.SqlClient";
 
-    Settings.Namespace = "EfDatabase.Inventarization.Base"; // Override the default namespace here
-    Settings.DbContextName = "InventarizationContext"; // Note: If generating separate files, please give the db context a different name from this tt filename.
+    Settings.Namespace = "EfDatabase.Inventory.Base"; // Override the default namespace here
+    Settings.DbContextName = "InventoryContext"; // Note: If generating separate files, please give the db context a different name from this tt filename.
     //Settings.DbContextInterfaceName = "IMyDbContext"; // Defaults to "I" + DbContextName or set string empty to not implement any interface.
     Settings.DbContextInterfaceBaseClasses = "System.IDisposable";    // Specify what the base classes are for your database context interface
     Settings.DbContextBaseClass = "System.Data.Entity.DbContext";   // Specify what the base class is for your DbContext. For ASP.NET Identity use "IdentityDbContext<ApplicationUser>"
@@ -39,7 +39,7 @@
     Settings.IncludeComments = CommentsStyle.AtEndOfField; // Adds comments to the generated code
     Settings.IncludeExtendedPropertyComments = CommentsStyle.InSummaryBlock; // Adds extended properties as comments to the generated code
     Settings.IncludeConnectionSettingComments = false; // Add comments describing connection settings used to generate file
-    Settings.IncludeViews = false;
+    Settings.IncludeViews = true;
     Settings.IncludeSynonyms = false;
     Settings.IncludeStoredProcedures = false;
     Settings.IncludeTableValuedFunctions = false; // If true, you must set IncludeStoredProcedures = true, and install the "EntityFramework.CodeFirstStoreFunctions" Nuget Package.

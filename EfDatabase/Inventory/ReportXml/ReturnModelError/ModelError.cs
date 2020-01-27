@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace EfDatabase.Inventarization.ReportSheme.ReturnModelError
+namespace EfDatabase.Inventory.ReportXml.ReturnModelError
 {
    public class ModelError
     {

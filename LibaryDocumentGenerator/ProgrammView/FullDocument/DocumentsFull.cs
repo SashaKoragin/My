@@ -695,7 +695,6 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                 cellcCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Фамилия, инициалы", "16", JustificationValues.Center), "0", TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Top));
                 table3.Append(rows.GenerateRow(ref cellcCollection, true, rows.FormulHeightRow(0.6)));
             }
-
             ///Начальник отдела Информатизации
             if (senders.ItOtdel != null)
             {

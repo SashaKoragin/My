@@ -10,7 +10,7 @@ using SqlLibaryIfns.SqlEntytiCommand.TaskUse;
 using SqlLibaryIfns.SqlZapros.SobytieSql;
 using System.IO;
 using System.Threading;
-using EfDatabase.Inventarization.BaseLogica.Select;
+using EfDatabase.Inventory.BaseLogic.Select;
 using LibaryDocumentGenerator.Documents.DocumentMigration;
 using LibaryDocumentGenerator.Documents.Template;
 using LibaryDocumentGenerator.GenerateDocument.GenerateWord;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using EfDatabaseInvoice;
 using EfDatabaseXsdBookAccounting;
 
-namespace EfDatabase.Inventarization.BaseLogica.Select
+namespace EfDatabase.Inventory.BaseLogic.Select
 {
    public class Report
     {
@@ -18,7 +18,7 @@ namespace EfDatabase.Inventarization.BaseLogica.Select
         {
             SelectSql select = new SelectSql();
             AddObjectDb.AddObjectDb adddoc = new AddObjectDb.AddObjectDb();
-            select.ReportInvoce(ref report);
+            select.ReportInvoice(ref report);
             report.Main.Barcode = new Barcode();
             report.Main.Barcode.Id = adddoc.AddDocument(report.ParamRequest.IdNameDocument, report.Main.Received.UserName,report.ParamRequest.IdUsers);
         }

@@ -2,32 +2,40 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using EfDatabase.Inventarization.Base;
-using EfDatabase.Inventarization.BaseLogica.AddObjectDb;
-using EfDatabase.Inventarization.BaseLogica.Autorization;
-using EfDatabase.Inventarization.BaseLogica.Select;
-using EfDatabase.Inventarization.ReportSheme.ReturnModelError;
+using EfDatabase.Inventory.Base;
+using EfDatabase.Inventory.BaseLogic.AddObjectDb;
+using EfDatabase.Inventory.BaseLogic.DeleteObjectDb;
+using EfDatabase.Inventory.BaseLogic.Login;
+using EfDatabase.Inventory.BaseLogic.Select;
+using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
-using SqlLibaryIfns.Inventarization.ModelParametr;
-using SqlLibaryIfns.Inventarization.Select;
+using SqlLibaryIfns.Inventory.ModelParametr;
+using SqlLibaryIfns.Inventory.Select;
 using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
 using SqlLibaryIfns.ZaprosSelectNotParam;
 using TestIFNSLibary.PathJurnalAndUse;
-using CopySave = EfDatabase.Inventarization.Base.CopySave;
-using FullModel = EfDatabase.Inventarization.Base.FullModel;
-using FullProizvoditel = EfDatabase.Inventarization.Base.FullProizvoditel;
-using Kabinet = EfDatabase.Inventarization.Base.Kabinet;
+using BlockPower = EfDatabase.Inventory.Base.BlockPower;
+using CopySave = EfDatabase.Inventory.Base.CopySave;
+using FullModel = EfDatabase.Inventory.Base.FullModel;
+using FullProizvoditel = EfDatabase.Inventory.Base.FullProizvoditel;
+using Kabinet = EfDatabase.Inventory.Base.Kabinet;
 using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
-using ModelBlockPower = EfDatabase.Inventarization.Base.ModelBlockPower;
-using NameSysBlock = EfDatabase.Inventarization.Base.NameSysBlock;
-using Otdel = EfDatabase.Inventarization.Base.Otdel;
-using ProizvoditelBlockPower = EfDatabase.Inventarization.Base.ProizvoditelBlockPower;
-using Supply = EfDatabase.Inventarization.Base.Supply;
-using User = EfDatabase.Inventarization.Base.User;
+using Mfu = EfDatabase.Inventory.Base.Mfu;
+using ModelBlockPower = EfDatabase.Inventory.Base.ModelBlockPower;
+using NameSysBlock = EfDatabase.Inventory.Base.NameSysBlock;
+using Otdel = EfDatabase.Inventory.Base.Otdel;
+using Printer = EfDatabase.Inventory.Base.Printer;
+using ProizvoditelBlockPower = EfDatabase.Inventory.Base.ProizvoditelBlockPower;
+using ScanerAndCamer = EfDatabase.Inventory.Base.ScanerAndCamer;
+using Supply = EfDatabase.Inventory.Base.Supply;
+using Swithe = EfDatabase.Inventory.Base.Swithe;
+using SysBlock = EfDatabase.Inventory.Base.SysBlock;
+using Telephon = EfDatabase.Inventory.Base.Telephon;
+using User = EfDatabase.Inventory.Base.User;
 
 
 namespace TestIFNSLibary.Inventarka
@@ -35,14 +43,15 @@ namespace TestIFNSLibary.Inventarka
    public class Inventarka  : IInventarka
    {
        private readonly Parametr _parametrService = new Parametr();
-        /// <summary>
+
+       /// <summary>
         /// Запрос всех отделов
         /// </summary>
         /// <returns></returns>
         public async Task<string> AllOtdels()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.OtdelAll());
+            return await Task.Factory.StartNew(() => auto.DepartmentAll());
         }
         /// <summary>
         /// Авторизация
@@ -51,7 +60,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         public async Task<string> Authorization(User user)
         {
-            Autorization auto = new Autorization();
+            Login auto = new Login();
             return await Task.Factory.StartNew(() => auto.Identification(user));
         }
         /// <summary>
@@ -62,7 +71,7 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> SelectAllUsers(ModelParametr model)
         {
             var param = new Parametr();
-            SelectInventarization select = new SelectInventarization(param.Inventarization);
+            SelectInventory select = new SelectInventory(param.Inventarization);
             return await Task.Factory.StartNew((() => select.SelectFull(model)));
         }
         /// <summary>
@@ -94,7 +103,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="printer">Принтер</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventarization.Base.Printer> AddAndEditPrinter(EfDatabase.Inventarization.Base.Printer printer, string userIdEdit)
+        public ModelReturn<EfDatabase.Inventory.Base.Printer> AddAndEditPrinter(EfDatabase.Inventory.Base.Printer printer, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditPrinter(printer, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -107,7 +116,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="swith">Коммутатор</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventarization.Base.Swithe> AddAndEditSwith(EfDatabase.Inventarization.Base.Swithe swith, string userIdEdit)
+        public ModelReturn<EfDatabase.Inventory.Base.Swithe> AddAndEditSwith(EfDatabase.Inventory.Base.Swithe swith, string userIdEdit)
        {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditSwiths(swith, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -121,7 +130,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="scaner">Сканер</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventarization.Base.ScanerAndCamer> AddAndEditScaner(EfDatabase.Inventarization.Base.ScanerAndCamer scaner, string userIdEdit)
+        public ModelReturn<EfDatabase.Inventory.Base.ScanerAndCamer> AddAndEditScaner(EfDatabase.Inventory.Base.ScanerAndCamer scaner, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditScaner(scaner, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -134,7 +143,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="mfu">МФУ</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventarization.Base.Mfu> AddAndEditMfu(EfDatabase.Inventarization.Base.Mfu mfu, string userIdEdit)
+        public ModelReturn<EfDatabase.Inventory.Base.Mfu> AddAndEditMfu(EfDatabase.Inventory.Base.Mfu mfu, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditMfu(mfu, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -147,7 +156,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="sysblock">Системный блок</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventarization.Base.SysBlock> AddAndEditSysBlok(EfDatabase.Inventarization.Base.SysBlock sysblock, string userIdEdit)
+        public ModelReturn<EfDatabase.Inventory.Base.SysBlock> AddAndEditSysBlok(EfDatabase.Inventory.Base.SysBlock sysblock, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditSysBlok(sysblock, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -162,7 +171,7 @@ namespace TestIFNSLibary.Inventarka
         public ModelReturn<Otdel> AddAndEditOtdel(Otdel otdel)
         {
             AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditOtdel(otdel);
+            var model = add.AddAndEditDepartment(otdel);
             if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOtdel(model.Model); }
             return model;
         }
@@ -604,7 +613,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="telephon">Телефон</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventarization.Base.Telephon> AddAndEditTelephon(EfDatabase.Inventarization.Base.Telephon telephon,string userIdEdit)
+        public ModelReturn<EfDatabase.Inventory.Base.Telephon> AddAndEditTelephon(EfDatabase.Inventory.Base.Telephon telephon,string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model =  add.AddAndEditTelephone(telephon, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -617,7 +626,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="blockpower">ИБП</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventarization.Base.BlockPower> AddAndEditBlockPower(EfDatabase.Inventarization.Base.BlockPower blockpower, string userIdEdit)
+        public ModelReturn<EfDatabase.Inventory.Base.BlockPower> AddAndEditBlockPower(EfDatabase.Inventory.Base.BlockPower blockpower, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditPowerBlock(blockpower, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -633,7 +642,7 @@ namespace TestIFNSLibary.Inventarka
             return model;
         }
 
-        public ModelReturn<EfDatabase.Inventarization.Base.NameMonitor> AddAndEditNameMonitor(EfDatabase.Inventarization.Base.NameMonitor nameMonitor)
+        public ModelReturn<EfDatabase.Inventory.Base.NameMonitor> AddAndEditNameMonitor(EfDatabase.Inventory.Base.NameMonitor nameMonitor)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditNameMonitor(nameMonitor);
@@ -723,12 +732,121 @@ namespace TestIFNSLibary.Inventarka
             return await Task.Factory.StartNew(() => auto.AllClasification());
         }
 
-        public ModelReturn<EfDatabase.Inventarization.Base.ModelSwithe> AddAndEditModelSwith(EfDatabase.Inventarization.Base.ModelSwithe modelswith)
+        public ModelReturn<EfDatabase.Inventory.Base.ModelSwithe> AddAndEditModelSwith(EfDatabase.Inventory.Base.ModelSwithe modelswith)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditModelSwithe(modelswith);
             if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSwithe(model.Model); }
             return model;
         }
-    }
+
+        /// <summary>
+        /// Удаление пользователя
+        /// </summary>
+        /// <param name="user">Пользователь</param>
+        /// <returns></returns>
+        public ModelReturn<User> DeleteUser(User user)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteUser(user);
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteUser(model);
+            return model;
+        }
+        /// <summary>
+        /// Удаление системных блоков
+        /// </summary>
+        /// <param name="sysBlock">Системный блок</param>
+        /// <returns></returns>
+        public ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteSystemUnit(sysBlock);
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSystemUnit(model);
+            return model;
+        }
+        /// <summary>
+        /// Удаление Мониторов
+        /// </summary>
+        /// <param name="monitor">Монитор</param>
+        /// <returns></returns>
+        public ModelReturn<Monitor> DeleteMonitor(Monitor monitor)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteMonitor(monitor);
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMonitor(model);
+            return model;
+        }
+        /// <summary>
+        /// Удаление принтеров
+        /// </summary>
+        /// <param name="printer">Принтер</param>
+        /// <returns></returns>
+        public ModelReturn<Printer> DeletePrinter(Printer printer)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeletePrinter(printer);
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeletePrinter(model);
+            return model;
+        }
+        /// <summary>
+        /// Удаление сканеров и камер
+        /// </summary>
+        /// <param name="scanner">Сканер или камера</param>
+        /// <returns></returns>
+        public ModelReturn<ScanerAndCamer> DeleteScannerAndCamera(ScanerAndCamer scanner)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteScannerAndCamera(scanner);
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteScannerAndCamera(model);
+            return model;
+        }
+        /// <summary>
+        /// Удаление МФУ
+        /// </summary>
+        /// <param name="mfu">МФУ</param>
+        /// <returns></returns>
+        public ModelReturn<Mfu> DeleteMfu(Mfu mfu)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteMfu(mfu);
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMfu(model);
+            return model;
+        }
+        /// <summary>
+        /// Удаление ИБП
+        /// </summary>
+        /// <param name="blockPower">ИБП</param>
+        /// <returns></returns>
+        public ModelReturn<BlockPower> DeleteBlockPower(BlockPower blockPower)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteBlockPower(blockPower);
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteBlockPower(model);
+            return model;
+        }
+        /// <summary>
+        /// Удаление коммутаторов
+        /// </summary>
+        /// <param name="switches">Коммутатор</param>
+        /// <returns></returns>
+        public ModelReturn<Swithe> DeleteSwitch(Swithe switches)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteSwitch(switches);
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSwitch(model);
+            return model;
+        }
+        /// <summary>
+        /// Удаление телефонов
+        /// </summary>
+        /// <param name="telephone">Телефон</param>
+        /// <returns></returns>
+        public ModelReturn<Telephon> DeleteTelephone(Telephon telephone)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteTelephone(telephone);
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteTelephone(model);
+            return model;
+        }
+   }
 }

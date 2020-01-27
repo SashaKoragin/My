@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq;
-using EfDatabase.Inventarization.Base;
+using EfDatabase.Inventory.Base;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 
 
-namespace EfDatabase.Inventarization.BaseLogica.Autorization
+namespace EfDatabase.Inventory.BaseLogic.Login
 {
-   public class Autorization : IDisposable 
+   public class Login : IDisposable 
     {
-        public InventarizationContext Inventarization { get; set; }
+        public InventoryContext Inventory { get; set; }
 
-        public Autorization()
+        public Login()
         {
-           Inventarization?.Dispose();
-           Inventarization = new InventarizationContext();
+            Inventory?.Dispose();
+            Inventory = new InventoryContext();
         }
         /// <summary>
         /// Запрос на авторизацию пользователя
@@ -23,14 +23,14 @@ namespace EfDatabase.Inventarization.BaseLogica.Autorization
         public string Identification(User user)
         {
             SerializeJson json = new SerializeJson();
-               var  query = from Users in Inventarization.Users where Users.Passwords == user.Passwords && Users.NameUser == user.NameUser
-                        join Otdels in Inventarization.Otdels on Users.IdOtdel equals Otdels.IdOtdel
-                        join Rules in  Inventarization.Rules on Users.IdRule equals Rules.IdRule
+               var  query = from users in Inventory.Users where users.Passwords == user.Passwords && users.NameUser == user.NameUser
+                        join department in Inventory.Otdels on users.IdOtdel equals department.IdOtdel
+                        join rules in Inventory.Rules on users.IdRule equals rules.IdRule
                         select new 
                         {
-                            Users,
-                            Otdels,
-                            Rules
+                            Users = users,
+                            Otdels = department,
+                            rules
                         };
             if (query.Any())
             {
@@ -40,15 +40,15 @@ namespace EfDatabase.Inventarization.BaseLogica.Autorization
         }
 
         /// <summary>
-        /// Dispos
+        /// Disposing
         /// </summary>
         /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
             {
-                Inventarization?.Dispose();
-                Inventarization = null;
+                Inventory?.Dispose();
+                Inventory = null;
             }
         }
 
