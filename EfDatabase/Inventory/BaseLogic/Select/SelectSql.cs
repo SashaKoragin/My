@@ -2,11 +2,13 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using EfDatabase.Inventory.Base;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
+using User = EfDatabase.Inventory.Base.User;
 
 
 namespace EfDatabase.Inventory.BaseLogic.Select
@@ -76,7 +78,11 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// <param name="sqlSelect">Запрос к БД для выборки данных</param>
         public void UserRuleModel(ref RuleTemplate template, UserRules userRule, ModelSelect sqlSelect)
         {
-            var groupElement = userRule.User.Where(x=>x.Number!="Скрипт").GroupBy(x => new {x.Dates, x.Number,x.Otdel}).Select(x => new {x.Key.Number, x.Key.Dates,x.Key.Otdel}).ToList();
+            var groupElement = userRule.User.Where(x=>x.Number!="Скрипт").Select(x => new
+                { x.Dates, 
+                  x.Number, 
+                  Otdel = x.Otdel.Replace("№ ", "№")
+                }).GroupBy(x => new {x.Dates, x.Number, x.Otdel }).Select(x => new {x.Key.Number, x.Key.Dates, x.Key.Otdel }).ToList();
             int i = 0;
             foreach (var gr in groupElement)
             {
@@ -88,12 +94,20 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                           new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[1], gr.Otdel.Replace("№ ","№")),
                           new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[2], gr.Number)).FirstOrDefault();
                 template.Otdel[i].Dates = gr.Dates;
-                var user = userRule.User.Where(userRole => (userRole.Dates == gr.Dates) && (userRole.Number == gr.Number) && (userRole.Otdel == gr.Otdel)).Select(u => new { u.Dates, u.Fio, u.SysName, u.Dolj, u.Otdel, u.Number }).Distinct().ToList();
+                var user = userRule.User.Where(userRole => (userRole.Dates == gr.Dates) && (userRole.Number == gr.Number) && (userRole.Otdel.Replace("№ ", "№") == gr.Otdel)).Select(u => new
+                {
+                    u.Dates,
+                    u.Fio,
+                    u.SysName,
+                    u.Dolj,
+                    Otdel = u.Otdel.Replace("№ ", "№"),
+                    u.Number
+                }).Distinct().ToList();
                 int j = 0;
                 foreach (var userRole in user)
                 {
                     var roleAll = userRule.User.Where(u =>
-                                  u.Dates == userRole.Dates && u.Dolj == userRole.Dolj && u.Otdel == userRole.Otdel &&
+                                  u.Dates == userRole.Dates && u.Dolj == userRole.Dolj && u.Otdel.Replace("№ ", "№") == userRole.Otdel &&
                                   u.Fio == userRole.Fio && u.SysName == userRole.SysName && u.Number == userRole.Number).
                                   Select(x => x.Rule).Aggregate((element, next) => element.Concat(next).ToArray());
                     if (template.Otdel[i].Users == null)

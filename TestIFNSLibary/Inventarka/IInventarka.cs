@@ -586,8 +586,8 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="user">Пользователь</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteUser", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<User> DeleteUser(User user);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteUser?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<User> DeleteUser(User user, string userIdEdit);
         
         /// <summary>
         /// Удаление не актуальных системных блоков
@@ -595,8 +595,8 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="sysBlock">Системный блок</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteSysBlock", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteSysBlock?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock, string userIdEdit);
         
         /// <summary>
         /// Удаление не актуальных мониторов
@@ -604,8 +604,8 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="monitor">Монитор</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteMonitor", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<Monitor> DeleteMonitor(Monitor monitor);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteMonitor?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<Monitor> DeleteMonitor(Monitor monitor, string userIdEdit);
 
         /// <summary>
         /// Удаление не актуальных Принтеров
@@ -613,8 +613,8 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="printer">Принтер</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeletePrinter", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<Printer> DeletePrinter(Printer printer);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeletePrinter?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<Printer> DeletePrinter(Printer printer, string userIdEdit);
 
         /// <summary>
         /// Удаление не актуальных Сканеров или Камер
@@ -622,8 +622,8 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="scanner">Сканеров или Камера</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteScannerAndCamera", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<ScanerAndCamer> DeleteScannerAndCamera(ScanerAndCamer scanner);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteScannerAndCamera?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<ScanerAndCamer> DeleteScannerAndCamera(ScanerAndCamer scanner, string userIdEdit);
 
         /// <summary>
         /// Удаление не актуальных МФУ
@@ -631,8 +631,8 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="mfu">МФУ</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteMfu", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<EfDatabase.Inventory.Base.Mfu> DeleteMfu(EfDatabase.Inventory.Base.Mfu mfu);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteMfu?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventory.Base.Mfu> DeleteMfu(EfDatabase.Inventory.Base.Mfu mfu, string userIdEdit);
 
         /// <summary>
         /// Удаление не актуальных ИБП
@@ -640,8 +640,8 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="blockPower">ИБП</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteBlockPower", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<EfDatabase.Inventory.Base.BlockPower> DeleteBlockPower(EfDatabase.Inventory.Base.BlockPower blockPower);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteBlockPower?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventory.Base.BlockPower> DeleteBlockPower(EfDatabase.Inventory.Base.BlockPower blockPower, string userIdEdit);
 
         /// <summary>
         /// Удаление не актуальных Коммутаторов
@@ -649,8 +649,8 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="switches">Коммутатор</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteSwitch", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<EfDatabase.Inventory.Base.Swithe> DeleteSwitch(EfDatabase.Inventory.Base.Swithe switches);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteSwitch?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventory.Base.Swithe> DeleteSwitch(EfDatabase.Inventory.Base.Swithe switches, string userIdEdit);
 
         /// <summary>
         /// Удаление не актуальных Телефонов
@@ -658,7 +658,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="telephone">Телефон</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteTelephone", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<EfDatabase.Inventory.Base.Telephon> DeleteTelephone(EfDatabase.Inventory.Base.Telephon telephone);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteTelephone?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventory.Base.Telephon> DeleteTelephone(EfDatabase.Inventory.Base.Telephon telephone, string userIdEdit);
    }
 }

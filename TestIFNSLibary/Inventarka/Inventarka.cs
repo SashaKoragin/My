@@ -745,10 +745,10 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="user">Пользователь</param>
         /// <returns></returns>
-        public ModelReturn<User> DeleteUser(User user)
+        public ModelReturn<User> DeleteUser(User user, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteUser(user);
+            var model = delete.DeleteUser(user, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteUser(model);
             return model;
         }
@@ -757,10 +757,10 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="sysBlock">Системный блок</param>
         /// <returns></returns>
-        public ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock)
+        public ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteSystemUnit(sysBlock);
+            var model = delete.DeleteSystemUnit(sysBlock, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSystemUnit(model);
             return model;
         }
@@ -769,10 +769,10 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="monitor">Монитор</param>
         /// <returns></returns>
-        public ModelReturn<Monitor> DeleteMonitor(Monitor monitor)
+        public ModelReturn<Monitor> DeleteMonitor(Monitor monitor, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteMonitor(monitor);
+            var model = delete.DeleteMonitor(monitor, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMonitor(model);
             return model;
         }
@@ -781,10 +781,10 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="printer">Принтер</param>
         /// <returns></returns>
-        public ModelReturn<Printer> DeletePrinter(Printer printer)
+        public ModelReturn<Printer> DeletePrinter(Printer printer, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeletePrinter(printer);
+            var model = delete.DeletePrinter(printer, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeletePrinter(model);
             return model;
         }
@@ -793,10 +793,10 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="scanner">Сканер или камера</param>
         /// <returns></returns>
-        public ModelReturn<ScanerAndCamer> DeleteScannerAndCamera(ScanerAndCamer scanner)
+        public ModelReturn<ScanerAndCamer> DeleteScannerAndCamera(ScanerAndCamer scanner, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteScannerAndCamera(scanner);
+            var model = delete.DeleteScannerAndCamera(scanner, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteScannerAndCamera(model);
             return model;
         }
@@ -805,10 +805,10 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="mfu">МФУ</param>
         /// <returns></returns>
-        public ModelReturn<Mfu> DeleteMfu(Mfu mfu)
+        public ModelReturn<Mfu> DeleteMfu(Mfu mfu, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteMfu(mfu);
+            var model = delete.DeleteMfu(mfu, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMfu(model);
             return model;
         }
@@ -817,10 +817,10 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="blockPower">ИБП</param>
         /// <returns></returns>
-        public ModelReturn<BlockPower> DeleteBlockPower(BlockPower blockPower)
+        public ModelReturn<BlockPower> DeleteBlockPower(BlockPower blockPower, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteBlockPower(blockPower);
+            var model = delete.DeleteBlockPower(blockPower, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteBlockPower(model);
             return model;
         }
@@ -829,10 +829,10 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="switches">Коммутатор</param>
         /// <returns></returns>
-        public ModelReturn<Swithe> DeleteSwitch(Swithe switches)
+        public ModelReturn<Swithe> DeleteSwitch(Swithe switches, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteSwitch(switches);
+            var model = delete.DeleteSwitch(switches, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSwitch(model);
             return model;
         }
@@ -841,10 +841,10 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="telephone">Телефон</param>
         /// <returns></returns>
-        public ModelReturn<Telephon> DeleteTelephone(Telephon telephone)
+        public ModelReturn<Telephon> DeleteTelephone(Telephon telephone, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteTelephone(telephone);
+            var model = delete.DeleteTelephone(telephone, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteTelephone(model);
             return model;
         }
