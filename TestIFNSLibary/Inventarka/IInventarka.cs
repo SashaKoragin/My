@@ -18,10 +18,7 @@ namespace TestIFNSLibary.Inventarka
    [ServiceContract]
    public interface IInventarka
    {
-
-
-
-        /// <summary>
+       /// <summary>
         /// http://localhost:8182/Inventarka/GenerateSqlSelect
         /// Генерация запросов на клиент
         /// </summary>
@@ -38,7 +35,14 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateTelephoneHelper", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<Stream> GenerateTelephoneHelper(ModelSelect telephonehelper);
-
+        /// <summary>
+        /// Генерация файла из View
+        /// </summary>
+        /// <param name="idView">Ун выборки View</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateFileXlsxSqlView?idView={idView}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> GenerateFileXlsxSqlView(int idView);
         /// <summary>
         /// http://localhost:8182/Inventarka/GenerateBookAccounting
         /// Генерация книги учета материальных ценностей
@@ -660,5 +664,65 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteTelephone?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn<EfDatabase.Inventory.Base.Telephon> DeleteTelephone(EfDatabase.Inventory.Base.Telephon telephone, string userIdEdit);
-   }
+        /// <summary>
+        /// Просмотр Body
+        /// </summary>
+        /// <param name="idMail">Ун почты</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/VisibilityBodyMail", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> VisibilityBodyMail(int idMail);
+        /// <summary>
+        /// Выгрузка вложения из почты
+        /// </summary>
+        /// <param name="idMail">Ун почты</param>
+        /// <returns></returns>
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/OutputMail", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        [OperationContract]
+        Task<Stream> OutputMail(int idMail);
+        /// <summary>
+        /// Удаление вложения из почты
+        /// </summary>
+        /// <param name="idMail">Ун почты</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteMail", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> DeleteMail(int idMail);
+
+        /// <summary>
+        /// Все идентификаторы пользователей
+        /// http://localhost:8182/Inventarka/AllMailIdentifies
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllMailIdentifies", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllMailIdentifies();
+
+        /// <summary>
+        /// Все группы
+        /// http://localhost:8182/Inventarka/AllMailGroups
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllMailGroups", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllMailGroups();
+        /// <summary>
+        /// Редактирование идентификатора
+        /// http://localhost:8182/Inventarka/AddAndEditMailIdentifies
+        /// </summary>
+        /// <param name="nameMailIdentifier"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditMailIdentifies", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<MailIdentifier> AddAndEditMailIdentifies(MailIdentifier nameMailIdentifier);
+        /// <summary>
+        /// Редактирование Группы
+        /// http://localhost:8182/Inventarka/AddAndEditMailGroups
+        /// </summary>
+        /// <param name="nameMailGroups"></param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditMailGroups", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<MailGroup> AddAndEditMailGroups(MailGroup nameMailGroups);
+    }
 }

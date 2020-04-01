@@ -22,6 +22,7 @@ using SqlLibaryIfns.SqlSelect.ModelSqlFullService;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
 using SqlLibaryIfns.ZaprosSelectNotParam;
 using LibaryDocumentGenerator.DonloadFile.Angular;
+using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.Reports.FullTemplateSheme;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
@@ -318,21 +319,25 @@ namespace TestIFNSLibary.ServiceRest
         /// </summary>
         /// <param name="json">Json отчет</param>
         /// <returns></returns>
-        public async Task<string> MigrationReports(MigrationParse json)
+        public async Task<ModelPathReport> MigrationReports(MigrationParse json)
         {
+            var report = new ModelPathReport();
             try
             {
              return  await Task.Factory.StartNew(() =>
                 {
                     var docmigration = new DocumentMigration();
                     docmigration.MigrationDoc(_parametrService.ConectWork, _parametrService.ReportMassTemplate, json);
-                    return "Документы для печати запущены и сохраняются в папку " + _parametrService.ReportMassTemplate;
+                    report.Note = "Документы для печати запущены и сохраняются в папку ";
+                    report.Url = _parametrService.ReportMassTemplate;
+                    return report;
                 });
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
-                return e.Message;
+                report.Note = e.Message;
+                return report;
             }
         }
 
@@ -341,11 +346,12 @@ namespace TestIFNSLibary.ServiceRest
         /// </summary>
         /// <param name="userRule">Спаршенные данные АИС 3</param>
         /// <returns></returns>
-        public async Task<string> GenerateTemplateRule(UserRules userRule)
+        public async Task<ModelPathReport> GenerateTemplateRule(UserRules userRule)
         {
+            var report = new ModelPathReport();
             try
             {
-             return  await Task.Factory.StartNew(() =>
+                return  await Task.Factory.StartNew(() =>
                 {
                     var sql = new SelectSql();
                     var templateword = new TemplateUserRule();
@@ -353,13 +359,16 @@ namespace TestIFNSLibary.ServiceRest
                     var modelselect = sql.SendersUsers(ref ruletemplate);
                     sql.UserRuleModel(ref ruletemplate, userRule, modelselect);
                     templateword.CreateDocum(_parametrService.ReportMassTemplate, ruletemplate, null);
-                    return "Заявки запущены и сохраняются в папку " + _parametrService.ReportMassTemplate;
+                    report.Note = "Заявки запущены и сохраняются в папку";
+                    report.Url = _parametrService.ReportMassTemplate;
+                    return report;
                 });
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
-                return e.Message;
+                report.Note = e.Message;
+                return report;
             }
         }
     }

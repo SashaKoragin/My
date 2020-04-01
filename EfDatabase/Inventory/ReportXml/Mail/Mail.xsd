@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="MailSheme" type="MailSheme">
+		<xs:annotation>
+			<xs:documentation>Схема для писем mail nalog</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="MailSheme">
+		<xs:annotation>
+			<xs:documentation>Схема для писем mail nalog</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Mail" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Mail">
+		<xs:annotation>
+			<xs:documentation>Письма</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdMail" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ун заступившего письма</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MailAdressSend" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>От какого сервиса письмо</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MailAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>От кого письмо</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SubjectMail" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тема письма</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Присутствует ли вложение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateInputServer" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата заступления письма</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LogicsButton" default="Button">
+				<xs:annotation>
+					<xs:documentation>Логика кнопок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -10,7 +10,7 @@ using Supply = EfDatabase.Inventory.Base.Supply;
 
 namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
 {
-   public class AddObjectDb : IDisposable
+    public class AddObjectDb : IDisposable
     {
         public InventoryContext Inventory { get; set; }
 
@@ -26,7 +26,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         /// </summary>
         /// <param name="user"></param>
         /// <param name="idUser">Ун пользователя</param>
-        public ModelReturn<User> AddAndEditUser(User user,int? idUser)
+        public ModelReturn<User> AddAndEditUser(User user, int? idUser)
         {
             var log = new HistoryLog.HistoryLog();
             var usersAddAndModified = new User()
@@ -48,12 +48,12 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             {
                 using (var context = new InventoryContext())
                 {
-                    var modelDb = from users in context.Users where users.IdUser == user.IdUser select new {Users = users};
+                    var modelDb = from users in context.Users where users.IdUser == user.IdUser select new { Users = users };
                     if (modelDb.Any())
                     {
                         Inventory.Entry(usersAddAndModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
-                        log.GenerateHistory(usersAddAndModified.IdHistory, usersAddAndModified.IdUser, "Пользователь",idUser, 
+                        log.GenerateHistory(usersAddAndModified.IdHistory, usersAddAndModified.IdUser, "Пользователь", idUser,
                             "Нет смысла отслеживать проходит через синхронизацию",
                             "Нет смысла отслеживать проходит через синхронизацию");
                         return new ModelReturn<User>("Обновили пользователя: " + usersAddAndModified.IdUser, user);
@@ -61,9 +61,9 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 }
                 Inventory.Users.Add(usersAddAndModified);
                 Inventory.SaveChanges();
-                  user.IdUser = usersAddAndModified.IdUser;
-                  user.IdHistory = usersAddAndModified.IdHistory;
-                  log.GenerateHistory(usersAddAndModified.IdHistory, usersAddAndModified.IdUser, "Пользователь", idUser, "Нет смысла отслеживать проходит через синхронизацию", "Нет смысла отслеживать проходит через синхронизацию");
+                user.IdUser = usersAddAndModified.IdUser;
+                user.IdHistory = usersAddAndModified.IdHistory;
+                log.GenerateHistory(usersAddAndModified.IdHistory, usersAddAndModified.IdUser, "Пользователь", idUser, "Нет смысла отслеживать проходит через синхронизацию", "Нет смысла отслеживать проходит через синхронизацию");
                 return new ModelReturn<User>("Добавили пользователя: " + usersAddAndModified.IdUser, user, usersAddAndModified.IdUser, usersAddAndModified.IdHistory);
             }
             catch (Exception e)
@@ -87,18 +87,18 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
-              if ((from departmentSelect in Inventory.Otdels
-                 where departmentSelect.IdOtdel == departmentAddAndModified.IdOtdel
-                 select new { Otdels = departmentSelect }).Any())
+                if ((from departmentSelect in Inventory.Otdels
+                     where departmentSelect.IdOtdel == departmentAddAndModified.IdOtdel
+                     select new { Otdels = departmentSelect }).Any())
                 {
-                  Inventory.Entry(departmentAddAndModified).State = EntityState.Modified;
-                  Inventory.SaveChanges();
-                  return new ModelReturn<Otdel>("Обновили отдел: "+ departmentAddAndModified.IdOtdel, department);
+                    Inventory.Entry(departmentAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<Otdel>("Обновили отдел: " + departmentAddAndModified.IdOtdel, department);
                 }
-              Inventory.Otdels.Add(departmentAddAndModified);
-              Inventory.SaveChanges();
-              department.IdOtdel = departmentAddAndModified.IdOtdel;
-              return new ModelReturn<Otdel>("Добавили отдел: " + departmentAddAndModified.IdOtdel, department, departmentAddAndModified.IdOtdel);
+                Inventory.Otdels.Add(departmentAddAndModified);
+                Inventory.SaveChanges();
+                department.IdOtdel = departmentAddAndModified.IdOtdel;
+                return new ModelReturn<Otdel>("Добавили отдел: " + departmentAddAndModified.IdOtdel, department, departmentAddAndModified.IdOtdel);
             }
             catch (Exception e)
             {
@@ -135,27 +135,27 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
-              var newModel = $"Пользователь: {printer.User?.Name}; Кабинет: {printer.Kabinet?.NumberKabinet}; Комментарий: {printer.Coment}; Статус: {printer.Statusing?.Name}";
-              using (var context = new InventoryContext())
-              {
-                var modelDb = from printers in context.Printers where printers.IdPrinter == printer.IdPrinter select new {Printers = printers};
-                if (modelDb.Any())
+                var newModel = $"Пользователь: {printer.User?.Name}; Кабинет: {printer.Kabinet?.NumberKabinet}; Комментарий: {printer.Coment}; Статус: {printer.Statusing?.Name}";
+                using (var context = new InventoryContext())
                 {
-                    var oldModel = $"Пользователь: {modelDb.First().Printers?.User?.Name}; Кабинет: {modelDb.First().Printers?.Kabinet?.NumberKabinet}; Комментарий: {modelDb.First().Printers.Coment}; Статус: {modelDb.First().Printers?.Statusing?.Name}";
-                    Inventory.Entry(printerAddAndModified).State = EntityState.Modified;
-                    Inventory.SaveChanges();
-                    log.GenerateHistory(printer.IdHistory, printer.IdPrinter, "Принтер", idUser,
-                       oldModel,
-                       newModel);
-                    return new ModelReturn<Printer>("Обновили принтер: " + printer.IdPrinter, printer);
+                    var modelDb = from printers in context.Printers where printers.IdPrinter == printer.IdPrinter select new { Printers = printers };
+                    if (modelDb.Any())
+                    {
+                        var oldModel = $"Пользователь: {modelDb.First().Printers?.User?.Name}; Кабинет: {modelDb.First().Printers?.Kabinet?.NumberKabinet}; Комментарий: {modelDb.First().Printers.Coment}; Статус: {modelDb.First().Printers?.Statusing?.Name}";
+                        Inventory.Entry(printerAddAndModified).State = EntityState.Modified;
+                        Inventory.SaveChanges();
+                        log.GenerateHistory(printer.IdHistory, printer.IdPrinter, "Принтер", idUser,
+                           oldModel,
+                           newModel);
+                        return new ModelReturn<Printer>("Обновили принтер: " + printer.IdPrinter, printer);
+                    }
                 }
-              }
-              Inventory.Printers.Add(printerAddAndModified);
-              Inventory.SaveChanges();
-              printer.IdPrinter = printerAddAndModified.IdPrinter;
-              printer.IdHistory = printerAddAndModified.IdHistory;
-              log.GenerateHistory(printer.IdHistory, printer.IdPrinter, "Принтер", idUser, "Отсутствует модель при добавлении нового устройства", newModel);
-              return new ModelReturn<Printer>("Добавили принтер: " + printerAddAndModified.IdPrinter, printer, printerAddAndModified.IdPrinter, printerAddAndModified.IdHistory);
+                Inventory.Printers.Add(printerAddAndModified);
+                Inventory.SaveChanges();
+                printer.IdPrinter = printerAddAndModified.IdPrinter;
+                printer.IdHistory = printerAddAndModified.IdHistory;
+                log.GenerateHistory(printer.IdHistory, printer.IdPrinter, "Принтер", idUser, "Отсутствует модель при добавлении нового устройства", newModel);
+                return new ModelReturn<Printer>("Добавили принтер: " + printerAddAndModified.IdPrinter, printer, printerAddAndModified.IdPrinter, printerAddAndModified.IdHistory);
             }
             catch (Exception e)
             {
@@ -190,7 +190,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 var newmodel = $"Пользователь: {swithe.User?.Name}; Кабинет: {swithe.Kabinet?.NumberKabinet}; Коментарий: {swithe.Coment}; Статус: {swithe.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
-                    var modeldb = from Swithes in context.Swithes where Swithes.IdSwithes == swithe.IdSwithes select new {Swithes};
+                    var modeldb = from Swithes in context.Swithes where Swithes.IdSwithes == swithe.IdSwithes select new { Swithes };
                     if (modeldb.Any())
                     {
                         var oldmodel = $"Пользователь: {modeldb.First().Swithes?.User?.Name}; Кабинет: {modeldb.First().Swithes?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Swithes.Coment}; Статус: {modeldb.First().Swithes?.Statusing?.Name}";
@@ -247,7 +247,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 var newmodel = $"Пользователь: {scaner.User?.Name}; Кабинет: {scaner.Kabinet?.NumberKabinet}; Коментарий: {scaner.Coment}; Статус: {scaner.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
-                    var modeldb = from Scaner in context.ScanerAndCamers where Scaner.IdScaner == scaner.IdScaner select new {Scaner};
+                    var modeldb = from Scaner in context.ScanerAndCamers where Scaner.IdScaner == scaner.IdScaner select new { Scaner };
                     if (modeldb.Any())
                     {
                         var oldmodel = $"Пользователь: {modeldb.First().Scaner?.User?.Name}; Кабинет: {modeldb.First().Scaner?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Scaner.Coment}; Статус: {modeldb.First().Scaner?.Statusing?.Name}";
@@ -306,7 +306,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 var newmodel = $"Пользователь: {mfu.User?.Name}; Кабинет: {mfu.Kabinet?.NumberKabinet}; Коментарий: {mfu.Coment}; Статус: {mfu.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
-                    var modeldb = from Mfu in context.Mfus where Mfu.IdMfu == mfu.IdMfu select new {Mfu};
+                    var modeldb = from Mfu in context.Mfus where Mfu.IdMfu == mfu.IdMfu select new { Mfu };
                     if (modeldb.Any())
                     {
                         var oldmodel = $"Пользователь: {modeldb.First().Mfu?.User?.Name}; Кабинет: {modeldb.First().Mfu?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Mfu.Coment}; Статус: {modeldb.First().Mfu?.Statusing?.Name}";
@@ -326,7 +326,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                     $"Отсутствует модель при добавлении нового устройства",
                     newmodel);
                 return new ModelReturn<Mfu>("Добавили МФУ: " + mfuAddadnModified.IdMfu, mfu, mfuAddadnModified.IdMfu, mfuAddadnModified.IdHistory);
-             }
+            }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
@@ -363,7 +363,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 var newmodel = $"Пользователь: {sysblok.User?.Name} Имя компьютера: {sysblok.NameComputer} Кабинет: {sysblok.Kabinet?.NumberKabinet} Коментарий: {sysblok.Coment} Статус: {sysblok.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
-                    var modeldb = from SysBlocks in context.SysBlocks where SysBlocks.IdSysBlock == sysblok.IdSysBlock select new {SysBlocks};
+                    var modeldb = from SysBlocks in context.SysBlocks where SysBlocks.IdSysBlock == sysblok.IdSysBlock select new { SysBlocks };
                     if (modeldb.Any())
                     {
                         var oldmodel = $"Пользователь: {modeldb.First().SysBlocks?.User?.Name} Имя компьютера: {modeldb.First().SysBlocks?.NameComputer} Кабинет: {modeldb.First().SysBlocks?.Kabinet?.NumberKabinet} Коментарий: {modeldb.First().SysBlocks.Coment} Статус: {modeldb.First().SysBlocks?.Statusing?.Name}";
@@ -376,19 +376,19 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                     }
                 }
                 Inventory.SysBlocks.Add(sysblokAddadnModified);
-                  Inventory.SaveChanges();
-                  sysblok.IdSysBlock= sysblokAddadnModified.IdSysBlock;
-                  sysblok.IdHistory = sysblokAddadnModified.IdHistory;
-                  log.GenerateHistory(sysblok.IdHistory, sysblok.IdSysBlock, "Системный блок", idUser,
-                     $"Отсутствует модель при добавлении нового устройства",
-                     newmodel);
-                  return new ModelReturn<SysBlock>("Добавили Системный блок: " + sysblokAddadnModified.IdSysBlock, sysblok, sysblokAddadnModified.IdSysBlock, sysblokAddadnModified.IdHistory);
+                Inventory.SaveChanges();
+                sysblok.IdSysBlock = sysblokAddadnModified.IdSysBlock;
+                sysblok.IdHistory = sysblokAddadnModified.IdHistory;
+                log.GenerateHistory(sysblok.IdHistory, sysblok.IdSysBlock, "Системный блок", idUser,
+                   $"Отсутствует модель при добавлении нового устройства",
+                   newmodel);
+                return new ModelReturn<SysBlock>("Добавили Системный блок: " + sysblokAddadnModified.IdSysBlock, sysblok, sysblokAddadnModified.IdSysBlock, sysblokAddadnModified.IdHistory);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn<SysBlock>("При обновлении/добавлении данных 'Системный блок' по : " + sysblokAddadnModified.IdSysBlock+ " произошла ошибка смотри log.txt");
+            return new ModelReturn<SysBlock>("При обновлении/добавлении данных 'Системный блок' по : " + sysblokAddadnModified.IdSysBlock + " произошла ошибка смотри log.txt");
         }
 
 
@@ -418,7 +418,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 var newmodel = $"Пользователь: {monitor.User?.Name}; Кабинет: {monitor.Kabinet?.NumberKabinet}; Коментарий: {monitor.Coment}; Статус: {monitor.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
-                    var modeldb = from Monitor in context.Monitors where Monitor.IdMonitor == monitor.IdMonitor select new {Monitor};
+                    var modeldb = from Monitor in context.Monitors where Monitor.IdMonitor == monitor.IdMonitor select new { Monitor };
                     if (modeldb.Any())
                     {
                         var oldmodel = $"Пользователь: {modeldb.First().Monitor?.User?.Name}; Кабинет: {modeldb.First().Monitor?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Monitor.Coment}; Статус: {modeldb.First().Monitor?.Statusing?.Name}";
@@ -431,18 +431,18 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                     }
                 }
                 Inventory.Monitors.Add(monitorAddadnModified);
-                 Inventory.SaveChanges();
-                 monitor.IdMonitor = monitorAddadnModified.IdMonitor;
-                 monitor.IdHistory = monitorAddadnModified.IdHistory;
-                 log.GenerateHistory(monitor.IdHistory, monitor.IdMonitor, "Монитор", idUser,
-                    $"Отсутствует модель при добавлении нового устройства",
-                    newmodel);
-                 return new ModelReturn<Monitor>("Добавили Монитор: " + monitorAddadnModified.IdMonitor, monitor, monitorAddadnModified.IdMonitor, monitorAddadnModified.IdHistory);
-             }
-             catch (Exception e)
-             {
+                Inventory.SaveChanges();
+                monitor.IdMonitor = monitorAddadnModified.IdMonitor;
+                monitor.IdHistory = monitorAddadnModified.IdHistory;
+                log.GenerateHistory(monitor.IdHistory, monitor.IdMonitor, "Монитор", idUser,
+                   $"Отсутствует модель при добавлении нового устройства",
+                   newmodel);
+                return new ModelReturn<Monitor>("Добавили Монитор: " + monitorAddadnModified.IdMonitor, monitor, monitorAddadnModified.IdMonitor, monitorAddadnModified.IdHistory);
+            }
+            catch (Exception e)
+            {
                 Loggers.Log4NetLogger.Error(e);
-             }
+            }
             return new ModelReturn<Monitor>("При обновлении/добавлении данных 'Монитор' по : " + monitorAddadnModified.IdMonitor + " произошла ошибка смотри log.txt");
         }
 
@@ -473,7 +473,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 var newmodel = $"Кабинет: {telephone.Kabinet?.NumberKabinet}; Коментарий: {telephone.Coment}; Статус: {telephone.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
-                    var modeldb = from Telephone in context.Telephons where Telephone.IdTelephon == telephone.IdTelephon select new {Telephone};
+                    var modeldb = from Telephone in context.Telephons where Telephone.IdTelephon == telephone.IdTelephon select new { Telephone };
                     if (modeldb.Any())
                     {
                         var oldmodel = $"Кабинет: {modeldb.First().Telephone?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Telephone.Coment}; Статус: {modeldb.First().Telephone?.Statusing?.Name}";
@@ -482,16 +482,16 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                         log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
                             oldmodel,
                             newmodel);
-                        return new ModelReturn<Telephon>("Обновили Телефон: " + telephoneAddadnModified.IdTelephon,telephone);
+                        return new ModelReturn<Telephon>("Обновили Телефон: " + telephoneAddadnModified.IdTelephon, telephone);
                     }
                 }
                 Inventory.Telephons.Add(telephoneAddadnModified);
-                  Inventory.SaveChanges();
-                  telephone.IdTelephon = telephoneAddadnModified.IdTelephon;
-                  log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
-                     $"Отсутствует модель при добавлении нового устройства",
-                     newmodel);
-                 return new ModelReturn<Telephon>("Добавили Телефон: " + telephoneAddadnModified.IdTelephon, telephone, telephoneAddadnModified.IdTelephon);
+                Inventory.SaveChanges();
+                telephone.IdTelephon = telephoneAddadnModified.IdTelephon;
+                log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
+                   $"Отсутствует модель при добавлении нового устройства",
+                   newmodel);
+                return new ModelReturn<Telephon>("Добавили Телефон: " + telephoneAddadnModified.IdTelephon, telephone, telephoneAddadnModified.IdTelephon);
             }
             catch (Exception e)
             {
@@ -523,14 +523,14 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 Coment = blokpower.Coment,
                 IdStatus = blokpower.IdStatus,
                 IdHistory = blokpower.IdHistory
-                
+
             };
             try
             {
                 var newmodel = $"Пользователь: {blokpower.User?.Name}; Кабинет: {blokpower.Kabinet?.NumberKabinet}; Коментарий: {blokpower.Coment}; Статус: {blokpower.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
-                    var modeldb = from BlockPowers in context.BlockPowers where BlockPowers.IdBlockPowers == blokpower.IdBlockPowers select new {BlockPowers};
+                    var modeldb = from BlockPowers in context.BlockPowers where BlockPowers.IdBlockPowers == blokpower.IdBlockPowers select new { BlockPowers };
                     if (modeldb.Any())
                     {
                         var oldmodel = $"Пользователь: {modeldb.First().BlockPowers?.User?.Name}; Кабинет: {modeldb.First().BlockPowers?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().BlockPowers.Coment}; Статус: {modeldb.First().BlockPowers?.Statusing?.Name}";
@@ -543,13 +543,13 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                     }
                 }
                 Inventory.BlockPowers.Add(blockpoweraddadnModified);
-                    Inventory.SaveChanges();
-                    blokpower.IdBlockPowers = blockpoweraddadnModified.IdBlockPowers;
-                    blokpower.IdHistory = blockpoweraddadnModified.IdHistory;
-                    log.GenerateHistory(blokpower.IdHistory, blokpower.IdBlockPowers, "ИБП", idUser,
-                       $"Отсутствует модель при добавлении нового устройства",
-                       newmodel);
-                    return new ModelReturn<BlockPower>("Добавили Монитор: " + blockpoweraddadnModified.IdModelBP, blokpower, blockpoweraddadnModified.IdBlockPowers, blockpoweraddadnModified.IdHistory);
+                Inventory.SaveChanges();
+                blokpower.IdBlockPowers = blockpoweraddadnModified.IdBlockPowers;
+                blokpower.IdHistory = blockpoweraddadnModified.IdHistory;
+                log.GenerateHistory(blokpower.IdHistory, blokpower.IdBlockPowers, "ИБП", idUser,
+                   $"Отсутствует модель при добавлении нового устройства",
+                   newmodel);
+                return new ModelReturn<BlockPower>("Добавили Монитор: " + blockpoweraddadnModified.IdModelBP, blokpower, blockpoweraddadnModified.IdBlockPowers, blockpoweraddadnModified.IdHistory);
             }
             catch (Exception e)
             {
@@ -565,13 +565,13 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         /// <param name="nameinfo">Описание документа</param>
         /// <param name="iduser">Ун пользователя на документ может и не быть null</param>
         /// <returns></returns>
-        public int AddDocument(int iddoc,string nameinfo,int? iduser)
+        public int AddDocument(int iddoc, string nameinfo, int? iduser)
         {
             var doc = new Document()
             {
                 IdNamedocument = iddoc,
                 IdUser = iduser,
-                InfoUserFile ="Накладная по " + nameinfo,
+                InfoUserFile = "Накладная по " + nameinfo,
                 IsFileExists = false,
                 IsActual = true
             };
@@ -616,7 +616,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 document.IsFileExists = true;
                 Inventory.Entry(document).State = EntityState.Modified;
                 Inventory.SaveChanges();
-                return  new ModelError()
+                return new ModelError()
                 {
                     IdDocument = upload.IdDocument,
                     IdError = 0,
@@ -645,7 +645,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 book.Book = upload.BlobFile;
                 book.TypeFile = upload.ExpansionFile;
                 book.IsActual = true;
-                foreach (var bookAccounting in Inventory.BookAccountings.Where(x => x.IdKeys == book.IdKeys && x.IdModel == book.IdModel && x.IdBook != book.IdBook && x.IsActual==true))
+                foreach (var bookAccounting in Inventory.BookAccountings.Where(x => x.IdKeys == book.IdKeys && x.IdModel == book.IdModel && x.IdBook != book.IdBook && x.IsActual == true))
                 {
                     bookAccounting.IsActual = false;
                 }
@@ -691,6 +691,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         public Stream LoadDocuments(int iddoc)
         {
             var document = Inventory.Documents.FirstOrDefault(x => x.Id == iddoc);
+
             return new MemoryStream(document?.Document_);
         }
         /// <summary>
@@ -700,7 +701,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         /// <returns></returns>
         public Stream LoadBook(int iddoc)
         {
-            var book = Inventory.BookAccountings.FirstOrDefault(x => x.IdBook==iddoc);
+            var book = Inventory.BookAccountings.FirstOrDefault(x => x.IdBook == iddoc);
             return new MemoryStream(book.Book);
         }
 
@@ -712,8 +713,8 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         {
             var nameSysBlockAddadnModified = new NameSysBlock()
             {
-              IdModelSysBlock = nameSysBlock.IdModelSysBlock,
-              NameComputer = nameSysBlock.NameComputer
+                IdModelSysBlock = nameSysBlock.IdModelSysBlock,
+                NameComputer = nameSysBlock.NameComputer
             };
             try
             {
@@ -778,8 +779,8 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         {
             var nameModelBlokPowerAddadnModified = new ModelBlockPower()
             {
-               IdModelBP = nameModelBlokPower.IdModelBP,
-               Name = nameModelBlokPower.Name,
+                IdModelBP = nameModelBlokPower.IdModelBP,
+                Name = nameModelBlokPower.Name,
             };
             try
             {
@@ -845,11 +846,11 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
 
             var nameSupplyAddadnModified = new Supply()
             {
-               IdSupply = nameSupply.IdSupply,
-               NameSupply = nameSupply.NameSupply,
-               NameKontract = nameSupply.NameKontract,
-               DatePostavki = nameSupply.DatePostavki
-              
+                IdSupply = nameSupply.IdSupply,
+                NameSupply = nameSupply.NameSupply,
+                NameKontract = nameSupply.NameKontract,
+                DatePostavki = nameSupply.DatePostavki
+
             };
             try
             {
@@ -984,9 +985,9 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         {
             var nameFullModelAddadnModified = new FullModel()
             {
-               IdModel = nameFullModel.IdModel,
-               NameModel = nameFullModel.NameModel,
-               IdClasification = nameFullModel.IdClasification
+                IdModel = nameFullModel.IdModel,
+                NameModel = nameFullModel.NameModel,
+                IdClasification = nameFullModel.IdClasification
             };
             try
             {
@@ -1018,8 +1019,8 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         {
             var nameClassificationAddadnModified = new Classification()
             {
-               IdClasification = nameClassification.IdClasification,
-               NameClass = nameClassification.NameClass
+                IdClasification = nameClassification.IdClasification,
+                NameClass = nameClassification.NameClass
             };
             try
             {
@@ -1111,6 +1112,78 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             return new ModelReturn<CopySave>("При обновлении/добавлении данных 'CopySave для МФУ' по : " + nameCopySaveAddadnModified.IdCopySave + " произошла ошибка смотри log.txt");
         }
         /// <summary>
+        /// Обновление почтовых идентификаторов пользователей
+        /// </summary>
+        /// <param name="nameMailIdentifier">Модель идентификатор пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<MailIdentifier> AddAndEditMailIdentifies(MailIdentifier nameMailIdentifier)
+        {
+            var nameMailIdentifierAddadnModified = new MailIdentifier()
+            {
+                IdUser = nameMailIdentifier.IdUser,
+                IdentifierUser = nameMailIdentifier.IdentifierUser,
+                IdGroupMail = nameMailIdentifier.IdGroupMail
+            };
+            try
+            {
+                if ((from MailIdentifiers in Inventory.MailIdentifiers
+                     where MailIdentifiers.IdUser == nameMailIdentifierAddadnModified.IdUser
+                     select new { MailIdentifiers }).Any())
+                {
+                    Inventory.Entry(nameMailIdentifierAddadnModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<MailIdentifier>("Обновили справочник идентификаторов для Пользователей: " + nameMailIdentifierAddadnModified.IdUser, nameMailIdentifier);
+                }
+              
+                return new ModelReturn<MailIdentifier>("Для идентификаторов добавление не предусмотрено воспользуйтесь Актуализацией пользователей");
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<MailIdentifier>("При обновлении/добавлении данных 'CopySave для МФУ' по : " + nameMailIdentifierAddadnModified.IdUser + " произошла ошибка смотри log.txt");
+        }
+
+        /// <summary>
+        /// Обновление почтовых групп для абонентов
+        /// </summary>
+        /// <param name="nameMailGroups">Модель группа для абонента</param>
+        /// <returns></returns>
+        public ModelReturn<MailGroup> AddAndEditMailGroup(MailGroup nameMailGroups)
+        {
+            var nameMailGroupAddadnModified = new MailGroup()
+            {
+                IdGroupMail = nameMailGroups.IdGroupMail,
+                IdOtdelNumber = nameMailGroups.IdOtdelNumber,
+                NameGroup = nameMailGroups.NameGroup
+            };
+            try
+            {
+                if ((from MailGroups in Inventory.MailGroups where MailGroups.IdOtdelNumber == nameMailGroupAddadnModified.IdOtdelNumber select new { MailGroups }).Any())
+                {
+                    return new ModelReturn<MailGroup>("Такой номер отдела уже существует добавление изменение не возможно " + nameMailGroups.IdOtdelNumber + " произошла ошибка смотри log.txt");
+                }
+                if ((from MailGroups in Inventory.MailGroups where MailGroups.IdGroupMail == nameMailGroupAddadnModified.IdGroupMail select new { MailGroups }).Any())
+                {
+                    Inventory.Entry(nameMailGroupAddadnModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<MailGroup>("Обновили справочник Групп абонентов: " + nameMailGroupAddadnModified.IdGroupMail, nameMailGroups);
+                }
+                Inventory.MailGroups.Add(nameMailGroupAddadnModified);
+                Inventory.SaveChanges();
+                nameMailGroups.IdGroupMail = nameMailGroupAddadnModified.IdGroupMail;
+                return new ModelReturn<MailGroup>("Добавили новую группу для абонента: " + nameMailGroupAddadnModified.IdGroupMail, nameMailGroups, nameMailGroupAddadnModified.IdGroupMail);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<MailGroup>("При обновлении/добавлении новой группы для абонента " + nameMailGroups.IdGroupMail + " произошла ошибка смотри log.txt");
+        }
+
+
+
+        /// <summary>
         /// Сигнал завершения процесса задачи
         /// </summary>
         /// <param name="idprocess">Ун процесса</param>
@@ -1122,10 +1195,10 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             {
                 process.IsComplete = iscomplete;
                 process.DataStart = iscomplete ? process.DataStart : DateTime.Now;
-                process.DataFinish = iscomplete ? DateTime.Now : (DateTime?) null;
+                process.DataFinish = iscomplete ? DateTime.Now : (DateTime?)null;
             }
-               Inventory.Entry(process).State = EntityState.Modified;
-               Inventory.SaveChanges();
+            Inventory.Entry(process).State = EntityState.Modified;
+            Inventory.SaveChanges();
         }
 
         /// <summary>

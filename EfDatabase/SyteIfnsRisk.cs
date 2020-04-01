@@ -113,6 +113,7 @@ namespace Ifns51.Risk
         System.Data.Entity.DbSet<JobDataXml> JobDataXmls { get; set; } // JOB_DATA_XML
         System.Data.Entity.DbSet<JobDatum> JobDatums { get; set; } // JOB_DATA
         System.Data.Entity.DbSet<KaoCerhistory> KaoCerhistories { get; set; } // KAO_CERHISTORY
+        System.Data.Entity.DbSet<KaoRanhistory> KaoRanhistories { get; set; } // KAO_RANHISTORY
         System.Data.Entity.DbSet<KaoRhistory> KaoRhistories { get; set; } // KAO_RHISTORY
         System.Data.Entity.DbSet<KaoRogue> KaoRogues { get; set; } // KAO_ROGUE
         System.Data.Entity.DbSet<KaoRogueAbo> KaoRogueAboes { get; set; } // KAO_ROGUE_ABO
@@ -312,6 +313,7 @@ namespace Ifns51.Risk
         public System.Data.Entity.DbSet<JobDataXml> JobDataXmls { get; set; } // JOB_DATA_XML
         public System.Data.Entity.DbSet<JobDatum> JobDatums { get; set; } // JOB_DATA
         public System.Data.Entity.DbSet<KaoCerhistory> KaoCerhistories { get; set; } // KAO_CERHISTORY
+        public System.Data.Entity.DbSet<KaoRanhistory> KaoRanhistories { get; set; } // KAO_RANHISTORY
         public System.Data.Entity.DbSet<KaoRhistory> KaoRhistories { get; set; } // KAO_RHISTORY
         public System.Data.Entity.DbSet<KaoRogue> KaoRogues { get; set; } // KAO_ROGUE
         public System.Data.Entity.DbSet<KaoRogueAbo> KaoRogueAboes { get; set; } // KAO_ROGUE_ABO
@@ -538,6 +540,7 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new JobDataXmlConfiguration());
             modelBuilder.Configurations.Add(new JobDatumConfiguration());
             modelBuilder.Configurations.Add(new KaoCerhistoryConfiguration());
+            modelBuilder.Configurations.Add(new KaoRanhistoryConfiguration());
             modelBuilder.Configurations.Add(new KaoRhistoryConfiguration());
             modelBuilder.Configurations.Add(new KaoRogueConfiguration());
             modelBuilder.Configurations.Add(new KaoRogueAboConfiguration());
@@ -719,6 +722,7 @@ namespace Ifns51.Risk
             modelBuilder.Configurations.Add(new JobDataXmlConfiguration(schema));
             modelBuilder.Configurations.Add(new JobDatumConfiguration(schema));
             modelBuilder.Configurations.Add(new KaoCerhistoryConfiguration(schema));
+            modelBuilder.Configurations.Add(new KaoRanhistoryConfiguration(schema));
             modelBuilder.Configurations.Add(new KaoRhistoryConfiguration(schema));
             modelBuilder.Configurations.Add(new KaoRogueConfiguration(schema));
             modelBuilder.Configurations.Add(new KaoRogueAboConfiguration(schema));
@@ -4104,6 +4108,53 @@ namespace Ifns51.Risk
         public virtual KaoRogueCert KaoRogueCert { get; set; } // FK_KAO_CERHISTORY_KAO_ROGUE_CERT
     }
 
+    // KAO_RANHISTORY
+    ///<summary>
+    /// История помещения / удаления НП в перечень отываемых сертификатов
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRanhistory
+    {
+
+        ///<summary>
+        /// УН записи
+        ///</summary>
+        public int Id { get; set; } // ID (Primary key)
+
+        ///<summary>
+        /// УН компании
+        ///</summary>
+        public int RogueId { get; set; } // ROGUE_ID
+
+        ///<summary>
+        /// Пользователь, совершивший операцию
+        ///</summary>
+        public string Sname { get; set; } // SNAME (length: 128)
+
+        ///<summary>
+        /// Дата операции
+        ///</summary>
+        public System.DateTime Dt { get; set; } // DT
+
+        ///<summary>
+        /// Значение флага автоматического отзыва сертификата (0 - не отзывать, 1 - отзывать)
+        ///</summary>
+        public bool AutoRevoke { get; set; } // AUTO_REVOKE
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent KaoRogue pointed by [KAO_RANHISTORY].([RogueId]) (FK_KAO_RANHISTORY_KAO_ROGUE)
+        /// </summary>
+        public virtual KaoRogue KaoRogue { get; set; } // FK_KAO_RANHISTORY_KAO_ROGUE
+
+        public KaoRanhistory()
+        {
+            Sname = "suser_sname()";
+            Dt = System.DateTime.Now;
+        }
+    }
+
     // KAO_RHISTORY
     ///<summary>
     /// История запросов данных об абонентах в ИРУД
@@ -4182,6 +4233,10 @@ namespace Ifns51.Risk
         // Reverse navigation
 
         /// <summary>
+        /// Child KaoRanhistories where [KAO_RANHISTORY].[ROGUE_ID] point to this entity (FK_KAO_RANHISTORY_KAO_ROGUE)
+        /// </summary>
+        public virtual System.Collections.Generic.ICollection<KaoRanhistory> KaoRanhistories { get; set; } // KAO_RANHISTORY.FK_KAO_RANHISTORY_KAO_ROGUE
+        /// <summary>
         /// Child KaoRhistories where [KAO_RHISTORY].[ROGUE_ID] point to this entity (FK_KAO_RHISTORY_KAO_ROGUE)
         /// </summary>
         public virtual System.Collections.Generic.ICollection<KaoRhistory> KaoRhistories { get; set; } // KAO_RHISTORY.FK_KAO_RHISTORY_KAO_ROGUE
@@ -4197,6 +4252,7 @@ namespace Ifns51.Risk
         public KaoRogue()
         {
             AutoRevoke = true;
+            KaoRanhistories = new System.Collections.Generic.List<KaoRanhistory>();
             KaoRhistories = new System.Collections.Generic.List<KaoRhistory>();
             KaoRogueAboes = new System.Collections.Generic.List<KaoRogueAbo>();
             KaoRogueCerts = new System.Collections.Generic.List<KaoRogueCert>();
@@ -10365,6 +10421,31 @@ namespace Ifns51.Risk
         }
     }
 
+    // KAO_RANHISTORY
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
+    public class KaoRanhistoryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<KaoRanhistory>
+    {
+        public KaoRanhistoryConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public KaoRanhistoryConfiguration(string schema)
+        {
+            ToTable("KAO_RANHISTORY", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"ID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.RogueId).HasColumnName(@"ROGUE_ID").HasColumnType("int").IsRequired();
+            Property(x => x.Sname).HasColumnName(@"SNAME").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.Dt).HasColumnName(@"DT").HasColumnType("smalldatetime").IsRequired();
+            Property(x => x.AutoRevoke).HasColumnName(@"AUTO_REVOKE").HasColumnType("bit").IsRequired();
+
+            // Foreign keys
+            HasRequired(a => a.KaoRogue).WithMany(b => b.KaoRanhistories).HasForeignKey(c => c.RogueId).WillCascadeOnDelete(false); // FK_KAO_RANHISTORY_KAO_ROGUE
+        }
+    }
+
     // KAO_RHISTORY
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.1.0")]
     public class KaoRhistoryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<KaoRhistory>
@@ -12857,4 +12938,3 @@ namespace Ifns51.Risk
 
 }
 // </auto-generated>
-

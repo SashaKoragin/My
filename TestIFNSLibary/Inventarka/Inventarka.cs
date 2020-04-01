@@ -7,6 +7,7 @@ using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.BaseLogic.DeleteObjectDb;
 using EfDatabase.Inventory.BaseLogic.Login;
 using EfDatabase.Inventory.BaseLogic.Select;
+using EfDatabase.Inventory.MailLogicLotus;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
@@ -366,15 +367,15 @@ namespace TestIFNSLibary.Inventarka
         {
             try
             {
-            SelectSql select = new SelectSql();
-            var selectfull = new SelectFull();
-            TelephoneHelp invoice = new TelephoneHelp();
-            return await Task.Factory.StartNew(() =>
-            { 
-                telephonehelper.LogicaSelect = select.SqlSelectModel(telephonehelper.ParametrsSelect.Id);
-                invoice.CreateDocum(_parametrService.Report, (EfDatabaseTelephoneHelp.TelephoneHelp)selectfull.GenerateShemeXsdSql<string,string>(_parametrService.Inventarization, telephonehelper.LogicaSelect), null);
-                return invoice.FileArray();
-            });
+                SelectSql select = new SelectSql();
+                var selectfull = new SelectFull();
+                TelephoneHelp invoice = new TelephoneHelp();
+                return await Task.Factory.StartNew(() =>
+                { 
+                    telephonehelper.LogicaSelect = select.SqlSelectModel(telephonehelper.ParametrsSelect.Id);
+                    invoice.CreateDocum(_parametrService.Report, (EfDatabaseTelephoneHelp.TelephoneHelp)selectfull.GenerateSchemeXsdSql<string,string>(_parametrService.Inventarization, telephonehelper.LogicaSelect), null);
+                    return invoice.FileArray();
+                });
             }
             catch (Exception e)
             {
@@ -382,6 +383,19 @@ namespace TestIFNSLibary.Inventarka
             }
             return null;
         }
+        /// <summary>
+        /// Запрос на get получение файла по телефонам
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Stream> GenerateFileXlsxSqlView(int idView)
+        {
+            SelectSql select = new SelectSql();
+            var selectFull = new SelectFull();
+            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(_parametrService.Inventarization, 
+                @select.SqlSelectModel(idView),
+                _parametrService.Report));
+    }
+
         /// <summary>
         /// Генерация книги учета материальных ценностей
         /// </summary>
@@ -409,7 +423,7 @@ namespace TestIFNSLibary.Inventarka
                         {modelSelect.LogicaSelect.SelectedParametr.Split(',')[0], bookModels.Name},
                         {modelSelect.LogicaSelect.SelectedParametr.Split(',')[1], bookModels.Id.ToString()}
                     };
-                    Book book =(Book) selectfull.GenerateShemeXsdSql(_parametrService.Inventarization, modelSelect.LogicaSelect,parametr); //Получение данных для модели
+                    Book book =(Book) selectfull.GenerateSchemeXsdSql(_parametrService.Inventarization, modelSelect.LogicaSelect,parametr); //Получение данных для модели
                     rep.BookInvoce(ref book.BareCodeBook, bookModels); //Раскладывает в БД
                     barecode.GenerateBookCode(ref book.BareCodeBook, _parametrService.Report);//Генерит Штрихкод на основе раскладки БД
                     bookAccounting.CreateDocum(_parametrService.Report, book, null);
@@ -452,11 +466,11 @@ namespace TestIFNSLibary.Inventarka
                        File.Delete(report.Main.Barcode.PathBarcode);
                        return invoice.FileArray();
                     });
-                }
-              catch (Exception e)
-              {
-                Loggers.Log4NetLogger.Error(e);
-              }
+               }
+               catch (Exception e)
+               {
+                   Loggers.Log4NetLogger.Error(e);
+               }
             return null;
         }
 
@@ -848,5 +862,82 @@ namespace TestIFNSLibary.Inventarka
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteTelephone(model);
             return model;
         }
-   }
+        /// <summary>
+        /// Просмотр Body
+        /// </summary>
+        /// <param name="idMail">Ун письма</param>
+        /// <returns></returns>
+        public async Task<string> VisibilityBodyMail(int idMail)
+        {
+            MailLogicLotus mail = new MailLogicLotus();
+            return await Task.Factory.StartNew(() => mail.ReturnMailBody(idMail));
+        }
+        /// <summary>
+        /// Выгрузка файла вложения
+        /// </summary>
+        /// <param name="idMail">Ун письма</param>
+        /// <returns></returns>
+        public async Task<Stream> OutputMail(int idMail)
+        {
+            MailLogicLotus mail = new MailLogicLotus();
+            return await Task.Factory.StartNew(() => mail.OutputMail(idMail));
+        }
+        /// <summary>
+        /// Удаление письма
+        /// </summary>
+        /// <param name="idMail">Ун письма</param>
+        /// <returns></returns>
+        public async Task<string> DeleteMail(int idMail)
+        {
+            MailLogicLotus mail = new MailLogicLotus();
+            return await Task.Factory.StartNew(() => mail.DeleteMail(idMail));
+        }
+
+        /// <summary>
+        /// Все идентификаторы пользователей
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllMailIdentifies()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllMailIdentifier());
+        }
+
+        /// <summary>
+        /// Все идентификаторы пользователей
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllMailGroups()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllMailGroup());
+        }
+
+        /// <summary>
+        /// Обновление идентификаторов пользователя
+        /// </summary>
+        /// <param name="nameMailIdentifier"></param>
+        /// <returns></returns>
+        public  ModelReturn<MailIdentifier> AddAndEditMailIdentifies(MailIdentifier nameMailIdentifier)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditMailIdentifies(nameMailIdentifier);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailIdentifier(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Обновление групп для абонентов
+        /// </summary>
+        /// <param name="nameMailGroups">Группа для абонентов</param>
+        /// <returns></returns>
+        public ModelReturn<MailGroup> AddAndEditMailGroups(MailGroup nameMailGroups)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditMailGroup(nameMailGroups);
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailGroups(model.Model); }
+            return model;
+        }
+    }
 }

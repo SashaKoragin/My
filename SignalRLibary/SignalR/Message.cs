@@ -15,7 +15,7 @@ namespace SignalRLibary.SignalR
         {
             try
             {
-                
+                GlobalHost.HubPipeline.AddModule(new HubError.HubError());
                 app.Map("/signalr", map =>
                 {
                     map.UseCors(CorsOptions.AllowAll);
@@ -24,9 +24,8 @@ namespace SignalRLibary.SignalR
                         EnableDetailedErrors = true
                     };
                     map.RunSignalR(hubConfiguration);
-                    
                 });
-                //  GlobalHost.HubPipeline.RequireAuthentication();
+               
             }
             catch (Exception e)
             {

@@ -28,6 +28,7 @@ namespace EfDatabase.Inventory.Base
 
     public interface IInventoryContext : System.IDisposable
     {
+        System.Data.Entity.DbSet<AllTelephon> AllTelephons { get; set; } // AllTelephon
         System.Data.Entity.DbSet<BlockPower> BlockPowers { get; set; } // BlockPower
         System.Data.Entity.DbSet<BookAccounting> BookAccountings { get; set; } // BookAccounting
         System.Data.Entity.DbSet<BookModel> BookModels { get; set; } // BookModels
@@ -49,6 +50,10 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<IsProcessComplete> IsProcessCompletes { get; set; } // IsProcessComplete
         System.Data.Entity.DbSet<Kabinet> Kabinets { get; set; } // Kabinet
         System.Data.Entity.DbSet<LogicaSelect> LogicaSelects { get; set; } // LogicaSelect
+        System.Data.Entity.DbSet<Mail> Mails { get; set; } // Mail
+        System.Data.Entity.DbSet<MailGroup> MailGroups { get; set; } // MailGroup
+        System.Data.Entity.DbSet<MailIdentifier> MailIdentifiers { get; set; } // MailIdentifier
+        System.Data.Entity.DbSet<MailOutlook> MailOutlooks { get; set; } // MailOutlook
         System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
         System.Data.Entity.DbSet<ModelSwithe> ModelSwithes { get; set; } // ModelSwithes
@@ -97,6 +102,7 @@ namespace EfDatabase.Inventory.Base
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class InventoryContext : System.Data.Entity.DbContext, IInventoryContext
     {
+        public System.Data.Entity.DbSet<AllTelephon> AllTelephons { get; set; } // AllTelephon
         public System.Data.Entity.DbSet<BlockPower> BlockPowers { get; set; } // BlockPower
         public System.Data.Entity.DbSet<BookAccounting> BookAccountings { get; set; } // BookAccounting
         public System.Data.Entity.DbSet<BookModel> BookModels { get; set; } // BookModels
@@ -118,6 +124,10 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<IsProcessComplete> IsProcessCompletes { get; set; } // IsProcessComplete
         public System.Data.Entity.DbSet<Kabinet> Kabinets { get; set; } // Kabinet
         public System.Data.Entity.DbSet<LogicaSelect> LogicaSelects { get; set; } // LogicaSelect
+        public System.Data.Entity.DbSet<Mail> Mails { get; set; } // Mail
+        public System.Data.Entity.DbSet<MailGroup> MailGroups { get; set; } // MailGroup
+        public System.Data.Entity.DbSet<MailIdentifier> MailIdentifiers { get; set; } // MailIdentifier
+        public System.Data.Entity.DbSet<MailOutlook> MailOutlooks { get; set; } // MailOutlook
         public System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         public System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
         public System.Data.Entity.DbSet<ModelSwithe> ModelSwithes { get; set; } // ModelSwithes
@@ -198,6 +208,7 @@ namespace EfDatabase.Inventory.Base
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Configurations.Add(new AllTelephonConfiguration());
             modelBuilder.Configurations.Add(new BlockPowerConfiguration());
             modelBuilder.Configurations.Add(new BookAccountingConfiguration());
             modelBuilder.Configurations.Add(new BookModelConfiguration());
@@ -219,6 +230,10 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new IsProcessCompleteConfiguration());
             modelBuilder.Configurations.Add(new KabinetConfiguration());
             modelBuilder.Configurations.Add(new LogicaSelectConfiguration());
+            modelBuilder.Configurations.Add(new MailConfiguration());
+            modelBuilder.Configurations.Add(new MailGroupConfiguration());
+            modelBuilder.Configurations.Add(new MailIdentifierConfiguration());
+            modelBuilder.Configurations.Add(new MailOutlookConfiguration());
             modelBuilder.Configurations.Add(new MfuConfiguration());
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration());
             modelBuilder.Configurations.Add(new ModelSwitheConfiguration());
@@ -249,6 +264,7 @@ namespace EfDatabase.Inventory.Base
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
+            modelBuilder.Configurations.Add(new AllTelephonConfiguration(schema));
             modelBuilder.Configurations.Add(new BlockPowerConfiguration(schema));
             modelBuilder.Configurations.Add(new BookAccountingConfiguration(schema));
             modelBuilder.Configurations.Add(new BookModelConfiguration(schema));
@@ -270,6 +286,10 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new IsProcessCompleteConfiguration(schema));
             modelBuilder.Configurations.Add(new KabinetConfiguration(schema));
             modelBuilder.Configurations.Add(new LogicaSelectConfiguration(schema));
+            modelBuilder.Configurations.Add(new MailConfiguration(schema));
+            modelBuilder.Configurations.Add(new MailGroupConfiguration(schema));
+            modelBuilder.Configurations.Add(new MailIdentifierConfiguration(schema));
+            modelBuilder.Configurations.Add(new MailOutlookConfiguration(schema));
             modelBuilder.Configurations.Add(new MfuConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelSwitheConfiguration(schema));
@@ -314,6 +334,21 @@ namespace EfDatabase.Inventory.Base
     #endregion
 
     #region POCO classes
+
+    // AllTelephon
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class AllTelephon
+    {
+        public string ФИО { get; set; } // ФИО (Primary key) (length: 256)
+        public string Коментарий { get; set; } // Коментарий (length: 254)
+        public string Отдел { get; set; } // Отдел (length: 256)
+        public string Номеркабинета { get; set; } // Номер кабинета (length: 5)
+        public string Внутреннийтелефон { get; set; } // Внутренний телефон (length: 32)
+        public string Городскойтелефон { get; set; } // Городской телефон (length: 32)
+        public string Серийныйномер { get; set; } // Серийный номер (length: 64)
+        public string IPТелефона { get; set; } // IP Телефона (length: 64)
+        public string MACАдрестелефона { get; set; } // MAC Адрес телефона (length: 64)
+    }
 
     // The table 'AnaliticaSysBlokAndMonitors' is not usable by entity framework because it
     // does not have a primary key. It is listed here for completeness.
@@ -1039,6 +1074,91 @@ namespace EfDatabase.Inventory.Base
         public LogicaSelect()
         {
             DataCreate = System.DateTime.Now;
+        }
+    }
+
+    // Mail
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class Mail
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string IdMail { get; set; } // IdMail (Primary key) (length: 512)
+        public string MailAdress { get; set; } // MailAdress (Primary key) (length: 256)
+        public string SubjectMail { get; set; } // SubjectMail (length: 512)
+        public string IsFile { get; set; } // IsFile (Primary key) (length: 20)
+        public System.DateTime? DateInputServer { get; set; } // DateInputServer
+    }
+
+    // MailGroup
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailGroup
+    {
+        public int IdGroupMail { get; set; } // IdGroupMail (Primary key)
+        public int IdOtdelNumber { get; set; } // IdOtdelNumber
+        public string NameGroup { get; set; } // NameGroup (length: 64)
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child MailIdentifiers where [MailIdentifier].[IdGroupMail] point to this entity (FK_MailIdentifier_MailGroup)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<MailIdentifier> MailIdentifiers { get; set; } // MailIdentifier.FK_MailIdentifier_MailGroup
+
+        public MailGroup()
+        {
+            DateCreate = System.DateTime.Now;
+            MailIdentifiers = new System.Collections.Generic.List<MailIdentifier>();
+        }
+    }
+
+    // MailIdentifier
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailIdentifier
+    {
+        public int IdUser { get; set; } // IdUser (Primary key)
+        public int? IdGroupMail { get; set; } // IdGroupMail
+        public string IdentifierUser { get; set; } // IdentifierUser (length: 32)
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent MailGroup pointed by [MailIdentifier].([IdGroupMail]) (FK_MailIdentifier_MailGroup)
+        /// </summary>
+        public virtual MailGroup MailGroup { get; set; } // FK_MailIdentifier_MailGroup
+
+        /// <summary>
+        /// Parent User pointed by [MailIdentifier].([IdUser]) (FK_MailIdentifier_Users)
+        /// </summary>
+        public virtual User User { get; set; } // FK_MailIdentifier_Users
+
+        public MailIdentifier()
+        {
+            DateCreate = System.DateTime.Now;
+        }
+    }
+
+    // MailOutlook
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailOutlook
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string IdMail { get; set; } // IdMail (length: 512)
+        public string MailAdressSend { get; set; } // MailAdressSend (length: 256)
+        public string MailAdress { get; set; } // MailAdress (length: 256)
+        public string SubjectMail { get; set; } // SubjectMail (length: 512)
+        public string Body { get; set; } // Body
+        public string FullPathFile { get; set; } // FullPathFile (length: 256)
+        public string NameFile { get; set; } // NameFile (length: 256)
+        public byte[] FileMail { get; set; } // FileMail (length: 2147483647)
+        public System.DateTime? DateInputServer { get; set; } // DateInputServer
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        public MailOutlook()
+        {
+            DateCreate = System.DateTime.Now;
         }
     }
 
@@ -2446,6 +2566,11 @@ namespace EfDatabase.Inventory.Base
         // Reverse navigation
 
         /// <summary>
+        /// Parent (One-to-One) User pointed by [MailIdentifier].[IdUser] (FK_MailIdentifier_Users)
+        /// </summary>
+        [JsonIgnore]
+        public virtual MailIdentifier MailIdentifier { get; set; } // MailIdentifier.FK_MailIdentifier_Users
+        /// <summary>
         /// Child BlockPowers where [BlockPower].[IdUser] point to this entity (FK_BlockPower_Users)
         /// </summary>
         [JsonIgnore]
@@ -2605,6 +2730,32 @@ namespace EfDatabase.Inventory.Base
     #endregion
 
     #region POCO Configuration
+
+    // AllTelephon
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class AllTelephonConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AllTelephon>
+    {
+        public AllTelephonConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AllTelephonConfiguration(string schema)
+        {
+            ToTable("AllTelephon", schema);
+            HasKey(x => x.ФИО);
+
+            Property(x => x.ФИО).HasColumnName(@"ФИО").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Коментарий).HasColumnName(@"Коментарий").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(254);
+            Property(x => x.Отдел).HasColumnName(@"Отдел").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.Номеркабинета).HasColumnName(@"Номер кабинета").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(5);
+            Property(x => x.Внутреннийтелефон).HasColumnName(@"Внутренний телефон").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.Городскойтелефон).HasColumnName(@"Городской телефон").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.Серийныйномер).HasColumnName(@"Серийный номер").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.IPТелефона).HasColumnName(@"IP Телефона").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.MACАдрестелефона).HasColumnName(@"MAC Адрес телефона").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+        }
+    }
 
     // BlockPower
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
@@ -3128,6 +3279,103 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.SelectedParametr).HasColumnName(@"SelectedParametr").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.SelectUser).HasColumnName(@"SelectUser").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // Mail
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Mail>
+    {
+        public MailConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MailConfiguration(string schema)
+        {
+            ToTable("Mail", schema);
+            HasKey(x => new { x.Id, x.IdMail, x.MailAdress, x.IsFile });
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdMail).HasColumnName(@"IdMail").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MailAdress).HasColumnName(@"MailAdress").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.SubjectMail).HasColumnName(@"SubjectMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.IsFile).HasColumnName(@"IsFile").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.DateInputServer).HasColumnName(@"DateInputServer").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // MailGroup
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailGroupConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MailGroup>
+    {
+        public MailGroupConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MailGroupConfiguration(string schema)
+        {
+            ToTable("MailGroup", schema);
+            HasKey(x => x.IdGroupMail);
+
+            Property(x => x.IdGroupMail).HasColumnName(@"IdGroupMail").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdOtdelNumber).HasColumnName(@"IdOtdelNumber").HasColumnType("int").IsRequired();
+            Property(x => x.NameGroup).HasColumnName(@"NameGroup").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // MailIdentifier
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailIdentifierConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MailIdentifier>
+    {
+        public MailIdentifierConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MailIdentifierConfiguration(string schema)
+        {
+            ToTable("MailIdentifier", schema);
+            HasKey(x => x.IdUser);
+
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdGroupMail).HasColumnName(@"IdGroupMail").HasColumnType("int").IsOptional();
+            Property(x => x.IdentifierUser).HasColumnName(@"IdentifierUser").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasOptional(a => a.MailGroup).WithMany(b => b.MailIdentifiers).HasForeignKey(c => c.IdGroupMail).WillCascadeOnDelete(false); // FK_MailIdentifier_MailGroup
+            HasRequired(a => a.User).WithOptional(b => b.MailIdentifier); // FK_MailIdentifier_Users
+        }
+    }
+
+    // MailOutlook
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailOutlookConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MailOutlook>
+    {
+        public MailOutlookConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MailOutlookConfiguration(string schema)
+        {
+            ToTable("MailOutlook", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdMail).HasColumnName(@"IdMail").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.MailAdressSend).HasColumnName(@"MailAdressSend").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.MailAdress).HasColumnName(@"MailAdress").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.SubjectMail).HasColumnName(@"SubjectMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.Body).HasColumnName(@"Body").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FullPathFile).HasColumnName(@"FullPathFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.NameFile).HasColumnName(@"NameFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.FileMail).HasColumnName(@"FileMail").HasColumnType("image").IsOptional().HasMaxLength(2147483647);
+            Property(x => x.DateInputServer).HasColumnName(@"DateInputServer").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
     }
 
@@ -3843,4 +4091,3 @@ namespace EfDatabase.Inventory.Base
 
 }
 // </auto-generated>
-

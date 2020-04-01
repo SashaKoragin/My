@@ -1,4 +1,4 @@
-﻿<#@ include file="EF.Reverse.POCO.Core.ttinclude" #>
+﻿﻿<#@ include file="EF.Reverse.POCO.Core.ttinclude" #>
 <#
     // v2.37.3
     // Please make changes to the settings below.

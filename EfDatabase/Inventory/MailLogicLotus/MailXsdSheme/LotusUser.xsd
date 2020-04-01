@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="UserLotus" type="UserLotus">
+		<xs:annotation>
+			<xs:documentation>Схема пользователей</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UserLotus">
+		<xs:annotation>
+			<xs:documentation>Схема пользователей</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="User" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="User">
+		<xs:annotation>
+			<xs:documentation>Описание пользователя</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование пользователей</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TabelNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Табельный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdentifierUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Идентификатор пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

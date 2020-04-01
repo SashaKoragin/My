@@ -4,6 +4,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
 using LibaryXMLAuto.ModelServiceWcfCommand.AngularModel;
+using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 using LibaryXMLAuto.Reports.FullTemplateSheme;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
@@ -148,7 +149,7 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/MigrationError", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> MigrationReports(MigrationParse json);
+        Task<ModelPathReport> MigrationReports(MigrationParse json);
 
         /// <summary>
         /// Автоматическое формирование заявок на открытие доступа
@@ -157,6 +158,6 @@ namespace TestIFNSLibary.ServiceRest
         /// <param name="userRule">Данные с ролями от программы AutomatAis3Full </param>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateTemplateRule", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> GenerateTemplateRule(UserRules userRule);
+        Task<ModelPathReport> GenerateTemplateRule(UserRules userRule);
     }
 }

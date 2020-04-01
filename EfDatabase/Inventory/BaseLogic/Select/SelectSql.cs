@@ -6,8 +6,10 @@ using System.Runtime.Remoting.Messaging;
 using EfDatabase.Inventory.Base;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
+using EfDatabaseXsdLotusUser;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
+using Otdel = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel;
 using User = EfDatabase.Inventory.Base.User;
 
 
@@ -90,9 +92,19 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 {
                     template.Otdel = new LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel[groupElement.Count];
                 }
-                template.Otdel[i] = Inventory.Database.SqlQuery<LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel>(sqlSelect.LogicaSelect.SelectUser, new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[0], 1),
-                          new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[1], gr.Otdel.Replace("№ ","№")),
-                          new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[2], gr.Number)).FirstOrDefault();
+                template.Otdel[i] = Inventory.Database.SqlQuery<LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel>(
+                                        sqlSelect.LogicaSelect.SelectUser,
+                                        new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[0], 1),
+                                        new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[1],
+                                            gr.Otdel.Replace("№ ", "№")),
+                                        new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[2],
+                                            gr.Number)).FirstOrDefault() ??
+                                    new Otdel()
+                                    {
+                                        Number = gr.Number, NameOtdel = "Ошибка в наименование отдела Кадры,AD,АИС3",
+                                        RnameOtdel = "Ошибка в наименование отдела Кадры,AD,АИС3",
+                                        SmallName = "Отсутствует", NamePosition = "Отсутствует"
+                                    };
                 template.Otdel[i].Dates = gr.Dates;
                 var user = userRule.User.Where(userRole => (userRole.Dates == gr.Dates) && (userRole.Number == gr.Number) && (userRole.Otdel.Replace("№ ", "№") == gr.Otdel)).Select(u => new
                 {
@@ -205,13 +217,69 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 return exception.Message;
             }
        }
+       /// <summary>
+       /// Поиск пользователя идентификатора пользователя в БД Инвентаризация
+       /// </summary>
+       /// <param name="keyUser">Идентификатор пользователя</param>
+       /// <returns></returns>
+       public UserLotus FindUserSqlKey(string keyUser)
+       {
+            try
+            {
+                UserLotus userLotus = new UserLotus();
+                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(24) };
+                userLotus.User =  Inventory.Database.SqlQuery<EfDatabaseXsdLotusUser.User>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], keyUser)).ToArray();
+                return userLotus;
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+       }
+        /// <summary>
+        /// Поиск по группе абонентов
+        /// </summary>
+        /// <param name="idDepNumber">Номер департамента</param>
+        /// <param name="nameGroup">Наименование группы</param>
+        /// <returns></returns>
+       public UserLotus FindUserGroup(int? idDepNumber = null, string nameGroup = null)
+       {
+           try
+           {
+               UserLotus userLotus = new UserLotus();
+               ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(26) };
+               if (idDepNumber != null)
+               {
+                   userLotus.User = Inventory.Database.SqlQuery<EfDatabaseXsdLotusUser.User>(model.LogicaSelect.SelectUser,
+                              new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], idDepNumber),
+                                           new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], DBNull.Value)).ToArray();
+               }
+               else
+               {
+                   userLotus.User = Inventory.Database.SqlQuery<EfDatabaseXsdLotusUser.User>(model.LogicaSelect.SelectUser,
+                       new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], DBNull.Value),
+                       new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], nameGroup)).ToArray();
+               }
+               return userLotus;
+
+           }
+           catch (Exception e)
+           {
+               Loggers.Log4NetLogger.Error(e);
+           }
+           return null;
+        }
+
+
+
 
         /// <summary>
         /// Выборка модели для манипуляции
         /// </summary>
         /// <param name="id">Параметр индекса в таблицы</param>
         /// <returns></returns>
-       public EfDatabaseParametrsModel.LogicaSelect SqlSelectModel(int id)
+        public EfDatabaseParametrsModel.LogicaSelect SqlSelectModel(int id)
        {
             return Inventory.Database.SqlQuery<EfDatabaseParametrsModel.LogicaSelect>(String.Format(ProcedureSelect, id)).ToList()[0];
        }

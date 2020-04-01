@@ -257,9 +257,27 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.Classifications);
         }
+        /// <summary>
+        /// Все идентификаторы пользователей
+        /// </summary>
+        /// <returns></returns>
+        public string AllMailIdentifier()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.MailIdentifiers);
+        }
+        /// <summary>
+        /// Все группы пользователей
+        /// </summary>
+        /// <returns></returns>
+        public string AllMailGroup()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.MailGroups);
+        }
 
         /// <summary>
-        /// Dispos
+        /// Dispose
         /// </summary>
         /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)

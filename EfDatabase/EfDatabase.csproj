@@ -29,6 +29,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>C:\Nuget\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -79,6 +99,10 @@
     <Compile Include="Inventory\DataTransferObject\ParametrModelSelect\ParametrsModel.cs">
       <DependentUpon>ParametrsModel.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\MailLogicLotus\MailLogicLotus.cs" />
+    <Compile Include="Inventory\MailLogicLotus\MailXsdSheme\LotusUser.cs">
+      <DependentUpon>LotusUser.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\ReportXml\BookAccounting\Books.cs">
       <DependentUpon>Books.xsd</DependentUpon>
     </Compile>
@@ -90,6 +114,9 @@
     </Compile>
     <Compile Include="Inventory\ReportXml\Invoice\ReportShemeInvoice.cs">
       <DependentUpon>ReportShemeInvoice.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\Mail\Mail.cs">
+      <DependentUpon>Mail.xsd</DependentUpon>
     </Compile>
     <Compile Include="Inventory\ReportXml\ReturnModelError\ModelError.cs" />
     <Compile Include="Inventory\ReportXml\TelephoneHelp\TelephoneHelp.cs">
@@ -127,6 +154,9 @@
     <None Include="Inventory\DataTransferObject\ParametrModelSelect\ParametrsModel.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Inventory\MailLogicLotus\MailXsdSheme\LotusUser.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventory\ReportXml\BookAccounting\Books.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -137,6 +167,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\Invoice\ReportShemeInvoice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\Mail\Mail.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\TelephoneHelp\TelephoneHelp.xsd">
@@ -182,6 +215,8 @@
       <XsdReportError Include="Inventory\ReportXml\ErrorInventory\*.xsd" />
       <XsdTelephoneHelp Include="Inventory\ReportXml\TelephoneHelp\*.xsd" />
       <XsdBookAccounting Include="Inventory\ReportXml\BookAccounting\*.xsd" />
+      <XsdMail Include="Inventory\ReportXml\Mail\*.xsd" />
+      <XsdLotusUser Include="Inventory\MailLogicLotus\MailXsdSheme\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -197,5 +232,7 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportError.FullPath)&quot; /c /namespace:$(RootNamespace)ErrorInventory /outputdir:Inventory\ReportXml\ErrorInventory\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdTelephoneHelp.FullPath)&quot; /c /namespace:$(RootNamespace)TelephoneHelp /outputdir:Inventory\ReportXml\TelephoneHelp\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdBookAccounting.FullPath)&quot; /c /f /namespace:$(RootNamespace)XsdBookAccounting /outputdir:Inventory\ReportXml\BookAccounting\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdLotusUser.FullPath)&quot; /c /namespace:$(RootNamespace)XsdLotusUser /outputdir:Inventory\MailLogicLotus\MailXsdSheme\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdMail.FullPath)&quot; /c /namespace:$(RootNamespace)XsdMail /outputdir:Inventory\ReportXml\Mail\" />
   </Target>
 </Project>

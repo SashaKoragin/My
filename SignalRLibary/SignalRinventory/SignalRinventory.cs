@@ -16,6 +16,8 @@ namespace SignalRLibary.SignalRinventory
     {
         private static readonly BasicChatConnect<UsersContext> _connections = new BasicChatConnect<UsersContext>();
 
+       
+
         /// <summary>
         /// Получения значения пользователя в БД
         /// </summary>
@@ -32,6 +34,7 @@ namespace SignalRLibary.SignalRinventory
         /// <returns></returns>
         public override Task OnConnected()
         {
+
             var user = new UsersContext()
             {
                 IdUser = Convert.ToInt32(Context.QueryString["iduser"]),
@@ -68,7 +71,7 @@ namespace SignalRLibary.SignalRinventory
             return base.OnDisconnected(stopCalled);
         }
 
-        /// <summary>
+/*        public override Task Error()*/        /// <summary>
         /// Переподключение
         /// </summary>
         /// <returns></returns>
@@ -422,6 +425,29 @@ namespace SignalRLibary.SignalRinventory
             Loggers.Log4NetLogger.Info(new Exception("Модель Модель Коммутатора рассылка пошла: " + modelSwithes.NameModel));
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeModelSwithe(json.JsonLibaryIgnoreDate(modelSwithes));
+        }
+
+        /// <summary>
+        /// Подписка на изменение Модель Идентификаторы
+        /// </summary>
+        /// <param name="modelMailIdentifier">Модель Идентификаторы пользователей</param>
+        public static void SubscribeModelMailIdentifier(MailIdentifier modelMailIdentifier)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Рассылка идентификаторов пользователей пошла: " + modelMailIdentifier.IdentifierUser));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeModelMailIdentifier(json.JsonLibaryIgnoreDate(modelMailIdentifier));
+        }
+        /// <summary>
+        /// Подписка на изменение Модель Группы пользователей
+        /// </summary>
+        /// <param name="modelMailGroups">Модель Группы пользователей</param>
+        public static void SubscribeModelMailGroups(MailGroup modelMailGroups)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Рассылка групп пользователей пошла: " + modelMailGroups.IdOtdelNumber));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeModelMailGroups(json.JsonLibaryIgnoreDate(modelMailGroups));
         }
 
     }
