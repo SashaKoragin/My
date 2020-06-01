@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.ServiceProcess;
 using Microsoft.Owin;
@@ -17,41 +18,42 @@ namespace TestIFNSService
             InitializeComponent();
         }
 
-        public ServiceHost Servicehost;
-        public ServiceHost ServiceRest;
-        public ServiceHost Inventarization;
+        public IDisposable MyServerSignalR { get; set; }
+        public ServiceHost ServiceHost { get; set; }
+        public ServiceHost ServiceRest { get; set; }
+        public ServiceHost Inventarization { get; set; }
 
         protected override void OnStart(string[] args)
         {
-            if (Servicehost != null)
-            {
-               Servicehost.Close();
-               ServiceRest.Close();
-               Inventarization.Close();
-            }
             var url = "http://+:8059";
-            WebApp.Start(url);
+            MyServerSignalR =  WebApp.Start(url);
             ServiceRest = new WebServiceHost(typeof(TestIFNSLibary.ServiceRest.ServiceRest));
-           
             Inventarization = new WebServiceHost(typeof(TestIFNSLibary.Inventarka.Inventarka));
-            Servicehost = new ServiceHost(typeof(CommandDbf));
+            ServiceHost = new ServiceHost(typeof(CommandDbf));
             ServiceRest.Open();
-            Servicehost.Open();
+            ServiceHost.Open();
             Inventarization.Open();
             var timeEvent = new TestIFNSLibary.TimeEvent.TimeEvent();
         }
 
         protected override void OnStop()
         {
-            if (Servicehost != null)
+            if (ServiceHost != null)
             {
-                Servicehost.Close();
+                ServiceHost.Close();
+                ServiceHost = null;
+            }
+            if (ServiceRest != null)
+            {
                 ServiceRest.Close();
+                ServiceRest = null;
+            }
+            if (Inventarization != null)
+            {
                 Inventarization.Close();
                 Inventarization = null;
-                ServiceRest = null;
-                Servicehost = null;
             }
+            MyServerSignalR?.Dispose();
         }
     }
 }

@@ -7,6 +7,7 @@ using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
+using EfDatabaseXsdMail;
 using SqlLibaryIfns.Inventory.ModelParametr;
 using Printer = EfDatabase.Inventory.Base.Printer;
 using ScanerAndCamer = EfDatabase.Inventory.Base.ScanerAndCamer;
@@ -667,27 +668,27 @@ namespace TestIFNSLibary.Inventarka
         /// <summary>
         /// Просмотр Body
         /// </summary>
-        /// <param name="idMail">Ун почты</param>
+        /// <param name="model">Модель почты</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/VisibilityBodyMail", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> VisibilityBodyMail(int idMail);
+        Task<string> VisibilityBodyMail(WebMailModel model);
         /// <summary>
         /// Выгрузка вложения из почты
         /// </summary>
-        /// <param name="idMail">Ун почты</param>
+        /// <param name="model">Модель почты</param>
         /// <returns></returns>
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/OutputMail", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         [OperationContract]
-        Task<Stream> OutputMail(int idMail);
+        Task<Stream> OutputMail(WebMailModel model);
         /// <summary>
         /// Удаление вложения из почты
         /// </summary>
-        /// <param name="idMail">Ун почты</param>
+        /// <param name="model">Модель почты</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteMail", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> DeleteMail(int idMail);
+        Task<string> DeleteMail(WebMailModel model);
 
         /// <summary>
         /// Все идентификаторы пользователей

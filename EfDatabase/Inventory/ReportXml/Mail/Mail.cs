@@ -23,16 +23,41 @@ namespace EfDatabaseXsdMail {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class MailSheme {
         
-        private Mail[] mailField;
+        private MailIn[] mailInField;
+        
+        private MailOut[] mailOutField;
+        
+        private WebMailModel webMailModelField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Mail")]
-        public Mail[] Mail {
+        [System.Xml.Serialization.XmlElementAttribute("MailIn")]
+        public MailIn[] MailIn {
             get {
-                return this.mailField;
+                return this.mailInField;
             }
             set {
-                this.mailField = value;
+                this.mailInField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("MailOut")]
+        public MailOut[] MailOut {
+            get {
+                return this.mailOutField;
+            }
+            set {
+                this.mailOutField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public WebMailModel WebMailModel {
+            get {
+                return this.webMailModelField;
+            }
+            set {
+                this.webMailModelField = value;
             }
         }
     }
@@ -44,7 +69,7 @@ namespace EfDatabaseXsdMail {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class Mail {
+    public partial class MailIn {
         
         private int idField;
         
@@ -66,7 +91,7 @@ namespace EfDatabaseXsdMail {
         
         private string logicsButtonField;
         
-        public Mail() {
+        public MailIn() {
             this.logicsButtonField = "Button";
         }
         
@@ -178,6 +203,199 @@ namespace EfDatabaseXsdMail {
             }
             set {
                 this.logicsButtonField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class MailOut {
+        
+        private int idField;
+        
+        private bool idFieldSpecified;
+        
+        private string idMailField;
+        
+        private string mailAdressInField;
+        
+        private string mailAdressOutField;
+        
+        private string subjectMailField;
+        
+        private string isFileField;
+        
+        private string errorMailField;
+        
+        private string logicsButtonField;
+        
+        private System.DateTime dateCreateField;
+        
+        private bool dateCreateFieldSpecified;
+        
+        public MailOut() {
+            this.logicsButtonField = "Button";
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IdSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IdMail {
+            get {
+                return this.idMailField;
+            }
+            set {
+                this.idMailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string MailAdressIn {
+            get {
+                return this.mailAdressInField;
+            }
+            set {
+                this.mailAdressInField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string MailAdressOut {
+            get {
+                return this.mailAdressOutField;
+            }
+            set {
+                this.mailAdressOutField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SubjectMail {
+            get {
+                return this.subjectMailField;
+            }
+            set {
+                this.subjectMailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IsFile {
+            get {
+                return this.isFileField;
+            }
+            set {
+                this.isFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ErrorMail {
+            get {
+                return this.errorMailField;
+            }
+            set {
+                this.errorMailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("Button")]
+        public string LogicsButton {
+            get {
+                return this.logicsButtonField;
+            }
+            set {
+                this.logicsButtonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DateCreate {
+            get {
+                return this.dateCreateField;
+            }
+            set {
+                this.dateCreateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DateCreateSpecified {
+            get {
+                return this.dateCreateFieldSpecified;
+            }
+            set {
+                this.dateCreateFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class WebMailModel {
+        
+        private int idField;
+        
+        private string nameGroupModelField;
+        
+        /// <remarks/>
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameGroupModel {
+            get {
+                return this.nameGroupModelField;
+            }
+            set {
+                this.nameGroupModelField = value;
             }
         }
     }

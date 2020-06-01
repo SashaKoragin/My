@@ -66,8 +66,9 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
         /// <param name="borders">Стиль отражение границы ячейки</param>
         /// <param name="gridNumber">Объединение ячеек</param>
         /// <param name="verticalmerge">1 Начало объединения 2 конец объединения</param>
+        /// <param name="colorHex">Цвет ячейки</param>
         /// <returns></returns>
-        public static TableCell GenerateCell(Paragraph paragraph, string width, TableWidthUnitValues type, string leftmargin = "0", string rightmargin = "0", TableVerticalAlignmentValues verticalAlignment = TableVerticalAlignmentValues.Bottom, TableCellBorders borders = null, int gridNumber = 0, int verticalmerge = 0)
+        public static TableCell GenerateCell(Paragraph paragraph, string width, TableWidthUnitValues type, string leftmargin = "0", string rightmargin = "0", TableVerticalAlignmentValues verticalAlignment = TableVerticalAlignmentValues.Bottom, TableCellBorders borders = null, int gridNumber = 0, int verticalmerge = 0, string colorHex = "FFFFFF")
         {
             TableCell tableCell = new TableCell();
             TableCellProperties tableCellProperties = new TableCellProperties();
@@ -97,6 +98,9 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
                 RightMargin rightMargin = new RightMargin() { Width = rightmargin, Type = TableWidthUnitValues.Dxa };
                 tableCellMargin.Append(rightMargin);
             }
+
+            Shading shading = new Shading() {Color = "auto", Fill = colorHex, Val = ShadingPatternValues.Clear};
+            tableCellProperties.Append(shading);
             tableCellProperties.Append(tcVA);
             tableCellProperties.Append(tableCellWidth);
             tableCellProperties.Append(tableCellMargin);

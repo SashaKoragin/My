@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
+using System.Text.RegularExpressions;
 using EfDatabase.Inventory.Base;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
@@ -10,7 +10,7 @@ using EfDatabaseXsdLotusUser;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
 using Otdel = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel;
-using User = EfDatabase.Inventory.Base.User;
+
 
 
 namespace EfDatabase.Inventory.BaseLogic.Select
@@ -90,9 +90,9 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             {
                 if (template.Otdel == null)
                 {
-                    template.Otdel = new LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel[groupElement.Count];
+                    template.Otdel = new Otdel[groupElement.Count];
                 }
-                template.Otdel[i] = Inventory.Database.SqlQuery<LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel>(
+                template.Otdel[i] = Inventory.Database.SqlQuery<Otdel>(
                                         sqlSelect.LogicaSelect.SelectUser,
                                         new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[0], 1),
                                         new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[1],
@@ -237,6 +237,46 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             }
             return null;
        }
+
+        /// <summary>
+        /// Поиск пользователя или группы по алгоритму
+        /// </summary>
+        /// <param name="userDefault">Пользователь по умолчанию</param>
+        /// <param name="nameFindTextGroupOnUser">Параметры поиска пользователя или группы по умолчанию возвращает пользователя</param>
+        /// <returns></returns>
+       public UserLotus FindUserOnUserGroup(UserLotus userDefault, string nameFindTextGroupOnUser)
+       {
+            if (nameFindTextGroupOnUser != null)
+            {
+                UserLotus userSql = null;
+                if (nameFindTextGroupOnUser.Length <= 64 && Regex.IsMatch(nameFindTextGroupOnUser, @"[А-я]"))
+                {
+                    //Ищем группу по наименованию если текст
+                    userSql = FindUserGroup(null, nameFindTextGroupOnUser);
+                }
+                if (nameFindTextGroupOnUser.Length <= 2 && Regex.IsMatch(nameFindTextGroupOnUser, @"\d"))
+                {
+                    //Ищем группу по номеру группы
+                    userSql = FindUserGroup(Convert.ToInt32(nameFindTextGroupOnUser));
+                }
+                if (nameFindTextGroupOnUser.Length > 2 && nameFindTextGroupOnUser.Length <= 32 && Regex.IsMatch(nameFindTextGroupOnUser, @"\d"))
+                {
+                    //Ищем пользователя
+                    userSql = FindUserSqlKey(nameFindTextGroupOnUser);
+                }
+                //Если нашли не дефектных пользователей
+                if (userSql?.User != null && userSql.User.Length > 0)
+                {
+                    userDefault = userSql;
+                }
+                else
+                {
+                    Loggers.Log4NetLogger.Info(new Exception($"Пользователь или группы с идентификатором {nameFindTextGroupOnUser} не найден в БД Sql Инвентаризация идет рассылка на стандартную группу (OIT)"));
+                }
+            }
+            return userDefault;
+       }
+
         /// <summary>
         /// Поиск по группе абонентов
         /// </summary>

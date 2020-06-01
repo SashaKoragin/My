@@ -76,16 +76,20 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
             body.Append(sectionProperties);
         }
         /// <summary>
-        /// Обычный документ вертикальное выравнивание стандартный размер полей
+        /// Обычный документ вертикальное выравнивание стандартный размер полей или задается
         /// </summary>
-        /// <param name="body"></param>
-        public void DocumentVerticalMarginStandart(ref Body body)
+        /// <param name="body">Тело документа</param>
+        /// <param name="margin">Выравнивание</param>
+        public void DocumentVerticalMarginStandart(ref Body body, PageMargin margin = null)
         {
             SectionProperties sectionProperties = new SectionProperties();
             PageSize pageSize = new PageSize() { Width = 11907U, Height = 16839U, Orient = PageOrientationValues.Portrait };
-            PageMargin pageMargin = new PageMargin() { Top = 567, Right = 567, Bottom = 567, Left = 1135 };
+            if (margin == null)
+            {
+                margin = new PageMargin() { Top = 567, Right = 567, Bottom = 567, Left = 1135 };
+            }
             sectionProperties.Append(pageSize);
-            sectionProperties.Append(pageMargin);
+            sectionProperties.Append(margin);
             body.Append(sectionProperties);
         }
 
@@ -102,5 +106,6 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
             sectionProperties.Append(margin);
             body.Append(sectionProperties);
         }
+
     }
 }

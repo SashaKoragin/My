@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
-using EfDatabaseXsdBookAccounting;
+using DocumentFormat.OpenXml.Wordprocessing;
 using LibaryDocumentGenerator.ProgrammView.FullDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
 
+using LibaryXMLAutoModelXmlSql.PreCheck.ModelCard;
+
 namespace LibaryDocumentGenerator.Documents.Template
 {
-    public class BookAccountingInventarka : ITemplate<EfDatabaseXsdBookAccounting.Book>
+   public class ReportNote : ITemplate<CardFaceUl>
     {
         /// <summary>
         /// Полный путь к книге на сервере
         /// </summary>
         public string FullPathDocumentWord { get; set; }
 
-
         /// <summary>
-        /// Выгрузка и удаление файла книги отчета
+        /// Выгрузка и удаление файла докладной записки ЮЛ
         /// </summary>
         /// <returns></returns>
         public Stream FileArray()
@@ -31,9 +28,10 @@ namespace LibaryDocumentGenerator.Documents.Template
             return new MemoryStream(file);
         }
 
-        public void CreateDocum(string path, Book template, object obj)
+
+        public void CreateDocum(string path, CardFaceUl template, object obj)
         {
-            FullPathDocumentWord = path + template.BareCodeBook.NameModel + Constant.WordConstant.Formatword;
+            FullPathDocumentWord = path + template.FaceUl.Inn + Constant.WordConstant.Formatword;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
             {
                 CreateWord(package, template, obj);
@@ -42,19 +40,14 @@ namespace LibaryDocumentGenerator.Documents.Template
             }
         }
 
-        public void CreateWord(WordprocessingDocument package, Book template, object obj)
+        public void CreateWord(WordprocessingDocument package, CardFaceUl template, object obj)
         {
             MainDocumentPart mainDocumentPart = package.AddMainDocumentPart();
             DocumentFormat.OpenXml.Wordprocessing.Document document = new DocumentFormat.OpenXml.Wordprocessing.Document();
-            ImagePart image = mainDocumentPart.AddImagePart(ImagePartType.Jpeg);
-            using (FileStream file = new FileStream(template.BareCodeBook.FullPathSave, FileMode.Open))
-            {
-                image.FeedData(file);
-            }
-            PageSetting settingpage = new PageSetting();
-            DocumentsFull documentInvoce = new DocumentsFull();
-            document.Append(settingpage.DocumentSettingVertical());
-            document.Append(documentInvoce.BookAccounting(template, mainDocumentPart.GetIdOfPart(image)));
+            PageSetting settingPage = new PageSetting();
+            DocumentsPreChek documentInvoice = new DocumentsPreChek();
+            document.Append(settingPage.DocumentSettingVertical(new PageMargin() { Top = 1135, Right = 567, Bottom = 567, Left = 1135 }));
+            document.Append(documentInvoice.GenerateReportNote(template));
             mainDocumentPart.Document = document;
         }
     }

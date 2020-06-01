@@ -66,6 +66,10 @@
     <Compile Include="Sql\ProcedureInventorization\UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\WPFLib\WPFLib\EfDatabaseAutomation\EfDatabaseAutomation.csproj">
+      <Project>{fdad249d-cd7d-4581-b945-90d2f9dad698}</Project>
+      <Name>EfDatabaseAutomation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
       <Project>{a2bc3ae2-4a61-4e9e-9fa4-96a02677c79c}</Project>
       <Name>LibaryXMLAuto</Name>

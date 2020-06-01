@@ -64,12 +64,14 @@
     <Compile Include="Documents\Template\BookAccountingInventarka.cs" />
     <Compile Include="Documents\Template\InvoiceInventarka.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />
+    <Compile Include="Documents\Template\ReportNote.cs" />
     <Compile Include="Documents\Template\TelephoneHelp.cs" />
     <Compile Include="Documents\Template\TemplateOutBdk.cs" />
     <Compile Include="Documents\Template\TemplateUserRule.cs" />
     <Compile Include="DonloadFile\Angular\AngularRestEf.cs" />
     <Compile Include="GenerateDocument\GenerateWord\GenerateDocument.cs" />
     <Compile Include="ProgrammView\FullDocument\DocumentsFull.cs" />
+    <Compile Include="ProgrammView\FullDocument\DocumentsPreChek.cs" />
     <Compile Include="ProgrammView\Word\Libary\Drawing\AddDriwing.cs" />
     <Compile Include="ProgrammView\Word\Libary\FottersGenerator\FotterGenerate.cs" />
     <Compile Include="ProgrammView\Word\Libary\PageGenerator\PageGenerate.cs" />

@@ -11,12 +11,14 @@
 			<xs:documentation>Схема для писем mail nalog</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="Mail" maxOccurs="unbounded"/>
+			<xs:element ref="MailIn" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="MailOut" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="WebMailModel" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="Mail">
+	<xs:element name="MailIn">
 		<xs:annotation>
-			<xs:documentation>Письма</xs:documentation>
+			<xs:documentation>Письма входящие</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name="Id" type="xs:int">
@@ -60,5 +62,77 @@
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
+	</xs:element>
+	<xs:element name="MailOut">
+		<xs:annotation>
+			<xs:documentation>Письма исходящии</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdMail" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ун письма в Lotus</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MailAdressIn" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Кто отправил(Отправитель)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MailAdressOut" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Кому отправили (Получатель)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SubjectMail" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тема письма</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Присутствует ли файл</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ErrorMail" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ошиька отправки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LogicsButton" default="Button">
+				<xs:annotation>
+					<xs:documentation>Логика кнопок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateCreate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата отправки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="WebMailModel">
+		<xs:annotation>
+			<xs:documentation>Модель отправки запроса с web интерфейса</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Id"/>
+			</xs:sequence>
+			<xs:attribute name="NameGroupModel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование группы подели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Id" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>Ун в БД</xs:documentation>
+		</xs:annotation>
 	</xs:element>
 </xs:schema>

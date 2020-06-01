@@ -11,6 +11,7 @@ using EfDatabase.Inventory.MailLogicLotus;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
+using EfDatabaseXsdMail;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
 using SqlLibaryIfns.Inventory.ModelParametr;
@@ -865,32 +866,32 @@ namespace TestIFNSLibary.Inventarka
         /// <summary>
         /// Просмотр Body
         /// </summary>
-        /// <param name="idMail">Ун письма</param>
+        /// <param name="model">Модель почты</param>
         /// <returns></returns>
-        public async Task<string> VisibilityBodyMail(int idMail)
+        public async Task<string> VisibilityBodyMail(WebMailModel model)
         {
             MailLogicLotus mail = new MailLogicLotus();
-            return await Task.Factory.StartNew(() => mail.ReturnMailBody(idMail));
+            return await Task.Factory.StartNew(() => mail.ReturnMailBody(model));
         }
         /// <summary>
         /// Выгрузка файла вложения
         /// </summary>
-        /// <param name="idMail">Ун письма</param>
+        /// <param name="model">Модель почты</param>
         /// <returns></returns>
-        public async Task<Stream> OutputMail(int idMail)
+        public async Task<Stream> OutputMail(WebMailModel model)
         {
             MailLogicLotus mail = new MailLogicLotus();
-            return await Task.Factory.StartNew(() => mail.OutputMail(idMail));
+            return await Task.Factory.StartNew(() => mail.OutputMail(model));
         }
         /// <summary>
         /// Удаление письма
         /// </summary>
-        /// <param name="idMail">Ун письма</param>
+        /// <param name="model">Модель почты</param>
         /// <returns></returns>
-        public async Task<string> DeleteMail(int idMail)
+        public async Task<string> DeleteMail(WebMailModel model)
         {
             MailLogicLotus mail = new MailLogicLotus();
-            return await Task.Factory.StartNew(() => mail.DeleteMail(idMail));
+            return await Task.Factory.StartNew(() => mail.DeleteMail(model));
         }
 
         /// <summary>

@@ -1,13 +1,8 @@
 ﻿using System;
-using SqlLibaryIfns.ExcelReport.Report;
 using System.Threading.Tasks;
 using System.Timers;
-using LibaryXMLAutoModelServiceWcfCommand.TestIfnsService;
 using SqlLibaryIfns.PingIp;
-using SqlLibaryIfns.SqlSelect.ModelSqlFullService;
-using SqlLibaryIfns.SqlZapros.SqlConnections;
 using TestIFNSLibary.PathJurnalAndUse;
-using TestIFNSLibary.WebSevice.Bakcup;
 
 namespace TestIFNSLibary.TimeEvent
 {

@@ -53,7 +53,8 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<Mail> Mails { get; set; } // Mail
         System.Data.Entity.DbSet<MailGroup> MailGroups { get; set; } // MailGroup
         System.Data.Entity.DbSet<MailIdentifier> MailIdentifiers { get; set; } // MailIdentifier
-        System.Data.Entity.DbSet<MailOutlook> MailOutlooks { get; set; } // MailOutlook
+        System.Data.Entity.DbSet<MailLotusOutlookIn> MailLotusOutlookIns { get; set; } // MailLotusOutlookIn
+        System.Data.Entity.DbSet<MailLotusOutlookOut> MailLotusOutlookOuts { get; set; } // MailLotusOutlookOut
         System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
         System.Data.Entity.DbSet<ModelSwithe> ModelSwithes { get; set; } // ModelSwithes
@@ -127,7 +128,8 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<Mail> Mails { get; set; } // Mail
         public System.Data.Entity.DbSet<MailGroup> MailGroups { get; set; } // MailGroup
         public System.Data.Entity.DbSet<MailIdentifier> MailIdentifiers { get; set; } // MailIdentifier
-        public System.Data.Entity.DbSet<MailOutlook> MailOutlooks { get; set; } // MailOutlook
+        public System.Data.Entity.DbSet<MailLotusOutlookIn> MailLotusOutlookIns { get; set; } // MailLotusOutlookIn
+        public System.Data.Entity.DbSet<MailLotusOutlookOut> MailLotusOutlookOuts { get; set; } // MailLotusOutlookOut
         public System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         public System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
         public System.Data.Entity.DbSet<ModelSwithe> ModelSwithes { get; set; } // ModelSwithes
@@ -233,7 +235,8 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new MailConfiguration());
             modelBuilder.Configurations.Add(new MailGroupConfiguration());
             modelBuilder.Configurations.Add(new MailIdentifierConfiguration());
-            modelBuilder.Configurations.Add(new MailOutlookConfiguration());
+            modelBuilder.Configurations.Add(new MailLotusOutlookInConfiguration());
+            modelBuilder.Configurations.Add(new MailLotusOutlookOutConfiguration());
             modelBuilder.Configurations.Add(new MfuConfiguration());
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration());
             modelBuilder.Configurations.Add(new ModelSwitheConfiguration());
@@ -289,7 +292,8 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new MailConfiguration(schema));
             modelBuilder.Configurations.Add(new MailGroupConfiguration(schema));
             modelBuilder.Configurations.Add(new MailIdentifierConfiguration(schema));
-            modelBuilder.Configurations.Add(new MailOutlookConfiguration(schema));
+            modelBuilder.Configurations.Add(new MailLotusOutlookInConfiguration(schema));
+            modelBuilder.Configurations.Add(new MailLotusOutlookOutConfiguration(schema));
             modelBuilder.Configurations.Add(new MfuConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelSwitheConfiguration(schema));
@@ -1083,6 +1087,7 @@ namespace EfDatabase.Inventory.Base
     {
         public int Id { get; set; } // Id (Primary key)
         public string IdMail { get; set; } // IdMail (Primary key) (length: 512)
+        public string MailAdressSend { get; set; } // MailAdressSend (length: 256)
         public string MailAdress { get; set; } // MailAdress (Primary key) (length: 256)
         public string SubjectMail { get; set; } // SubjectMail (length: 512)
         public string IsFile { get; set; } // IsFile (Primary key) (length: 20)
@@ -1140,9 +1145,9 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
-    // MailOutlook
+    // MailLotusOutlookIn
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
-    public class MailOutlook
+    public class MailLotusOutlookIn
     {
         public int Id { get; set; } // Id (Primary key)
         public string IdMail { get; set; } // IdMail (length: 512)
@@ -1156,7 +1161,29 @@ namespace EfDatabase.Inventory.Base
         public System.DateTime? DateInputServer { get; set; } // DateInputServer
         public System.DateTime? DateCreate { get; set; } // DateCreate
 
-        public MailOutlook()
+        public MailLotusOutlookIn()
+        {
+            DateCreate = System.DateTime.Now;
+        }
+    }
+
+    // MailLotusOutlookOut
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailLotusOutlookOut
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string IdMail { get; set; } // IdMail (length: 512)
+        public string MailAdressIn { get; set; } // MailAdressIn (length: 256)
+        public string MailAdressOut { get; set; } // MailAdressOut (length: 256)
+        public string SubjectMail { get; set; } // SubjectMail (length: 512)
+        public string Body { get; set; } // Body
+        public string FullPathListFile { get; set; } // FullPathListFile
+        public string NameFileZip { get; set; } // NameFileZip (length: 256)
+        public byte[] FileMailZip { get; set; } // FileMailZip (length: 2147483647)
+        public string ErrorMail { get; set; } // ErrorMail (length: 512)
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        public MailLotusOutlookOut()
         {
             DateCreate = System.DateTime.Now;
         }
@@ -3298,6 +3325,7 @@ namespace EfDatabase.Inventory.Base
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.IdMail).HasColumnName(@"IdMail").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MailAdressSend).HasColumnName(@"MailAdressSend").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.MailAdress).HasColumnName(@"MailAdress").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.SubjectMail).HasColumnName(@"SubjectMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.IsFile).HasColumnName(@"IsFile").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
@@ -3351,18 +3379,18 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
-    // MailOutlook
+    // MailLotusOutlookIn
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
-    public class MailOutlookConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MailOutlook>
+    public class MailLotusOutlookInConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MailLotusOutlookIn>
     {
-        public MailOutlookConfiguration()
+        public MailLotusOutlookInConfiguration()
             : this("dbo")
         {
         }
 
-        public MailOutlookConfiguration(string schema)
+        public MailLotusOutlookInConfiguration(string schema)
         {
-            ToTable("MailOutlook", schema);
+            ToTable("MailLotusOutlookIn", schema);
             HasKey(x => x.Id);
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
@@ -3375,6 +3403,34 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.NameFile).HasColumnName(@"NameFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.FileMail).HasColumnName(@"FileMail").HasColumnType("image").IsOptional().HasMaxLength(2147483647);
             Property(x => x.DateInputServer).HasColumnName(@"DateInputServer").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // MailLotusOutlookOut
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailLotusOutlookOutConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MailLotusOutlookOut>
+    {
+        public MailLotusOutlookOutConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MailLotusOutlookOutConfiguration(string schema)
+        {
+            ToTable("MailLotusOutlookOut", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdMail).HasColumnName(@"IdMail").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.MailAdressIn).HasColumnName(@"MailAdressIn").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.MailAdressOut).HasColumnName(@"MailAdressOut").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.SubjectMail).HasColumnName(@"SubjectMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.Body).HasColumnName(@"Body").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FullPathListFile).HasColumnName(@"FullPathListFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.NameFileZip).HasColumnName(@"NameFileZip").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.FileMailZip).HasColumnName(@"FileMailZip").HasColumnType("image").IsOptional().HasMaxLength(2147483647);
+            Property(x => x.ErrorMail).HasColumnName(@"ErrorMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
     }
