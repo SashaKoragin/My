@@ -1,12 +1,6 @@
 ﻿using EfDatabase.Inventory.Base;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
-using LibaryXMLAutoInventarization.Model.ModelSelectAll;
 
 namespace EfDatabase.Inventory.BaseLogic.Select
 {
@@ -274,6 +268,15 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.MailGroups);
+        }
+        /// <summary>
+        /// Запрос на все шаблоны СТО для заявок
+        /// </summary>
+        /// <returns></returns>
+        public string AllTemplate()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.FullTemplateSupports);
         }
 
         /// <summary>

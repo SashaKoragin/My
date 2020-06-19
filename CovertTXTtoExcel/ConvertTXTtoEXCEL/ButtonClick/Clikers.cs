@@ -52,7 +52,7 @@ namespace CovertTXTtoExcel.ConvertTXTtoEXCEL.ButtonClick
         internal void AddFile(object sender, RoutedEventArgs e)
         {
             var i = new ZnachView {File = new ObservableCollection<ZnachView>()};
-            var win = new OpenFileDialog { Filter = "Файлы txt|*.txt|Файлы crv|*crv", Multiselect = true };
+            var win = new OpenFileDialog { Filter = "Файлы txt|*.txt|Файлы crv|*crv|Файлы tsv|*tsv", Multiselect = true };
             if (win.ShowDialog() == true)
             {
                 foreach ( string file in win.FileNames)

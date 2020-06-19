@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using EfDatabase.Inventory.Base;
+using EfDatabaseXsdInventoryAutorization;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 
 
@@ -20,10 +21,10 @@ namespace EfDatabase.Inventory.BaseLogic.Login
         /// </summary>
         /// <param name="user">Пользователь</param>
         /// <returns></returns>
-        public string Identification(User user)
+        public Autorization Identification(Autorization user)
         {
             SerializeJson json = new SerializeJson();
-               var  query = from users in Inventory.Users where users.Passwords == user.Passwords && users.NameUser == user.NameUser
+               var  query = from users in Inventory.Users where  users.TabelNumber == user.Login
                         join department in Inventory.Otdels on users.IdOtdel equals department.IdOtdel
                         join rules in Inventory.Rules on users.IdRule equals rules.IdRule
                         select new 
@@ -32,11 +33,17 @@ namespace EfDatabase.Inventory.BaseLogic.Login
                             Otdels = department,
                             rules
                         };
+
             if (query.Any())
             {
-                return json.JsonLibaryIgnoreDate(query.Single());
+                user.IdUser = query.FirstOrDefault().Users.IdUser;
+                user.TabelNumber = query.FirstOrDefault().Users.TabelNumber;
+                user.Name = query.FirstOrDefault().Users.NameUser;
+                user.Rule = query.FirstOrDefault().rules.NameRules;
+                return user;
             }
-            return null;
+            user.ErrorAutorization = "Роли пользователю не определены Вход не возможен!!!";
+            return user;
         }
 
         /// <summary>

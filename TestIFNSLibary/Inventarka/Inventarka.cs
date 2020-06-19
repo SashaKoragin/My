@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.AccountManagement;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
@@ -11,7 +13,9 @@ using EfDatabase.Inventory.MailLogicLotus;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
+using EfDatabaseXsdInventoryAutorization;
 using EfDatabaseXsdMail;
+using EfDatabaseXsdSupportNalog;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
 using SqlLibaryIfns.Inventory.ModelParametr;
@@ -38,7 +42,7 @@ using Swithe = EfDatabase.Inventory.Base.Swithe;
 using SysBlock = EfDatabase.Inventory.Base.SysBlock;
 using Telephon = EfDatabase.Inventory.Base.Telephon;
 using User = EfDatabase.Inventory.Base.User;
-
+using LibraryAutoSupportSto.Support.SupportPostGet;
 
 namespace TestIFNSLibary.Inventarka
 {
@@ -60,10 +64,26 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<string> Authorization(User user)
+        public async Task<Autorization> Authorization(Autorization user)
         {
             Login auto = new Login();
-            return await Task.Factory.StartNew(() => auto.Identification(user));
+            return await Task.Factory.StartNew(() =>
+            {
+                if (user.Login != null)
+                {
+                    using (PrincipalContext context = new PrincipalContext(ContextType.Domain, null, user.Login, user.Password))
+                    {
+                        if (context.ValidateCredentials(user.Login, user.Password))
+                        {
+                            return auto.Identification(user);
+                        }
+                        user.ErrorAutorization = "Не правильный логин/пароль!!!";
+                        return user;
+                    }
+                }
+                user.ErrorAutorization = "Пользователь не введен!!!";
+                return user;
+            });
         }
         /// <summary>
         /// Простой запрос к БД
@@ -940,5 +960,49 @@ namespace TestIFNSLibary.Inventarka
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailGroups(model.Model); }
             return model;
         }
-    }
+        /// <summary>
+        /// Шаблоны для СТО по категориям
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllTemplateSupport()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllTemplate());
+        }
+
+
+        /// <summary>
+        /// Данный api создан для генерации и отправки запроса в СТО по ун шаблону
+        /// </summary>
+        /// <param name="modelSupport">Модель генерации для отправки на СТО</param>
+        /// <returns></returns>
+        public async Task<ModelParametrSupport> ServiceSupport(ModelParametrSupport modelSupport)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var generate = new GenerateParameterSupport();
+                    generate.GenerateTemplateUrlParameter(ref modelSupport);
+                    var support = new CreateTiсketSupport(modelSupport.Login,modelSupport.Password);
+                    support.StepTraining();
+                    support.GenerateParameterResponse("//form[@action='/requests/create.php?step=1']",modelSupport.TemplateSupport.Where(param=> param.NameStepSupport == "Step1").ToArray());
+                    support.Steps(support.Step1Post);
+                    support.GenerateParameterResponse("//form[@action='/requests/create.php?step=2']", modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
+                    support.Steps(support.Step2Post);
+                    support.GenerateParameterResponse("//form[@action='/requests/create.php?step=3']");
+                    support.Steps(support.Step3Post);
+                    var senders = support.ReturnResponseWebStep3();
+                    support.Dispose();
+                    modelSupport.Step3ResponseSupport = senders;
+                    return modelSupport;
+                }
+                catch (Exception ex)
+                {
+                    Loggers.Log4NetLogger.Error(ex);
+                    return null;
+                }
+            });
+        }
+   }
 }

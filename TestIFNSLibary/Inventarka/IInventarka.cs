@@ -7,7 +7,9 @@ using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
+using EfDatabaseXsdInventoryAutorization;
 using EfDatabaseXsdMail;
+using EfDatabaseXsdSupportNalog;
 using SqlLibaryIfns.Inventory.ModelParametr;
 using Printer = EfDatabase.Inventory.Base.Printer;
 using ScanerAndCamer = EfDatabase.Inventory.Base.ScanerAndCamer;
@@ -60,7 +62,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/Authorization", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> Authorization(User user);
+        Task<Autorization> Authorization(Autorization user);
 
         /// <summary>
         /// Выбор всех пользователей c SQL запроса
@@ -725,5 +727,22 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditMailGroups", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn<MailGroup> AddAndEditMailGroups(MailGroup nameMailGroups);
-    }
+        /// <summary>
+        /// Все шаблоны СТО
+        /// http://localhost:8182/Inventarka/AllTemplateSupport
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllTemplateSupport", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllTemplateSupport();
+        /// <summary>
+        /// Данный api создан для генерации и отправки запроса в СТО по ун шаблону
+        /// </summary>
+        /// <param name="modelSupport">Модель генерации для отправки на СТО</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ServiceSupport", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<ModelParametrSupport> ServiceSupport(ModelParametrSupport modelSupport);
+
+   }
 }

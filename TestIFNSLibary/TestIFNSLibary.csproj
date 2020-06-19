@@ -134,6 +134,10 @@
       <Project>{939b256e-591b-40cc-8097-5d34456404cd}</Project>
       <Name>LibaryDocumentGenerator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibraryAutoSupportSto\LibraryAutoSupportSto.csproj">
+      <Project>{79180f30-1984-4ffd-84ae-e321cd0b334a}</Project>
+      <Name>LibraryAutoSupportSto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Loggers\Loggers.csproj">
       <Project>{9bac233e-ed3d-493e-b7f6-f26f8091968d}</Project>
       <Name>Loggers</Name>

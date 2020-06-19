@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Autorization" type="Autorization">
+		<xs:annotation>
+			<xs:documentation>Авторизация</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Autorization">
+		<xs:annotation>
+			<xs:documentation>Авторизация</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="IdUser"/>
+			<xs:element ref="Name"/>
+			<xs:element ref="Rule"/>
+			<xs:element ref="TabelNumber"/>
+			<xs:element ref="ErrorAutorization"/>
+			<xs:element ref="Login"/>
+			<xs:element ref="Password"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Rule" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Роль Авторизации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Name" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Имя пользователя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdUser" type="xs:int" default="0">
+		<xs:annotation>
+			<xs:documentation>Ун пользователя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TabelNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Табельный номер</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ErrorAutorization" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Ошибка авторизации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Password" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Пароль</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Login" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Логин</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

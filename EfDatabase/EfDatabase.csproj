@@ -85,6 +85,7 @@
     <Compile Include="Inventory\BaseLogic\Login\Login.cs" />
     <Compile Include="Inventory\BaseLogic\DeleteObjectDb\DeleteObjectDb.cs" />
     <Compile Include="Inventory\BaseLogic\HistoryLog\HistoryLog.cs" />
+    <Compile Include="Inventory\BaseLogic\Select\GenerateParametrSupport.cs" />
     <Compile Include="Inventory\BaseLogic\Select\Report.cs" />
     <Compile Include="Inventory\BaseLogic\Select\Select.cs" />
     <Compile Include="Inventory\BaseLogic\Select\SelectSql.cs" />
@@ -109,6 +110,9 @@
     <Compile Include="Inventory\ReportXml\ErrorInventory\ErrorInventory.cs">
       <DependentUpon>ErrorInventory.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ReportXml\InventoryAutorization\Autorization.cs">
+      <DependentUpon>Autorization.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\ReportXml\Invoice\DocumentInventory.cs">
       <DependentUpon>DocumentInventory.xsd</DependentUpon>
     </Compile>
@@ -117,6 +121,9 @@
     </Compile>
     <Compile Include="Inventory\ReportXml\Mail\Mail.cs">
       <DependentUpon>Mail.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\ModelSupportNalog\TemplateSupportSTO.cs">
+      <DependentUpon>TemplateSupportSTO.xsd</DependentUpon>
     </Compile>
     <Compile Include="Inventory\ReportXml\ReturnModelError\ModelError.cs" />
     <Compile Include="Inventory\ReportXml\TelephoneHelp\TelephoneHelp.cs">
@@ -163,6 +170,9 @@
     <None Include="Inventory\ReportXml\ErrorInventory\ErrorInventory.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Inventory\ReportXml\InventoryAutorization\Autorization.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventory\ReportXml\Invoice\DocumentInventory.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -170,6 +180,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\Mail\Mail.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\ModelSupportNalog\TemplateSupportSTO.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\TelephoneHelp\TelephoneHelp.xsd">
@@ -217,6 +230,8 @@
       <XsdBookAccounting Include="Inventory\ReportXml\BookAccounting\*.xsd" />
       <XsdMail Include="Inventory\ReportXml\Mail\*.xsd" />
       <XsdLotusUser Include="Inventory\MailLogicLotus\MailXsdSheme\*.xsd" />
+      <XsdSupportNalog Include="Inventory\ReportXml\ModelSupportNalog\*.xsd" />
+      <XsdInventoryAutorization Include="Inventory\ReportXml\InventoryAutorization\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -234,5 +249,7 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdBookAccounting.FullPath)&quot; /c /f /namespace:$(RootNamespace)XsdBookAccounting /outputdir:Inventory\ReportXml\BookAccounting\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdLotusUser.FullPath)&quot; /c /namespace:$(RootNamespace)XsdLotusUser /outputdir:Inventory\MailLogicLotus\MailXsdSheme\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdMail.FullPath)&quot; /c /namespace:$(RootNamespace)XsdMail /outputdir:Inventory\ReportXml\Mail\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdSupportNalog.FullPath)&quot; /c /namespace:$(RootNamespace)XsdSupportNalog /outputdir:Inventory\ReportXml\ModelSupportNalog\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdInventoryAutorization.FullPath)&quot; /c /namespace:$(RootNamespace)XsdInventoryAutorization /outputdir:Inventory\ReportXml\InventoryAutorization\" />
   </Target>
 </Project>

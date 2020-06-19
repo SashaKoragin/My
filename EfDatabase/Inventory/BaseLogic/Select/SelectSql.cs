@@ -220,15 +220,27 @@ namespace EfDatabase.Inventory.BaseLogic.Select
        /// <summary>
        /// Поиск пользователя идентификатора пользователя в БД Инвентаризация
        /// </summary>
-       /// <param name="keyUser">Идентификатор пользователя</param>
+       /// <param name="keyUser">Идентификаторы пользователей</param>
        /// <returns></returns>
-       public UserLotus FindUserSqlKey(string keyUser)
+       public UserLotus FindUserSqlKey(string[] keyUser)
        {
             try
             {
-                UserLotus userLotus = new UserLotus();
-                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(24) };
-                userLotus.User =  Inventory.Database.SqlQuery<EfDatabaseXsdLotusUser.User>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], keyUser)).ToArray();
+                UserLotus userLotus = new UserLotus
+                {
+                    User = (from id in Inventory.MailIdentifiers
+                        join user in Inventory.Users on id.IdUser equals user.IdUser
+                        join otdel in Inventory.Otdels on user.IdOtdel equals otdel.IdOtdel
+                        where keyUser.Any(idUser => idUser.Contains(id.IdentifierUser))
+                        select
+                            new EfDatabaseXsdLotusUser.User
+                            {
+                                Name = user.Name,
+                                TabelNumber = user.TabelNumber,
+                                NameOtdel = otdel.NameOtdel,
+                                IdentifierUser = id.IdentifierUser
+                            }).ToArray()
+                };
                 return userLotus;
             }
             catch (Exception e)
@@ -249,20 +261,19 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             if (nameFindTextGroupOnUser != null)
             {
                 UserLotus userSql = null;
-                if (nameFindTextGroupOnUser.Length <= 64 && Regex.IsMatch(nameFindTextGroupOnUser, @"[А-я]"))
-                {
-                    //Ищем группу по наименованию если текст
-                    userSql = FindUserGroup(null, nameFindTextGroupOnUser);
-                }
                 if (nameFindTextGroupOnUser.Length <= 2 && Regex.IsMatch(nameFindTextGroupOnUser, @"\d"))
                 {
                     //Ищем группу по номеру группы
                     userSql = FindUserGroup(Convert.ToInt32(nameFindTextGroupOnUser));
                 }
-                if (nameFindTextGroupOnUser.Length > 2 && nameFindTextGroupOnUser.Length <= 32 && Regex.IsMatch(nameFindTextGroupOnUser, @"\d"))
+                //Ищем пользователя
+                if (nameFindTextGroupOnUser.Length >= 5)
                 {
-                    //Ищем пользователя
-                    userSql = FindUserSqlKey(nameFindTextGroupOnUser);
+                   var userFindSender = Regex.Matches(nameFindTextGroupOnUser, @"(0[0-1][0-9]{3})").Cast<Match>().Select(m=>m.Value).ToArray();
+                   if (userFindSender.Length > 0)
+                   {
+                     userSql = FindUserSqlKey(userFindSender);
+                   }
                 }
                 //Если нашли не дефектных пользователей
                 if (userSql?.User != null && userSql.User.Length > 0)
@@ -271,7 +282,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 }
                 else
                 {
-                    Loggers.Log4NetLogger.Info(new Exception($"Пользователь или группы с идентификатором {nameFindTextGroupOnUser} не найден в БД Sql Инвентаризация идет рассылка на стандартную группу (OIT)"));
+                    Loggers.Log4NetLogger.Info(new Exception($"Пользователь или группы с идентификаторами ' {nameFindTextGroupOnUser} ' не найден в БД Sql Инвентаризация идет рассылка на стандартную группу (OIT)"));
                 }
             }
             return userDefault;

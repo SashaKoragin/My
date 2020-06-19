@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ModelParametrSupport" type="ModelParametrSupport">
+		<xs:annotation>
+			<xs:documentation>Модель параметров отправки запроса на СТП</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ModelParametrSupport">
+		<xs:annotation>
+			<xs:documentation>Модель параметров отправки запроса на СТП</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Login"/>
+			<xs:element ref="Password"/>
+			<xs:element ref="Discription"/>
+			<xs:element ref="IdUser"/>
+			<xs:element ref="IdMfu"/>
+			<xs:element ref="IdMonitor"/>
+			<xs:element ref="IdPrinter"/>
+			<xs:element ref="IdSysBlock"/>
+			<xs:element ref="IdTemplate"/>
+			<xs:element ref="IdScanner"/>
+			<xs:element ref="TemplateSupport" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Step3ResponseSupport"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="IdTemplate" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун шаблона параметров</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdSysBlock" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун системного блока</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdMonitor" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун системного блока</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdScanner" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун сканера</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdMfu" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун МФУ</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdPrinter" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун принтера</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdUser" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун пользователя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TemplateSupport" type="TemplateSupport" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Шаблон отправки генерации и отправки на СТO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="TemplateSupport">
+		<xs:annotation>
+			<xs:documentation>Шаблон отправки генерации и отправки на СТO</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Name" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Наименование категории</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="InfoTemplate" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Информация о шаблоне</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NameStepSupport" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Очередность шага запроса</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="HelpParameter" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Описание параметра</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NameGuidParametr" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Наименование параметра Form</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Parametr" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Параметр</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TypeParametr" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Тип параметра вводимый, выбираемый</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NameParametrType" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Наименование выбираемого параметра</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SelectParametr" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Выборка на вводимый параметр</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="TemplateParametrType" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Шаблон выборки параметра User,SysBlock...</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="Discription" type="xs:string" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Описание на отправку</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Login" type="xs:string" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Логин</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Password" type="xs:string" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Пароль</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Step3ResponseSupport" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Параметры ответа от сервера на шаге 3</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

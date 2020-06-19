@@ -32,6 +32,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<BlockPower> BlockPowers { get; set; } // BlockPower
         System.Data.Entity.DbSet<BookAccounting> BookAccountings { get; set; } // BookAccounting
         System.Data.Entity.DbSet<BookModel> BookModels { get; set; } // BookModels
+        System.Data.Entity.DbSet<CategoriaTemplate> CategoriaTemplates { get; set; } // CategoriaTemplate
         System.Data.Entity.DbSet<Classification> Classifications { get; set; } // Classification
         System.Data.Entity.DbSet<ComputerIpAdressSynhronization> ComputerIpAdressSynhronizations { get; set; } // ComputerIpAdressSynhronization
         System.Data.Entity.DbSet<CopySave> CopySaves { get; set; } // CopySave
@@ -41,6 +42,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<ErrorUSerNotActul> ErrorUSerNotActuls { get; set; } // ErrorUSerNotActul
         System.Data.Entity.DbSet<FullModel> FullModels { get; set; } // FullModel
         System.Data.Entity.DbSet<FullProizvoditel> FullProizvoditels { get; set; } // FullProizvoditel
+        System.Data.Entity.DbSet<FullTemplateSupport> FullTemplateSupports { get; set; } // FullTemplateSupport
         System.Data.Entity.DbSet<History> Histories { get; set; } // History
         System.Data.Entity.DbSet<HistoryLog> HistoryLogs { get; set; } // HistoryLog
         System.Data.Entity.DbSet<InfoLogic> InfoLogics { get; set; } // InfoLogic
@@ -50,11 +52,12 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<IsProcessComplete> IsProcessCompletes { get; set; } // IsProcessComplete
         System.Data.Entity.DbSet<Kabinet> Kabinets { get; set; } // Kabinet
         System.Data.Entity.DbSet<LogicaSelect> LogicaSelects { get; set; } // LogicaSelect
-        System.Data.Entity.DbSet<Mail> Mails { get; set; } // Mail
         System.Data.Entity.DbSet<MailGroup> MailGroups { get; set; } // MailGroup
         System.Data.Entity.DbSet<MailIdentifier> MailIdentifiers { get; set; } // MailIdentifier
+        System.Data.Entity.DbSet<MailIn> MailIns { get; set; } // MailIn
         System.Data.Entity.DbSet<MailLotusOutlookIn> MailLotusOutlookIns { get; set; } // MailLotusOutlookIn
         System.Data.Entity.DbSet<MailLotusOutlookOut> MailLotusOutlookOuts { get; set; } // MailLotusOutlookOut
+        System.Data.Entity.DbSet<MailOut> MailOuts { get; set; } // MailOut
         System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
         System.Data.Entity.DbSet<ModelSwithe> ModelSwithes { get; set; } // ModelSwithes
@@ -66,6 +69,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<Organization> Organizations { get; set; } // Organization
         System.Data.Entity.DbSet<Otdel> Otdels { get; set; } // Otdel
         System.Data.Entity.DbSet<OtdelPadeg> OtdelPadegs { get; set; } // OtdelPadeg
+        System.Data.Entity.DbSet<ParametrSupport> ParametrSupports { get; set; } // ParametrSupport
         System.Data.Entity.DbSet<Position> Positions { get; set; } // Position
         System.Data.Entity.DbSet<Printer> Printers { get; set; } // Printer
         System.Data.Entity.DbSet<ProizvoditelBlockPower> ProizvoditelBlockPowers { get; set; } // ProizvoditelBlockPower
@@ -78,6 +82,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
         System.Data.Entity.DbSet<TecnicalOtdel> TecnicalOtdels { get; set; } // TecnicalOtdel
         System.Data.Entity.DbSet<Telephon> Telephons { get; set; } // Telephon
+        System.Data.Entity.DbSet<TemplateSupportAndParametrSupport> TemplateSupportAndParametrSupports { get; set; } // TemplateSupportAndParametrSupport
         System.Data.Entity.DbSet<User> Users { get; set; } // Users
         System.Data.Entity.DbSet<UsersIsActualsStat> UsersIsActualsStats { get; set; } // UsersIsActualsStat
         System.Data.Entity.DbSet<UsersNotTechnical> UsersNotTechnicals { get; set; } // UsersNotTechnical
@@ -107,6 +112,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<BlockPower> BlockPowers { get; set; } // BlockPower
         public System.Data.Entity.DbSet<BookAccounting> BookAccountings { get; set; } // BookAccounting
         public System.Data.Entity.DbSet<BookModel> BookModels { get; set; } // BookModels
+        public System.Data.Entity.DbSet<CategoriaTemplate> CategoriaTemplates { get; set; } // CategoriaTemplate
         public System.Data.Entity.DbSet<Classification> Classifications { get; set; } // Classification
         public System.Data.Entity.DbSet<ComputerIpAdressSynhronization> ComputerIpAdressSynhronizations { get; set; } // ComputerIpAdressSynhronization
         public System.Data.Entity.DbSet<CopySave> CopySaves { get; set; } // CopySave
@@ -116,6 +122,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<ErrorUSerNotActul> ErrorUSerNotActuls { get; set; } // ErrorUSerNotActul
         public System.Data.Entity.DbSet<FullModel> FullModels { get; set; } // FullModel
         public System.Data.Entity.DbSet<FullProizvoditel> FullProizvoditels { get; set; } // FullProizvoditel
+        public System.Data.Entity.DbSet<FullTemplateSupport> FullTemplateSupports { get; set; } // FullTemplateSupport
         public System.Data.Entity.DbSet<History> Histories { get; set; } // History
         public System.Data.Entity.DbSet<HistoryLog> HistoryLogs { get; set; } // HistoryLog
         public System.Data.Entity.DbSet<InfoLogic> InfoLogics { get; set; } // InfoLogic
@@ -125,11 +132,12 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<IsProcessComplete> IsProcessCompletes { get; set; } // IsProcessComplete
         public System.Data.Entity.DbSet<Kabinet> Kabinets { get; set; } // Kabinet
         public System.Data.Entity.DbSet<LogicaSelect> LogicaSelects { get; set; } // LogicaSelect
-        public System.Data.Entity.DbSet<Mail> Mails { get; set; } // Mail
         public System.Data.Entity.DbSet<MailGroup> MailGroups { get; set; } // MailGroup
         public System.Data.Entity.DbSet<MailIdentifier> MailIdentifiers { get; set; } // MailIdentifier
+        public System.Data.Entity.DbSet<MailIn> MailIns { get; set; } // MailIn
         public System.Data.Entity.DbSet<MailLotusOutlookIn> MailLotusOutlookIns { get; set; } // MailLotusOutlookIn
         public System.Data.Entity.DbSet<MailLotusOutlookOut> MailLotusOutlookOuts { get; set; } // MailLotusOutlookOut
+        public System.Data.Entity.DbSet<MailOut> MailOuts { get; set; } // MailOut
         public System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         public System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
         public System.Data.Entity.DbSet<ModelSwithe> ModelSwithes { get; set; } // ModelSwithes
@@ -141,6 +149,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<Organization> Organizations { get; set; } // Organization
         public System.Data.Entity.DbSet<Otdel> Otdels { get; set; } // Otdel
         public System.Data.Entity.DbSet<OtdelPadeg> OtdelPadegs { get; set; } // OtdelPadeg
+        public System.Data.Entity.DbSet<ParametrSupport> ParametrSupports { get; set; } // ParametrSupport
         public System.Data.Entity.DbSet<Position> Positions { get; set; } // Position
         public System.Data.Entity.DbSet<Printer> Printers { get; set; } // Printer
         public System.Data.Entity.DbSet<ProizvoditelBlockPower> ProizvoditelBlockPowers { get; set; } // ProizvoditelBlockPower
@@ -153,6 +162,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
         public System.Data.Entity.DbSet<TecnicalOtdel> TecnicalOtdels { get; set; } // TecnicalOtdel
         public System.Data.Entity.DbSet<Telephon> Telephons { get; set; } // Telephon
+        public System.Data.Entity.DbSet<TemplateSupportAndParametrSupport> TemplateSupportAndParametrSupports { get; set; } // TemplateSupportAndParametrSupport
         public System.Data.Entity.DbSet<User> Users { get; set; } // Users
         public System.Data.Entity.DbSet<UsersIsActualsStat> UsersIsActualsStats { get; set; } // UsersIsActualsStat
         public System.Data.Entity.DbSet<UsersNotTechnical> UsersNotTechnicals { get; set; } // UsersNotTechnical
@@ -214,6 +224,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new BlockPowerConfiguration());
             modelBuilder.Configurations.Add(new BookAccountingConfiguration());
             modelBuilder.Configurations.Add(new BookModelConfiguration());
+            modelBuilder.Configurations.Add(new CategoriaTemplateConfiguration());
             modelBuilder.Configurations.Add(new ClassificationConfiguration());
             modelBuilder.Configurations.Add(new ComputerIpAdressSynhronizationConfiguration());
             modelBuilder.Configurations.Add(new CopySaveConfiguration());
@@ -223,6 +234,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new ErrorUSerNotActulConfiguration());
             modelBuilder.Configurations.Add(new FullModelConfiguration());
             modelBuilder.Configurations.Add(new FullProizvoditelConfiguration());
+            modelBuilder.Configurations.Add(new FullTemplateSupportConfiguration());
             modelBuilder.Configurations.Add(new HistoryConfiguration());
             modelBuilder.Configurations.Add(new HistoryLogConfiguration());
             modelBuilder.Configurations.Add(new InfoLogicConfiguration());
@@ -232,11 +244,12 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new IsProcessCompleteConfiguration());
             modelBuilder.Configurations.Add(new KabinetConfiguration());
             modelBuilder.Configurations.Add(new LogicaSelectConfiguration());
-            modelBuilder.Configurations.Add(new MailConfiguration());
             modelBuilder.Configurations.Add(new MailGroupConfiguration());
             modelBuilder.Configurations.Add(new MailIdentifierConfiguration());
+            modelBuilder.Configurations.Add(new MailInConfiguration());
             modelBuilder.Configurations.Add(new MailLotusOutlookInConfiguration());
             modelBuilder.Configurations.Add(new MailLotusOutlookOutConfiguration());
+            modelBuilder.Configurations.Add(new MailOutConfiguration());
             modelBuilder.Configurations.Add(new MfuConfiguration());
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration());
             modelBuilder.Configurations.Add(new ModelSwitheConfiguration());
@@ -248,6 +261,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new OrganizationConfiguration());
             modelBuilder.Configurations.Add(new OtdelConfiguration());
             modelBuilder.Configurations.Add(new OtdelPadegConfiguration());
+            modelBuilder.Configurations.Add(new ParametrSupportConfiguration());
             modelBuilder.Configurations.Add(new PositionConfiguration());
             modelBuilder.Configurations.Add(new PrinterConfiguration());
             modelBuilder.Configurations.Add(new ProizvoditelBlockPowerConfiguration());
@@ -260,6 +274,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new SysBlockConfiguration());
             modelBuilder.Configurations.Add(new TecnicalOtdelConfiguration());
             modelBuilder.Configurations.Add(new TelephonConfiguration());
+            modelBuilder.Configurations.Add(new TemplateSupportAndParametrSupportConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new UsersIsActualsStatConfiguration());
             modelBuilder.Configurations.Add(new UsersNotTechnicalConfiguration());
@@ -271,6 +286,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new BlockPowerConfiguration(schema));
             modelBuilder.Configurations.Add(new BookAccountingConfiguration(schema));
             modelBuilder.Configurations.Add(new BookModelConfiguration(schema));
+            modelBuilder.Configurations.Add(new CategoriaTemplateConfiguration(schema));
             modelBuilder.Configurations.Add(new ClassificationConfiguration(schema));
             modelBuilder.Configurations.Add(new ComputerIpAdressSynhronizationConfiguration(schema));
             modelBuilder.Configurations.Add(new CopySaveConfiguration(schema));
@@ -280,6 +296,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new ErrorUSerNotActulConfiguration(schema));
             modelBuilder.Configurations.Add(new FullModelConfiguration(schema));
             modelBuilder.Configurations.Add(new FullProizvoditelConfiguration(schema));
+            modelBuilder.Configurations.Add(new FullTemplateSupportConfiguration(schema));
             modelBuilder.Configurations.Add(new HistoryConfiguration(schema));
             modelBuilder.Configurations.Add(new HistoryLogConfiguration(schema));
             modelBuilder.Configurations.Add(new InfoLogicConfiguration(schema));
@@ -289,11 +306,12 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new IsProcessCompleteConfiguration(schema));
             modelBuilder.Configurations.Add(new KabinetConfiguration(schema));
             modelBuilder.Configurations.Add(new LogicaSelectConfiguration(schema));
-            modelBuilder.Configurations.Add(new MailConfiguration(schema));
             modelBuilder.Configurations.Add(new MailGroupConfiguration(schema));
             modelBuilder.Configurations.Add(new MailIdentifierConfiguration(schema));
+            modelBuilder.Configurations.Add(new MailInConfiguration(schema));
             modelBuilder.Configurations.Add(new MailLotusOutlookInConfiguration(schema));
             modelBuilder.Configurations.Add(new MailLotusOutlookOutConfiguration(schema));
+            modelBuilder.Configurations.Add(new MailOutConfiguration(schema));
             modelBuilder.Configurations.Add(new MfuConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelSwitheConfiguration(schema));
@@ -305,6 +323,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new OrganizationConfiguration(schema));
             modelBuilder.Configurations.Add(new OtdelConfiguration(schema));
             modelBuilder.Configurations.Add(new OtdelPadegConfiguration(schema));
+            modelBuilder.Configurations.Add(new ParametrSupportConfiguration(schema));
             modelBuilder.Configurations.Add(new PositionConfiguration(schema));
             modelBuilder.Configurations.Add(new PrinterConfiguration(schema));
             modelBuilder.Configurations.Add(new ProizvoditelBlockPowerConfiguration(schema));
@@ -317,6 +336,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new SysBlockConfiguration(schema));
             modelBuilder.Configurations.Add(new TecnicalOtdelConfiguration(schema));
             modelBuilder.Configurations.Add(new TelephonConfiguration(schema));
+            modelBuilder.Configurations.Add(new TemplateSupportAndParametrSupportConfiguration(schema));
             modelBuilder.Configurations.Add(new UserConfiguration(schema));
             modelBuilder.Configurations.Add(new UsersIsActualsStatConfiguration(schema));
             modelBuilder.Configurations.Add(new UsersNotTechnicalConfiguration(schema));
@@ -534,6 +554,30 @@ namespace EfDatabase.Inventory.Base
         public int Id { get; set; } // Id (Primary key)
         public string Model { get; set; } // Model (length: 512)
         public int? IdBook { get; set; } // IdBook
+    }
+
+    // CategoriaTemplate
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class CategoriaTemplate
+    {
+        public int IdCategiria { get; set; } // IdCategiria (Primary key)
+        public string NameEngCategoria { get; set; } // NameEngCategoria (length: 512)
+        public string NameRusCategoria { get; set; } // NameRusCategoria (length: 512)
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child FullTemplateSupports where [FullTemplateSupport].[IdCategiria] point to this entity (FK_FullTemplateSupport_CategoriaTemplate)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<FullTemplateSupport> FullTemplateSupports { get; set; } // FullTemplateSupport.FK_FullTemplateSupport_CategoriaTemplate
+
+        public CategoriaTemplate()
+        {
+            DateCreate = System.DateTime.Now;
+            FullTemplateSupports = new System.Collections.Generic.List<FullTemplateSupport>();
+        }
     }
 
     // Classification
@@ -858,6 +902,38 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // FullTemplateSupport
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class FullTemplateSupport
+    {
+        public int IdTemplate { get; set; } // IdTemplate (Primary key)
+        public string Name { get; set; } // Name (length: 1024)
+        public string InfoTemplate { get; set; } // InfoTemplate (length: 1024)
+        public int IdCategiria { get; set; } // IdCategiria
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child TemplateSupportAndParametrSupports where [TemplateSupportAndParametrSupport].[IdTemplate] point to this entity (FK_TemplateSupportAndParametrSupport_FullTemplateSupport)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<TemplateSupportAndParametrSupport> TemplateSupportAndParametrSupports { get; set; } // TemplateSupportAndParametrSupport.FK_TemplateSupportAndParametrSupport_FullTemplateSupport
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent CategoriaTemplate pointed by [FullTemplateSupport].([IdCategiria]) (FK_FullTemplateSupport_CategoriaTemplate)
+        /// </summary>
+        public virtual CategoriaTemplate CategoriaTemplate { get; set; } // FK_FullTemplateSupport_CategoriaTemplate
+
+        public FullTemplateSupport()
+        {
+            DateCreate = System.DateTime.Now;
+            TemplateSupportAndParametrSupports = new System.Collections.Generic.List<TemplateSupportAndParametrSupport>();
+        }
+    }
+
     // History
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class History
@@ -1081,26 +1157,13 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
-    // Mail
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
-    public class Mail
-    {
-        public int Id { get; set; } // Id (Primary key)
-        public string IdMail { get; set; } // IdMail (Primary key) (length: 512)
-        public string MailAdressSend { get; set; } // MailAdressSend (length: 256)
-        public string MailAdress { get; set; } // MailAdress (Primary key) (length: 256)
-        public string SubjectMail { get; set; } // SubjectMail (length: 512)
-        public string IsFile { get; set; } // IsFile (Primary key) (length: 20)
-        public System.DateTime? DateInputServer { get; set; } // DateInputServer
-    }
-
     // MailGroup
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class MailGroup
     {
         public int IdGroupMail { get; set; } // IdGroupMail (Primary key)
         public int IdOtdelNumber { get; set; } // IdOtdelNumber
-        public string NameGroup { get; set; } // NameGroup (length: 64)
+        public string NameGroup { get; set; } // NameGroup (length: 512)
         public System.DateTime? DateCreate { get; set; } // DateCreate
 
         // Reverse navigation
@@ -1145,6 +1208,19 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // MailIn
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailIn
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string IdMail { get; set; } // IdMail (Primary key) (length: 512)
+        public string MailAdressSend { get; set; } // MailAdressSend (length: 256)
+        public string MailAdress { get; set; } // MailAdress (Primary key) (length: 256)
+        public string SubjectMail { get; set; } // SubjectMail (length: 512)
+        public string IsFile { get; set; } // IsFile (Primary key) (length: 20)
+        public System.DateTime? DateInputServer { get; set; } // DateInputServer
+    }
+
     // MailLotusOutlookIn
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class MailLotusOutlookIn
@@ -1187,6 +1263,20 @@ namespace EfDatabase.Inventory.Base
         {
             DateCreate = System.DateTime.Now;
         }
+    }
+
+    // MailOut
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailOut
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string IdMail { get; set; } // IdMail (Primary key) (length: 512)
+        public string MailAdressIn { get; set; } // MailAdressIn (length: 256)
+        public string MailAdressOut { get; set; } // MailAdressOut (Primary key) (length: 256)
+        public string SubjectMail { get; set; } // SubjectMail (length: 512)
+        public string IsFile { get; set; } // IsFile (Primary key) (length: 20)
+        public string ErrorMail { get; set; } // ErrorMail (length: 512)
+        public System.DateTime? DateCreate { get; set; } // DateCreate
     }
 
     // Mfu
@@ -1694,6 +1784,36 @@ namespace EfDatabase.Inventory.Base
         public OtdelPadeg()
         {
             DataCreate = System.DateTime.Now;
+        }
+    }
+
+    // ParametrSupport
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ParametrSupport
+    {
+        public int IdParametr { get; set; } // IdParametr (Primary key)
+        public string NameStepSupport { get; set; } // NameStepSupport (length: 15)
+        public string HelpParameter { get; set; } // HelpParameter (length: 1024)
+        public string NameGuidParametr { get; set; } // NameGuidParametr (length: 512)
+        public string Parametr { get; set; } // Parametr (length: 512)
+        public string TypeParametr { get; set; } // TypeParametr (length: 64)
+        public string NameParametrType { get; set; } // NameParametrType (length: 64)
+        public string SelectParametr { get; set; } // SelectParametr
+        public string TemplateParametrType { get; set; } // TemplateParametrType (length: 512)
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child TemplateSupportAndParametrSupports where [TemplateSupportAndParametrSupport].[IdParametr] point to this entity (FK_TemplateSupportAndParametrSupport_ParametrSupport)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<TemplateSupportAndParametrSupport> TemplateSupportAndParametrSupports { get; set; } // TemplateSupportAndParametrSupport.FK_TemplateSupportAndParametrSupport_ParametrSupport
+
+        public ParametrSupport()
+        {
+            DateCreate = System.DateTime.Now;
+            TemplateSupportAndParametrSupports = new System.Collections.Generic.List<TemplateSupportAndParametrSupport>();
         }
     }
 
@@ -2520,6 +2640,33 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // TemplateSupportAndParametrSupport
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class TemplateSupportAndParametrSupport
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public int? IdParametr { get; set; } // IdParametr
+        public int? IdTemplate { get; set; } // IdTemplate
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent FullTemplateSupport pointed by [TemplateSupportAndParametrSupport].([IdTemplate]) (FK_TemplateSupportAndParametrSupport_FullTemplateSupport)
+        /// </summary>
+        public virtual FullTemplateSupport FullTemplateSupport { get; set; } // FK_TemplateSupportAndParametrSupport_FullTemplateSupport
+
+        /// <summary>
+        /// Parent ParametrSupport pointed by [TemplateSupportAndParametrSupport].([IdParametr]) (FK_TemplateSupportAndParametrSupport_ParametrSupport)
+        /// </summary>
+        public virtual ParametrSupport ParametrSupport { get; set; } // FK_TemplateSupportAndParametrSupport_ParametrSupport
+
+        public TemplateSupportAndParametrSupport()
+        {
+            DateCreate = System.DateTime.Now;
+        }
+    }
+
     // Users
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class User
@@ -2877,6 +3024,27 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // CategoriaTemplate
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class CategoriaTemplateConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CategoriaTemplate>
+    {
+        public CategoriaTemplateConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CategoriaTemplateConfiguration(string schema)
+        {
+            ToTable("CategoriaTemplate", schema);
+            HasKey(x => x.IdCategiria);
+
+            Property(x => x.IdCategiria).HasColumnName(@"IdCategiria").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.NameEngCategoria).HasColumnName(@"NameEngCategoria").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.NameRusCategoria).HasColumnName(@"NameRusCategoria").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
     // Classification
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ClassificationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Classification>
@@ -3100,6 +3268,31 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // FullTemplateSupport
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class FullTemplateSupportConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<FullTemplateSupport>
+    {
+        public FullTemplateSupportConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public FullTemplateSupportConfiguration(string schema)
+        {
+            ToTable("FullTemplateSupport", schema);
+            HasKey(x => x.IdTemplate);
+
+            Property(x => x.IdTemplate).HasColumnName(@"IdTemplate").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.InfoTemplate).HasColumnName(@"InfoTemplate").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.IdCategiria).HasColumnName(@"IdCategiria").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.CategoriaTemplate).WithMany(b => b.FullTemplateSupports).HasForeignKey(c => c.IdCategiria).WillCascadeOnDelete(false); // FK_FullTemplateSupport_CategoriaTemplate
+        }
+    }
+
     // History
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class HistoryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<History>
@@ -3309,30 +3502,6 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
-    // Mail
-    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
-    public class MailConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Mail>
-    {
-        public MailConfiguration()
-            : this("dbo")
-        {
-        }
-
-        public MailConfiguration(string schema)
-        {
-            ToTable("Mail", schema);
-            HasKey(x => new { x.Id, x.IdMail, x.MailAdress, x.IsFile });
-
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.IdMail).HasColumnName(@"IdMail").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.MailAdressSend).HasColumnName(@"MailAdressSend").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
-            Property(x => x.MailAdress).HasColumnName(@"MailAdress").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.SubjectMail).HasColumnName(@"SubjectMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
-            Property(x => x.IsFile).HasColumnName(@"IsFile").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.DateInputServer).HasColumnName(@"DateInputServer").HasColumnType("smalldatetime").IsOptional();
-        }
-    }
-
     // MailGroup
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class MailGroupConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MailGroup>
@@ -3349,7 +3518,7 @@ namespace EfDatabase.Inventory.Base
 
             Property(x => x.IdGroupMail).HasColumnName(@"IdGroupMail").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.IdOtdelNumber).HasColumnName(@"IdOtdelNumber").HasColumnType("int").IsRequired();
-            Property(x => x.NameGroup).HasColumnName(@"NameGroup").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.NameGroup).HasColumnName(@"NameGroup").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
     }
@@ -3376,6 +3545,30 @@ namespace EfDatabase.Inventory.Base
             // Foreign keys
             HasOptional(a => a.MailGroup).WithMany(b => b.MailIdentifiers).HasForeignKey(c => c.IdGroupMail).WillCascadeOnDelete(false); // FK_MailIdentifier_MailGroup
             HasRequired(a => a.User).WithOptional(b => b.MailIdentifier); // FK_MailIdentifier_Users
+        }
+    }
+
+    // MailIn
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailInConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MailIn>
+    {
+        public MailInConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MailInConfiguration(string schema)
+        {
+            ToTable("MailIn", schema);
+            HasKey(x => new { x.Id, x.IdMail, x.MailAdress, x.IsFile });
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdMail).HasColumnName(@"IdMail").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MailAdressSend).HasColumnName(@"MailAdressSend").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.MailAdress).HasColumnName(@"MailAdress").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.SubjectMail).HasColumnName(@"SubjectMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.IsFile).HasColumnName(@"IsFile").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.DateInputServer).HasColumnName(@"DateInputServer").HasColumnType("smalldatetime").IsOptional();
         }
     }
 
@@ -3430,6 +3623,31 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.FullPathListFile).HasColumnName(@"FullPathListFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.NameFileZip).HasColumnName(@"NameFileZip").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.FileMailZip).HasColumnName(@"FileMailZip").HasColumnType("image").IsOptional().HasMaxLength(2147483647);
+            Property(x => x.ErrorMail).HasColumnName(@"ErrorMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // MailOut
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class MailOutConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MailOut>
+    {
+        public MailOutConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MailOutConfiguration(string schema)
+        {
+            ToTable("MailOut", schema);
+            HasKey(x => new { x.Id, x.IdMail, x.MailAdressOut, x.IsFile });
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdMail).HasColumnName(@"IdMail").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.MailAdressIn).HasColumnName(@"MailAdressIn").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.MailAdressOut).HasColumnName(@"MailAdressOut").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.SubjectMail).HasColumnName(@"SubjectMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.IsFile).HasColumnName(@"IsFile").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(20).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ErrorMail).HasColumnName(@"ErrorMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
@@ -3716,6 +3934,33 @@ namespace EfDatabase.Inventory.Base
 
             // Foreign keys
             HasRequired(a => a.Otdel).WithOptional(b => b.OtdelPadeg).WillCascadeOnDelete(false); // FK_Otdel_OtdelPadeg
+        }
+    }
+
+    // ParametrSupport
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ParametrSupportConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ParametrSupport>
+    {
+        public ParametrSupportConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ParametrSupportConfiguration(string schema)
+        {
+            ToTable("ParametrSupport", schema);
+            HasKey(x => x.IdParametr);
+
+            Property(x => x.IdParametr).HasColumnName(@"IdParametr").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.NameStepSupport).HasColumnName(@"NameStepSupport").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(15);
+            Property(x => x.HelpParameter).HasColumnName(@"HelpParameter").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.NameGuidParametr).HasColumnName(@"NameGuidParametr").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.Parametr).HasColumnName(@"Parametr").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.TypeParametr).HasColumnName(@"TypeParametr").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.NameParametrType).HasColumnName(@"NameParametrType").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SelectParametr).HasColumnName(@"SelectParametr").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.TemplateParametrType).HasColumnName(@"TemplateParametrType").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
     }
 
@@ -4053,6 +4298,31 @@ namespace EfDatabase.Inventory.Base
             HasOptional(a => a.Kabinet).WithMany(b => b.Telephons).HasForeignKey(c => c.IdNumberKabinet).WillCascadeOnDelete(false); // FK_Telephon_Kabinet
             HasOptional(a => a.Statusing).WithMany(b => b.Telephons).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_Statusing_Telephon
             HasOptional(a => a.Supply).WithMany(b => b.Telephons).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_Telephon_Supply
+        }
+    }
+
+    // TemplateSupportAndParametrSupport
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class TemplateSupportAndParametrSupportConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<TemplateSupportAndParametrSupport>
+    {
+        public TemplateSupportAndParametrSupportConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public TemplateSupportAndParametrSupportConfiguration(string schema)
+        {
+            ToTable("TemplateSupportAndParametrSupport", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdParametr).HasColumnName(@"IdParametr").HasColumnType("int").IsOptional();
+            Property(x => x.IdTemplate).HasColumnName(@"IdTemplate").HasColumnType("int").IsOptional();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasOptional(a => a.FullTemplateSupport).WithMany(b => b.TemplateSupportAndParametrSupports).HasForeignKey(c => c.IdTemplate).WillCascadeOnDelete(false); // FK_TemplateSupportAndParametrSupport_FullTemplateSupport
+            HasOptional(a => a.ParametrSupport).WithMany(b => b.TemplateSupportAndParametrSupports).HasForeignKey(c => c.IdParametr).WillCascadeOnDelete(false); // FK_TemplateSupportAndParametrSupport_ParametrSupport
         }
     }
 

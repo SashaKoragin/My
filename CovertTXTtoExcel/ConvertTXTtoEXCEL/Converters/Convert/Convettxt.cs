@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using CovertTXTtoExcel.ConvertTXTtoEXCEL.AddItem;
 using OfficeOpenXml;
 
@@ -32,7 +33,7 @@ namespace CovertTXTtoExcel.ConvertTXTtoEXCEL.Convert
         public ExcelWorksheet ConvtxtScalar(ZnachView path, ExcelPackage excel, String scalare)
         {
             var i = 0;
-            var scal = System.Convert.ToChar(scalare);
+           // var scal = System.Convert.ToChar(scalare);
             using (var st = new StreamReader(path.Pathfile, Encoding.Default))
             {
                 var worksheet = excel.Workbook.Worksheets.Add(path.Namefile);
@@ -47,7 +48,7 @@ namespace CovertTXTtoExcel.ConvertTXTtoEXCEL.Convert
                         worksheet.Cells[String.Format("A{0}", i)].Value = readLine;
                         foreach (var cell in worksheet.Cells[String.Format("A{0}", i)])
                         {
-                            var splittedValues = ((String)cell.Value).Split(scal);
+                            var splittedValues = Regex.Split((String)cell.Value, scalare);
                             cell.Value = splittedValues[0];
                             for (var j = 0; j < splittedValues.Length; j++)
                             {
