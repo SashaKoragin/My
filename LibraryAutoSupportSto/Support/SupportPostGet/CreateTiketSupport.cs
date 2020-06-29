@@ -31,7 +31,10 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         /// Авторизация на сайте Support
         /// </summary>
         private readonly string _autorizationSupport = "https://support.tax.nalog.ru/?login=yesbackurl=%2F&AUTH_FORM=Y&TYPE=AUTH&USER_LOGIN={0}&USER_PASSWORD={1}&Login=null";
-
+        /// <summary>
+        /// Выход из сайта
+        /// </summary>
+        public string Logon = "https://support.tax.nalog.ru/?logout=yes";
         /// <summary>
         /// Шаг 1 для запроса
         /// </summary>
@@ -49,8 +52,10 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
 
         public CreateTiсketSupport(string login, string password)
         {
-            Request = (HttpWebRequest)WebRequest.Create(_autorizationSupport.Replace("{0}",login).Replace("{1}",password));
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            Request = (HttpWebRequest)WebRequest.Create(_autorizationSupport.Replace("{0}", WebUtility.UrlEncode(login)).Replace("{1}", WebUtility.UrlEncode(password)));
             Request.CookieContainer = new CookieContainer();
+            Request.ProtocolVersion = HttpVersion.Version11;
             Request.Method = "POST";
             Response = (HttpWebResponse)Request.GetResponse();
             Сookie = new CookieContainer();
@@ -69,17 +74,19 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         /// <summary>
         /// Шаги для запросов на выполнение
         /// </summary>
-        public void Steps(string urlSteps)
+        public void Steps(string urlSteps,string isModel)
         {
             Request = (HttpWebRequest)WebRequest.Create(urlSteps);
             Request.ContentType = "application/x-www-form-urlencoded";
-            Request.ContentLength = DatesBytes.Length;
             Request.CookieContainer = Сookie;
-            Request.Method = "POST";
-            using (var stream = Request.GetRequestStream())
+            Request.Method = isModel;
+            if (isModel != "GET")
             {
-                stream.Write(DatesBytes, 0, DatesBytes.Length);
-
+                Request.ContentLength = DatesBytes.Length;
+                using (var stream = Request.GetRequestStream())
+                {
+                    stream.Write(DatesBytes, 0, DatesBytes.Length);
+                }
             }
             Response = (HttpWebResponse)Request.GetResponse();
         }
@@ -105,8 +112,8 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
                     document.LoadHtml(data);
                     HtmlNode formNode = document.DocumentNode.SelectSingleNode(findNode);
                     inputParameter = formNode.Elements("input").Where(type => type.GetAttributeValue("type", "hidden") == "hidden").Cast<HtmlNode>()
-                        .Select(elem => $"{elem.GetAttributeValue("name", "default")}={elem.GetAttributeValue("value", "default")}")
-                        .Aggregate((element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : "&") + next);
+                            .Select(elem => $"{elem.GetAttributeValue("name", "default")}={elem.GetAttributeValue("value", "default")}")
+                            .Aggregate((element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : "&") + next);
                     readStream.Close();
                     receiveStream.Close();
                 }

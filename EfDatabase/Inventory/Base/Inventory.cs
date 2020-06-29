@@ -1797,6 +1797,7 @@ namespace EfDatabase.Inventory.Base
         public string NameGuidParametr { get; set; } // NameGuidParametr (length: 512)
         public string Parametr { get; set; } // Parametr (length: 512)
         public string TypeParametr { get; set; } // TypeParametr (length: 64)
+        public bool? IsImportant { get; set; } // IsImportant
         public string NameParametrType { get; set; } // NameParametrType (length: 64)
         public string SelectParametr { get; set; } // SelectParametr
         public string TemplateParametrType { get; set; } // TemplateParametrType (length: 512)
@@ -3957,6 +3958,7 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.NameGuidParametr).HasColumnName(@"NameGuidParametr").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(512);
             Property(x => x.Parametr).HasColumnName(@"Parametr").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.TypeParametr).HasColumnName(@"TypeParametr").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.IsImportant).HasColumnName(@"IsImportant").HasColumnType("bit").IsOptional();
             Property(x => x.NameParametrType).HasColumnName(@"NameParametrType").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.SelectParametr).HasColumnName(@"SelectParametr").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.TemplateParametrType).HasColumnName(@"TemplateParametrType").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);

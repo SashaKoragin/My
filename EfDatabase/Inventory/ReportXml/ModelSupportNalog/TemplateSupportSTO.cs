@@ -43,9 +43,13 @@ namespace EfDatabaseXsdSupportNalog {
         
         private int idScannerField;
         
-        private TemplateSupport[] templateSupportField;
+        private int idTelephonField;
+        
+        private TemplateSupport1[] templateSupportField;
         
         private string step3ResponseSupportField;
+        
+        private string errorField;
         
         public ModelParametrSupport() {
             this.idUserField = 0;
@@ -55,6 +59,7 @@ namespace EfDatabaseXsdSupportNalog {
             this.idSysBlockField = 0;
             this.idTemplateField = 0;
             this.idScannerField = 0;
+            this.idTelephonField = 0;
         }
         
         /// <remarks/>
@@ -158,8 +163,18 @@ namespace EfDatabaseXsdSupportNalog {
         }
         
         /// <remarks/>
+        public int IdTelephon {
+            get {
+                return this.idTelephonField;
+            }
+            set {
+                this.idTelephonField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("TemplateSupport", IsNullable=true)]
-        public TemplateSupport[] TemplateSupport {
+        public TemplateSupport1[] TemplateSupport {
             get {
                 return this.templateSupportField;
             }
@@ -177,6 +192,17 @@ namespace EfDatabaseXsdSupportNalog {
                 this.step3ResponseSupportField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Error {
+            get {
+                return this.errorField;
+            }
+            set {
+                this.errorField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -184,7 +210,16 @@ namespace EfDatabaseXsdSupportNalog {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute("TemplateSupport", Namespace="", IsNullable=true)]
+    public partial class TemplateSupport1 : TemplateSupport {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TemplateSupport {
         
         private string nameField;
@@ -206,6 +241,10 @@ namespace EfDatabaseXsdSupportNalog {
         private string selectParametrField;
         
         private string templateParametrTypeField;
+        
+        private bool isImportantField;
+        
+        private bool isImportantFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -314,6 +353,28 @@ namespace EfDatabaseXsdSupportNalog {
             }
             set {
                 this.templateParametrTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsImportant {
+            get {
+                return this.isImportantField;
+            }
+            set {
+                this.isImportantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IsImportantSpecified {
+            get {
+                return this.isImportantFieldSpecified;
+            }
+            set {
+                this.isImportantFieldSpecified = value;
             }
         }
     }

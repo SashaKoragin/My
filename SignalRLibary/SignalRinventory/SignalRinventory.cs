@@ -91,7 +91,6 @@ namespace SignalRLibary.SignalRinventory
             return base.OnReconnected();
         }
 
-
         public void HelloUser(string hellouser, string conectionId)
         {
             Clients.Client(conectionId).HelloUser(hellouser);

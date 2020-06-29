@@ -21,8 +21,10 @@
 			<xs:element ref="IdSysBlock"/>
 			<xs:element ref="IdTemplate"/>
 			<xs:element ref="IdScanner"/>
+			<xs:element ref="IdTelephon"/>
 			<xs:element ref="TemplateSupport" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="Step3ResponseSupport"/>
+			<xs:element ref="Error"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="IdTemplate" type="xs:int" default="0" nillable="false">
@@ -60,10 +62,15 @@
 			<xs:documentation>Ун пользователя</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="TemplateSupport" type="TemplateSupport" nillable="true">
+	<xs:element name="TemplateSupport" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Шаблон отправки генерации и отправки на СТO</xs:documentation>
 		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="TemplateSupport"/>
+			</xs:complexContent>
+		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="TemplateSupport">
 		<xs:annotation>
@@ -119,6 +126,11 @@
 				<xs:documentation>Шаблон выборки параметра User,SysBlock...</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name="IsImportant" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>Для проверки главных параметров</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:element name="Discription" type="xs:string" nillable="false">
 		<xs:annotation>
@@ -138,6 +150,16 @@
 	<xs:element name="Step3ResponseSupport" type="xs:string">
 		<xs:annotation>
 			<xs:documentation>Параметры ответа от сервера на шаге 3</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdTelephon" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун телефона</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Error" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Ошибка</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

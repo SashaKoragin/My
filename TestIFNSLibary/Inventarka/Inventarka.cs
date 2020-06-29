@@ -982,17 +982,19 @@ namespace TestIFNSLibary.Inventarka
             {
                 try
                 {
-                    var generate = new GenerateParameterSupport();
+                    var generate = new GenerateParameterSupport(_parametrService.PathDomainGroup);
                     generate.GenerateTemplateUrlParameter(ref modelSupport);
-                    var support = new CreateTiсketSupport(modelSupport.Login,modelSupport.Password);
+                    generate.IsCheckAllParameter(modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
+                    var support = new CreateTiсketSupport(modelSupport.Login, modelSupport.Password);
                     support.StepTraining();
-                    support.GenerateParameterResponse("//form[@action='/requests/create.php?step=1']",modelSupport.TemplateSupport.Where(param=> param.NameStepSupport == "Step1").ToArray());
-                    support.Steps(support.Step1Post);
+                    support.GenerateParameterResponse("//form[@action='/requests/create.php?step=1']", modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step1").ToArray());
+                    support.Steps(support.Step1Post, "POST");
                     support.GenerateParameterResponse("//form[@action='/requests/create.php?step=2']", modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
-                    support.Steps(support.Step2Post);
+                    support.Steps(support.Step2Post, "POST");
                     support.GenerateParameterResponse("//form[@action='/requests/create.php?step=3']");
-                    support.Steps(support.Step3Post);
+                    support.Steps(support.Step3Post, "POST");
                     var senders = support.ReturnResponseWebStep3();
+                    support.Steps(support.Logon, "GET");
                     support.Dispose();
                     modelSupport.Step3ResponseSupport = senders;
                     return modelSupport;
@@ -1000,7 +1002,8 @@ namespace TestIFNSLibary.Inventarka
                 catch (Exception ex)
                 {
                     Loggers.Log4NetLogger.Error(ex);
-                    return null;
+                    modelSupport.Error = ex.Message;
+                    return modelSupport;
                 }
             });
         }

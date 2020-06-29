@@ -26,8 +26,10 @@ namespace TestIFNSLibary.PathJurnalAndUse
             ReportMassTemplate = ConfigurationManager.AppSettings["ReportMassTemplate"];
             Inventarization = ConfigurationManager.ConnectionStrings["Inventarization"].ConnectionString;
             ConnectImns51 = ConfigurationManager.AppSettings["ConnectImns51"];
-            PathDomain = ConfigurationManager.AppSettings["PathDomain"];
+            PathDomainComputer = ConfigurationManager.AppSettings["PathDomainComputer"];
+            PathDomainGroup = ConfigurationManager.AppSettings["PathDomainGroup"];
             FindWorkStations = ConfigurationManager.AppSettings["FindWorkStations"];
+
         }
 
         public void SettingEdit(string testDb, string workDb, int hours, int minutes)
@@ -98,9 +100,13 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// </summary>
         public string ConnectImns51 { get; set; }
         /// <summary>
-        /// Путь к домену
+        /// Путь к домену Компьютеры
         /// </summary>
-        public string PathDomain { get; set; }
+        public string PathDomainComputer { get; set; }
+        /// <summary>
+        /// Группы пользователей поиск
+        /// </summary>
+        public string PathDomainGroup { get; set; }
         /// <summary>
         /// Поиск рабочих станций
         /// </summary>

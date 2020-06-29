@@ -42,7 +42,7 @@ namespace TestIFNSLibary.TimeEvent
                         try
                         {
                           PingIp ping = new PingIp();
-                          ping.FindIpHost(parametr.PathDomain,parametr.FindWorkStations);
+                          ping.FindIpHost(parametr.PathDomainComputer, parametr.FindWorkStations);
                         }
                         catch (Exception exception)
                         {

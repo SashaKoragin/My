@@ -194,6 +194,12 @@
       <Component Id="zxing.dlll" Guid="76E50B26-165A-4C6E-BD2E-2A9E193AB528">
         <File Id="zxing.dll" Name="zxing.dll" Source="$(var.TestIFNSService_TargetDir)zxing.dll" />
       </Component>
+      <Component Id="HtmlAgilityPack.dll" Guid="331CF85D-3BD8-49A4-9892-ED5D55F8741E">
+        <File Id="HtmlAgilityPack.dll" Name="HtmlAgilityPack.dll" Source="$(var.TestIFNSService_TargetDir)HtmlAgilityPack.dll" />
+      </Component>
+      <Component Id="LibraryAutoSupportSto.dll" Guid="626AE3D7-02DB-4887-B740-345CA8E2DF8C">
+        <File Id="LibraryAutoSupportSto.dll" Name="LibraryAutoSupportSto.dll" Source="$(var.TestIFNSService_TargetDir)LibraryAutoSupportSto.dll" />
+      </Component>
 		</ComponentGroup>
 	</Fragment>
   <Fragment>
