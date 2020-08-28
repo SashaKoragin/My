@@ -11,6 +11,7 @@ using EfDatabase.Inventory.BaseLogic.Login;
 using EfDatabase.Inventory.BaseLogic.Select;
 using EfDatabase.Inventory.MailLogicLotus;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
+using EfDatabaseErrorInventory;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
 using EfDatabaseXsdInventoryAutorization;
@@ -159,6 +160,52 @@ namespace TestIFNSLibary.Inventarka
             if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeScanerAndCamer(model.Model); }
             return model;
         }
+        /// <summary>
+        /// Добавление или редактирование серверного оборудования
+        /// </summary>
+        /// <param name="serverEquipment">Серверное оборудование</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
+        /// <returns></returns>
+        public ModelReturn<ServerEquipment> AddAndEditServerEquipment(ServerEquipment serverEquipment, string userIdEdit)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditServerEquipment(serverEquipment, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeServerEquipment(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Добавление или редактирования модели серверного оборудования
+        /// </summary>
+        /// <param name="modelSeverEquipment">Модель серверного оборудования</param>
+        /// <returns></returns>
+        public ModelReturn<ModelSeverEquipment> AddAndEditModelSeverEquipment(ModelSeverEquipment modelSeverEquipment)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditModelSeverEquipment(modelSeverEquipment);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSeverEquipment(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Добавление или редактирования производителя серверного оборудования
+        /// </summary>
+        /// <param name="manufacturerSeverEquipment">Производитель серверного оборудования</param>
+        /// <returns></returns>
+        public ModelReturn<ManufacturerSeverEquipment> AddAndEditManufacturerSeverEquipment(ManufacturerSeverEquipment manufacturerSeverEquipment)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditManufacturerSeverEquipment(manufacturerSeverEquipment);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeManufacturerSeverEquipment(model.Model); }
+            return model;
+        }
+
+        public ModelReturn<TypeServer> AddAndEditTypeServer(TypeServer typeServer)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditTypeServer(typeServer);
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTypeServer(model.Model); }
+            return model;
+        }
+
         /// <summary>
         /// Добавление или обновление скнера
         /// </summary>
@@ -595,417 +642,526 @@ namespace TestIFNSLibary.Inventarka
                 Loggers.Log4NetLogger.Error(e);
                 return e.Message;
             }
+       }
+
+       /// <summary>
+       /// Выгрузка телефонов
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> Telephon()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.Telephon());
+       }
+       /// <summary>
+       /// Типы серверов
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> TypeServer()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.TypeServer());
         }
 
-        /// <summary>
-        /// Выгрузка телефонов
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> Telephon()
-        {
-            Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Telephon());
-        }
+
         /// <summary>
         /// Выгрузка бесперебойников
         /// </summary>
         /// <returns></returns>
         public async Task<string> BlockPower()
-        {
-            Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.BlockPower());
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.BlockPower());
+       }
+       /// <summary>
+       /// Серверное оборудование
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> ServerEquipment()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.ServerEquipment());
         }
+       /// <summary>
+       /// Модели серверного оборудования
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> ModelSeverEquipment()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.ModelSeverEquipment());
+        }
+       /// <summary>
+       /// производители серверного оборудования
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> ManufacturerSeverEquipment()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.ManufacturerSeverEquipment());
+        }
+
+       /// <summary>
+       /// Поставщики
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> Supply()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.Supply());
+       }
+       /// <summary>
+       /// Все модели системных блоков
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> ModelBlockPower()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.ModelBlockPower());
+       }
+       /// <summary>
+       /// Все производители системных блоков
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> ProizvoditelBlockPower()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.ProizvoditelBlockPower());
+       }
+       /// <summary>
+       /// Добавление или обновление телефона
+       /// </summary>
+       /// <param name="telephon">Телефон</param>
+       /// <param name="userIdEdit">Пользователь кто редактировал</param>
+       /// <returns></returns>
+       public ModelReturn<EfDatabase.Inventory.Base.Telephon> AddAndEditTelephon(EfDatabase.Inventory.Base.Telephon telephon,string userIdEdit)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model =  add.AddAndEditTelephone(telephon, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           if(model.Model != null){ SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTelephone(model.Model);}
+           return model;
+       }
+       /// <summary>
+       /// Добавление или обновление ИБП
+       /// </summary>
+       /// <param name="blockpower">ИБП</param>
+       /// <param name="userIdEdit">Пользователь кто редактировал</param>
+       /// <returns></returns>
+       public ModelReturn<EfDatabase.Inventory.Base.BlockPower> AddAndEditBlockPower(EfDatabase.Inventory.Base.BlockPower blockpower, string userIdEdit)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditPowerBlock(blockpower, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeBlockPower(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<NameSysBlock> AddAndEditNameSysBlock(NameSysBlock nameSysBlock)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameSysBlock(nameSysBlock);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameSysBlock(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<EfDatabase.Inventory.Base.NameMonitor> AddAndEditNameMonitor(EfDatabase.Inventory.Base.NameMonitor nameMonitor)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameMonitor(nameMonitor);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameMonitor(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<ModelBlockPower> AddAndEditNameModelBlokPower(ModelBlockPower nameModelBlokPower)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameModelBlokPower(nameModelBlokPower);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelBlockPower(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<ProizvoditelBlockPower> AddAndEditNameProizvoditelBlockPower(ProizvoditelBlockPower nameProizvoditelBlockPower)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameProizvoditelBlockPower(nameProizvoditelBlockPower);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelBlockPower(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<Supply> AddAndEditNameSupply(Supply nameSupply)
+       {
+           AddObjectDb add = new AddObjectDb();
+           if (nameSupply.DatePostavki != null)
+           {
+               nameSupply.DatePostavki = nameSupply.DatePostavki.Value.AddHours(4);
+           }
+           var model = add.AddAndEditNameSupply(nameSupply);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSupply(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<Statusing> AddAndEditNameStatus(Statusing nameStatus)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameStatus(nameStatus);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusing(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<Kabinet> AddAndEditNameKabinet(Kabinet nameKabinet)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameKabinetr(nameKabinet);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeKabinet(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<FullModel> AddAndEditNameFullModel(FullModel nameFullModel)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameFullModel(nameFullModel);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullModel(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<Classification> AddAndEditNameClassification(Classification nameClassification)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameClassification(nameClassification);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeClassification(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<FullProizvoditel> AddAndEditNameFullProizvoditel(FullProizvoditel nameFullProizvoditel)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameFullProizvoditel(nameFullProizvoditel);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullProizvoditel(model.Model); }
+           return model;
+       }
+
+       public ModelReturn<CopySave> AddAndEditNameCopySave(CopySave nameCopySave)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditNameCopySave(nameCopySave);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeCopySave(model.Model); }
+           return model;
+       }
+
+       public async Task<string> AllClasification()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.AllClasification());
+       }
+
+       public ModelReturn<EfDatabase.Inventory.Base.ModelSwithe> AddAndEditModelSwith(EfDatabase.Inventory.Base.ModelSwithe modelswith)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditModelSwithe(modelswith);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSwithe(model.Model); }
+           return model;
+       }
+
+       /// <summary>
+       /// Удаление пользователя
+       /// </summary>
+       /// <param name="user">Пользователь</param>
+       /// <param name="userIdEdit">Ун пользователя</param>
+       /// <returns></returns>
+       public ModelReturn<User> DeleteUser(User user, string userIdEdit)
+       {
+           DeleteObjectDb delete = new DeleteObjectDb();
+           var model = delete.DeleteUser(user, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteUser(model);
+           return model;
+       }
+       /// <summary>
+       /// Удаление системных блоков
+       /// </summary>
+       /// <param name="sysBlock">Системный блок</param>
+       /// <param name="userIdEdit">Ун пользователя</param>
+       /// <returns></returns>
+       public ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock, string userIdEdit)
+       {
+           DeleteObjectDb delete = new DeleteObjectDb();
+           var model = delete.DeleteSystemUnit(sysBlock, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSystemUnit(model);
+           return model;
+       }
         /// <summary>
-        /// Поставщики
+        /// Удаление не актуального серверного оборудования
         /// </summary>
-        /// <returns></returns>
-        public async Task<string> Supply()
-        {
-            Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Supply());
-        }
-        /// <summary>
-        /// Все модели системных блоков
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> ModelBlockPower()
-        {
-            Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.ModelBlockPower());
-        }
-        /// <summary>
-        /// Все производители системных блоков
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> ProizvoditelBlockPower()
-        {
-            Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.ProizvoditelBlockPower());
-        }
-        /// <summary>
-        /// Добавление или обновление телефона
-        /// </summary>
-        /// <param name="telephon">Телефон</param>
-        /// <param name="userIdEdit">Пользователь кто редактировал</param>
-        /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventory.Base.Telephon> AddAndEditTelephon(EfDatabase.Inventory.Base.Telephon telephon,string userIdEdit)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model =  add.AddAndEditTelephone(telephon, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            if(model.Model != null){ SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTelephone(model.Model);}
-            return model;
-        }
-        /// <summary>
-        /// Добавление или обновление ИБП
-        /// </summary>
-        /// <param name="blockpower">ИБП</param>
-        /// <param name="userIdEdit">Пользователь кто редактировал</param>
-        /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventory.Base.BlockPower> AddAndEditBlockPower(EfDatabase.Inventory.Base.BlockPower blockpower, string userIdEdit)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditPowerBlock(blockpower, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeBlockPower(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<NameSysBlock> AddAndEditNameSysBlock(NameSysBlock nameSysBlock)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameSysBlock(nameSysBlock);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameSysBlock(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<EfDatabase.Inventory.Base.NameMonitor> AddAndEditNameMonitor(EfDatabase.Inventory.Base.NameMonitor nameMonitor)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameMonitor(nameMonitor);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameMonitor(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<ModelBlockPower> AddAndEditNameModelBlokPower(ModelBlockPower nameModelBlokPower)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameModelBlokPower(nameModelBlokPower);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelBlockPower(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<ProizvoditelBlockPower> AddAndEditNameProizvoditelBlockPower(ProizvoditelBlockPower nameProizvoditelBlockPower)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameProizvoditelBlockPower(nameProizvoditelBlockPower);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelBlockPower(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<Supply> AddAndEditNameSupply(Supply nameSupply)
-        {
-            AddObjectDb add = new AddObjectDb();
-            if (nameSupply.DatePostavki != null)
-            {
-                nameSupply.DatePostavki = nameSupply.DatePostavki.Value.AddHours(4);
-            }
-            var model = add.AddAndEditNameSupply(nameSupply);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSupply(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<Statusing> AddAndEditNameStatus(Statusing nameStatus)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameStatus(nameStatus);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusing(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<Kabinet> AddAndEditNameKabinet(Kabinet nameKabinet)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameKabinetr(nameKabinet);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeKabinet(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<FullModel> AddAndEditNameFullModel(FullModel nameFullModel)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameFullModel(nameFullModel);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullModel(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<Classification> AddAndEditNameClassification(Classification nameClassification)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameClassification(nameClassification);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeClassification(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<FullProizvoditel> AddAndEditNameFullProizvoditel(FullProizvoditel nameFullProizvoditel)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameFullProizvoditel(nameFullProizvoditel);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullProizvoditel(model.Model); }
-            return model;
-        }
-
-        public ModelReturn<CopySave> AddAndEditNameCopySave(CopySave nameCopySave)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditNameCopySave(nameCopySave);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeCopySave(model.Model); }
-            return model;
-        }
-
-        public async Task<string> AllClasification()
-        {
-            Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllClasification());
-        }
-
-        public ModelReturn<EfDatabase.Inventory.Base.ModelSwithe> AddAndEditModelSwith(EfDatabase.Inventory.Base.ModelSwithe modelswith)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditModelSwithe(modelswith);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSwithe(model.Model); }
-            return model;
-        }
-
-        /// <summary>
-        /// Удаление пользователя
-        /// </summary>
-        /// <param name="user">Пользователь</param>
-        /// <returns></returns>
-        public ModelReturn<User> DeleteUser(User user, string userIdEdit)
+        /// <param name="serverEquipment">Серверное оборудование</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        public ModelReturn<ServerEquipment> DeleteServerEquipment(ServerEquipment serverEquipment, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteUser(user, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteUser(model);
+            var model = delete.DeleteServerEquipment(serverEquipment, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteServerEquipment(model);
             return model;
-        }
-        /// <summary>
-        /// Удаление системных блоков
-        /// </summary>
-        /// <param name="sysBlock">Системный блок</param>
-        /// <returns></returns>
-        public ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock, string userIdEdit)
-        {
-            DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteSystemUnit(sysBlock, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSystemUnit(model);
-            return model;
-        }
-        /// <summary>
-        /// Удаление Мониторов
-        /// </summary>
-        /// <param name="monitor">Монитор</param>
-        /// <returns></returns>
-        public ModelReturn<Monitor> DeleteMonitor(Monitor monitor, string userIdEdit)
-        {
-            DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteMonitor(monitor, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMonitor(model);
-            return model;
-        }
-        /// <summary>
-        /// Удаление принтеров
-        /// </summary>
-        /// <param name="printer">Принтер</param>
-        /// <returns></returns>
-        public ModelReturn<Printer> DeletePrinter(Printer printer, string userIdEdit)
-        {
-            DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeletePrinter(printer, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeletePrinter(model);
-            return model;
-        }
-        /// <summary>
-        /// Удаление сканеров и камер
-        /// </summary>
-        /// <param name="scanner">Сканер или камера</param>
-        /// <returns></returns>
-        public ModelReturn<ScanerAndCamer> DeleteScannerAndCamera(ScanerAndCamer scanner, string userIdEdit)
-        {
-            DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteScannerAndCamera(scanner, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteScannerAndCamera(model);
-            return model;
-        }
-        /// <summary>
-        /// Удаление МФУ
-        /// </summary>
-        /// <param name="mfu">МФУ</param>
-        /// <returns></returns>
-        public ModelReturn<Mfu> DeleteMfu(Mfu mfu, string userIdEdit)
-        {
-            DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteMfu(mfu, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMfu(model);
-            return model;
-        }
-        /// <summary>
-        /// Удаление ИБП
-        /// </summary>
-        /// <param name="blockPower">ИБП</param>
-        /// <returns></returns>
-        public ModelReturn<BlockPower> DeleteBlockPower(BlockPower blockPower, string userIdEdit)
-        {
-            DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteBlockPower(blockPower, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteBlockPower(model);
-            return model;
-        }
-        /// <summary>
-        /// Удаление коммутаторов
-        /// </summary>
-        /// <param name="switches">Коммутатор</param>
-        /// <returns></returns>
-        public ModelReturn<Swithe> DeleteSwitch(Swithe switches, string userIdEdit)
-        {
-            DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteSwitch(switches, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSwitch(model);
-            return model;
-        }
-        /// <summary>
-        /// Удаление телефонов
-        /// </summary>
-        /// <param name="telephone">Телефон</param>
-        /// <returns></returns>
-        public ModelReturn<Telephon> DeleteTelephone(Telephon telephone, string userIdEdit)
-        {
-            DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteTelephone(telephone, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteTelephone(model);
-            return model;
-        }
-        /// <summary>
-        /// Просмотр Body
-        /// </summary>
-        /// <param name="model">Модель почты</param>
-        /// <returns></returns>
-        public async Task<string> VisibilityBodyMail(WebMailModel model)
-        {
-            MailLogicLotus mail = new MailLogicLotus();
-            return await Task.Factory.StartNew(() => mail.ReturnMailBody(model));
-        }
-        /// <summary>
-        /// Выгрузка файла вложения
-        /// </summary>
-        /// <param name="model">Модель почты</param>
-        /// <returns></returns>
-        public async Task<Stream> OutputMail(WebMailModel model)
-        {
-            MailLogicLotus mail = new MailLogicLotus();
-            return await Task.Factory.StartNew(() => mail.OutputMail(model));
-        }
-        /// <summary>
-        /// Удаление письма
-        /// </summary>
-        /// <param name="model">Модель почты</param>
-        /// <returns></returns>
-        public async Task<string> DeleteMail(WebMailModel model)
-        {
-            MailLogicLotus mail = new MailLogicLotus();
-            return await Task.Factory.StartNew(() => mail.DeleteMail(model));
         }
 
-        /// <summary>
-        /// Все идентификаторы пользователей
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> AllMailIdentifies()
-        {
-            Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllMailIdentifier());
-        }
+       /// <summary>
+       /// Удаление Мониторов
+       /// </summary>
+       /// <param name="monitor">Монитор</param>
+       /// <param name="userIdEdit">Ун пользователя</param>
+       /// <returns></returns>
+       public ModelReturn<Monitor> DeleteMonitor(Monitor monitor, string userIdEdit)
+       {
+           DeleteObjectDb delete = new DeleteObjectDb();
+           var model = delete.DeleteMonitor(monitor, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMonitor(model);
+           return model;
+       }
 
-        /// <summary>
-        /// Все идентификаторы пользователей
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> AllMailGroups()
-        {
-            Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllMailGroup());
-        }
+       /// <summary>
+       /// Удаление принтеров
+       /// </summary>
+       /// <param name="printer">Принтер</param>
+       /// <param name="userIdEdit">Ун пользователя</param>
+       /// <returns></returns>
+       public ModelReturn<Printer> DeletePrinter(Printer printer, string userIdEdit)
+       {
+           DeleteObjectDb delete = new DeleteObjectDb();
+           var model = delete.DeletePrinter(printer, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeletePrinter(model);
+           return model;
+       }
+       /// <summary>
+       /// Удаление сканеров и камер
+       /// </summary>
+       /// <param name="scanner">Сканер или камера</param>
+       /// <param name="userIdEdit">Пользователь</param>
+       /// <returns></returns>
+       public ModelReturn<ScanerAndCamer> DeleteScannerAndCamera(ScanerAndCamer scanner, string userIdEdit)
+       {
+           DeleteObjectDb delete = new DeleteObjectDb();
+           var model = delete.DeleteScannerAndCamera(scanner, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteScannerAndCamera(model);
+           return model;
+       }
+       /// <summary>
+       /// Удаление МФУ
+       /// </summary>
+       /// <param name="mfu">МФУ</param>
+       /// <param name="userIdEdit">Ун пользователя</param>
+       /// <returns></returns>
+       public ModelReturn<Mfu> DeleteMfu(Mfu mfu, string userIdEdit)
+       {
+           DeleteObjectDb delete = new DeleteObjectDb();
+           var model = delete.DeleteMfu(mfu, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMfu(model);
+           return model;
+       }
+       /// <summary>
+       /// Удаление ИБП
+       /// </summary>
+       /// <param name="blockPower">ИБП</param>
+       /// <param name="userIdEdit">Ун пользователя</param>
+       /// <returns></returns>
+       public ModelReturn<BlockPower> DeleteBlockPower(BlockPower blockPower, string userIdEdit)
+       {
+           DeleteObjectDb delete = new DeleteObjectDb();
+           var model = delete.DeleteBlockPower(blockPower, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteBlockPower(model);
+           return model;
+       }
+       /// <summary>
+       /// Удаление коммутаторов
+       /// </summary>
+       /// <param name="switches">Коммутатор</param>
+       /// <param name="userIdEdit">Ун пользователя</param>
+       /// <returns></returns>
+       public ModelReturn<Swithe> DeleteSwitch(Swithe switches, string userIdEdit)
+       {
+           DeleteObjectDb delete = new DeleteObjectDb();
+           var model = delete.DeleteSwitch(switches, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSwitch(model);
+           return model;
+       }
+       /// <summary>
+       /// Удаление телефонов
+       /// </summary>
+       /// <param name="telephone">Телефон</param>
+       /// <param name="userIdEdit">Ун пользователя</param>
+       /// <returns></returns>
+       public ModelReturn<Telephon> DeleteTelephone(Telephon telephone, string userIdEdit)
+       {
+           DeleteObjectDb delete = new DeleteObjectDb();
+           var model = delete.DeleteTelephone(telephone, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteTelephone(model);
+           return model;
+       }
+       /// <summary>
+       /// Просмотр Body
+       /// </summary>
+       /// <param name="model">Модель почты</param>
+       /// <returns></returns>
+       public async Task<string> VisibilityBodyMail(WebMailModel model)
+       {
+           MailLogicLotus mail = new MailLogicLotus();
+           return await Task.Factory.StartNew(() => mail.ReturnMailBody(model));
+       }
+       /// <summary>
+       /// Выгрузка файла вложения
+       /// </summary>
+       /// <param name="model">Модель почты</param>
+       /// <returns></returns>
+       public async Task<Stream> OutputMail(WebMailModel model)
+       {
+           MailLogicLotus mail = new MailLogicLotus();
+           return await Task.Factory.StartNew(() => mail.OutputMail(model));
+       }
+       /// <summary>
+       /// Удаление письма
+       /// </summary>
+       /// <param name="model">Модель почты</param>
+       /// <returns></returns>
+       public async Task<string> DeleteMail(WebMailModel model)
+       {
+           MailLogicLotus mail = new MailLogicLotus();
+           return await Task.Factory.StartNew(() => mail.DeleteMail(model));
+       }
 
-        /// <summary>
-        /// Обновление идентификаторов пользователя
-        /// </summary>
-        /// <param name="nameMailIdentifier"></param>
-        /// <returns></returns>
-        public  ModelReturn<MailIdentifier> AddAndEditMailIdentifies(MailIdentifier nameMailIdentifier)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditMailIdentifies(nameMailIdentifier);
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailIdentifier(model.Model); }
-            return model;
-        }
-        /// <summary>
-        /// Обновление групп для абонентов
-        /// </summary>
-        /// <param name="nameMailGroups">Группа для абонентов</param>
-        /// <returns></returns>
-        public ModelReturn<MailGroup> AddAndEditMailGroups(MailGroup nameMailGroups)
-        {
-            AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditMailGroup(nameMailGroups);
-            if (model.Model != null)
-            {
-                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailGroups(model.Model); }
-            return model;
-        }
-        /// <summary>
-        /// Шаблоны для СТО по категориям
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> AllTemplateSupport()
-        {
-            Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllTemplate());
-        }
+       /// <summary>
+       /// Все идентификаторы пользователей
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> AllMailIdentifies()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.AllMailIdentifier());
+       }
+
+       /// <summary>
+       /// Все идентификаторы пользователей
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> AllMailGroups()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.AllMailGroup());
+       }
+
+       /// <summary>
+       /// Обновление идентификаторов пользователя
+       /// </summary>
+       /// <param name="nameMailIdentifier"></param>
+       /// <returns></returns>
+       public  ModelReturn<MailIdentifier> AddAndEditMailIdentifies(MailIdentifier nameMailIdentifier)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditMailIdentifies(nameMailIdentifier);
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailIdentifier(model.Model); }
+           return model;
+       }
+       /// <summary>
+       /// Обновление групп для абонентов
+       /// </summary>
+       /// <param name="nameMailGroups">Группа для абонентов</param>
+       /// <returns></returns>
+       public ModelReturn<MailGroup> AddAndEditMailGroups(MailGroup nameMailGroups)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditMailGroup(nameMailGroups);
+           if (model.Model != null)
+           {
+               SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailGroups(model.Model); }
+           return model;
+       }
+       /// <summary>
+       /// Шаблоны для СТО по категориям
+       /// </summary>
+       /// <returns></returns>
+       public async Task<string> AllTemplateSupport()
+       {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.AllTemplate());
+       }
 
 
-        /// <summary>
-        /// Данный api создан для генерации и отправки запроса в СТО по ун шаблону
-        /// </summary>
-        /// <param name="modelSupport">Модель генерации для отправки на СТО</param>
-        /// <returns></returns>
-        public async Task<ModelParametrSupport> ServiceSupport(ModelParametrSupport modelSupport)
-        {
-            return await Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    var generate = new GenerateParameterSupport(_parametrService.PathDomainGroup);
-                    generate.GenerateTemplateUrlParameter(ref modelSupport);
-                    generate.IsCheckAllParameter(modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
-                    var support = new CreateTiсketSupport(modelSupport.Login, modelSupport.Password);
-                    support.StepTraining();
-                    support.GenerateParameterResponse("//form[@action='/requests/create.php?step=1']", modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step1").ToArray());
-                    support.Steps(support.Step1Post, "POST");
-                    support.GenerateParameterResponse("//form[@action='/requests/create.php?step=2']", modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
-                    support.Steps(support.Step2Post, "POST");
-                    support.GenerateParameterResponse("//form[@action='/requests/create.php?step=3']");
-                    support.Steps(support.Step3Post, "POST");
-                    var senders = support.ReturnResponseWebStep3();
-                    support.Steps(support.Logon, "GET");
-                    support.Dispose();
-                    modelSupport.Step3ResponseSupport = senders;
-                    return modelSupport;
-                }
-                catch (Exception ex)
-                {
-                    Loggers.Log4NetLogger.Error(ex);
-                    modelSupport.Error = ex.Message;
-                    return modelSupport;
-                }
-            });
-        }
+       /// <summary>
+       /// Данный api создан для генерации и отправки запроса в СТО по ун шаблону
+       /// </summary>
+       /// <param name="modelSupport">Модель генерации для отправки на СТО</param>
+       /// <returns></returns>
+       public async Task<ModelParametrSupport> ServiceSupport(ModelParametrSupport modelSupport)
+       {
+           return await Task.Factory.StartNew(() =>
+           {
+               var support = new CreateTiсketSupport(modelSupport.Login, modelSupport.Password);
+               try
+               {
+                   var generate = new GenerateParameterSupport(_parametrService.PathDomainGroup);
+                   generate.GenerateTemplateUrlParameter(ref modelSupport);
+                   generate.IsCheckAllParameter(modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
+                   support.StepTraining();
+                   support.GenerateParameterResponse("//form[@action='/requests/create.php?step=1']",
+                       modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step1").ToArray());
+                   support.Steps(support.Step1Post, "POST");
+                   support.GenerateParameterResponse("//form[@action='/requests/create.php?step=2']",
+                       modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
+                   support.Steps(support.Step2Post, "POST");
+                   support.GenerateParameterResponse("//form[@action='/requests/create.php?step=3']");
+                   support.Steps(support.Step3Post, "POST");
+                   var senders = support.ReturnResponseWebStep3();
+                   modelSupport.Step3ResponseSupport = senders;
+                   return modelSupport;
+               }
+               catch (Exception ex)
+               {
+                   Loggers.Log4NetLogger.Error(ex);
+                   modelSupport.Error = ex.Message;
+                   return modelSupport;
+               }
+               finally
+               {
+                   support.Steps(support.Logon, "GET");
+                   support.Dispose();
+                   Loggers.Log4NetLogger.Info(new Exception($"Пользователем {modelSupport.Login} создана заявка по теме {modelSupport.TemplateSupport.FirstOrDefault(discription => discription.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}" ));
+               }
+           });
+       }
+       /// <summary>
+       /// Снятие статуса со списанной техники
+       /// </summary>
+       /// <param name="allTechnics">списанная техника</param>
+       /// <returns></returns>
+       public async Task<string> IsCheckStatusNull(AllTechnic allTechnics)
+       {
+           SelectSql selectSql = new SelectSql();
+           return await Task.Factory.StartNew(() => selectSql.CheckStatus(allTechnics));
+       }
+       /// <summary>
+       /// Генерация QR Code для инвентаризации
+       /// </summary>
+       /// <returns></returns>
+       /// <param name="serialNumber">Серийный номер техники</param>
+       public async Task<Stream> GenerateQrCode(string serialNumber)
+       {
+           try
+           {
+               return await Task.Factory.StartNew(() =>
+               {
+                   Select auto = new Select();
+                   StickerCode sticker = new StickerCode();
+                   var technical = auto.SelecTechnic(serialNumber);
+                   if (technical != null)
+                   {
+                       GenerateBarcode qrCode = new GenerateBarcode();
+                       qrCode.GenerateQrCode(technical, _parametrService.Report);
+                       sticker.CreateDocum(_parametrService.Report, technical);
+                       File.Delete(technical.Name);
+                       return sticker.FileArray();
+                   }
+                   return null;
+               });
+           }
+           catch (Exception e)
+           {
+               Loggers.Log4NetLogger.Error(e);
+           }
+           return null;
+       }
    }
 }

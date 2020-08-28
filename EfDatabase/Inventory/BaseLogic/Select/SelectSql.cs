@@ -217,6 +217,29 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 return exception.Message;
             }
        }
+
+        /// <summary>
+        /// Снятие статуса по технике 
+        /// </summary>
+        /// <param name="technic">Техника</param>
+        /// <returns></returns>
+        public string CheckStatus(AllTechnic technic)
+        {
+            try
+            {
+                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(32) };
+                Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser,
+                    new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], technic.Id),
+                                 new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], technic.Item));
+                return "Статус снят!!!";
+            }
+            catch (Exception exception)
+            {
+                Loggers.Log4NetLogger.Error(exception);
+                return "Во время снятия статуса произошла ошибка смотрите Log.txt";
+            }
+        }
+
        /// <summary>
        /// Поиск пользователя идентификатора пользователя в БД Инвентаризация
        /// </summary>

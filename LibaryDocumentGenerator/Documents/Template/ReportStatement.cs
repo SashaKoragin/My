@@ -1,21 +1,27 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using EfDatabaseAutomation.Automation.BaseLogica.SqlSelect.XsdDTOSheme;
 using LibaryDocumentGenerator.ProgrammView.FullDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
 
 namespace LibaryDocumentGenerator.Documents.Template
 {
-   public class TelephoneHelp: ITemplate<EfDatabaseTelephoneHelp.TelephoneHelp>
+   public class ReportStatement : ITemplate<Statement>
     {
         /// <summary>
-        /// Путь сохранения документа
+        /// Полный путь к книге на сервере
         /// </summary>
         public string FullPathDocumentWord { get; set; }
 
         /// <summary>
-        /// Выгрузка и удаление файла тедлефонного справочника
+        /// Выгрузка и удаление файла докладной записки ЮЛ
         /// </summary>
         /// <returns></returns>
         public Stream FileArray()
@@ -24,17 +30,15 @@ namespace LibaryDocumentGenerator.Documents.Template
             File.Delete(FullPathDocumentWord);
             return new MemoryStream(file);
         }
-
-
         /// <summary>
-        /// Создание документа справочника
+        /// Создание документа выписки
         /// </summary>
-        /// <param name="path">Путь сохранения документа</param>
+        /// <param name="path">Путь к документу</param>
         /// <param name="template">Шаблон</param>
         /// <param name="obj"></param>
-        public void CreateDocum(string path, EfDatabaseTelephoneHelp.TelephoneHelp template, object obj)
+       public void CreateDocum(string path, Statement template, object obj = null)
         {
-            FullPathDocumentWord = path + "Телефонный справочник инспекции" + Constant.WordConstant.Formatword;
+            FullPathDocumentWord = path + template.HeadingStatement[0].NameIndex + Constant.WordConstant.Formatword;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
             {
                 CreateWord(package, template, obj);
@@ -43,19 +47,19 @@ namespace LibaryDocumentGenerator.Documents.Template
             }
         }
         /// <summary>
-        /// Создание xml Word
+        /// Создание выписки выгрузки данных 
         /// </summary>
-        /// <param name="package"></param>
-        /// <param name="template"></param>
-        /// <param name="obj"></param>
-        public void CreateWord(WordprocessingDocument package, EfDatabaseTelephoneHelp.TelephoneHelp template, object obj)
+        /// <param name="package">Пакет</param>
+        /// <param name="template">Шаблон</param>
+        /// <param name="obj">Объект</param>
+        public void CreateWord(WordprocessingDocument package, Statement template, object obj = null)
         {
             MainDocumentPart mainDocumentPart = package.AddMainDocumentPart();
             DocumentFormat.OpenXml.Wordprocessing.Document document = new DocumentFormat.OpenXml.Wordprocessing.Document();
-            PageSetting settingpage = new PageSetting();
-            DocumentsFull documentInvoce = new DocumentsFull();
-            document.Append(settingpage.DocumentSettingVertical());
-            document.Append(documentInvoce.DocumentsTelephoneHelp(template));
+            PageSetting settingPage = new PageSetting();
+            GenerateStatementPreCheck documentStatement = new GenerateStatementPreCheck();
+            document.Append(settingPage.DocumentSettingVertical(new PageMargin() { Top = 1135, Right = 567, Bottom = 567, Left = 1135 }));
+            document.Append(documentStatement.GenerateStatementNote(template));
             mainDocumentPart.Document = document;
         }
     }

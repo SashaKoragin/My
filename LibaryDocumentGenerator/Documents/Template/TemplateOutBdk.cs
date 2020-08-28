@@ -6,7 +6,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using LibaryXMLAutoReports.ReportsBdk;
 using Single = LibaryDocumentGenerator.ProgrammView.Word.Template.SingleDocument.Single;
-
+using System.IO;
 
 namespace LibaryDocumentGenerator.Documents.Template
 {
@@ -15,6 +15,8 @@ namespace LibaryDocumentGenerator.Documents.Template
     /// </summary>
     public class TemplateOutBdk : ITemplate<LibaryXMLAutoReports.FullTemplateSheme.Document>
     {
+        public string FullPathDocumentWord { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
         public void CreateDocum(string path, LibaryXMLAutoReports.FullTemplateSheme.Document template, object obj)
         {
             var data = (FN71)obj;
@@ -43,6 +45,11 @@ namespace LibaryDocumentGenerator.Documents.Template
             document.Append(body.DocumentIshBdkTableBody(data));
             document.Append(single.AddSingle(template));
             mainDocumentPart.Document = document;
+        }
+
+        public Stream FileArray()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

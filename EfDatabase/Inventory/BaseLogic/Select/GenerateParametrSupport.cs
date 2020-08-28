@@ -179,7 +179,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 {
                     if (searcher.FindOne() is UserPrincipal user)
                     {
-                        var fullPath = user.DistinguishedName.Split(',').Where(x => x.Contains("OU=")).Reverse().Aggregate(
+                        var fullPath = user.DistinguishedName.Replace("\\", "").Split(',').Where(x => x.Contains("OU=")).Reverse().Aggregate(
                             (element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : "/") + next).Replace("OU=", "");
                         return fullPath;
                     }

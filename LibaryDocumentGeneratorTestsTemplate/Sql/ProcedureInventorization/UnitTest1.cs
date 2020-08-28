@@ -1,7 +1,10 @@
 ﻿using System.Linq;
 using EfDatabase.Inventory.BaseLogic.Select;
+using LibaryDocumentGenerator.Barcode;
+using LibaryDocumentGenerator.Documents.Template;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestIFNSLibary.Inventarka;
 using TestIFNSLibary.ServiceRest;
 
 namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
@@ -12,8 +15,14 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
         [TestMethod]
         public void TestProcedureIpAdress()
         {
-            var select = new SelectSql();
-            select.ActualIp();
+            Select auto = new Select();
+            StickerCode sticker = new StickerCode();
+            var technical = auto.SelecTechnic("B80GАGA000847");
+            GenerateBarcode qrCode = new GenerateBarcode();
+            qrCode.GenerateQrCode(technical, "C:\\Testing\\");
+            sticker.CreateDocum("C:\\Testing\\", technical, null);
+            //File.Delete(technical.Name);
+           // return sticker.FileArray();
         }
         [TestMethod]
         public void TestTemplateRule()

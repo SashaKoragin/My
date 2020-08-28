@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml;
+﻿using System;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
 using A = DocumentFormat.OpenXml.Drawing;
 using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
@@ -12,14 +13,16 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.Drawing
         /// Генерация штрихкода на документе 
         /// </summary>
         /// <param name="relationshipId">mainDocumentPart.GetIdOfPart(image)</param>
+        /// <param name="cx">Размер по X</param>
+        /// <param name="cy">Размер по Y</param>
         /// <returns></returns>
-        public Run AddImageToParagraph(string relationshipId)
+        public Run AddImageToParagraph(string relationshipId, long cx = 1500000L, long cy = 500000L)
         {
             // Define the reference of the image.
             var element =
                  new DocumentFormat.OpenXml.Wordprocessing.Drawing(
                      new DW.Inline(
-                         new DW.Extent() { Cx = 1500000L, Cy = 500000L },
+                         new DW.Extent() { Cx = cx, Cy = cy },
 
                          new DW.EffectExtent()
                          {
@@ -63,7 +66,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.Drawing
                                      new PIC.ShapeProperties(
                                          new A.Transform2D(
                                              new A.Offset() { X = 0L, Y = 0L },
-                                             new A.Extents() { Cx = 1500000L, Cy = 500000L }
+                                             new A.Extents() { Cx = cx, Cy = cy }
                                             ),
                                          new A.PresetGeometry(
                                              new A.AdjustValueList()

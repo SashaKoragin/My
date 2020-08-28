@@ -75,6 +75,7 @@
 			<xs:element ref="NameHostIpAdress" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="HistoryLog" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="TecnicalOtdel" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="AllTechnics" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="ErrorUSerNotActul">
@@ -639,7 +640,7 @@
 	</xs:element>
 	<xs:element name="TecnicalOtdel">
 		<xs:annotation>
-			<xs:documentation>Техника на о</xs:documentation>
+			<xs:documentation>Техника на отдел</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name="NameOtdel" type="xs:string">
@@ -680,6 +681,89 @@
 			<xs:attribute name="Coment" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Коментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AllTechnics">
+		<xs:annotation>
+			<xs:documentation>Вся техника в БД</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="LogicsButton" default="Button"/>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Уникальный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Item" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Классификация</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Users" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Пользователь</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тип оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameManufacturer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Производитель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameModel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Модель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameServer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование компьютера/сервера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Mac" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>MAC Адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberKabinet" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер кабинета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Коментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Статус</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

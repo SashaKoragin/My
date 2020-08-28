@@ -11,7 +11,7 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
     /// <summary>
     /// Класс генерации заявки на СТП ФКУ
     /// </summary>
-   public class CreateTiсketSupport :IDisposable
+   public class CreateTiсketSupport : IDisposable
     {
         /// <summary>
         /// Запрос
@@ -30,7 +30,7 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         /// <summary>
         /// Авторизация на сайте Support
         /// </summary>
-        private readonly string _autorizationSupport = "https://support.tax.nalog.ru/?login=yesbackurl=%2F&AUTH_FORM=Y&TYPE=AUTH&USER_LOGIN={0}&USER_PASSWORD={1}&Login=null";
+        private readonly string _autorizationSupport = "https://support.tax.nalog.ru/?login=yesbackurl=%2F&AUTH_FORM=Y&TYPE=AUTH&USER_LOGIN={0}&USER_PASSWORD={1}&Login={2}";
         /// <summary>
         /// Выход из сайта
         /// </summary>
@@ -53,7 +53,7 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         public CreateTiсketSupport(string login, string password)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-            Request = (HttpWebRequest)WebRequest.Create(_autorizationSupport.Replace("{0}", WebUtility.UrlEncode(login)).Replace("{1}", WebUtility.UrlEncode(password)));
+            Request = (HttpWebRequest)WebRequest.Create(_autorizationSupport.Replace("{0}", WebUtility.UrlEncode(login)).Replace("{1}", WebUtility.UrlEncode(password)).Replace("{2}", WebUtility.UrlEncode("Войти")));
             Request.CookieContainer = new CookieContainer();
             Request.ProtocolVersion = HttpVersion.Version11;
             Request.Method = "POST";
@@ -66,16 +66,20 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         /// </summary>
         public void StepTraining()
         {
+            Dispose();
             Request = (HttpWebRequest)WebRequest.Create(Step1Post);
             Request.CookieContainer = Сookie;
+            Request.ProtocolVersion = HttpVersion.Version11;
+            Request.Method = "GET";
             Response = (HttpWebResponse)Request.GetResponse();
-            Сookie.Add(Response.Cookies);
+            Сookie.Add(Response.Cookies); //Может быть проблема в этой строке?
         }
         /// <summary>
         /// Шаги для запросов на выполнение
         /// </summary>
         public void Steps(string urlSteps,string isModel)
         {
+            Dispose();
             Request = (HttpWebRequest)WebRequest.Create(urlSteps);
             Request.ContentType = "application/x-www-form-urlencoded";
             Request.CookieContainer = Сookie;
@@ -97,7 +101,7 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         /// </summary>
         /// <param name="findNode">Модель параметров</param>
         /// <param name="modelParameter">Модель параметров</param>
-        public void GenerateParameterResponse(string findNode, TemplateSupport[] modelParameter=null)
+        public void GenerateParameterResponse(string findNode, TemplateSupport1[] modelParameter=null)
         {
             if (Response.StatusCode == HttpStatusCode.OK)
             {
@@ -140,21 +144,18 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
                     StreamReader readStream;
                     readStream = String.IsNullOrWhiteSpace(Response.CharacterSet) ? new StreamReader(receiveStream) : new StreamReader(receiveStream, Encoding.GetEncoding(Response.CharacterSet));
                     data = readStream.ReadToEnd();
-                    
                     readStream.Close();
                     receiveStream.Close();
                 }
             }
             return data;
         }
+
         /// <summary>
         /// Dispose 
         /// </summary>
         public void Dispose()
         {
-            Request = null;
-            DatesBytes = null;
-            Сookie = null;
             Response.Close(); 
             Response.Dispose();
         }

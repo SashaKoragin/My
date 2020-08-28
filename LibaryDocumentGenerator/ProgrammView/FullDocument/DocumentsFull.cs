@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
+using EfDatabase.Inventory.Base;
 using EfDatabaseTelephoneHelp;
 using EfDatabaseXsdBookAccounting;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.Drawing;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator;
-using LibaryXMLAutoModelXmlSql.PreCheck.ModelCard;
 
 namespace LibaryDocumentGenerator.ProgrammView.FullDocument
 {
@@ -1009,6 +1006,56 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                 return body;
         }
 
+        /// <summary>
+        /// Подготовка наклеек для техники
+        /// </summary>
+        /// <param name="report">Техника из БД</param>
+        /// <param name="relationshipId">Ссылка на сгенерированый QR Code</param>
+        /// <returns></returns>
+        public Body Sticker(AllTechnic report, string relationshipId)
+        {
+            AddDriwing driving = new AddDriwing();
+            var paragraphGenerate = new RunGenerate();
+            Table table = new Table();
+            ObservableCollection<TableCell> cellCollection = new ObservableCollection<TableCell>();
+            var rows = new RowGenerate();
+            Body body = new Body();
+            var barcode = paragraphGenerate.RunParagraphGeneratorStandart("");
+            barcode.Append(driving.AddImageToParagraph(relationshipId, 800000L, 800000L));
+
+            cellCollection.Add(CellGenerate.GenerateCell(barcode, "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.LeftBorderOrTopBorder), 0, 1));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"{report.Item}: {report.NameManufacturer} {report.NameModel}", "20", JustificationValues.Left, 1), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.RightBorderOrTopBorder), 2));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.5)));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.LeftBorder), 0, 2));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"s/n: {report.SerNum}", "20", JustificationValues.Left, 1), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.RightBorder), 2));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.5)));
+            
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.LeftBorder), 0, 2));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"Инв.: {report.InventarNum}", "20", JustificationValues.Left, 1), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.RightBorder), 2));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.5)));
+           
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.LeftBorder), 0, 2));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"Kaб.: {report.NumberKabinet}", "20", JustificationValues.Left, 1), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.RightBorder), 2));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.5)));
+           
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.LeftBorderOrBottomBorder), 0, 2));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"User: {report.Users}", "20", JustificationValues.Left, 1), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.SelectGenerateBorder(CellBorders.SelectTableCellBorders.RightBorderOrBottomBorder), 2));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.5)));
+
+            body.Append(table);
+            return body;
+        }
     }
 }
 

@@ -187,6 +187,8 @@ namespace EfDatabaseErrorInventory {
         
         private TecnicalOtdel[] tecnicalOtdelField;
         
+        private AllTechnics[] allTechnicsField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Error")]
         public Error[] Error {
@@ -316,6 +318,17 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.tecnicalOtdelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("AllTechnics")]
+        public AllTechnics[] AllTechnics {
+            get {
+                return this.allTechnicsField;
+            }
+            set {
+                this.allTechnicsField = value;
             }
         }
     }
@@ -2012,6 +2025,242 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.comentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class AllTechnics {
+        
+        private string logicsButtonField;
+        
+        private int idField;
+        
+        private bool idFieldSpecified;
+        
+        private string itemField;
+        
+        private string usersField;
+        
+        private string nameTypeField;
+        
+        private string nameManufacturerField;
+        
+        private string nameModelField;
+        
+        private string serNumField;
+        
+        private string inventarNumField;
+        
+        private string serviceNumField;
+        
+        private string nameServerField;
+        
+        private string ipAdressField;
+        
+        private string macField;
+        
+        private string numberKabinetField;
+        
+        private string comentField;
+        
+        private string nameField;
+        
+        public AllTechnics() {
+            this.logicsButtonField = "Button";
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("Button")]
+        public string LogicsButton {
+            get {
+                return this.logicsButtonField;
+            }
+            set {
+                this.logicsButtonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IdSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Users {
+            get {
+                return this.usersField;
+            }
+            set {
+                this.usersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameType {
+            get {
+                return this.nameTypeField;
+            }
+            set {
+                this.nameTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameManufacturer {
+            get {
+                return this.nameManufacturerField;
+            }
+            set {
+                this.nameManufacturerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameModel {
+            get {
+                return this.nameModelField;
+            }
+            set {
+                this.nameModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNum {
+            get {
+                return this.serNumField;
+            }
+            set {
+                this.serNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string InventarNum {
+            get {
+                return this.inventarNumField;
+            }
+            set {
+                this.inventarNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ServiceNum {
+            get {
+                return this.serviceNumField;
+            }
+            set {
+                this.serviceNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameServer {
+            get {
+                return this.nameServerField;
+            }
+            set {
+                this.nameServerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IpAdress {
+            get {
+                return this.ipAdressField;
+            }
+            set {
+                this.ipAdressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Mac {
+            get {
+                return this.macField;
+            }
+            set {
+                this.macField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NumberKabinet {
+            get {
+                return this.numberKabinetField;
+            }
+            set {
+                this.numberKabinetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
             }
         }
     }

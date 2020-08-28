@@ -274,6 +274,64 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             }
             return new ModelReturn<ScanerAndCamer>("При обновлении/добавлении данных 'Cканер' по : " + scanerAddadnModified.IdScaner + " произошла ошибка смотри log.txt");
         }
+        /// <summary>
+        /// Добавление или обновление серверного оборудования
+        /// </summary>
+        /// <param name="serverEquipment"></param>
+        /// <param name="idUser"></param>
+        /// <returns></returns>
+        public ModelReturn<ServerEquipment> AddAndEditServerEquipment(ServerEquipment serverEquipment, int? idUser)
+        {
+            HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
+            var serverEquipmentAddadnModified = new ServerEquipment()
+            {
+                Id = serverEquipment.Id,
+                IdManufacturerSeverEquipment = serverEquipment.IdManufacturerSeverEquipment,
+                IdModelSeverEquipment = serverEquipment.IdModelSeverEquipment,
+                IdTypeServer = serverEquipment.IdTypeServer,
+                IdSupply = serverEquipment.IdSupply,
+                IdNumberKabinet = serverEquipment.IdNumberKabinet,
+                ServiceNum = serverEquipment.ServiceNum,
+                SerNum = serverEquipment.SerNum,
+                InventarNum = serverEquipment.InventarNum,
+                NameServer = serverEquipment.NameServer,
+                IpAdress = serverEquipment.IpAdress,
+                Coment = serverEquipment.Coment,
+                IdStatus = serverEquipment.IdStatus,
+                IdHistory = serverEquipment.IdHistory
+            };
+            try
+            {
+                var newModel = $"Производитель: {serverEquipment.ManufacturerSeverEquipment?.NameManufacturer}; Модель: {serverEquipmentAddadnModified.ModelSeverEquipment?.NameModel} ; Кабинет: {serverEquipmentAddadnModified.Kabinet?.NumberKabinet}; Комментарий: {serverEquipmentAddadnModified.Coment}; Статус: {serverEquipment.Statusing?.Name}";
+                using (var context = new InventoryContext())
+                {
+                    var modelDb = from ServerEquipment in context.ServerEquipments where ServerEquipment.Id == serverEquipment.Id select new { ServerEquipment };
+                    if (modelDb.Any())
+                    {
+                        var oldModel = $"Производитель: {modelDb.First().ServerEquipment?.ManufacturerSeverEquipment?.NameManufacturer}; Модель: {modelDb.First().ServerEquipment?.ModelSeverEquipment?.NameModel} Кабинет: {modelDb.First().ServerEquipment?.Kabinet?.NumberKabinet}; Коментарий: {modelDb.First().ServerEquipment?.Coment}; Статус: {modelDb.First().ServerEquipment?.Statusing?.Name}";
+                        Inventory.Entry(serverEquipmentAddadnModified).State = EntityState.Modified;
+                        Inventory.SaveChanges();
+                        log.GenerateHistory(serverEquipment.IdHistory, serverEquipment.Id, "Серверное оборудование", idUser,
+                            oldModel,
+                            newModel);
+                        return new ModelReturn<ServerEquipment>("Обновили серверное оборудование: " + serverEquipmentAddadnModified.Id, serverEquipment);
+                    }
+                }
+                Inventory.ServerEquipments.Add(serverEquipmentAddadnModified);
+                Inventory.SaveChanges();
+                serverEquipment.Id = serverEquipmentAddadnModified.Id;
+                serverEquipment.IdHistory = serverEquipmentAddadnModified.IdHistory;
+                log.GenerateHistory(serverEquipment.IdHistory, serverEquipment.Id, "Серверное оборудование", idUser,
+                        $"Отсутствует модель при добавлении нового устройства",
+                        newModel);
+                return new ModelReturn<ServerEquipment>("Добавили серверное оборудование: " + serverEquipmentAddadnModified.Id, serverEquipment, serverEquipmentAddadnModified.Id, serverEquipmentAddadnModified.IdHistory);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ServerEquipment>("При обновлении/добавлении данных 'Серверное оборудование' по : " + serverEquipmentAddadnModified.Id + " произошла ошибка смотри log.txt");
+        }
 
         /// <summary>
         /// Добавление или обновление МФУ
@@ -407,6 +465,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IdSupply = monitor.IdSupply,
                 IdModelMonitor = monitor.IdModelMonitor,
                 IdNumberKabinet = monitor.IdNumberKabinet,
+                ServiceNum = monitor.ServiceNum,
                 SerNum = monitor.SerNum,
                 InventarNumMonitor = monitor.InventarNumMonitor,
                 Coment = monitor.Coment,
@@ -459,7 +518,9 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IdTelephon = telephone.IdTelephon,
                 IdSupply = telephone.IdSupply,
                 IdNumberKabinet = telephone.IdNumberKabinet,
+                ServiceNum = telephone.ServiceNum,
                 SerNumber = telephone.SerNumber,
+                InventarNum = telephone.InventarNum,
                 NameTelephone = telephone.NameTelephone,
                 Telephon_ = telephone.Telephon_,
                 TelephonUndeground = telephone.TelephonUndeground,
@@ -769,6 +830,105 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 Loggers.Log4NetLogger.Error(e);
             }
             return new ModelReturn<NameMonitor>("При обновлении/добавлении данных 'Наименование мониторов' по : " + nameMonitorAddadnModified.IdModelMonitor + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление или редактирования модели серверного оборудования
+        /// </summary>
+        /// <param name="modelSeverEquipment">Модель серверного оборудования</param>
+        /// <returns></returns>
+        public ModelReturn<ModelSeverEquipment> AddAndEditModelSeverEquipment(ModelSeverEquipment modelSeverEquipment)
+        {
+            var modelSeverEquipmentAddadnModified = new ModelSeverEquipment()
+            {
+                IdModelSeverEquipment = modelSeverEquipment.IdModelSeverEquipment,
+                NameModel = modelSeverEquipment.NameModel
+            };
+            try
+            {
+                if ((from ModelSeverEquipment in Inventory.ModelSeverEquipments
+                    where ModelSeverEquipment.IdModelSeverEquipment == modelSeverEquipmentAddadnModified.IdModelSeverEquipment
+                    select new { ModelSeverEquipment }).Any())
+                {
+                    Inventory.Entry(modelSeverEquipmentAddadnModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<ModelSeverEquipment>("Обновили справочник модели серверного оборудования: " + modelSeverEquipmentAddadnModified.IdModelSeverEquipment, modelSeverEquipment);
+                }
+                Inventory.ModelSeverEquipments.Add(modelSeverEquipmentAddadnModified);
+                Inventory.SaveChanges();
+                modelSeverEquipment.IdModelSeverEquipment = modelSeverEquipmentAddadnModified.IdModelSeverEquipment;
+                return new ModelReturn<ModelSeverEquipment>("Добавили новое имя модели серверного оборудования: " + modelSeverEquipmentAddadnModified.IdModelSeverEquipment, modelSeverEquipment, modelSeverEquipmentAddadnModified.IdModelSeverEquipment);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ModelSeverEquipment>("При обновлении/добавлении данных 'Наименование модели серверного оборудования' по : " + modelSeverEquipmentAddadnModified.IdModelSeverEquipment + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление или редактирования производителя серверного оборудования
+        /// </summary>
+        /// <param name="manufacturerSeverEquipment">Производитель серверного оборудования</param>
+        /// <returns></returns>
+        public ModelReturn<ManufacturerSeverEquipment> AddAndEditManufacturerSeverEquipment(ManufacturerSeverEquipment manufacturerSeverEquipment)
+        {
+            var manufacturerSeverEquipmentAddadnModified = new ManufacturerSeverEquipment()
+            {
+                IdManufacturerSeverEquipment = manufacturerSeverEquipment.IdManufacturerSeverEquipment,
+                NameManufacturer = manufacturerSeverEquipment.NameManufacturer
+            };
+            try
+            {
+                if ((from ManufacturerSeverEquipment in Inventory.ManufacturerSeverEquipments
+                     where ManufacturerSeverEquipment.IdManufacturerSeverEquipment == manufacturerSeverEquipmentAddadnModified.IdManufacturerSeverEquipment
+                     select new { ManufacturerSeverEquipment }).Any())
+                {
+                    Inventory.Entry(manufacturerSeverEquipmentAddadnModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<ManufacturerSeverEquipment>("Обновили справочник производители серверного оборудования: " + manufacturerSeverEquipmentAddadnModified.IdManufacturerSeverEquipment, manufacturerSeverEquipment);
+                }
+                Inventory.ManufacturerSeverEquipments.Add(manufacturerSeverEquipmentAddadnModified);
+                Inventory.SaveChanges();
+                manufacturerSeverEquipment.IdManufacturerSeverEquipment = manufacturerSeverEquipmentAddadnModified.IdManufacturerSeverEquipment;
+                return new ModelReturn<ManufacturerSeverEquipment>("Добавили новое имя производителя серверного оборудования: " + manufacturerSeverEquipmentAddadnModified.IdManufacturerSeverEquipment, manufacturerSeverEquipment, manufacturerSeverEquipmentAddadnModified.IdManufacturerSeverEquipment);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ManufacturerSeverEquipment>("При обновлении/добавлении данных 'Наименование производителя серверного оборудования' по : " + manufacturerSeverEquipmentAddadnModified.IdManufacturerSeverEquipment + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление или редактирование типа серверного оборудования
+        /// </summary>
+        /// <param name="typeServer">Тип серверного оборудования</param>
+        /// <returns></returns>
+        public ModelReturn<TypeServer> AddAndEditTypeServer(TypeServer typeServer)
+        {
+            var typeServerAddadnModified = new TypeServer()
+            {
+                IdTypeServer = typeServer.IdTypeServer,
+                NameType = typeServer.NameType
+            };
+            try
+            {
+                if ((from TypeServer in Inventory.TypeServers
+                     where TypeServer.IdTypeServer == typeServerAddadnModified.IdTypeServer
+                     select new { TypeServer }).Any())
+                {
+                    Inventory.Entry(typeServerAddadnModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<TypeServer>("Обновили справочник типы серверного оборудования: " + typeServerAddadnModified.IdTypeServer, typeServer);
+                }
+                Inventory.TypeServers.Add(typeServerAddadnModified);
+                Inventory.SaveChanges();
+                typeServer.IdTypeServer = typeServerAddadnModified.IdTypeServer;
+                return new ModelReturn<TypeServer>("Добавили новое имя типа серверного оборудования: " + typeServerAddadnModified.IdTypeServer, typeServer, typeServerAddadnModified.IdTypeServer);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<TypeServer>("При обновлении/добавлении данных 'Типа серверного оборудования' по : " + typeServerAddadnModified.IdTypeServer + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>

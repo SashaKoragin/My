@@ -2,12 +2,15 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Media.Imaging;
+using EfDatabase.Inventory.Base;
 using EfDatabaseInvoice;
 using EfDatabaseUploadFile;
 using EfDatabaseXsdBookAccounting;
 using ZXing;
 using LibaryDocumentGenerator.Documents.Constant;
 using ZXing.Common;
+using ZXing.QrCode;
+using ZXing.Rendering;
 
 namespace LibaryDocumentGenerator.Barcode
 {
@@ -103,8 +106,36 @@ namespace LibaryDocumentGenerator.Barcode
                         pngEncoder.Save(pngFs);
                     }
                 }
-             }
+            }
             return pngPaths;
+        }
+        /// <summary>
+        /// Генерация QR CODE
+        /// </summary>
+        ///<param name="allTechnical">Техника для QR code</param>
+        /// <param name="path">Путь сохранения</param>
+        public void GenerateQrCode(AllTechnic allTechnical, string path)
+        {
+            allTechnical.Name = path + allTechnical.Id+ WordConstant.Formatpng;
+            var options = new QrCodeEncodingOptions()
+            {
+                GS1Format = false,
+                DisableECI = false,
+                PureBarcode = false,
+                CharacterSet = "UTF-8",
+                Width = 110,
+                Height = 110,
+                Margin = 0
+            };
+            var writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.QR_CODE;
+            writer.Options = options;
+            writer.Write($"{allTechnical.Item}: {allTechnical.NameManufacturer} {allTechnical.NameModel}\r\n" +
+                                $"s/n: {allTechnical.SerNum}\r\n" +
+                                $"Инв.: {allTechnical.InventarNum}\r\n" +
+                                $"Серв.: {allTechnical.ServiceNum}\r\n" +
+                                $"Kaб.: {allTechnical.NumberKabinet}\r\n" +
+                                $"User: {allTechnical.Users}").Save(allTechnical.Name);
         }
     }
 }

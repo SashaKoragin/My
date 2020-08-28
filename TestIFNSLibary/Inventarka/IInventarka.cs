@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
+using EfDatabaseErrorInventory;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
 using EfDatabaseXsdInventoryAutorization;
@@ -249,13 +250,48 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllTelephon", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> Telephon();
         /// <summary>
-        /// Все бесперебойники
+        /// Все бесперебойные блоки
         /// http://localhost:8182/Inventarka/AllBlockPower
         /// </summary>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllBlockPower", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> BlockPower();
+
+        /// <summary>
+        /// Все серверное оборудование
+        /// http://localhost:8182/Inventarka/AllServerEquipment
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllServerEquipment", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> ServerEquipment();
+        /// <summary>
+        /// Все типы серверного оборудования
+        /// http://localhost:8182/Inventarka/AllTypeServer
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllTypeServer", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> TypeServer();
+        /// <summary>
+        /// Все модели серверного оборудования
+        /// http://localhost:8182/Inventarka/AllModelSeverEquipment
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllModelSeverEquipment", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> ModelSeverEquipment();
+
+        /// <summary>
+        /// Все производители серверного оборудования
+        /// http://localhost:8182/Inventarka/AllManufacturerSeverEquipment
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllManufacturerSeverEquipment", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> ManufacturerSeverEquipment();
+
         /// <summary>
         /// Все поставщики
         /// http://localhost:8182/Inventarka/AllSupply
@@ -265,7 +301,7 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllSupply", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> Supply();
         /// <summary>
-        /// Все модели бесперебойников
+        /// Все модели бесперебойных блоков
         /// http://localhost:8182/Inventarka/AllModelBlockPower
         /// </summary>
         /// <returns></returns>
@@ -273,7 +309,7 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllModelBlockPower", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> ModelBlockPower();
         /// <summary>
-        /// Все производители бесперебойников
+        /// Все производители бесперебойных блоков
         /// http://localhost:8182/Inventarka/AllProizvoditelBlockPower
         /// </summary>
         /// <returns></returns>
@@ -340,7 +376,44 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditScaner?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn<EfDatabase.Inventory.Base.ScanerAndCamer> AddAndEditScaner(EfDatabase.Inventory.Base.ScanerAndCamer scaner, string userIdEdit);
+        /// <summary>
+        /// Добавление или редактирования серверного оборудования
+        /// http://localhost:8182/Inventarka/AddAndEditServerEquipment
+        /// </summary>
+        /// <param name="serverEquipment">Серверное оборудование</param>
+        /// <param name="userIdEdit">Кто редактировал</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditServerEquipment?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<ServerEquipment> AddAndEditServerEquipment(ServerEquipment serverEquipment, string userIdEdit);
+        /// <summary>
+        /// Добавление или редактирования модели серверного оборудования
+        /// http://localhost:8182/Inventarka/AddAndEditModelSeverEquipment
+        /// </summary>
+        /// <param name="modelSeverEquipment">Модель серверного оборудования</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditModelSeverEquipment", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<ModelSeverEquipment> AddAndEditModelSeverEquipment(ModelSeverEquipment modelSeverEquipment);
 
+        /// <summary>
+        /// Добавление или редактирования производителя серверного оборудования
+        /// http://localhost:8182/Inventarka/AddAndEditManufacturerSeverEquipment
+        /// </summary>
+        /// <param name="manufacturerSeverEquipment">Производитель серверного оборудования</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditManufacturerSeverEquipment", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<ManufacturerSeverEquipment> AddAndEditManufacturerSeverEquipment(ManufacturerSeverEquipment manufacturerSeverEquipment);
+        /// <summary>
+        /// Добавление или редактирования типа сервера
+        /// http://localhost:8182/Inventarka/AddAndEditTypeServer
+        /// </summary>
+        /// <param name="typeServer">Тип сервера</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditTypeServer", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<TypeServer> AddAndEditTypeServer(TypeServer typeServer);
         /// <summary>
         /// Добавление или обновление мфу
         /// http://localhost:8182/Inventarka/AddAndEditMfu
@@ -600,11 +673,22 @@ namespace TestIFNSLibary.Inventarka
         /// Удаление не актуальных системных блоков
         /// </summary>
         /// <param name="sysBlock">Системный блок</param>
+        /// <param name="userIdEdit">Кто удалял</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteSysBlock?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock, string userIdEdit);
         
+        /// <summary>
+        /// Удаление не актуального серверного оборудования
+        /// </summary>
+        /// <param name="serverEquipment">Серверное оборудование</param>
+        /// <param name="userIdEdit">Кто удалял</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteServerEquipment?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<ServerEquipment> DeleteServerEquipment(ServerEquipment serverEquipment, string userIdEdit);
+
         /// <summary>
         /// Удаление не актуальных мониторов
         /// </summary>
@@ -743,6 +827,19 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ServiceSupport", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<ModelParametrSupport> ServiceSupport(ModelParametrSupport modelSupport);
-
+        /// <summary>
+        /// Снять статус техники по Id технике
+        /// </summary>
+        /// <param name="allTechnics">Техника</param>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/IsCheckStatusNull", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> IsCheckStatusNull(AllTechnic allTechnics);
+        /// <summary>
+        /// Генерация QR code для техники
+        /// </summary>
+        /// <param name="serialNumber">Серийный номер техники</param>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateQrCode?serialNumber={serialNumber}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> GenerateQrCode(string serialNumber);
    }
 }

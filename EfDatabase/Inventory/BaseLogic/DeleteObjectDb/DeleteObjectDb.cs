@@ -36,7 +36,7 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
                     if (isActive != null && isActive.Value == 2)
                     {
                         var isExistsUsers = context.Database.SqlQuery<object>($"Select * From ErrorUSerNotActul Where IdUser={user.IdUser}");
-                        if (isExistsUsers.Any()) return new ModelReturn<User>("Не возможно удалить пользователя! Есть привязки к технике!", user,2);
+                        if (isExistsUsers.Any()) return new ModelReturn<User>("Не возможно удалить пользователя! Есть привязки к технике и(или) к Накладной форме!", user,2);
                         DeleteModelDb(context, new User() { IdUser = user.IdUser });
                         Loggers.Log4NetLogger.Info(new Exception("Удалили пользователя "+ user.IdUser));
                         return new ModelReturn<User>("Пользователь удален!", user);
@@ -82,6 +82,37 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
                 Loggers.Log4NetLogger.Error(e);
             }
             return new ModelReturn<SysBlock>("При удалении системного блока возникли ошибки " + systemUnit.IdSysBlock + " произошла ошибка смотри log.txt", systemUnit, 2);
+        }
+
+        /// <summary>
+        /// Удаление серверного оборудования
+        /// </summary>
+        /// <param name="serverEquipment">Серверное оборудование</param>
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<ServerEquipment> DeleteServerEquipment(ServerEquipment serverEquipment, int? idUser)
+        {
+            try
+            {
+                using (var context = new InventoryContext())
+                {
+                    var isExistSystemUnit = context.Database.SqlQuery<object>($"Select * From ServerEquipment Where Id = {serverEquipment.Id} and IdStatus is null");
+                    if (isExistSystemUnit.Any())
+                    {
+                        HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
+                        DeleteModelDb(context, new ServerEquipment() {Id = serverEquipment.Id});
+                        log.GenerateHistory( serverEquipment.IdHistory, serverEquipment.Id, "Серверное оборудование", idUser,
+                            $"Модель: {serverEquipment.ModelSeverEquipment?.NameModel} Серийный номер: {serverEquipment.SerNum} Сервисный номер: {serverEquipment.ServiceNum} Инвентарный номер: {serverEquipment.InventarNum}",
+                            "Произведено удаление!");
+                        return new ModelReturn<ServerEquipment>("Серверное оборудование удалено!", serverEquipment);
+                    }
+                    return new ModelReturn<ServerEquipment>("Не возможно удалить серверное оборудование! Есть привязки к статусу!", serverEquipment, 1);
+                }
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ServerEquipment>("При удалении серверного оборудования возникли ошибки " + serverEquipment.Id + " произошла ошибка смотри log.txt", serverEquipment, 2);
         }
         /// <summary>
         /// Удаление монитора из БД

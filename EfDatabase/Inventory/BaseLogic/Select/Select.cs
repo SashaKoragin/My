@@ -1,5 +1,6 @@
 ﻿using EfDatabase.Inventory.Base;
 using System;
+using System.Linq;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 
 namespace EfDatabase.Inventory.BaseLogic.Select
@@ -60,7 +61,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Printers()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Printers);
+            return json.JsonLibaryIgnoreDate(Inventory.Printers.Where(x=>x.IdStatus!=31));
         }
         /// <summary>
         /// Выгрузка всех Коммутаторов
@@ -69,7 +70,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Swithes()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Swithes);
+            return json.JsonLibaryIgnoreDate(Inventory.Swithes.Where(x => x.IdStatus != 31));
         }
 
         public string ModelSwitch()
@@ -85,7 +86,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Scaner()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.ScanerAndCamers);
+            return json.JsonLibaryIgnoreDate(Inventory.ScanerAndCamers.Where(x => x.IdStatus != 31));
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Mfu()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Mfus);
+            return json.JsonLibaryIgnoreDate(Inventory.Mfus.Where(x => x.IdStatus != 31));
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string SysBloks()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.SysBlocks);
+            return json.JsonLibaryIgnoreDate(Inventory.SysBlocks.Where(x => x.IdStatus != 31));
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Monitors()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Monitors);
+            return json.JsonLibaryIgnoreDate(Inventory.Monitors.Where(x => x.IdStatus != 31));
         }
 
         /// <summary>
@@ -194,7 +195,16 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Telephon()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Telephons);
+            return json.JsonLibaryIgnoreDate(Inventory.Telephons.Where(x => x.IdStatus != 31));
+        }
+        /// <summary>
+        /// Выгрузка типов серверов
+        /// </summary>
+        /// <returns></returns>
+        public string TypeServer()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.TypeServers);
         }
         /// <summary>
         /// Выгрузка бесперебойников
@@ -203,8 +213,36 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string BlockPower()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.BlockPowers);
+            return json.JsonLibaryIgnoreDate(Inventory.BlockPowers.Where(x => x.IdStatus != 31));
         }
+        /// <summary>
+        /// Все серверное оборудование
+        /// </summary>
+        /// <returns></returns>
+        public string ServerEquipment()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.ServerEquipments.Where(x => x.IdStatus != 31));
+        }
+        /// <summary>
+        /// Все модели серверного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public string ModelSeverEquipment()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.ModelSeverEquipments);
+        }
+        /// <summary>
+        /// Все производители серверного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public string ManufacturerSeverEquipment()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.ManufacturerSeverEquipments);
+        }
+
         /// <summary>
         /// Выгрузка поставщиков
         /// </summary>
@@ -277,6 +315,23 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.FullTemplateSupports);
+        }
+        /// <summary>
+        /// Запрос на технику претендующую на QR code
+        /// </summary>
+        /// <param name="serialNumber">Серийный номер</param>
+        /// <returns></returns>
+        public AllTechnic SelecTechnic(string serialNumber)
+        {
+            try
+            {
+                return Inventory.AllTechnics.FirstOrDefault(x => x.SerNum == serialNumber);
+            }
+            catch(Exception ex)
+            {
+                Loggers.Log4NetLogger.Error(ex);
+            }
+            return null;
         }
 
         /// <summary>
