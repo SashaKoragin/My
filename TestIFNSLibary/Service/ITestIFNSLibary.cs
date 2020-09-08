@@ -62,7 +62,7 @@ namespace TestIFNSLibary.Service
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        Parametr Config();
+        Parameter Config();
         /// <summary>
         /// Сохранение настроек сервиса
         /// </summary>

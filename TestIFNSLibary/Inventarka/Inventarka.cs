@@ -49,7 +49,7 @@ namespace TestIFNSLibary.Inventarka
 {
    public class Inventarka  : IInventarka
    {
-       private readonly Parametr _parametrService = new Parametr();
+       private readonly Parameter _parametrService = new Parameter();
 
        /// <summary>
         /// Запрос всех отделов
@@ -93,7 +93,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         public async Task<string> SelectAllUsers(ModelParametr model)
         {
-            var param = new Parametr();
+            var param = new Parameter();
             SelectInventory select = new SelectInventory(param.Inventarization);
             return await Task.Factory.StartNew((() => select.SelectFull(model)));
         }

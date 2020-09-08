@@ -5,12 +5,12 @@ using System.Runtime.Serialization;
 namespace TestIFNSLibary.PathJurnalAndUse
 {
     [DataContract]
-   public class Parametr
+   public class Parameter
     {
         /// <summary>
         /// При инициализации обновляется Конфиг и подтягиваются переменные
         /// </summary>
-        public Parametr()
+        public Parameter()
         {
             ConfigurationManager.RefreshSection(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.SectionInformation.Name);
             PathJurnal = ConfigurationManager.AppSettings["PathJurnal"];
@@ -29,7 +29,9 @@ namespace TestIFNSLibary.PathJurnalAndUse
             PathDomainComputer = ConfigurationManager.AppSettings["PathDomainComputer"];
             PathDomainGroup = ConfigurationManager.AppSettings["PathDomainGroup"];
             FindWorkStations = ConfigurationManager.AppSettings["FindWorkStations"];
-
+            User = ConfigurationManager.AppSettings["User"];
+            Password = ConfigurationManager.AppSettings["Password"];
+            DayX = Convert.ToInt32(ConfigurationManager.AppSettings["DayX"]);
         }
 
         public void SettingEdit(string testDb, string workDb, int hours, int minutes)
@@ -111,5 +113,17 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// Поиск рабочих станций
         /// </summary>
         public string FindWorkStations { get; set; }
+        /// <summary>
+        /// Логин 
+        /// </summary>
+        public string User { get; set; }
+        /// <summary>
+        /// Пароль
+        /// </summary>
+        public string Password { get; set; }
+        /// <summary>
+        /// День заявки
+        /// </summary>
+        public int DayX { get; set; }
     }
 }

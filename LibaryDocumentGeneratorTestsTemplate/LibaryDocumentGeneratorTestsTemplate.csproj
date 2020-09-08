@@ -66,6 +66,7 @@
     <Compile Include="Documents\Template\TemplateUserRuleTestsTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sql\ProcedureInventorization\UnitTest1.cs" />
+    <Compile Include="TestStoAuto\StoTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WPFLib\WPFLib\EfDatabaseAutomation\EfDatabaseAutomation.csproj">
@@ -98,8 +99,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

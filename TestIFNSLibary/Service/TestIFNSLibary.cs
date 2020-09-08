@@ -12,7 +12,7 @@ namespace TestIFNSLibary.Service
     [ServiceBehavior(UseSynchronizationContext = true, IncludeExceptionDetailInFaults = true)]
     public class CommandDbf : IReaderCommandDbf
     {
-        public Parametr Parametr = new Parametr();
+        public Parameter Parametr = new Parameter();
         public DataSet SqlFl(string command, string conectionstring, DataSet datasetreport, int i)
         {
             using (var con = new OleDbConnection(conectionstring))
@@ -62,9 +62,9 @@ namespace TestIFNSLibary.Service
             return xmlstatusbakcup.DateBakcup();
         }
 
-        public Parametr Config()
+        public Parameter Config()
         {
-            return new Parametr();
+            return new Parameter();
         }
 
         public void SaveSeting(string testDb, string workDb, int hours, int minutes)
@@ -76,7 +76,7 @@ namespace TestIFNSLibary.Service
         {
             Task task = new Task((() =>
             {
-                Parametr param = new Parametr();
+                Parameter param = new Parameter();
                 using (BakcupingDb bakcuping = new BakcupingDb())
                 {
                     bakcuping.Backup(param.WorkDB, param.TestDB,param.PathJurnal);

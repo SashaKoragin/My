@@ -26,7 +26,7 @@ namespace Loggers
         }
         public static void Error(Exception ex)
         {
-            logger.Error(ex, ex.Source);
+            logger.Error(ex);
         }
         public static void Fatal(Exception ex)
         {

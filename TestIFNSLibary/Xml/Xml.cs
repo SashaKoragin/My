@@ -8,7 +8,7 @@ namespace TestIFNSLibary.Xml
 {
     class Xml
     {
-        Parametr ParametrService = new Parametr();
+        Parameter ParametrService = new Parameter();
         public static XmlSerializer Formatter = new XmlSerializer(typeof(Bakcup));
         public bool YesandNo()
         {

@@ -33,7 +33,7 @@ namespace TestIFNSLibary.ServiceRest
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple, UseSynchronizationContext = false)]
     public class ServiceRest : IServiceRest
     {
-        readonly Parametr _parametrService = new Parametr();
+        readonly Parameter _parametrService = new Parameter();
         //Функции для сайта IFNS
         public async Task<Face> SqlFaceError()
         {
