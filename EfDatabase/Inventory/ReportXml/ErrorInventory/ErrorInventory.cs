@@ -189,6 +189,8 @@ namespace EfDatabaseErrorInventory {
         
         private AllTechnics[] allTechnicsField;
         
+        private ErrorTokenUser[] errorTokenUserField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Error")]
         public Error[] Error {
@@ -329,6 +331,17 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.allTechnicsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ErrorTokenUser")]
+        public ErrorTokenUser[] ErrorTokenUser {
+            get {
+                return this.errorTokenUserField;
+            }
+            set {
+                this.errorTokenUserField = value;
             }
         }
     }
@@ -2046,7 +2059,7 @@ namespace EfDatabaseErrorInventory {
         
         private string itemField;
         
-        private string usersField;
+        private string nameField;
         
         private string nameTypeField;
         
@@ -2070,7 +2083,7 @@ namespace EfDatabaseErrorInventory {
         
         private string comentField;
         
-        private string nameField;
+        private string nameStatusField;
         
         public AllTechnics() {
             this.logicsButtonField = "Button";
@@ -2123,12 +2136,12 @@ namespace EfDatabaseErrorInventory {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Users {
+        public string Name {
             get {
-                return this.usersField;
+                return this.nameField;
             }
             set {
-                this.usersField = value;
+                this.nameField = value;
             }
         }
         
@@ -2255,12 +2268,126 @@ namespace EfDatabaseErrorInventory {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameStatus {
             get {
-                return this.nameField;
+                return this.nameStatusField;
             }
             set {
-                this.nameField = value;
+                this.nameStatusField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class ErrorTokenUser {
+        
+        private string idTokenField;
+        
+        private string smallNameField;
+        
+        private string smallNameU1Field;
+        
+        private string serNumField;
+        
+        private string serNumSysBlockField;
+        
+        private string nameComputerSysBlockField;
+        
+        private string serNumFactField;
+        
+        private string nameComputerFactField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IdToken {
+            get {
+                return this.idTokenField;
+            }
+            set {
+                this.idTokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SmallName {
+            get {
+                return this.smallNameField;
+            }
+            set {
+                this.smallNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SmallNameU1 {
+            get {
+                return this.smallNameU1Field;
+            }
+            set {
+                this.smallNameU1Field = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNum {
+            get {
+                return this.serNumField;
+            }
+            set {
+                this.serNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNumSysBlock {
+            get {
+                return this.serNumSysBlockField;
+            }
+            set {
+                this.serNumSysBlockField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameComputerSysBlock {
+            get {
+                return this.nameComputerSysBlockField;
+            }
+            set {
+                this.nameComputerSysBlockField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNumFact {
+            get {
+                return this.serNumFactField;
+            }
+            set {
+                this.serNumFactField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameComputerFact {
+            get {
+                return this.nameComputerFactField;
+            }
+            set {
+                this.nameComputerFactField = value;
             }
         }
     }

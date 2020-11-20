@@ -25,6 +25,7 @@
 			<xs:element ref="TemplateSupport" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="Step3ResponseSupport"/>
 			<xs:element ref="Error"/>
+			<xs:element ref="IdCalendarVks"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="IdTemplate" type="xs:int" default="0" nillable="false">
@@ -160,6 +161,11 @@
 	<xs:element name="Error" type="xs:string" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Ошибка</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdCalendarVks" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун календаря ВКС</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

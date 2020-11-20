@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
@@ -16,7 +17,6 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
         public TableRow GenerateRow(ref ObservableCollection<TableCell> tablecells, bool isHeight = false, uint valHeight = 175U)
         {
             TableRow tableRow = new TableRow();
-
             foreach (var cell in tablecells)
             {
                 tableRow.Append(cell);

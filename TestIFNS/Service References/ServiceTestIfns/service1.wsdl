@@ -260,7 +260,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:45618/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Spn>host/i7751-w00000745.regions.tax.nalog.ru</Spn>
+          <Upn>7751_svc_admin@regions.tax.nalog.ru</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

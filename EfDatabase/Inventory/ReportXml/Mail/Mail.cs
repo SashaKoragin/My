@@ -29,6 +29,8 @@ namespace EfDatabaseXsdMail {
         
         private WebMailModel webMailModelField;
         
+        private CalendarVksStp[] calendarVksStpField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("MailIn")]
         public MailIn[] MailIn {
@@ -58,6 +60,17 @@ namespace EfDatabaseXsdMail {
             }
             set {
                 this.webMailModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CalendarVksStp")]
+        public CalendarVksStp[] CalendarVksStp {
+            get {
+                return this.calendarVksStpField;
+            }
+            set {
+                this.calendarVksStpField = value;
             }
         }
     }
@@ -374,17 +387,17 @@ namespace EfDatabaseXsdMail {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class WebMailModel {
         
-        private int idField;
+        private string idMailField;
         
         private string nameGroupModelField;
         
         /// <remarks/>
-        public int Id {
+        public string IdMail {
             get {
-                return this.idField;
+                return this.idMailField;
             }
             set {
-                this.idField = value;
+                this.idMailField = value;
             }
         }
         
@@ -396,6 +409,177 @@ namespace EfDatabaseXsdMail {
             }
             set {
                 this.nameGroupModelField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class CalendarVksStp {
+        
+        private int idField;
+        
+        private bool idFieldSpecified;
+        
+        private string idMailField;
+        
+        private string descriptionVKSField;
+        
+        private string fullDescriptionField;
+        
+        private string idVKSField;
+        
+        private System.DateTime dateStartField;
+        
+        private bool dateStartFieldSpecified;
+        
+        private System.DateTime dateFinishField;
+        
+        private bool dateFinishFieldSpecified;
+        
+        private string isSTPField;
+        
+        private string logicsButtonField;
+        
+        public CalendarVksStp() {
+            this.logicsButtonField = "Button";
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IdSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IdMail {
+            get {
+                return this.idMailField;
+            }
+            set {
+                this.idMailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DescriptionVKS {
+            get {
+                return this.descriptionVKSField;
+            }
+            set {
+                this.descriptionVKSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FullDescription {
+            get {
+                return this.fullDescriptionField;
+            }
+            set {
+                this.fullDescriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IdVKS {
+            get {
+                return this.idVKSField;
+            }
+            set {
+                this.idVKSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DateStart {
+            get {
+                return this.dateStartField;
+            }
+            set {
+                this.dateStartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DateStartSpecified {
+            get {
+                return this.dateStartFieldSpecified;
+            }
+            set {
+                this.dateStartFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DateFinish {
+            get {
+                return this.dateFinishField;
+            }
+            set {
+                this.dateFinishField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DateFinishSpecified {
+            get {
+                return this.dateFinishFieldSpecified;
+            }
+            set {
+                this.dateFinishFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IsSTP {
+            get {
+                return this.isSTPField;
+            }
+            set {
+                this.isSTPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("Button")]
+        public string LogicsButton {
+            get {
+                return this.logicsButtonField;
+            }
+            set {
+                this.logicsButtonField = value;
             }
         }
     }

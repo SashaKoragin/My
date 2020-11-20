@@ -14,6 +14,7 @@
 			<xs:element ref="MailIn" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="MailOut" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="WebMailModel" minOccurs="0"/>
+			<xs:element ref="CalendarVksStp" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="MailIn">
@@ -121,7 +122,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="Id"/>
+				<xs:element ref="IdMail"/>
 			</xs:sequence>
 			<xs:attribute name="NameGroupModel" type="xs:string">
 				<xs:annotation>
@@ -130,9 +131,57 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="Id" type="xs:int">
+	<xs:element name="IdMail" type="xs:string">
 		<xs:annotation>
-			<xs:documentation>Ун в БД</xs:documentation>
+			<xs:documentation>Ун письма в БД</xs:documentation>
 		</xs:annotation>
+	</xs:element>
+	<xs:element name="CalendarVksStp">
+		<xs:annotation>
+			<xs:documentation>Календарь ВКС</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун в таблице</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdMail" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ун письма</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DescriptionVKS" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Описание ВКС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FullDescription" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Полное описание ВКС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdVKS" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер ВКС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateStart" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата и время начала ВКС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateFinish" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата и время окончания ВКС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSTP" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Отправленно на СТП</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LogicsButton" default="Button"/>
+		</xs:complexType>
 	</xs:element>
 </xs:schema>

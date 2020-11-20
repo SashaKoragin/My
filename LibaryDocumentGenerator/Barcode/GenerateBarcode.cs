@@ -112,30 +112,27 @@ namespace LibaryDocumentGenerator.Barcode
         /// <summary>
         /// Генерация QR CODE
         /// </summary>
-        ///<param name="allTechnical">Техника для QR code</param>
-        /// <param name="path">Путь сохранения</param>
-        public void GenerateQrCode(AllTechnic allTechnical, string path)
+        /// <param name="fullPathAndNameFileNotFormat">Путь сохранения</param>
+        /// <param name="templateContent"></param>
+        /// <returns>Полный путь сохранения</returns>
+        public string GenerateQrCode(string fullPathAndNameFileNotFormat,string templateContent)
         {
-            allTechnical.Name = path + allTechnical.Id+ WordConstant.Formatpng;
+            fullPathAndNameFileNotFormat = fullPathAndNameFileNotFormat + WordConstant.Formatpng;
             var options = new QrCodeEncodingOptions()
             {
                 GS1Format = false,
                 DisableECI = false,
                 PureBarcode = false,
                 CharacterSet = "UTF-8",
-                Width = 110,
-                Height = 110,
+                Width = 120,
+                Height = 120,
                 Margin = 0
             };
             var writer = new BarcodeWriter();
             writer.Format = BarcodeFormat.QR_CODE;
             writer.Options = options;
-            writer.Write($"{allTechnical.Item}: {allTechnical.NameManufacturer} {allTechnical.NameModel}\r\n" +
-                                $"s/n: {allTechnical.SerNum}\r\n" +
-                                $"Инв.: {allTechnical.InventarNum}\r\n" +
-                                $"Серв.: {allTechnical.ServiceNum}\r\n" +
-                                $"Kaб.: {allTechnical.NumberKabinet}\r\n" +
-                                $"User: {allTechnical.Users}").Save(allTechnical.Name);
+            writer.Write(templateContent).Save(fullPathAndNameFileNotFormat);
+            return fullPathAndNameFileNotFormat;
         }
     }
 }

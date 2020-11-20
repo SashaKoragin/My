@@ -101,6 +101,9 @@
     <Compile Include="Inventory\DataTransferObject\ParametrModelSelect\ParametrsModel.cs">
       <DependentUpon>ParametrsModel.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\DataTransferObject\QrCodeOffice\QrCodeOfficeModel.cs">
+      <DependentUpon>QrCodeOfficeModel.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\MailLogicLotus\MailLogicLotus.cs" />
     <Compile Include="Inventory\MailLogicLotus\MailXsdSheme\LotusUser.cs">
       <DependentUpon>LotusUser.xsd</DependentUpon>
@@ -113,6 +116,9 @@
     </Compile>
     <Compile Include="Inventory\ReportXml\InventoryAutorization\Autorization.cs">
       <DependentUpon>Autorization.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\InventoryRuleAndUsers\RuleAndUsers.cs">
+      <DependentUpon>RuleAndUsers.xsd</DependentUpon>
     </Compile>
     <Compile Include="Inventory\ReportXml\Invoice\DocumentInventory.cs">
       <DependentUpon>DocumentInventory.xsd</DependentUpon>
@@ -162,6 +168,9 @@
     <None Include="Inventory\DataTransferObject\ParametrModelSelect\ParametrsModel.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Inventory\DataTransferObject\QrCodeOffice\QrCodeOfficeModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventory\MailLogicLotus\MailXsdSheme\LotusUser.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -172,6 +181,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\InventoryAutorization\Autorization.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\InventoryRuleAndUsers\RuleAndUsers.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\Invoice\DocumentInventory.xsd">
@@ -233,6 +245,8 @@
       <XsdLotusUser Include="Inventory\MailLogicLotus\MailXsdSheme\*.xsd" />
       <XsdSupportNalog Include="Inventory\ReportXml\ModelSupportNalog\*.xsd" />
       <XsdInventoryAutorization Include="Inventory\ReportXml\InventoryAutorization\*.xsd" />
+      <XsdInventoryRuleAndUsers Include="Inventory\ReportXml\InventoryRuleAndUsers\*.xsd" />
+      <XsdQrCodeModel Include="Inventory\DataTransferObject\QrCodeOffice\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -252,5 +266,7 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdMail.FullPath)&quot; /c /namespace:$(RootNamespace)XsdMail /outputdir:Inventory\ReportXml\Mail\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdSupportNalog.FullPath)&quot; /c /namespace:$(RootNamespace)XsdSupportNalog /outputdir:Inventory\ReportXml\ModelSupportNalog\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdInventoryAutorization.FullPath)&quot; /c /namespace:$(RootNamespace)XsdInventoryAutorization /outputdir:Inventory\ReportXml\InventoryAutorization\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdQrCodeModel.FullPath)&quot; /c /namespace:$(RootNamespace)XsdQrCodeModel /outputdir:Inventory\DataTransferObject\QrCodeOffice\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdInventoryRuleAndUsers.FullPath)&quot; /c /namespace:$(RootNamespace).XsdInventoryRuleAndUsers /outputdir:Inventory\ReportXml\InventoryRuleAndUsers\" />
   </Target>
 </Project>

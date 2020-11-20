@@ -22,21 +22,20 @@ namespace TestIFNSTools.Arhivator.Arhiv.OtcetKV
 
         public void ExistsOpenDbf ()
        {
-
-               DiscoveryClient dc = new DiscoveryClient(new UdpDiscoveryEndpoint());
-               FindResponse discoveryresponce = dc.Find(new FindCriteria(typeof(IReaderCommandDbf)));
-               if (discoveryresponce.Endpoints.Count > 0)
-               {
-                        _owner.button7.Text = @"Соединение со службой WCF ОК!!!";
-                        _owner.button7.BackColor = Color.Green;
-               }
-               else
-               {
-                       _owner.button7.Text = @"Нет соединения со службой WCF!!!";
-                       _owner.button7.BackColor = Color.Red;
-                }
-                //EndpointAddress address = discoveryresponce.Endpoints[0].Address;
-                // var service = new ReaderCommandDbfClient(new BasicHttpsBinding(), address);
+           DiscoveryClient dc = new DiscoveryClient(new UdpDiscoveryEndpoint());
+            FindResponse discoveryresponce = dc.Find(new FindCriteria(typeof(IReaderCommandDbf)));
+            if (discoveryresponce.Endpoints.Count > 0)
+            {
+                _owner.button7.Text = @"Соединение со службой WCF ОК!!!";
+                _owner.button7.BackColor = Color.Green;
+            }
+            else
+            {
+                _owner.button7.Text = @"Нет соединения со службой WCF!!!";
+                _owner.button7.BackColor = Color.Red;
+            }
+            //EndpointAddress address = discoveryresponce.Endpoints[0].Address;
+             //    var service = new ReaderCommandDbfClient(new BasicHttpsBinding(), address);
        }
 
         public void OpenSelectDbf()

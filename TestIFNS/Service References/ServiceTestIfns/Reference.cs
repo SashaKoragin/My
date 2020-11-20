@@ -119,9 +119,9 @@ namespace TestIFNSTools.ServiceTestIfns {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Parametr", Namespace="http://schemas.datacontract.org/2004/07/TestIFNSLibary.PathJurnalAndUse")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Parameter", Namespace="http://schemas.datacontract.org/2004/07/TestIFNSLibary.PathJurnalAndUse")]
     [System.SerializableAttribute()]
-    public partial class Parametr : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Parameter : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -251,10 +251,10 @@ namespace TestIFNSTools.ServiceTestIfns {
         System.Threading.Tasks.Task FileBakcupAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReaderCommandDbf/Config", ReplyAction="http://tempuri.org/IReaderCommandDbf/ConfigResponse")]
-        TestIFNSTools.ServiceTestIfns.Parametr Config();
+        TestIFNSTools.ServiceTestIfns.Parameter Config();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReaderCommandDbf/Config", ReplyAction="http://tempuri.org/IReaderCommandDbf/ConfigResponse")]
-        System.Threading.Tasks.Task<TestIFNSTools.ServiceTestIfns.Parametr> ConfigAsync();
+        System.Threading.Tasks.Task<TestIFNSTools.ServiceTestIfns.Parameter> ConfigAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IReaderCommandDbf/SaveSeting")]
         void SaveSeting(string testDb, string workDb, int hours, int minutes);
@@ -338,11 +338,11 @@ namespace TestIFNSTools.ServiceTestIfns {
             return base.Channel.FileBakcupAsync();
         }
         
-        public TestIFNSTools.ServiceTestIfns.Parametr Config() {
+        public TestIFNSTools.ServiceTestIfns.Parameter Config() {
             return base.Channel.Config();
         }
         
-        public System.Threading.Tasks.Task<TestIFNSTools.ServiceTestIfns.Parametr> ConfigAsync() {
+        public System.Threading.Tasks.Task<TestIFNSTools.ServiceTestIfns.Parameter> ConfigAsync() {
             return base.Channel.ConfigAsync();
         }
         

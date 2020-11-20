@@ -27,7 +27,7 @@ namespace EfDatabaseXsdInventoryAutorization {
         
         private string nameField;
         
-        private string ruleField;
+        private string[] ruleField;
         
         private string tabelNumberField;
         
@@ -62,7 +62,8 @@ namespace EfDatabaseXsdInventoryAutorization {
         }
         
         /// <remarks/>
-        public string Rule {
+        [System.Xml.Serialization.XmlElementAttribute("Rule")]
+        public string[] Rule {
             get {
                 return this.ruleField;
             }

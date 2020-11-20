@@ -481,7 +481,6 @@ namespace SignalRLibary.SignalRinventory
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeModelSwithe(json.JsonLibaryIgnoreDate(modelSwithes));
         }
-
         /// <summary>
         /// Подписка на изменение Модель Идентификаторы
         /// </summary>
@@ -504,7 +503,26 @@ namespace SignalRLibary.SignalRinventory
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeModelMailGroups(json.JsonLibaryIgnoreDate(modelMailGroups));
         }
-
+        /// <summary>
+        /// Рассылка изменения по Токенам ключам
+        /// </summary>
+        /// <param name="token">Токен ключ</param>
+        public static void SubscribeToken(Token token)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Модель Токена рассылка пошла: " + token.IdToken + " " + token.Coment));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeToken(json.JsonLibaryIgnoreDate(token));
+        }
+        /// <summary>
+        /// Удаление токена ключа подписка пользователя на удаление
+        /// </summary>
+        /// <param name="modelToken">Модель мониторов</param>
+        public static void SubscribeDeleteToken(ModelReturn<Token> modelToken)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteToken(modelToken);
+        }
     }
     public class UsersContext
     {

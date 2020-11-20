@@ -15,12 +15,12 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
         [TestMethod]
         public void TestProcedureIpAdress()
         {
-            Select auto = new Select();
-            StickerCode sticker = new StickerCode();
-            var technical = auto.SelecTechnic("B80GАGA000847");
-            GenerateBarcode qrCode = new GenerateBarcode();
-            qrCode.GenerateQrCode(technical, "C:\\Testing\\");
-            sticker.CreateDocum("C:\\Testing\\", technical, null);
+            //Select auto = new Select();
+            //StickerCode sticker = new StickerCode();
+            //var technical = auto.SelecTechnic("B80GАGA000847");
+            //GenerateBarcode qrCode = new GenerateBarcode();
+            //qrCode.GenerateQrCode("", "C:\\Testing\\");
+            //sticker.CreateDocum("C:\\Testing\\", technical, null);
             //File.Delete(technical.Name);
            // return sticker.FileArray();
         }

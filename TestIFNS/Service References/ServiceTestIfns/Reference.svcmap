@@ -19,15 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://i7751-w00000745:8181/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://i7751-w40204180:8181/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="b87d6ad2-df56-483a-95cf-80b5e994fa89" SourceId="1" SourceUrl="http://i7751-w00000745:8181/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="71d52bf0-7e71-4bd2-a3dc-69f4e0423889" SourceId="1" SourceUrl="http://i7751-w00000745:8181/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="d15c25e7-0e29-4e04-a0bc-fc7a0b69cc02" SourceId="1" SourceUrl="http://i7751-w00000745:8181/mex" />
-    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="cdf2a41f-8b14-4763-91e8-94b8c0b06273" SourceId="1" SourceUrl="http://i7751-w00000745:8181/mex" />
-    <MetadataFile FileName="TestIFNSLibary.Xml.XmlDS.xsd" MetadataType="Schema" ID="7def0f1b-2395-4508-b9ec-540564cb5a98" SourceId="1" SourceUrl="http://i7751-w00000745:8181/mex" />
-    <MetadataFile FileName="TestIFNSLibary.PathJurnalAndUse.xsd" MetadataType="Schema" ID="f87a1cba-02f1-4f91-8656-ac9f26e02cdf" SourceId="1" SourceUrl="http://i7751-w00000745:8181/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="f0881fea-a0be-4f31-ba0b-9f95ae321cfa" SourceId="1" SourceUrl="http://i7751-w40204180:8181/mex" />
+    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="5262aa7d-c3d1-448f-823f-fcb8f2a63474" SourceId="1" SourceUrl="http://i7751-w40204180:8181/mex" />
+    <MetadataFile FileName="service31.xsd" MetadataType="Schema" ID="e27986a4-dc7a-42b4-a1ef-a1e4daf7ddb8" SourceId="1" SourceUrl="http://i7751-w40204180:8181/mex" />
+    <MetadataFile FileName="service32.xsd" MetadataType="Schema" ID="cb0b9168-a82f-46bb-9d61-af300241552c" SourceId="1" SourceUrl="http://i7751-w40204180:8181/mex" />
+    <MetadataFile FileName="TestIFNSLibary.Xml.XmlDS1.xsd" MetadataType="Schema" ID="03abf798-82ff-47b5-bcc6-031077611536" SourceId="1" SourceUrl="http://i7751-w40204180:8181/mex" />
+    <MetadataFile FileName="TestIFNSLibary.PathJurnalAndUse1.xsd" MetadataType="Schema" ID="50e57770-884c-4097-8890-b073d3d50063" SourceId="1" SourceUrl="http://i7751-w40204180:8181/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

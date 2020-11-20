@@ -22,9 +22,9 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SingleDocument
             var paragraphGenerate = new RunGenerate();
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Stone.Stone1, "26"));
             paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Stone.Stone2, "26"));
-            cellcCollection.Add(CellGenerate.GenerateCell(ref paragraphcCollection, "5000", TableWidthUnitValues.Dxa));
-            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Stone.Stone3, "26"));
-            cellcCollection.Add(CellGenerate.GenerateCell(ref paragraphcCollection, "100", TableWidthUnitValues.Auto, "2400"));
+            cellcCollection.Add(CellGenerate.GenerateCell(ref paragraphcCollection, CellGenerate.FormulWidthCell(8.8), TableWidthUnitValues.Dxa));
+            paragraphcCollection.Add(paragraphGenerate.RunParagraphGeneratorStandart(tamplate.Templates.Stone.Stone3, "26",JustificationValues.Right));
+            cellcCollection.Add(CellGenerate.GenerateCell(ref paragraphcCollection, CellGenerate.FormulWidthCell(9.2), TableWidthUnitValues.Dxa));
             table.Append(rows.GenerateRow(ref cellcCollection));
             body.Append(table);
             return body;

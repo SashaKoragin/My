@@ -51,6 +51,8 @@ namespace EfDatabaseXsdSupportNalog {
         
         private string errorField;
         
+        private int idCalendarVksField;
+        
         public ModelParametrSupport() {
             this.idUserField = 0;
             this.idMfuField = 0;
@@ -60,6 +62,7 @@ namespace EfDatabaseXsdSupportNalog {
             this.idTemplateField = 0;
             this.idScannerField = 0;
             this.idTelephonField = 0;
+            this.idCalendarVksField = 0;
         }
         
         /// <remarks/>
@@ -201,6 +204,16 @@ namespace EfDatabaseXsdSupportNalog {
             }
             set {
                 this.errorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int IdCalendarVks {
+            get {
+                return this.idCalendarVksField;
+            }
+            set {
+                this.idCalendarVksField = value;
             }
         }
     }

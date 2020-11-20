@@ -56,7 +56,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
            {
                 ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(13) };
                 template.SenderUsers.Security = Inventory.Database.SqlQuery<Security>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], 3),
-                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел безопасности"),
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел информационной безопасности"),
                           new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).FirstOrDefault();
                 template.SenderUsers.ItOtdel = Inventory.Database.SqlQuery<ItOtdel>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], 4),
                           new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел информатизации"),

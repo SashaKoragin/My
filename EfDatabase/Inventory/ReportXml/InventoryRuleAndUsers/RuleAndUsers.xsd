@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="RuleAllAndUsers" type="RuleAllAndUsers">
+		<xs:annotation>
+			<xs:documentation>Роли пользователя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RuleAllAndUsers">
+		<xs:annotation>
+			<xs:documentation>Роли пользователя</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="RuleUsers" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Id" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>УН записи о роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdUser" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>УН пользователя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdRule" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>УН роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameRules" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Наименование роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RuleUsers">
+		<xs:annotation>
+			<xs:documentation>Роли и пользователи</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Id" minOccurs="0"/>
+				<xs:element ref="IdUser" minOccurs="0"/>
+				<xs:element ref="IdRule"/>
+				<xs:element ref="NameRules"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

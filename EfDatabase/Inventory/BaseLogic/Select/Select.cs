@@ -1,7 +1,15 @@
 ﻿using EfDatabase.Inventory.Base;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
+using EfDatabase.XsdInventoryRuleAndUsers;
+using EfDatabaseParametrsModel;
+using EfDatabaseXsdQrCodeModel;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
+using Otdel = EfDatabase.Inventory.Base.Otdel;
+
 
 namespace EfDatabase.Inventory.BaseLogic.Select
 {
@@ -32,6 +40,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string RuleAll()
         {
             SerializeJson json = new SerializeJson();
+           
             return json.JsonLibaryIgnoreDate(Inventory.Rules);
         }
         /// <summary>
@@ -42,7 +51,6 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.Users);
-
         }
         /// <summary>
         /// Запрос всех должностей
@@ -317,21 +325,74 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             return json.JsonLibaryIgnoreDate(Inventory.FullTemplateSupports);
         }
         /// <summary>
+        /// Все токены ключи в БД
+        /// </summary>
+        /// <returns></returns>
+        public string AllToken()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Tokens);
+        }
+        /// <summary>
         /// Запрос на технику претендующую на QR code
         /// </summary>
         /// <param name="serialNumber">Серийный номер</param>
+        /// <param name="isAll"></param>
         /// <returns></returns>
-        public AllTechnic SelecTechnic(string serialNumber)
+        public List<AllTechnic> SelectTechnical(string serialNumber, bool isAll = false)
         {
-            try
+            return isAll ? Inventory.AllTechnics.Where(x => x.IdStatus != 31).ToList() : Inventory.AllTechnics.Where(x => x.SerNum == serialNumber).ToList();
+        }
+        /// <summary>
+        /// Отбираем все или конкретный
+        /// </summary>
+        /// <param name="numberOffice">Номер кабинета</param>
+        /// <param name="isAll">Если true запрашиваем все</param>
+        public QrCodeOffice SelectOffice(string numberOffice, bool isAll = false)
+        {
+            var modelOfficeList = new QrCodeOffice
             {
-                return Inventory.AllTechnics.FirstOrDefault(x => x.SerNum == serialNumber);
-            }
-            catch(Exception ex)
+                Kabinet = isAll
+                    ? Inventory.Database.SqlQuery<EfDatabaseXsdQrCodeModel.Kabinet>($"Select * From Kabinet").ToArray()
+                    : Inventory.Database
+                        .SqlQuery<EfDatabaseXsdQrCodeModel.Kabinet>(
+                            $"Select * From Kabinet Where NumberKabinet ='{numberOffice}'").ToArray()
+            };
+            return modelOfficeList;
+        }
+        /// <summary>
+        /// Получение данных для личного кабинета пользователя инвенторизации
+        /// </summary>
+        /// <param name="idUser">Ун пользователя</param>
+        /// <returns></returns>
+        public string AllTechicsLkInventory(int idUser)
+        {
+            SerializeJson json = new SerializeJson();
+            SelectSql sql = new SelectSql();
+            ModelSelect model = new ModelSelect { LogicaSelect = sql.SqlSelectModel(34) };
+            var idDepartment = Inventory.Database.SqlQuery<int>(model.LogicaSelect.SelectUser,
+                new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], idUser)).FirstOrDefault();
+            sql.Dispose();
+            if (idDepartment != 0)
             {
-                Loggers.Log4NetLogger.Error(ex);
+               
+              return json.JsonLibaryIgnoreDate(Inventory.AllTechnics.Where(x => x.IdOtdel == idDepartment)); 
             }
-            return null;
+            return json.JsonLibaryIgnoreDate(Inventory.AllTechnics.Where(x => x.IdUser == idUser));
+        }
+        /// <summary>
+        /// Выгрузка ролей пользователя
+        /// </summary>
+        /// <param name="idUser">УН пользователя</param>
+        /// <returns></returns>
+        public RuleUsers[] AllRuleUser(int idUser)
+        {
+            SelectSql sql = new SelectSql();
+            ModelSelect model = new ModelSelect { LogicaSelect = sql.SqlSelectModel(35) };
+            sql.Dispose();
+            var ruleAndUser = Inventory.Database.SqlQuery<RuleUsers>(model.LogicaSelect.SelectUser,
+                new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], idUser)).ToArray();
+            return ruleAndUser;
         }
 
         /// <summary>

@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EfDatabase.Inventory.BaseLogic.Select;
+using EfDatabaseXsdQrCodeModel;
 using EfDatabaseXsdSupportNalog;
+using LibaryDocumentGenerator.Barcode;
+using LibaryDocumentGenerator.Documents.Template;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestIFNSLibary.Inventarka;
 using TestIFNSLibary.PathJurnalAndUse;
@@ -42,6 +47,25 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
                                
                             }
                     }
+        }
+        [TestMethod]
+        public void CreateQrCodeOffice()
+        {
+            Select auto = new Select();
+            QrCodeOffice office = auto.SelectOffice("357", true);
+            GenerateBarcode qrCode = new GenerateBarcode();
+            OfficeStikerCode stickerQrOffice = new OfficeStikerCode();
+            //Создание qr кодов
+            foreach (var qrCodeOffice in office.Kabinet)
+            {
+                qrCodeOffice.FullPathPng = qrCode.GenerateQrCode("C:\\Testing\\" + qrCodeOffice.IdNumberKabinet, qrCodeOffice.NumberKabinet);
+            }
+            stickerQrOffice.CreateDocum("C:\\Testing\\QrCodeOffice", office);
+            //Удаление всех png
+            foreach (var cabinet in office.Kabinet)
+            {
+                File.Delete(cabinet.FullPathPng);
+            }
         }
     }
 }

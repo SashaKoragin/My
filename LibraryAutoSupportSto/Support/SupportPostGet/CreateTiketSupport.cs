@@ -64,7 +64,7 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         /// <summary>
         /// Подготовительный шаг
         /// </summary>
-        public void StepTraining()
+        private void StepTraining()
         {
             Dispose();
             Request = (HttpWebRequest)WebRequest.Create(Step1Post);
@@ -101,7 +101,7 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         /// </summary>
         /// <param name="findNode">Модель параметров</param>
         /// <param name="modelParameter">Модель параметров</param>
-        public void GenerateParameterResponse(string findNode, TemplateSupport1[] modelParameter=null)
+        private void GenerateParameterResponse(string findNode, TemplateSupport1[] modelParameter=null)
         {
             if (Response.StatusCode == HttpStatusCode.OK)
             {
@@ -134,7 +134,7 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         /// <summary>
         /// Возврат результата с шага 3
         /// </summary>
-        public string ReturnResponseWebStep3()
+        private string ReturnResponseWebStep3()
         {
             string data = null;
             if (Response.StatusCode == HttpStatusCode.OK)
@@ -149,6 +149,24 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
                 }
             }
             return data;
+        }
+        /// <summary>
+        /// Создание полной заявки на СТП Support.Tax.Nalog.ru
+        /// </summary>
+        /// <param name="modelSupport">Модель параметров</param>
+        /// <returns></returns>
+        public string CreateFullSupportTax(ModelParametrSupport modelSupport)
+        {
+            StepTraining();
+            GenerateParameterResponse("//form[@action='/requests/create.php?step=1']",
+                modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step1").ToArray());
+            Steps(Step1Post, "POST");
+            GenerateParameterResponse("//form[@action='/requests/create.php?step=2']",
+                modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
+            Steps(Step2Post, "POST");
+            GenerateParameterResponse("//form[@action='/requests/create.php?step=3']");
+            Steps(Step3Post, "POST");
+            return ReturnResponseWebStep3();
         }
 
         /// <summary>

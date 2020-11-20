@@ -31,7 +31,6 @@ namespace EfDatabase.Inventory.BaseLogic.Select
        public void GenerateTemplateUrlParameter(ref ModelParametrSupport modelSupport)
        {
            SelectSql select = new SelectSql();
-
            ModelSelect model = new ModelSelect { LogicaSelect = select.SqlSelectModel(28) };
            if (modelSupport.IdSysBlock == 0)
            {
@@ -48,6 +47,11 @@ namespace EfDatabase.Inventory.BaseLogic.Select
 
                foreach (var template in modelParameterInput)
                {
+                   if (template.TemplateParametrType.Equals("CalendarVKS") && modelSupport.IdCalendarVks != 0)
+                   {
+                       template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr,
+                           new SqlParameter("CalendarVKS", modelSupport.IdCalendarVks)).FirstOrDefault();
+                   }
                    if (template.TemplateParametrType.Equals("User") && modelSupport.IdUser != 0)
                    {
                        template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr,
@@ -220,7 +224,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             {
                 if (templateSupport.IsImportant)
                 {
-                    if (templateSupport.Parametr == null)
+                    if (string.IsNullOrWhiteSpace(templateSupport.Parametr))
                     {
                         throw new InvalidOperationException($"Фатальная ошибка на шаге 2 отсутствуют главные параметры!!! {templateSupport.HelpParameter} " );
                     }

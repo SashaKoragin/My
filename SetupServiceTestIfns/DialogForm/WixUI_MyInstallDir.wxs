@@ -67,11 +67,11 @@ Patch dialog sequence:
                 <Control Id="Title2" Type="Text" Text="Настройки для Rest приложения:" Height="17" Width="140" X="11" Y="70" />
                 <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="80" X="11" Y="90" />
               <Control Id="Db" Type="Edit" X="90" Y="90" Height="15" Width="240" Property="DataBase" Text="[DataBase]">
-                <Property Id="DataBase" Value="i7751-app001" />
+                <Property Id="DataBase" Value="i7751-app051" />
               </Control>
               <Control Id="ReportBdkText" Type="Text" Text="Путь для отчетов:" Height="15" Width="80" X="11" Y="110" />
               <Control Id="ReportBdkEdit" Type="Edit" X="90" Y="110" Height="15" Width="240" Property="PathReportFull" Text="[PathReportFull]">
-                <Property Id="PathReportFull" Value="\\10.177.172.31\Network-Disk\!!! PUBLIC !!!\TestingSystem\" />
+                <Property Id="PathReportFull" Value="\\i7751-app014\Network-Disk\!!! PUBLIC !!!\TestingSystem\" />
               </Control>
               <Control Id="InventoryParametr" Type="Text" Text="Настройки для БД инвенторизация:" Height="17" Width="140" X="11" Y="130" />
               <Control Id="KadrText1" Type="Text" Text="Server IMNS:" Height="15" ToolTip="Строка соединения с БД Кадрами" Width="65" X="10" Y="150" />

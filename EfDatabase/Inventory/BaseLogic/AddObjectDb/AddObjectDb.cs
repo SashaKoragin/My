@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
+using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseUploadFile;
 using EfDatabaseXsdBookAccounting;
 using Supply = EfDatabase.Inventory.Base.Supply;
@@ -36,7 +38,6 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 SmallName = user.SmallName,
                 IdOtdel = user.IdOtdel,
                 IdPosition = user.IdPosition,
-                IdRule = user.IdRule,
                 TabelNumber = user.TabelNumber,
                 IdTelephon = user.IdTelephon,
                 NameUser = user.NameUser,
@@ -187,13 +188,13 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
-                var newmodel = $"Пользователь: {swithe.User?.Name}; Кабинет: {swithe.Kabinet?.NumberKabinet}; Коментарий: {swithe.Coment}; Статус: {swithe.Statusing?.Name}";
+                var newmodel = $"Пользователь: {swithe.User?.Name}; Кабинет: {swithe.Kabinet?.NumberKabinet}; Комментарий: {swithe.Coment}; Статус: {swithe.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
                     var modeldb = from Swithes in context.Swithes where Swithes.IdSwithes == swithe.IdSwithes select new { Swithes };
                     if (modeldb.Any())
                     {
-                        var oldmodel = $"Пользователь: {modeldb.First().Swithes?.User?.Name}; Кабинет: {modeldb.First().Swithes?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Swithes.Coment}; Статус: {modeldb.First().Swithes?.Statusing?.Name}";
+                        var oldmodel = $"Пользователь: {modeldb.First().Swithes?.User?.Name}; Кабинет: {modeldb.First().Swithes?.Kabinet?.NumberKabinet}; Комментарий: {modeldb.First().Swithes.Coment}; Статус: {modeldb.First().Swithes?.Statusing?.Name}";
                         Inventory.Entry(switheAddadnModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(swithe.IdHistory, swithe.IdSwithes, "Коммутатор", idUser,
@@ -244,13 +245,13 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
-                var newmodel = $"Пользователь: {scaner.User?.Name}; Кабинет: {scaner.Kabinet?.NumberKabinet}; Коментарий: {scaner.Coment}; Статус: {scaner.Statusing?.Name}";
+                var newmodel = $"Пользователь: {scaner.User?.Name}; Кабинет: {scaner.Kabinet?.NumberKabinet}; Комментарий: {scaner.Coment}; Статус: {scaner.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
                     var modeldb = from Scaner in context.ScanerAndCamers where Scaner.IdScaner == scaner.IdScaner select new { Scaner };
                     if (modeldb.Any())
                     {
-                        var oldmodel = $"Пользователь: {modeldb.First().Scaner?.User?.Name}; Кабинет: {modeldb.First().Scaner?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Scaner.Coment}; Статус: {modeldb.First().Scaner?.Statusing?.Name}";
+                        var oldmodel = $"Пользователь: {modeldb.First().Scaner?.User?.Name}; Кабинет: {modeldb.First().Scaner?.Kabinet?.NumberKabinet}; Комментарий: {modeldb.First().Scaner.Coment}; Статус: {modeldb.First().Scaner?.Statusing?.Name}";
                         Inventory.Entry(scanerAddadnModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(scaner.IdHistory, scaner.IdScaner, "Сканер или камера", idUser,
@@ -308,7 +309,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                     var modelDb = from ServerEquipment in context.ServerEquipments where ServerEquipment.Id == serverEquipment.Id select new { ServerEquipment };
                     if (modelDb.Any())
                     {
-                        var oldModel = $"Производитель: {modelDb.First().ServerEquipment?.ManufacturerSeverEquipment?.NameManufacturer}; Модель: {modelDb.First().ServerEquipment?.ModelSeverEquipment?.NameModel} Кабинет: {modelDb.First().ServerEquipment?.Kabinet?.NumberKabinet}; Коментарий: {modelDb.First().ServerEquipment?.Coment}; Статус: {modelDb.First().ServerEquipment?.Statusing?.Name}";
+                        var oldModel = $"Производитель: {modelDb.First().ServerEquipment?.ManufacturerSeverEquipment?.NameManufacturer}; Модель: {modelDb.First().ServerEquipment?.ModelSeverEquipment?.NameModel} Кабинет: {modelDb.First().ServerEquipment?.Kabinet?.NumberKabinet}; Комментарий: {modelDb.First().ServerEquipment?.Coment}; Статус: {modelDb.First().ServerEquipment?.Statusing?.Name}";
                         Inventory.Entry(serverEquipmentAddadnModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(serverEquipment.IdHistory, serverEquipment.Id, "Серверное оборудование", idUser,
@@ -361,13 +362,13 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
-                var newmodel = $"Пользователь: {mfu.User?.Name}; Кабинет: {mfu.Kabinet?.NumberKabinet}; Коментарий: {mfu.Coment}; Статус: {mfu.Statusing?.Name}";
+                var newmodel = $"Пользователь: {mfu.User?.Name}; Кабинет: {mfu.Kabinet?.NumberKabinet}; Комментарий: {mfu.Coment}; Статус: {mfu.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
                     var modeldb = from Mfu in context.Mfus where Mfu.IdMfu == mfu.IdMfu select new { Mfu };
                     if (modeldb.Any())
                     {
-                        var oldmodel = $"Пользователь: {modeldb.First().Mfu?.User?.Name}; Кабинет: {modeldb.First().Mfu?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Mfu.Coment}; Статус: {modeldb.First().Mfu?.Statusing?.Name}";
+                        var oldmodel = $"Пользователь: {modeldb.First().Mfu?.User?.Name}; Кабинет: {modeldb.First().Mfu?.Kabinet?.NumberKabinet}; Комментарий: {modeldb.First().Mfu.Coment}; Статус: {modeldb.First().Mfu?.Statusing?.Name}";
                         Inventory.Entry(mfuAddadnModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(mfu.IdHistory, mfu.IdMfu, "МФУ", idUser,
@@ -418,13 +419,13 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
-                var newmodel = $"Пользователь: {sysblok.User?.Name} Имя компьютера: {sysblok.NameComputer} Кабинет: {sysblok.Kabinet?.NumberKabinet} Коментарий: {sysblok.Coment} Статус: {sysblok.Statusing?.Name}";
+                var newmodel = $"Пользователь: {sysblok.User?.Name} Имя компьютера: {sysblok.NameComputer} Кабинет: {sysblok.Kabinet?.NumberKabinet} Комментарий: {sysblok.Coment} Статус: {sysblok.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
                     var modeldb = from SysBlocks in context.SysBlocks where SysBlocks.IdSysBlock == sysblok.IdSysBlock select new { SysBlocks };
                     if (modeldb.Any())
                     {
-                        var oldmodel = $"Пользователь: {modeldb.First().SysBlocks?.User?.Name} Имя компьютера: {modeldb.First().SysBlocks?.NameComputer} Кабинет: {modeldb.First().SysBlocks?.Kabinet?.NumberKabinet} Коментарий: {modeldb.First().SysBlocks.Coment} Статус: {modeldb.First().SysBlocks?.Statusing?.Name}";
+                        var oldmodel = $"Пользователь: {modeldb.First().SysBlocks?.User?.Name} Имя компьютера: {modeldb.First().SysBlocks?.NameComputer} Кабинет: {modeldb.First().SysBlocks?.Kabinet?.NumberKabinet} Комментарий: {modeldb.First().SysBlocks.Coment} Статус: {modeldb.First().SysBlocks?.Statusing?.Name}";
                         Inventory.Entry(sysblokAddadnModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(sysblok.IdHistory, sysblok.IdSysBlock, "Системный блок", idUser,
@@ -474,13 +475,13 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
-                var newmodel = $"Пользователь: {monitor.User?.Name}; Кабинет: {monitor.Kabinet?.NumberKabinet}; Коментарий: {monitor.Coment}; Статус: {monitor.Statusing?.Name}";
+                var newmodel = $"Пользователь: {monitor.User?.Name}; Кабинет: {monitor.Kabinet?.NumberKabinet}; Комментарий: {monitor.Coment}; Статус: {monitor.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
                     var modeldb = from Monitor in context.Monitors where Monitor.IdMonitor == monitor.IdMonitor select new { Monitor };
                     if (modeldb.Any())
                     {
-                        var oldmodel = $"Пользователь: {modeldb.First().Monitor?.User?.Name}; Кабинет: {modeldb.First().Monitor?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Monitor.Coment}; Статус: {modeldb.First().Monitor?.Statusing?.Name}";
+                        var oldmodel = $"Пользователь: {modeldb.First().Monitor?.User?.Name}; Кабинет: {modeldb.First().Monitor?.Kabinet?.NumberKabinet}; Комментарий: {modeldb.First().Monitor.Coment}; Статус: {modeldb.First().Monitor?.Statusing?.Name}";
                         Inventory.Entry(monitorAddadnModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(monitor.IdHistory, monitor.IdMonitor, "Монитор", idUser,
@@ -503,6 +504,59 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 Loggers.Log4NetLogger.Error(e);
             }
             return new ModelReturn<Monitor>("При обновлении/добавлении данных 'Монитор' по : " + monitorAddadnModified.IdMonitor + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Обновление или добавление токена ключа
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="idUser"></param>
+        /// <returns></returns>
+        public ModelReturn<Token> AddAndEditToken(Token token, int? idUser)
+        {
+            HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
+            var tokenAddadnModified = new Token()
+            {
+                IdToken = token.IdToken,
+                IdUser = token.IdUser,
+                IdSupply = token.IdSupply,
+                IdSysBlock = token.IdSysBlock,
+                ProizvoditelName = token.ProizvoditelName,
+                SerNum = token.SerNum,
+                Coment = token.Coment,
+                IdStatus = token.IdStatus,
+                IdHistory = token.IdHistory
+            };
+            try
+            {
+                var newModel = $"Пользователь: {token.User?.Name}; Серийный номер: {token.SerNum} Комментарий: {token.Coment}; Статус: {token.Statusing?.Name}";
+                using (var context = new InventoryContext())
+                {
+                    var modelDb = from Token in context.Tokens where Token.IdToken == token.IdToken select new { Token };
+                    if (modelDb.Any())
+                    {
+                        var oldModel = $"Пользователь: {modelDb.First().Token?.User?.Name}; Серийный номер: {modelDb.First().Token?.SerNum}; Комментарий: {modelDb.First().Token.Coment}; Статус: {modelDb.First().Token?.Statusing?.Name}";
+                        Inventory.Entry(tokenAddadnModified).State = EntityState.Modified;
+                        Inventory.SaveChanges();
+                        log.GenerateHistory(token.IdHistory, token.IdToken, "Токен", idUser,
+                            oldModel,
+                            newModel);
+                        return new ModelReturn<Token>("Обновили Токен: " + tokenAddadnModified.IdToken, token);
+                    }
+                }
+                Inventory.Tokens.Add(tokenAddadnModified);
+                Inventory.SaveChanges();
+                token.IdToken = tokenAddadnModified.IdToken;
+                token.IdHistory = tokenAddadnModified.IdHistory;
+                log.GenerateHistory(token.IdHistory, token.IdToken, "Токен", idUser,
+                    $"Отсутствует модель при добавлении нового устройства",
+                    newModel);
+                return new ModelReturn<Token>("Добавили Токен: " + tokenAddadnModified.IdToken, token, tokenAddadnModified.IdToken, tokenAddadnModified.IdHistory);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<Token>("При обновлении/добавлении данных 'Токен' по : " + tokenAddadnModified.IdToken + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
@@ -531,13 +585,13 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
-                var newmodel = $"Кабинет: {telephone.Kabinet?.NumberKabinet}; Коментарий: {telephone.Coment}; Статус: {telephone.Statusing?.Name}";
+                var newmodel = $"Кабинет: {telephone.Kabinet?.NumberKabinet}; Комментарий: {telephone.Coment}; Статус: {telephone.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
                     var modeldb = from Telephone in context.Telephons where Telephone.IdTelephon == telephone.IdTelephon select new { Telephone };
                     if (modeldb.Any())
                     {
-                        var oldmodel = $"Кабинет: {modeldb.First().Telephone?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().Telephone.Coment}; Статус: {modeldb.First().Telephone?.Statusing?.Name}";
+                        var oldmodel = $"Кабинет: {modeldb.First().Telephone?.Kabinet?.NumberKabinet}; Комментарий: {modeldb.First().Telephone.Coment}; Статус: {modeldb.First().Telephone?.Statusing?.Name}";
                         Inventory.Entry(telephoneAddadnModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
@@ -588,13 +642,13 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
-                var newmodel = $"Пользователь: {blokpower.User?.Name}; Кабинет: {blokpower.Kabinet?.NumberKabinet}; Коментарий: {blokpower.Coment}; Статус: {blokpower.Statusing?.Name}";
+                var newmodel = $"Пользователь: {blokpower.User?.Name}; Кабинет: {blokpower.Kabinet?.NumberKabinet}; Комментарий: {blokpower.Coment}; Статус: {blokpower.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
                     var modeldb = from BlockPowers in context.BlockPowers where BlockPowers.IdBlockPowers == blokpower.IdBlockPowers select new { BlockPowers };
                     if (modeldb.Any())
                     {
-                        var oldmodel = $"Пользователь: {modeldb.First().BlockPowers?.User?.Name}; Кабинет: {modeldb.First().BlockPowers?.Kabinet?.NumberKabinet}; Коментарий: {modeldb.First().BlockPowers.Coment}; Статус: {modeldb.First().BlockPowers?.Statusing?.Name}";
+                        var oldmodel = $"Пользователь: {modeldb.First().BlockPowers?.User?.Name}; Кабинет: {modeldb.First().BlockPowers?.Kabinet?.NumberKabinet}; Комментарий: {modeldb.First().BlockPowers.Coment}; Статус: {modeldb.First().BlockPowers?.Statusing?.Name}";
                         Inventory.Entry(blockpoweraddadnModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(blokpower.IdHistory, blokpower.IdBlockPowers, "ИБП", idUser,
@@ -1340,6 +1394,36 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             }
             return new ModelReturn<MailGroup>("При обновлении/добавлении новой группы для абонента " + nameMailGroups.IdGroupMail + " произошла ошибка смотри log.txt");
         }
+        /// <summary>
+        /// Удаление или добавление роли пользователя в БД
+        /// </summary>
+        /// <param name="ruleUsers"></param>
+        public void AddAndDeleteRuleUsers(RuleUsers ruleUsers)
+        {
+            if (ruleUsers.Id != null)
+            {
+                Inventory.Entry(new RuleAndUser() {Id = (int)ruleUsers.Id}).State = EntityState.Deleted;
+                Inventory.SaveChanges();
+            }
+            else
+            {
+                if (ruleUsers.IdUser != null)
+                {
+                    var ruleUser = new RuleAndUser()
+                {
+                    IdRule = ruleUsers.IdRule,
+                    IdUser = (int) ruleUsers.IdUser
+                };
+                Inventory.RuleAndUsers.Add(ruleUser);
+                Inventory.SaveChanges();
+                }
+                else
+                {
+                    Loggers.Log4NetLogger.Error(new Exception("IdUser is null добавление роли не возможно"));
+                }
+            }
+        }
+
 
 
 

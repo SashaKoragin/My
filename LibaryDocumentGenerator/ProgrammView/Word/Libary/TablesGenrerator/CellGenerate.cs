@@ -19,7 +19,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
         /// <param name="rightmargin">Правый отступ в пикселях</param>
         /// <param name="borders">Отражение границы ячейки</param>
         /// <returns></returns>
-        public static TableCell GenerateCell(ref ObservableCollection<Paragraph> paragraph, string width, TableWidthUnitValues type, string leftmargin = "0", string rightmargin = "0", TableVerticalAlignmentValues verticalAlignment = TableVerticalAlignmentValues.Bottom, TableCellBorders borders = null, int number = 0)
+        public static TableCell GenerateCell(ref ObservableCollection<Paragraph> paragraph, string width, TableWidthUnitValues type, string leftmargin = "0", string rightmargin = "0", TableVerticalAlignmentValues verticalAlignment = TableVerticalAlignmentValues.Bottom, TableCellBorders borders = null, int number = 0, int verticalmerge = 0,int noWrap = 0)
         {
             TableCell tableCell = new TableCell();
             TableCellProperties tableCellProperties = new TableCellProperties();
@@ -28,7 +28,21 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
             TableCellVerticalAlignment tcVA = new TableCellVerticalAlignment() { Val = verticalAlignment };
 
             TableCellMargin tableCellMargin = new TableCellMargin();
-
+            if (noWrap == 1)
+            {
+                NoWrap noWraping= new NoWrap() {Val = OnOffOnlyValues.On};
+                tableCellProperties.Append(noWraping);
+            }
+            if (verticalmerge == 1)
+            {
+                VerticalMerge vertical = new VerticalMerge() { Val = MergedCellValues.Restart };
+                tableCellProperties.Append(vertical);
+            }
+            if (verticalmerge == 2)
+            {
+                VerticalMerge vertical = new VerticalMerge() { Val = MergedCellValues.Continue };
+                tableCellProperties.Append(vertical);
+            }
             if (leftmargin != "0")
             {
                 LeftMargin leftMargin = new LeftMargin() { Width = leftmargin, Type = TableWidthUnitValues.Dxa };

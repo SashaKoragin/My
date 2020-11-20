@@ -130,8 +130,9 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
         /// <param name="textparagraph">Текст добавленый в параграф</param>
         /// <param name="fontsize">Размер шрифта</param>
         /// <param name="style">Стиль текста 0 обычный по умолчанию: 1 Жирный:, 2 Подчеркнутый</param>
+        /// <param name="breaks">Кнопка Enter после вставки</param>
         /// <returns></returns>
-        public Run RunText(string textparagraph = " ", string fontsize = "20", int style = 0)
+        public Run RunText(string textparagraph = " ", string fontsize = "20", int style = 0, bool breaks = false)
         {
             FontSize fontSize = new FontSize { Val = fontsize };
             Run run = new Run();
@@ -158,10 +159,12 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
             runProperties.Append(runFonts);
             runProperties.Append(fontSize);
             runProperties.Append(fontSizeComplexScript);
-
             run.Append(runProperties);
             run.Append(text);
-
+            if (breaks)
+            {
+                run.Append(new Break());
+            }
             return run;
         }
     }

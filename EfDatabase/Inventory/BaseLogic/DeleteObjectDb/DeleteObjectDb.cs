@@ -114,6 +114,42 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
             }
             return new ModelReturn<ServerEquipment>("При удалении серверного оборудования возникли ошибки " + serverEquipment.Id + " произошла ошибка смотри log.txt", serverEquipment, 2);
         }
+
+        /// <summary>
+        /// Удаление токен ключ
+        /// </summary>
+        /// <param name="token">Токен ключ</param>
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<Token> DeleteToken(Token token, int? idUser)
+        {
+            try
+            {
+                using (var context = new InventoryContext())
+                {
+                    var isExistSystemUnit = context.Database.SqlQuery<object>($"Select * From Token Where IdToken = {token.IdToken} and IdStatus is null");
+                    if (isExistSystemUnit.Any())
+                    {
+                        HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
+
+                        
+                        DeleteModelDb(context, new Token() { IdToken = token.IdToken });
+                        log.GenerateHistory(token.IdHistory, token.IdToken, "Токен", idUser,
+                            $"Пользователь: {token.User?.Name}; Серийный номер: {token.SerNum} Комментарий: {token.Coment}; Статус: {token.Statusing?.Name}",
+                            "Произведено удаление!");
+                        return new ModelReturn<Token>("Токен удалён!", token);
+                    }
+                    return new ModelReturn<Token>("Не возможно удалить Токен! Есть привязки к статусу!", token, 1);
+                }
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<Token>("При удалении Токена возникли ошибки " + token.IdToken + " произошла ошибка смотри log.txt", token, 2);
+        }
+
+
+
         /// <summary>
         /// Удаление монитора из БД
         /// </summary>

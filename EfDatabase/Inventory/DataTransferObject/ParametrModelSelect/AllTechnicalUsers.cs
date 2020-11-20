@@ -75,6 +75,8 @@ namespace EfDatabaseParametrsModel {
         
         private Swithe[] switheField;
         
+        private Token[] tokenField;
+        
         private int idUserField;
         
         private bool idUserFieldSpecified;
@@ -165,6 +167,17 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.switheField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Token")]
+        public Token[] Token {
+            get {
+                return this.tokenField;
+            }
+            set {
+                this.tokenField = value;
             }
         }
         
@@ -1180,6 +1193,80 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.countPortField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class Token {
+        
+        private Kabinet kabinetField;
+        
+        private string serviceNumField;
+        
+        private string serNumField;
+        
+        private string inventarNumField;
+        
+        private string proizvoditelNameField;
+        
+        /// <remarks/>
+        public Kabinet Kabinet {
+            get {
+                return this.kabinetField;
+            }
+            set {
+                this.kabinetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ServiceNum {
+            get {
+                return this.serviceNumField;
+            }
+            set {
+                this.serviceNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNum {
+            get {
+                return this.serNumField;
+            }
+            set {
+                this.serNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string InventarNum {
+            get {
+                return this.inventarNumField;
+            }
+            set {
+                this.inventarNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ProizvoditelName {
+            get {
+                return this.proizvoditelNameField;
+            }
+            set {
+                this.proizvoditelNameField = value;
             }
         }
     }

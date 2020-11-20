@@ -76,6 +76,7 @@
 			<xs:element ref="HistoryLog" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="TecnicalOtdel" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="AllTechnics" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ErrorTokenUser" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="ErrorUSerNotActul">
@@ -701,7 +702,7 @@
 					<xs:documentation>Классификация</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Users" type="xs:string">
+			<xs:attribute name="Name" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Пользователь</xs:documentation>
 				</xs:annotation>
@@ -761,9 +762,56 @@
 					<xs:documentation>Коментарий</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameStatus" type="xs:string">
 				<xs:annotation>
-					<xs:documentation>Статус</xs:documentation>
+					<xs:documentation>Наименование статуса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ErrorTokenUser">
+		<xs:annotation>
+			<xs:documentation>Ошибки неправильно подтянутых Компьютеров к Токен</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdToken" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>УН токена</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Владелец СБ</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallNameU1" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Пользователь токена</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийнный номер токена</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNumSysBlock" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ошибочно внесен Токен на СБ: s/n</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputerSysBlock" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ошибочно внесен Токен на СБ: имя компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNumFact" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>s/n Компьютера пользователя токена по Факту</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputerFact" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера пользователя по Факту</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

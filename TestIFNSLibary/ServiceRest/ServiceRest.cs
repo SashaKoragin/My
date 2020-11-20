@@ -327,7 +327,7 @@ namespace TestIFNSLibary.ServiceRest
              return  await Task.Factory.StartNew(() =>
                 {
                     var docmigration = new DocumentMigration();
-                    docmigration.MigrationDoc(_parametrService.ConectWork, _parametrService.ReportMassTemplate, json);
+                    docmigration.MigrationDocument(_parametrService.ConectWork, _parametrService.ReportMassTemplate, json, _parametrService.SendServiceLotus);
                     report.Note = "Документы для печати запущены и сохраняются в папку ";
                     report.Url = _parametrService.ReportMassTemplate;
                     return report;

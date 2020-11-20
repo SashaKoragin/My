@@ -107,8 +107,11 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator
             LeftBorderOrTopBorder = 5,
             LeftBorderOrBottomBorder = 6,
             RightBorderOrBottomBorder = 7,
-            RightBorderOrTopBorder = 8
-
+            RightBorderOrTopBorder = 8,
+            LeftBorderOrRightBorderOrTopBorder = 9,
+            LeftBorderOrRightBorderOrBottomBorder = 10,
+            LeftBorderOrBottomBorderOrTopBorder = 11,
+            RightBorderOrBottomBorderOrTopBorder = 12,
         }
     }
 }

@@ -34,6 +34,10 @@
       <HintPath>C:\Nuget\DocumentFormat.OpenXml.2.8.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EfDatabaseAutomation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WPFLib\WPFLib\EfDatabaseAutomation\bin\Debug\EfDatabaseAutomation.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,6 +61,8 @@
     <Compile Include="Barcode\GenerateBarcode.cs" />
     <Compile Include="Documents\Constant\WordConstant.cs" />
     <Compile Include="Documents\DocumentMigration\DocumentMigration.cs" />
+    <Compile Include="Documents\DocumentMigration\ModelServiceLotusSendLetter.cs" />
+    <Compile Include="Documents\DocumentMigration\ServiceRestLotus.cs" />
     <Compile Include="Documents\Document\Doc.cs" />
     <Compile Include="Documents\FileLogica\FileLogica.cs" />
     <Compile Include="Documents\Model\IModel.cs" />
@@ -64,6 +70,7 @@
     <Compile Include="Documents\Template\BookAccountingInventarka.cs" />
     <Compile Include="Documents\Template\InvoiceInventarka.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />
+    <Compile Include="Documents\Template\OfficeStikerCode.cs" />
     <Compile Include="Documents\Template\ReportNote.cs" />
     <Compile Include="Documents\Template\ReportStatement.cs" />
     <Compile Include="Documents\Template\StickerCode.cs" />
@@ -96,10 +103,6 @@
     <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WPFLib\WPFLib\EfDatabaseAutomation\EfDatabaseAutomation.csproj">
-      <Project>{fdad249d-cd7d-4581-b945-90d2f9dad698}</Project>
-      <Name>EfDatabaseAutomation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
       <Project>{a2bc3ae2-4a61-4e9e-9fa4-96a02677c79c}</Project>
       <Name>LibaryXMLAuto</Name>

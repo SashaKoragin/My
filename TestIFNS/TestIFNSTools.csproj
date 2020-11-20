@@ -312,26 +312,26 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\ServiceTestIfns\service.wsdl" />
-    <None Include="Service References\ServiceTestIfns\service.xsd">
+    <None Include="Service References\ServiceTestIfns\service1.wsdl" />
+    <None Include="Service References\ServiceTestIfns\service3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceTestIfns\service1.xsd">
+    <None Include="Service References\ServiceTestIfns\service31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceTestIfns\service2.xsd">
+    <None Include="Service References\ServiceTestIfns\service32.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceTestIfns\TestIFNSLibary.PathJurnalAndUse.xsd">
+    <None Include="Service References\ServiceTestIfns\TestIFNSLibary.PathJurnalAndUse1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceTestIfns\TestIFNSLibary.Xml.XmlDS.xsd">
+    <None Include="Service References\ServiceTestIfns\TestIFNSLibary.Xml.XmlDS1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceTestIfns\TestIFNSTools.ServiceTestIfns.BakcupJurnal.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceTestIfns\TestIFNSTools.ServiceTestIfns.Parametr.datasource">
+    <None Include="Service References\ServiceTestIfns\TestIFNSTools.ServiceTestIfns.Parameter.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>

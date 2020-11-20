@@ -32,6 +32,7 @@ namespace TestIFNSLibary.PathJurnalAndUse
             User = ConfigurationManager.AppSettings["User"];
             Password = ConfigurationManager.AppSettings["Password"];
             DayX = Convert.ToInt32(ConfigurationManager.AppSettings["DayX"]);
+            SendServiceLotus = ConfigurationManager.AppSettings["SendServiceLotus"];
         }
 
         public void SettingEdit(string testDb, string workDb, int hours, int minutes)
@@ -125,5 +126,9 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// День заявки
         /// </summary>
         public int DayX { get; set; }
+        /// <summary>
+        /// Отправка модели для генерации писем
+        /// </summary>
+        public string SendServiceLotus { get; set; }
     }
 }

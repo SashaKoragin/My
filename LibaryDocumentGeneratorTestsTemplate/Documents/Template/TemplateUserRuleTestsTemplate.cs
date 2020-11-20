@@ -41,16 +41,6 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
         public void FindGroupSecurity()
         {
             var support = new CreateTiсketSupport("7751-00-099", "Qwer1234!!!");
-            support.StepTraining();
-            support.Steps(support.Logon, "GET");
-            support.Dispose();
-            support = new CreateTiсketSupport("7751-00-099", "Qwer1234!!!");
-            support.StepTraining();
-            support.Steps(support.Logon, "GET");
-            support.Dispose();
-            support = new CreateTiсketSupport("7751-00-099", "Qwer1234!!!");
-            support.StepTraining();
-            support.Steps(support.Logon, "GET");
             support.Dispose();
 
         }

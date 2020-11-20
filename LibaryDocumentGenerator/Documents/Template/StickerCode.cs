@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
 using EfDatabase.Inventory.Base;
 using LibaryDocumentGenerator.ProgrammView.FullDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
@@ -10,13 +12,13 @@ namespace LibaryDocumentGenerator.Documents.Template
     /// <summary>
     /// Класс генерации наклеек
     /// </summary>
-    public class StickerCode : ITemplate<AllTechnic>
+    public class StickerCode : ITemplate<List<AllTechnic>>
     {
         public string FullPathDocumentWord { get; set; }
 
-        public void CreateDocum(string path, AllTechnic template, object obj=null)
+        public void CreateDocum(string path, List<AllTechnic> template, object obj=null)
         {
-            FullPathDocumentWord = path + template.Id + Constant.WordConstant.Formatword;
+            FullPathDocumentWord = path + Constant.WordConstant.Formatword;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
             {
                 CreateWord(package, template, obj);
@@ -25,19 +27,14 @@ namespace LibaryDocumentGenerator.Documents.Template
             }
         }
 
-        public void CreateWord(WordprocessingDocument package, AllTechnic template, object obj = null)
+        public void CreateWord(WordprocessingDocument package, List<AllTechnic> template, object obj = null)
         {
             MainDocumentPart mainDocumentPart = package.AddMainDocumentPart();
             DocumentFormat.OpenXml.Wordprocessing.Document document = new DocumentFormat.OpenXml.Wordprocessing.Document();
-            ImagePart image = mainDocumentPart.AddImagePart(ImagePartType.Jpeg);
-            using (FileStream file = new FileStream(template.Name, FileMode.Open))
-            {
-                image.FeedData(file);
-            }
-            PageSetting settingpage = new PageSetting();
+            PageSetting settingPage = new PageSetting();
             DocumentsFull documentInvoce = new DocumentsFull();
-            document.Append(settingpage.DocumentSettingVertical());
-            document.Append(documentInvoce.Sticker(template, mainDocumentPart.GetIdOfPart(image)));
+            document.Append(settingPage.ParametrPageHorizontEditMargin(new PageMargin() {Left = 500, Right = 500, Bottom = 500, Top = 500 }));
+            document.Append(documentInvoce.Sticker(template, mainDocumentPart));
             mainDocumentPart.Document = document;
         }
 

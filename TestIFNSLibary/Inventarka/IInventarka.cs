@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
-using EfDatabaseErrorInventory;
+using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdBookAccounting;
 using EfDatabaseXsdInventoryAutorization;
@@ -15,6 +15,7 @@ using SqlLibaryIfns.Inventory.ModelParametr;
 using Printer = EfDatabase.Inventory.Base.Printer;
 using ScanerAndCamer = EfDatabase.Inventory.Base.ScanerAndCamer;
 using SysBlock = EfDatabase.Inventory.Base.SysBlock;
+using Token = EfDatabase.Inventory.Base.Token;
 using User = EfDatabase.Inventory.Base.User;
 
 namespace TestIFNSLibary.Inventarka
@@ -89,6 +90,23 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "GET",RequestFormat = WebMessageFormat.Json,UriTemplate = "/AllRules",ResponseFormat = WebMessageFormat.Json,BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> AllRules();
+        /// <summary>
+        /// Роли пользователя
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/RuleAndUsers?idUser={idUser}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<RuleUsers[]> RuleAndUsers(int idUser);
+
+        /// <summary>
+        /// Добавление или удаление роли пользователя
+        /// </summary>
+        /// <param name="ruleUsers">Роль пользователя</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndDeleteRuleUser", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<RuleUsers[]> AddAndDeleteRuleUser(RuleUsers ruleUsers);
+        
         /// <summary>
         /// Все пользователи 
         /// http://localhost:8182/Inventarka/AllUsers
@@ -830,16 +848,63 @@ namespace TestIFNSLibary.Inventarka
         /// <summary>
         /// Снять статус техники по Id технике
         /// </summary>
-        /// <param name="allTechnics">Техника</param>
+        /// <param name="allTechnical">Техника</param>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/IsCheckStatusNull", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> IsCheckStatusNull(AllTechnic allTechnics);
+        Task<string> IsCheckStatusNull(AllTechnic allTechnical);
         /// <summary>
         /// Генерация QR code для техники
         /// </summary>
         /// <param name="serialNumber">Серийный номер техники</param>
+        /// <param name="isAll">Создать на всю технику</param>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateQrCode?serialNumber={serialNumber}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<Stream> GenerateQrCode(string serialNumber);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateQrCodeTechnical?serialNumber={serialNumber}&isAll={isAll}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> GenerateQrCodeTechnical(string serialNumber, bool isAll = false);
+        /// <summary>
+        /// Генерация QR Кодов кабинетов
+        /// </summary>
+        /// <param name="numberOffice">Номер офиса для QR кода</param>
+        /// <param name="isAll">Делать на все кабинеты</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateQrCodeOffice?numberOffice={numberOffice}&isAll={isAll}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> GenerateQrCodeOffice(string numberOffice, bool isAll=false);
+
+        /// <summary>
+        /// Вся техника на пользователя для личного кабинета
+        /// http://localhost:8182/Inventarka/AllTechnicsLk
+        /// </summary>
+        /// <param name="idUser">Ун пользователя</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllTechnicsLk?idUser={idUser}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllTechnicsLk(int idUser);
+        /// <summary>
+        /// Все токены ключи реестр
+        /// http://localhost:8182/Inventarka/AllToken
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllToken", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllToken();
+        /// <summary>
+        /// Добавление или обновление Токена ключа
+        /// http://localhost:8182/Inventarka/AddAndEditToken?userIdEdit={userIdEdit}
+        /// </summary>
+        /// <param name="token">Токен ключ</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditToken?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<Token> AddAndEditToken(Token token, string userIdEdit);
+        /// <summary>
+        /// Удаление не актуального токена
+        /// </summary>
+        /// <param name="token">Токен ключ</param>
+        /// <param name="userIdEdit">Кто удалял</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteToken?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<Token> DeleteToken(Token token, string userIdEdit);
    }
 }

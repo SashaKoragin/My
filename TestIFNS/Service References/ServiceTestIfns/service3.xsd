@@ -135,7 +135,7 @@
   <xs:element name="ConfigResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TestIFNSLibary.PathJurnalAndUse" minOccurs="0" name="ConfigResult" nillable="true" type="q2:Parametr" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TestIFNSLibary.PathJurnalAndUse" minOccurs="0" name="ConfigResult" nillable="true" type="q2:Parameter" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

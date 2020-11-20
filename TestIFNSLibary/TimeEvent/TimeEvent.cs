@@ -20,6 +20,7 @@ namespace TestIFNSLibary.TimeEvent
             var createStpSupportView = new Timer()
             {
                 Interval = 86400000,
+                
                 Enabled = true,
                 AutoReset = true
             };
@@ -104,7 +105,7 @@ namespace TestIFNSLibary.TimeEvent
                     }
                     else
                     {
-                        Loggers.Log4NetLogger.Info(new Exception("Создание не наступило"));
+                        Loggers.Log4NetLogger.Info(new Exception("Создание заявки не наступило 28 каждого месяца!"));
                     }
                 }
                 catch (Exception ex)

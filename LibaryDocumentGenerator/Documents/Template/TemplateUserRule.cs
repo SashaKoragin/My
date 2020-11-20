@@ -17,11 +17,11 @@ namespace LibaryDocumentGenerator.Documents.Template
             {
                Fullpathdocumentword = path + tempuotdel.Number+"_"+tempuotdel.NameOtdel+"_"+tempuotdel.Dates + Constant.WordConstant.Formatword;
                using (WordprocessingDocument package = WordprocessingDocument.Create(Fullpathdocumentword, WordprocessingDocumentType.Document))
-              {
+               {
                   CreateWord(package, tempuotdel,template.SenderUsers, obj);
                   package.MainDocumentPart.Document.Save();
                   package.Close();
-              }
+               }
             }
         }
 
