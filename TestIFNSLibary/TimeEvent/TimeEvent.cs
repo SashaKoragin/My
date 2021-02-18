@@ -17,15 +17,6 @@ namespace TestIFNSLibary.TimeEvent
         /// </summary>
         public TimeEvent()
         {
-            var createStpSupportView = new Timer()
-            {
-                Interval = 86400000,
-                
-                Enabled = true,
-                AutoReset = true
-            };
-            createStpSupportView.Elapsed += CreateSto;
-            createStpSupportView.Start();
             var selectDomainComputers = new Timer()
             {
                 Interval = 60000,
@@ -105,7 +96,7 @@ namespace TestIFNSLibary.TimeEvent
                     }
                     else
                     {
-                        Loggers.Log4NetLogger.Info(new Exception("Создание заявки не наступило 28 каждого месяца!"));
+                        Loggers.Log4NetLogger.Info(new Exception($"Создание заявки не наступило {parameter.DayX} каждого месяца!"));
                     }
                 }
                 catch (Exception ex)

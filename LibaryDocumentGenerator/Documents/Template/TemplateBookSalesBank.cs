@@ -4,12 +4,11 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using LibaryDocumentGenerator.ProgrammView.FullDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
-
 using LibaryXMLAutoModelXmlSql.PreCheck.ModelCard;
 
 namespace LibaryDocumentGenerator.Documents.Template
 {
-   public class ReportNote : ITemplate<CardFaceUl>
+   public class TemplateBookSalesBank : ITemplate<CardFaceUl>
     {
         /// <summary>
         /// Полный путь к книге на сервере
@@ -45,12 +44,9 @@ namespace LibaryDocumentGenerator.Documents.Template
             DocumentFormat.OpenXml.Wordprocessing.Document document = new DocumentFormat.OpenXml.Wordprocessing.Document();
             PageSetting settingPage = new PageSetting();
             DocumentsPreChek documentInvoice = new DocumentsPreChek();
-            document.Append(settingPage.DocumentSettingVertical(new PageMargin() { Top = 1135, Right = 567, Bottom = 567, Left = 1135 }));
-            document.Append(documentInvoice.GenerateReportNote(template, (int) obj));
-            document.Append(settingPage.AddHorizontPage());
+            document.Append(settingPage.ParametrPageHorizontEditMargin(new PageMargin() { Top = 567, Right = 200, Bottom = 567, Left = 200 }));
             document.Append(documentInvoice.GenerateSalesBookReportNote(template, (int)obj));
             mainDocumentPart.Document = document;
         }
-
     }
 }

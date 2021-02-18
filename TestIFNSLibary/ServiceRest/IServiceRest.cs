@@ -159,5 +159,14 @@ namespace TestIFNSLibary.ServiceRest
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateTemplateRule", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<ModelPathReport> GenerateTemplateRule(UserRules userRule);
+        /// <summary>
+        /// Заполнение модели в БД Ролями шаблонами
+        /// http://localhost:8181/ServiceRest/LoadInfoTemplateToDataBase
+        /// </summary>
+        /// <param name="infoTemplate">Информация о шаблонах</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/LoadInfoTemplateToDataBase", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelPathReport LoadInfoTemplateToDataBase(InfoRuleTemplate infoTemplate);
     }
 }

@@ -29,20 +29,35 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
             AddObjectDb add =new AddObjectDb();
             add.IsProcessComplete(1,false);
         }
+
+        /// <summary>
+        /// Полная карточка
+        /// </summary>
         [TestMethod()]
         public void TestReportNote()
         {
             var model = new EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost.ModelGetPost();
-            var card = model.CardUi("5258111850");
+            var card = model.CardUi("7751012500", 2021);
             ReportNote report = new ReportNote();
-            report.CreateDocum(@"D:\", card, null);
+            report.CreateDocum(@"D:\", card, 2021);
         }
+        /// <summary>
+        /// Только книги покупок-продаж на банк
+        /// </summary>
+        [TestMethod()]
+        public void TestReportBookSales()
+        {
+            var model = new EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost.ModelGetPost();
+            var card = model.CardUiBookSales("7751012500", 2021);
+            TemplateBookSalesBank report = new TemplateBookSalesBank();
+            report.CreateDocum(@"D:\", card, 2021);
+        }
+
         [TestMethod()]
         public void FindGroupSecurity()
         {
             var support = new CreateTiсketSupport("7751-00-099", "Qwer1234!!!");
             support.Dispose();
-
         }
         [TestMethod()]
         public void Test()

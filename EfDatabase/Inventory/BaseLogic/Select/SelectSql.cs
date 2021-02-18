@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Xml;
 using EfDatabase.Inventory.Base;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdLotusUser;
+using LibaryXMLAuto.ReadOrWrite;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
 using Otdel = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel;
@@ -177,6 +181,26 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 Console.WriteLine(e);
             
             }
+        }
+        /// <summary>
+        /// Загрузка шаблонов в Базу данных
+        /// </summary>
+        /// <param name="infoTemplate">Модель шаблонов</param>
+        public void LoadTemplateDataBase(InfoRuleTemplate infoTemplate)
+        {
+            ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(37) };
+            XmlReadOrWrite xml = new XmlReadOrWrite();
+            var addObjectDb = new AddObjectDb.AddObjectDb();
+            addObjectDb.IsProcessComplete(2,false);
+            Inventory.Database.CommandTimeout = 18000;
+            Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser, 
+                new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml)
+                {
+                    Value = new SqlXml(new XmlTextReader(xml.ClassToXml(infoTemplate, typeof(InfoRuleTemplate)),
+                    XmlNodeType.Document, null))
+                });
+            addObjectDb.IsProcessComplete(2, true);
+            addObjectDb.Dispose();
         }
         /// <summary>
         /// Актуализация пользователей модели

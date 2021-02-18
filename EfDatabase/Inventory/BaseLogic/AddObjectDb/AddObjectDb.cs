@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using EfDatabase.Inventory.Base;
@@ -1430,16 +1429,16 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         /// <summary>
         /// Сигнал завершения процесса задачи
         /// </summary>
-        /// <param name="idprocess">Ун процесса</param>
-        /// <param name="iscomplete">Завершен ли процесс или начат</param>
-        public void IsProcessComplete(int idprocess, bool iscomplete)
+        /// <param name="idProcess">Ун процесса</param>
+        /// <param name="isComplete">Завершен ли процесс или начат</param>
+        public void IsProcessComplete(int idProcess, bool isComplete)
         {
-            var process = Inventory.IsProcessCompletes.FirstOrDefault(x => x.Id == idprocess);
+            var process = Inventory.IsProcessCompletes.FirstOrDefault(x => x.Id == idProcess);
             if (process != null)
             {
-                process.IsComplete = iscomplete;
-                process.DataStart = iscomplete ? process.DataStart : DateTime.Now;
-                process.DataFinish = iscomplete ? DateTime.Now : (DateTime?)null;
+                process.IsComplete = isComplete;
+                process.DataStart = isComplete ? process.DataStart : DateTime.Now;
+                process.DataFinish = isComplete ? DateTime.Now : (DateTime?)null;
             }
             Inventory.Entry(process).State = EntityState.Modified;
             Inventory.SaveChanges();

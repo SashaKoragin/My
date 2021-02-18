@@ -11,7 +11,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
         /// <param name="textparagraph">Текст по умолчанию null вернет пустой параграв</param>
         /// <param name="fontsize">Размер шрифта по умолчанию 10 20 делить на 2</param>
         /// <param name="justifications">Выравнивание по умолчанию Слева</param>
-        /// <param name="style">Стиль текста 0 обычный по умолчанию: 1 Жирный:, 2 Подчеркнутый,</param>
+        /// <param name="style">Стиль текста 0 обычный по умолчанию: 1 Жирный:, 2 Курсив подчеркнутый, 3 Курсив</param>
         /// <param name="leftident">Отступ слева</param>
         /// <param name="breake">Кнопка Enter после вставки</param>
         /// <param name="isfoters">Вставка в Foters</param>

@@ -33,15 +33,22 @@ namespace TestIFNSLibary.ServiceRest
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple, UseSynchronizationContext = false)]
     public class ServiceRest : IServiceRest
     {
-        readonly Parameter _parametrService = new Parameter();
+        /// <summary>
+        /// Параметры конфигурации
+        /// </summary>
+        readonly Parameter _parameterService = new Parameter();
+        /// <summary>
+        /// Указатель выполнение задачи загрузки шаблонов по ролям
+        /// </summary>
+        public static bool IsLoadCompletedDataBaseTemplate = true;
         //Функции для сайта IFNS
         public async Task<Face> SqlFaceError()
         {
-            var selectfull = new SelectFull();
+            var selectFull = new SelectFull();
             return
                 await Task.Factory.StartNew(
                     () =>
-                        selectfull.FaceError(_parametrService.ConnectionString,
+                        selectFull.FaceError(_parameterService.ConnectionString,
                             SqlLibaryIfns.SqlSelect.SqlFaceMergin.FaceSelectError.FaceError));
         }
 
@@ -50,7 +57,7 @@ namespace TestIFNSLibary.ServiceRest
             try
             {
                 Sobytie sobytie = new Sobytie() {Messages = null};
-                using (var con = new SqlConnection(_parametrService.ConnectionString))
+                using (var con = new SqlConnection(_parameterService.ConnectionString))
                 {
                     con.InfoMessage += sobytie.Con_InfoMessage;
                     using (var cmd = new SqlCommand(SqlLibaryIfns.SqlSelect.SqlFaceMergin.FaceSelectError.AddFace, con))
@@ -74,7 +81,7 @@ namespace TestIFNSLibary.ServiceRest
             try
             {
                 Sobytie sobytie = new Sobytie {Messages = null};
-                using (var con = new SqlConnection(_parametrService.ConnectionString))
+                using (var con = new SqlConnection(_parameterService.ConnectionString))
                 {
                     con.InfoMessage += sobytie.Con_InfoMessage;
                     using (
@@ -104,9 +111,9 @@ namespace TestIFNSLibary.ServiceRest
             switch (seting.Db)
             {
                 case "Work":
-                    return await taskcommand.TaskSqlProcedure(_parametrService.ConectWork, seting);
+                    return await taskcommand.TaskSqlProcedure(_parameterService.ConectWork, seting);
                 case "Test":
-                    return await taskcommand.TaskSqlProcedure(_parametrService.ConectTest, seting);
+                    return await taskcommand.TaskSqlProcedure(_parameterService.ConectTest, seting);
                 default:
                     return null;
             }
@@ -120,7 +127,7 @@ namespace TestIFNSLibary.ServiceRest
         public async Task<Stream> DonloadFile(string filename)
         {
             DonloadsFile donloads = new DonloadsFile();
-            return await donloads.SelectDonloadsFile(_parametrService.Report, filename, _parametrService.ConectWork);
+            return await donloads.SelectDonloadsFile(_parameterService.Report, filename, _parameterService.ConectWork);
         }
 
         /// <summary>
@@ -138,9 +145,9 @@ namespace TestIFNSLibary.ServiceRest
                     return
                         await Task.Factory.StartNew(
                             () =>
-                                selectfull.BdkSqlSelect(_parametrService.ConectWork,
+                                selectfull.BdkSqlSelect(_parameterService.ConectWork,
                                 ((ServiceWcf)
-                                    sqlconnect.SelectFullParametrSqlReader(_parametrService.ConectWork,
+                                    sqlconnect.SelectFullParametrSqlReader(_parameterService.ConectWork,
                                         ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf),
                                         ModelSqlFullService.ParamCommand("7"))).ServiceWcfCommand.Command));
                 default:
@@ -159,7 +166,7 @@ namespace TestIFNSLibary.ServiceRest
             switch (setting.Db)
             {
                 case "Work":
-                    return await taskcommand.TaskSqlProcedureBdk(_parametrService.ConectWork, setting);
+                    return await taskcommand.TaskSqlProcedureBdk(_parameterService.ConectWork, setting);
                 default:
                     return null;
             }
@@ -176,7 +183,7 @@ namespace TestIFNSLibary.ServiceRest
             switch (setting.Db)
             {
                 case "Work":
-                    return await taskcommand.TaskSqlProcedureSoprovod(_parametrService.ConectWork, setting);
+                    return await taskcommand.TaskSqlProcedureSoprovod(_parameterService.ConectWork, setting);
                 default:
                     return null;
             }
@@ -193,7 +200,7 @@ namespace TestIFNSLibary.ServiceRest
             switch (setting.Db)
             {
                 case "Work":
-                    return await taskcommand.TaskSqlProcedureKrsb(_parametrService.ConectWork, setting);
+                    return await taskcommand.TaskSqlProcedureKrsb(_parameterService.ConectWork, setting);
                 default:
                     return null;
             }
@@ -211,10 +218,10 @@ namespace TestIFNSLibary.ServiceRest
                 Task.Factory.StartNew(() =>
                 {
                     GenerateDocument report = new GenerateDocument();
-                    report.GenerateOutBdk(_parametrService.ConectWork, _parametrService.ConnectionString,
-                        _parametrService.ReportMassTemplate, setting);
+                    report.GenerateOutBdk(_parameterService.ConectWork, _parameterService.ConnectionString,
+                        _parameterService.ReportMassTemplate, setting);
                 });
-                return "Документы для печати запущены и сохраняются в папку " + _parametrService.ReportMassTemplate;
+                return "Документы для печати запущены и сохраняются в папку " + _parameterService.ReportMassTemplate;
             }
             catch (Exception e)
             {
@@ -231,7 +238,7 @@ namespace TestIFNSLibary.ServiceRest
         public async Task<string> ModelServiceCommand(FullSetting setting)
         {
             var selectfull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectfull.ServiceCommand(_parametrService.ConectWork, setting));
+            return await Task.Factory.StartNew(() => selectfull.ServiceCommand(_parameterService.ConectWork, setting));
         }
 
         /// <summary>
@@ -241,7 +248,7 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<string> ModelSqlSelect(AngularModel command)
         {
-            var connect = command.Db == "Work" ? _parametrService.ConectWork : _parametrService.ConectTest;
+            var connect = command.Db == "Work" ? _parameterService.ConectWork : _parameterService.ConectTest;
             var selectfull = new SelectFull();
             return await Task.Factory.StartNew(() => selectfull.SqlSelect(connect, command));
         }
@@ -271,7 +278,7 @@ namespace TestIFNSLibary.ServiceRest
         public async Task<string> AngularCreateKrsb(FullSetting setting)
         {
             var efangular = new AngularRestEf();
-            return await Task.Factory.StartNew(() => efangular.CreateKrsb(_parametrService.ConectWork, setting));
+            return await Task.Factory.StartNew(() => efangular.CreateKrsb(_parameterService.ConectWork, setting));
         }
 
         public async Task<Stream> StoreProcedureKam5(FullSetting setting)
@@ -281,7 +288,7 @@ namespace TestIFNSLibary.ServiceRest
             switch (setting.Db)
             {
                 case "Work":
-                    return await donloads.SelectDonloadsFile(_parametrService.Report, "Камеральный №5.xlsx", null, await taskcommand.TaskSqlProcedureKam5(_parametrService.ConectWork, setting));
+                    return await donloads.SelectDonloadsFile(_parameterService.Report, "Камеральный №5.xlsx", null, await taskcommand.TaskSqlProcedureKam5(_parameterService.ConectWork, setting));
                 default:
                     return null;
             }
@@ -292,7 +299,7 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<string> ServerList(FullSetting setting)
         {
-            var connect = setting.Db == "Work" ? _parametrService.ConectWork : _parametrService.ConectTest;
+            var connect = setting.Db == "Work" ? _parameterService.ConectWork : _parameterService.ConectTest;
             var selectfull = new SelectFull();
             return await Task.Factory.StartNew(() => selectfull.SqlSelect(connect, setting));
         }
@@ -327,9 +334,9 @@ namespace TestIFNSLibary.ServiceRest
              return  await Task.Factory.StartNew(() =>
                 {
                     var docmigration = new DocumentMigration();
-                    docmigration.MigrationDocument(_parametrService.ConectWork, _parametrService.ReportMassTemplate, json, _parametrService.SendServiceLotus);
+                    docmigration.MigrationDocument(_parameterService.ConectWork, _parameterService.ReportMassTemplate, json, _parameterService.SendServiceLotus);
                     report.Note = "Документы для печати запущены и сохраняются в папку ";
-                    report.Url = _parametrService.ReportMassTemplate;
+                    report.Url = _parameterService.ReportMassTemplate;
                     return report;
                 });
             }
@@ -344,7 +351,7 @@ namespace TestIFNSLibary.ServiceRest
         /// <summary>
         /// Формирование заявок пляшем от АИС 3
         /// </summary>
-        /// <param name="userRule">Спаршенные данные АИС 3</param>
+        /// <param name="userRule">Данные АИС 3 для создания заявки</param>
         /// <returns></returns>
         public async Task<ModelPathReport> GenerateTemplateRule(UserRules userRule)
         {
@@ -354,13 +361,13 @@ namespace TestIFNSLibary.ServiceRest
                 return  await Task.Factory.StartNew(() =>
                 {
                     var sql = new SelectSql();
-                    var templateword = new TemplateUserRule();
-                    var ruletemplate = new RuleTemplate() { SenderUsers = new SenderUsers() };
-                    var modelselect = sql.SendersUsers(ref ruletemplate);
-                    sql.UserRuleModel(ref ruletemplate, userRule, modelselect);
-                    templateword.CreateDocum(_parametrService.ReportMassTemplate, ruletemplate, null);
+                    var templateWord = new TemplateUserRule();
+                    var templateRule = new RuleTemplate() { SenderUsers = new SenderUsers() };
+                    var modelSelect = sql.SendersUsers(ref templateRule);
+                    sql.UserRuleModel(ref templateRule, userRule, modelSelect);
+                    templateWord.CreateDocum(_parameterService.ReportMassTemplate, templateRule, null);
                     report.Note = "Заявки запущены и сохраняются в папку";
-                    report.Url = _parametrService.ReportMassTemplate;
+                    report.Url = _parameterService.ReportMassTemplate;
                     return report;
                 });
             }
@@ -371,31 +378,66 @@ namespace TestIFNSLibary.ServiceRest
                 return report;
             }
         }
+        /// <summary>
+        /// Загрузка шаблонов в БД
+        /// </summary>
+        /// <param name="infoTemplate">Шаблоны</param>
+        /// <returns></returns>
+        public ModelPathReport LoadInfoTemplateToDataBase(InfoRuleTemplate infoTemplate)
+        {
+            var report = new ModelPathReport();
+            if (IsLoadCompletedDataBaseTemplate)
+            {
+               var task = Task.Run(() =>
+                 {
+                    try
+                    {
+                        var sql = new SelectSql(); 
+                        sql.LoadTemplateDataBase(infoTemplate);
+                        sql.Dispose();
+                    }
+                    catch (Exception e)
+                    {
+                        Loggers.Log4NetLogger.Error(e);
+                    }
+                 });
+               IsLoadCompletedDataBaseTemplate = task.ConfigureAwait(true).GetAwaiter().IsCompleted;
+               task.ConfigureAwait(true).GetAwaiter().OnCompleted((() => 
+                    IsLoadCompletedDataBaseTemplate = true
+                    ));
+                report.Note = "Процесс по загрузке шаблонов запущен!";
+            }
+            else
+            {
+                report.Note = "Задача уже запущенна ожидайте окончание процесса!";
+            }
+            return report;
+        }
     }
 
 
     }
-    class CompletedAsyncResult<T> : IAsyncResult
-    {
-        T data;
+class CompletedAsyncResult<T> : IAsyncResult
+{
+    T data;
 
-        public CompletedAsyncResult(T data)
-        { this.data = data; }
+    public CompletedAsyncResult(T data)
+    { this.data = data; }
 
-        public T Data
-        { get { return data; } }
+    public T Data
+    { get { return data; } }
 
-        #region IAsyncResult Members
-        public object AsyncState
-        { get { return (object)data; } }
+    #region IAsyncResult Members
+    public object AsyncState
+    { get { return (object)data; } }
 
-        public WaitHandle AsyncWaitHandle
-        { get { throw new Exception("The method or operation is not implemented."); } }
+    public WaitHandle AsyncWaitHandle
+    { get { throw new Exception("The method or operation is not implemented."); } }
 
-        public bool CompletedSynchronously
-        { get { return true; } }
+    public bool CompletedSynchronously
+    { get { return true; } }
 
-        public bool IsCompleted
-        { get { return true; } }
-        #endregion
-    }
+    public bool IsCompleted
+    { get { return true; } }
+    #endregion
+}

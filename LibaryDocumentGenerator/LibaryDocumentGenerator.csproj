@@ -75,6 +75,7 @@
     <Compile Include="Documents\Template\ReportStatement.cs" />
     <Compile Include="Documents\Template\StickerCode.cs" />
     <Compile Include="Documents\Template\TelephoneHelp.cs" />
+    <Compile Include="Documents\Template\TemplateBookSalesBank.cs" />
     <Compile Include="Documents\Template\TemplateOutBdk.cs" />
     <Compile Include="Documents\Template\TemplateUserRule.cs" />
     <Compile Include="DonloadFile\Angular\AngularRestEf.cs" />
