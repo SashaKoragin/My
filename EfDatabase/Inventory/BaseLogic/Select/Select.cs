@@ -394,6 +394,16 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], idUser)).ToArray();
             return ruleAndUser;
         }
+        /// <summary>
+        /// Запрос на процесс
+        /// </summary>
+        /// <param name="idTask">Ун</param>
+        /// <returns></returns>
+        public bool IsBeginTask(int idTask)
+        {
+            var isComplete = Inventory.IsProcessCompletes.FirstOrDefault(x => x.Id == idTask)?.IsComplete;
+            return isComplete != null && (bool)isComplete;
+        }
 
         /// <summary>
         /// Dispose

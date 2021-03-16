@@ -21,11 +21,13 @@ namespace EfDatabaseParametrsModel {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class AllTechnicalUsersAndOtdel {
+    public partial class AllTechnicalUsersAndOtdelAndTreeAis3 {
         
         private Users[] usersField;
         
         private Otdel[] otdelField;
+        
+        private AllTemplateAndTree[] allTemplateAndTreeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Users")]
@@ -46,6 +48,17 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.otdelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("AllTemplateAndTree")]
+        public AllTemplateAndTree[] AllTemplateAndTree {
+            get {
+                return this.allTemplateAndTreeField;
+            }
+            set {
+                this.allTemplateAndTreeField = value;
             }
         }
     }
@@ -1316,6 +1329,113 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.idUserField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class AllTemplateAndTree {
+        
+        private TableTemplate tableTemplateField;
+        
+        /// <remarks/>
+        public TableTemplate TableTemplate {
+            get {
+                return this.tableTemplateField;
+            }
+            set {
+                this.tableTemplateField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class TableTemplate {
+        
+        private TableTasks[] tableTasksField;
+        
+        private string namesField;
+        
+        private string categoryField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("TableTasks")]
+        public TableTasks[] TableTasks {
+            get {
+                return this.tableTasksField;
+            }
+            set {
+                this.tableTasksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Names {
+            get {
+                return this.namesField;
+            }
+            set {
+                this.namesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Category {
+            get {
+                return this.categoryField;
+            }
+            set {
+                this.categoryField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class TableTasks {
+        
+        private string pathField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Path {
+            get {
+                return this.pathField;
+            }
+            set {
+                this.pathField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
             }
         }
     }

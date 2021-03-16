@@ -84,6 +84,7 @@
     <Compile Include="Inventarka\IInventarka.cs" />
     <Compile Include="Inventarka\Inventarka.cs" />
     <Compile Include="PostRequest\Face\FaceAdd.cs" />
+    <Compile Include="Serialization\ServerCustomSerialization.cs" />
     <Compile Include="ServiceRest\IServiceRest.cs" />
     <Compile Include="ServiceRest\ServiceRest.cs" />
     <Compile Include="Service\ITestIFNSLibary.cs" />

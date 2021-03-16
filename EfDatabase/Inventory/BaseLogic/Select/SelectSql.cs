@@ -14,7 +14,7 @@ using LibaryXMLAuto.ReadOrWrite;
 using LibaryXMLAutoModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
 using Otdel = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel;
-
+using RuleTemplate = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.RuleTemplate;
 
 
 namespace EfDatabase.Inventory.BaseLogic.Select

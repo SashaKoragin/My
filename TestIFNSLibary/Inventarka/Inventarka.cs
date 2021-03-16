@@ -640,7 +640,7 @@ namespace TestIFNSLibary.Inventarka
                     {
                         IdDocument = uploadFileModel.Upload[i].IdDocument,
                         IdError = 1,
-                        Messages = "Не распознался штрихкод на документе " + uploadFileModel.Upload[i].NameFile
+                        Messages = "Не распознается штрих код на документе " + uploadFileModel.Upload[i].NameFile
                     };
                 }
             }
@@ -668,7 +668,7 @@ namespace TestIFNSLibary.Inventarka
             return "Возникла не предвиденная ошибка смотри Log.txt";
         }
        /// <summary>
-       /// Актулизация Ip Адресов в БД
+       /// Актуализация Ip Адресов в БД
        /// </summary>
        /// <returns></returns>
        public async Task<string> ActualComputerIp()
@@ -1302,5 +1302,15 @@ namespace TestIFNSLibary.Inventarka
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteToken(model);
             return model;
         }
-   }
+        /// <summary>
+        /// Проверка по УН процесса запущен ли он или нет
+        /// </summary>
+        /// <param name="idTask">Ун процесса</param>
+        /// <returns></returns>
+        public async Task<bool> IsBeginTask(int idTask)
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.IsBeginTask(idTask));
+        }
+    }
 }

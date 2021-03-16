@@ -95,8 +95,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
-    <Compile Include="Inventory\DataTransferObject\ParametrModelSelect\AllTechnicalUsers.cs">
-      <DependentUpon>AllTechnicalUsers.xsd</DependentUpon>
+    <Compile Include="Inventory\DataTransferObject\ParametrModelSelect\AllTechnicalUsersAndOtdelAndTreeAis3.cs">
+      <DependentUpon>AllTechnicalUsersAndOtdelAndTreeAis3.xsd</DependentUpon>
     </Compile>
     <Compile Include="Inventory\DataTransferObject\ParametrModelSelect\ParametrsModel.cs">
       <DependentUpon>ParametrsModel.xsd</DependentUpon>
@@ -162,7 +162,7 @@
     <None Include="EF.Reverse.POCO.ttinclude" />
     <None Include="Inventory\Base\EF.Reverse.POCO.Core.ttinclude" />
     <None Include="Inventory\Base\EF.Reverse.POCO.ttinclude" />
-    <None Include="Inventory\DataTransferObject\ParametrModelSelect\AllTechnicalUsers.xsd">
+    <None Include="Inventory\DataTransferObject\ParametrModelSelect\AllTechnicalUsersAndOtdelAndTreeAis3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\DataTransferObject\ParametrModelSelect\ParametrsModel.xsd">
