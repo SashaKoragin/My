@@ -26,8 +26,6 @@ namespace EfDatabaseErrorInventory {
         
         private int idSysBlockField;
         
-        private bool idSysBlockFieldSpecified;
-        
         private string nameUsersField;
         
         private string serNumField;
@@ -52,17 +50,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idSysBlockField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSysBlockSpecified {
-            get {
-                return this.idSysBlockFieldSpecified;
-            }
-            set {
-                this.idSysBlockFieldSpecified = value;
             }
         }
         
@@ -165,7 +152,7 @@ namespace EfDatabaseErrorInventory {
         
         private Error[] errorField;
         
-        private ErrorUSerNotActul[] errorUSerNotActulField;
+        private ErrorUsersNotActual[] errorUsersNotActualField;
         
         private AnaliticaSysBlokAndMonitors[] analiticaSysBlokAndMonitorsField;
         
@@ -203,13 +190,13 @@ namespace EfDatabaseErrorInventory {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ErrorUSerNotActul")]
-        public ErrorUSerNotActul[] ErrorUSerNotActul {
+        [System.Xml.Serialization.XmlElementAttribute("ErrorUsersNotActual")]
+        public ErrorUsersNotActual[] ErrorUsersNotActual {
             get {
-                return this.errorUSerNotActulField;
+                return this.errorUsersNotActualField;
             }
             set {
-                this.errorUSerNotActulField = value;
+                this.errorUsersNotActualField = value;
             }
         }
         
@@ -355,7 +342,7 @@ namespace EfDatabaseErrorInventory {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Error {
         
-        private string error1Field;
+        private string errorModelField;
         
         private string smallNameField;
         
@@ -378,13 +365,13 @@ namespace EfDatabaseErrorInventory {
         private string comentField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute("Error")]
-        public string Error1 {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ErrorModel {
             get {
-                return this.error1Field;
+                return this.errorModelField;
             }
             set {
-                this.error1Field = value;
+                this.errorModelField = value;
             }
         }
         
@@ -506,17 +493,13 @@ namespace EfDatabaseErrorInventory {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class ErrorUSerNotActul {
+    public partial class ErrorUsersNotActual {
         
         private int idUserField;
         
-        private bool idUserFieldSpecified;
-        
         private string nameField;
         
-        private sbyte statusActualField;
-        
-        private bool statusActualFieldSpecified;
+        private int statusActualField;
         
         private string statusTextField;
         
@@ -552,17 +535,6 @@ namespace EfDatabaseErrorInventory {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdUserSpecified {
-            get {
-                return this.idUserFieldSpecified;
-            }
-            set {
-                this.idUserFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name {
             get {
@@ -575,23 +547,12 @@ namespace EfDatabaseErrorInventory {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public sbyte StatusActual {
+        public int StatusActual {
             get {
                 return this.statusActualField;
             }
             set {
                 this.statusActualField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusActualSpecified {
-            get {
-                return this.statusActualFieldSpecified;
-            }
-            set {
-                this.statusActualFieldSpecified = value;
             }
         }
         
@@ -1037,8 +998,6 @@ namespace EfDatabaseErrorInventory {
         
         private int idUserField;
         
-        private bool idUserFieldSpecified;
-        
         private string nameField;
         
         private string smallNameField;
@@ -1057,17 +1016,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idUserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdUserSpecified {
-            get {
-                return this.idUserFieldSpecified;
-            }
-            set {
-                this.idUserFieldSpecified = value;
             }
         }
         
@@ -1136,23 +1084,37 @@ namespace EfDatabaseErrorInventory {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class IsProcessComplete {
         
-        private int idField;
+        private System.Nullable<System.DateTime> dataStartField;
         
-        private bool idFieldSpecified;
+        private System.Nullable<System.DateTime> dataFinishField;
+        
+        private int idField;
         
         private string nameProcessField;
         
         private bool isCompleteField;
         
-        private bool isCompleteFieldSpecified;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataStart {
+            get {
+                return this.dataStartField;
+            }
+            set {
+                this.dataStartField = value;
+            }
+        }
         
-        private System.DateTime dataStartField;
-        
-        private bool dataStartFieldSpecified;
-        
-        private System.DateTime dataFinishField;
-        
-        private bool dataFinishFieldSpecified;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataFinish {
+            get {
+                return this.dataFinishField;
+            }
+            set {
+                this.dataFinishField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1162,17 +1124,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
             }
         }
         
@@ -1197,61 +1148,6 @@ namespace EfDatabaseErrorInventory {
                 this.isCompleteField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsCompleteSpecified {
-            get {
-                return this.isCompleteFieldSpecified;
-            }
-            set {
-                this.isCompleteFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime DataStart {
-            get {
-                return this.dataStartField;
-            }
-            set {
-                this.dataStartField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DataStartSpecified {
-            get {
-                return this.dataStartFieldSpecified;
-            }
-            set {
-                this.dataStartFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime DataFinish {
-            get {
-                return this.dataFinishField;
-            }
-            set {
-                this.dataFinishField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DataFinishSpecified {
-            get {
-                return this.dataFinishFieldSpecified;
-            }
-            set {
-                this.dataFinishFieldSpecified = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1263,9 +1159,9 @@ namespace EfDatabaseErrorInventory {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class ComputerIpAdressSynhronization {
         
-        private int idField;
+        private System.Nullable<System.DateTime> dateCreateField;
         
-        private bool idFieldSpecified;
+        private int idField;
         
         private string nameHostField;
         
@@ -1277,9 +1173,16 @@ namespace EfDatabaseErrorInventory {
         
         private string userNameField;
         
-        private System.DateTime dateCreateField;
-        
-        private bool dateCreateFieldSpecified;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DateCreate {
+            get {
+                return this.dateCreateField;
+            }
+            set {
+                this.dateCreateField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1289,17 +1192,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
             }
         }
         
@@ -1357,28 +1249,6 @@ namespace EfDatabaseErrorInventory {
                 this.userNameField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime DateCreate {
-            get {
-                return this.dateCreateField;
-            }
-            set {
-                this.dateCreateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateCreateSpecified {
-            get {
-                return this.dateCreateFieldSpecified;
-            }
-            set {
-                this.dateCreateFieldSpecified = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1391,8 +1261,6 @@ namespace EfDatabaseErrorInventory {
     public partial class DoubleComputersName {
         
         private int idSysBlockField;
-        
-        private bool idSysBlockFieldSpecified;
         
         private string serviceNumField;
         
@@ -1412,17 +1280,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idSysBlockField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSysBlockSpecified {
-            get {
-                return this.idSysBlockFieldSpecified;
-            }
-            set {
-                this.idSysBlockFieldSpecified = value;
             }
         }
         
@@ -1491,15 +1348,13 @@ namespace EfDatabaseErrorInventory {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class SynhronizationIp {
         
+        private System.Nullable<System.DateTime> datesField;
+        
+        private System.Nullable<int> idUserField;
+        
         private string taskField;
         
         private int idSysBlockField;
-        
-        private bool idSysBlockFieldSpecified;
-        
-        private int idUserField;
-        
-        private bool idUserFieldSpecified;
         
         private string actualIpAdressField;
         
@@ -1509,9 +1364,27 @@ namespace EfDatabaseErrorInventory {
         
         private string ipAdressNewField;
         
-        private System.DateTime datesField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> Dates {
+            get {
+                return this.datesField;
+            }
+            set {
+                this.datesField = value;
+            }
+        }
         
-        private bool datesFieldSpecified;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> IdUser {
+            get {
+                return this.idUserField;
+            }
+            set {
+                this.idUserField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1532,39 +1405,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idSysBlockField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSysBlockSpecified {
-            get {
-                return this.idSysBlockFieldSpecified;
-            }
-            set {
-                this.idSysBlockFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int IdUser {
-            get {
-                return this.idUserField;
-            }
-            set {
-                this.idUserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdUserSpecified {
-            get {
-                return this.idUserFieldSpecified;
-            }
-            set {
-                this.idUserFieldSpecified = value;
             }
         }
         
@@ -1611,28 +1451,6 @@ namespace EfDatabaseErrorInventory {
                 this.ipAdressNewField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime Dates {
-            get {
-                return this.datesField;
-            }
-            set {
-                this.datesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DatesSpecified {
-            get {
-                return this.datesFieldSpecified;
-            }
-            set {
-                this.datesFieldSpecified = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1645,8 +1463,6 @@ namespace EfDatabaseErrorInventory {
     public partial class NameHostIpAdress {
         
         private int idSysBlockField;
-        
-        private bool idSysBlockFieldSpecified;
         
         private string userNameField;
         
@@ -1672,17 +1488,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idSysBlockField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSysBlockSpecified {
-            get {
-                return this.idSysBlockFieldSpecified;
-            }
-            set {
-                this.idSysBlockFieldSpecified = value;
             }
         }
         
@@ -1784,9 +1589,9 @@ namespace EfDatabaseErrorInventory {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class HistoryLog {
         
-        private int idModelField;
+        private System.Nullable<System.DateTime> dataCreateField;
         
-        private bool idModelFieldSpecified;
+        private int idModelField;
         
         private string nameField;
         
@@ -1802,9 +1607,16 @@ namespace EfDatabaseErrorInventory {
         
         private string inventarNumberField;
         
-        private System.DateTime dataCreateField;
-        
-        private bool dataCreateFieldSpecified;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataCreate {
+            get {
+                return this.dataCreateField;
+            }
+            set {
+                this.dataCreateField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1814,17 +1626,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idModelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdModelSpecified {
-            get {
-                return this.idModelFieldSpecified;
-            }
-            set {
-                this.idModelFieldSpecified = value;
             }
         }
         
@@ -1902,28 +1703,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.inventarNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime DataCreate {
-            get {
-                return this.dataCreateField;
-            }
-            set {
-                this.dataCreateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DataCreateSpecified {
-            get {
-                return this.dataCreateFieldSpecified;
-            }
-            set {
-                this.dataCreateFieldSpecified = value;
             }
         }
     }
@@ -2055,8 +1834,6 @@ namespace EfDatabaseErrorInventory {
         
         private int idField;
         
-        private bool idFieldSpecified;
-        
         private string itemField;
         
         private string nameField;
@@ -2109,17 +1886,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
             }
         }
         
@@ -2287,7 +2053,7 @@ namespace EfDatabaseErrorInventory {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class ErrorTokenUser {
         
-        private string idTokenField;
+        private int idTokenField;
         
         private string smallNameField;
         
@@ -2305,7 +2071,7 @@ namespace EfDatabaseErrorInventory {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string IdToken {
+        public int IdToken {
             get {
                 return this.idTokenField;
             }

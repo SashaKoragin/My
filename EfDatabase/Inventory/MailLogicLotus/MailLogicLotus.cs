@@ -82,10 +82,10 @@ namespace EfDatabase.Inventory.MailLogicLotus
         {
             switch (model.NameGroupModel)
             {
-                case "MailIn":
+                case "MailInView":
                     var mailIn = Inventory.MailLotusOutlookIns.Single(mails => mails.IdMail == model.IdMail);
                     return mailIn.Body;
-                case "MailOut" :
+                case "MailOutView":
                     var mailOut = Inventory.MailLotusOutlookOuts.Single(mails => mails.IdMail == model.IdMail);
                     return mailOut.Body;
                 default:
@@ -101,10 +101,10 @@ namespace EfDatabase.Inventory.MailLogicLotus
         {
             switch (model.NameGroupModel)
             {
-                case "MailIn":
+                case "MailInView":
                     var mailIn = Inventory.MailLotusOutlookIns.Single(mails => mails.IdMail == model.IdMail);
                     return new MemoryStream(mailIn.FileMail);
-                case "MailOut":
+                case "MailOutView":
                     var mailOut = Inventory.MailLotusOutlookOuts.Single(mails => mails.IdMail == model.IdMail);
                     return  new MemoryStream(mailOut.FileMailZip);
                 default:

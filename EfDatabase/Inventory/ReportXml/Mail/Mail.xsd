@@ -11,18 +11,21 @@
 			<xs:documentation>Схема для писем mail nalog</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element ref="MailIn" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element ref="MailOut" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="MailInView" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="MailOutView" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="WebMailModel" minOccurs="0"/>
-			<xs:element ref="CalendarVksStp" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="CalendarVksStpView" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="MailIn">
+	<xs:element name="MailInView">
 		<xs:annotation>
 			<xs:documentation>Письма входящие</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Id" type="xs:int">
+			<xs:sequence>
+				<xs:element ref="DateInputServer"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун в БД</xs:documentation>
 				</xs:annotation>
@@ -52,11 +55,6 @@
 					<xs:documentation>Присутствует ли вложение</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateInputServer" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата заступления письма</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
 			<xs:attribute name="LogicsButton" default="Button">
 				<xs:annotation>
 					<xs:documentation>Логика кнопок</xs:documentation>
@@ -64,12 +62,15 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="MailOut">
+	<xs:element name="MailOutView">
 		<xs:annotation>
 			<xs:documentation>Письма исходящии</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Id" type="xs:int">
+			<xs:sequence>
+				<xs:element ref="DateCreate"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун в БД</xs:documentation>
 				</xs:annotation>
@@ -109,11 +110,6 @@
 					<xs:documentation>Логика кнопок</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateCreate" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата отправки</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="WebMailModel">
@@ -136,12 +132,16 @@
 			<xs:documentation>Ун письма в БД</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="CalendarVksStp">
+	<xs:element name="CalendarVksStpView">
 		<xs:annotation>
 			<xs:documentation>Календарь ВКС</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Id" type="xs:int">
+			<xs:sequence>
+				<xs:element ref="DateStart"/>
+				<xs:element ref="DateFinish"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун в таблице</xs:documentation>
 				</xs:annotation>
@@ -166,16 +166,6 @@
 					<xs:documentation>Номер ВКС</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateStart" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата и время начала ВКС</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="DateFinish" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата и время окончания ВКС</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
 			<xs:attribute name="IsSTP" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Отправленно на СТП</xs:documentation>
@@ -183,5 +173,25 @@
 			</xs:attribute>
 			<xs:attribute name="LogicsButton" default="Button"/>
 		</xs:complexType>
+	</xs:element>
+	<xs:element name="DateInputServer" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата заступления письма</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateCreate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата отправки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateStart" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата и время начала ВКС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateFinish" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата и время окончания ВКС</xs:documentation>
+		</xs:annotation>
 	</xs:element>
 </xs:schema>

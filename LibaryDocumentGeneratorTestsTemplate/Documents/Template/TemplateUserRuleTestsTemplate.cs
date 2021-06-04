@@ -37,7 +37,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
         public void TestReportNote()
         {
             var model = new EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost.ModelGetPost();
-            var card = model.CardUi("7751012500", 2021);
+            var card = model.CardUi("1435172110", 2021);
             ReportNote report = new ReportNote();
             report.CreateDocum(@"D:\", card, 2021);
         }
@@ -48,7 +48,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
         public void TestReportBookSales()
         {
             var model = new EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost.ModelGetPost();
-            var card = model.CardUiBookSales("7751012500", 2021);
+            var card = model.CardUiBookSales("1435172110", 2021);
             TemplateBookSalesBank report = new TemplateBookSalesBank();
             report.CreateDocum(@"D:\", card, 2021);
         }

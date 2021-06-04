@@ -1,14 +1,13 @@
 ﻿using EfDatabase.Inventory.Base;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdQrCodeModel;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
-using Otdel = EfDatabase.Inventory.Base.Otdel;
 
 
 namespace EfDatabase.Inventory.BaseLogic.Select
@@ -21,6 +20,52 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             Inventory?.Dispose();
             Inventory = new InventoryContext();
+        }
+        /// <summary>
+        /// Глобальные настройки организации
+        /// </summary>
+        /// <returns></returns>
+        public Organization SettingOrganization()
+        {
+           return  Inventory.Organizations.FirstOrDefault();
+        }
+        /// <summary>
+        /// Выгрузка падежей отделов для отчетов
+        /// </summary>
+        /// <returns></returns>
+        public string SettingDepartmentCase()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<SettingDepartmentCase>("Select " +
+                                                                                                 "Otdel.IdOtdel, " +
+                                                                                                 "Otdel.NameOtdel, " +
+                                                                                                 "OtdelPadeg.InameOtdel, " +
+                                                                                                 "OtdelPadeg.RnameOtdel, " +
+                                                                                                 "OtdelPadeg.DnameOtdel, " +
+                                                                                                 "OtdelPadeg.VnameOtdel, " +
+                                                                                                 "OtdelPadeg.PnameOtdel, " +
+                                                                                                 "OtdelPadeg.TnameOtdel From Otdel "+
+                                                                                                 "Left Join OtdelPadeg on Otdel.IdOtdel = OtdelPadeg.IdOtdel").ToArray());
+        }
+        /// <summary>
+        /// Регламенты отделов для заявок
+        /// </summary>
+        /// <returns></returns>
+        public string SettingDepartmentRegulations()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<RegulationsDepartment>("Select Otdel.IdOtdel, Otdel.NameOtdel, DepartmentRegulations.Regulations From Otdel " +
+                                                                                                     "Left Join DepartmentRegulations on Otdel.IdOtdel = DepartmentRegulations.IdOtdel").ToArray());
+        }
+
+        /// <summary>
+        /// Получение\выгрузка всех праздничных дней
+        /// </summary>
+        /// <returns></returns>
+        public string GetHolidays()
+        { 
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibrary(Inventory.Rb_Holidays);
         }
 
         /// <summary>
@@ -242,6 +287,33 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             return json.JsonLibaryIgnoreDate(Inventory.ModelSeverEquipments);
         }
         /// <summary>
+        /// Получение ресурсов для заявки
+        /// </summary>
+        /// <returns></returns>
+        public string GetResourceIt()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.ResourceIts);
+        }
+        /// <summary>
+        /// Получение задач для заявки АИС 3
+        /// </summary>
+        /// <returns></returns>
+        public string GetTaskAis3()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.TaskAis3);
+        }
+        /// <summary>
+        /// Получение журнала заявок на различные ресурсы
+        /// </summary>
+        /// <returns></returns>
+        public string GetJournalAis3()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.JournalAis3);
+        }
+        /// <summary>
         /// Все производители серверного оборудования
         /// </summary>
         /// <returns></returns>
@@ -258,7 +330,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Supply()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibary(Inventory.Supplies);
+            return json.JsonLibrary(Inventory.Supplies);
         }
         /// <summary>
         /// Выгрузка моделей бесперебойных блоков
@@ -369,7 +441,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             SerializeJson json = new SerializeJson();
             SelectSql sql = new SelectSql();
-            ModelSelect model = new ModelSelect { LogicaSelect = sql.SqlSelectModel(34) };
+            ModelSelect model = new ModelSelect { LogicaSelect = sql.SqlSelectModel(33) };
             var idDepartment = Inventory.Database.SqlQuery<int>(model.LogicaSelect.SelectUser,
                 new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], idUser)).FirstOrDefault();
             sql.Dispose();
@@ -388,7 +460,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public RuleUsers[] AllRuleUser(int idUser)
         {
             SelectSql sql = new SelectSql();
-            ModelSelect model = new ModelSelect { LogicaSelect = sql.SqlSelectModel(35) };
+            ModelSelect model = new ModelSelect { LogicaSelect = sql.SqlSelectModel(34) };
             sql.Dispose();
             var ruleAndUser = Inventory.Database.SqlQuery<RuleUsers>(model.LogicaSelect.SelectUser,
                 new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], idUser)).ToArray();

@@ -1,8 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
 using EfDatabase.Inventory.BaseLogic.Select;
+using EfDatabase.Inventory.SqlModelSelect;
+using EfDatabaseAutomation.Automation.BaseLogica.SqlSelect.ProcedureParametr;
+using EfDatabaseAutomation.Automation.BaseLogica.SqlSelect.XsdDTOSheme;
+using EfDatabaseErrorInventory;
+using EfDatabaseParametrsModel;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
-using LibaryXMLAutoModelXmlAuto.MigrationReport;
+using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestIFNSLibary.Inventarka;
 using TestIFNSLibary.ServiceRest;
@@ -27,51 +35,70 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
         [TestMethod]
         public void TestTemplateRule()
         {
+
+            //var t = CultureInfo.CreateSpecificCulture("ru-Ru").DateTimeFormat.MonthGenitiveNames;
             ServiceRest rest = new ServiceRest();
             var xml = new LibaryXMLAuto.ReadOrWrite.XmlReadOrWrite();
-            UserRules rule = (UserRules)xml.ReadXml("C:\\UserRule.xml", typeof(UserRules));
-            var groupelement = rule.User.Where(x => x.Number != "Скрипт").GroupBy(x => new { x.Dates, x.Number, x.Otdel }).Select(x => new { x.Key.Number, x.Key.Dates, x.Key.Otdel }).ToList();
-            int i = 0;
-            foreach (var gr in groupelement)
-            {
-                //if (template.Otdel == null)
-                //{
-                //    template.Otdel = new LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel[groupelement.Count];
-                //}
-                //template.Otdel[i] = Inventarization.Database.SqlQuery<LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel>(sqlselect.LogicaSelect.SelectUser, new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[0], 1),
-                //          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[1], gr.Otdel.Replace("№ ", "№")),
-                //          new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[2], gr.Number)).ToList()[0];
-                //template.Otdel[i].Dates = gr.Dates;
-                var user = rule.User.Where(userrule => (userrule.Dates == gr.Dates) && (userrule.Number == gr.Number) && (userrule.Otdel == gr.Otdel)).Select(u=>new { u.Dates,u.Fio,u.SysName,u.Dolj,u.Otdel,u.Number}).Distinct().ToList();
-                
-                //int j = 0;
-                foreach (var userule in user)
-                {
-                  var ruleall =  rule.User.Where( u =>
-                     u.Dates == userule.Dates && u.Dolj == userule.Dolj && u.Otdel == userule.Otdel &&
-                     u.Fio == userule.Fio && u.SysName == userule.SysName && u.Number == userule.Number).
-                     Select(x=>x.Rule).Aggregate((element, next)=>element.Concat(next).ToArray());
+            UserRules rule = (UserRules)xml.ReadXml("D:\\UserRule.xml", typeof(UserRules));
+            var t =   rest.GenerateTemplateRule(rule);
+        }
+        [TestMethod]
+        public async void TestAct()
+        {
+            Inventarka inv = new Inventarka();
+           await inv.CreateAct(new ModelSelect()
+                {ParametrsAct = new ParametrsAct() {IdClasificationAct = 1, IdModelTemplate = 13 } });
+        }
+        /// <summary>
+        /// Загрузка информации о ролях и пользователях
+        /// </summary>
+        [TestMethod]
+        public void TestLoadTemplate()
+        {
+            ServiceRest rest = new ServiceRest();
+            var xml = new LibaryXMLAuto.ReadOrWrite.XmlReadOrWrite();
+            InfoRuleTemplate infoRuleTemplate = (InfoRuleTemplate)xml.ReadXml("D:\\InfoRuleTemplate.xml", typeof(InfoRuleTemplate));
+            var t = rest.LoadInfoTemplateToDataBase(infoRuleTemplate);
+        }
+        /// <summary>
+        /// Тест динамического создания отчета
+        /// </summary>
+        [TestMethod]
+        public void SqlModelProcedureLogic()
+        {
+            LogicaSelect logic = new LogicaSelect();
+            logic.Id = 29;
+            logic.IsResultXml = true;
+            logic.SelectUser = "Select (Select TableTemplate.Name as Names, TableTemplate.Category as Category, (Select distinct TableSystems.Name+'\'+TableFolders.Name+'\'+TableTasks.Name as Path, TableTasks.TypeTask as Type From TableAllModel Join TableTasks on TableTasks.IdTasks = TableAllModel.IdTasks Join TableFolders on TableFolders.IdFolders = TableAllModel.IdFolders Join TableSystems on TableSystems.IdSystems = TableAllModel.IdSystems Where TableAllModel.IdTemplate = TableTemplate.IdTemplate For Xml Auto,Type) From TableTemplate Where AllTemplateAndTree.IdTemplate = TableTemplate.IdTemplate For Xml Auto,Type) From AllTemplateAndTree  Group by IdTemplate,Name,Category Having IdTemplate = max(IdTemplate) For xml Auto,ROOT('AllTechnicalUsersAndOtdelAndTreeAis3')";
+          //var model = (string)typeof(FullSelectModelInventory).GetMethod("SqlModelInventory")
+          //      ?.Invoke(new FullSelectModelInventory(), new object[] { logic });
+         Type type = Type.GetType($"EfDatabaseParametrsModel.AllTechnicalUsersAndOtdelAndTreeAis3, EfDatabase");
+          if (logic.SelectUser != null)
+          {
 
-                    ruleall.Select(elem => $"{elem.Types}: {elem.Name}").Aggregate(
-                        (element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : ", ") + next);
+                //  var type = db.GetType($"EfDatabaseErrorInventory.AllTechnics");
+                var m = (string) typeof(FullSelectModelInventory).GetMethod("SqlModelInventory")?.MakeGenericMethod(type).Invoke(new FullSelectModelInventory(), new object[] { logic });
+              //    if (model.ParametrsSelect.Id == 12)
+              //    {
+              //        return;
+              //    }
+              //    return (ModelSelect)typeof(SqlSelect).GetMethod("ResultSelectProcedure")?.MakeGenericMethod(type)
+              //        .Invoke(new SqlSelect(), new object[] { model });
+              //}
+          }
+          //    EfDatabaseErrorInventory.AllTechnics п = new EfDatabaseErrorInventory.AllTechnics();
+           //   EfDatabase.Inventory.SqlModelSelect.FullSelectModelInventory select = new FullSelectModelInventory();
+            //select.SqlModelInventory<AllTechnics>(logic);
+        }
+        [TestMethod]
+        public void TestIsHoliday()
+        {
+            var dateSign = new DateTime(2021, 1, 3);
+            var date = dateSign.AddWorkdays(1);
+             date = dateSign.AddWorkdays(-1);
+             date = dateSign.AddWorkdays(-3);
+             date = dateSign.AddWorkdays(3);
 
-
-                    // var elemt = ruleall.ToList()  //.Select(elem => $"{elem.Types}: {elem.Name}").Aggregate(
-                    //    (element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : ", ") + next)
-                    //if (template.Otdel[i].Users == null)
-                    //{
-                    //    template.Otdel[i].Users = new LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Users[user.Count];
-                    //}
-                    //template.Otdel[i].Users[j] = Inventarization.Database.SqlQuery<LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Users>(sqlselect.LogicaSelect.SelectUser, new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[0], 2),
-                    //      new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[1], userule.SysName.Split('@')[0]),
-                    //      new SqlParameter(sqlselect.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).ToList()[0];
-                    //template.Otdel[i].Users[j].RuleTemplate = userule.Rule.Select(elem => $"{elem.Types}: {elem.Name}").Aggregate(
-                    //    (element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : ", ") + next);
-                    //template.Otdel[i].Users[j].Pushed = userule.Rule[0].Pushed;
-                    //j++;
-                }
-                i++;
-            }
         }
     }
 }

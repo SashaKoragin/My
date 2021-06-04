@@ -132,13 +132,20 @@
     <Compile Include="Inventory\ReportXml\ModelSupportNalog\TemplateSupportSTO.cs">
       <DependentUpon>TemplateSupportSTO.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ReportXml\ModelUserRulesError\ModelDtoTemplateUsersRulesError.cs">
+      <DependentUpon>ModelDtoTemplateUsersRulesError.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\ReportXml\ReturnModelError\ModelError.cs" />
+    <Compile Include="Inventory\ReportXml\SettingModelInventory\SettingModelInventory.cs">
+      <DependentUpon>SettingModelInventory.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\ReportXml\TelephoneHelp\TelephoneHelp.cs">
       <DependentUpon>TelephoneHelp.xsd</DependentUpon>
     </Compile>
     <Compile Include="Inventory\ReportXml\UploadFile\UploadFileModel.cs">
       <DependentUpon>UploadFileModel.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\SqlModelSelect\FullSelectModelInventory.cs" />
     <Compile Include="SyteIfnsRisk.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -198,6 +205,12 @@
     <None Include="Inventory\ReportXml\ModelSupportNalog\TemplateSupportSTO.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Inventory\ReportXml\ModelUserRulesError\ModelDtoTemplateUsersRulesError.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\SettingModelInventory\SettingModelInventory.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventory\ReportXml\TelephoneHelp\TelephoneHelp.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -247,6 +260,8 @@
       <XsdInventoryAutorization Include="Inventory\ReportXml\InventoryAutorization\*.xsd" />
       <XsdInventoryRuleAndUsers Include="Inventory\ReportXml\InventoryRuleAndUsers\*.xsd" />
       <XsdQrCodeModel Include="Inventory\DataTransferObject\QrCodeOffice\*.xsd" />
+      <ModelDtoTemplateUsersRulesError Include="Inventory\ReportXml\ModelUserRulesError\*.xsd" />
+      <ModelSettingModelInventory Include="Inventory\ReportXml\SettingModelInventory\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -261,12 +276,14 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportFile.FullPath)&quot; /c /f /namespace:$(RootNamespace)UploadFile /outputdir:Inventory\ReportXml\UploadFile\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportError.FullPath)&quot; /c /namespace:$(RootNamespace)ErrorInventory /outputdir:Inventory\ReportXml\ErrorInventory\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdTelephoneHelp.FullPath)&quot; /c /namespace:$(RootNamespace)TelephoneHelp /outputdir:Inventory\ReportXml\TelephoneHelp\" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdBookAccounting.FullPath)&quot; /c /f /namespace:$(RootNamespace)XsdBookAccounting /outputdir:Inventory\ReportXml\BookAccounting\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdBookAccounting.FullPath)&quot; /c /namespace:$(RootNamespace).XsdBookAccounting /outputdir:Inventory\ReportXml\BookAccounting\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdLotusUser.FullPath)&quot; /c /namespace:$(RootNamespace)XsdLotusUser /outputdir:Inventory\MailLogicLotus\MailXsdSheme\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdMail.FullPath)&quot; /c /namespace:$(RootNamespace)XsdMail /outputdir:Inventory\ReportXml\Mail\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdSupportNalog.FullPath)&quot; /c /namespace:$(RootNamespace)XsdSupportNalog /outputdir:Inventory\ReportXml\ModelSupportNalog\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdInventoryAutorization.FullPath)&quot; /c /namespace:$(RootNamespace)XsdInventoryAutorization /outputdir:Inventory\ReportXml\InventoryAutorization\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdQrCodeModel.FullPath)&quot; /c /namespace:$(RootNamespace)XsdQrCodeModel /outputdir:Inventory\DataTransferObject\QrCodeOffice\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdInventoryRuleAndUsers.FullPath)&quot; /c /namespace:$(RootNamespace).XsdInventoryRuleAndUsers /outputdir:Inventory\ReportXml\InventoryRuleAndUsers\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(ModelDtoTemplateUsersRulesError.FullPath)&quot; /c /namespace:$(RootNamespace).ModelDtoTemplateUsersRulesError /outputdir:Inventory\ReportXml\ModelUserRulesError\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(ModelSettingModelInventory.FullPath)&quot; /c /namespace:$(RootNamespace).SettingModelInventory /outputdir:Inventory\ReportXml\SettingModelInventory\" />
   </Target>
 </Project>

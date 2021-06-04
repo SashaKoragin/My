@@ -10,6 +10,7 @@ using SqlLibaryIfns.SqlEntytiCommand.TaskUse;
 using SqlLibaryIfns.SqlZapros.SobytieSql;
 using System.IO;
 using System.Threading;
+using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.Select;
 using LibaryDocumentGenerator.Documents.DocumentMigration;
 using LibaryDocumentGenerator.Documents.Template;
@@ -24,7 +25,7 @@ using SqlLibaryIfns.ZaprosSelectNotParam;
 using LibaryDocumentGenerator.DonloadFile.Angular;
 using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.Reports.FullTemplateSheme;
-using LibaryXMLAutoModelXmlAuto.MigrationReport;
+using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
 using RuleTemplate = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.RuleTemplate;
 
@@ -38,9 +39,23 @@ namespace TestIFNSLibary.ServiceRest
         /// </summary>
         readonly Parameter _parameterService = new Parameter();
         /// <summary>
+        /// Получение всех сервисов в БД для шаблонов
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ServiceModelInventory[]> GetServiceApi()
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                var sql = new SelectSql();
+                var service = sql.GetServiceApi();
+                sql.Dispose();
+                return service;
+            });
+        }
+        /// <summary>
         /// Указатель выполнение задачи загрузки шаблонов по ролям
         /// </summary>
-        public static bool IsLoadCompletedDataBaseTemplate = true;
+       // public static bool IsLoadCompletedDataBaseTemplate = true;
         //Функции для сайта IFNS
         public async Task<Face> SqlFaceError()
         {
@@ -126,8 +141,8 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<Stream> DonloadFile(string filename)
         {
-            DonloadsFile donloads = new DonloadsFile();
-            return await donloads.SelectDonloadsFile(_parameterService.Report, filename, _parameterService.ConectWork);
+            DonloadsFile downloads = new DonloadsFile();
+            return await downloads.SelectDonloadsFile(_parameterService.Report, filename, _parameterService.ConectWork);
         }
 
         /// <summary>
@@ -137,7 +152,7 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<string> LoaderBdk(FullSetting setting)
         {
-            var selectfull = new SelectFull();
+            var selectFull = new SelectFull();
             switch (setting.Db)
             {
                 case "Work":
@@ -145,7 +160,7 @@ namespace TestIFNSLibary.ServiceRest
                     return
                         await Task.Factory.StartNew(
                             () =>
-                                selectfull.BdkSqlSelect(_parameterService.ConectWork,
+                                selectFull.BdkSqlSelect(_parameterService.ConectWork,
                                 ((ServiceWcf)
                                     sqlconnect.SelectFullParametrSqlReader(_parameterService.ConectWork,
                                         ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf),
@@ -162,11 +177,11 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<string> StoreProcedureBdk(FullSetting setting)
         {
-            var taskcommand = new TaskResult();
+            var taskCommand = new TaskResult();
             switch (setting.Db)
             {
                 case "Work":
-                    return await taskcommand.TaskSqlProcedureBdk(_parameterService.ConectWork, setting);
+                    return await taskCommand.TaskSqlProcedureBdk(_parameterService.ConectWork, setting);
                 default:
                     return null;
             }
@@ -179,11 +194,11 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<string> StoreProcedureSoprovod(FullSetting setting)
         {
-            var taskcommand = new TaskResult();
+            var taskCommand = new TaskResult();
             switch (setting.Db)
             {
                 case "Work":
-                    return await taskcommand.TaskSqlProcedureSoprovod(_parameterService.ConectWork, setting);
+                    return await taskCommand.TaskSqlProcedureSoprovod(_parameterService.ConectWork, setting);
                 default:
                     return null;
             }
@@ -196,11 +211,11 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<string> StoreProcedureKrsb(FullSetting setting)
         {
-            var taskcommand = new TaskResult();
+            var taskCommand = new TaskResult();
             switch (setting.Db)
             {
                 case "Work":
-                    return await taskcommand.TaskSqlProcedureKrsb(_parameterService.ConectWork, setting);
+                    return await taskCommand.TaskSqlProcedureKrsb(_parameterService.ConectWork, setting);
                 default:
                     return null;
             }
@@ -237,8 +252,8 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<string> ModelServiceCommand(FullSetting setting)
         {
-            var selectfull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectfull.ServiceCommand(_parameterService.ConectWork, setting));
+            var selectFull = new SelectFull();
+            return await Task.Factory.StartNew(() => selectFull.ServiceCommand(_parameterService.ConectWork, setting));
         }
 
         /// <summary>
@@ -300,8 +315,8 @@ namespace TestIFNSLibary.ServiceRest
         public async Task<string> ServerList(FullSetting setting)
         {
             var connect = setting.Db == "Work" ? _parameterService.ConectWork : _parameterService.ConectTest;
-            var selectfull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectfull.SqlSelect(connect, setting));
+            var selectFull = new SelectFull();
+            return await Task.Factory.StartNew(() => selectFull.SqlSelect(connect, setting));
         }
         /// <summary>
         /// Авторизация на сервере
@@ -333,8 +348,8 @@ namespace TestIFNSLibary.ServiceRest
             {
              return  await Task.Factory.StartNew(() =>
                 {
-                    var docmigration = new DocumentMigration();
-                    docmigration.MigrationDocument(_parameterService.ConectWork, _parameterService.ReportMassTemplate, json, _parameterService.SendServiceLotus);
+                    var docMigration = new DocumentMigration();
+                    docMigration.MigrationDocument(_parameterService.ConectWork, _parameterService.ReportMassTemplate, json, _parameterService.SendServiceLotus);
                     report.Note = "Документы для печати запущены и сохраняются в папку ";
                     report.Url = _parameterService.ReportMassTemplate;
                     return report;
@@ -385,38 +400,21 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public ModelPathReport LoadInfoTemplateToDataBase(InfoRuleTemplate infoTemplate)
         {
-            var report = new ModelPathReport();
-            if (IsLoadCompletedDataBaseTemplate)
-            {
-               var task = Task.Run(() =>
-                 {
-                    try
-                    {
-                        var sql = new SelectSql(); 
-                        sql.LoadTemplateDataBase(infoTemplate);
-                        sql.Dispose();
-                    }
-                    catch (Exception e)
-                    {
-                        Loggers.Log4NetLogger.Error(e);
-                    }
-                 });
-               IsLoadCompletedDataBaseTemplate = task.ConfigureAwait(true).GetAwaiter().IsCompleted;
-               task.ConfigureAwait(true).GetAwaiter().OnCompleted((() => 
-                    IsLoadCompletedDataBaseTemplate = true
-                    ));
-                report.Note = "Процесс по загрузке шаблонов запущен!";
-            }
-            else
-            {
-                report.Note = "Задача уже запущенна ожидайте окончание процесса!";
-            }
-            return report;
+            var sql = new SelectSql();
+            return sql.LoadModelToDataBase(infoTemplate, 36, 2);
+        }
+        /// <summary>
+        /// Загрузка справочников по шаблонам ролям пользователям
+        /// </summary>
+        /// <param name="infoUserTemlateAndRule">Шаблоны роли пользователи</param>
+        /// <returns></returns>
+        public ModelPathReport LoadInfoUserTemplateAndRuleToDataBase(InfoUserTemlateAndRule infoUserTemlateAndRule)
+        {
+            var sql = new SelectSql();
+            return sql.LoadModelToDataBase(infoUserTemlateAndRule, 38, 3);
         }
     }
-
-
-    }
+}
 class CompletedAsyncResult<T> : IAsyncResult
 {
     T data;

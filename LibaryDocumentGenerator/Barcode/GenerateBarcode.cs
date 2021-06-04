@@ -2,10 +2,9 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Media.Imaging;
-using EfDatabase.Inventory.Base;
+using EfDatabase.XsdBookAccounting;
 using EfDatabaseInvoice;
 using EfDatabaseUploadFile;
-using EfDatabaseXsdBookAccounting;
 using ZXing;
 using LibaryDocumentGenerator.Documents.Constant;
 using ZXing.Common;
@@ -21,7 +20,7 @@ namespace LibaryDocumentGenerator.Barcode
         /// </summary>
         /// <param name="barecode">Параметры кода</param>
         /// <param name="path">Путь сохранения</param>
-        public void GenerateBookCode(ref BareCodeBook barecode, string path)
+        public void GenerateBookCode(BareCodeBook barecode, string path)
         {
             barecode.FullPathSave = path + barecode.NameModel + WordConstant.Formatpng;
             BarcodeWriter writer = new BarcodeWriter

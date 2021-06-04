@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EfDatabase.XsdBookAccounting;
 using EfDatabaseInvoice;
-using EfDatabaseXsdBookAccounting;
+
 
 namespace EfDatabase.Inventory.BaseLogic.Select
 {
@@ -23,11 +24,12 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             report.Main.Barcode.Id = adddoc.AddDocument(report.ParamRequest.IdNameDocument, report.Main.Received.UserName,report.ParamRequest.IdUsers);
         }
 
-        public void BookInvoce(ref BareCodeBook barecode, BookModels bookModels)
+        public BareCodeBook BookInvoce(BareCodeBook barecode, BookModels bookModels)
         {
             barecode.NameModel = bookModels.Model;
             AddObjectDb.AddObjectDb adddoc = new AddObjectDb.AddObjectDb();
             barecode.Id = adddoc.AddBookAccounting(bookModels);
+            return barecode;
         }
     }
 }

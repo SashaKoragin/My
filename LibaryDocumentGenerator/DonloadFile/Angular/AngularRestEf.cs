@@ -83,7 +83,7 @@ namespace LibaryDocumentGenerator.DonloadFile.Angular
                             sqlconnect.SelectFullParametrSqlReader(conectstring,
                                 ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf),
                                 ModelSqlFullService.ParamCommand("19"))).ServiceWcfCommand.Command);
-                   return serializeJson.JsonLibary((CreateDela)sqlconnect.SelectFullParametrSqlReader<string, string>(conectstring,
+                   return serializeJson.JsonLibrary((CreateDela)sqlconnect.SelectFullParametrSqlReader<string, string>(conectstring,
                          ((ServiceWcf)
                             sqlconnect.SelectFullParametrSqlReader(conectstring,
                                 ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf),

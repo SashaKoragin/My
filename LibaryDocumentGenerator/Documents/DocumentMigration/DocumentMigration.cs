@@ -9,7 +9,7 @@ using LibaryDocumentGenerator.ProgrammView.Word.Template.FottersDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.HeadersDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
-using LibaryXMLAutoModelXmlAuto.MigrationReport;
+using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using Single = LibaryDocumentGenerator.ProgrammView.Word.Template.SingleDocument.Single;
 
 namespace LibaryDocumentGenerator.Documents.DocumentMigration

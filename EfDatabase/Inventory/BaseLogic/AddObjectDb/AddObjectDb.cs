@@ -4,9 +4,11 @@ using System.IO;
 using System.Linq;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
+using EfDatabase.SettingModelInventory;
+using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseUploadFile;
-using EfDatabaseXsdBookAccounting;
+using Organization = EfDatabase.Inventory.Base.Organization;
 using Supply = EfDatabase.Inventory.Base.Supply;
 
 namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
@@ -71,6 +73,150 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 Loggers.Log4NetLogger.Error(e);
             }
             return new ModelReturn<User>("При обновлении/добавлении данных 'Пользователь' по : " + usersAddAndModified.IdOtdel + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Редактирование модели организации или добавление новых в случае отсутствия
+        /// </summary>
+        public ModelReturn<Organization> AddAndEditOrganization(Organization organization)
+        {
+            var organizationAddAndModified = new Organization()
+            {
+                Id = organization.Id,
+                NameOrganization = organization.NameOrganization,
+                NameFace = organization.NameFace,
+                InameOrganization = organization.InameOrganization,
+                RnameOrganization = organization.RnameOrganization,
+                DnameOrganization = organization.DnameOrganization,
+                VnameOrganization = organization.VnameOrganization,
+                TnameOrganization = organization.TnameOrganization,
+                PnameOrganization = organization.PnameOrganization,
+                NameDepartament = organization.NameDepartament
+            };
+            try
+            {
+                if ((from organizationSelect in Inventory.Organizations
+                    where organizationSelect.Id == organizationAddAndModified.Id
+                     select new { Organization = organizationSelect }).Any())
+                {
+                    Inventory.Entry(organizationAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<Organization>("Обновили настройки организации: " + organizationAddAndModified.Id, organization);
+                }
+                Inventory.Organizations.Add(organizationAddAndModified);
+                Inventory.SaveChanges();
+                organization.Id = organizationAddAndModified.Id;
+                return new ModelReturn<Organization>("Добавили новые настройки организации: " + organizationAddAndModified.Id, organization, organizationAddAndModified.Id);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<Organization>("При обновлении/добавлении новых настроек организации по : " + organizationAddAndModified.Id + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление или редактирование праздничных дней 
+        /// </summary>
+        /// <param name="holiday"></param>
+        /// <returns></returns>
+        public ModelReturn<Rb_Holiday> AddAndEditHoliday(Rb_Holiday holiday)
+        {
+            var holidayAddAndModified = new Rb_Holiday()
+            {
+                Id = holiday.Id,
+                DateTime_Holiday = holiday.DateTime_Holiday,
+                IS_HOLIDAY = holiday.IS_HOLIDAY
+            };
+            try
+            {
+                if ((from holidaySelect in Inventory.Rb_Holidays
+                    where holidaySelect.Id == holiday.Id
+                    select new { Holidays = holidaySelect }).Any())
+                {
+                    Inventory.Entry(holidayAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<Rb_Holiday>("Обновили праздничный день: " + holidayAddAndModified.Id, holiday);
+                }
+                Inventory.Rb_Holidays.Add(holidayAddAndModified);
+                Inventory.SaveChanges();
+                holiday.Id = holidayAddAndModified.Id;
+                return new ModelReturn<Rb_Holiday>("Добавили новый праздничный день: " + holidayAddAndModified.Id, holiday, holidayAddAndModified.Id);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<Rb_Holiday>("При обновлении/добавлении праздничных дней по: " + holidayAddAndModified.Id + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление или удаление падежей отделов для настроек шаблонов
+        /// </summary>
+        /// <param name="settingDepartmentCase">Настройки падежей</param>
+        /// <returns></returns>
+        public ModelReturn<SettingDepartmentCase> AddAndEditSettingDepartmentCase(SettingDepartmentCase settingDepartmentCase)
+        {
+            var departmentCaseAddAndModified = new OtdelPadeg()
+            {
+                IdOtdel = settingDepartmentCase.IdOtdel,
+                InameOtdel = settingDepartmentCase.InameOtdel,
+                RnameOtdel = settingDepartmentCase.RnameOtdel,
+                DnameOtdel = settingDepartmentCase.DnameOtdel,
+                VnameOtdel = settingDepartmentCase.VnameOtdel,
+                TnameOtdel = settingDepartmentCase.TnameOtdel,
+                PnameOtdel = settingDepartmentCase.PnameOtdel
+            };
+            try
+            {
+                if ((from departmentCaseSelect in Inventory.OtdelPadegs
+                    where departmentCaseSelect.IdOtdel == settingDepartmentCase.IdOtdel
+                    select new { OtdelPadeg = departmentCaseSelect }).Any())
+                {
+                    Inventory.Entry(departmentCaseAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<SettingDepartmentCase>("Обновили настройки для отдела: " + departmentCaseAddAndModified.IdOtdel, settingDepartmentCase);
+                }
+                Inventory.OtdelPadegs.Add(departmentCaseAddAndModified);
+                Inventory.SaveChanges();
+                settingDepartmentCase.IdOtdel = departmentCaseAddAndModified.IdOtdel;
+                return new ModelReturn<SettingDepartmentCase>("Добавили новые настройки для отдела: " + departmentCaseAddAndModified.IdOtdel, settingDepartmentCase, departmentCaseAddAndModified.IdOtdel);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<SettingDepartmentCase>("При обновлении/добавлении новых настроек для отдела по : " + departmentCaseAddAndModified.IdOtdel + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление или обновление регламентов отдела для заявок
+        /// </summary>
+        /// <param name="regulationsDepartment">Регламент отдела</param>
+        /// <returns></returns>
+        public ModelReturn<RegulationsDepartment> AddAndEditSettingDepartmentRegulations(RegulationsDepartment regulationsDepartment)
+        {
+            var departmentRegulationsAddAndModified = new DepartmentRegulation()
+            {
+                IdOtdel = regulationsDepartment.IdOtdel,
+                Regulations = regulationsDepartment.Regulations
+            };
+            try
+            {
+                if ((from departmentRegulationsSelect in Inventory.DepartmentRegulations
+                    where departmentRegulationsSelect.IdOtdel == regulationsDepartment.IdOtdel
+                    select new { DepartmentRegulation = departmentRegulationsSelect }).Any())
+                {
+                    Inventory.Entry(departmentRegulationsAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<RegulationsDepartment>("Обновили регламент для отдела: " + departmentRegulationsAddAndModified.IdOtdel, regulationsDepartment);
+                }
+                Inventory.DepartmentRegulations.Add(departmentRegulationsAddAndModified);
+                Inventory.SaveChanges();
+                regulationsDepartment.IdOtdel = departmentRegulationsAddAndModified.IdOtdel;
+                return new ModelReturn<RegulationsDepartment>("Добавили новый регламент для отдела: " + departmentRegulationsAddAndModified.IdOtdel, regulationsDepartment, departmentRegulationsAddAndModified.IdOtdel);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<RegulationsDepartment>("При обновлении/добавлении новых регламентов для отдела по : " + departmentRegulationsAddAndModified.IdOtdel + " произошла ошибка смотри log.txt");
         }
         /// <summary>
         /// Добавление отдела без лога данных проверим как работает
@@ -828,7 +974,9 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             var nameSysBlockAddadnModified = new NameSysBlock()
             {
                 IdModelSysBlock = nameSysBlock.IdModelSysBlock,
-                NameComputer = nameSysBlock.NameComputer
+                NameComputer = nameSysBlock.NameComputer,
+                NameManufacturer = nameSysBlock.NameManufacturer,
+                NameProizvoditel = nameSysBlock.NameProizvoditel
             };
             try
             {
@@ -1016,6 +1164,9 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             }
             return new ModelReturn<ModelBlockPower>("При обновлении/добавлении данных 'Наименование модели ИБП' по : " + nameModelBlokPowerAddadnModified.IdModelBP + " произошла ошибка смотри log.txt");
         }
+
+
+
 
         /// <summary>
         /// Добавление или обновление производителя ИБП
@@ -1393,6 +1544,113 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             }
             return new ModelReturn<MailGroup>("При обновлении/добавлении новой группы для абонента " + nameMailGroups.IdGroupMail + " произошла ошибка смотри log.txt");
         }
+        /// <summary>
+        /// Добавление или обновление модель ресурсы для заявки
+        /// </summary>
+        /// <param name="resourceIt">Ресурс для заявки</param>
+        /// <returns></returns>
+        public ModelReturn<ResourceIt> AddAndEditResourceIt(ResourceIt resourceIt)
+        {
+            var resourceItAddAndModified = new ResourceIt()
+            {
+                IdResource = resourceIt.IdResource,
+                NameResource = resourceIt.NameResource
+            };
+            try
+            {
+                if ((from resourceIts in Inventory.ResourceIts
+                    where resourceIts.IdResource == resourceItAddAndModified.IdResource
+                     select new { resourceIts }).Any())
+                {
+                    Inventory.Entry(resourceItAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<ResourceIt>("Обновили справочник наименование ресурса для заявки: " + resourceItAddAndModified.IdResource, resourceIt);
+                }
+                Inventory.ResourceIts.Add(resourceItAddAndModified);
+                Inventory.SaveChanges();
+                resourceIt.IdResource = resourceItAddAndModified.IdResource;
+                return new ModelReturn<ResourceIt>("Добавили новое наименование ресурса для заявки " + resourceItAddAndModified.IdResource, resourceIt, resourceItAddAndModified.IdResource);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ResourceIt>("При обновлении/добавлении данных 'Наименование модели ресурса для заявки' по : " + resourceItAddAndModified.IdResource + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление задачи для заявки
+        /// </summary>
+        /// <param name="taskAis3">Задача</param>
+        /// <returns></returns>
+        public ModelReturn<TaskAis3> AddAndEditTaskAis3(TaskAis3 taskAis3)
+        {
+            var taskAis3AddAndModified = new TaskAis3()
+            {
+                IdTask = taskAis3.IdTask,
+                NameTask = taskAis3.NameTask
+            };
+            try
+            {
+                if ((from TaskAis3 in Inventory.TaskAis3
+                    where TaskAis3.IdTask == taskAis3AddAndModified.IdTask
+                    select new { TaskAis3 }).Any())
+                {
+                    Inventory.Entry(taskAis3AddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<TaskAis3>("Обновили справочник задачи для заявки: " + taskAis3AddAndModified.IdTask, taskAis3);
+                }
+                Inventory.TaskAis3.Add(taskAis3AddAndModified);
+                Inventory.SaveChanges();
+                taskAis3.IdTask = taskAis3AddAndModified.IdTask;
+                return new ModelReturn<TaskAis3>("Добавили новое наименование задачи для заявки " + taskAis3AddAndModified.IdTask, taskAis3, taskAis3AddAndModified.IdTask);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<TaskAis3> ("При обновлении/добавлении данных 'Наименование задачи для заявки' по : " + taskAis3AddAndModified.IdTask + " произошла ошибка смотри log.txt");
+
+        }
+
+        /// <summary>
+        /// Добавление или редактирование записи о доступе в журнале
+        /// </summary>
+        /// <param name="journalAis3">Запись в журнале</param>
+        /// <returns></returns>
+        public ModelReturn<JournalAis3> AddAndEditJournalAis3(JournalAis3 journalAis3)
+        {
+            var journalAis3AddAndModified = new JournalAis3()
+            {
+                IdJournal = journalAis3.IdJournal,
+                IdTask = journalAis3.IdTask,
+                IdResource = journalAis3.IdResource,
+                IdUser = journalAis3.IdUser,
+                NameTarget = journalAis3.NameTarget,
+                TaskUser = journalAis3.TaskUser,
+                DateTask = journalAis3.DateTask
+            };
+            try
+            {
+                if ((from journalAis in Inventory.JournalAis3
+                     where journalAis.IdJournal == journalAis3AddAndModified.IdJournal
+                    select new { journalAis }).Any())
+                {
+                    Inventory.Entry(journalAis3AddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<JournalAis3>("Обновили справочник задачи для заявки: " + journalAis3AddAndModified.IdJournal, journalAis3);
+                }
+                Inventory.JournalAis3.Add(journalAis3AddAndModified);
+                Inventory.SaveChanges();
+                journalAis3.IdJournal = journalAis3AddAndModified.IdJournal;
+                return new ModelReturn<JournalAis3>("Добавили новое наименование задачи для заявки " + journalAis3AddAndModified.IdJournal, journalAis3, journalAis3AddAndModified.IdJournal);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<JournalAis3>("При обновлении/добавлении данных 'Наименование задачи для заявки' по : " + journalAis3AddAndModified.IdJournal + " произошла ошибка смотри log.txt");
+        }
+
         /// <summary>
         /// Удаление или добавление роли пользователя в БД
         /// </summary>

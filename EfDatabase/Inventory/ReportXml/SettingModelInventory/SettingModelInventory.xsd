@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="SettingModelInventory" type="SettingModelInventory">
+		<xs:annotation>
+			<xs:documentation>Настройки прилоджения инвенторизации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="SettingModelInventory">
+		<xs:annotation>
+			<xs:documentation>Настройки прилоджения инвенторизации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="SettingDepartmentCase" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="RegulationsDepartment" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SettingDepartmentCase">
+		<xs:annotation>
+			<xs:documentation>Настройки падежей отделов</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdOtdel" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имянительный падеж отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RnameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Родительный падеж отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DnameOtdel">
+				<xs:annotation>
+					<xs:documentation>Дательный падеж отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VnameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Винительный падеж отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PnameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Предложный падеж отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TnameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Творительный падеж отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RegulationsDepartment">
+		<xs:annotation>
+			<xs:documentation>Настройка регламентов отделов для заявки</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdOtdel" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>УН отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Regulations" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Регламент отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

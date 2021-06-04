@@ -35,8 +35,8 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
                         select users.StatusActual).SingleOrDefault();
                     if (isActive != null && isActive.Value == 2)
                     {
-                        var isExistsUsers = context.Database.SqlQuery<object>($"Select * From ErrorUSerNotActul Where IdUser={user.IdUser}");
-                        if (isExistsUsers.Any()) return new ModelReturn<User>("Не возможно удалить пользователя! Есть привязки к технике и(или) к Накладной форме!", user,2);
+                        var isExistsUsers = context.Database.SqlQuery<object>($"Select * From ErrorUsersNotActual Where IdUser={user.IdUser}");
+                        if (isExistsUsers.Any()) return new ModelReturn<User>("Не возможно удалить пользователя! Есть привязки к технике и(или): Накладной форме, Токену!", user,2);
                         DeleteModelDb(context, new User() { IdUser = user.IdUser });
                         Loggers.Log4NetLogger.Info(new Exception("Удалили пользователя "+ user.IdUser));
                         return new ModelReturn<User>("Пользователь удален!", user);
@@ -147,7 +147,32 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
             }
             return new ModelReturn<Token>("При удалении Токена возникли ошибки " + token.IdToken + " произошла ошибка смотри log.txt", token, 2);
         }
-
+        /// <summary>
+        /// Удаление праздничных дней
+        /// </summary>
+        /// <param name="holiday">Запись о праздничном дне</param>
+        /// <param name="idUser">Ун пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<Rb_Holiday> DeleteHoliday(Rb_Holiday holiday, int? idUser)
+        {
+            try
+            {
+                using (var context = new InventoryContext())
+                {
+                    var isExistHoliday = context.Database.SqlQuery<object>($"Select * From Rb_Holidays Where Id = {holiday.Id}");
+                    if (isExistHoliday.Any())
+                    {
+                        DeleteModelDb(context, new Rb_Holiday() { Id = holiday.Id });
+                        return new ModelReturn<Rb_Holiday>("Праздничный день удален!", holiday);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<Rb_Holiday>("При удалении праздничного дня возникли ошибки " + holiday.Id + " произошла ошибка смотри log.txt", holiday, 2);
+        }
 
 
         /// <summary>

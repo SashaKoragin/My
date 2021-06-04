@@ -7,7 +7,7 @@ namespace LibaryDocumentGenerator.Documents.Template
 
       string FullPathDocumentWord { get; set; }
       Stream FileArray();
-      void CreateDocum(string path, T template, object obj = null);
+      void CreateDocument(string path, T template, object obj = null);
 
       void CreateWord(WordprocessingDocument package, T template, object obj = null);
    }

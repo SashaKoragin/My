@@ -11,9 +11,11 @@ using EfDatabase.Inventory.BaseLogic.Login;
 using EfDatabase.Inventory.BaseLogic.Select;
 using EfDatabase.Inventory.MailLogicLotus;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
+using EfDatabase.Inventory.SqlModelSelect;
+using EfDatabase.SettingModelInventory;
+using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseParametrsModel;
-using EfDatabaseXsdBookAccounting;
 using EfDatabaseXsdInventoryAutorization;
 using EfDatabaseXsdMail;
 using EfDatabaseXsdQrCodeModel;
@@ -45,6 +47,7 @@ using SysBlock = EfDatabase.Inventory.Base.SysBlock;
 using Telephon = EfDatabase.Inventory.Base.Telephon;
 using User = EfDatabase.Inventory.Base.User;
 using LibraryAutoSupportSto.Support.SupportPostGet;
+using Organization = EfDatabase.Inventory.Base.Organization;
 
 namespace TestIFNSLibary.Inventarka
 {
@@ -279,6 +282,44 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.AllRuleUser(idUser));
         }
+        /// <summary>
+        /// Выгрузка праздничных дней
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetHoliday()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.GetHolidays());
+        }
+        /// <summary>
+        /// Добавление или редактирование справочника праздничных дней
+        /// </summary>
+        /// <param name="holidays">Запись о праздничном дне</param>
+        /// <param name="userIdEdit">Пользователь вносивший изменения</param>
+        /// <returns></returns>
+        public ModelReturn<Rb_Holiday> AddAndEditRbHoliday(Rb_Holiday holidays, string userIdEdit)
+        {
+            holidays.DateTime_Holiday = holidays.DateTime_Holiday.AddHours(3);
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditHoliday(holidays);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeRbHoliday(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Удаление не актуальных праздничных дней
+        /// </summary>
+        /// <param name="holidays">Запись о праздничном дне</param>
+        /// <param name="userIdEdit">Пользователь вносивший изменения</param>
+        /// <returns></returns>
+        public ModelReturn<Rb_Holiday> DeleteRbHoliday(Rb_Holiday holidays, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteHoliday(holidays, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteHoliday(model);
+            return model;
+        }
+
 
         /// <summary>
         /// Удаление или добавление роли пользователя
@@ -296,7 +337,75 @@ namespace TestIFNSLibary.Inventarka
                 return auto.AllRuleUser((int)ruleUsers.IdUser);
             });
         }
-
+        /// <summary>
+        /// Редактирование или добавление настроек организации
+        /// </summary>
+        /// <param name="organization">Модель организации</param>
+        /// <param name="userIdEdit">Пользователь вносивший изменения</param>
+        /// <returns></returns>
+        public ModelReturn<Organization> AddAndEditOrganization(Organization organization, string userIdEdit)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditOrganization(organization);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOrganization(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Редактирование или добавление настроек падежей отдела 
+        /// </summary>
+        /// <param name="settingDepartmentCase">падежи отдела</param>
+        /// <param name="userIdEdit">Пользователь вносивший изменения</param>
+        /// <returns></returns>
+        public ModelReturn<SettingDepartmentCase> AddAndEditSettingDepartmentCase(SettingDepartmentCase settingDepartmentCase, string userIdEdit)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditSettingDepartmentCase(settingDepartmentCase);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDepartmentCase(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Обновление или обновление регламентов отдела
+        /// </summary>
+        /// <param name="regulationsDepartment">Регламент отдела</param>
+        /// <param name="userIdEdit">Пользователь вносивший изменения</param>
+        /// <returns></returns>
+        public ModelReturn<RegulationsDepartment> AddAndEditSettingDepartmentRegulations(RegulationsDepartment regulationsDepartment, string userIdEdit)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditSettingDepartmentRegulations(regulationsDepartment);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDepartmentRegulations(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Глобальные настройки организации
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Organization> SettingOrganization()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.SettingOrganization());
+        }
+        /// <summary>
+        /// Настройки падежей организации
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> SettingDepartmentCase()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.SettingDepartmentCase());
+        }
+        /// <summary>
+        /// Регламенты отделов 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> SettingDepartmentRegulations()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.SettingDepartmentRegulations());
+        }
         /// <summary>
         /// Запрос всех пользователей
         /// </summary>
@@ -481,7 +590,7 @@ namespace TestIFNSLibary.Inventarka
                 return await Task.Factory.StartNew(() =>
                 { 
                     telephonehelper.LogicaSelect = select.SqlSelectModel(telephonehelper.ParametrsSelect.Id);
-                    invoice.CreateDocum(_parametrService.Report, (EfDatabaseTelephoneHelp.TelephoneHelp)selectfull.GenerateSchemeXsdSql<string,string>(_parametrService.Inventarization, telephonehelper.LogicaSelect), null);
+                    invoice.CreateDocument(_parametrService.Report, (EfDatabaseTelephoneHelp.TelephoneHelp)selectfull.GenerateSchemeXsdSql<string,string>(_parametrService.Inventarization, telephonehelper.LogicaSelect), null);
                     return invoice.FileArray();
                 });
             }
@@ -495,14 +604,11 @@ namespace TestIFNSLibary.Inventarka
         /// Запрос на get получение файла по телефонам
         /// </summary>
         /// <returns></returns>
-        public async Task<Stream> GenerateFileXlsxSqlView(int idView)
+        public async Task<Stream> GenerateFileXlsxSqlView(LogicaSelect selectLogic)
         {
-            SelectSql select = new SelectSql();
             var selectFull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(_parametrService.Inventarization, 
-                @select.SqlSelectModel(idView),
-                _parametrService.Report));
-    }
+            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(_parametrService.Inventarization, selectLogic.SelectUser, selectLogic.NameReportFile, selectLogic.NameReportList, _parametrService.ReportMassTemplate));
+        }
 
         /// <summary>
         /// Генерация книги учета материальных ценностей
@@ -532,9 +638,9 @@ namespace TestIFNSLibary.Inventarka
                         {modelSelect.LogicaSelect.SelectedParametr.Split(',')[1], bookModels.Id.ToString()}
                     };
                     Book book =(Book) selectfull.GenerateSchemeXsdSql(_parametrService.Inventarization, modelSelect.LogicaSelect,parametr); //Получение данных для модели
-                    rep.BookInvoce(ref book.BareCodeBook, bookModels); //Раскладывает в БД
-                    barecode.GenerateBookCode(ref book.BareCodeBook, _parametrService.Report);//Генерит Штрихкод на основе раскладки БД
-                    bookAccounting.CreateDocum(_parametrService.Report, book, null);
+                    book.BareCodeBook = rep.BookInvoce(book.BareCodeBook, bookModels); //Раскладывает в БД
+                    barecode.GenerateBookCode(book.BareCodeBook, _parametrService.Report);//Генерит Штрихкод на основе раскладки БД
+                    bookAccounting.CreateDocument(_parametrService.Report, book, null);
                     File.Delete(book.BareCodeBook.FullPathSave);
                     return bookAccounting.FileArray();
                 });
@@ -549,12 +655,20 @@ namespace TestIFNSLibary.Inventarka
         /// <summary>
         /// Выборка
         /// </summary>
-        /// <param name="logica"></param>
+        /// <param name="logica">Логика выборки</param>
         /// <returns></returns>
         public async Task<string> SelectXml(LogicaSelect logica)
         {
-            var selectfull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectfull.SqlModelInventory(_parametrService.Inventarization,logica));
+            return await Task.Factory.StartNew(() =>
+            {
+                string model = null;
+                if (logica.SelectUser != null)
+                {
+                    Type type = Type.GetType($"{logica.FindNameSpace}, {logica.NameDll}");
+                    model = (string)typeof(FullSelectModelInventory).GetMethod("SqlModelInventory")?.MakeGenericMethod(type).Invoke(new FullSelectModelInventory(), new object[] { logica });
+                }
+                return model;
+            });
         }
         /// <summary>
         /// Генерация накладной
@@ -570,7 +684,7 @@ namespace TestIFNSLibary.Inventarka
                        GenerateBarcode barecode = new GenerateBarcode();
                        rep.ReportInvoice(ref report);
                        barecode.GenerateCode(ref report, _parametrService.Report);
-                       invoice.CreateDocum(_parametrService.Report, report, null);
+                       invoice.CreateDocument(_parametrService.Report, report, null);
                        File.Delete(report.Main.Barcode.PathBarcode);
                        return invoice.FileArray();
                     });
@@ -667,12 +781,12 @@ namespace TestIFNSLibary.Inventarka
             }
             return "Возникла не предвиденная ошибка смотри Log.txt";
         }
-       /// <summary>
-       /// Актуализация Ip Адресов в БД
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> ActualComputerIp()
-       {
+        /// <summary>
+        /// Актуализация Ip Адресов в БД
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ActualComputerIp()
+        {
             try
             {
                 SelectSql select = new SelectSql();
@@ -683,23 +797,23 @@ namespace TestIFNSLibary.Inventarka
                 Loggers.Log4NetLogger.Error(e);
                 return e.Message;
             }
-       }
+        }
 
-       /// <summary>
-       /// Выгрузка телефонов
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> Telephon()
-       {
+        /// <summary>
+        /// Выгрузка телефонов
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> Telephon()
+        {
            Select auto = new Select();
            return await Task.Factory.StartNew(() => auto.Telephon());
-       }
-       /// <summary>
-       /// Типы серверов
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> TypeServer()
-       {
+        }
+        /// <summary>
+        /// Типы серверов
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> TypeServer()
+        {
            Select auto = new Select();
            return await Task.Factory.StartNew(() => auto.TypeServer());
         }
@@ -710,33 +824,101 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <returns></returns>
         public async Task<string> BlockPower()
-       {
+        {
            Select auto = new Select();
            return await Task.Factory.StartNew(() => auto.BlockPower());
-       }
-       /// <summary>
-       /// Серверное оборудование
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> ServerEquipment()
-       {
+        }
+        /// <summary>
+        /// Серверное оборудование
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ServerEquipment()
+        {
            Select auto = new Select();
            return await Task.Factory.StartNew(() => auto.ServerEquipment());
         }
-       /// <summary>
-       /// Модели серверного оборудования
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> ModelSeverEquipment()
-       {
+        /// <summary>
+        /// Модели серверного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ModelSeverEquipment()
+        {
            Select auto = new Select();
            return await Task.Factory.StartNew(() => auto.ModelSeverEquipment());
         }
-       /// <summary>
-       /// производители серверного оборудования
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> ManufacturerSeverEquipment()
+        /// <summary>
+        /// Получение ресурсов для заявки АИС 3
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetResourceIt()
+        {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.GetResourceIt());
+        }
+        /// <summary>
+        /// Получение задач для заявки АИС 3
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetTaskAis3()
+        {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.GetTaskAis3());
+        }
+        /// <summary>
+        /// Получение журнала заявок на различные ресурсы
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetJournalAis3()
+        {
+           Select auto = new Select();
+           return await Task.Factory.StartNew(() => auto.GetJournalAis3());
+        }
+        /// <summary>
+        /// Добавление или обновление ресурса для заявки
+        /// </summary>
+        /// <param name="resourceIt">Ресурс для заявки</param>
+        /// <returns></returns>
+        public ModelReturn<ResourceIt> AddAndEditResourceIt(ResourceIt resourceIt)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditResourceIt(resourceIt);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeResourceIt(model.Model); }
+            return model;
+        }
+
+        /// <summary>
+        /// Добавление или обновление задачи для заявки
+        /// </summary>
+        /// <param name="taskAis3">Задачи для заявки</param>
+        /// <returns></returns>
+        public ModelReturn<TaskAis3> AddAndEditTaskAis3(TaskAis3 taskAis3)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditTaskAis3(taskAis3);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTaskAis3(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Добавление или удаление записи в журнале доступа
+        /// </summary>
+        /// <param name="journalAis3">Запись в журнале</param>
+        /// <returns></returns>
+        public ModelReturn<JournalAis3> AddAndEditJournalAis3(JournalAis3 journalAis3)
+        {
+            journalAis3.DateTask = journalAis3.DateTask.AddHours(3);
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditJournalAis3(journalAis3);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeJournalAis3(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// производители серверного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ManufacturerSeverEquipment()
        {
            Select auto = new Select();
            return await Task.Factory.StartNew(() => auto.ManufacturerSeverEquipment());
@@ -835,20 +1017,20 @@ namespace TestIFNSLibary.Inventarka
            return model;
        }
 
-       public ModelReturn<Supply> AddAndEditNameSupply(Supply nameSupply)
-       {
-           AddObjectDb add = new AddObjectDb();
-           if (nameSupply.DatePostavki != null)
-           {
-               nameSupply.DatePostavki = nameSupply.DatePostavki.Value.AddHours(4);
-           }
-           var model = add.AddAndEditNameSupply(nameSupply);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSupply(model.Model); }
-           return model;
-       }
+        public ModelReturn<Supply> AddAndEditNameSupply(Supply nameSupply)
+        {
+            AddObjectDb add = new AddObjectDb();
+            if (nameSupply.DatePostavki != null)
+            {
+                nameSupply.DatePostavki = nameSupply.DatePostavki.Value.AddHours(4);
+            }
+            var model = add.AddAndEditNameSupply(nameSupply);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSupply(model.Model); }
+            return model;
+        }
 
-       public ModelReturn<Statusing> AddAndEditNameStatus(Statusing nameStatus)
+        public ModelReturn<Statusing> AddAndEditNameStatus(Statusing nameStatus)
        {
            AddObjectDb add = new AddObjectDb();
            var model = add.AddAndEditNameStatus(nameStatus);
@@ -1215,7 +1397,7 @@ namespace TestIFNSLibary.Inventarka
                        x.Coment = qrCode.GenerateQrCode(_parametrService.Report + i, templateContent);
                        i++;
                    });
-                   sticker.CreateDocum(_parametrService.Report + "QrCodeOffice", technical);
+                   sticker.CreateDocument(_parametrService.Report + "QrCodeOffice", technical);
                    technical.Select(x => x.Coment).ToList().ForEach(File.Delete);
                    return sticker.FileArray();
                });
@@ -1245,7 +1427,7 @@ namespace TestIFNSLibary.Inventarka
                    //Создание qr кодов
                    if (office.Kabinet == null) return null;
                    office.Kabinet.AsEnumerable().Select(x => x).ToList().ForEach(x => x.FullPathPng = qrCode.GenerateQrCode(_parametrService.Report + x.IdNumberKabinet, x.NumberKabinet));
-                   stickerQrOffice.CreateDocum(_parametrService.Report + "QrCodeOffice", office);
+                   stickerQrOffice.CreateDocument(_parametrService.Report + "QrCodeOffice", office);
                    office.Kabinet.AsEnumerable().Select(x => x.FullPathPng).ToList().ForEach(File.Delete);
                    return stickerQrOffice.FileArray();
                });
@@ -1311,6 +1493,30 @@ namespace TestIFNSLibary.Inventarka
         {
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.IsBeginTask(idTask));
+        }
+        /// <summary>
+        /// Создание Акта списания техники
+        /// </summary>
+        /// <param name="modelParameterAct">Параметры акта списания техники</param>
+        /// <returns></returns>
+        public async Task<Stream> CreateAct(ModelSelect modelParameterAct)
+        {
+            try
+            {
+               return await Task.Factory.StartNew(() =>
+              {
+                    var generate = new GenerateParameterSupport(_parametrService.PathDomainGroup);
+                    var act = generate.GenerateParameterAct(modelParameterAct);
+                    var templateAct = new TemplateAct();
+                    templateAct.CreateDocument(_parametrService.Report + "Акт списания ", act);
+                    return templateAct.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
         }
     }
 }

@@ -1,15 +1,18 @@
 ﻿using System.IO;
+using System.Linq;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using EfDatabase.Inventory.Base;
 using LibaryDocumentGenerator.ProgrammView.FullDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
 
-using LibaryXMLAutoModelXmlSql.PreCheck.ModelCard;
-
 namespace LibaryDocumentGenerator.Documents.Template
 {
-   public class ReportNote : ITemplate<CardFaceUl>
+    /// <summary>
+    /// Класс создания акта
+    /// </summary>
+   public class TemplateAct : ITemplate<Act[]>
     {
         /// <summary>
         /// Полный путь к книге на сервере
@@ -28,9 +31,9 @@ namespace LibaryDocumentGenerator.Documents.Template
         }
 
 
-        public void CreateDocument(string path, CardFaceUl template, object obj)
+        public void CreateDocument(string path, Act[] template, object obj = null)
         {
-            FullPathDocumentWord = path + template.FaceUl.Inn + Constant.WordConstant.Formatword;
+            FullPathDocumentWord = path + template.Where(act => act.ParameterAct.ClassParameterTemplate.NameClassParameter == "Head").Select(act => act.ParameterAct.Parameter).FirstOrDefault() + Constant.WordConstant.Formatword;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
             {
                 CreateWord(package, template, obj);
@@ -39,18 +42,15 @@ namespace LibaryDocumentGenerator.Documents.Template
             }
         }
 
-        public void CreateWord(WordprocessingDocument package, CardFaceUl template, object obj)
+        public void CreateWord(WordprocessingDocument package, Act[] template, object obj = null)
         {
             MainDocumentPart mainDocumentPart = package.AddMainDocumentPart();
             DocumentFormat.OpenXml.Wordprocessing.Document document = new DocumentFormat.OpenXml.Wordprocessing.Document();
             PageSetting settingPage = new PageSetting();
-            DocumentsPreChek documentInvoice = new DocumentsPreChek();
-            document.Append(settingPage.DocumentSettingVertical(new PageMargin() { Top = 1135, Right = 567, Bottom = 567, Left = 1135 }));
-            document.Append(documentInvoice.GenerateReportNote(template, (int) obj));
-            document.Append(settingPage.AddHorizontPage());
-            document.Append(documentInvoice.GenerateSalesBookReportNote(template, (int)obj));
+            DocumentsFull documentInvoice = new DocumentsFull();
+            document.Append(settingPage.DocumentSettingVertical(new PageMargin() { Top = 567, Right = 963, Bottom = 567, Left = 1020 }));
+            document.Append(documentInvoice.Act(template));
             mainDocumentPart.Document = document;
         }
-
     }
 }

@@ -3,11 +3,12 @@ using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
+using EfDatabase.Inventory.Base;
 using LibaryXMLAuto.ModelServiceWcfCommand.AngularModel;
 using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
 using LibaryXMLAuto.Reports.FullTemplateSheme;
-using LibaryXMLAutoModelXmlAuto.MigrationReport;
+using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlSql.Model.FaceError;
 using TestIFNSLibary.PostRequest.Face;
 
@@ -16,6 +17,14 @@ namespace TestIFNSLibary.ServiceRest
     [ServiceContract(SessionMode = SessionMode.NotAllowed)]
     interface IServiceRest
     {
+        /// <summary>
+        /// Получение модели api из БД
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GetServiceApi", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<ServiceModelInventory[]> GetServiceApi();
+
+
         [OperationContract(AsyncPattern = true)]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AuthServiceDomain", 
             ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
@@ -168,5 +177,14 @@ namespace TestIFNSLibary.ServiceRest
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/LoadInfoTemplateToDataBase", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelPathReport LoadInfoTemplateToDataBase(InfoRuleTemplate infoTemplate);
+        /// <summary>
+        /// Заполнение шаблонов и ролей пользователя
+        /// http://localhost:8181/ServiceRest/LoadInfoUserTemplateAndRuleToDataBase
+        /// </summary>
+        /// <param name="infoUserTemlateAndRule">Информация о шаблонах и ролях пользователя</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/LoadInfoUserTemplateAndRuleToDataBase", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelPathReport LoadInfoUserTemplateAndRuleToDataBase(InfoUserTemlateAndRule infoUserTemlateAndRule);
     }
 }

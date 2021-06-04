@@ -17,7 +17,7 @@ namespace LibaryDocumentGenerator.Documents.Template
     {
         public string FullPathDocumentWord { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-        public void CreateDocum(string path, LibaryXMLAutoReports.FullTemplateSheme.Document template, object obj)
+        public void CreateDocument(string path, LibaryXMLAutoReports.FullTemplateSheme.Document template, object obj)
         {
             var data = (FN71)obj;
             using (WordprocessingDocument package = WordprocessingDocument.Create(path, WordprocessingDocumentType.Document))

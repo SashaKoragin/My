@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
+using EfDatabase.SettingModelInventory;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -142,7 +143,15 @@ namespace SignalRLibary.SignalRinventory
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             context.Clients.All.SubscribeDeleteMonitor(modelMonitor);
         }
-
+        /// <summary>
+        /// Подписка на удаление праздничного дня
+        /// </summary>
+        /// <param name="modelHoliday">Модель праздничных дней</param>
+        public static void SubscribeDeleteHoliday(ModelReturn<Rb_Holiday> modelHoliday)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteHoliday(modelHoliday);
+        }
         /// <summary>
         /// Удаление принтера подписка пользователя на удаление
         /// </summary>
@@ -402,7 +411,7 @@ namespace SignalRLibary.SignalRinventory
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             Loggers.Log4NetLogger.Info(new Exception("Модель Поставка-контракт рассылка пошла: " + nameSupply.NameSupply));
             SerializeJson json = new SerializeJson();
-            context.Clients.All.SubscribeSupply(json.JsonLibaryIgnoreDate(nameSupply));
+            context.Clients.All.SubscribeSupply(json.JsonLibrary(nameSupply));
         }
         /// <summary>
         /// Подписка на изменение Статуса
@@ -513,6 +522,81 @@ namespace SignalRLibary.SignalRinventory
             Loggers.Log4NetLogger.Info(new Exception("Модель Токена рассылка пошла: " + token.IdToken + " " + token.Coment));
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeToken(json.JsonLibaryIgnoreDate(token));
+        }
+        /// <summary>
+        /// Рассылка изменения по настройкам организации
+        /// </summary>
+        /// <param name="organization">Настройки организации</param>
+        public static void SubscribeOrganization(Organization organization)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Модель настроек организации пошла: " + organization.Id));
+            context.Clients.All.SubscribeOrganization(organization);
+        }
+        /// <summary>
+        /// Рассылка изменений по таблице праздничные дни
+        /// </summary>
+        /// <param name="holiday"></param>
+        public static void SubscribeRbHoliday(Rb_Holiday holiday)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Модель настроек праздничных дней пошла: " + holiday.Id));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeRbHoliday(json.JsonLibrary(holiday));
+        }
+        /// <summary>
+        /// Рассылка по пользователям падежи отдела
+        /// </summary>
+        /// <param name="settingDepartmentCase">Настройки падежей отдела</param>
+        public static void SubscribeDepartmentCase(SettingDepartmentCase settingDepartmentCase)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Модель настроек падежей отдела пошла: " + settingDepartmentCase.IdOtdel));
+            context.Clients.All.SubscribeDepartmentCase(settingDepartmentCase);
+        }
+        /// <summary>
+        /// Рассылка по пользователем пошла регламентов отдела
+        /// </summary>
+        /// <param name="regulationsDepartment">Настройки регламентов отдела</param>
+        public static void SubscribeDepartmentRegulations(RegulationsDepartment regulationsDepartment)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Модель регламентов отдела пошла: " + regulationsDepartment.IdOtdel));
+            context.Clients.All.SubscribeDepartmentRegulations(regulationsDepartment);
+        }
+        /// <summary>
+        /// Подписка на рассылку ресурсов для заявки
+        /// </summary>
+        /// <param name="resourceIt">Модель ресурса</param>
+        public static void SubscribeResourceIt(ResourceIt resourceIt)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Модель ресурсов для заявки рассылка пошла: " + resourceIt.IdResource));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeResourceIt(json.JsonLibaryIgnoreDate(resourceIt));
+        }
+
+        /// <summary>
+        /// Подписка на рассылку задачи для заявки
+        /// </summary>
+        /// <param name="taskAis3">Задача для заявки</param>
+        public static void SubscribeTaskAis3(TaskAis3 taskAis3)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Модель задач для заявки рассылка пошла: " + taskAis3.IdTask));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeTaskAis3(json.JsonLibaryIgnoreDate(taskAis3));
+        }
+        /// <summary>
+        /// Подписка на рассылку записи о доступе
+        /// </summary>
+        /// <param name="journalAis3">Запись в журнале</param>
+        public static void SubscribeJournalAis3(JournalAis3 journalAis3)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Модель запись о доступе рассылка пошла: " + journalAis3.IdJournal));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeJournalAis3(json.JsonLibaryIgnoreDate(journalAis3));
         }
         /// <summary>
         /// Удаление токена ключа подписка пользователя на удаление

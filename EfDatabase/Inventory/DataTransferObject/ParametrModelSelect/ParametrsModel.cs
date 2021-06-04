@@ -38,6 +38,8 @@ namespace EfDatabaseParametrsModel {
         
         private Parametrs[] parametrsField;
         
+        private ParametrsAct parametrsActField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public ParametrsSelect ParametrsSelect {
@@ -68,6 +70,17 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.parametrsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public ParametrsAct ParametrsAct {
+            get {
+                return this.parametrsActField;
+            }
+            set {
+                this.parametrsActField = value;
             }
         }
     }
@@ -113,6 +126,16 @@ namespace EfDatabaseParametrsModel {
         
         private string selectInfoField;
         
+        private string nameDllField;
+        
+        private string findNameSpaceField;
+        
+        private bool isResultXmlField;
+        
+        private string nameReportListField;
+        
+        private string nameReportFileField;
+        
         private string selectedParametrField;
         
         private string selectUserField;
@@ -141,6 +164,61 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.selectInfoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameDll {
+            get {
+                return this.nameDllField;
+            }
+            set {
+                this.nameDllField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FindNameSpace {
+            get {
+                return this.findNameSpaceField;
+            }
+            set {
+                this.findNameSpaceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsResultXml {
+            get {
+                return this.isResultXmlField;
+            }
+            set {
+                this.isResultXmlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameReportList {
+            get {
+                return this.nameReportListField;
+            }
+            set {
+                this.nameReportListField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameReportFile {
+            get {
+                return this.nameReportFileField;
+            }
+            set {
+                this.nameReportFileField = value;
             }
         }
         
@@ -264,6 +342,49 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.isVisibleFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    public partial class ParametrsAct {
+        
+        private int idClasificationActField;
+        
+        private int idModelTemplateField;
+        
+        public ParametrsAct() {
+            this.idClasificationActField = 0;
+            this.idModelTemplateField = 0;
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int IdClasificationAct {
+            get {
+                return this.idClasificationActField;
+            }
+            set {
+                this.idClasificationActField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int IdModelTemplate {
+            get {
+                return this.idModelTemplateField;
+            }
+            set {
+                this.idModelTemplateField = value;
             }
         }
     }

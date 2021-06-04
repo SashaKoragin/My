@@ -23,16 +23,16 @@ namespace EfDatabaseInvoice {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Documents {
         
-        private Document[] documentField;
+        private DocumentModel[] documentModelField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Document")]
-        public Document[] Document {
+        [System.Xml.Serialization.XmlElementAttribute("DocumentModel")]
+        public DocumentModel[] DocumentModel {
             get {
-                return this.documentField;
+                return this.documentModelField;
             }
             set {
-                this.documentField = value;
+                this.documentModelField = value;
             }
         }
     }
@@ -44,44 +44,30 @@ namespace EfDatabaseInvoice {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class Document {
-        
-        private Namedocument namedocumentField;
+    public partial class DocumentModel {
         
         private int idField;
         
-        private bool idFieldSpecified;
-        
         private int idNamedocumentField;
-        
-        private bool idNamedocumentFieldSpecified;
         
         private string infoUserFileField;
         
         private bool isFileExistsField;
         
-        private bool isFileExistsFieldSpecified;
-        
         private string namefileField;
         
         private string typeFileField;
         
-        private int idUserField;
+        private string nameDocumentField;
         
-        private bool idUserFieldSpecified;
+        private int idUserField;
         
         private bool isActualField;
         
-        private bool isActualFieldSpecified;
+        private string logicsButtonField;
         
-        /// <remarks/>
-        public Namedocument Namedocument {
-            get {
-                return this.namedocumentField;
-            }
-            set {
-                this.namedocumentField = value;
-            }
+        public DocumentModel() {
+            this.logicsButtonField = "Button";
         }
         
         /// <remarks/>
@@ -96,17 +82,6 @@ namespace EfDatabaseInvoice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public int IdNamedocument {
             get {
@@ -114,17 +89,6 @@ namespace EfDatabaseInvoice {
             }
             set {
                 this.idNamedocumentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdNamedocumentSpecified {
-            get {
-                return this.idNamedocumentFieldSpecified;
-            }
-            set {
-                this.idNamedocumentFieldSpecified = value;
             }
         }
         
@@ -147,17 +111,6 @@ namespace EfDatabaseInvoice {
             }
             set {
                 this.isFileExistsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsFileExistsSpecified {
-            get {
-                return this.isFileExistsFieldSpecified;
-            }
-            set {
-                this.isFileExistsFieldSpecified = value;
             }
         }
         
@@ -185,23 +138,23 @@ namespace EfDatabaseInvoice {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameDocument {
+            get {
+                return this.nameDocumentField;
+            }
+            set {
+                this.nameDocumentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public int IdUser {
             get {
                 return this.idUserField;
             }
             set {
                 this.idUserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdUserSpecified {
-            get {
-                return this.idUserFieldSpecified;
-            }
-            set {
-                this.idUserFieldSpecified = value;
             }
         }
         
@@ -217,36 +170,14 @@ namespace EfDatabaseInvoice {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsActualSpecified {
-            get {
-                return this.isActualFieldSpecified;
-            }
-            set {
-                this.isActualFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class Namedocument {
-        
-        private string nameDocumentField;
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameDocument {
+        [System.ComponentModel.DefaultValueAttribute("Button")]
+        public string LogicsButton {
             get {
-                return this.nameDocumentField;
+                return this.logicsButtonField;
             }
             set {
-                this.nameDocumentField = value;
+                this.logicsButtonField = value;
             }
         }
     }

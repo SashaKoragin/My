@@ -12,17 +12,27 @@ namespace EfDatabase.Inventory.BaseLogic.Select
 {
    public class GenerateParameterSupport : IDisposable
    {
-       public InventoryContext Inventory { get; set; }
+        public InventoryContext Inventory { get; set; }
         /// <summary>
         /// Маршрут до групп пользователей
         /// </summary>
-       public string PathDomainGroup { get; set; }
-       public GenerateParameterSupport(string groupPath)
-       {
+        public string PathDomainGroup { get; set; }
+        /// <summary>
+        /// Инициализация
+        /// </summary>
+        public GenerateParameterSupport()
+        {
+            InitializationSql();
+        }
+        /// <summary>
+        /// Инициализация
+        /// </summary>
+        /// <param name="groupPath">Наименование группы путь к AD</param>
+        public GenerateParameterSupport(string groupPath)
+        {
            PathDomainGroup = groupPath;
-           Inventory?.Dispose();
-           Inventory = new InventoryContext();
-       }
+           InitializationSql();
+        }
 
         /// <summary>
         /// Генерация параметров для запроса на СТО
@@ -118,6 +128,28 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                throw new InvalidOperationException($"Фатальная ошибка отсутствует шаблон запроса на CTO по id {modelSupport.IdTemplate}!");
            }
            select.Dispose();
+        }
+        /// <summary>
+        /// Генерация акта по модели параметров
+        /// </summary>
+        /// <param name="modelParameterAct">Параметры акта списания техники</param>
+        /// <returns></returns>
+        public Act[] GenerateParameterAct(ModelSelect modelParameterAct)
+        {
+            var modelParameter = Inventory.Acts.Where(act => act.IdClasification == modelParameterAct.ParametrsAct.IdClasificationAct).ToArray();
+            foreach (var act in modelParameter)
+            {
+                if (act.ParameterAct.IsExistParameterReplace)
+                {
+                    act.ParameterAct.Parameter = Inventory.Database.SqlQuery<string>(act.ParameterAct.SelectParameter,
+                        new SqlParameter("Id", modelParameterAct.ParametrsAct.IdModelTemplate)).FirstOrDefault();
+                }
+                else
+                {
+                    act.ParameterAct.Parameter = Inventory.Database.SqlQuery<string>(act.ParameterAct.SelectParameter).FirstOrDefault();
+                }
+            }
+            return modelParameter;
         }
 
         /// <summary>
@@ -230,6 +262,14 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                     }
                 }
             }
+        }
+        /// <summary>
+        /// Инициализация Sql БД
+        /// </summary>
+        private void InitializationSql()
+        {
+            Inventory?.Dispose();
+            Inventory = new InventoryContext();
         }
 
        /// <summary>

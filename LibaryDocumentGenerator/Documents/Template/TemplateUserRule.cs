@@ -13,15 +13,18 @@ namespace LibaryDocumentGenerator.Documents.Template
         public string Fullpathdocumentword { get; set; }
         public void CreateDocum(string path, RuleTemplate template, object obj)
         {
+            var i = 1;
             foreach (var tempuotdel in template.Otdel)
             {
-               Fullpathdocumentword = path + tempuotdel.Number+"_"+tempuotdel.NameOtdel+"_"+tempuotdel.Dates + Constant.WordConstant.Formatword;
+               Fullpathdocumentword = path + tempuotdel.Number+"_"+tempuotdel.NameOtdel+"_"+tempuotdel.Dates?.ToString("dd.MM.yyyy") +"_"+ i + Constant.WordConstant.Formatword;
                using (WordprocessingDocument package = WordprocessingDocument.Create(Fullpathdocumentword, WordprocessingDocumentType.Document))
                {
                   CreateWord(package, tempuotdel,template.SenderUsers, obj);
                   package.MainDocumentPart.Document.Save();
                   package.Close();
                }
+
+               i++;
             }
         }
 

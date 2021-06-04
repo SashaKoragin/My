@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="ServiceWcf">
 		<xs:annotation>
@@ -41,6 +41,31 @@
 			<xs:attribute name="SelectInfo" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Описание выборки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameDll" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование dll для динамического формирования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FindNameSpace" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Поиск класса в пространстве имен</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsResultXml" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>True - на выходе (string) False - на выходе Array</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameReportList" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование листа в Excel</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameReportFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отчета xlsx</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name="SelectedParametr" type="xs:string">
@@ -100,6 +125,34 @@
 			<xs:element ref="ParametrsSelect" minOccurs="0"/>
 			<xs:element ref="LogicaSelect" minOccurs="0"/>
 			<xs:element ref="Parametrs" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ParametrsAct" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="ParametrsAct" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Параметры акта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdClasificationAct" default="0">
+				<xs:annotation>
+					<xs:documentation>Ун акта</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="IdModelTemplate" default="0">
+				<xs:annotation>
+					<xs:documentation>Уникальный номер модели</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>

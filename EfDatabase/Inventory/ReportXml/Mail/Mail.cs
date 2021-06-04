@@ -23,33 +23,33 @@ namespace EfDatabaseXsdMail {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class MailSheme {
         
-        private MailIn[] mailInField;
+        private MailInView[] mailInViewField;
         
-        private MailOut[] mailOutField;
+        private MailOutView[] mailOutViewField;
         
         private WebMailModel webMailModelField;
         
-        private CalendarVksStp[] calendarVksStpField;
+        private CalendarVksStpView[] calendarVksStpViewField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MailIn")]
-        public MailIn[] MailIn {
+        [System.Xml.Serialization.XmlElementAttribute("MailInView")]
+        public MailInView[] MailInView {
             get {
-                return this.mailInField;
+                return this.mailInViewField;
             }
             set {
-                this.mailInField = value;
+                this.mailInViewField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MailOut")]
-        public MailOut[] MailOut {
+        [System.Xml.Serialization.XmlElementAttribute("MailOutView")]
+        public MailOutView[] MailOutView {
             get {
-                return this.mailOutField;
+                return this.mailOutViewField;
             }
             set {
-                this.mailOutField = value;
+                this.mailOutViewField = value;
             }
         }
         
@@ -64,13 +64,13 @@ namespace EfDatabaseXsdMail {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CalendarVksStp")]
-        public CalendarVksStp[] CalendarVksStp {
+        [System.Xml.Serialization.XmlElementAttribute("CalendarVksStpView")]
+        public CalendarVksStpView[] CalendarVksStpView {
             get {
-                return this.calendarVksStpField;
+                return this.calendarVksStpViewField;
             }
             set {
-                this.calendarVksStpField = value;
+                this.calendarVksStpViewField = value;
             }
         }
     }
@@ -82,11 +82,11 @@ namespace EfDatabaseXsdMail {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class MailIn {
+    public partial class MailInView {
+        
+        private System.Nullable<System.DateTime> dateInputServerField;
         
         private int idField;
-        
-        private bool idFieldSpecified;
         
         private string idMailField;
         
@@ -98,14 +98,21 @@ namespace EfDatabaseXsdMail {
         
         private string isFileField;
         
-        private System.DateTime dateInputServerField;
-        
-        private bool dateInputServerFieldSpecified;
-        
         private string logicsButtonField;
         
-        public MailIn() {
+        public MailInView() {
             this.logicsButtonField = "Button";
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DateInputServer {
+            get {
+                return this.dateInputServerField;
+            }
+            set {
+                this.dateInputServerField = value;
+            }
         }
         
         /// <remarks/>
@@ -116,17 +123,6 @@ namespace EfDatabaseXsdMail {
             }
             set {
                 this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
             }
         }
         
@@ -187,28 +183,6 @@ namespace EfDatabaseXsdMail {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime DateInputServer {
-            get {
-                return this.dateInputServerField;
-            }
-            set {
-                this.dateInputServerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateInputServerSpecified {
-            get {
-                return this.dateInputServerFieldSpecified;
-            }
-            set {
-                this.dateInputServerFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.ComponentModel.DefaultValueAttribute("Button")]
         public string LogicsButton {
             get {
@@ -227,11 +201,11 @@ namespace EfDatabaseXsdMail {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class MailOut {
+    public partial class MailOutView {
+        
+        private System.Nullable<System.DateTime> dateCreateField;
         
         private int idField;
-        
-        private bool idFieldSpecified;
         
         private string idMailField;
         
@@ -247,12 +221,19 @@ namespace EfDatabaseXsdMail {
         
         private string logicsButtonField;
         
-        private System.DateTime dateCreateField;
-        
-        private bool dateCreateFieldSpecified;
-        
-        public MailOut() {
+        public MailOutView() {
             this.logicsButtonField = "Button";
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DateCreate {
+            get {
+                return this.dateCreateField;
+            }
+            set {
+                this.dateCreateField = value;
+            }
         }
         
         /// <remarks/>
@@ -263,17 +244,6 @@ namespace EfDatabaseXsdMail {
             }
             set {
                 this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
             }
         }
         
@@ -354,28 +324,6 @@ namespace EfDatabaseXsdMail {
                 this.logicsButtonField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime DateCreate {
-            get {
-                return this.dateCreateField;
-            }
-            set {
-                this.dateCreateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateCreateSpecified {
-            get {
-                return this.dateCreateFieldSpecified;
-            }
-            set {
-                this.dateCreateFieldSpecified = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -420,11 +368,13 @@ namespace EfDatabaseXsdMail {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class CalendarVksStp {
+    public partial class CalendarVksStpView {
+        
+        private System.Nullable<System.DateTime> dateStartField;
+        
+        private System.Nullable<System.DateTime> dateFinishField;
         
         private int idField;
-        
-        private bool idFieldSpecified;
         
         private string idMailField;
         
@@ -434,20 +384,34 @@ namespace EfDatabaseXsdMail {
         
         private string idVKSField;
         
-        private System.DateTime dateStartField;
-        
-        private bool dateStartFieldSpecified;
-        
-        private System.DateTime dateFinishField;
-        
-        private bool dateFinishFieldSpecified;
-        
         private string isSTPField;
         
         private string logicsButtonField;
         
-        public CalendarVksStp() {
+        public CalendarVksStpView() {
             this.logicsButtonField = "Button";
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DateStart {
+            get {
+                return this.dateStartField;
+            }
+            set {
+                this.dateStartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DateFinish {
+            get {
+                return this.dateFinishField;
+            }
+            set {
+                this.dateFinishField = value;
+            }
         }
         
         /// <remarks/>
@@ -458,17 +422,6 @@ namespace EfDatabaseXsdMail {
             }
             set {
                 this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
             }
         }
         
@@ -513,50 +466,6 @@ namespace EfDatabaseXsdMail {
             }
             set {
                 this.idVKSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime DateStart {
-            get {
-                return this.dateStartField;
-            }
-            set {
-                this.dateStartField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateStartSpecified {
-            get {
-                return this.dateStartFieldSpecified;
-            }
-            set {
-                this.dateStartFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime DateFinish {
-            get {
-                return this.dateFinishField;
-            }
-            set {
-                this.dateFinishField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateFinishSpecified {
-            get {
-                return this.dateFinishFieldSpecified;
-            }
-            set {
-                this.dateFinishFieldSpecified = value;
             }
         }
         

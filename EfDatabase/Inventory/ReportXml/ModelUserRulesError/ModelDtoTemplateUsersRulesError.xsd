@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="DataAnalysisTemplateAndRole" type="DataAnalysisTemplateAndRole">
+		<xs:annotation>
+			<xs:documentation>Шаблон для анализа данных по шаблонам и ролям пользователя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="DataAnalysisTemplateAndRole">
+		<xs:annotation>
+			<xs:documentation>Шаблон для анализа данных по шаблонам и ролям пользователя</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="UsersIsBloking" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="UsersRuleOld" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="UsersDoubleRulesTemplate" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="UserRulesRuk" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="RuleNotTemplateUser" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="TemplateAllIfns" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="RuleUserReplace" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="UsersIsBloking" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Заблокированные пользователи а АИС 3</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NameUser"/>
+				<xs:element ref="TabelNumber"/>
+				<xs:element ref="Department"/>
+				<xs:element ref="Position"/>
+				<xs:element ref="NumberActiveDirectory"/>
+				<xs:element ref="NameTemplate"/>
+				<xs:element ref="NameRule"/>
+				<xs:element ref="NameRuleNothing"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UsersRuleOld" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Устаревшие роли в АИС 3</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NameUser"/>
+				<xs:element ref="TabelNumber"/>
+				<xs:element ref="Department"/>
+				<xs:element ref="Position"/>
+				<xs:element ref="NumberActiveDirectory"/>
+				<xs:element ref="NameRuleNothing"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UsersDoubleRulesTemplate" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дубликаты ролей по наличию шаблона АИС 3</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NameUser"/>
+				<xs:element ref="TabelNumber"/>
+				<xs:element ref="NameTemplate"/>
+				<xs:element ref="NameRule"/>
+				<xs:element ref="IdTemplateIfns"/>
+				<xs:element ref="IdRuleIfns"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UserRulesRuk" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Шаблоны или роли в них преднозначены для начальников кураторов и руководителей</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NameUser"/>
+				<xs:element ref="TabelNumber"/>
+				<xs:element ref="NameTemplate"/>
+				<xs:element ref="NameRule"/>
+				<xs:element ref="IdRuleIfns"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RuleNotTemplateUser" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Роли у пользователя не привязанные к шаблонам</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NameUser"/>
+				<xs:element ref="TabelNumber"/>
+				<xs:element ref="NameTemplate"/>
+				<xs:element ref="NameRule"/>
+				<xs:element ref="IdTemplateIfns"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TemplateAllIfns" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Шаблон справочник</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TemplateIfnsAndRuleIfns" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Category" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Категория организаций</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование шаблона</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdTemplateIfns" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>УН Шаблона</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TemplateIfnsAndRuleIfns" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Роли в шаблоне</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Rules" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Полный путь до роли</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdRuleIfns" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>УН Роли</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NameUser" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Наименование пользователя</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TabelNumber" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Табельный номер</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Department" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Отдел</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Position" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Должность</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NumberActiveDirectory" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Номер в Active Derectory</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameTemplate" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Наименование шаблона</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameRule" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Наименование роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameRuleNothing" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Наименование отсутствующей роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdTemplateIfns" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>УН Шаблона</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdRuleIfns" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>УН Роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RuleUserReplace">
+		<xs:annotation>
+			<xs:documentation>Взаимозаменяющие роли</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="NameUser"/>
+				<xs:element ref="IdTemplateIfnsNew"/>
+				<xs:element ref="NameNew"/>
+				<xs:element ref="CountUserRuleNew"/>
+				<xs:element ref="IdTemplateIfnsOld"/>
+				<xs:element ref="NameOld"/>
+				<xs:element ref="CountUserRuleOld"/>
+				<xs:element ref="CountMaxRule"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IdTemplateIfnsNew" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>УН расширяющей роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameNew" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Наименование расширяющей роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountUserRuleNew" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Количество ролей в расширяющей роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdTemplateIfnsOld" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>УН избыточной роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameOld" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Наименование избыточной роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountMaxRule" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Количество совпадений</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountUserRuleOld" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Колличество ролей в избыточной роли</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
-using EfDatabaseXsdBookAccounting;
+using EfDatabase.XsdBookAccounting;
+
 using LibaryDocumentGenerator.ProgrammView.FullDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
 
 namespace LibaryDocumentGenerator.Documents.Template
 {
-    public class BookAccountingInventarka : ITemplate<EfDatabaseXsdBookAccounting.Book>
+    public class BookAccountingInventarka : ITemplate<EfDatabase.XsdBookAccounting.Book>
     {
         /// <summary>
         /// Полный путь к книге на сервере
@@ -31,7 +28,7 @@ namespace LibaryDocumentGenerator.Documents.Template
             return new MemoryStream(file);
         }
 
-        public void CreateDocum(string path, Book template, object obj)
+        public void CreateDocument(string path, Book template, object obj)
         {
             FullPathDocumentWord = path + template.BareCodeBook.NameModel + Constant.WordConstant.Formatword;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))

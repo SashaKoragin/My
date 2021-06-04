@@ -27,7 +27,7 @@ namespace LibaryDocumentGenerator.Documents.Document
                 try
                 {
                     string fullpath = Model.PathSave +fn71.N279 + "_CountBDK_" + fn71.FN1723_2.Length + Constant.WordConstant.Formatword;
-                    Template.CreateDocum(fullpath, Model.DocumentTemplate, fn71);
+                    Template.CreateDocument(fullpath, Model.DocumentTemplate, fn71);
                     var savefile = new AddOutBdk();
                     savefile.SaveFile(fullpath, Model.DocumentTemplate.IdNamedocument);
                     savefile.SaveReestr(fn71);

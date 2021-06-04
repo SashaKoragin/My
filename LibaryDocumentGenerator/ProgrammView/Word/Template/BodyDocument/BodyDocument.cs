@@ -2,7 +2,7 @@
 using DocumentFormat.OpenXml.Wordprocessing;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator;
-using LibaryXMLAutoModelXmlAuto.MigrationReport;
+using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using LibaryXMLAutoReports.ReportsBdk;
 
 namespace LibaryDocumentGenerator.ProgrammView.Word.Template.BodyDocument

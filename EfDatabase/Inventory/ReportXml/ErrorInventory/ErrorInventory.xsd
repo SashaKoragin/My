@@ -6,7 +6,7 @@
 			<xs:documentation>Имена не совпадают с именами</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="IdSysBlock" type="xs:int">
+			<xs:attribute name="IdSysBlock" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун системного блока</xs:documentation>
 				</xs:annotation>
@@ -64,7 +64,7 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element ref="Error" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element ref="ErrorUSerNotActul" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ErrorUsersNotActual" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="AnaliticaSysBlokAndMonitors" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="UsersNotTechnical" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="IsProcessComplete" minOccurs="0" maxOccurs="unbounded"/>
@@ -79,12 +79,12 @@
 			<xs:element ref="ErrorTokenUser" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="ErrorUSerNotActul">
+	<xs:element name="ErrorUsersNotActual">
 		<xs:annotation>
 			<xs:documentation>Ошибки не актуальных пользователей</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="IdUser" type="xs:int">
+			<xs:attribute name="IdUser" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
@@ -94,17 +94,17 @@
 					<xs:documentation>Пользователь</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="StatusActual" type="xs:byte">
+			<xs:attribute name="StatusActual" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Статус</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="StatusText">
+			<xs:attribute name="StatusText" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Статус пользователя</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="ColorStatus">
+			<xs:attribute name="ColorStatus" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Цвет пользователя</xs:documentation>
 				</xs:annotation>
@@ -161,7 +161,7 @@
 			<xs:documentation>Ошибки по технике</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Error" type="xs:string">
+			<xs:attribute name="ErrorModel" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Описание ошибки</xs:documentation>
 				</xs:annotation>
@@ -253,7 +253,7 @@
 					<xs:documentation>Номер кабинета Сис.Блок</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="StatusingSysBlock">
+			<xs:attribute name="StatusingSysBlock" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Статус системного блока</xs:documentation>
 				</xs:annotation>
@@ -318,7 +318,7 @@
 					<xs:documentation>Номер кабинета Монитор</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="StatusingMonitors">
+			<xs:attribute name="StatusingMonitors" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Статус монитора</xs:documentation>
 				</xs:annotation>
@@ -345,7 +345,7 @@
 			<xs:documentation>Отсутствует техника у пользователя</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="IdUser" type="xs:int">
+			<xs:attribute name="IdUser" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
@@ -382,7 +382,11 @@
 			<xs:documentation>Аналитика запущенных процосов</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Id" type="xs:int">
+			<xs:sequence>
+				<xs:element ref="DataStart"/>
+				<xs:element ref="DataFinish"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун процесса</xs:documentation>
 				</xs:annotation>
@@ -392,19 +396,9 @@
 					<xs:documentation>Наименование процесса</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IsComplete" type="xs:boolean">
+			<xs:attribute name="IsComplete" type="xs:boolean" use="required">
 				<xs:annotation>
 					<xs:documentation>Статус</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="DataStart" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата запуска</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="DataFinish" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата завершения</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -414,7 +408,10 @@
 			<xs:documentation>Данные полученные из домена</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Id" type="xs:int">
+			<xs:sequence>
+				<xs:element ref="DateCreate"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Уникальный номер</xs:documentation>
 				</xs:annotation>
@@ -444,11 +441,6 @@
 					<xs:documentation>Имя пользователя</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateCreate" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата записи</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="DoubleComputersName">
@@ -456,7 +448,7 @@
 			<xs:documentation>Ошибки дубли</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="IdSysBlock" type="xs:int">
+			<xs:attribute name="IdSysBlock" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Уникальный номер</xs:documentation>
 				</xs:annotation>
@@ -493,19 +485,18 @@
 			<xs:documentation>Синхронизация IP Адрессов</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Dates"/>
+				<xs:element ref="IdUser"/>
+			</xs:sequence>
 			<xs:attribute name="Task" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Описание задачи</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IdSysBlock" type="xs:int">
+			<xs:attribute name="IdSysBlock" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун системного блока</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="IdUser" type="xs:int">
-				<xs:annotation>
-					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name="ActualIpAdress" type="xs:string">
@@ -528,11 +519,6 @@
 					<xs:documentation>Новый Ip Адрес</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Dates" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата записи</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="NameHostIpAdress">
@@ -540,7 +526,7 @@
 			<xs:documentation>Накладка Ip Адресов на Домен</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="IdSysBlock" type="xs:int">
+			<xs:attribute name="IdSysBlock" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун системного блока</xs:documentation>
 				</xs:annotation>
@@ -592,7 +578,10 @@
 			<xs:documentation>Журнал</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="IdModel" type="xs:int">
+			<xs:sequence>
+				<xs:element ref="DataCreate"/>
+			</xs:sequence>
+			<xs:attribute name="IdModel" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Наименование модели ID</xs:documentation>
 				</xs:annotation>
@@ -630,11 +619,6 @@
 			<xs:attribute name="InventarNumber" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Инвентарный номер</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="DataCreate" type="xs:dateTime">
-				<xs:annotation>
-					<xs:documentation>Дата записи</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -692,7 +676,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name="LogicsButton" default="Button"/>
-			<xs:attribute name="Id" type="xs:int">
+			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Уникальный номер</xs:documentation>
 				</xs:annotation>
@@ -774,7 +758,7 @@
 			<xs:documentation>Ошибки неправильно подтянутых Компьютеров к Токен</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="IdToken" type="xs:string">
+			<xs:attribute name="IdToken" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>УН токена</xs:documentation>
 				</xs:annotation>
@@ -815,5 +799,35 @@
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
+	</xs:element>
+	<xs:element name="DataStart" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата начала процесса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DataFinish" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата окончания процесса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateCreate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата записи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Dates" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата записи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DataCreate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата записи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdUser" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>УН пользователя</xs:documentation>
+		</xs:annotation>
 	</xs:element>
 </xs:schema>

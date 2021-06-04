@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
+using EfDatabase.SettingModelInventory;
+using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseParametrsModel;
-using EfDatabaseXsdBookAccounting;
 using EfDatabaseXsdInventoryAutorization;
 using EfDatabaseXsdMail;
 using EfDatabaseXsdSupportNalog;
 using SqlLibaryIfns.Inventory.ModelParametr;
+using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
 using Printer = EfDatabase.Inventory.Base.Printer;
 using ScanerAndCamer = EfDatabase.Inventory.Base.ScanerAndCamer;
 using SysBlock = EfDatabase.Inventory.Base.SysBlock;
@@ -44,11 +46,11 @@ namespace TestIFNSLibary.Inventarka
         /// <summary>
         /// Генерация файла из View
         /// </summary>
-        /// <param name="idView">Ун выборки View</param>
+        /// <param name="selectLogic">Ун выборки View</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateFileXlsxSqlView?idView={idView}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<Stream> GenerateFileXlsxSqlView(int idView);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateFileXlsxSqlView", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> GenerateFileXlsxSqlView(LogicaSelect selectLogic);
         /// <summary>
         /// http://localhost:8182/Inventarka/GenerateBookAccounting
         /// Генерация книги учета материальных ценностей
@@ -107,7 +109,85 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndDeleteRuleUser", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<RuleUsers[]> AddAndDeleteRuleUser(RuleUsers ruleUsers);
-        
+        /// <summary>
+        /// Глобальные настройки организации
+        /// http://localhost:8182/Inventarka/SettingOrganization
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SettingOrganization", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<EfDatabase.Inventory.Base.Organization> SettingOrganization();
+        /// <summary>
+        /// Настройки падежей отделов для настроек отчетов
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SettingDepartmentCase", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SettingDepartmentCase();
+        /// <summary>
+        /// Настройка регламентов для отделов
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SettingDepartmentRegulations", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SettingDepartmentRegulations();
+        /// <summary>
+        /// Получение всех праздничных дней в БД для редактирования\добавления
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GetHoliday", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> GetHoliday();
+        /// <summary>
+        /// Редактирование или добавление настроек организации
+        /// http://localhost:8182/Inventarka/AddAndEditOrganization
+        /// </summary>
+        /// <param name="organization">Настройки организации</param>
+        /// <param name="userIdEdit">Кто редактировал или добавлял</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditOrganization?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EfDatabase.Inventory.Base.Organization> AddAndEditOrganization(EfDatabase.Inventory.Base.Organization organization, string userIdEdit);
+        /// <summary>
+        /// Редактирование или добавление падежей отделов для настроек отчетов
+        /// http://localhost:8182/Inventarka/AddAndEditSettingDepartamentCase
+        /// </summary>
+        /// <param name="settingDepartmentCase">Падежи отредактированные</param>
+        /// <param name="userIdEdit">Пользователь производивший настройку</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditSettingDepartmentCase?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<SettingDepartmentCase> AddAndEditSettingDepartmentCase(SettingDepartmentCase settingDepartmentCase, string userIdEdit);
+        /// <summary>
+        /// Редактирование или добавление падежей отделов для настроек отчетов
+        /// http://localhost:8182/Inventarka/AddAndEditSettingDepartmentRegulations
+        /// </summary>
+        /// <param name="regulationsDepartment">Регламент отдела</param>
+        /// <param name="userIdEdit">Пользователь производивший настройку</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditSettingDepartmentRegulations?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<RegulationsDepartment> AddAndEditSettingDepartmentRegulations(RegulationsDepartment regulationsDepartment, string userIdEdit);
+        /// <summary>
+        /// Добавление в справочник праздничных дней с признаком
+        /// </summary>
+        /// <param name="holidays">Запись о праздничном дне</param>
+        /// <param name="userIdEdit">Пользователь производивший настройку</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditRbHoliday?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<Rb_Holiday> AddAndEditRbHoliday(Rb_Holiday holidays, string userIdEdit);
+
+        /// <summary>
+        /// Удаление не актуальных праздничных или ошибочных дней
+        /// </summary>
+        /// <param name="holidays">Монитор</param>
+        /// <param name="userIdEdit">Пользователь производивший настройку</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteRbHoliday?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<Rb_Holiday> DeleteRbHoliday(Rb_Holiday holidays, string userIdEdit);
+
         /// <summary>
         /// Все пользователи 
         /// http://localhost:8182/Inventarka/AllUsers
@@ -301,7 +381,57 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllModelSeverEquipment", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> ModelSeverEquipment();
-
+        /// <summary>
+        /// Получение ресурсов для заявок АИС 3
+        /// http://localhost:8182/Inventarka/GetResourceIt
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GetResourceIt", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> GetResourceIt();
+        /// <summary>
+        /// Получение задач для заявок АИС 3
+        /// http://localhost:8182/Inventarka/GetTaskAis3
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GetTaskAis3", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> GetTaskAis3();
+        /// <summary>
+        /// Получение журнала заявок на различные ресурсы
+        /// http://localhost:8182/Inventarka/GetJournalAis3
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GetJournalAis3", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> GetJournalAis3();
+        /// <summary> 
+        /// Добавление или обновление ресурса для заявки
+        /// http://localhost:8182/Inventarka/AddAndEditResourceIt
+        /// </summary>
+        /// <param name="resourceIt">Ресурс для заявки</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditResourceIt", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<ResourceIt> AddAndEditResourceIt(ResourceIt resourceIt);
+        /// <summary>
+        /// Добавление или обновление задачи для заявки
+        /// http://localhost:8182/Inventarka/AddAndEditTaskAis3
+        /// </summary>
+        /// <param name="taskAis3">Задача для заявки</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditTaskAis3", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<TaskAis3> AddAndEditTaskAis3(TaskAis3 taskAis3);
+        /// <summary>
+        /// Добавление или обновление журнала для заявок по ресурсам
+        /// http://localhost:8182/Inventarka/AddAndEditJournalAis3
+        /// </summary>
+        /// <param name="journalAis3">Задача для заявки</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditJournalAis3", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<JournalAis3> AddAndEditJournalAis3(JournalAis3 journalAis3);
         /// <summary>
         /// Все производители серверного оборудования
         /// http://localhost:8182/Inventarka/AllManufacturerSeverEquipment
@@ -870,7 +1000,6 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateQrCodeOffice?numberOffice={numberOffice}&isAll={isAll}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<Stream> GenerateQrCodeOffice(string numberOffice, bool isAll=false);
-
         /// <summary>
         /// Вся техника на пользователя для личного кабинета
         /// http://localhost:8182/Inventarka/AllTechnicsLk
@@ -915,5 +1044,13 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/IsBeginTask?userIdEdit={idTask}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<bool> IsBeginTask(int idTask);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelParameterAct">Параметры акта документа списания</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreateAct", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> CreateAct(ModelSelect modelParameterAct);
    }
 }

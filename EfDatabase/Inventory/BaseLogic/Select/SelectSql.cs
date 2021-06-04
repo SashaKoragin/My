@@ -10,8 +10,9 @@ using EfDatabase.Inventory.Base;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdLotusUser;
+using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.ReadOrWrite;
-using LibaryXMLAutoModelXmlAuto.MigrationReport;
+using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
 using Otdel = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel;
 using RuleTemplate = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.RuleTemplate;
@@ -19,7 +20,40 @@ using RuleTemplate = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.RuleTemplate;
 
 namespace EfDatabase.Inventory.BaseLogic.Select
 {
-   public class SelectSql : IDisposable
+    public static class DateTimeExtensions
+    {
+        public static DateTime AddWorkdays(this DateTime originalDate, int workDays)
+        {
+            DateTime tmpDate = originalDate;
+            while (workDays > 0)
+            {
+                tmpDate = tmpDate.AddDays(1);
+                if (tmpDate.DayOfWeek < DayOfWeek.Saturday &&
+                    tmpDate.DayOfWeek > DayOfWeek.Sunday &&
+                    !tmpDate.IsHoliday())
+                    workDays--;
+            }
+            while (workDays < 0)
+            {
+                tmpDate = tmpDate.AddDays(-1);
+                if (tmpDate.DayOfWeek < DayOfWeek.Saturday &&
+                    tmpDate.DayOfWeek > DayOfWeek.Sunday &&
+                    !tmpDate.IsHoliday())
+                    workDays++;
+            }
+            return tmpDate;
+        }
+
+        public static bool IsHoliday(this DateTime originalDate)
+        {
+            SelectSql select = new SelectSql();
+            var isHoliday = select.IsHolidays(originalDate);
+            select.Dispose();
+            return isHoliday;
+        }
+    }
+
+    public class SelectSql : IDisposable
    {
        public static string ProcedureSelect = "Exec [dbo].[InventarizationCommandSelectWcfToSql] {0}";
         public InventoryContext Inventory { get; set; }
@@ -31,6 +65,18 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             Inventory = new InventoryContext();
         }
         /// <summary>
+        /// Получение всех api из БД
+        /// </summary>
+        public ServiceModelInventory[] GetServiceApi()
+        {
+            return Inventory.ServiceModelInventories.ToArray();
+        }
+
+        public bool IsHolidays(DateTime dateTime)
+        {
+           return Inventory.Rb_Holidays.Any(x => x.DateTime_Holiday == dateTime && x.IS_HOLIDAY);
+        }
+        /// <summary>
         /// Генерация модели с параметрами для пользовательских выборок
         /// </summary>
         /// <param name="model"></param>
@@ -40,7 +86,10 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             try
             {
                 model.LogicaSelect = SqlSelectModel(model.ParametrsSelect.Id);
-                model.Parametrs = Inventory.Database.SqlQuery<Parametrs>(model.LogicaSelect.SelectedParametr).ToArray();
+                if (model.LogicaSelect.SelectedParametr != null)
+                {
+                    model.Parametrs = Inventory.Database.SqlQuery<Parametrs>(model.LogicaSelect.SelectedParametr).ToArray();
+                }
                 return model;
             }
             catch (Exception e)
@@ -84,11 +133,18 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// <param name="sqlSelect">Запрос к БД для выборки данных</param>
         public void UserRuleModel(ref RuleTemplate template, UserRules userRule, ModelSelect sqlSelect)
         {
-            var groupElement = userRule.User.Where(x=>x.Number!="Скрипт").Select(x => new
-                { x.Dates, 
-                  x.Number, 
-                  Otdel = x.Otdel.Replace("№ ", "№")
-                }).GroupBy(x => new {x.Dates, x.Number, x.Otdel }).Select(x => new {x.Key.Number, x.Key.Dates, x.Key.Otdel }).ToList();
+            //Группируем по номеру, отделу, дате и назначению
+            var groupElement = userRule.User.Where(x => x.Number != "Скрипт").SelectMany(x => x.Rule, (u, r) => new
+                {
+                    u, r
+                }).GroupBy(x => new {x.r.Pushed, x.u.Dates, x.u.Number, x.u.Otdel })
+                .Select(x => new
+                {
+                    x.Key.Number, 
+                    x.Key.Dates, 
+                    x.Key.Otdel, 
+                    x.Key.Pushed
+                }).ToList();
             int i = 0;
             foreach (var gr in groupElement)
             {
@@ -109,23 +165,32 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                                         RnameOtdel = "Ошибка в наименование отдела Кадры,AD,АИС3",
                                         SmallName = "Отсутствует", NamePosition = "Отсутствует"
                                     };
-                template.Otdel[i].Dates = gr.Dates;
-                var user = userRule.User.Where(userRole => (userRole.Dates == gr.Dates) && (userRole.Number == gr.Number) && (userRole.Otdel.Replace("№ ", "№") == gr.Otdel)).Select(u => new
+                template.Otdel[i].Dates = Convert.ToDateTime(gr.Dates);
+                template.Otdel[i].DateStatement = Convert.ToDateTime(gr.Dates).AddWorkdays(-1);
+                var user = userRule.User.SelectMany(x => x.Rule, (u, r) => new
+                                          { u, r }).Where(userRole => 
+                                                   (userRole.u.Dates == gr.Dates) &&
+                                                   (userRole.u.Number == gr.Number) &&
+                                                   (userRole.r.Pushed == gr.Pushed) &&
+                                                   (userRole.u.Otdel.Replace("№ ", "№") == gr.Otdel.Replace("№ ", "№"))
+                 ).Select(mussel => new
                 {
-                    u.Dates,
-                    u.Fio,
-                    u.SysName,
-                    u.Dolj,
-                    Otdel = u.Otdel.Replace("№ ", "№"),
-                    u.Number
+                    mussel.u.Dates,
+                    mussel.u.Fio,
+                    mussel.u.SysName,
+                    mussel.u.Dolj,
+                    Otdel = mussel.u.Otdel.Replace("№ ", "№"),
+                    mussel.u.Number
                 }).Distinct().ToList();
                 int j = 0;
                 foreach (var userRole in user)
                 {
+
                     var roleAll = userRule.User.Where(u =>
-                                  u.Dates == userRole.Dates && u.Dolj == userRole.Dolj && u.Otdel.Replace("№ ", "№") == userRole.Otdel &&
-                                  u.Fio == userRole.Fio && u.SysName == userRole.SysName && u.Number == userRole.Number).
-                                  Select(x => x.Rule).Aggregate((element, next) => element.Concat(next).ToArray());
+                            u.Dates == userRole.Dates && u.Dolj == userRole.Dolj && u.Otdel.Replace("№ ", "№") == userRole.Otdel &&
+                            u.Fio == userRole.Fio && u.SysName == userRole.SysName && u.Number == userRole.Number).
+                        Select(x => x.Rule.Where(r => r.Pushed == gr.Pushed)).Aggregate((element, next) => element.Concat(next).ToArray()).ToArray();
+
                     if (template.Otdel[i].Users == null)
                     {
                         template.Otdel[i].Users = new LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Users[user.Count];
@@ -139,7 +204,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                                                           Tabel = $"regions\\{userRole.SysName.Split('@')[0]}", NumberKabinet = null,
                                                           RuleTemplate = null
                                                      };
-                    template.Otdel[i].Users[j].RuleTemplate = roleAll.Select(elem=> $"{elem.Types}: {elem.Name}").Aggregate(
+                    template.Otdel[i].Users[j].RuleTemplate = roleAll.Select(elem=> $"{elem.Types}: {elem.Name} {((string.IsNullOrWhiteSpace(elem.DateFinish) || elem.Pushed == "Отзыв") ? null :" - " + elem.DateFinish)}").Aggregate(
                         (element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : ", ") + next);
                     template.Otdel[i].Users[j].Pushed = roleAll[0].Pushed;
                     j++;
@@ -147,8 +212,6 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 i++;
             }
         }
-
-
         /// <summary>
         /// Модель отчета из БД которая отправится в Open Xml
         /// </summary>
@@ -183,25 +246,63 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             }
         }
         /// <summary>
-        /// Загрузка шаблонов в Базу данных
+        /// Модель загрузки Шаблонов в БД по шаблону
         /// </summary>
-        /// <param name="infoTemplate">Модель шаблонов</param>
-        public void LoadTemplateDataBase(InfoRuleTemplate infoTemplate)
+        /// <typeparam name="T">Шаблон class to xml</typeparam>
+        /// <param name="modelTemplate">Шаблон</param>
+        /// <param name="idProcedureLoad">УН процедуры загрузки</param>
+        /// <param name="idProcessBlock">УН процедуры процесса</param>
+        /// <returns></returns>
+        public ModelPathReport LoadModelToDataBase<T>(T modelTemplate, int idProcedureLoad, int idProcessBlock)
         {
-            ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(37) };
-            XmlReadOrWrite xml = new XmlReadOrWrite();
-            var addObjectDb = new AddObjectDb.AddObjectDb();
-            addObjectDb.IsProcessComplete(2,false);
-            Inventory.Database.CommandTimeout = 18000;
-            Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser, 
-                new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml)
+            var report = new ModelPathReport();
+            try
+            {
+                var isProcessTrue = Inventory.IsProcessCompletes.FirstOrDefault(complete => complete.Id == idProcessBlock);
+                if (isProcessTrue == null)
+                    throw new InvalidOperationException($"Фатальная ошибка отсутствует процесс Id - {idProcessBlock} в системе!");
+                if (isProcessTrue.IsComplete == true)
                 {
-                    Value = new SqlXml(new XmlTextReader(xml.ClassToXml(infoTemplate, typeof(InfoRuleTemplate)),
-                    XmlNodeType.Document, null))
-                });
-            addObjectDb.IsProcessComplete(2, true);
-            addObjectDb.Dispose();
+                    var addObjectDb = new AddObjectDb.AddObjectDb();
+                    var task = Task.Run(() =>
+                    {
+                        try
+                        {
+                            ModelSelect model = new ModelSelect {LogicaSelect = SqlSelectModel(idProcedureLoad)};
+                            XmlReadOrWrite xml = new XmlReadOrWrite();
+                            addObjectDb.IsProcessComplete(idProcessBlock, false);
+                            Inventory.Database.CommandTimeout = 18000;
+                            Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser,
+                                new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml)
+                                {
+                                    Value = new SqlXml(new XmlTextReader(xml.ClassToXml(modelTemplate, modelTemplate.GetType()), XmlNodeType.Document, null))
+                                });
+                        }
+                        catch (Exception e)
+                        {
+                            Loggers.Log4NetLogger.Error(e);
+                        }
+                    });
+                    task.ConfigureAwait(true).GetAwaiter().OnCompleted((() =>
+                    {
+                        addObjectDb.IsProcessComplete(idProcessBlock, true);
+                        addObjectDb.Dispose();
+                    }));
+                    report.Note = $"{isProcessTrue.NameProcess} запущен!";
+                }
+                else
+                {
+                    report.Note = $"{isProcessTrue.NameProcess} уже запущен ожидайте окончание процесса!";
+                }
+            }
+            catch (Exception e)
+            {
+                report.Note = e.Message;
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return report;
         }
+
         /// <summary>
         /// Актуализация пользователей модели
         /// </summary>
@@ -251,7 +352,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             try
             {
-                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(32) };
+                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(31) };
                 Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser,
                     new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], technic.Id),
                                  new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], technic.Item));

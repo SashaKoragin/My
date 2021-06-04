@@ -11,7 +11,7 @@
 // 
 // Этот исходный код был создан с помощью xsd, версия=4.7.2046.0.
 // 
-namespace EfDatabaseXsdBookAccounting {
+namespace EfDatabase.XsdBookAccounting {
     using System.Xml.Serialization;
     
     
@@ -23,15 +23,42 @@ namespace EfDatabaseXsdBookAccounting {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Book {
         
+        private BookModels[] bookModelsField;
+        
+        private Organization organizationField;
+        
+        private BareCodeBook bareCodeBookField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("BookModels")]
-        public BookModels[] BookModels;
+        public BookModels[] BookModels {
+            get {
+                return this.bookModelsField;
+            }
+            set {
+                this.bookModelsField = value;
+            }
+        }
         
         /// <remarks/>
-        public Organization Organization;
+        public Organization Organization {
+            get {
+                return this.organizationField;
+            }
+            set {
+                this.organizationField = value;
+            }
+        }
         
         /// <remarks/>
-        public BareCodeBook BareCodeBook;
+        public BareCodeBook BareCodeBook {
+            get {
+                return this.bareCodeBookField;
+            }
+            set {
+                this.bareCodeBookField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -43,45 +70,102 @@ namespace EfDatabaseXsdBookAccounting {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class BookModels {
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int RowNum;
+        private long rowNumField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RowNumSpecified;
+        private int keysField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Keys;
+        private string nameField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool KeysSpecified;
+        private int idField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name;
+        private string modelField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id;
+        private int idBookField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified;
+        private string logicsButtonField;
+        
+        public BookModels() {
+            this.idBookField = 0;
+            this.logicsButtonField = "Button";
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Model;
+        public long RowNum {
+            get {
+                return this.rowNumField;
+            }
+            set {
+                this.rowNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Keys {
+            get {
+                return this.keysField;
+            }
+            set {
+                this.keysField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Model {
+            get {
+                return this.modelField;
+            }
+            set {
+                this.modelField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.ComponentModel.DefaultValueAttribute(0)]
-        public int IdBook;
+        public int IdBook {
+            get {
+                return this.idBookField;
+            }
+            set {
+                this.idBookField = value;
+            }
+        }
         
-        public BookModels() {
-            this.IdBook = 0;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("Button")]
+        public string LogicsButton {
+            get {
+                return this.logicsButtonField;
+            }
+            set {
+                this.logicsButtonField = value;
+            }
         }
     }
     
@@ -94,24 +178,69 @@ namespace EfDatabaseXsdBookAccounting {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Organization {
         
+        private Supply supplyField;
+        
+        private Position[] positionField;
+        
+        private string nameOrganizationField;
+        
+        private string nameFaceField;
+        
+        private string nameDepartamentField;
+        
         /// <remarks/>
-        public Supply Supply;
+        public Supply Supply {
+            get {
+                return this.supplyField;
+            }
+            set {
+                this.supplyField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Position")]
-        public Position[] Position;
+        public Position[] Position {
+            get {
+                return this.positionField;
+            }
+            set {
+                this.positionField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameOrganization;
+        public string NameOrganization {
+            get {
+                return this.nameOrganizationField;
+            }
+            set {
+                this.nameOrganizationField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameFace;
+        public string NameFace {
+            get {
+                return this.nameFaceField;
+            }
+            set {
+                this.nameFaceField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameDepartament;
+        public string NameDepartament {
+            get {
+                return this.nameDepartamentField;
+            }
+            set {
+                this.nameDepartamentField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -123,21 +252,57 @@ namespace EfDatabaseXsdBookAccounting {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Supply {
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameKontract;
+        private string nameKontractField;
+        
+        private string daysPostavkiField;
+        
+        private string yearsField;
+        
+        private string nameSupplyField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string DaysPostavki;
+        public string NameKontract {
+            get {
+                return this.nameKontractField;
+            }
+            set {
+                this.nameKontractField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Years;
+        public string DaysPostavki {
+            get {
+                return this.daysPostavkiField;
+            }
+            set {
+                this.daysPostavkiField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameSupply;
+        public string Years {
+            get {
+                return this.yearsField;
+            }
+            set {
+                this.yearsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameSupply {
+            get {
+                return this.nameSupplyField;
+            }
+            set {
+                this.nameSupplyField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -149,20 +314,56 @@ namespace EfDatabaseXsdBookAccounting {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Position {
         
+        private Users usersField;
+        
+        private int idPositionField;
+        
+        private bool idPositionFieldSpecified;
+        
+        private string serNumField;
+        
         /// <remarks/>
-        public Users Users;
+        public Users Users {
+            get {
+                return this.usersField;
+            }
+            set {
+                this.usersField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int IdPosition;
+        public int IdPosition {
+            get {
+                return this.idPositionField;
+            }
+            set {
+                this.idPositionField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdPositionSpecified;
+        public bool IdPositionSpecified {
+            get {
+                return this.idPositionFieldSpecified;
+            }
+            set {
+                this.idPositionFieldSpecified = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SerNum;
+        public string SerNum {
+            get {
+                return this.serNumField;
+            }
+            set {
+                this.serNumField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -174,9 +375,18 @@ namespace EfDatabaseXsdBookAccounting {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Users {
         
+        private string smallNameField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SmallName;
+        public string SmallName {
+            get {
+                return this.smallNameField;
+            }
+            set {
+                this.smallNameField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -188,20 +398,56 @@ namespace EfDatabaseXsdBookAccounting {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class BareCodeBook {
         
+        private int idField;
+        
+        private bool idFieldSpecified;
+        
+        private string fullPathSaveField;
+        
+        private string nameModelField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id;
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified;
+        public bool IdSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string FullPathSave;
+        public string FullPathSave {
+            get {
+                return this.fullPathSaveField;
+            }
+            set {
+                this.fullPathSaveField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameModel;
+        public string NameModel {
+            get {
+                return this.nameModelField;
+            }
+            set {
+                this.nameModelField = value;
+            }
+        }
     }
 }

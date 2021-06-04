@@ -27,7 +27,7 @@ namespace LibaryDocumentGenerator.Documents.Template
         }
 
 
-        public void CreateDocum(string path, CardFaceUl template, object obj)
+        public void CreateDocument(string path, CardFaceUl template, object obj)
         {
             FullPathDocumentWord = path + template.FaceUl.Inn + Constant.WordConstant.Formatword;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))

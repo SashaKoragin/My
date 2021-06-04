@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="Book" type="Book">
 		<xs:annotation>
@@ -25,12 +25,12 @@
 			<xs:documentation>Модель последней актуальной книги</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="RowNum" type="xs:int">
+			<xs:attribute name="RowNum" type="xs:long" use="required">
 				<xs:annotation>
 					<xs:documentation>Номер строки</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Keys" type="xs:int">
+			<xs:attribute name="Keys" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Уникальный ключ</xs:documentation>
 				</xs:annotation>
@@ -40,7 +40,7 @@
 					<xs:documentation>Наименование категории</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Id" type="xs:int">
+			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун по ключу</xs:documentation>
 				</xs:annotation>
@@ -53,6 +53,11 @@
 			<xs:attribute name="IdBook" type="xs:int" default="0">
 				<xs:annotation>
 					<xs:documentation>Ун последней книги</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LogicsButton" type="xs:string" default="Button">
+				<xs:annotation>
+					<xs:documentation>Логика кнопки</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

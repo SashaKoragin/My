@@ -20,7 +20,7 @@ namespace LibaryDocumentGenerator.Documents.DocumentMigration
         public void ServicePostLotus(string postAddress, object requestModel)
         {
             var json = new SerializeJson();
-            var js = json.JsonLibary(requestModel);
+            var js = json.JsonLibrary(requestModel);
             var request = (HttpWebRequest)WebRequest.Create(postAddress);
             request.Method = "POST";
             request.ContentType = "application/json";

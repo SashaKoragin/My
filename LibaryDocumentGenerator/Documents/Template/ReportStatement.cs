@@ -31,7 +31,7 @@ namespace LibaryDocumentGenerator.Documents.Template
         /// <param name="path">Путь к документу</param>
         /// <param name="template">Шаблон</param>
         /// <param name="obj"></param>
-       public void CreateDocum(string path, Statement template, object obj = null)
+       public void CreateDocument(string path, Statement template, object obj = null)
         {
             FullPathDocumentWord = path + template.HeadingStatement[0].NameIndex + Constant.WordConstant.Formatword;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))

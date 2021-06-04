@@ -19,7 +19,7 @@ namespace LibaryDocumentGenerator.Documents.Template
             return new MemoryStream(file);
         }
 
-        public void CreateDocum(string path, QrCodeOffice template, object obj = null)
+        public void CreateDocument(string path, QrCodeOffice template, object obj = null)
         {
             FullPathDocumentWord = path + Constant.WordConstant.Formatword;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
