@@ -60,7 +60,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
             {
                 qrCodeOffice.FullPathPng = qrCode.GenerateQrCode("C:\\Testing\\" + qrCodeOffice.IdNumberKabinet, qrCodeOffice.NumberKabinet);
             }
-            stickerQrOffice.CreateDocum("C:\\Testing\\QrCodeOffice", office);
+            stickerQrOffice.CreateDocument("C:\\Testing\\QrCodeOffice", office);
             //Удаление всех png
             foreach (var cabinet in office.Kabinet)
             {

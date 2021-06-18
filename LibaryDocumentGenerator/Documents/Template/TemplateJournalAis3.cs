@@ -1,36 +1,34 @@
 ﻿using System.IO;
-
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
-using EfDatabase.XsdBookAccounting;
-
+using DocumentFormat.OpenXml.Wordprocessing;
 using LibaryDocumentGenerator.ProgrammView.FullDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
 
 namespace LibaryDocumentGenerator.Documents.Template
 {
-    public class BookAccountingInventarka : ITemplate<EfDatabase.XsdBookAccounting.Book>
+   public class TemplateJournalAis3 : ITemplate<EfDatabase.Journal.AllJournal>
     {
         /// <summary>
         /// Полный путь к книге на сервере
         /// </summary>
         public string FullPathDocumentWord { get; set; }
 
-
         /// <summary>
-        /// Выгрузка и удаление файла книги отчета
+        /// Выгрузка и удаление файла докладной записки ЮЛ
         /// </summary>
         /// <returns></returns>
         public Stream FileArray()
         {
             var file = File.ReadAllBytes(FullPathDocumentWord);
-            File.Delete(FullPathDocumentWord);
+         //   File.Delete(FullPathDocumentWord);
             return new MemoryStream(file);
         }
 
-        public void CreateDocument(string path, Book template, object obj)
+
+        public void CreateDocument(string path, EfDatabase.Journal.AllJournal template, object obj)
         {
-            FullPathDocumentWord = path + template.BareCodeBook.NameModel + Constant.WordConstant.FormatWord;
+            FullPathDocumentWord = path + "Журнал" + Constant.WordConstant.FormatWord;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
             {
                 CreateWord(package, template, obj);
@@ -39,19 +37,14 @@ namespace LibaryDocumentGenerator.Documents.Template
             }
         }
 
-        public void CreateWord(WordprocessingDocument package, Book template, object obj)
+        public void CreateWord(WordprocessingDocument package, EfDatabase.Journal.AllJournal template, object obj)
         {
             MainDocumentPart mainDocumentPart = package.AddMainDocumentPart();
             DocumentFormat.OpenXml.Wordprocessing.Document document = new DocumentFormat.OpenXml.Wordprocessing.Document();
-            ImagePart image = mainDocumentPart.AddImagePart(ImagePartType.Jpeg);
-            using (FileStream file = new FileStream(template.BareCodeBook.FullPathSave, FileMode.Open))
-            {
-                image.FeedData(file);
-            }
-            PageSetting settingpage = new PageSetting();
-            DocumentsFull documentInvoce = new DocumentsFull();
-            document.Append(settingpage.DocumentSettingVertical());
-            document.Append(documentInvoce.BookAccounting(template, mainDocumentPart.GetIdOfPart(image)));
+            PageSetting settingPage = new PageSetting();
+            DocumentsFull documentInvoice = new DocumentsFull();
+            document.Append(settingPage.ParametrPageHorizontEditMargin(new PageMargin() { Top = 1701, Right = 1134, Bottom = 850, Left = 1134 }));
+            document.Append(documentInvoice.CreateJournal(template));
             mainDocumentPart.Document = document;
         }
     }

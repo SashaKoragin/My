@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -2276,12 +2275,11 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             ObservableCollection<TableCell> cellCollection = new ObservableCollection<TableCell>();
             var rows = new RowGenerate();
             Table table = new Table();
-            var i = 1; //Счетчик циклов
             var fontSize = "14";
             var paragraphGenerate = new RunGenerate();
             var para = paragraphGenerate.RunParagraphGeneratorStandart("Сравнительный анализ ", "24");
-            para.Append(paragraphGenerate.RunText("контрагентов-покупателей ", "24",2));
-            para.Append(paragraphGenerate.RunText("анализируемого налогоплательщика из сведений по расчетным счетам и книги продаж (тыс. руб.)", "24"));
+            para.Append(paragraphGenerate.RunText("контрагентов-поставщиков ", "24",2));
+            para.Append(paragraphGenerate.RunText("анализируемого налогоплательщика из сведений по расчетным счетам и книги покупок (тыс. руб.)", "24"));
             body.Append(para);
             table = new Table();
 
@@ -3175,8 +3173,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             }
 
             var para1 = paragraphGenerate.RunParagraphGeneratorStandart("Сравнительный анализ ", "24");
-            para1.Append(paragraphGenerate.RunText("контрагентов-поставщиков ", "24", 2));
-            para1.Append(paragraphGenerate.RunText("анализируемого налогоплательщика из сведений по расчетным счетам и книги покупок (тыс. руб.)", "24"));
+            para1.Append(paragraphGenerate.RunText("контрагентов-покупателей ", "24", 2));
+            para1.Append(paragraphGenerate.RunText("анализируемого налогоплательщика из сведений по расчетным счетам и книги продаж (тыс. руб.)", "24"));
 
             body.Append(para1);
             body.Append(table);

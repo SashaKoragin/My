@@ -11,10 +11,14 @@ namespace LibaryDocumentGenerator.Documents.Constant
         /// <summary>
         /// Константа Word Расширения
         /// </summary>
-        public static string Formatword = ".docx";
+        public static string FormatWord = ".docx";
         /// <summary>
         /// Константа PNG
         /// </summary>
-        public static string Formatpng = ".png";
+        public static string FormatPng = ".png";
+        /// <summary>
+        /// Формат Excel
+        /// </summary>
+        public static string FormatXlsx = ".xlsx";
     }
 }

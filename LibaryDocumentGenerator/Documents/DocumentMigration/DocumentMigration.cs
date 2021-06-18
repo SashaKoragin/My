@@ -48,7 +48,7 @@ namespace LibaryDocumentGenerator.Documents.DocumentMigration
             var documentTemplate = template.Template(connectionStringTemplate, setting);
             model.N280 = template.Inspection(connectionStringTemplate, "7746").Inspection.N280;
             var ul46 = model.ReportMigration.Where(code => (code.Kpp ?? string.Empty) != "" && code.Problem.Contains("Запись о налогоплательщике в ЦУН не содержит ОКТМО")).ToArray();
-            var fullPath = path + "7746" + "_ЮЛ_" + Constant.WordConstant.Formatword;
+            var fullPath = path + "7746" + "_ЮЛ_" + Constant.WordConstant.FormatWord;
             GenerateDoc(fullPath, documentTemplate, ul46, model, 1, "7746");
             setting.UseTemplate.IdTemplate = 2;
             documentTemplate = template.Template(connectionStringTemplate, setting);
@@ -67,13 +67,13 @@ namespace LibaryDocumentGenerator.Documents.DocumentMigration
                     if (!string.IsNullOrWhiteSpace(param[0].Kpp))
                     {
                         isTemplate = 1;
-                        fileName = key.Key + "_ЮЛ_" + Constant.WordConstant.Formatword;
+                        fileName = key.Key + "_ЮЛ_" + Constant.WordConstant.FormatWord;
                         fullPath = path + fileName;
                     }
                     else
                     {
                         isTemplate = 2;
-                        fileName = key.Key + "_ФЛ_ИП_" + Constant.WordConstant.Formatword;
+                        fileName = key.Key + "_ФЛ_ИП_" + Constant.WordConstant.FormatWord;
                         fullPath = path + fileName;
                     }
                     GenerateDoc(fullPath, documentTemplate, param, model, isTemplate, key.Key);
@@ -84,7 +84,7 @@ namespace LibaryDocumentGenerator.Documents.DocumentMigration
                         modeLetter.Attachments[0] = new Attachment
                         {
                             FileName = fileName,
-                            Extension = Constant.WordConstant.Formatword,
+                            Extension = Constant.WordConstant.FormatWord,
                             Data = File.ReadAllBytes(fullPath)
                         };
                         modeLetter.Id = Guid.NewGuid().ToString();

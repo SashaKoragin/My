@@ -34,7 +34,7 @@ namespace LibaryDocumentGenerator.Documents.Template
         /// <param name="obj"></param>
         public void CreateDocument(string path, EfDatabaseTelephoneHelp.TelephoneHelp template, object obj)
         {
-            FullPathDocumentWord = path + "Телефонный справочник инспекции" + Constant.WordConstant.Formatword;
+            FullPathDocumentWord = path + "Телефонный справочник инспекции" + Constant.WordConstant.FormatWord;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
             {
                 CreateWord(package, template, obj);

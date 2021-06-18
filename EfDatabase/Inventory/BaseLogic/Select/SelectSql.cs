@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using EfDatabase.Inventory.Base;
+using EfDatabase.Journal;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdLotusUser;
@@ -14,6 +15,7 @@ using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.ReadOrWrite;
 using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
+using JournalAis3 = EfDatabase.Inventory.Base.JournalAis3;
 using Otdel = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel;
 using RuleTemplate = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.RuleTemplate;
 
@@ -469,8 +471,28 @@ namespace EfDatabase.Inventory.BaseLogic.Select
            }
            return null;
         }
+        /// <summary>
+        /// Журнал назначений АИС 3
+        /// </summary>
+        /// <param name="year">Год назначения</param>
+        public AllJournal SelectJournalAis3(int year)
+        {
+            try
+            {
+                AllJournal journal = new AllJournal();
+                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(47) };
+                journal.JournalAis3 = Inventory.Database.SqlQuery<Journal.JournalAis3>(model.LogicaSelect.SelectUser,
+                    new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], year)).ToArray();
+                return journal;
 
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
 
+        }
 
 
         /// <summary>

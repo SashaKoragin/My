@@ -18,7 +18,7 @@ namespace LibaryDocumentGenerator.Documents.Template
 
         public void CreateDocument(string path, List<AllTechnic> template, object obj=null)
         {
-            FullPathDocumentWord = path + Constant.WordConstant.Formatword;
+            FullPathDocumentWord = path + Constant.WordConstant.FormatWord;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
             {
                 CreateWord(package, template, obj);

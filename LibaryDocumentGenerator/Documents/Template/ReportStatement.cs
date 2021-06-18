@@ -33,7 +33,7 @@ namespace LibaryDocumentGenerator.Documents.Template
         /// <param name="obj"></param>
        public void CreateDocument(string path, Statement template, object obj = null)
         {
-            FullPathDocumentWord = path + template.HeadingStatement[0].NameIndex + Constant.WordConstant.Formatword;
+            FullPathDocumentWord = path + template.HeadingStatement[0].NameIndex + Constant.WordConstant.FormatWord;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
             {
                 CreateWord(package, template, obj);

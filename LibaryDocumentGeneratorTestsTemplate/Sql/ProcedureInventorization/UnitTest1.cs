@@ -43,11 +43,10 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
             var t =   rest.GenerateTemplateRule(rule);
         }
         [TestMethod]
-        public async void TestAct()
+        public void TestAct()
         {
             Inventarka inv = new Inventarka();
-           await inv.CreateAct(new ModelSelect()
-                {ParametrsAct = new ParametrsAct() {IdClasificationAct = 1, IdModelTemplate = 13 } });
+            inv.CreateJournalAis3(2021);
         }
         /// <summary>
         /// Загрузка информации о ролях и пользователях

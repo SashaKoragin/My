@@ -675,7 +675,7 @@
 			<xs:documentation>Вся техника в БД</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="LogicsButton" default="Button"/>
+			<xs:attribute name="LogicsButton" type="xs:string" default="Button"/>
 			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Уникальный номер</xs:documentation>

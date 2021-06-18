@@ -22,7 +22,7 @@ namespace LibaryDocumentGenerator.Barcode
         /// <param name="path">Путь сохранения</param>
         public void GenerateBookCode(BareCodeBook barecode, string path)
         {
-            barecode.FullPathSave = path + barecode.NameModel + WordConstant.Formatpng;
+            barecode.FullPathSave = path + barecode.NameModel + WordConstant.FormatPng;
             BarcodeWriter writer = new BarcodeWriter
             {
                 Format = BarcodeFormat.CODE_128,
@@ -44,7 +44,7 @@ namespace LibaryDocumentGenerator.Barcode
         /// <param name="path">Путь к сохранению</param>
         public void GenerateCode(ref Report report,string path)
         {
-            report.Main.Barcode.PathBarcode = path + report.Main.Received.UserName + WordConstant.Formatpng;
+            report.Main.Barcode.PathBarcode = path + report.Main.Received.UserName + WordConstant.FormatPng;
             BarcodeWriter writer = new BarcodeWriter
             {
                 Format = BarcodeFormat.CODE_128,
@@ -116,7 +116,7 @@ namespace LibaryDocumentGenerator.Barcode
         /// <returns>Полный путь сохранения</returns>
         public string GenerateQrCode(string fullPathAndNameFileNotFormat,string templateContent)
         {
-            fullPathAndNameFileNotFormat = fullPathAndNameFileNotFormat + WordConstant.Formatpng;
+            fullPathAndNameFileNotFormat = fullPathAndNameFileNotFormat + WordConstant.FormatPng;
             var options = new QrCodeEncodingOptions()
             {
                 GS1Format = false,

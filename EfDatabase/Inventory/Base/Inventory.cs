@@ -578,7 +578,7 @@ namespace EfDatabase.Inventory.Base
         public int? IdUser { get; set; } // IdUser
         public int? IdOtdel { get; set; } // IdOtdel
         public string Telephon { get; set; } // Telephon (length: 32)
-        public int? LogicsButton { get; set; } // LogicsButton
+        public string LogicsButton { get; set; } // LogicsButton (Primary key) (length: 6)
     }
 
     // AllTelephon
@@ -4139,7 +4139,7 @@ namespace EfDatabase.Inventory.Base
         public AllTechnicConfiguration(string schema)
         {
             ToTable("AllTechnics", schema);
-            HasKey(x => new { x.Id, x.IdCategoriaSupport, x.Item });
+            HasKey(x => new { x.Id, x.IdCategoriaSupport, x.Item, x.LogicsButton });
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.IdCategoriaSupport).HasColumnName(@"IdCategoriaSupport").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
@@ -4162,7 +4162,7 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
             Property(x => x.IdOtdel).HasColumnName(@"IdOtdel").HasColumnType("int").IsOptional();
             Property(x => x.Telephon).HasColumnName(@"Telephon").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
-            Property(x => x.LogicsButton).HasColumnName(@"LogicsButton").HasColumnType("int").IsOptional();
+            Property(x => x.LogicsButton).HasColumnName(@"LogicsButton").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(6).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
         }
     }
 

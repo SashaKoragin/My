@@ -92,9 +92,13 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// Запрос всех пользователей
         /// </summary>
         /// <returns></returns>
-        public string UsersAll()
+        public string UsersAll(bool filterActual)
         {
             SerializeJson json = new SerializeJson();
+            if (filterActual)
+            {
+                return json.JsonLibaryIgnoreDate(Inventory.Users.Where(user => user.StatusUser != null));
+            }
             return json.JsonLibaryIgnoreDate(Inventory.Users);
         }
         /// <summary>

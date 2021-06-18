@@ -126,6 +126,9 @@
     <Compile Include="Inventory\ReportXml\Invoice\ReportShemeInvoice.cs">
       <DependentUpon>ReportShemeInvoice.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ReportXml\Journal\Journal.cs">
+      <DependentUpon>Journal.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\ReportXml\Mail\Mail.cs">
       <DependentUpon>Mail.xsd</DependentUpon>
     </Compile>
@@ -199,6 +202,9 @@
     <None Include="Inventory\ReportXml\Invoice\ReportShemeInvoice.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Inventory\ReportXml\Journal\Journal.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventory\ReportXml\Mail\Mail.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -262,6 +268,7 @@
       <XsdQrCodeModel Include="Inventory\DataTransferObject\QrCodeOffice\*.xsd" />
       <ModelDtoTemplateUsersRulesError Include="Inventory\ReportXml\ModelUserRulesError\*.xsd" />
       <ModelSettingModelInventory Include="Inventory\ReportXml\SettingModelInventory\*.xsd" />
+      <XsdJournal Include="Inventory\ReportXml\Journal\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -285,5 +292,6 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdInventoryRuleAndUsers.FullPath)&quot; /c /namespace:$(RootNamespace).XsdInventoryRuleAndUsers /outputdir:Inventory\ReportXml\InventoryRuleAndUsers\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(ModelDtoTemplateUsersRulesError.FullPath)&quot; /c /namespace:$(RootNamespace).ModelDtoTemplateUsersRulesError /outputdir:Inventory\ReportXml\ModelUserRulesError\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(ModelSettingModelInventory.FullPath)&quot; /c /namespace:$(RootNamespace).SettingModelInventory /outputdir:Inventory\ReportXml\SettingModelInventory\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdJournal.FullPath)&quot; /c /namespace:$(RootNamespace).Journal /outputdir:Inventory\ReportXml\Journal\" />
   </Target>
 </Project>

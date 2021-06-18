@@ -194,8 +194,8 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllUsers",  ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> AllUsers();
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllUsers?filterActual={filterActual}",  ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllUsers(bool filterActual = false);
 
         /// <summary>
         /// Статистика обраьботки пользователей процедурой
@@ -1052,5 +1052,13 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreateAct", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<Stream> CreateAct(ModelSelect modelParameterAct);
+        /// <summary>
+        /// Создание журнала
+        /// </summary>
+        /// <param name="year">Год журнала</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreateJournalAis3?year={year}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> CreateJournalAis3(int year);
    }
 }

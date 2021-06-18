@@ -6,8 +6,10 @@ using System.Text.RegularExpressions;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.BaseLogic.Select;
 using EfDatabaseAutomation.Automation.Base;
+using EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
+using LibaryDocumentGenerator.Documents.TemplateExcel;
 using LibraryAutoSupportSto.Support.SupportPostGet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -39,7 +41,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
             var model = new EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost.ModelGetPost();
             var card = model.CardUi("1435172110", 2021);
             ReportNote report = new ReportNote();
-            report.CreateDocum(@"D:\", card, 2021);
+            report.CreateDocument(@"D:\", card, 2021);
         }
         /// <summary>
         /// Только книги покупок-продаж на банк
@@ -50,7 +52,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
             var model = new EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost.ModelGetPost();
             var card = model.CardUiBookSales("1435172110", 2021);
             TemplateBookSalesBank report = new TemplateBookSalesBank();
-            report.CreateDocum(@"D:\", card, 2021);
+            report.CreateDocument(@"D:\", card, 2021);
         }
 
         [TestMethod()]
@@ -80,8 +82,19 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
         [TestMethod()]
         public void Generate()
         {
-            var g = new GenerateBarcode();
-          //  g.GenerateQrCode();
+            //var nds = new LibaryDocumentGenerator.Documents.TemplateExcel.ReportAskNds();
+            //nds.CreateDocument("D:\\Testing\\");
+            //g.GenerateQrCode();
+
+            var model = new ModelGetPost();
+            var card = model.CardUiAskNds("5046075713", 2021);
+            model.Dispose();
+            if (card != null)
+            {
+                ReportAskNds report = new ReportAskNds();
+                report.CreateDocument("D:\\Testing\\", card, 2021);
+                //return report.FileArray();
+            }
         }
     }
 }

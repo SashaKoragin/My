@@ -410,10 +410,10 @@ namespace TestIFNSLibary.Inventarka
         /// Запрос всех пользователей
         /// </summary>
         /// <returns></returns>
-        public async Task<string> AllUsers()
+        public async Task<string> AllUsers(bool filterActual)
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.UsersAll());
+            return await Task.Factory.StartNew(() => auto.UsersAll(filterActual));
         }
         /// <summary>
         /// Запрос на все роли
@@ -1510,6 +1510,30 @@ namespace TestIFNSLibary.Inventarka
                     var templateAct = new TemplateAct();
                     templateAct.CreateDocument(_parametrService.Report + "Акт списания ", act);
                     return templateAct.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
+        /// <summary>
+        /// Создание журнала доступа АИС 3
+        /// </summary>
+        /// <param name="year">Год журнала</param>
+        /// <returns></returns>
+        public async Task<Stream> CreateJournalAis3(int year)
+        {
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    SelectSql select = new SelectSql();
+                    EfDatabase.Journal.AllJournal journal = select.SelectJournalAis3(year);
+                    var templateJournal = new TemplateJournalAis3();
+                    templateJournal.CreateDocument(_parametrService.Report, journal, null);
+                    return templateJournal.FileArray();
                 });
             }
             catch (Exception e)

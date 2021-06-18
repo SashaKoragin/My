@@ -30,7 +30,7 @@ namespace LibaryDocumentGenerator.Documents.Template
 
         public void CreateDocument(string path, CardFaceUl template, object obj)
         {
-            FullPathDocumentWord = path + template.FaceUl.Inn + Constant.WordConstant.Formatword;
+            FullPathDocumentWord = path + template.FaceUl.Inn + Constant.WordConstant.FormatWord;
             using (WordprocessingDocument package = WordprocessingDocument.Create(FullPathDocumentWord, WordprocessingDocumentType.Document))
             {
                 CreateWord(package, template, obj);

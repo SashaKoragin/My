@@ -16,7 +16,7 @@ namespace LibaryDocumentGenerator.Documents.Template
             var i = 1;
             foreach (var tempuotdel in template.Otdel)
             {
-               Fullpathdocumentword = path + tempuotdel.Number+"_"+tempuotdel.NameOtdel+"_"+tempuotdel.Dates?.ToString("dd.MM.yyyy") +"_"+ i + Constant.WordConstant.Formatword;
+               Fullpathdocumentword = path + tempuotdel.Number+"_"+tempuotdel.NameOtdel+"_"+tempuotdel.Dates?.ToString("dd.MM.yyyy") +"_"+ i + Constant.WordConstant.FormatWord;
                using (WordprocessingDocument package = WordprocessingDocument.Create(Fullpathdocumentword, WordprocessingDocumentType.Document))
                {
                   CreateWord(package, tempuotdel,template.SenderUsers, obj);

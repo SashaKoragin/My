@@ -1268,13 +1268,13 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             body.Append(table9);
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart("В результате осмотра и оценки технического состояния было установлено:", "22", JustificationValues.Left, 1, "567"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Системный блок не включается. Данная модель снята с производства. Заказ комплектующих невозможен. Монитор не включается.", "22"), CellGenerate.FormulWidthCell(17.4),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Системный блок не включается. Монитор не включается.", "22"), CellGenerate.FormulWidthCell(17.4),
                 TableWidthUnitValues.Dxa, "100", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorder()));
             table10.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.23)));
             body.Append(table10);
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart("Выводы, заключение, рекомендации:", "22", JustificationValues.Left, 1, "567"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Ремонт экономически нецелесообразен. Дальнейшая эксплуатация невозможна. Наличие пригодных для эксплуатации деталей, которые могут быть изъяты при утилизации списанного имущества: отсутствуют.", "22"), CellGenerate.FormulWidthCell(17.4),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Ремонт экономически нецелесообразен. Дальнейшая эксплуатация невозможна. Данная модель снята с производства. Заказ комплектующих невозможен. Наличие пригодных для эксплуатации деталей, которые могут быть изъяты при утилизации списанного имущества: отсутствуют.", "22"), CellGenerate.FormulWidthCell(17.4),
                 TableWidthUnitValues.Dxa, "100", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorder()));
             table11.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.44)));
             body.Append(table11);
@@ -1314,6 +1314,79 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                 TableWidthUnitValues.Auto));
             table13.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.5)));
             body.Append(table13);
+            return body;
+        }
+        /// <summary>
+        /// Генерация журнала доступов из АИС 3
+        /// </summary>
+        /// <param name="template">Шаблон журнала</param>
+        /// <returns></returns>
+        public Body CreateJournal(EfDatabase.Journal.AllJournal template)
+        {
+            Body body = new Body();
+            Table table = new Table();
+            Table table2 = new Table();
+            var paragraphGenerate = new RunGenerate();
+            ObservableCollection<TableCell> cellCollection = new ObservableCollection<TableCell>();
+            var rows = new RowGenerate();
+            var para = paragraphGenerate.RunParagraphGeneratorStandart("к Порядку доступа к информационным, программным и аппаратным", "18", JustificationValues.Left, 0, "0", true);
+            para.Append(paragraphGenerate.RunText("ресурсам Управления и подведомственных инспекций Федеральной", "18", 0, true));
+            para.Append(paragraphGenerate.RunText("налоговой службы по г. Москве, утвержденного приказом УФНС России", "18", 0,true));
+            para.Append(paragraphGenerate.RunText("по г. Москве", "18", 0, true));
+            para.Append(paragraphGenerate.RunText("от «05»    12     2014 г. № ", "18"));
+            para.Append(paragraphGenerate.RunText("440", "18",2));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(15.00),
+                TableWidthUnitValues.Dxa));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Приложение № 5", "24"), CellGenerate.FormulWidthCell(10.63),
+                TableWidthUnitValues.Dxa, "100"));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.56)));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(),"0",
+                TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(para, "0",
+                TableWidthUnitValues.Auto, "100"));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(2.20)));
+
+            body.Append(table);
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart(" ", "24"));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart(" ", "24"));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart(" ", "24"));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart("Журнал", "24",JustificationValues.Center,1));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart("регистрации заявок на предоставление доступа к информационным ресурсам ", "24", JustificationValues.Center));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart(" ", "24"));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart(" ", "24"));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Рег. № заявки","24",JustificationValues.Center,1), CellGenerate.FormulWidthCell(1.71),
+                TableWidthUnitValues.Dxa,"0","0",TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0,0, "E6E6E6"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Наименование отдела ", "24", JustificationValues.Center,1), CellGenerate.FormulWidthCell(4.83),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "E6E6E6"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Ф.И.О.", "24", JustificationValues.Center,1), CellGenerate.FormulWidthCell(6.27),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "E6E6E6"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Ресурс", "24", JustificationValues.Center, 1), CellGenerate.FormulWidthCell(2.87),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "E6E6E6"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Задача/ профиль", "24", JustificationValues.Center, 1), CellGenerate.FormulWidthCell(4.71),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "E6E6E6"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Дата передачи на исполнение", "24", JustificationValues.Center, 1), CellGenerate.FormulWidthCell(5.25),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "E6E6E6"));
+            table2.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(2.25)));
+            foreach (var journalRow in template.JournalAis3)
+            {
+                cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(journalRow.IdJournal.ToString(), "24"), "0",
+                    TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Top, CellBorders.GenerateBorderFull()));
+                cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(journalRow.NameOtdel, "24"), "0",
+                    TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Top, CellBorders.GenerateBorderFull()));
+                cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(journalRow.TaskUser, "24"), "0",
+                    TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Top, CellBorders.GenerateBorderFull()));
+                cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(journalRow.NameResource, "24"), "0",
+                    TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Top, CellBorders.GenerateBorderFull()));
+                cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(journalRow.NameTarget, "24"), "0",
+                    TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Top, CellBorders.GenerateBorderFull()));
+                cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(journalRow.DateTask.ToString("dd.MM.yyyy"), "24"), "0",
+                    TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Top, CellBorders.GenerateBorderFull()));
+                table2.Append(rows.GenerateRow(ref cellCollection));
+            }
+            body.Append(table2);
             return body;
         }
     }

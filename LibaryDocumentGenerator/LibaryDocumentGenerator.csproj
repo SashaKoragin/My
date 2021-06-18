@@ -67,6 +67,8 @@
     <Compile Include="Documents\FileLogica\FileLogica.cs" />
     <Compile Include="Documents\Model\IModel.cs" />
     <Compile Include="Documents\Model\OutBdkModel.cs" />
+    <Compile Include="Documents\TemplateExcel\ITemplateExcel.cs" />
+    <Compile Include="Documents\TemplateExcel\ReportAskNds.cs" />
     <Compile Include="Documents\Template\BookAccountingInventarka.cs" />
     <Compile Include="Documents\Template\InvoiceInventarka.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />
@@ -77,10 +79,16 @@
     <Compile Include="Documents\Template\TelephoneHelp.cs" />
     <Compile Include="Documents\Template\TemplateAct.cs" />
     <Compile Include="Documents\Template\TemplateBookSalesBank.cs" />
+    <Compile Include="Documents\Template\TemplateJournalAis3.cs" />
     <Compile Include="Documents\Template\TemplateOutBdk.cs" />
     <Compile Include="Documents\Template\TemplateUserRule.cs" />
     <Compile Include="DonloadFile\Angular\AngularRestEf.cs" />
     <Compile Include="GenerateDocument\GenerateWord\GenerateDocument.cs" />
+    <Compile Include="ProgrammView\Excel\CellAndRowsStyle\CellAndRowsStyle.cs" />
+    <Compile Include="ProgrammView\Excel\Library\ListExcel.cs" />
+    <Compile Include="ProgrammView\Excel\Library\ModelCellFormat.cs" />
+    <Compile Include="ProgrammView\Excel\Library\StyleCells.cs" />
+    <Compile Include="ProgrammView\FullDocumentExcel\DocumentExcelReportNds.cs" />
     <Compile Include="ProgrammView\FullDocument\DocumentsFull.cs" />
     <Compile Include="ProgrammView\FullDocument\DocumentsPreChek.cs" />
     <Compile Include="ProgrammView\FullDocument\GenerateStatementPreCheck.cs" />
