@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using EfDatabase.Inventory.BaseLogic.Select;
 using EfDatabase.Inventory.SqlModelSelect;
+using EfDatabase.ReportCard;
 using EfDatabaseAutomation.Automation.BaseLogica.SqlSelect.ProcedureParametr;
 using EfDatabaseAutomation.Automation.BaseLogica.SqlSelect.XsdDTOSheme;
 using EfDatabaseErrorInventory;
@@ -11,9 +14,14 @@ using EfDatabaseParametrsModel;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
 using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
+using LibaryXMLAuto.ReadOrWrite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
+using SqlLibaryIfns.SqlZapros.SqlConnections;
 using TestIFNSLibary.Inventarka;
+using TestIFNSLibary.PathJurnalAndUse;
 using TestIFNSLibary.ServiceRest;
+using Type = System.Type;
 
 namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
 {
@@ -23,14 +31,12 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
         [TestMethod]
         public void TestProcedureIpAdress()
         {
-            //Select auto = new Select();
-            //StickerCode sticker = new StickerCode();
-            //var technical = auto.SelecTechnic("B80GАGA000847");
-            //GenerateBarcode qrCode = new GenerateBarcode();
-            //qrCode.GenerateQrCode("", "C:\\Testing\\");
-            //sticker.CreateDocum("C:\\Testing\\", technical, null);
-            //File.Delete(technical.Name);
-           // return sticker.FileArray();
+
+            var arrLetterStatus = new string[3];
+            arrLetterStatus[1] = "B";
+            arrLetterStatus[2] = "ОЧ";
+            var notCount = new[] { "ОЧ", "B" };
+       
         }
         [TestMethod]
         public void TestTemplateRule()

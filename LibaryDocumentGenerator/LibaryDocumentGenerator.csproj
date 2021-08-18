@@ -69,9 +69,11 @@
     <Compile Include="Documents\Model\OutBdkModel.cs" />
     <Compile Include="Documents\TemplateExcel\ITemplateExcel.cs" />
     <Compile Include="Documents\TemplateExcel\ReportAskNds.cs" />
+    <Compile Include="Documents\TemplateExcel\ReportCard.cs" />
     <Compile Include="Documents\Template\BookAccountingInventarka.cs" />
     <Compile Include="Documents\Template\InvoiceInventarka.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />
+    <Compile Include="Documents\Template\MemoReport.cs" />
     <Compile Include="Documents\Template\OfficeStikerCode.cs" />
     <Compile Include="Documents\Template\ReportNote.cs" />
     <Compile Include="Documents\Template\ReportStatement.cs" />
@@ -84,7 +86,10 @@
     <Compile Include="Documents\Template\TemplateUserRule.cs" />
     <Compile Include="DonloadFile\Angular\AngularRestEf.cs" />
     <Compile Include="GenerateDocument\GenerateWord\GenerateDocument.cs" />
+    <Compile Include="ProgrammView\Excel\BorderModel\BorderModel.cs" />
     <Compile Include="ProgrammView\Excel\CellAndRowsStyle\CellAndRowsStyle.cs" />
+    <Compile Include="ProgrammView\Excel\ColumnModelWidth\ColumnModelWidth.cs" />
+    <Compile Include="ProgrammView\Excel\FontModel\FontModel.cs" />
     <Compile Include="ProgrammView\Excel\Library\ListExcel.cs" />
     <Compile Include="ProgrammView\Excel\Library\ModelCellFormat.cs" />
     <Compile Include="ProgrammView\Excel\Library\StyleCells.cs" />

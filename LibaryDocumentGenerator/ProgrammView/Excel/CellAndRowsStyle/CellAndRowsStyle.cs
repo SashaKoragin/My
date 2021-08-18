@@ -29,10 +29,42 @@ namespace LibaryDocumentGenerator.ProgrammView.Excel.CellAndRowsStyle
            select c1 +c2 + c3;
        }
 
-       /// <summary>
-       /// Генерация колонок Excel Матрица букв
-       /// </summary>
-       private List<List<string>> RowNameColumnsMatrix { get; } = new List<List<string>>();
+        /// <summary>
+        /// Генерация колонок Excel Матрица букв
+        /// </summary>
+        private List<List<string>> RowNameColumnsMatrix { get; } = new List<List<string>>();
+        /// <summary>
+        /// Генерация пустой строки или колонок с определенным модели шаблона из класса ColumnModelWidth размером
+        /// </summary>
+        /// <param name="listCellModel">Модель ячеек</param>
+        /// <param name="heightRow">Высота строки</param>
+        /// <param name="countColumn">Количество колонок</param>
+        /// <param name="listModelColumnWith">Количество колонок и размеры к ним</param>
+        public void GenerateEmptyCell(ref List<ModelRowFormat> listCellModel, DoubleValue heightRow, int countColumn, List<DoubleValue> listModelColumnWith = null)
+        {
+           var listCell = new List<ModelCellFormat>();
+           var i = 1;
+           if (listModelColumnWith != null)
+           {
+               foreach (var doubleValue in listModelColumnWith)
+               {
+                    listCell.Add(new ModelCellFormat() { IndexCellStart = i, IndexCellFinish = 1, CellFormat = CellValues.String, WidthColumn = doubleValue.Value });
+                    i++;
+               }
+           }
+           else
+           {
+               for (int j = 1; j < countColumn; j++)
+               {
+                   listCell.Add(new ModelCellFormat() { IndexCellStart = j, IndexCellFinish = 1, CellFormat = CellValues.String });
+               }
+           }
+           listCellModel.Add(new ModelRowFormat()
+           {
+               HeightRow = heightRow,
+               ModelCell = listCell
+           });
+        }
 
         /// <summary>
         /// Генерация ячеек и строк
@@ -111,10 +143,17 @@ namespace LibaryDocumentGenerator.ProgrammView.Excel.CellAndRowsStyle
                         MergeCell mergeCell = new MergeCell() { Reference = $"{first}:{last}" };
                         model.MergeCells.Append(mergeCell);
                     }
-                    if (modelCellFormat.MergeVerticalInt != 0)
+                    if (modelCellFormat.MergeVerticalInt != 0 && modelCellFormat.MergeHorizontalSquare == 0)
                     {
                         var listStart = RowNameColumnsMatrix[i].Skip(modelCellFormat.IndexCellStart - 1).ToList().First();
                         var listFinish = RowNameColumnsMatrix[i + modelCellFormat.MergeVerticalInt].Skip(modelCellFormat.IndexCellStart - 1).ToList().First();
+                        MergeCell mergeCell = new MergeCell() { Reference = $"{listStart}:{listFinish}" };
+                        model.MergeCells.Append(mergeCell);
+                    }
+                    if (modelCellFormat.MergeHorizontalSquare != 0 && modelCellFormat.MergeVerticalInt != 0)
+                    {
+                        var listStart = RowNameColumnsMatrix[i].Skip(modelCellFormat.IndexCellStart - 1).ToList().First();
+                        var listFinish = RowNameColumnsMatrix[i + modelCellFormat.MergeVerticalInt].Skip(modelCellFormat.IndexCellStart - 1).Take(modelCellFormat.MergeHorizontalSquare).ToList().Last();
                         MergeCell mergeCell = new MergeCell() { Reference = $"{listStart}:{listFinish}" };
                         model.MergeCells.Append(mergeCell);
                     }

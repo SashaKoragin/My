@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using EfDatabase.FilterModel;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseParametrsModel;
@@ -91,13 +92,14 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// <summary>
         /// Запрос всех пользователей
         /// </summary>
+        /// <param name="filterActual">Фильтр</param>
         /// <returns></returns>
-        public string UsersAll(bool filterActual)
+        public string UsersAll(AllUsersFilters filterActual)
         {
             SerializeJson json = new SerializeJson();
-            if (filterActual)
+            if (filterActual.FilterActual.IsFilter)
             {
-                return json.JsonLibaryIgnoreDate(Inventory.Users.Where(user => user.StatusUser != null));
+                return json.JsonLibaryIgnoreDate(Inventory.Users.Where(user => user.StatusUser != null).Where(u=> u.StatusUser.IdStatusUser != 4));
             }
             return json.JsonLibaryIgnoreDate(Inventory.Users);
         }
@@ -451,11 +453,26 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             sql.Dispose();
             if (idDepartment != 0)
             {
-               
-              return json.JsonLibaryIgnoreDate(Inventory.AllTechnics.Where(x => x.IdOtdel == idDepartment)); 
+                return json.JsonLibaryIgnoreDate(Inventory.AllTechnics.Where(x => x.IdOtdel == idDepartment)); 
             }
             return json.JsonLibaryIgnoreDate(Inventory.AllTechnics.Where(x => x.IdUser == idUser));
         }
+        /// <summary>
+        /// Загрузка всего департамента для ЛК 
+        /// </summary>
+        /// <param name="idUser">УН пользователя</param>
+        /// <returns></returns>
+        public string AllUsersDepartmentLk(int idUser)
+        {
+            SerializeJson json = new SerializeJson();
+            var idDepartment = Inventory.Users.FirstOrDefault(user => user.IdUser == idUser);
+            if (idDepartment != null && (idDepartment.IdOtdel != null || idDepartment.IdOtdel != 0))
+            {
+               return json.JsonLibaryIgnoreDate(Inventory.Users.Where(user => user.IdOtdel == idDepartment.IdOtdel).Where(user => user.StatusUser != null).Where(u => u.StatusUser.IdStatusUser != 4).ToList());
+            }
+            return null;
+        }
+
         /// <summary>
         /// Выгрузка ролей пользователя
         /// </summary>

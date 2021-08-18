@@ -11,20 +11,19 @@ namespace TestIFNSLibary.Cross
 {
     public class CorsEnablingBehavior : BehaviorExtensionElement, IEndpointBehavior
     {
-     public void AddBindingParameters(ServiceEndpoint endpoint,BindingParameterCollection bindingParameters) { }
-     public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime) { }
-     public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+    public void AddBindingParameters(ServiceEndpoint endpoint,BindingParameterCollection bindingParameters) { }
+    public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime) { } 
+    public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
     {
-       endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new CorsHeaderInjectingMessageInspector());
+        endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new CorsHeaderInjectingMessageInspector());
     }
-        public void Validate(ServiceEndpoint endpoint) { }
-        public override Type BehaviorType { get { return typeof(CorsEnablingBehavior); } }
-        protected override object CreateBehavior() { return new CorsEnablingBehavior(); }
+    public void Validate(ServiceEndpoint endpoint) { }
+    public override Type BehaviorType { get { return typeof(CorsEnablingBehavior); } }
+    protected override object CreateBehavior() { return new CorsEnablingBehavior(); }
 
-
-private class CorsHeaderInjectingMessageInspector : IDispatchMessageInspector
+    private class CorsHeaderInjectingMessageInspector : IDispatchMessageInspector
         {
-        public object AfterReceiveRequest(ref Message request,IClientChannel channel,InstanceContext instanceContext)
+    public object AfterReceiveRequest(ref Message request,IClientChannel channel,InstanceContext instanceContext)
         {
           var httpRequest = (HttpRequestMessageProperty)request
                .Properties[HttpRequestMessageProperty.Name];
@@ -34,15 +33,19 @@ private class CorsHeaderInjectingMessageInspector : IDispatchMessageInspector
                     handlePreflight = httpRequest.Method.Equals("OPTIONS",
                         StringComparison.InvariantCultureIgnoreCase)
                 };
-            }
+        }
 
     private static IDictionary<string, string> _headersToInject = new Dictionary<string, string>
-          {
+        {
+            { "Content-Type", "application/json" },
             { "Access-Control-Allow-Origin", "*" },
+            { "Vary", "Origin" },
             { "Access-Control-Request-Method", "POST, GET, PUT, DELETE, OPTIONS" },
-            { "Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With" }
-          };
-            public void BeforeSendReply(ref Message reply, object correlationState)
+            { "Allow",  "POST, GET, PUT, DELETE, OPTIONS" },
+            { "Access-Control-Allow-Headers", "Content-Type, Accept, Accept-Language, Origin, User-Agent, Access-Control-Allow-Headers, Authorization, X-Requested-With" },
+            { "Access-Control-Allow-Credentials", "true" }
+        };
+        public void BeforeSendReply(ref Message reply, object correlationState)
             {
                 var state = (dynamic)correlationState;
                 if (state.handlePreflight)

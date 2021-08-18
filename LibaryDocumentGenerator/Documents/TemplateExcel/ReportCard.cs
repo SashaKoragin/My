@@ -1,13 +1,16 @@
 ﻿using System.IO;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
+using EfDatabase.ReportCard;
 using LibaryDocumentGenerator.ProgrammView.Excel.Library;
 using LibaryDocumentGenerator.ProgrammView.FullDocumentExcel;
-using LibaryXMLAutoModelXmlSql.PreCheck.ModelCard;
 
 namespace LibaryDocumentGenerator.Documents.TemplateExcel
 {
-   public class ReportAskNds : ITemplateExcel<CardFaceUl>
+    /// <summary>
+    /// Документ табель
+    /// </summary>
+    public class ReportCard : ITemplateExcel<ReportCardModel>
     {
         public string FullPathDocumentWord { get; set; }
 
@@ -22,9 +25,9 @@ namespace LibaryDocumentGenerator.Documents.TemplateExcel
             return new MemoryStream(file);
         }
 
-        public void CreateDocument(string path, CardFaceUl template, object obj = null)
+        public void CreateDocument(string path, ReportCardModel template, object obj = null)
         {
-            FullPathDocumentWord = path + "Отчет АСК НДС" + Constant.WordConstant.FormatXlsx;
+            FullPathDocumentWord = path + "Табель" + Constant.WordConstant.FormatXlsx;
             using (SpreadsheetDocument package = SpreadsheetDocument.Create(FullPathDocumentWord, SpreadsheetDocumentType.Workbook))
             {
                 CreateExcel(package, template, obj);
@@ -32,14 +35,13 @@ namespace LibaryDocumentGenerator.Documents.TemplateExcel
             }
         }
 
-        public void CreateExcel(SpreadsheetDocument document, CardFaceUl template, object obj = null)
+        public void CreateExcel(SpreadsheetDocument document, ReportCardModel template, object obj = null)
         {
             ListExcel excel = new ListExcel(document);
-            var list1 = excel.CreateExcelList("Контрагенты");
-            AllDocumentExcel docNds = new AllDocumentExcel(excel.Document,excel.WorkBookPart);
-            list1.Worksheet = docNds.ReportNds(template, (int)obj);
+            var list1 = excel.CreateExcelList("Табель");
+            AllDocumentExcel docCard = new AllDocumentExcel(excel.Document, excel.WorkBookPart);
+            list1.Worksheet = docCard.ReportCard(template);
             excel.WorkBookPart.Workbook.Save();
         }
-
-   }
+    }
 }

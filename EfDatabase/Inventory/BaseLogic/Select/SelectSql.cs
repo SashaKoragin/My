@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Xml;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Journal;
+using EfDatabase.MemoReport;
+using EfDatabase.ReportCard;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdLotusUser;
@@ -15,7 +17,6 @@ using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.ReadOrWrite;
 using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
-using JournalAis3 = EfDatabase.Inventory.Base.JournalAis3;
 using Otdel = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel;
 using RuleTemplate = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.RuleTemplate;
 
@@ -268,22 +269,30 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                     var addObjectDb = new AddObjectDb.AddObjectDb();
                     var task = Task.Run(() =>
                     {
-                        try
-                        {
+
                             ModelSelect model = new ModelSelect {LogicaSelect = SqlSelectModel(idProcedureLoad)};
                             XmlReadOrWrite xml = new XmlReadOrWrite();
                             addObjectDb.IsProcessComplete(idProcessBlock, false);
-                            Inventory.Database.CommandTimeout = 18000;
-                            Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser,
-                                new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml)
+                            using (var transaction = Inventory.Database.BeginTransaction())
+                            {
+                                try
                                 {
-                                    Value = new SqlXml(new XmlTextReader(xml.ClassToXml(modelTemplate, modelTemplate.GetType()), XmlNodeType.Document, null))
-                                });
-                        }
-                        catch (Exception e)
-                        {
-                            Loggers.Log4NetLogger.Error(e);
-                        }
+                                    Inventory.Database.CommandTimeout = 18000; 
+                                    Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser,
+                                new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml)
+                                             {
+                                                    Value = new SqlXml(new XmlTextReader(xml.ClassToXml(modelTemplate, modelTemplate.GetType()), XmlNodeType.Document, null))
+                                             });
+                                    transaction.Commit();
+                                    Inventory.Dispose();
+                                }
+                                catch (Exception e)
+                                {
+                                    transaction.Rollback();
+                                    Inventory.Dispose();
+                                    Loggers.Log4NetLogger.Error(e);
+                                }
+                            }
                     });
                     task.ConfigureAwait(true).GetAwaiter().OnCompleted((() =>
                     {
@@ -484,16 +493,87 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 journal.JournalAis3 = Inventory.Database.SqlQuery<Journal.JournalAis3>(model.LogicaSelect.SelectUser,
                     new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], year)).ToArray();
                 return journal;
-
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
             return null;
-
         }
 
+        /// <summary>
+        /// Выбираем людей подписантов табельных номеров
+        /// </summary>
+        /// <param name="model">Модель табеля</param>
+        /// <returns></returns>
+        public void SelectCardModelLeader(ref ReportCardModel model)
+        {
+            try
+            {
+                ModelSelect selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(48) };
+                model.SettingParameters.LeaderN = Inventory.Database.SqlQuery<LeaderN>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 1),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], DBNull.Value),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth)).FirstOrDefault();
+                model.SettingParameters.LeaderD = Inventory.Database.SqlQuery<LeaderD>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 2),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], model.SettingParameters.TabelNumber),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth)).FirstOrDefault();
+                model.SettingParameters.LeaderKadr = Inventory.Database.SqlQuery<LeaderKadr>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 3),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], DBNull.Value),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth)).FirstOrDefault();
+                model.SettingParameters.Holidays = Inventory.Database.SqlQuery<Holidays>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 4),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], DBNull.Value),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth)).ToArray();
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+        }
+        /// <summary>
+        /// Генерация для служебных записок модель
+        /// </summary>
+        /// <param name="memoReport">Модель для служебных записок</param>
+        public void SelectMemoReport(ref ModelMemoReport memoReport)
+        {
+            try
+            {
+                ModelSelect selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(49) };
+              
+                memoReport.UserDepartment = Inventory.Database.SqlQuery<UserDepartment>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 1),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], memoReport.SelectParameterDocument.IdUser),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], DBNull.Value)).FirstOrDefault();
+                memoReport.Executor = Inventory.Database.SqlQuery<Executor>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 2),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], memoReport.SelectParameterDocument.IdUser),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], memoReport.SelectParameterDocument.TabelNumber),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], DBNull.Value)).FirstOrDefault();
+                memoReport.BossDepartment = Inventory.Database.SqlQuery<BossDepartment>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 3),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], memoReport.SelectParameterDocument.IdUser),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], memoReport.SelectParameterDocument.TabelNumber),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], DBNull.Value)).FirstOrDefault();
+                memoReport.BossAgreed = Inventory.Database.SqlQuery<BossAgreed>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 4),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], memoReport.SelectParameterDocument.IdUser),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], memoReport.SelectParameterDocument.TabelNumber),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], memoReport.SelectParameterDocument.TypeDocument)).FirstOrDefault();
+                memoReport.LeaderOrganization = Inventory.Database.SqlQuery<LeaderOrganization>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 5),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], memoReport.SelectParameterDocument.IdUser),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], DBNull.Value)).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+        }
 
         /// <summary>
         /// Выборка модели для манипуляции

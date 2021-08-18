@@ -113,7 +113,7 @@ namespace LibaryDocumentGenerator.Documents.DocumentMigration
             {
                 MainDocumentPart mainDocumentPart = package.AddMainDocumentPart();
                 DocumentFormat.OpenXml.Wordprocessing.Document doc = new DocumentFormat.OpenXml.Wordprocessing.Document();
-                Fotters.FottersAddDocument(mainDocumentPart, documentTemplate);
+                Fotters.FottersAddDocument(mainDocumentPart, documentTemplate.Templates.Stone.Stone4, documentTemplate.Templates.Stone.Stone5);
                 doc.Append(SettingPage.AddSetting(mainDocumentPart));
                 doc.Append(Headers.HeaderDocumentIfns(documentTemplate, mainDocumentPart, ifns, model.N280, model.Otdel));
                 doc.Append(Body.TextDocumentFormatMigration(documentTemplate));

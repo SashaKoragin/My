@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ModelMemoReport" type="ModelMemoReport">
+		<xs:annotation>
+			<xs:documentation>Модель параметров служебной записки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ModelMemoReport">
+		<xs:annotation>
+			<xs:documentation>Модель параметров служебной записки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="SelectParameterDocument"/>
+			<xs:element ref="UserDepartment" minOccurs="0"/>
+			<xs:element ref="BossDepartment" minOccurs="0"/>
+			<xs:element ref="BossAgreed" minOccurs="0"/>
+			<xs:element ref="Executor" minOccurs="0"/>
+			<xs:element ref="LeaderOrganization" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SelectParameterDocument">
+		<xs:annotation>
+			<xs:documentation>Параметры запрашиваемого документа</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NumberDocument" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер докуменента</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameDocument" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeDocument" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип документа 1,2,3,4</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdUser" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>УН пользователя для служебки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TabelNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Табельный номер испольнителя документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UserDepartment" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Пользователь отдела</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Orders" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Отдел</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RnameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела в Родительном падеже</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Position" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Regulations" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Регламент кратко</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TabelNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Табельный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdress" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip Адрес компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberKabinet" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер кабинета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Telephone" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Телефон</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallTabelNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Табельный номер по Кадрам маленький</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BossDepartment" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Начальник отдела </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameDepartment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя начальника отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BossAgreed" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Согласователь в зависимости от документа</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="PositionAgreed" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameAgreed" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя согласователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Executor">
+		<xs:annotation>
+			<xs:documentation>Исполнитель</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Phone" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Телефон</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Orders" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Номер приказа</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Orders_Reestr" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Orders_Reestr">
+		<xs:annotation>
+			<xs:documentation>Номер приказа</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="LastOrder" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Приказ о переводе ДКС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LeaderOrganization">
+		<xs:annotation>
+			<xs:documentation>Глава организации</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameFaceLeader" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>ФИО Руководителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RnameOrganization" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность руководителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

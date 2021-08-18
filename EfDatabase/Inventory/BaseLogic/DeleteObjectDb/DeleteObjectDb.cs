@@ -26,6 +26,18 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
         /// </summary>
         public ModelReturn<User> DeleteUser(User user, int? idUser)
         {
+            var usersDelete = new User()
+            {
+                IdUser = user.IdUser,
+                Name = user.Name,
+                SmallName = user.SmallName,
+                IdOtdel = user.IdOtdel,
+                IdPosition = user.IdPosition,
+                TabelNumber = user.TabelNumber,
+                IdTelephon = user.IdTelephon,
+                StatusActual = 4,
+                IdHistory = user.IdHistory,
+            };
             try
             {
                 using (var context = new InventoryContext())
@@ -36,22 +48,28 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
                     if (isActive != null && isActive.Value == 2)
                     {
                         var isExistsUsers = context.Database.SqlQuery<object>($"Select * From ErrorUsersNotActual Where IdUser={user.IdUser}");
-                        if (isExistsUsers.Any()) return new ModelReturn<User>("Не возможно удалить пользователя! Есть привязки к технике и(или): Накладной форме, Токену!", user,2);
-                        DeleteModelDb(context, new User() { IdUser = user.IdUser });
-                        Loggers.Log4NetLogger.Info(new Exception("Удалили пользователя "+ user.IdUser));
-                        return new ModelReturn<User>("Пользователь удален!", user);
+                        if (isExistsUsers.Any()) return new ModelReturn<User>("Не возможно удалить пользователя! Есть привязки к технике и(или): Накладной форме, Токену!", user, 2);
+                        var modelDb = from users in context.Users where users.IdUser == user.IdUser select new { Users = users };
+                        user.StatusActual = 4;
+                        usersDelete.DateInWork = modelDb.First().Users.DateInWork;
+                        user.StatusUser = Inventory.StatusUsers.First(status => status.IdStatusUser == 4);
+                        Inventory.Entry(usersDelete).State = EntityState.Modified;
+                        Inventory.SaveChanges();
+                        Loggers.Log4NetLogger.Info(new Exception("Проставили статус пользователь удален "+ user.IdUser));
+                        return new ModelReturn<User>("Проставили статус пользователь удален!", user);
                     }
-                    else
+                    if (isActive == 4)
                     {
-                        return new ModelReturn<User>("Не возможно удалить пользователя! Пользователь не уволен!", user,1);
+                        return new ModelReturn<User>("Проставили статус пользователь удален!", user,1);
                     }
+                    return new ModelReturn<User>("Не возможно удалить пользователя! Пользователь не уволен!", user, 1);
                 }
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn<User>("При удалении пользователя возникли ошибки " + user.IdUser + " произошла ошибка смотри log.txt", user,3);
+            return new ModelReturn<User>("При удалении пользователя возникли ошибки " + user.IdUser + " произошла ошибка смотри log.txt", user, 3);
         }
         /// <summary>
         /// Удаление системного блока из БД

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ReportCardModel" type="ReportCardModel">
+		<xs:annotation>
+			<xs:documentation>Модель табеля</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ReportCardModel">
+		<xs:annotation>
+			<xs:documentation>Модель табеля</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="SettingParameters"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SettingParameters">
+		<xs:annotation>
+			<xs:documentation>Параметры настройки</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Year"/>
+				<xs:element ref="Mouth"/>
+				<xs:element ref="View"/>
+				<xs:element ref="Type"/>
+				<xs:element ref="LeaderN" minOccurs="0"/>
+				<xs:element ref="LeaderD" minOccurs="0"/>
+				<xs:element ref="LeaderKadr" minOccurs="0"/>
+				<xs:element ref="Holidays" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="UsersReportCard" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="TabelNumber" use="required">
+				<xs:annotation>
+					<xs:documentation>Табельный номер</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Year" type="xs:int" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Год табеля</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Mouth" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Месяц табеля</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NumberMouth" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер месяца</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberMouthString" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер месяца строковый формат</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameMouth" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование месяца</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="View" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Вид (Первичный корректирующий)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdView" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер вида</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameView" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование вида</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Type" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Тип (Аванс, Полный)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdType" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер типа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование типа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LeaderN">
+		<xs:annotation>
+			<xs:documentation>Наименование и руководитель НО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameFaceLeader" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование руководителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameFullOrganization" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Полное наименование организации</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LeaderD">
+		<xs:annotation>
+			<xs:documentation>Наименование отдела и начальника отдела</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="CodeDepartment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Код департамента</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameDepartment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameLeaderDepartment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ответственный исполнитель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DoljLeaderDepartment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность Ответственого исполнителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameIspDepartment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя исполнителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DoljIspDepartment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность исполнителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LeaderKadr">
+		<xs:annotation>
+			<xs:documentation>Работник кадровой службы</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="DoljKadr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность работника кадровой службы</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameKadr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя работника кадровой службы</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Holidays">
+		<xs:annotation>
+			<xs:documentation>Модель праздничных дней</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="DateTime_Holiday" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Праздничная дата</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IS_HOLIDAY" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Признак 1 - Праздничная дата 0 - Предпразничная дата</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UsersReportCard">
+		<xs:annotation>
+			<xs:documentation>Модель пользователей для табельных карточек</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ItemVacation" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Disability" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Business" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Fio" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Фио Пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Tab_num" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Табельный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="New_post" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Status_link" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>УН статуса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Date_in" use="optional">
+				<xs:annotation>
+					<xs:documentation>Дата приема на работу</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Date_out" use="optional">
+				<xs:annotation>
+					<xs:documentation>Дата увольнения </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ItemVacation">
+		<xs:annotation>
+			<xs:documentation>Диопазоны отпусков</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TypeVacation"/>
+			</xs:sequence>
+			<xs:attribute name="Date_begin" use="optional">
+				<xs:annotation>
+					<xs:documentation>Дата начала</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Date_end" use="optional">
+				<xs:annotation>
+					<xs:documentation>Дата окончания</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Disability">
+		<xs:annotation>
+			<xs:documentation>Больничные листы</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Date_start_disability" use="optional">
+				<xs:annotation>
+					<xs:documentation>Дата начала больничного</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Date_finish_disability" use="optional">
+				<xs:annotation>
+					<xs:documentation>Дата окончания больничного</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Business">
+		<xs:annotation>
+			<xs:documentation>Коммандировка</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="BusinessStart" use="optional">
+				<xs:annotation>
+					<xs:documentation>Начало коммандировки</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="BusinessFinish" use="optional">
+				<xs:annotation>
+					<xs:documentation>Конец коммандировки</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:dateTime">
+						<xs:whiteSpace value="collapse"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TypeVacation">
+		<xs:annotation>
+			<xs:documentation>Тип отпуска</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Code" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Код отпуска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -11,16 +11,17 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.FottersDocument
         ///Создание колонтитула
         /// </summary>
         /// <param name="mainDocument">Документ</param>
-        /// <param name="tamplate">Шаблон</param>
-        public void FottersAddDocument(MainDocumentPart mainDocument, LibaryXMLAutoReports.FullTemplateSheme.Document tamplate)
+        /// <param name="isp">Шаблон</param>
+        /// <param name="phone">Шаблон</param>
+        public void FottersAddDocument(MainDocumentPart mainDocument, string isp, string phone)
         {
             var fotters = FotterGenerate.AddFotters(mainDocument);
             var paragraph = new RunGenerate();
             Footer footer = new Footer();
             var par1 = paragraph.RunParagraphGeneratorStandart();
-            par1.Append(FormulandFooters(tamplate.Templates.Stone.Stone4));
+            par1.Append(FormulandFooters(isp));
             var par2 = paragraph.RunParagraphGeneratorStandart();
-            par2.Append(FormulandFooters(tamplate.Templates.Stone.Stone5));
+            par2.Append(FormulandFooters(phone));
             footer.Append(par1);
             footer.Append(par2);
             fotters.Footer = footer;

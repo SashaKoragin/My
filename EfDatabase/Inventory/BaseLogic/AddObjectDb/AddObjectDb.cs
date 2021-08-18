@@ -41,8 +41,6 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IdPosition = user.IdPosition,
                 TabelNumber = user.TabelNumber,
                 IdTelephon = user.IdTelephon,
-                NameUser = user.NameUser,
-                Passwords = user.Passwords,
                 StatusActual = user.StatusActual,
                 IdHistory = user.IdHistory,
             };
@@ -53,6 +51,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                     var modelDb = from users in context.Users where users.IdUser == user.IdUser select new { Users = users };
                     if (modelDb.Any())
                     {
+                        usersAddAndModified.DateInWork = modelDb.First().Users.DateInWork;
                         Inventory.Entry(usersAddAndModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(usersAddAndModified.IdHistory, usersAddAndModified.IdUser, "Пользователь", idUser,
@@ -83,13 +82,15 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             {
                 Id = organization.Id,
                 NameOrganization = organization.NameOrganization,
-                NameFace = organization.NameFace,
+                NameFullOrganization = organization.NameFullOrganization,
+                NameFaceLeader = organization.NameFaceLeader,
                 InameOrganization = organization.InameOrganization,
                 RnameOrganization = organization.RnameOrganization,
                 DnameOrganization = organization.DnameOrganization,
                 VnameOrganization = organization.VnameOrganization,
                 TnameOrganization = organization.TnameOrganization,
                 PnameOrganization = organization.PnameOrganization,
+                NameFace = organization.NameFace,
                 NameDepartament = organization.NameDepartament
             };
             try
@@ -229,6 +230,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             {
                 IdOtdel = department.IdOtdel,
                 IdUser = department.IdUser,
+                CodeOtdel = department.CodeOtdel,
                 NameOtdel = department.NameOtdel
             };
             try
@@ -1692,14 +1694,14 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         public void IsProcessComplete(int idProcess, bool isComplete)
         {
             var process = Inventory.IsProcessCompletes.FirstOrDefault(x => x.Id == idProcess);
-            if (process != null)
-            {
-                process.IsComplete = isComplete;
-                process.DataStart = isComplete ? process.DataStart : DateTime.Now;
-                process.DataFinish = isComplete ? DateTime.Now : (DateTime?)null;
-            }
-            Inventory.Entry(process).State = EntityState.Modified;
-            Inventory.SaveChanges();
+                if (process != null)
+                {
+                    process.IsComplete = isComplete;
+                    process.DataStart = isComplete ? process.DataStart : DateTime.Now;
+                    process.DataFinish = isComplete ? DateTime.Now : (DateTime?)null;
+                }
+                Inventory.Entry(process).State = EntityState.Modified;
+                Inventory.SaveChanges();
         }
 
         /// <summary>

@@ -95,6 +95,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\DataTransferObject\FilterModel\FilterModel.cs">
+      <DependentUpon>FilterModel.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\DataTransferObject\MemoReport\ModelMemoReport.cs">
+      <DependentUpon>ModelMemoReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\DataTransferObject\ParametrModelSelect\AllTechnicalUsersAndOtdelAndTreeAis3.cs">
       <DependentUpon>AllTechnicalUsersAndOtdelAndTreeAis3.xsd</DependentUpon>
     </Compile>
@@ -131,6 +137,9 @@
     </Compile>
     <Compile Include="Inventory\ReportXml\Mail\Mail.cs">
       <DependentUpon>Mail.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\ModelReportCard\ReportCard.cs">
+      <DependentUpon>ReportCard.xsd</DependentUpon>
     </Compile>
     <Compile Include="Inventory\ReportXml\ModelSupportNalog\TemplateSupportSTO.cs">
       <DependentUpon>TemplateSupportSTO.xsd</DependentUpon>
@@ -172,6 +181,12 @@
     <None Include="EF.Reverse.POCO.ttinclude" />
     <None Include="Inventory\Base\EF.Reverse.POCO.Core.ttinclude" />
     <None Include="Inventory\Base\EF.Reverse.POCO.ttinclude" />
+    <None Include="Inventory\DataTransferObject\FilterModel\FilterModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\DataTransferObject\MemoReport\ModelMemoReport.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventory\DataTransferObject\ParametrModelSelect\AllTechnicalUsersAndOtdelAndTreeAis3.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -206,6 +221,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\Mail\Mail.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\ModelReportCard\ReportCard.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\ModelSupportNalog\TemplateSupportSTO.xsd">
@@ -269,6 +287,9 @@
       <ModelDtoTemplateUsersRulesError Include="Inventory\ReportXml\ModelUserRulesError\*.xsd" />
       <ModelSettingModelInventory Include="Inventory\ReportXml\SettingModelInventory\*.xsd" />
       <XsdJournal Include="Inventory\ReportXml\Journal\*.xsd" />
+      <XsdReportCard Include="Inventory\ReportXml\ModelReportCard\*.xsd" />
+      <XmlFilterModel Include="Inventory\DataTransferObject\FilterModel\*.xsd" />
+      <XmlMemoReport Include="Inventory\DataTransferObject\MemoReport\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -293,5 +314,8 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(ModelDtoTemplateUsersRulesError.FullPath)&quot; /c /namespace:$(RootNamespace).ModelDtoTemplateUsersRulesError /outputdir:Inventory\ReportXml\ModelUserRulesError\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(ModelSettingModelInventory.FullPath)&quot; /c /namespace:$(RootNamespace).SettingModelInventory /outputdir:Inventory\ReportXml\SettingModelInventory\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdJournal.FullPath)&quot; /c /namespace:$(RootNamespace).Journal /outputdir:Inventory\ReportXml\Journal\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportCard.FullPath)&quot; /c /namespace:$(RootNamespace).ReportCard /outputdir:Inventory\ReportXml\ModelReportCard\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlFilterModel.FullPath)&quot; /c /namespace:$(RootNamespace).FilterModel /outputdir:Inventory\DataTransferObject\FilterModel\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlMemoReport.FullPath)&quot; /c /namespace:$(RootNamespace).MemoReport /outputdir:Inventory\DataTransferObject\MemoReport\" />
   </Target>
 </Project>

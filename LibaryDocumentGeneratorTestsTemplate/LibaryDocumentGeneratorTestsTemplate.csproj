@@ -77,6 +77,10 @@
       <Project>{a2bc3ae2-4a61-4e9e-9fa4-96a02677c79c}</Project>
       <Name>LibaryXMLAuto</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\WPFLib\WPFLib\SqlLibaryIfns\SqlLibaryIfns.csproj">
+      <Project>{128C2BF1-DE92-4BB8-BDA0-EEFC5EAB66D2}</Project>
+      <Name>SqlLibaryIfns</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EfDatabase\EfDatabase.csproj">
       <Project>{578cf45e-310b-4e2e-9c94-5a9f16b736ae}</Project>
       <Name>EfDatabase</Name>

@@ -31,10 +31,10 @@ namespace EfDatabase.Inventory.SqlModelSelect
             SerializeJson serializeJson = new SerializeJson();
             object result;
             string resultModel;
+            Inventory.Database.CommandTimeout = 120000;
             if (logic.IsResultXml)
             {
                 var xml = new XmlReadOrWrite();
-                Inventory.Database.CommandTimeout = 120000;
                 result = Inventory.Database.SqlQuery<string>(logic.SelectUser).ToArray();
                 var resultXml = (T) xml.ReadXmlText(string.Join("", (string[])result), typeof(T));
                 resultModel = serializeJson.JsonLibrary(resultXml, "dd.MM.yyyy HH:mm");

@@ -2203,13 +2203,15 @@ namespace EfDatabase.Inventory.Base
     {
         public int Id { get; set; } // Id (Primary key)
         public string NameOrganization { get; set; } // NameOrganization (length: 512)
-        public string NameFace { get; set; } // NameFace (length: 512)
+        public string NameFullOrganization { get; set; } // NameFullOrganization (length: 512)
+        public string NameFaceLeader { get; set; } // NameFaceLeader (length: 512)
         public string InameOrganization { get; set; } // InameOrganization (length: 512)
         public string RnameOrganization { get; set; } // RnameOrganization (length: 512)
         public string DnameOrganization { get; set; } // DnameOrganization (length: 512)
         public string VnameOrganization { get; set; } // VnameOrganization (length: 512)
         public string TnameOrganization { get; set; } // TnameOrganization (length: 512)
         public string PnameOrganization { get; set; } // PnameOrganization (length: 512)
+        public string NameFace { get; set; } // NameFace (length: 512)
         public string NameDepartament { get; set; } // NameDepartament (length: 512)
         public System.DateTime? DataCreate { get; set; } // DataCreate
 
@@ -2223,25 +2225,10 @@ namespace EfDatabase.Inventory.Base
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class Otdel
     {
-
-        ///<summary>
-        /// Номер отдела
-        ///</summary>
         public int IdOtdel { get; set; } // IdOtdel (Primary key)
-
-        ///<summary>
-        /// Константа начальника отдела
-        ///</summary>
         public int? IdUser { get; set; } // IdUser
-
-        ///<summary>
-        /// Наименование отдела
-        ///</summary>
+        public string CodeOtdel { get; set; } // CodeOtdel (length: 128)
         public string NameOtdel { get; set; } // NameOtdel (length: 256)
-
-        ///<summary>
-        /// Дата создания
-        ///</summary>
         public System.DateTime? DataCreate { get; set; } // DataCreate
 
         // Reverse navigation
@@ -3757,6 +3744,7 @@ namespace EfDatabase.Inventory.Base
         /// Сокращенное имя пользователя
         ///</summary>
         public string SmallName { get; set; } // SmallName (length: 128)
+        public System.DateTime? DateInWork { get; set; } // DateInWork
 
         ///<summary>
         /// Ун отдела
@@ -3777,16 +3765,6 @@ namespace EfDatabase.Inventory.Base
         /// Уникальный номер телефона
         ///</summary>
         public int? IdTelephon { get; set; } // IdTelephon
-
-        ///<summary>
-        /// Логин для входа
-        ///</summary>
-        public string NameUser { get; set; } // NameUser (length: 64)
-
-        ///<summary>
-        /// Пароль для входа
-        ///</summary>
-        public string Passwords { get; set; } // Passwords (length: 64)
 
         ///<summary>
         /// Актуальный статус
@@ -5545,13 +5523,15 @@ namespace EfDatabase.Inventory.Base
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.NameOrganization).HasColumnName(@"NameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
-            Property(x => x.NameFace).HasColumnName(@"NameFace").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.NameFullOrganization).HasColumnName(@"NameFullOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.NameFaceLeader).HasColumnName(@"NameFaceLeader").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.InameOrganization).HasColumnName(@"InameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.RnameOrganization).HasColumnName(@"RnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.DnameOrganization).HasColumnName(@"DnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.VnameOrganization).HasColumnName(@"VnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.TnameOrganization).HasColumnName(@"TnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.PnameOrganization).HasColumnName(@"PnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.NameFace).HasColumnName(@"NameFace").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.NameDepartament).HasColumnName(@"NameDepartament").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
         }
@@ -5573,6 +5553,7 @@ namespace EfDatabase.Inventory.Base
 
             Property(x => x.IdOtdel).HasColumnName(@"IdOtdel").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+            Property(x => x.CodeOtdel).HasColumnName(@"CodeOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.NameOtdel).HasColumnName(@"NameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
 
@@ -6495,12 +6476,11 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256);
             Property(x => x.SmallName).HasColumnName(@"SmallName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.DateInWork).HasColumnName(@"DateInWork").HasColumnType("smalldatetime").IsOptional();
             Property(x => x.IdOtdel).HasColumnName(@"IdOtdel").HasColumnType("int").IsOptional();
             Property(x => x.IdPosition).HasColumnName(@"IdPosition").HasColumnType("int").IsOptional();
             Property(x => x.TabelNumber).HasColumnName(@"TabelNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
             Property(x => x.IdTelephon).HasColumnName(@"IdTelephon").HasColumnType("int").IsOptional();
-            Property(x => x.NameUser).HasColumnName(@"NameUser").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
-            Property(x => x.Passwords).HasColumnName(@"Passwords").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.StatusActual).HasColumnName(@"StatusActual").HasColumnType("int").IsOptional();
             Property(x => x.IdHistory).HasColumnName(@"IdHistory").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();

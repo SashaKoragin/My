@@ -38,7 +38,7 @@ namespace LibaryDocumentGenerator.Documents.Template
             Single single = new Single();
             Fotters fotters = new Fotters();
             PageSetting settingpage = new PageSetting();
-            fotters.FottersAddDocument(mainDocumentPart, template);
+            fotters.FottersAddDocument(mainDocumentPart, template.Templates.Stone.Stone4, template.Templates.Stone.Stone5);
             document.Append(settingpage.AddSetting(mainDocumentPart));
             document.Append(headers.DocumentsHeaders(template, data.N279, data.N280));
             document.Append(body.TextDocument(template));

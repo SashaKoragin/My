@@ -4,6 +4,7 @@ using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using EfDatabase.FilterModel;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.BaseLogic.DeleteObjectDb;
@@ -12,6 +13,8 @@ using EfDatabase.Inventory.BaseLogic.Select;
 using EfDatabase.Inventory.MailLogicLotus;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabase.Inventory.SqlModelSelect;
+using EfDatabase.MemoReport;
+using EfDatabase.ReportCard;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
@@ -22,6 +25,8 @@ using EfDatabaseXsdQrCodeModel;
 using EfDatabaseXsdSupportNalog;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
+using LibaryDocumentGenerator.Documents.TemplateExcel;
+using LibaryXMLAuto.ReadOrWrite;
 using SqlLibaryIfns.Inventory.ModelParametr;
 using SqlLibaryIfns.Inventory.Select;
 using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
@@ -48,6 +53,7 @@ using Telephon = EfDatabase.Inventory.Base.Telephon;
 using User = EfDatabase.Inventory.Base.User;
 using LibraryAutoSupportSto.Support.SupportPostGet;
 using Organization = EfDatabase.Inventory.Base.Organization;
+using Type = System.Type;
 
 namespace TestIFNSLibary.Inventarka
 {
@@ -410,7 +416,7 @@ namespace TestIFNSLibary.Inventarka
         /// Запрос всех пользователей
         /// </summary>
         /// <returns></returns>
-        public async Task<string> AllUsers(bool filterActual)
+        public async Task<string> AllUsers(AllUsersFilters filterActual)
         {
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.UsersAll(filterActual));
@@ -1449,6 +1455,16 @@ namespace TestIFNSLibary.Inventarka
             return await Task.Factory.StartNew(() => auto.AllTechicsLkInventory(idUser));
         }
         /// <summary>
+        /// Все пользователи отдела для генерации служебных записок
+        /// </summary>
+        /// <param name="idUser">Ун пользователя</param>
+        /// <returns></returns>
+        public async Task<string> AllUsersDepartmentLk(int idUser)
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllUsersDepartmentLk(idUser));
+        }
+        /// <summary>
         /// Выгрузка токенов ключей
         /// </summary>
         /// <returns></returns>
@@ -1542,5 +1558,87 @@ namespace TestIFNSLibary.Inventarka
             }
             return null;
         }
+        /// <summary>
+        /// Создание табеля
+        /// </summary>
+        /// <param name="model">Модель табеля</param>
+        /// <returns></returns>
+        public async Task<Stream> CreateReportCard(ReportCardModel model)
+        {
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    SqlConnectionType sql = new SqlConnectionType();
+                    SelectImns selectFrames = new SelectImns();
+                    XmlReadOrWrite xml = new XmlReadOrWrite();
+                    SelectSql select = new SelectSql();
+                    select.SelectCardModelLeader(ref model);
+                    var command = string.Format(selectFrames.UserReportCard, model.SettingParameters.LeaderD.NameDepartment, $"{model.SettingParameters.Year}-{model.SettingParameters.Mouth.NumberMouthString}-01");
+                    var userReportCard = sql.XmlString(_parametrService.ConnectImns51, command);
+                    userReportCard = string.Concat("<SettingParameters>", userReportCard, "</SettingParameters>");
+                    model.SettingParameters.UsersReportCard = ((SettingParameters)xml.ReadXmlText(userReportCard, typeof(SettingParameters))).UsersReportCard;
+                    foreach (var usersReportCard in model.SettingParameters.UsersReportCard)
+                    {
+                        var commandVacation = string.Format(selectFrames.ItemVacation, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
+                        var userVacation = sql.XmlString(_parametrService.ConnectImns51, commandVacation);
+                        userVacation = string.Concat("<UsersReportCard>", userVacation, "</UsersReportCard>");
+                        usersReportCard.ItemVacation = ((UsersReportCard)xml.ReadXmlText(userVacation, typeof(UsersReportCard))).ItemVacation;
+                        var commandDisability = string.Format(selectFrames.Disability, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
+                        var userDisability = sql.XmlString(_parametrService.ConnectImns51, commandDisability);
+                        userDisability = string.Concat("<UsersReportCard>", userDisability, "</UsersReportCard>");
+                        usersReportCard.Disability = ((UsersReportCard)xml.ReadXmlText(userDisability, typeof(UsersReportCard))).Disability;
+                        var commandBusiness = string.Format(selectFrames.Business, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
+                        var userBusiness = sql.XmlString(_parametrService.ConnectImns51, commandBusiness);
+                        userBusiness = string.Concat("<UsersReportCard>", userBusiness, "</UsersReportCard>");
+                        usersReportCard.Business = ((UsersReportCard)xml.ReadXmlText(userBusiness, typeof(UsersReportCard))).Business;
+                    }
+                    ReportCard report = new ReportCard();
+                    report.CreateDocument(_parametrService.Report, model);
+                    return report.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
+        /// <summary>
+        /// Создание служебных записок для ЛК 
+        /// </summary>
+        /// <param name="memoReport">Запрос служебной записки</param>
+        /// <returns></returns>
+        public async Task<Stream> CreateMemoReport(ModelMemoReport memoReport)
+        {
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    SelectSql select = new SelectSql();
+                    SelectImns selectFrames = new SelectImns();
+                    SqlConnectionType sql = new SqlConnectionType();
+                    XmlReadOrWrite xml = new XmlReadOrWrite();
+                    MemoReport memo = new MemoReport();
+                    select.SelectMemoReport(ref memoReport);
+                    var commandOrders = string.Format(selectFrames.LastOrder, memoReport.UserDepartment.SmallTabelNumber);
+                    var userOrder = sql.XmlString(_parametrService.ConnectImns51, commandOrders);
+                    if (userOrder != null)
+                    {
+                        userOrder = string.Concat("<Orders>", userOrder, "</Orders>");
+                        memoReport.UserDepartment.Orders = ((Orders)xml.ReadXmlText(userOrder, typeof(Orders)));
+                    }
+                    memo.CreateDocument(_parametrService.Report, memoReport);
+                    return memo.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+                Loggers.Log4NetLogger.Error(new Exception($"Возникла ошибка при создании пользователя {memoReport.SelectParameterDocument.IdUser}, документа {memoReport.SelectParameterDocument.NameDocument}, исполнителя {memoReport.SelectParameterDocument.TabelNumber}"));
+            }
+            return null;
+        }
+
     }
 }

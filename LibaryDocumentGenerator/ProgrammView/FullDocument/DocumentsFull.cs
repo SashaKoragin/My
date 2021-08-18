@@ -7,6 +7,7 @@ using System.Linq;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using EfDatabase.Inventory.Base;
+using EfDatabase.MemoReport;
 using EfDatabase.XsdBookAccounting;
 using EfDatabaseTelephoneHelp;
 using EfDatabaseXsdQrCodeModel;
@@ -1387,6 +1388,297 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                 table2.Append(rows.GenerateRow(ref cellCollection));
             }
             body.Append(table2);
+            return body;
+        }
+
+        /// <summary>
+        /// Генерация служебных записок для ОИТ
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="template">Модель шаблона</param>
+        public Body CreateDocMemoReport(ModelMemoReport template)
+        {
+            Body body = new Body();
+            var paragraphGenerate = new RunGenerate();
+            var nameOrganization = "Межрайонной ИФНС России №51 по г. Москве";
+            var paragraph = paragraphGenerate.RunParagraphGeneratorStandart();
+            var paragraphPrl = paragraphGenerate.RunParagraphGeneratorStandart();
+            var paragraphMemo = paragraphGenerate.RunParagraphGeneratorStandart();
+            var paragraphBossDepartment = paragraphGenerate.RunParagraphGeneratorStandart(template.BossDepartment.NameDepartment, "22", JustificationValues.Left, 0, "0", true);
+            paragraphBossDepartment.Append(paragraphGenerate.RunText(nameOrganization, "22"));
+            var paragraphBossDepartmentAgreed = paragraphGenerate.RunParagraphGeneratorStandart(template.BossAgreed.PositionAgreed, "22", JustificationValues.Left, 0, "0", true);
+            paragraphBossDepartmentAgreed.Append(paragraphGenerate.RunText(nameOrganization, "22"));
+
+            Table table = new Table();
+            Table table2 = new Table();
+            Table table3 = new Table();
+            ObservableCollection <TableCell> cellCollection = new ObservableCollection<TableCell>();
+            var rows = new RowGenerate();
+            var paragraphR1 = rows.FormulHeightRow(0.10);
+            var paragraphR2 = rows.FormulHeightRow(0.10);
+            if (template.SelectParameterDocument.TypeDocument != 2)
+            {
+                paragraph = paragraphGenerate.RunParagraphGeneratorStandart("к Порядку доступа к информационным, программным ", "18", JustificationValues.Both, 0, "0", true);
+                paragraph.Append(paragraphGenerate.RunText("и аппаратным ресурсам Управления и подведомственных ", "18", 0, true));
+                paragraph.Append(paragraphGenerate.RunText("Инспекций Федеральной налоговой службы по г. Москве,", "18", 0, true));
+                paragraph.Append(paragraphGenerate.RunText(" утвержденного приказом УФНС России по г. Москве", "18", 0, true));
+                paragraph.Append(paragraphGenerate.RunText("от «05»    12     2014 г. № ", "18"));
+                paragraph.Append(paragraphGenerate.RunText("440", "18", 2));
+                paragraphPrl = paragraphGenerate.RunParagraphGeneratorStandart("Приложение № 3", "18", JustificationValues.Right);
+                paragraphR1 = rows.FormulHeightRow(0.50);
+                paragraphR2 = rows.FormulHeightRow(2.20);
+            }
+
+            if (template.SelectParameterDocument.NumberDocument == 3)
+            {
+                paragraphMemo = paragraphGenerate.RunParagraphGeneratorStandart("Прошу перевести доменную учетную запись ", "22", JustificationValues.Both,0,"800");
+                paragraphMemo.Append(paragraphGenerate.RunText($"(на основании приказа инспекции {template.UserDepartment.Orders.Orders_Reestr.LastOrder}) ", "22",3));
+                paragraphMemo.Append(paragraphGenerate.RunText("сотрудника:", "22"));
+            }
+
+            if (template.SelectParameterDocument.NumberDocument == 2)
+            {
+                paragraphMemo = paragraphGenerate.RunParagraphGeneratorStandart("Прошу выдать рабочую станцию, телефонный аппарат ", "22", JustificationValues.Both, 0, "800");
+                paragraphMemo.Append(paragraphGenerate.RunText("(служебная необходимость) ", "22",3));
+                paragraphMemo.Append(paragraphGenerate.RunText("сотруднику:", "22"));
+            }
+
+            if (template.SelectParameterDocument.NumberDocument == 1)
+            {
+                paragraphMemo = paragraphGenerate.RunParagraphGeneratorStandart("Прошу создать доменную учетную запись ", "22", JustificationValues.Both, 0, "800");
+                paragraphMemo.Append(paragraphGenerate.RunText("(по необходимости) ", "22", 3));
+                paragraphMemo.Append(paragraphGenerate.RunText("сотруднику:", "22"));
+            }
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(10.50),
+                TableWidthUnitValues.Dxa));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphPrl, CellGenerate.FormulWidthCell(8.50),
+                TableWidthUnitValues.Dxa, "100"));
+            table.Append(rows.GenerateRow(ref cellCollection, true, paragraphR1));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(10.50),
+                TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraph, CellGenerate.FormulWidthCell(8.50),
+                TableWidthUnitValues.Auto, "100"));
+            table.Append(rows.GenerateRow(ref cellCollection, true, paragraphR2));
+           
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.NameOtdel,"26"), CellGenerate.FormulWidthCell(10.50),
+                TableWidthUnitValues.Auto, "100"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Начальнику отдела информатизации", "26"), CellGenerate.FormulWidthCell(8.50),
+                TableWidthUnitValues.Auto, "100"));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(2.00)));
+
+            body.Append(table);
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart("Служебная записка","28",JustificationValues.Center));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+            body.Append(paragraphMemo);
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Ф.И.О","22",JustificationValues.Center), CellGenerate.FormulWidthCell(2.94),
+                TableWidthUnitValues.Dxa,"0","0",TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(),0,0, "F2F2F2"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Отдел", "22", JustificationValues.Center), CellGenerate.FormulWidthCell(2),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "F2F2F2"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Должность", "22", JustificationValues.Center), CellGenerate.FormulWidthCell(2.75),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "F2F2F2"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Табельный №", "22", JustificationValues.Center), CellGenerate.FormulWidthCell(3.50),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "F2F2F2"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Примечание", "22", JustificationValues.Center), CellGenerate.FormulWidthCell(2.25),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "F2F2F2"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("№ каб.", "22", JustificationValues.Center), CellGenerate.FormulWidthCell(2),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "F2F2F2"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("№ телефона", "22", JustificationValues.Center), CellGenerate.FormulWidthCell(2.47),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 0, "F2F2F2"));
+            table2.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.00)));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.Name,"20",JustificationValues.Center), CellGenerate.FormulWidthCell(2.94),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.NameOtdel, "20", JustificationValues.Center), CellGenerate.FormulWidthCell(2),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.Position, "20", JustificationValues.Center), CellGenerate.FormulWidthCell(2.75),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.SmallTabelNumber, "20", JustificationValues.Center), CellGenerate.FormulWidthCell(3.50),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(2.25),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.NumberKabinet, "20", JustificationValues.Center), CellGenerate.FormulWidthCell(2),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.Telephone, "20", JustificationValues.Center), CellGenerate.FormulWidthCell(2.47),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            table2.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(2.00)));
+            body.Append(table2);
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphBossDepartment, CellGenerate.FormulWidthCell(10.00),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Top ));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(4.00),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Top,CellBorders.GenerateBorder()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.BossDepartment.SmallName, "22"), CellGenerate.FormulWidthCell(3.91),
+                TableWidthUnitValues.Dxa));
+            table3.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.00)));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"«____»______________{DateTime.Now.Year}г", "22"),"0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Top));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto));
+            table3.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.00)));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Согласовано:", "22",JustificationValues.Left,1), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Bottom));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto));
+            table3.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.75)));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphBossDepartmentAgreed, CellGenerate.FormulWidthCell(10.00),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Top));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(4.00),
+                TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Top, CellBorders.GenerateBorder()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.BossAgreed.NameAgreed, "22"), CellGenerate.FormulWidthCell(3.91),
+                TableWidthUnitValues.Dxa));
+            table3.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.00)));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"«____»______________{DateTime.Now.Year}г", "22"), "0",
+                TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Top));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0",
+                TableWidthUnitValues.Auto));
+            table3.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.00)));
+            body.Append(table3);
+            return body;
+        }
+
+
+        /// <summary>
+        /// Генерация заявки для ОИТ для доступа к программным ресурсам
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="template">Модель шаблона</param>
+        public Body CreateDocMemoApplication(ModelMemoReport template)
+        {
+            Body body = new Body();
+            Table table = new Table();
+            Table table2 = new Table();
+            Table table3 = new Table();
+            ObservableCollection<TableCell> cellCollection = new ObservableCollection<TableCell>();
+            var rows = new RowGenerate();
+            var paragraphGenerate = new RunGenerate();
+            var nameOrganization = "Межрайонной ИФНС России №51 по г. Москве";
+            Paragraph paragraphPrl = paragraphGenerate.RunParagraphGeneratorStandart("Приложение № 7", "18", JustificationValues.Right);
+            Paragraph paragraph = paragraphGenerate.RunParagraphGeneratorStandart("к Порядку доступа к информационным, программным и аппаратным ", "18", JustificationValues.Both, 0, "0", true);
+            paragraph.Append(paragraphGenerate.RunText("ресурсам Управления и подведомственных инспекций Федеральной ", "18", 0, true));
+            paragraph.Append(paragraphGenerate.RunText("налоговой службы по г. Москве,  утвержденного приказом УФНС  ", "18", 0));
+            paragraph.Append(paragraphGenerate.RunText("России по г. Москве от «05»  12  2014 г. № 440", "18", 0));
+            Paragraph paragraphLeader = paragraphGenerate.RunParagraphGeneratorStandart("«УТВЕРЖДАЮ»", "22", JustificationValues.Left, 0, "0", true);
+            paragraphLeader.Append(paragraphGenerate.RunText(template.LeaderOrganization.RnameOrganization, "22", 0, true));
+            paragraphLeader.Append(paragraphGenerate.RunText(" ", "22", 0, true));
+            paragraphLeader.Append(paragraphGenerate.RunText($"____________________ {template.LeaderOrganization.NameFaceLeader}", "22", 0, true));
+            paragraphLeader.Append(paragraphGenerate.RunText($"«____»______________{DateTime.Now.Year}г.", "22"));
+
+            Paragraph paragraphListApp = paragraphGenerate.RunParagraphGeneratorStandart("1.Lotus Notes", "18", JustificationValues.Left, 0, "0", true);
+            paragraphListApp.Append(paragraphGenerate.RunText("2.GP-3", "18", 0, true));
+            paragraphListApp.Append(paragraphGenerate.RunText("3.ПК СЭОД", "18", 0, true));
+            paragraphListApp.Append(paragraphGenerate.RunText("4.СВОД 2000", "18", 0, true));
+            paragraphListApp.Append(paragraphGenerate.RunText("5.Консультант+", "18"));
+
+            Paragraph paragraphBossDepartment = paragraphGenerate.RunParagraphGeneratorStandart(template.BossDepartment.NameDepartment, "18", JustificationValues.Left, 0, "0", true);
+            paragraphBossDepartment.Append(paragraphGenerate.RunText(nameOrganization, "18"));
+            Paragraph paragraphBossDepartmentAgreed = paragraphGenerate.RunParagraphGeneratorStandart(template.BossAgreed.PositionAgreed, "18", JustificationValues.Left, 0, "0", true);
+            paragraphBossDepartmentAgreed.Append(paragraphGenerate.RunText(nameOrganization, "18"));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(18.50), TableWidthUnitValues.Dxa));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphPrl, CellGenerate.FormulWidthCell(9.20), TableWidthUnitValues.Dxa));
+            table.Append(rows.GenerateRow(ref cellCollection, true));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(18.50), TableWidthUnitValues.Dxa));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraph, CellGenerate.FormulWidthCell(9.20), TableWidthUnitValues.Dxa, "100"));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.60)));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphLeader, "0", TableWidthUnitValues.Auto, "100"));
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(3.50)));
+            body.Append(table);
+
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart("Заявка", "20", JustificationValues.Center,1));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart("на предоставление доступа к информационным ресурсам Межрайонной ИФНС России №51по г. Москве (территориальный уровень)", "20", JustificationValues.Center));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart($"следующим сотрудникам {template.UserDepartment.RnameOtdel.ToLower()}", "20", JustificationValues.Center));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("№ п/п","16", JustificationValues.Center), CellGenerate.FormulWidthCell(0.80), TableWidthUnitValues.Dxa,"100","100",TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Фамилия, имя, отчество/учетная запись сотрудника", "16",JustificationValues.Center), CellGenerate.FormulWidthCell(2.60), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Должность", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Обоснование необходимости проведения указанного вида работ в соответствии с должностными обязанностями сотрудника (ссылка на раздел должностного регламента или иной нормативный документ)", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(7), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Телефон/комната", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Ресурс (согласно Перечню)", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(3), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Задача", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("IP-адрес рабочей станции", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.20), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Подпись сотрудника", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Примечание", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            table2.Append(rows.GenerateRow(ref cellCollection));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("1", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(0.80), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("2", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.60), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("3", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("4", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(7), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("5", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("6", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(3), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("7", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("8", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.20), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("9", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("10", "16", JustificationValues.Center), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            table2.Append(rows.GenerateRow(ref cellCollection));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("1", "18"), CellGenerate.FormulWidthCell(0.80), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.Name, "18"), CellGenerate.FormulWidthCell(2.60), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.Position, "18"), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.Regulations, "18"), CellGenerate.FormulWidthCell(7), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"{template.UserDepartment.Telephone}/{template.UserDepartment.NumberKabinet}", "18"), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphListApp, CellGenerate.FormulWidthCell(3), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Просмотр", "18"), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.IpAdress, "18"), CellGenerate.FormulWidthCell(2.20), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(2), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(2.50), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
+            table2.Append(rows.GenerateRow(ref cellCollection));
+            body.Append(table2);
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphBossDepartment, CellGenerate.FormulWidthCell(11.20), TableWidthUnitValues.Dxa, "200", "200"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(7.30), TableWidthUnitValues.Dxa, "200", "200",TableVerticalAlignmentValues.Bottom, CellBorders.GenerateBorder()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.BossDepartment.SmallName, "18"), CellGenerate.FormulWidthCell(4),TableWidthUnitValues.Dxa, "200", "200"));
+            table3.Append(rows.GenerateRow(ref cellCollection));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"«____»______________{DateTime.Now.Year}г", "18"), CellGenerate.FormulWidthCell(11.20), TableWidthUnitValues.Dxa, "200", "200"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("(Подпись)", "18",JustificationValues.Center), CellGenerate.FormulWidthCell(7.30), TableWidthUnitValues.Dxa));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(4), TableWidthUnitValues.Dxa, "200", "200"));
+            table3.Append(rows.GenerateRow(ref cellCollection));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Согласовано:", "18",JustificationValues.Left,1), CellGenerate.FormulWidthCell(11.20), TableWidthUnitValues.Dxa, "200", "200", TableVerticalAlignmentValues.Center));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(7.30), TableWidthUnitValues.Dxa));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(4), TableWidthUnitValues.Dxa));
+            table3.Append(rows.GenerateRow(ref cellCollection,true, rows.FormulHeightRow(1.00)));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphBossDepartmentAgreed, CellGenerate.FormulWidthCell(11.20), TableWidthUnitValues.Dxa, "200", "200"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(7.30), TableWidthUnitValues.Dxa, "200", "200", TableVerticalAlignmentValues.Bottom, CellBorders.GenerateBorder()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.BossAgreed.NameAgreed, "18"), CellGenerate.FormulWidthCell(4), TableWidthUnitValues.Dxa, "200", "200"));
+            table3.Append(rows.GenerateRow(ref cellCollection));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"«____»______________{DateTime.Now.Year}г", "18"), CellGenerate.FormulWidthCell(11.20), TableWidthUnitValues.Dxa, "200", "200"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("(Подпись)", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(7.30), TableWidthUnitValues.Dxa));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(4), TableWidthUnitValues.Dxa, "200", "200"));
+            table3.Append(rows.GenerateRow(ref cellCollection));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Отметка об исполнении заявки:", "18", JustificationValues.Left, 1), CellGenerate.FormulWidthCell(11.20), TableWidthUnitValues.Dxa, "200", "200", TableVerticalAlignmentValues.Center));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(7.30), TableWidthUnitValues.Dxa, "200", "200", TableVerticalAlignmentValues.Bottom, CellBorders.GenerateBorder()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(4), TableWidthUnitValues.Dxa));
+            table3.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.50)));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart($"«____»______________{DateTime.Now.Year}г", "18"), CellGenerate.FormulWidthCell(11.20), TableWidthUnitValues.Dxa, "200", "200"));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("(Подпись)", "18", JustificationValues.Center), CellGenerate.FormulWidthCell(7.30), TableWidthUnitValues.Dxa));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), CellGenerate.FormulWidthCell(4), TableWidthUnitValues.Dxa, "200", "200"));
+            table3.Append(rows.GenerateRow(ref cellCollection));
+
+            body.Append(table3);
+
             return body;
         }
     }

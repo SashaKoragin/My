@@ -1,11 +1,13 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
+using EfDatabase.FilterModel;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
+using EfDatabase.MemoReport;
+using EfDatabase.ReportCard;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
@@ -194,8 +196,8 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllUsers?filterActual={filterActual}",  ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> AllUsers(bool filterActual = false);
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllUsers",  ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllUsers(AllUsersFilters filterActual);
 
         /// <summary>
         /// Статистика обраьботки пользователей процедурой
@@ -223,7 +225,6 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllClasification", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> AllClasification();
-
 
         /// <summary>
         /// Все принтеры
@@ -1010,6 +1011,15 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllTechnicsLk?idUser={idUser}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> AllTechnicsLk(int idUser);
         /// <summary>
+        /// Все пользователи отдела в ЛК для заявок
+        /// http://localhost:8182/Inventarka/AllUsersDepartmentLk
+        /// </summary>
+        /// <param name="idUser">Ун пользователя</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllUsersDepartmentLk?idUser={idUser}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllUsersDepartmentLk(int idUser);
+        /// <summary>
         /// Все токены ключи реестр
         /// http://localhost:8182/Inventarka/AllToken
         /// </summary>
@@ -1060,5 +1070,21 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreateJournalAis3?year={year}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<Stream> CreateJournalAis3(int year);
+        /// <summary>
+        /// Создание табеля
+        /// </summary>
+        /// <param name="model">Модель</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreateReportCard", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> CreateReportCard(ReportCardModel model);
+        /// <summary>
+        /// Создание служебных записок для личного кабинета
+        /// </summary>
+        /// <param name="memoReport">Модель документа и исполнителя</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreateMemoReport", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> CreateMemoReport(ModelMemoReport memoReport);
    }
 }

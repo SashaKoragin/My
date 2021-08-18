@@ -103,7 +103,7 @@ namespace SignalRLibary.SignalRinventory
         public static void SubscribeUser(User user)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
-            Loggers.Log4NetLogger.Info(new Exception("Модель Пользователя рассылка пошла: " + user.IdUser + " " + user.NameUser));
+            Loggers.Log4NetLogger.Info(new Exception("Модель Пользователя рассылка пошла: " + user.IdUser + " " + user.SmallName));
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeUser(json.JsonLibaryIgnoreDate(user));
         }

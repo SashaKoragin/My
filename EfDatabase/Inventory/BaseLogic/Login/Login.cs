@@ -43,7 +43,7 @@ namespace EfDatabase.Inventory.BaseLogic.Login
             {
                 user.IdUser = queryUser.FirstOrDefault().Users.IdUser;
                 user.TabelNumber = queryUser.FirstOrDefault().Users.TabelNumber;
-                user.Name = queryUser.FirstOrDefault().Users.NameUser;
+                user.Name = queryUser.FirstOrDefault().Users.SmallName;
                 user.Rule = queryRule.ToArray();
                 return user;
             }

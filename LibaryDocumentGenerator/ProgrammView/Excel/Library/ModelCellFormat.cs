@@ -42,6 +42,10 @@ namespace LibaryDocumentGenerator.ProgrammView.Excel.Library
         /// </summary>
         public int MergeHorizontalInt { get; set; } = 0;
         /// <summary>
+        /// Количество объединяющих ячеек по горизонтали квадрат
+        /// </summary>
+        public int MergeHorizontalSquare { get; set; } = 0;
+        /// <summary>
         /// Количество объединяющих ячеек по вертикале
         /// </summary>
         public int MergeVerticalInt { get; set; } = 0;
