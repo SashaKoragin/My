@@ -132,6 +132,36 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
             }
             return new ModelReturn<ServerEquipment>("При удалении серверного оборудования возникли ошибки " + serverEquipment.Id + " произошла ошибка смотри log.txt", serverEquipment, 2);
         }
+        /// <summary>
+        /// Удаление разного оборудования
+        /// </summary>
+        /// <param name="otherAll">Разное оборудование</param>
+        /// <param name="idUser">Ун пользователя</param>
+        public ModelReturn<OtherAll> DeleteOtherAll(OtherAll otherAll, int? idUser)
+        {
+            try
+            {
+                using (var context = new InventoryContext())
+                {
+                    var isExistSystemUnit = context.Database.SqlQuery<object>($"Select * From OtherAll Where IdOtherAll = {otherAll.IdOtherAll} and IdUser is null and IdStatus is null");
+                    if (isExistSystemUnit.Any())
+                    {
+                        HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
+                        DeleteModelDb(context, new OtherAll() { IdOtherAll = otherAll.IdOtherAll });
+                        log.GenerateHistory(otherAll.IdHistory, otherAll.IdOtherAll, "Разное", idUser,
+                            $"Модель: {otherAll.ModelOther?.Name} Серийный номер: {otherAll.SerNum} Сервисный номер: {otherAll.SerNum} Инвентарный номер: {otherAll.InventarNum}",
+                            "Произведено удаление!");
+                        return new ModelReturn<OtherAll>("Серверное оборудование удалено!", otherAll);
+                    }
+                    return new ModelReturn<OtherAll>("Не возможно удалить разное оборудование! Есть привязки к пользователю или к статусу!", otherAll, 1);
+                }
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<OtherAll>("При удалении разного оборудования возникли ошибки " + otherAll.IdOtherAll + " произошла ошибка смотри log.txt", otherAll, 2);
+        }
 
         /// <summary>
         /// Удаление токен ключ

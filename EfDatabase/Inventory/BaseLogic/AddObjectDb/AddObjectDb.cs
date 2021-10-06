@@ -1342,6 +1342,163 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             return new ModelReturn<Kabinet>("При обновлении/добавлении данных 'Номер Кабинета' по : " + nameKabinetAddadnModified.IdNumberKabinet + " произошла ошибка смотри log.txt");
         }
 
+        /// <summary>
+        /// Добавление или редактирование модели разное
+        /// </summary>
+        /// <param name="modelOtherAll">Разное</param>
+        /// <param name="idUser">УН пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<OtherAll> AddAndEditOtherAll(OtherAll modelOtherAll, int? idUser)
+        {
+            HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
+            var modelOtherAllAddAndModified = new OtherAll()
+            {
+                IdOtherAll = modelOtherAll.IdOtherAll,
+                IdUser = modelOtherAll.IdUser,
+                IdSupply = modelOtherAll.IdSupply,
+                IdTypeOther = modelOtherAll.IdTypeOther,
+                IdProizvoditelOther = modelOtherAll.IdProizvoditelOther,
+                IdModelOther = modelOtherAll.IdModelOther,
+                IdNumberKabinet = modelOtherAll.IdNumberKabinet,
+                ServiceNumber = modelOtherAll.ServiceNumber,
+                SerNum = modelOtherAll.SerNum,
+                InventarNum = modelOtherAll.InventarNum,
+                Coment = modelOtherAll.Coment,
+                IdStatus = modelOtherAll.IdStatus,
+                IdHistory = modelOtherAll.IdHistory
+            };
+            try
+            {
+                var newModel = $"Пользователь: {modelOtherAll.User?.Name}; Кабинет: {modelOtherAll.Kabinet?.NumberKabinet}; Комментарий: {modelOtherAll.Coment}; Статус: {modelOtherAll.Statusing?.Name}";
+                using (var context = new InventoryContext())
+                {
+                    var modelDb = from OtherAll in context.OtherAlls where OtherAll.IdOtherAll == modelOtherAll.IdOtherAll select new { OtherAll };
+                    if (modelDb.Any())
+                    {
+                        var oldModel = $"Пользователь: {modelDb.First().OtherAll?.User?.Name}; Кабинет: {modelDb.First().OtherAll?.Kabinet?.NumberKabinet}; Комментарий: {modelDb.First().OtherAll.Coment}; Статус: {modelDb.First().OtherAll?.Statusing?.Name}";
+                        Inventory.Entry(modelOtherAllAddAndModified).State = EntityState.Modified;
+                        Inventory.SaveChanges();
+                        log.GenerateHistory(modelOtherAll.IdHistory, modelOtherAll.IdOtherAll, "Разное", idUser,
+                            oldModel,
+                            newModel);
+                        return new ModelReturn<OtherAll>("Обновили Разное: " + modelOtherAllAddAndModified.IdOtherAll, modelOtherAll);
+                    }
+                }
+                Inventory.OtherAlls.Add(modelOtherAllAddAndModified);
+                Inventory.SaveChanges();
+                modelOtherAll.IdOtherAll = modelOtherAllAddAndModified.IdOtherAll;
+                modelOtherAll.IdHistory = modelOtherAllAddAndModified.IdHistory;
+                log.GenerateHistory(modelOtherAll.IdHistory, modelOtherAll.IdOtherAll, "Разное", idUser,
+                   $"Отсутствует модель при добавлении нового устройства",
+                   newModel);
+                return new ModelReturn<OtherAll>("Добавили Разное: " + modelOtherAllAddAndModified.IdOtherAll, modelOtherAll, modelOtherAllAddAndModified.IdOtherAll, modelOtherAllAddAndModified.IdHistory);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<OtherAll>("При обновлении/добавлении данных 'Разное' по : " + modelOtherAllAddAndModified.IdOtherAll + " произошла ошибка смотри log.txt");
+        }
+
+        /// <summary>
+        /// Добавление или обновление модели разного оборудования
+        /// </summary>
+        /// <param name="modelOther">Модель разного оборудования</param>
+        /// <returns></returns>
+        public ModelReturn<ModelOther> AddAndEditModelOther(ModelOther modelOther)
+        {
+            var modelOtherAddAndModified = new ModelOther()
+            {
+                IdModelOther = modelOther.IdModelOther,
+                Name = modelOther.Name
+            };
+            try
+            {
+                if ((from modelOthers in Inventory.ModelOthers
+                    where modelOthers.IdModelOther == modelOtherAddAndModified.IdModelOther
+                    select new { ModelOthers = modelOthers }).Any())
+                {
+                    Inventory.Entry(modelOtherAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<ModelOther>("Обновили справочник модели Разного оборудования: " + modelOtherAddAndModified.IdModelOther, modelOther);
+                }
+                Inventory.ModelOthers.Add(modelOtherAddAndModified);
+                Inventory.SaveChanges();
+                modelOther.IdModelOther = modelOtherAddAndModified.IdModelOther;
+                return new ModelReturn<ModelOther>("Добавили новую модель Разного оборудования: " + modelOtherAddAndModified.IdModelOther, modelOther, modelOtherAddAndModified.IdModelOther);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ModelOther>("При обновлении/добавлении данных 'модели Разного оборудования' по : " + modelOtherAddAndModified.IdModelOther + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление наименование типа оборудования
+        /// </summary>
+        /// <param name="typeOther">Тип оборудования</param>
+        /// <returns></returns>
+        public ModelReturn<TypeOther> AddAndEditTypeOther(TypeOther typeOther)
+        {
+            var typeOtherAddAndModified = new TypeOther()
+            {
+                IdTypeOther = typeOther.IdTypeOther,
+                Name = typeOther.Name
+            };
+            try
+            {
+                if ((from typeOthers in Inventory.TypeOthers
+                    where typeOthers.IdTypeOther == typeOtherAddAndModified.IdTypeOther
+                     select new { TypeOthers = typeOthers }).Any())
+                {
+                    Inventory.Entry(typeOtherAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<TypeOther>("Обновили справочник тип Разного оборудования: " + typeOtherAddAndModified.IdTypeOther, typeOther);
+                }
+                Inventory.TypeOthers.Add(typeOtherAddAndModified);
+                Inventory.SaveChanges();
+                typeOther.IdTypeOther = typeOtherAddAndModified.IdTypeOther;
+                return new ModelReturn<TypeOther>("Добавили новый тип Разного оборудования: " + typeOtherAddAndModified.IdTypeOther, typeOther, typeOtherAddAndModified.IdTypeOther);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<TypeOther>("При обновлении/добавлении данных 'типа Разного оборудования' по : " + typeOtherAddAndModified.IdTypeOther + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Добавление или изменения производителя Разного оборудования
+        /// </summary>
+        /// <param name="proizvoditelOther">Производитель разного оборудования</param>
+        /// <returns></returns>
+        public ModelReturn<ProizvoditelOther> AddAndEditProizvoditelOther(ProizvoditelOther proizvoditelOther)
+        {
+            var proizvoditelOtherAddAndModified = new ProizvoditelOther()
+            {
+                IdProizvoditelOther = proizvoditelOther.IdProizvoditelOther,
+                Name = proizvoditelOther.Name
+            };
+            try
+            {
+                if ((from proizvoditelOthers in Inventory.ProizvoditelOthers
+                    where proizvoditelOthers.IdProizvoditelOther == proizvoditelOtherAddAndModified.IdProizvoditelOther
+                     select new { ProizvoditelOthers = proizvoditelOthers }).Any())
+                {
+                    Inventory.Entry(proizvoditelOtherAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<ProizvoditelOther>("Обновили справочник производитель Разного оборудования: " + proizvoditelOtherAddAndModified.IdProizvoditelOther, proizvoditelOther);
+                }
+                Inventory.ProizvoditelOthers.Add(proizvoditelOtherAddAndModified);
+                Inventory.SaveChanges();
+                proizvoditelOther.IdProizvoditelOther = proizvoditelOtherAddAndModified.IdProizvoditelOther;
+                return new ModelReturn<ProizvoditelOther>("Добавили нового производителя Разного оборудования: " + proizvoditelOtherAddAndModified.IdProizvoditelOther, proizvoditelOther, proizvoditelOtherAddAndModified.IdProizvoditelOther);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ProizvoditelOther>("При обновлении/добавлении данных 'производитель Разного оборудования' по : " + proizvoditelOtherAddAndModified.IdProizvoditelOther + " произошла ошибка смотри log.txt");
+        }
 
         /// <summary>
         /// Добавление или обновление наименование модели принтера(МФУ)
@@ -1349,7 +1506,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         /// <param name="nameFullModel">Наименование наименование модели принтера(МФУ)</param>
         public ModelReturn<FullModel> AddAndEditNameFullModel(FullModel nameFullModel)
         {
-            var nameFullModelAddadnModified = new FullModel()
+            var nameFullModelAddAndModified = new FullModel()
             {
                 IdModel = nameFullModel.IdModel,
                 NameModel = nameFullModel.NameModel,
@@ -1358,23 +1515,23 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             try
             {
                 if ((from FullModels in Inventory.FullModels
-                     where FullModels.IdModel == nameFullModelAddadnModified.IdModel
+                     where FullModels.IdModel == nameFullModelAddAndModified.IdModel
                      select new { FullModels }).Any())
                 {
-                    Inventory.Entry(nameFullModelAddadnModified).State = EntityState.Modified;
+                    Inventory.Entry(nameFullModelAddAndModified).State = EntityState.Modified;
                     Inventory.SaveChanges();
-                    return new ModelReturn<FullModel>("Обновили справочник наименование модели принтера(МФУ): " + nameFullModelAddadnModified.IdModel, nameFullModel);
+                    return new ModelReturn<FullModel>("Обновили справочник наименование модели принтера(МФУ): " + nameFullModelAddAndModified.IdModel, nameFullModel);
                 }
-                Inventory.FullModels.Add(nameFullModelAddadnModified);
+                Inventory.FullModels.Add(nameFullModelAddAndModified);
                 Inventory.SaveChanges();
-                nameFullModel.IdModel = nameFullModelAddadnModified.IdModel;
-                return new ModelReturn<FullModel>("Добавили новое имя модели принтера(МФУ): " + nameFullModelAddadnModified.IdModel, nameFullModel, nameFullModelAddadnModified.IdModel);
+                nameFullModel.IdModel = nameFullModelAddAndModified.IdModel;
+                return new ModelReturn<FullModel>("Добавили новое имя модели принтера(МФУ): " + nameFullModelAddAndModified.IdModel, nameFullModel, nameFullModelAddAndModified.IdModel);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn<FullModel>("При обновлении/добавлении данных 'Наименование модели принтера(МФУ)' по : " + nameFullModelAddadnModified.IdModel + " произошла ошибка смотри log.txt");
+            return new ModelReturn<FullModel>("При обновлении/добавлении данных 'Наименование модели принтера(МФУ)' по : " + nameFullModelAddAndModified.IdModel + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>

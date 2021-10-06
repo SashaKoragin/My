@@ -40,6 +40,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
+			<xs:attribute name="IdDepartment" type="xs:int" use="optional" default="0"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Year" type="xs:int" nillable="false">

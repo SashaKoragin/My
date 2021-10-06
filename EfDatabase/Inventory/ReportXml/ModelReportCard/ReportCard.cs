@@ -65,6 +65,12 @@ namespace EfDatabase.ReportCard {
         
         private string tabelNumberField;
         
+        private int idDepartmentField;
+        
+        public SettingParameters() {
+            this.idDepartmentField = 0;
+        }
+        
         /// <remarks/>
         public int Year {
             get {
@@ -165,6 +171,18 @@ namespace EfDatabase.ReportCard {
             }
             set {
                 this.tabelNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int IdDepartment {
+            get {
+                return this.idDepartmentField;
+            }
+            set {
+                this.idDepartmentField = value;
             }
         }
     }

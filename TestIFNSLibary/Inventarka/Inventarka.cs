@@ -505,7 +505,42 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Monitors());
         }
-
+        /// <summary>
+        /// Запрос всего разного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllOtherAll()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.OtherAll());
+        }
+        /// <summary>
+        /// Все модели разного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllModelOther()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllModelOther());
+        }
+        /// <summary>
+        /// Все типы разного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllTypeOther()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllTypeOther());
+        }
+        /// <summary>
+        /// Все производители разного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllProizvoditelOther()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllProizvoditelOther());
+        }
         /// <summary>
         /// Запрос на все CopySave
         /// </summary>
@@ -1071,8 +1106,73 @@ namespace TestIFNSLibary.Inventarka
            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeClassification(model.Model); }
            return model;
        }
+        /// <summary>
+        /// Добавление объекта в Разное
+        /// </summary>
+        /// <param name="otherAll">Разное</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+       public ModelReturn<OtherAll> AddAndEditOtherAll(OtherAll otherAll, string userIdEdit)
+       {
+           AddObjectDb add = new AddObjectDb();
+           var model = add.AddAndEditOtherAll(otherAll, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+           add.Dispose();
+           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOtherAll(model.Model); }
+           return model;
+       }
+        /// <summary>
+        /// Добавление модели разного
+        /// </summary>
+        /// <param name="modelOther">Наименование модели разного</param>
+        /// <returns></returns>
+        public ModelReturn<ModelOther> AddAndEditModelOther(ModelOther modelOther)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditModelOther(modelOther);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelOther(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Добавление типа разного
+        /// </summary>
+        /// <param name="typeOther">Наименование типа разного</param>
+        /// <returns></returns>
+        public ModelReturn<TypeOther> AddAndEditTypeOther(TypeOther typeOther)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditTypeOther(typeOther);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTypeOther(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Добавление производителя в разное
+        /// </summary>
+        /// <param name="proizvoditelOther">Наименование производителя разного</param>
+        /// <returns></returns>
+        public ModelReturn<ProizvoditelOther> AddAndEditProizvoditelOther(ProizvoditelOther proizvoditelOther)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditProizvoditelOther(proizvoditelOther);
+            add.Dispose();
+            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelOther(model.Model); }
+            return model;
+        }
+        /// <summary>
+        /// Удаление не актуального разного оборудования
+        /// </summary>
+        /// <param name="otherAll">Серверное оборудование</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        public ModelReturn<OtherAll> DeleteOtherAll(OtherAll otherAll, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteOtherAll(otherAll, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteOtherAll(model);
+            return model;
+        }
 
-       public ModelReturn<FullProizvoditel> AddAndEditNameFullProizvoditel(FullProizvoditel nameFullProizvoditel)
+        public ModelReturn<FullProizvoditel> AddAndEditNameFullProizvoditel(FullProizvoditel nameFullProizvoditel)
        {
            AddObjectDb add = new AddObjectDb();
            var model = add.AddAndEditNameFullProizvoditel(nameFullProizvoditel);
@@ -1580,7 +1680,7 @@ namespace TestIFNSLibary.Inventarka
                     model.SettingParameters.UsersReportCard = ((SettingParameters)xml.ReadXmlText(userReportCard, typeof(SettingParameters))).UsersReportCard;
                     foreach (var usersReportCard in model.SettingParameters.UsersReportCard)
                     {
-                        var commandVacation = string.Format(selectFrames.ItemVacation, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
+                        var commandVacation = string.Format(selectFrames.ItemVacationNew, usersReportCard.Tab_num, $"{model.SettingParameters.Year}", $"{model.SettingParameters.Year}");
                         var userVacation = sql.XmlString(_parametrService.ConnectImns51, commandVacation);
                         userVacation = string.Concat("<UsersReportCard>", userVacation, "</UsersReportCard>");
                         usersReportCard.ItemVacation = ((UsersReportCard)xml.ReadXmlText(userVacation, typeof(UsersReportCard))).ItemVacation;

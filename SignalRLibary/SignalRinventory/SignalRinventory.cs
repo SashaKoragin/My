@@ -135,6 +135,15 @@ namespace SignalRLibary.SignalRinventory
             context.Clients.All.SubscribeDeleteServerEquipment(serverEquipment);
         }
         /// <summary>
+        /// Подписка на удаление разного оборудования
+        /// </summary>
+        /// <param name="otherAll"></param>
+        public static void SubscribeDeleteOtherAll(ModelReturn<OtherAll> otherAll)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeDeleteOtherAll(otherAll);
+        }
+        /// <summary>
         /// Удаление монитора подписка пользователя на удаление
         /// </summary>
         /// <param name="modelMonitor">Модель мониторов</param>
@@ -598,6 +607,51 @@ namespace SignalRLibary.SignalRinventory
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeJournalAis3(json.JsonLibaryIgnoreDate(journalAis3));
         }
+        /// <summary>
+        /// Подписка на рассылку разное
+        /// </summary>
+        /// <param name="otherAll">Разное</param>
+        public static void SubscribeOtherAll(OtherAll otherAll)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Разное рассылка пошла: " + otherAll.IdOtherAll + " " + otherAll.Coment));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeOtherAll(json.JsonLibaryIgnoreDate(otherAll));
+        }
+        /// <summary>
+        /// Наименование модели рассылка пошла
+        /// </summary>
+        /// <param name="modelOther">Наименование модели</param>
+        public static void SubscribeModelOther(ModelOther modelOther)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Наименование модели Разное рассылка пошла: " + modelOther.IdModelOther));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeModelOther(json.JsonLibaryIgnoreDate(modelOther));
+        }
+        /// <summary>
+        /// Наименование типа разного оборудования рассылка пошла
+        /// </summary>
+        /// <param name="typeOther">Тип оборудования</param>
+        public static void SubscribeTypeOther(TypeOther typeOther)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Наименование типы разного рассылка пошла: " + typeOther.IdTypeOther));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeTypeOther(json.JsonLibaryIgnoreDate(typeOther));
+        }
+        /// <summary>
+        /// Производитель разного оборудования рассылка пошла
+        /// </summary>
+        /// <param name="proizvoditelOther"></param>
+        public static void SubscribeProizvoditelOther(ProizvoditelOther proizvoditelOther)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Наименование типы разного рассылка пошла: " + proizvoditelOther.IdProizvoditelOther));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeProizvoditelOther(json.JsonLibaryIgnoreDate(proizvoditelOther));
+        }
+
         /// <summary>
         /// Удаление токена ключа подписка пользователя на удаление
         /// </summary>

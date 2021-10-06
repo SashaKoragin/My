@@ -408,7 +408,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                         paragraphGenerate.RunParagraphGeneratorStandart(branch?.DataCreateBranch?.ToString("dd.MM.yyyy")),
                         "0", TableWidthUnitValues.Nil, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
                     cellCollection.Add(CellGenerate.GenerateCell(
-                        paragraphGenerate.RunParagraphGeneratorStandart($"{branch?.IndexAddress},{branch?.RegionAddress},{branch?.DistrictAddress},{branch?.TownAddress},{branch?.LocalityAddress},{branch?.StreetAddress},{branch?.HouseAddress},{branch?.BodyAddress},{branch?.ApartmentAddress}"),
+                        paragraphGenerate.RunParagraphGeneratorStandart($"{branch?.RegionAddress}"),
                         "0", TableWidthUnitValues.Nil, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
                     cellCollection.Add(CellGenerate.GenerateCell(
                         paragraphGenerate.RunParagraphGeneratorStandart(branch?.DataCloseBranch?.ToString("dd.MM.yyyy")),

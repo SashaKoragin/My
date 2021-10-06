@@ -1086,5 +1086,84 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreateMemoReport", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<Stream> CreateMemoReport(ModelMemoReport memoReport);
-   }
+        /// <summary>
+        /// Запрос всего разного оборудования
+        /// http://localhost:8182/Inventarka/AllOtherAll
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllOtherAll", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllOtherAll();
+        /// <summary>
+        /// Все модели разного оборудования
+        /// http://localhost:8182/Inventarka/AllModelOther
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllModelOther", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllModelOther();
+        /// <summary>
+        /// Все типы разного оборудования
+        /// http://localhost:8182/Inventarka/AllTypeOther
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllTypeOther", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllTypeOther();
+        /// <summary>
+        /// Все производители разного оборудования
+        /// http://localhost:8182/Inventarka/AllProizvoditelOther
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllProizvoditelOther", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllProizvoditelOther();
+        /// <summary>
+        /// http://localhost:8182/Inventarka/AddAndEditOtherAll
+        /// Добавление объекта в Разное
+        /// </summary>
+        /// <param name="otherAll">Разное</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditOtherAll?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<OtherAll> AddAndEditOtherAll(OtherAll otherAll, string userIdEdit);
+        /// <summary>
+        /// http://localhost:8182/Inventarka/AddAndEditModelOther
+        /// Добавление модели разного
+        /// </summary>
+        /// <param name="modelOther">Наименование модели разного</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditModelOther", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<ModelOther> AddAndEditModelOther(ModelOther modelOther);
+        /// <summary>
+        /// http://localhost:8182/Inventarka/AddAndEditTypeOther
+        /// Добавление типа разного
+        /// </summary>
+        /// <param name="typeOther">Наименование типа разного</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditTypeOther", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<TypeOther> AddAndEditTypeOther(TypeOther typeOther);
+        /// <summary>
+        /// http://localhost:8182/Inventarka/AddAndEditProizvoditelOther
+        /// Добавление производителя в разное
+        /// </summary>
+        /// <param name="proizvoditelOther">Наименование производителя разного</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditProizvoditelOther", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<ProizvoditelOther> AddAndEditProizvoditelOther(ProizvoditelOther proizvoditelOther);
+
+        /// <summary>
+        /// Удаление не актуального разного оборудования
+        /// </summary>
+        /// <param name="otherAll">Разное</param>
+        /// <param name="userIdEdit">Пользователь</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteOtherAll?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<OtherAll> DeleteOtherAll(OtherAll otherAll, string userIdEdit);
+    }
 }

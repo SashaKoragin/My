@@ -472,7 +472,6 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                        new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], nameGroup)).ToArray();
                }
                return userLotus;
-
            }
            catch (Exception e)
            {
@@ -511,22 +510,37 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             try
             {
                 ModelSelect selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(48) };
+                if (model.SettingParameters.IdDepartment != 0)
+                {
+                    model.SettingParameters.TabelNumber = Inventory.Database.SqlQuery<string>(selectModel.LogicaSelect.SelectUser,
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 5),
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], DBNull.Value),
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth),
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], model.SettingParameters.IdDepartment)).FirstOrDefault();
+                }
                 model.SettingParameters.LeaderN = Inventory.Database.SqlQuery<LeaderN>(selectModel.LogicaSelect.SelectUser,
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 1),
                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], DBNull.Value),
-                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth)).FirstOrDefault();
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], DBNull.Value)).FirstOrDefault();
                 model.SettingParameters.LeaderD = Inventory.Database.SqlQuery<LeaderD>(selectModel.LogicaSelect.SelectUser,
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 2),
-                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], model.SettingParameters.TabelNumber),
-                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth)).FirstOrDefault();
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], model.SettingParameters.TabelNumber),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3],
+                        model.SettingParameters.IdDepartment != 0 ? 
+                        (IConvertible)model.SettingParameters.IdDepartment
+                        : DBNull.Value)).FirstOrDefault();
                 model.SettingParameters.LeaderKadr = Inventory.Database.SqlQuery<LeaderKadr>(selectModel.LogicaSelect.SelectUser,
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 3),
                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], DBNull.Value),
-                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth)).FirstOrDefault();
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], DBNull.Value)).FirstOrDefault();
                 model.SettingParameters.Holidays = Inventory.Database.SqlQuery<Holidays>(selectModel.LogicaSelect.SelectUser,
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], 4),
                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], DBNull.Value),
-                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth)).ToArray();
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], model.SettingParameters.Mouth.NumberMouth),
+                                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], DBNull.Value)).ToArray();
             }
             catch (Exception e)
             {

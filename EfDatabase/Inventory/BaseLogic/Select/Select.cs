@@ -177,7 +177,42 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.Monitors.Where(x => x.IdStatus != 31));
         }
-
+        /// <summary>
+        /// Разное оборудование
+        /// </summary>
+        /// <returns></returns>
+        public string OtherAll()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.OtherAlls.Where(x => x.IdStatus != 31));
+        }
+        /// <summary>
+        /// Все модели разного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public string AllModelOther()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.ModelOthers);
+        }
+        /// <summary>
+        /// Все типы разного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public string AllTypeOther()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.TypeOthers);
+        }
+        /// <summary>
+        /// Все производители разного оборудования
+        /// </summary>
+        /// <returns></returns>
+        public string AllProizvoditelOther()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.ProizvoditelOthers);
+        }
         /// <summary>
         /// Запрос всех CopySave с БД
         /// </summary>

@@ -14,6 +14,7 @@ using EfDatabaseXsdQrCodeModel;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.Drawing;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator;
 using LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator;
+using Organization = EfDatabase.Inventory.Base.Organization;
 
 namespace LibaryDocumentGenerator.ProgrammView.FullDocument
 {
@@ -1401,6 +1402,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             Body body = new Body();
             var paragraphGenerate = new RunGenerate();
             var nameOrganization = "Межрайонной ИФНС России №51 по г. Москве";
+            var paragraphDepartmentBoss = paragraphGenerate.RunParagraphGeneratorStandart();
             var paragraph = paragraphGenerate.RunParagraphGeneratorStandart();
             var paragraphPrl = paragraphGenerate.RunParagraphGeneratorStandart();
             var paragraphMemo = paragraphGenerate.RunParagraphGeneratorStandart();
@@ -1416,6 +1418,11 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             var rows = new RowGenerate();
             var paragraphR1 = rows.FormulHeightRow(0.10);
             var paragraphR2 = rows.FormulHeightRow(0.10);
+
+            paragraphDepartmentBoss = template.SelectParameterDocument.TypeDocument == 1 ||
+                                      template.SelectParameterDocument.TypeDocument == 3
+                ? paragraphGenerate.RunParagraphGeneratorStandart("Начальнику отдела информационной безопасности", "26")
+                : paragraphGenerate.RunParagraphGeneratorStandart("Начальнику отдела информационных технологий", "26");
             if (template.SelectParameterDocument.TypeDocument != 2)
             {
                 paragraph = paragraphGenerate.RunParagraphGeneratorStandart("к Порядку доступа к информационным, программным ", "18", JustificationValues.Both, 0, "0", true);
@@ -1463,7 +1470,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
            
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(template.UserDepartment.NameOtdel,"26"), CellGenerate.FormulWidthCell(10.50),
                 TableWidthUnitValues.Auto, "100"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Начальнику отдела информатизации", "26"), CellGenerate.FormulWidthCell(8.50),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphDepartmentBoss, CellGenerate.FormulWidthCell(8.50),
                 TableWidthUnitValues.Auto, "100"));
             table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(2.00)));
 

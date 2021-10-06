@@ -263,7 +263,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             var stileIsFullBorderCenterBottomBold = style.StyleTimesNewRoman(fontModel.GenerateFont(8D,true), modelBorder.GenerateStandardFullBorder(), HorizontalAlignmentValues.Center,VerticalAlignmentValues.Top);
             var stileIsFullBorderCenterCenter = style.StyleTimesNewRoman(fontModel.GenerateFont(10D), modelBorder.GenerateStandardFullBorder(), HorizontalAlignmentValues.Center, VerticalAlignmentValues.Center);
             var stileIsFullBorderCenterBottom = style.StyleTimesNewRoman(fontModel.GenerateFont(10D), modelBorder.GenerateStandardFullBorder(), HorizontalAlignmentValues.Center, VerticalAlignmentValues.Top);
-            var stileIsNotBorderCenter = style.StyleTimesNewRoman(fontModel.GenerateFont(10D), null,HorizontalAlignmentValues.Center);
+            var stileIsNotBorderCenter = style.StyleTimesNewRoman(fontModel.GenerateFont(9D), null,HorizontalAlignmentValues.Center);
             var stileIsNotBorderCenterFontNine = style.StyleTimesNewRoman(fontModel.GenerateFont(8D), null, HorizontalAlignmentValues.Center );
             var stileIsNotBorderLeft = style.StyleTimesNewRoman(fontModel.GenerateFont(10D));
             var stileIsNotBorderRight = style.StyleTimesNewRoman(fontModel.GenerateFont(10D), modelBorder.GenerateBottomBorder(), HorizontalAlignmentValues.Right);
@@ -307,7 +307,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             var styleMedium4 = style.StyleTimesNewRoman(fontModel.GenerateFont(10D),
                 modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.MediumDashDot, BorderStyleValues.None,
                     BorderStyleValues.None, BorderStyleValues.None),HorizontalAlignmentValues.Center);
-            var styleMedium5 = style.StyleTimesNewRoman(fontModel.GenerateFont(10D),
+            var styleMedium5 = style.StyleTimesNewRoman(fontModel.GenerateFont(9D),
                 modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.None, BorderStyleValues.MediumDashDot,
                     BorderStyleValues.None, BorderStyleValues.None));
             var styleMediumR5 = style.StyleTimesNewRoman(fontModel.GenerateFont(10D),
@@ -323,20 +323,11 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.None, BorderStyleValues.None,
                     BorderStyleValues.None, BorderStyleValues.MediumDashDot));
             var listValueCell = new List<ModelRowFormat>();
+            generateCellAndRowsStyle.GenerateEmptyCell(ref listValueCell, 3.75D, 42, columnModelWidth.ListColumnWidthReportCard);
             listValueCell.Add(new ModelRowFormat() { HeightRow = 12.75D, ModelCell = new List<ModelCellFormat>()
                 {
-                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 26, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 27, IndexCellFinish = 15,ValueCell = "У Т В Е Р Ж Д А Ю", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenter, MergeHorizontalInt = 15 }
-                }
-            });
-            generateCellAndRowsStyle.GenerateEmptyCell(ref listValueCell,12.75D,42,columnModelWidth.ListColumnWidthReportCard);
-            listValueCell.Add(new ModelRowFormat()
-            {
-                HeightRow = 12.75D,
-                ModelCell = new List<ModelCellFormat>()
-                {
-                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 22, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 23, IndexCellFinish = 4,ValueCell = "Руководитель", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderLeft, MergeHorizontalInt = 4 }
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 24, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 25, IndexCellFinish = 13,ValueCell = "У Т В Е Р Ж Д А Ю", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenter, MergeHorizontalInt = 15 }
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -344,12 +335,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 HeightRow = 12.75D,
                 ModelCell = new List<ModelCellFormat>()
                 {
-                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 22, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 23, IndexCellFinish = 4, ValueCell = "учреждения", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderLeft, MergeHorizontalInt = 4 },
-                    new ModelCellFormat() { IndexCellStart = 27, IndexCellFinish = 1, CellFormat = CellValues.String},
-                    new ModelCellFormat() { IndexCellStart = 28, IndexCellFinish = 3, CellFormat = CellValues.String, StyleIndex = stileIsNotBorderRight },
-                    new ModelCellFormat() { IndexCellStart = 31, IndexCellFinish = 1, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 32, IndexCellFinish = 10, ValueCell = model.SettingParameters.LeaderN.NameFaceLeader,  CellFormat = CellValues.String, StyleIndex = stileIsNotBorderRight, MergeHorizontalInt = 10 }
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 20, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 4,ValueCell = "Руководитель", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderLeft, MergeHorizontalInt = 4 }
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -357,10 +344,23 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 HeightRow = 12.75D,
                 ModelCell = new List<ModelCellFormat>()
                 {
-                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 27, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 28, IndexCellFinish = 3, ValueCell = "(подпись)", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenterFontNine, MergeHorizontalInt = 3 },
-                    new ModelCellFormat() { IndexCellStart = 31, IndexCellFinish = 1, CellFormat = CellValues.String},
-                    new ModelCellFormat() { IndexCellStart = 32, IndexCellFinish = 10, ValueCell = "(расшифровка подписи)",  CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenterFontNine, MergeHorizontalInt = 10 }
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 20, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 4, ValueCell = "учреждения", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderLeft, MergeHorizontalInt = 4 },
+                    new ModelCellFormat() { IndexCellStart = 25, IndexCellFinish = 1, CellFormat = CellValues.String},
+                    new ModelCellFormat() { IndexCellStart = 26, IndexCellFinish = 3, CellFormat = CellValues.String, StyleIndex = stileIsNotBorderRight },
+                    new ModelCellFormat() { IndexCellStart = 29, IndexCellFinish = 1, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 30, IndexCellFinish = 8, ValueCell = model.SettingParameters.LeaderN.NameFaceLeader,  CellFormat = CellValues.String, StyleIndex = stileIsNotBorderRight, MergeHorizontalInt = 10 }
+                }
+            });
+            listValueCell.Add(new ModelRowFormat()
+            {
+                HeightRow = 12.75D,
+                ModelCell = new List<ModelCellFormat>()
+                {
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 25, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 26, IndexCellFinish = 3, ValueCell = "(подпись)", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenterFontNine, MergeHorizontalInt = 3 },
+                    new ModelCellFormat() { IndexCellStart = 29, IndexCellFinish = 1, CellFormat = CellValues.String},
+                    new ModelCellFormat() { IndexCellStart = 30, IndexCellFinish = 8, ValueCell = "(расшифровка подписи)",  CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenterFontNine, MergeHorizontalInt = 10 }
                 }
             });
             generateCellAndRowsStyle.GenerateEmptyCell(ref listValueCell, 12.75D, 42);
@@ -369,8 +369,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 HeightRow = 12.75D,
                 ModelCell = new List<ModelCellFormat>()
                 {
-                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 28, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 29, IndexCellFinish = 13, ValueCell = "\"     \"_________________   ______г.", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenter, MergeHorizontalInt = 13 },
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 26, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 27, IndexCellFinish = 11, ValueCell = "\"     \"_________________   ______г.", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenter, MergeHorizontalInt = 13 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -379,7 +379,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 ModelCell = new List<ModelCellFormat>()
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 2, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 30, ValueCell = $"Табель  № {model.SettingParameters.LeaderD.CodeDepartment}_{model.SettingParameters.Mouth.NumberMouthString}", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenterBold, MergeHorizontalInt = 30 },
+                    new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 29, ValueCell = $"Табель  № {model.SettingParameters.LeaderD.CodeDepartment}_{model.SettingParameters.Mouth.NumberMouthString}", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenterBold, MergeHorizontalInt = 30 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -388,7 +388,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 ModelCell = new List<ModelCellFormat>()
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 2, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 30, ValueCell = "учета использования рабочего времени", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenterBold, MergeHorizontalInt = 30 },
+                    new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 29, ValueCell = "учета использования рабочего времени", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderCenterBold, MergeHorizontalInt = 30 },
                 }
             });
 
@@ -397,8 +397,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 HeightRow = 12.75D,
                 ModelCell = new List<ModelCellFormat>()
                 {
-                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 38, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 39, IndexCellFinish = 4, ValueCell = "КОДЫ", CellFormat = CellValues.String, StyleIndex = stileT1, MergeHorizontalInt = 4 },
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 34, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 4, ValueCell = "КОДЫ", CellFormat = CellValues.String, StyleIndex = stileT1, MergeHorizontalInt = 4 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -406,8 +406,9 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 HeightRow = 12.75D,
                 ModelCell = new List<ModelCellFormat>()
                 {
-                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 38, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 39, IndexCellFinish = 4, ValueCell = "0504421", CellFormat = CellValues.Number, StyleIndex = stileT2, MergeHorizontalInt = 4 },
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 29, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 30, IndexCellFinish = 5, ValueCell = "Форма  по ОКУД", CellFormat = CellValues.String, MergeHorizontalInt = 5, StyleIndex = stileIsNotBorderRight10 },
+                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 4, ValueCell = "0504421", CellFormat = CellValues.Number, StyleIndex = stileT2, MergeHorizontalInt = 4 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -420,9 +421,10 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     new ModelCellFormat() { IndexCellStart = 7, IndexCellFinish = 5, ValueCell = CultureInfo.CreateSpecificCulture("ru-Ru").DateTimeFormat.MonthGenitiveNames[model.SettingParameters.Mouth.NumberMouth - 1].ToLower(), CellFormat = CellValues.String, StyleIndex = stileIsBorderBottomCenter12, MergeHorizontalInt = 5 },
                     new ModelCellFormat() { IndexCellStart = 12, IndexCellFinish = 1, CellFormat = CellValues.String },
                     new ModelCellFormat() { IndexCellStart = 13, IndexCellFinish = 3, ValueCell = model.SettingParameters.Year.ToString(), CellFormat = CellValues.Number, StyleIndex = stileIsBorderBottomCenter12, MergeHorizontalInt = 3  },
-                    new ModelCellFormat() { IndexCellStart = 16, IndexCellFinish = 1, ValueCell = "г", CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 17, IndexCellFinish = 22, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 39, IndexCellFinish = 4, ValueCell = $"{countDaysCell}.{model.SettingParameters.Mouth.NumberMouthString}.{model.SettingParameters.Year}", CellFormat = CellValues.String, StyleIndex = stileT3, MergeHorizontalInt = 4 },
+                    new ModelCellFormat() { IndexCellStart = 16, IndexCellFinish = 1, ValueCell = "г", CellFormat = CellValues.String, StyleIndex = stileIsNotBorderLeft },
+                    new ModelCellFormat() { IndexCellStart = 17, IndexCellFinish = 16, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 33, IndexCellFinish = 2,ValueCell = "Дата", CellFormat = CellValues.String, MergeHorizontalInt = 2, StyleIndex = stileIsNotBorderRight10  },
+                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 4, ValueCell = $"{countDaysCell}.{model.SettingParameters.Mouth.NumberMouthString}.{model.SettingParameters.Year}", CellFormat = CellValues.String, StyleIndex = stileT3, MergeHorizontalInt = 4 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -430,8 +432,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 HeightRow = 12.75D,
                 ModelCell = new List<ModelCellFormat>()
                 {
-                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 38, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 39, IndexCellFinish = 4, ValueCell = "09770165", CellFormat = CellValues.Number, StyleIndex = stileT3, MergeVerticalInt = 1, MergeHorizontalSquare = 4},
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 34, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 4, ValueCell = "09770165", CellFormat = CellValues.Number, StyleIndex = stileT3, MergeVerticalInt = 1, MergeHorizontalSquare = 4},
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -440,9 +442,10 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 ModelCell = new List<ModelCellFormat>()
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 4,ValueCell = "Учреждение", StyleIndex = stileIsNotBorderRight10, CellFormat = CellValues.String, MergeHorizontalInt = 4 },
-                    new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 25,ValueCell = model.SettingParameters.LeaderN.NameFullOrganization, StyleIndex = stileIsBorderBottomLeft12, CellFormat = CellValues.String, MergeHorizontalInt = 25 },
-                    new ModelCellFormat() { IndexCellStart = 30, IndexCellFinish = 9,  CellFormat = CellValues.String},
-                    new ModelCellFormat() { IndexCellStart = 39, IndexCellFinish = 4, CellFormat = CellValues.String, StyleIndex = stileT3},
+                    new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 24,ValueCell = model.SettingParameters.LeaderN.NameFullOrganization, StyleIndex = stileIsBorderBottomLeft12, CellFormat = CellValues.String, MergeHorizontalInt = 24 },
+                    new ModelCellFormat() { IndexCellStart = 29, IndexCellFinish = 3,  CellFormat = CellValues.String},
+                    new ModelCellFormat() { IndexCellStart = 32, IndexCellFinish = 3,ValueCell = "по ОКПО",  CellFormat = CellValues.String, MergeHorizontalInt = 3, StyleIndex = stileIsNotBorderRight10},
+                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 4, CellFormat = CellValues.String, StyleIndex = stileT3},
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -451,9 +454,9 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 ModelCell = new List<ModelCellFormat>()
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 4, ValueCell = "Структурное подразделение", StyleIndex = stileIsNotBorderRight10, CellFormat = CellValues.String, MergeHorizontalInt = 4 },
-                    new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 25, ValueCell = model.SettingParameters.LeaderD.NameDepartment, StyleIndex = stileIsBorderBottomLeft12, CellFormat = CellValues.String, MergeHorizontalInt = 25 },
-                    new ModelCellFormat() { IndexCellStart = 30, IndexCellFinish = 9,  CellFormat = CellValues.String},
-                    new ModelCellFormat() { IndexCellStart = 39, IndexCellFinish = 4, ValueCell = model.SettingParameters.LeaderD.CodeDepartment, CellFormat = CellValues.String, StyleIndex = stileT3, MergeHorizontalInt = 4},
+                    new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 24, ValueCell = model.SettingParameters.LeaderD.NameDepartment, StyleIndex = stileIsBorderBottomLeft12, CellFormat = CellValues.String, MergeHorizontalInt = 24 },
+                    new ModelCellFormat() { IndexCellStart = 29, IndexCellFinish = 6,  CellFormat = CellValues.String},
+                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 4, ValueCell = model.SettingParameters.LeaderD.CodeDepartment, CellFormat = CellValues.String, StyleIndex = stileT3, MergeHorizontalInt = 4},
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -463,8 +466,9 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 4, ValueCell = "Вид табеля", StyleIndex = stileIsNotBorderRight10, CellFormat = CellValues.String, MergeHorizontalInt = 4 },
                     new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 17, ValueCell = model.SettingParameters.View.NameView.ToLower(), StyleIndex = stileIsBorderBottomLeft12, CellFormat = CellValues.String, MergeHorizontalInt = 17 },
-                    new ModelCellFormat() { IndexCellStart = 22, IndexCellFinish = 17,  CellFormat = CellValues.String},
-                    new ModelCellFormat() { IndexCellStart = 39, IndexCellFinish = 4, ValueCell = model.SettingParameters.View.IdView.ToString(), CellFormat = CellValues.Number, StyleIndex = stileT3, MergeHorizontalInt = 4},
+                    new ModelCellFormat() { IndexCellStart = 22, IndexCellFinish = 6,  CellFormat = CellValues.String},
+                    new ModelCellFormat() { IndexCellStart = 28, IndexCellFinish = 7,ValueCell = "Номер корректировки",   CellFormat = CellValues.String, MergeHorizontalInt = 7, StyleIndex = stileIsNotBorderRight10},
+                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 4, ValueCell = model.SettingParameters.View.IdView.ToString(), CellFormat = CellValues.Number, StyleIndex = stileT3, MergeHorizontalInt = 4},
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -474,8 +478,9 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 4, CellFormat = CellValues.String },
                     new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 17, ValueCell = "(первичный - 0; корректирующий - 1, 2 и т. д.)", StyleIndex = stileIsNotBorderCenter, CellFormat = CellValues.String, MergeHorizontalInt = 17 },
-                    new ModelCellFormat() { IndexCellStart = 22, IndexCellFinish = 17,  CellFormat = CellValues.String},
-                    new ModelCellFormat() { IndexCellStart = 39, IndexCellFinish = 4, ValueCell = DateTime.Now.ToString("dd.MM.yyyy"), CellFormat = CellValues.String, StyleIndex =  stileT4, MergeHorizontalInt = 4},
+                    new ModelCellFormat() { IndexCellStart = 22, IndexCellFinish = 4,  CellFormat = CellValues.String},
+                    new ModelCellFormat() { IndexCellStart = 26, IndexCellFinish = 9,ValueCell = "Дата формирования документа",   CellFormat = CellValues.String, MergeHorizontalInt = 9, StyleIndex = stileIsNotBorderRight10},
+                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 4, ValueCell = DateTime.Now.ToString("dd.MM.yyyy"), CellFormat = CellValues.String, StyleIndex =  stileT4, MergeHorizontalInt = 4},
                 }
             });
             generateCellAndRowsStyle.GenerateEmptyCell(ref listValueCell, 12.75D, 42);
@@ -501,7 +506,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             {
                 if (i == 16)
                 {
-                    listModelCellGenerate.Add(new ModelCellFormat() { IndexCellStart = indexStart, ValueCell = "Итого дней (часов) явок (неявок)за месяц", IndexCellFinish = 1, StyleIndex = stileIsFullBorderCenterBottomBold, CellFormat = CellValues.String, MergeVerticalInt = 2 });
+                    listModelCellGenerate.Add(new ModelCellFormat() { IndexCellStart = indexStart, ValueCell = "Итого дней (часов) явок (неявок) с 1 по 15", IndexCellFinish = 1, StyleIndex = stileIsFullBorderCenterBottomBold, CellFormat = CellValues.String, MergeVerticalInt = 2 });
                     indexStart++;
                 }
                 listModelCellGenerate.Add(new ModelCellFormat() { IndexCellStart = indexStart, ValueCell = i.ToString(), IndexCellFinish = 1, StyleIndex = stileIsFullBorderCenterBottom, CellFormat = CellValues.Number, MergeVerticalInt = 2 });
@@ -559,7 +564,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             });
 
             var iNumber = 1;
-            var notCount = new[] { "ОЧ","ОТ","Б","А","ОД","ОУ","К" };
+            var notCount = new[] { "ОЧ","ОТ","Б","А","ОД","ОУ","К" }; //Не считать
             bool exitTypeModelReport = true;
             foreach (var usersReportCard in model.SettingParameters.UsersReportCard)
             {
@@ -653,8 +658,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     new ModelCellFormat() { IndexCellStart = 12, IndexCellFinish = 7, ValueCell = model.SettingParameters.LeaderD.NameLeaderDepartment, StyleIndex = stileIsBorderBottomCenter10, CellFormat = CellValues.String, MergeHorizontalInt = 7},
                     new ModelCellFormat() { IndexCellStart = 19, IndexCellFinish = 1, CellFormat = CellValues.String },
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium1 },
-                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 20, CellFormat = CellValues.String, StyleIndex = styleMedium2 },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium3 },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 17, CellFormat = CellValues.String, StyleIndex = styleMedium2 },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium3 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -671,8 +676,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     new ModelCellFormat() { IndexCellStart = 19, IndexCellFinish = 1, CellFormat = CellValues.String },
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium4 },
                     new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 14, ValueCell = "Отметка бухгалтерии о принятии настоящего табеля", CellFormat =  CellValues.String, StyleIndex = stileIsNotBorderLeft, MergeHorizontalInt = 14 },
-                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 6, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
+                    new ModelCellFormat() { IndexCellStart = 35, IndexCellFinish = 3, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -682,8 +687,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 19, StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String},
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium4 },
-                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 20, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 17, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -699,8 +704,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     new ModelCellFormat() { IndexCellStart = 12, IndexCellFinish = 7, ValueCell = model.SettingParameters.LeaderD.NameIspDepartment, StyleIndex = stileIsBorderBottomCenter10, CellFormat = CellValues.String, MergeHorizontalInt = 7},
                     new ModelCellFormat() { IndexCellStart = 19, IndexCellFinish = 1, CellFormat = CellValues.String },
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium4 },
-                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 20, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 17, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -716,8 +721,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     new ModelCellFormat() { IndexCellStart = 12, IndexCellFinish = 7, ValueCell ="(расшифровка подписи)", StyleIndex = stileIsNotBorderCenter, CellFormat = CellValues.String, MergeHorizontalInt = 7},
                     new ModelCellFormat() { IndexCellStart = 19, IndexCellFinish = 1, CellFormat = CellValues.String },
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium4 },
-                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 20, CellFormat =  CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 17, CellFormat =  CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -727,8 +732,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 19, StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String},
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium4 },
-                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 20, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 17, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -738,8 +743,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 19, StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String},
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium4 },
-                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 20, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 17, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -755,13 +760,12 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     new ModelCellFormat() { IndexCellStart = 12, IndexCellFinish = 7, ValueCell = model.SettingParameters.LeaderKadr.NameKadr, StyleIndex = stileIsBorderBottomCenter10, CellFormat = CellValues.String, MergeHorizontalInt = 7},
                     new ModelCellFormat() { IndexCellStart = 19, IndexCellFinish = 1, CellFormat = CellValues.String },
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 4, ValueCell = "Исполнитель", CellFormat = CellValues.String, StyleIndex = styleMedium4, MergeHorizontalInt = 4 },
-                    new ModelCellFormat() { IndexCellStart = 24, IndexCellFinish = 1, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 25, IndexCellFinish = 5, CellFormat = CellValues.String, StyleIndex = stileIsBorderBottomCenter10 },
-                    new ModelCellFormat() { IndexCellStart = 30, IndexCellFinish = 1, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 31, IndexCellFinish = 2, CellFormat = CellValues.String, StyleIndex = stileIsBorderBottomCenter10 },
-                    new ModelCellFormat() { IndexCellStart = 33, IndexCellFinish = 5, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 3, CellFormat = CellValues.String, StyleIndex = stileIsBorderBottomCenter10 },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMediumR5 },
+                    new ModelCellFormat() { IndexCellStart = 24, IndexCellFinish = 5, CellFormat = CellValues.String, StyleIndex = stileIsBorderBottomCenter10 },
+                    new ModelCellFormat() { IndexCellStart = 29, IndexCellFinish = 1, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 30, IndexCellFinish = 2, CellFormat = CellValues.String, StyleIndex = stileIsBorderBottomCenter10 },
+                    new ModelCellFormat() { IndexCellStart = 32, IndexCellFinish = 1, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 33, IndexCellFinish = 5, CellFormat = CellValues.String, StyleIndex = stileIsBorderBottomCenter10 },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMediumR5 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -777,11 +781,10 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     new ModelCellFormat() { IndexCellStart = 12, IndexCellFinish = 7, ValueCell ="(расшифровка подписи)", StyleIndex = stileIsNotBorderCenter, CellFormat = CellValues.String, MergeHorizontalInt = 7},
                     new ModelCellFormat() { IndexCellStart = 19, IndexCellFinish = 1, CellFormat = CellValues.String },
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium4},
-                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 4, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 25, IndexCellFinish = 5, ValueCell = "(должность)", StyleIndex = stileIsNotBorderCenter,  CellFormat = CellValues.String, MergeHorizontalInt = 5 },
-                    new ModelCellFormat() { IndexCellStart = 30, IndexCellFinish = 4, ValueCell = "(подпись)", StyleIndex = stileIsNotBorderCenter, CellFormat = CellValues.String, MergeHorizontalInt = 4 },
-                    new ModelCellFormat() { IndexCellStart = 34, IndexCellFinish = 7, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 3, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 24, IndexCellFinish = 5, ValueCell = "(должность)", StyleIndex = stileIsNotBorderCenter,  CellFormat = CellValues.String, MergeHorizontalInt = 5 },
+                    new ModelCellFormat() { IndexCellStart = 29, IndexCellFinish = 4, ValueCell = "(подпись)", StyleIndex = stileIsNotBorderCenter, CellFormat = CellValues.String, MergeHorizontalInt = 4 },
+                    new ModelCellFormat() { IndexCellStart = 33, IndexCellFinish = 6, ValueCell = "(расшифровка подписи)", CellFormat = CellValues.String, StyleIndex = styleMedium5, MergeHorizontalInt = 6 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -791,8 +794,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 19, StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String},
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium4 },
-                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 20, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 17, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 },
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -811,14 +814,14 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     new ModelCellFormat() { IndexCellStart = 14, IndexCellFinish = 6, StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String },
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium4},
                     new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 1, ValueCell ="\"", StyleIndex = stileIsNotBorderRight10, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 22, IndexCellFinish = 2, StyleIndex = stileIsBorderBottomCenter10, CellFormat = CellValues.String},
-                    new ModelCellFormat() { IndexCellStart = 24, IndexCellFinish = 1, ValueCell ="\"", StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 25, IndexCellFinish = 6, StyleIndex = stileIsBorderBottomCenter10, CellFormat = CellValues.String},
-                    new ModelCellFormat() { IndexCellStart = 31, IndexCellFinish = 1, ValueCell ="20", StyleIndex = stileIsNotBorderRight10, CellFormat = CellValues.Number },
-                    new ModelCellFormat() { IndexCellStart = 32, IndexCellFinish = 1, StyleIndex = stileIsBorderBottomCenter10, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 33, IndexCellFinish = 1, ValueCell ="г.", StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 34, IndexCellFinish = 7, CellFormat = CellValues.String },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 }
+                    new ModelCellFormat() { IndexCellStart = 22, IndexCellFinish = 1, StyleIndex = stileIsBorderBottomCenter10, CellFormat = CellValues.String},
+                    new ModelCellFormat() { IndexCellStart = 23, IndexCellFinish = 1, ValueCell ="\"", StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 24, IndexCellFinish = 6, StyleIndex = stileIsBorderBottomCenter10, CellFormat = CellValues.String},
+                    new ModelCellFormat() { IndexCellStart = 30, IndexCellFinish = 1, ValueCell ="20", StyleIndex = stileIsNotBorderRight10, CellFormat = CellValues.Number },
+                    new ModelCellFormat() { IndexCellStart = 31, IndexCellFinish = 1, StyleIndex = stileIsBorderBottomCenter10, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 32, IndexCellFinish = 1, ValueCell ="г.", StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 33, IndexCellFinish = 5, CellFormat = CellValues.String },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium5 }
                 }
             });
             listValueCell.Add(new ModelRowFormat()
@@ -828,8 +831,8 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                 {
                     new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 19, StyleIndex = stileIsNotBorderLeft, CellFormat = CellValues.String},
                     new ModelCellFormat() { IndexCellStart = 20, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium6 },
-                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 20, CellFormat = CellValues.String, StyleIndex = styleMedium8 },
-                    new ModelCellFormat() { IndexCellStart = 41, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium7 },
+                    new ModelCellFormat() { IndexCellStart = 21, IndexCellFinish = 17, CellFormat = CellValues.String, StyleIndex = styleMedium8 },
+                    new ModelCellFormat() { IndexCellStart = 38, IndexCellFinish = 1, CellFormat = CellValues.String, StyleIndex = styleMedium7 },
                 }
             });
 
@@ -866,6 +869,16 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
         {
             if (userCard.Status_link == 5)
             {
+                if (userCard.ItemVacation != null)
+                {
+                    foreach (var itemVacation in userCard.ItemVacation)
+                    {
+                        if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end && (itemVacation.TypeVacation.Code == "20" || itemVacation.TypeVacation.Code == "21"))
+                        {
+                            return "А";
+                        }
+                    }
+                }
                 return "ОЧ";
             }
             if (userCard.Date_out != DateTime.MinValue)
@@ -875,11 +888,15 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     return "-";
                 }
             }
+            if (date < userCard.Date_in)
+            {
+                return "-";
+            }
             if (userCard.ItemVacation != null)
             {
                 foreach (var itemVacation in userCard.ItemVacation)
                 {
-                    if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end && itemVacation.TypeVacation.Code == "20")
+                    if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end && (itemVacation.TypeVacation.Code == "20" || itemVacation.TypeVacation.Code == "21"))
                     {
                         return "А";
                     }
@@ -890,6 +907,10 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end && (itemVacation.TypeVacation.Code == "13"|| itemVacation.TypeVacation.Code == "16"))
                     {
                         return "ОД";
+                    }
+                    if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end && (itemVacation.TypeVacation.Code == "42" || itemVacation.TypeVacation.Code == "43"))
+                    {
+                        return "ОЧ";
                     }
                     if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end)
                     {

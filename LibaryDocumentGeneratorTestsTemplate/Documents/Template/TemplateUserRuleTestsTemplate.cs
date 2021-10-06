@@ -44,7 +44,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
         public void TestReportNote()
         {
             var model = new EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost.ModelGetPost();
-            var card = model.CardUi("7729380970", 2021);
+            var card = model.CardUi("7810942860", 2021);
             ReportNote report = new ReportNote();
             report.CreateDocument(@"D:\", card, 2021);
         }
@@ -127,6 +127,41 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
                 memoReport.UserDepartment.Orders = ((Orders)xml.ReadXmlText(userOrder, typeof(Orders)));
             }
             memo.CreateDocument("D:\\Testing\\", memoReport);
+        }
+        [TestMethod()]
+        public void TestOfficialXlsx()
+        {
+            ReportCardModel model = new ReportCardModel() { SettingParameters = new SettingParameters() { TabelNumber = "7751-00-548", Year = 2021, IdDepartment = 8,
+                Type = new Type() { IdType = 1, NameType = "Полный" },
+                View = new View() { IdView = 0,NameView = "Первичный" },
+                Mouth = new Mouth() { NumberMouthString = "09", NameMouth = "Сентябрь" , NumberMouth =9 }
+            }};
+            SqlConnectionType sql = new SqlConnectionType();
+            SelectImns selectFrames = new SelectImns();
+            XmlReadOrWrite xml = new XmlReadOrWrite();
+            SelectSql select = new SelectSql();
+            select.SelectCardModelLeader(ref model);
+            var command = string.Format(selectFrames.UserReportCard, model.SettingParameters.LeaderD.NameDepartment, $"{model.SettingParameters.Year}-{model.SettingParameters.Mouth.NumberMouthString}-01");
+            var userReportCard = sql.XmlString("Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", command);
+            userReportCard = string.Concat("<SettingParameters>", userReportCard, "</SettingParameters>");
+            model.SettingParameters.UsersReportCard = ((SettingParameters)xml.ReadXmlText(userReportCard, typeof(SettingParameters))).UsersReportCard;
+            foreach (var usersReportCard in model.SettingParameters.UsersReportCard)
+            {
+                var commandVacation = string.Format(selectFrames.ItemVacationNew, usersReportCard.Tab_num, $"{model.SettingParameters.Year}", $"{model.SettingParameters.Year}");
+                var userVacation = sql.XmlString("Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandVacation);
+                userVacation = string.Concat("<UsersReportCard>", userVacation, "</UsersReportCard>");
+                usersReportCard.ItemVacation = ((UsersReportCard)xml.ReadXmlText(userVacation, typeof(UsersReportCard))).ItemVacation;
+                var commandDisability = string.Format(selectFrames.Disability, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
+                var userDisability = sql.XmlString("Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandDisability);
+                userDisability = string.Concat("<UsersReportCard>", userDisability, "</UsersReportCard>");
+                usersReportCard.Disability = ((UsersReportCard)xml.ReadXmlText(userDisability, typeof(UsersReportCard))).Disability;
+                var commandBusiness = string.Format(selectFrames.Business, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
+                var userBusiness = sql.XmlString("Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandBusiness);
+                userBusiness = string.Concat("<UsersReportCard>", userBusiness, "</UsersReportCard>");
+                usersReportCard.Business = ((UsersReportCard)xml.ReadXmlText(userBusiness, typeof(UsersReportCard))).Business;
+            }
+            ReportCard report = new ReportCard();
+            report.CreateDocument("D:\\Testing\\", model);
         }
     }
 }
