@@ -27,6 +27,7 @@ using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
 using LibaryDocumentGenerator.Documents.TemplateExcel;
 using LibaryXMLAuto.ReadOrWrite;
+using LibraryAutoSupportSto.PassportSto.PassportStoPostGet;
 using SqlLibaryIfns.Inventory.ModelParametr;
 using SqlLibaryIfns.Inventory.Select;
 using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
@@ -59,7 +60,7 @@ namespace TestIFNSLibary.Inventarka
 {
    public class Inventarka  : IInventarka
    {
-       private readonly Parameter _parametrService = new Parameter();
+       private readonly Parameter parametersService = new Parameter();
 
        /// <summary>
         /// Запрос всех отделов
@@ -137,7 +138,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="printer">Принтер</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventory.Base.Printer> AddAndEditPrinter(EfDatabase.Inventory.Base.Printer printer, string userIdEdit)
+        public ModelReturn<Printer> AddAndEditPrinter(Printer printer, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditPrinter(printer, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -151,7 +152,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="swith">Коммутатор</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventory.Base.Swithe> AddAndEditSwith(EfDatabase.Inventory.Base.Swithe swith, string userIdEdit)
+        public ModelReturn<Swithe> AddAndEditSwith(Swithe swith, string userIdEdit)
        {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditSwiths(swith, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -166,7 +167,7 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="scaner">Сканер</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventory.Base.ScanerAndCamer> AddAndEditScaner(EfDatabase.Inventory.Base.ScanerAndCamer scaner, string userIdEdit)
+        public ModelReturn<ScanerAndCamer> AddAndEditScaner(ScanerAndCamer scaner, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditScaner(scaner, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
@@ -626,12 +627,12 @@ namespace TestIFNSLibary.Inventarka
             try
             {
                 SelectSql select = new SelectSql();
-                var selectfull = new SelectFull();
+                var selectfull = new SelectFull(parametersService.Inventarization);
                 TelephoneHelp invoice = new TelephoneHelp();
                 return await Task.Factory.StartNew(() =>
                 { 
                     telephonehelper.LogicaSelect = select.SqlSelectModel(telephonehelper.ParametrsSelect.Id);
-                    invoice.CreateDocument(_parametrService.Report, (EfDatabaseTelephoneHelp.TelephoneHelp)selectfull.GenerateSchemeXsdSql<string,string>(_parametrService.Inventarization, telephonehelper.LogicaSelect), null);
+                    invoice.CreateDocument(parametersService.Report, (EfDatabaseTelephoneHelp.TelephoneHelp)selectfull.GenerateSchemeXsdSql<string,string>(telephonehelper.LogicaSelect), null);
                     return invoice.FileArray();
                 });
             }
@@ -647,8 +648,8 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         public async Task<Stream> GenerateFileXlsxSqlView(LogicaSelect selectLogic)
         {
-            var selectFull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(_parametrService.Inventarization, selectLogic.SelectUser, selectLogic.NameReportFile, selectLogic.NameReportList, _parametrService.ReportMassTemplate));
+            var selectFull = new SelectFull(parametersService.Inventarization);
+            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(selectLogic.SelectUser, selectLogic.NameReportFile, selectLogic.NameReportList, parametersService.ReportMassTemplate));
         }
 
         /// <summary>
@@ -666,7 +667,7 @@ namespace TestIFNSLibary.Inventarka
                     SelectSql select = new SelectSql();
                     Report rep = new Report();
                     GenerateBarcode barecode = new GenerateBarcode();
-                    SelectFull selectfull = new SelectFull();
+                    SelectFull selectfull = new SelectFull(parametersService.Inventarization);
                     ModelSelect modelSelect = new ModelSelect
                          {
                            ParametrsSelect = new ParametrsSelect {Id = 12},
@@ -678,10 +679,10 @@ namespace TestIFNSLibary.Inventarka
                         {modelSelect.LogicaSelect.SelectedParametr.Split(',')[0], bookModels.Name},
                         {modelSelect.LogicaSelect.SelectedParametr.Split(',')[1], bookModels.Id.ToString()}
                     };
-                    Book book =(Book) selectfull.GenerateSchemeXsdSql(_parametrService.Inventarization, modelSelect.LogicaSelect,parametr); //Получение данных для модели
+                    Book book =(Book) selectfull.GenerateSchemeXsdSql( modelSelect.LogicaSelect,parametr); //Получение данных для модели
                     book.BareCodeBook = rep.BookInvoce(book.BareCodeBook, bookModels); //Раскладывает в БД
-                    barecode.GenerateBookCode(book.BareCodeBook, _parametrService.Report);//Генерит Штрихкод на основе раскладки БД
-                    bookAccounting.CreateDocument(_parametrService.Report, book, null);
+                    barecode.GenerateBookCode(book.BareCodeBook, parametersService.Report);//Генерит Штрихкод на основе раскладки БД
+                    bookAccounting.CreateDocument(parametersService.Report, book, null);
                     File.Delete(book.BareCodeBook.FullPathSave);
                     return bookAccounting.FileArray();
                 });
@@ -724,8 +725,8 @@ namespace TestIFNSLibary.Inventarka
                        InvoiceInventarka invoice = new InvoiceInventarka();
                        GenerateBarcode barecode = new GenerateBarcode();
                        rep.ReportInvoice(ref report);
-                       barecode.GenerateCode(ref report, _parametrService.Report);
-                       invoice.CreateDocument(_parametrService.Report, report, null);
+                       barecode.GenerateCode(ref report, parametersService.Report);
+                       invoice.CreateDocument(parametersService.Report, report, null);
                        File.Delete(report.Main.Barcode.PathBarcode);
                        return invoice.FileArray();
                     });
@@ -776,7 +777,7 @@ namespace TestIFNSLibary.Inventarka
             ModelError[] error = new ModelError[uploadFileModel.Upload.Length];
             for (int i = 0; i < uploadFileModel.Upload.Length; i++)
             {
-                identitybarcode.DecodeBarCodePng(ref uploadFileModel.Upload[i], _parametrService.Report);
+                identitybarcode.DecodeBarCodePng(ref uploadFileModel.Upload[i], parametersService.Report);
                 if (uploadFileModel.Upload[i].IdDocument != 0)
                 {
                     switch (uploadFileModel.ClassFileToServer)
@@ -813,7 +814,7 @@ namespace TestIFNSLibary.Inventarka
                 SelectSql select = new SelectSql();
                 SqlConnectionType sql = new SqlConnectionType();
                 SelectImns selectFrames = new SelectImns();
-                var isActualizationUser = sql.XmlString(_parametrService.ConnectImns51, selectFrames.ActualUsers);
+                var isActualizationUser = sql.XmlString(parametersService.ConnectImns51, selectFrames.ActualUsers);
                 return await Task.Factory.StartNew(() => select.ActualUserModel(isActualizationUser));
             }
             catch (Exception e)
@@ -1440,12 +1441,18 @@ namespace TestIFNSLibary.Inventarka
                    stpCalender.Dispose();
                }
                var support = new CreateTiсketSupport(modelSupport.Login, modelSupport.Password);
-               var generate = new GenerateParameterSupport(_parametrService.PathDomainGroup);
+               var generate = new GenerateParameterSupport(parametersService.PathDomainGroup);
+               var selectReportPassportTechnique = new SelectReportPassportTechnique(parametersService.Inventarization);
                try
                {
                    
                    generate.GenerateTemplateUrlParameter(ref modelSupport);
                    generate.IsCheckAllParameter(modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
+                   var modelParameterInputStep3 = modelSupport.TemplateSupport.Where(temple => temple.NameStepSupport == "Step3" && temple.TemplateParametrType != null).ToArray();
+                   if (modelParameterInputStep3.Length > 0)
+                   {
+                       selectReportPassportTechnique.CreateStoParametersStep3(ref modelSupport, parametersService.Report);
+                   }
                    modelSupport.Step3ResponseSupport = support.CreateFullSupportTax(modelSupport);
                    Loggers.Log4NetLogger.Info(new Exception($"Пользователем {modelSupport.Login} создана заявка по теме {modelSupport.TemplateSupport.FirstOrDefault(description => description.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}"));
                    return modelSupport;
@@ -1462,6 +1469,7 @@ namespace TestIFNSLibary.Inventarka
                    generate.Dispose();
                    support.Steps(support.Logon, "GET");
                    support.Dispose();
+                   selectReportPassportTechnique.Dispose();
                }
            });
        }
@@ -1500,10 +1508,10 @@ namespace TestIFNSLibary.Inventarka
                                              $"Сервис.: {x.ServiceNum}\r\n" +
                                              $"Kaб.: {x.NumberKabinet}\r\n" +
                                              $"User: {x.Name}";
-                       x.Coment = qrCode.GenerateQrCode(_parametrService.Report + i, templateContent);
+                       x.Coment = qrCode.GenerateQrCode(parametersService.Report + i, templateContent);
                        i++;
                    });
-                   sticker.CreateDocument(_parametrService.Report + "QrCodeOffice", technical);
+                   sticker.CreateDocument(parametersService.Report + "QrCodeOffice", technical);
                    technical.Select(x => x.Coment).ToList().ForEach(File.Delete);
                    return sticker.FileArray();
                });
@@ -1532,8 +1540,8 @@ namespace TestIFNSLibary.Inventarka
                    var stickerQrOffice = new OfficeStikerCode();
                    //Создание qr кодов
                    if (office.Kabinet == null) return null;
-                   office.Kabinet.AsEnumerable().Select(x => x).ToList().ForEach(x => x.FullPathPng = qrCode.GenerateQrCode(_parametrService.Report + x.IdNumberKabinet, x.NumberKabinet));
-                   stickerQrOffice.CreateDocument(_parametrService.Report + "QrCodeOffice", office);
+                   office.Kabinet.AsEnumerable().Select(x => x).ToList().ForEach(x => x.FullPathPng = qrCode.GenerateQrCode(parametersService.Report + x.IdNumberKabinet, x.NumberKabinet));
+                   stickerQrOffice.CreateDocument(parametersService.Report + "QrCodeOffice", office);
                    office.Kabinet.AsEnumerable().Select(x => x.FullPathPng).ToList().ForEach(File.Delete);
                    return stickerQrOffice.FileArray();
                });
@@ -1621,10 +1629,10 @@ namespace TestIFNSLibary.Inventarka
             {
                return await Task.Factory.StartNew(() =>
               {
-                    var generate = new GenerateParameterSupport(_parametrService.PathDomainGroup);
+                    var generate = new GenerateParameterSupport(parametersService.PathDomainGroup);
                     var act = generate.GenerateParameterAct(modelParameterAct);
                     var templateAct = new TemplateAct();
-                    templateAct.CreateDocument(_parametrService.Report + "Акт списания ", act);
+                    templateAct.CreateDocument(parametersService.Report + "Акт списания ", act);
                     return templateAct.FileArray();
                 });
             }
@@ -1638,17 +1646,19 @@ namespace TestIFNSLibary.Inventarka
         /// Создание журнала доступа АИС 3
         /// </summary>
         /// <param name="year">Год журнала</param>
+        /// <param name="idOtdel">УН отдела</param>
+        /// <param name="isAllJournal">Логика полный или нет по умолчанию не полный</param>
         /// <returns></returns>
-        public async Task<Stream> CreateJournalAis3(int year)
+        public async Task<Stream> CreateJournalAis3(int year, int idOtdel, bool isAllJournal)
         {
             try
             {
                 return await Task.Factory.StartNew(() =>
                 {
                     SelectSql select = new SelectSql();
-                    EfDatabase.Journal.AllJournal journal = select.SelectJournalAis3(year);
+                    EfDatabase.Journal.AllJournal journal = select.SelectJournalAis3(year, idOtdel, isAllJournal);
                     var templateJournal = new TemplateJournalAis3();
-                    templateJournal.CreateDocument(_parametrService.Report, journal, null);
+                    templateJournal.CreateDocument(parametersService.Report, journal, null);
                     return templateJournal.FileArray();
                 });
             }
@@ -1674,27 +1684,28 @@ namespace TestIFNSLibary.Inventarka
                     XmlReadOrWrite xml = new XmlReadOrWrite();
                     SelectSql select = new SelectSql();
                     select.SelectCardModelLeader(ref model);
-                    var command = string.Format(selectFrames.UserReportCard, model.SettingParameters.LeaderD.NameDepartment, $"{model.SettingParameters.Year}-{model.SettingParameters.Mouth.NumberMouthString}-01");
-                    var userReportCard = sql.XmlString(_parametrService.ConnectImns51, command);
+                    var dateParameter = $"{model.SettingParameters.Year}-{model.SettingParameters.Mouth.NumberMouthString}-01";
+                    var command = string.Format(selectFrames.UserReportCard, dateParameter, dateParameter, model.SettingParameters.LeaderD.NameDepartment, dateParameter);
+                    var userReportCard = sql.XmlString(parametersService.ConnectImns51, command);
                     userReportCard = string.Concat("<SettingParameters>", userReportCard, "</SettingParameters>");
                     model.SettingParameters.UsersReportCard = ((SettingParameters)xml.ReadXmlText(userReportCard, typeof(SettingParameters))).UsersReportCard;
                     foreach (var usersReportCard in model.SettingParameters.UsersReportCard)
                     {
                         var commandVacation = string.Format(selectFrames.ItemVacationNew, usersReportCard.Tab_num, $"{model.SettingParameters.Year}", $"{model.SettingParameters.Year}");
-                        var userVacation = sql.XmlString(_parametrService.ConnectImns51, commandVacation);
+                        var userVacation = sql.XmlString(parametersService.ConnectImns51, commandVacation);
                         userVacation = string.Concat("<UsersReportCard>", userVacation, "</UsersReportCard>");
                         usersReportCard.ItemVacation = ((UsersReportCard)xml.ReadXmlText(userVacation, typeof(UsersReportCard))).ItemVacation;
                         var commandDisability = string.Format(selectFrames.Disability, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
-                        var userDisability = sql.XmlString(_parametrService.ConnectImns51, commandDisability);
+                        var userDisability = sql.XmlString(parametersService.ConnectImns51, commandDisability);
                         userDisability = string.Concat("<UsersReportCard>", userDisability, "</UsersReportCard>");
                         usersReportCard.Disability = ((UsersReportCard)xml.ReadXmlText(userDisability, typeof(UsersReportCard))).Disability;
                         var commandBusiness = string.Format(selectFrames.Business, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
-                        var userBusiness = sql.XmlString(_parametrService.ConnectImns51, commandBusiness);
+                        var userBusiness = sql.XmlString(parametersService.ConnectImns51, commandBusiness);
                         userBusiness = string.Concat("<UsersReportCard>", userBusiness, "</UsersReportCard>");
                         usersReportCard.Business = ((UsersReportCard)xml.ReadXmlText(userBusiness, typeof(UsersReportCard))).Business;
                     }
                     ReportCard report = new ReportCard();
-                    report.CreateDocument(_parametrService.Report, model);
+                    report.CreateDocument(parametersService.Report, model);
                     return report.FileArray();
                 });
             }
@@ -1722,13 +1733,13 @@ namespace TestIFNSLibary.Inventarka
                     MemoReport memo = new MemoReport();
                     select.SelectMemoReport(ref memoReport);
                     var commandOrders = string.Format(selectFrames.LastOrder, memoReport.UserDepartment.SmallTabelNumber);
-                    var userOrder = sql.XmlString(_parametrService.ConnectImns51, commandOrders);
+                    var userOrder = sql.XmlString(parametersService.ConnectImns51, commandOrders);
                     if (userOrder != null)
                     {
                         userOrder = string.Concat("<Orders>", userOrder, "</Orders>");
                         memoReport.UserDepartment.Orders = ((Orders)xml.ReadXmlText(userOrder, typeof(Orders)));
                     }
-                    memo.CreateDocument(_parametrService.Report, memoReport);
+                    memo.CreateDocument(parametersService.Report, memoReport);
                     return memo.FileArray();
                 });
             }
@@ -1739,6 +1750,65 @@ namespace TestIFNSLibary.Inventarka
             }
             return null;
         }
+        /// <summary>
+        /// Актуализация данных с СТО
+        /// </summary>
+        /// <returns></returns>
+        public void UpdateDataSto(int idProcess)
+        {
+            try
+            {
+                Select auto = new Select();
+                var process = auto.SelectProcess(idProcess);
+                if (process.IsComplete != null && (bool)process.IsComplete)
+                {
+                    var addObjectDb = new AddObjectDb();
+                    addObjectDb.IsProcessComplete(idProcess, false);
+                    var task = Task.Run(() =>
+                    {
+                        var sto = new PassportStoPostGet(parametersService.LoginSto, parametersService.PasswordSto, parametersService.Report);
+                        var fullPathXlsx = sto.DownloadReportSto();
+                        addObjectDb.CreateAndDownloadSto(fullPathXlsx, parametersService.Report, parametersService.XsdReport, parametersService.BulkCopyXmlSto);
+                    });
+                    task.ConfigureAwait(true).GetAwaiter().OnCompleted(()=>
+                    {
+                        addObjectDb.IsProcessComplete(idProcess, true);
+                        addObjectDb.Dispose();
+                        SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>($"{process.NameProcess} завершен!",null,3));
+                    });
+                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>($"{process.NameProcess} запущен!",null,1) );
+                }
+                else
+                {
+                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>($"{process.NameProcess} уже запущен ожидайте окончание процесса!",null,2)  );
+                }
+                auto.Dispose();
+            }
+            catch (Exception e)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>(e.Message));
+                Loggers.Log4NetLogger.Error(e);
+            }
+        }
+        /// <summary>
+        /// Получение всех отчетов сравнения ЭПО
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetModelReportAnalysisEpo()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.GetModelReportAnalysisEpo());
+        }
 
+        /// <summary>
+        /// Полный анализ ЭПО с Инвентаризацией
+        /// </summary>
+        /// <param name="idReport">Уникальные номера отчетов ЭПО</param>
+        /// <returns></returns>
+        public async Task<Stream> AllReportInventoryAndEpo(int[] idReport)
+        {
+            var selectReportPassportTechnique = new SelectReportPassportTechnique(parametersService.Inventarization);
+            return await Task.Factory.StartNew(() => selectReportPassportTechnique.CreateFullReportEpo(parametersService.Report, idReport));
+        }
     }
 }

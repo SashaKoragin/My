@@ -661,6 +661,17 @@ namespace SignalRLibary.SignalRinventory
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
             context.Clients.All.SubscribeDeleteToken(modelToken);
         }
+        /// <summary>
+        /// Возврат статуса процесса для сайта инвентаризация
+        /// </summary>
+        /// <param name="statusProcess">Статус процеса</param>
+        public static void SubscribeStatusProcess(ModelReturn<string> statusProcess)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception(statusProcess.Message));
+            context.Clients.All.SubscribeStatusProcess(statusProcess);
+        }
+
     }
     public class UsersContext
     {

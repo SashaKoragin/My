@@ -483,14 +483,18 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// Журнал назначений АИС 3
         /// </summary>
         /// <param name="year">Год назначения</param>
-        public AllJournal SelectJournalAis3(int year)
+        /// <param name="idOtdel">УН отдела</param>\
+        /// <param name="isAllJournal">Параметр журнала</param>
+        public AllJournal SelectJournalAis3(int year, int idOtdel, bool isAllJournal)
         {
             try
             {
                 AllJournal journal = new AllJournal();
                 ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(47) };
                 journal.JournalAis3 = Inventory.Database.SqlQuery<Journal.JournalAis3>(model.LogicaSelect.SelectUser,
-                    new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], year)).ToArray();
+                    new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], year),
+                    new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], idOtdel),
+                    new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], isAllJournal)).ToArray();
                 return journal;
             }
             catch (Exception e)

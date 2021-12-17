@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.SuspendLayout();
             // 
             // button2
@@ -106,6 +107,7 @@
         internal System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
+        private System.DirectoryServices.DirectoryEntry directoryEntry1;
     }
 }
 

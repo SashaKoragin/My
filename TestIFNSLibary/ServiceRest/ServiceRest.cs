@@ -59,11 +59,11 @@ namespace TestIFNSLibary.ServiceRest
         //Функции для сайта IFNS
         public async Task<Face> SqlFaceError()
         {
-            var selectFull = new SelectFull();
+            var selectFull = new SelectFull(_parameterService.ConnectionString);
             return
                 await Task.Factory.StartNew(
                     () =>
-                        selectFull.FaceError(_parameterService.ConnectionString,
+                        selectFull.FaceError(
                             SqlLibaryIfns.SqlSelect.SqlFaceMergin.FaceSelectError.FaceError));
         }
 
@@ -152,7 +152,7 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<string> LoaderBdk(FullSetting setting)
         {
-            var selectFull = new SelectFull();
+            var selectFull = new SelectFull(_parameterService.ConectWork);
             switch (setting.Db)
             {
                 case "Work":
@@ -160,7 +160,7 @@ namespace TestIFNSLibary.ServiceRest
                     return
                         await Task.Factory.StartNew(
                             () =>
-                                selectFull.BdkSqlSelect(_parameterService.ConectWork,
+                                selectFull.BdkSqlSelect(
                                 ((ServiceWcf)
                                     sqlconnect.SelectFullParametrSqlReader(_parameterService.ConectWork,
                                         ModelSqlFullService.ProcedureSelectParametr, typeof(ServiceWcf),
@@ -252,8 +252,8 @@ namespace TestIFNSLibary.ServiceRest
         /// <returns></returns>
         public async Task<string> ModelServiceCommand(FullSetting setting)
         {
-            var selectFull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectFull.ServiceCommand(_parameterService.ConectWork, setting));
+            var selectFull = new SelectFull(_parameterService.ConectWork);
+            return await Task.Factory.StartNew(() => selectFull.ServiceCommand(setting));
         }
 
         /// <summary>
@@ -264,8 +264,8 @@ namespace TestIFNSLibary.ServiceRest
         public async Task<string> ModelSqlSelect(AngularModel command)
         {
             var connect = command.Db == "Work" ? _parameterService.ConectWork : _parameterService.ConectTest;
-            var selectfull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectfull.SqlSelect(connect, command));
+            var selectfull = new SelectFull(connect);
+            return await Task.Factory.StartNew(() => selectfull.SqlSelect(command));
         }
 
         /// <summary>
@@ -315,8 +315,8 @@ namespace TestIFNSLibary.ServiceRest
         public async Task<string> ServerList(FullSetting setting)
         {
             var connect = setting.Db == "Work" ? _parameterService.ConectWork : _parameterService.ConectTest;
-            var selectFull = new SelectFull();
-            return await Task.Factory.StartNew(() => selectFull.SqlSelect(connect, setting));
+            var selectFull = new SelectFull(connect);
+            return await Task.Factory.StartNew(() => selectFull.SqlSelect(setting));
         }
         /// <summary>
         /// Авторизация на сервере

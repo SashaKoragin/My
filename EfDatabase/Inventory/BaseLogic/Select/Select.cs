@@ -49,6 +49,24 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                                                                                                  "Left Join OtdelPadeg on Otdel.IdOtdel = OtdelPadeg.IdOtdel").ToArray());
         }
         /// <summary>
+        /// Получение всех отчетов сравнения ЭПО
+        /// </summary>
+        /// <returns></returns>
+        public string GetModelReportAnalysisEpo()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(
+                    Inventory.AnalysisEpoAndInventarkas
+                        .Select(sel =>
+                            new
+                            {
+                                Id = sel.Id,
+                                IsPrint = sel.IsPrint,
+                                NameInfoReport = sel.NameInfoReport
+                            }
+                        ).ToArray());
+        }
+        /// <summary>
         /// Регламенты отделов для заявок
         /// </summary>
         /// <returns></returns>
@@ -531,6 +549,15 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             var isComplete = Inventory.IsProcessCompletes.FirstOrDefault(x => x.Id == idTask)?.IsComplete;
             return isComplete != null && (bool)isComplete;
+        }
+        /// <summary>
+        /// Вытаскивание процесса а по ID
+        /// </summary>
+        /// <param name="isProcess">Номер процесса</param>
+        /// <returns></returns>
+        public IsProcessComplete SelectProcess(int isProcess)
+        {
+            return Inventory.IsProcessCompletes.FirstOrDefault(x => x.Id == isProcess);
         }
 
         /// <summary>

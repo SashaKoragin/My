@@ -45,6 +45,8 @@ namespace EfDatabaseXsdSupportNalog {
         
         private int idTelephonField;
         
+        private int idAnalisysEpoField;
+        
         private TemplateSupport1[] templateSupportField;
         
         private string step3ResponseSupportField;
@@ -62,6 +64,7 @@ namespace EfDatabaseXsdSupportNalog {
             this.idTemplateField = 0;
             this.idScannerField = 0;
             this.idTelephonField = 0;
+            this.idAnalisysEpoField = 0;
             this.idCalendarVksField = 0;
         }
         
@@ -176,6 +179,16 @@ namespace EfDatabaseXsdSupportNalog {
         }
         
         /// <remarks/>
+        public int IdAnalisysEpo {
+            get {
+                return this.idAnalisysEpoField;
+            }
+            set {
+                this.idAnalisysEpoField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("TemplateSupport", IsNullable=true)]
         public TemplateSupport1[] TemplateSupport {
             get {
@@ -246,6 +259,8 @@ namespace EfDatabaseXsdSupportNalog {
         private string nameGuidParametrField;
         
         private string parametrField;
+        
+        private byte[] parameterStep3Field;
         
         private string typeParametrField;
         
@@ -322,6 +337,17 @@ namespace EfDatabaseXsdSupportNalog {
             }
             set {
                 this.parametrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
+        public byte[] ParameterStep3 {
+            get {
+                return this.parameterStep3Field;
+            }
+            set {
+                this.parameterStep3Field = value;
             }
         }
         

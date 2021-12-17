@@ -13,4 +13,5 @@
   <DeploySymbols>false</DeploySymbols>
   <DeployLocalizations>true</DeployLocalizations>
   <DeployExternalLocalizations>false</DeployExternalLocalizations>
+  <ExcludedProjectItems>-</ExcludedProjectItems>
 </Configuration>

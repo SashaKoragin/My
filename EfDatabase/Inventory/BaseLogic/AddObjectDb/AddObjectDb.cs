@@ -2,12 +2,14 @@
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using AttributeHelperModelXml;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseUploadFile;
+using LibaryXMLAuto.ReadOrWrite;
 using Organization = EfDatabase.Inventory.Base.Organization;
 using Supply = EfDatabase.Inventory.Base.Supply;
 
@@ -1713,7 +1715,8 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             var resourceItAddAndModified = new ResourceIt()
             {
                 IdResource = resourceIt.IdResource,
-                NameResource = resourceIt.NameResource
+                NameResource = resourceIt.NameResource,
+                IdOtdel = resourceIt.IdOtdel
             };
             try
             {
@@ -1839,7 +1842,38 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 }
             }
         }
-
+        /// <summary>
+        /// Загрузка STO
+        /// </summary>
+        /// <param name="pathFileXlsx">Полный путь до файла Xlsx  отчета по техники</param>
+        /// <param name="pathCreateFileXml">Путь создания xml</param>
+        /// <param name="pathFileXsd">Путь до схемы xsd</param>
+        /// <param name="connectionStringBulkCopyXml">Строка соединения с базой</param>
+        public void CreateAndDownloadSto(string pathFileXlsx, string pathCreateFileXml, string pathFileXsd, string connectionStringBulkCopyXml)
+        {
+            try
+            {
+                var convertOpenXmlToDataTable = new OpenXmlXlsxToDataTable.OpenXmlXlsxToDataTable();
+                var dataTable = convertOpenXmlToDataTable.GetDateTableOpenXml(pathFileXlsx);
+                DataNamesMapper<PassportSto.EquipmentSto> mapper = new DataNamesMapper<PassportSto.EquipmentSto>();
+                var stoXml = mapper.Map(dataTable).ToArray();
+                var passport = new PassportSto.PassportSto() {EquipmentSto = stoXml};
+                using (var contextInventoryDelete = new InventoryContext())
+                {
+                    contextInventoryDelete.Database.ExecuteSqlCommand("TRUNCATE TABLE PassportEquipment");
+                }
+                XmlReadOrWrite xml = new XmlReadOrWrite();
+                var xsdFile = $"{pathFileXsd}PassportSto.xsd";
+                var xmlFile = $"{pathCreateFileXml}PassportSto.xml";
+                xml.CreateXmlFile(xmlFile, passport, typeof(PassportSto.PassportSto));
+                BulkInsertIntoDb(xsdFile, xmlFile, connectionStringBulkCopyXml);
+                File.Delete(pathFileXlsx);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+        }
 
 
 
@@ -1861,6 +1895,9 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 Inventory.SaveChanges();
         }
 
+
+
+
         /// <summary>
         /// Очистка всех записей и сброса индекса перед добавлением 
         /// </summary>
@@ -1879,6 +1916,24 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             Inventory.SaveChanges();
         }
 
+        /// <summary>
+        /// Загрузка в БД
+        /// </summary>
+        /// <param name="fullPathXsdScheme">Полный путь к схеме xsd для загрузки данных</param>
+        /// <param name="fullPathXml">Полный путь к xml для загрузки</param>
+        /// <param name="connectionStringBulkCopyXml">Строка для массовой загрузки файла СТО</param>
+        private void BulkInsertIntoDb(string fullPathXsdScheme, string fullPathXml, string connectionStringBulkCopyXml)
+        {
+            var bulkLoader = new SQLXMLBULKLOADLib.SQLXMLBulkLoad4
+            {
+                ConnectionString = connectionStringBulkCopyXml,
+                ForceTableLock = true,
+                BulkLoad = true,
+                Transaction = false,
+                KeepIdentity = false,
+            };
+            bulkLoader.Execute(fullPathXsdScheme, fullPathXml);
+        }
 
         /// <summary>
         /// Disposing

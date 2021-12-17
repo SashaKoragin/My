@@ -33,7 +33,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart("Докладная записка", "28", JustificationValues.Center, 1));
-            body.Append(paragraphGenerate.RunParagraphGeneratorStandart("ИФНС России №51  по г. Москве", "28", JustificationValues.Center, 1));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart("Межрайонная ИФНС России №51  по г. Москве", "28", JustificationValues.Center, 1));
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart("о целесообразности (нецелесообразности) проведения выездной налоговой", "28", JustificationValues.Center, 1));
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart("проверки в связи с ликвидацией (реорганизацией)", "28", JustificationValues.Center, 1));
 
@@ -143,7 +143,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                 paragraphGenerate.RunParagraphGeneratorStandart("Дата внесения в ЕГРЮЛ сведений о том, что юридическое лицо находится в процессе реорганизации или ликвидации (с указанием вида прекращения деятельности: ликвидация или реорганизация)"),
                 "0", TableWidthUnitValues.Nil, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
             cellCollection.Add(CellGenerate.GenerateCell(
-                paragraphGenerate.RunParagraphGeneratorStandart(template.FaceUl.DateResh?.ToString("dd.MM.yyyy")),
+                paragraphGenerate.RunParagraphGeneratorStandart(template.FaceUl.DateResh!=null ? template.FaceUl.DateResh?.ToString("dd.MM.yyyy") : " "),
                 "0", TableWidthUnitValues.Nil, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 5));
             table.Append(rows.GenerateRow(ref cellCollection));
 
@@ -1882,7 +1882,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                 "0", TableWidthUnitValues.Nil, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
             table.Append(rows.GenerateRow(ref cellCollection));
 
-            var modelFormula4 = new string[] { "2120_4", "2110_4", "2220_4", "2330_4", "2350_4" };
+            var modelFormula4 = new string[] { "2120_4", "2210_4", "2220_4", "2330_4", "2350_4" };
             cellCollection.Add(CellGenerate.GenerateCell(
                 paragraphGenerate.RunParagraphGeneratorStandart("Расходы согласно отчета о финансовых результатах, тыс.руб. (стр. 2120 + 2210 + 2220 + 2330 + 2350)"),
                 "0", TableWidthUnitValues.Nil, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));
@@ -2264,7 +2264,40 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             
             body.Append(new Paragraph(new Run(new Break() { Type = BreakValues.Page })));
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart("ВЫВОДЫ:", "24", JustificationValues.Center, 1));
+            table = new Table();
+            var para = paragraphGenerate.RunParagraphGeneratorStandart("Начальник Межрайонной", "24", JustificationValues.Left, 0, "0", true, false, false);
+            para.Append(paragraphGenerate.RunText("ИФНС России №51 по г. Москве", "24"));
+            cellCollection.Add(CellGenerate.GenerateCell(para,
+                CellGenerate.FormulWidthCell(6.6), TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Bottom));
+            cellCollection.Add(CellGenerate.GenerateCell(
+                paragraphGenerate.RunParagraphGeneratorStandart(),
+                CellGenerate.FormulWidthCell(5.9), TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Bottom));
+            cellCollection.Add(CellGenerate.GenerateCell(
+                paragraphGenerate.RunParagraphGeneratorStandart(),
+                CellGenerate.FormulWidthCell(3.2), TableWidthUnitValues.Dxa, "0", "0", TableVerticalAlignmentValues.Bottom, CellBorders.GenerateBorder()));
+            cellCollection.Add(CellGenerate.GenerateCell(
+                paragraphGenerate.RunParagraphGeneratorStandart("В.В. Сугак", "24", JustificationValues.Left),
+                CellGenerate.FormulWidthCell(3.3), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Bottom));
 
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1.1)));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(),
+                "0", TableWidthUnitValues.Nil));
+            cellCollection.Add(CellGenerate.GenerateCell(
+                paragraphGenerate.RunParagraphGeneratorStandart(),
+                "0", TableWidthUnitValues.Nil));
+            cellCollection.Add(CellGenerate.GenerateCell(
+                paragraphGenerate.RunParagraphGeneratorStandart("«____»_____________", "24", JustificationValues.Left),
+                "0", TableWidthUnitValues.Nil));
+            cellCollection.Add(CellGenerate.GenerateCell(
+                paragraphGenerate.RunParagraphGeneratorStandart($"{year} года", "24", JustificationValues.Left),
+                CellGenerate.FormulWidthCell(3.3), TableWidthUnitValues.Dxa, "100", "100", TableVerticalAlignmentValues.Bottom));
+
+            table.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(1)));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
+            body.Append(table);
             return body;
         }
 
@@ -2343,19 +2376,19 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 2, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Банк", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга продаж", fontSize, JustificationValues.Center),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга покупок", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Банк", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга продаж", fontSize, JustificationValues.Center),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга покупок", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Банк", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга продаж", fontSize, JustificationValues.Center),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга покупок", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Банк", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга продаж", fontSize, JustificationValues.Center),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга покупок", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 2, "FFFFCC"));
@@ -2792,19 +2825,19 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 2, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Банк", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга покупок", fontSize, JustificationValues.Center),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга продаж", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Банк", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга покупок", fontSize, JustificationValues.Center),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга продаж", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Банк", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга покупок", fontSize, JustificationValues.Center),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга продаж", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Банк", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
-            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга покупок", fontSize, JustificationValues.Center),
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Книга продаж", fontSize, JustificationValues.Center),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 2, 0, "FFFFCC"));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(),
                 "0", TableWidthUnitValues.Auto, "100", "100", TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull(), 0, 2, "FFFFCC"));

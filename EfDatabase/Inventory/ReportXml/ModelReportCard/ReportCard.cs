@@ -563,6 +563,16 @@ namespace EfDatabase.ReportCard {
         
         private bool date_outFieldSpecified;
         
+        private int linkField;
+        
+        private bool linkFieldSpecified;
+        
+        private int link_GrField;
+        
+        private bool link_GrFieldSpecified;
+        
+        private string nameGrField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ItemVacation")]
         public ItemVacation[] ItemVacation {
@@ -692,6 +702,61 @@ namespace EfDatabase.ReportCard {
             }
             set {
                 this.date_outFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Link {
+            get {
+                return this.linkField;
+            }
+            set {
+                this.linkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LinkSpecified {
+            get {
+                return this.linkFieldSpecified;
+            }
+            set {
+                this.linkFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Link_Gr {
+            get {
+                return this.link_GrField;
+            }
+            set {
+                this.link_GrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool Link_GrSpecified {
+            get {
+                return this.link_GrFieldSpecified;
+            }
+            set {
+                this.link_GrFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameGr {
+            get {
+                return this.nameGrField;
+            }
+            set {
+                this.nameGrField = value;
             }
         }
     }

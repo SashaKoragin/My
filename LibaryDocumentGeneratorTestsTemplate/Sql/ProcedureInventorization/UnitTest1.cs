@@ -52,7 +52,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
         public void TestAct()
         {
             Inventarka inv = new Inventarka();
-            inv.CreateJournalAis3(2021);
+            inv.CreateJournalAis3(2021,23,true);
         }
         /// <summary>
         /// Загрузка информации о ролях и пользователях

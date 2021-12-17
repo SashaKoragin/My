@@ -16,12 +16,12 @@ namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.LoadingFormReport
         /// <param name="list">Элемент хранения</param>
         public void ReportPath(string path, System.Windows.Forms.ListView list)
         {
-            String[] dirarr = Directory.GetFiles(path, "*.txt").Select(Path.GetFileName).ToArray();
-            list.Items.Clear();
-            foreach (String item in dirarr)
-            {
-                list.Items.Add(item);
-            }
+            //String[] dirarr = Directory.GetFiles(path, "*.txt").Select(Path.GetFileName).ToArray();
+            //list.Items.Clear();
+            //foreach (String item in dirarr)
+            //{
+            //    list.Items.Add(item);
+            //}
         }
         /// <summary>
         /// Путь QBE DAtE
@@ -30,12 +30,12 @@ namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.LoadingFormReport
         /// <param name="list">Элемент хранения</param>
         public void ReportQbedate(string path, System.Windows.Forms.ListView list)
         {
-            String[] dirarr = Directory.GetFiles(path, "*.txt").Select(Path.GetFileName).ToArray();
-            list.Items.Clear();
-            foreach (String item in dirarr)
-            {
-                list.Items.Add(item);
-            }
+            //String[] dirarr = Directory.GetFiles(path, "*.txt").Select(Path.GetFileName).ToArray();
+            //list.Items.Clear();
+            //foreach (String item in dirarr)
+            //{
+            //    list.Items.Add(item);
+            //}
         }
         /// <summary>
         /// Загрузка отчетов 
@@ -44,12 +44,12 @@ namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.LoadingFormReport
         /// <param name="list">Элемент хранения</param>
         public void ReportExcel(string path, System.Windows.Forms.ListView list)
         {
-            String[] dirarr = Directory.GetFiles(path, "*.xlsx").Select(Path.GetFileName).ToArray();
-            list.Items.Clear();
-            foreach (String item in dirarr)
-            {
-                list.Items.Add(item);
-            }
+            //String[] dirarr = Directory.GetFiles(path, "*.xlsx").Select(Path.GetFileName).ToArray();
+            //list.Items.Clear();
+            //foreach (String item in dirarr)
+            //{
+            //    list.Items.Add(item);
+            //}
         }
        /// <summary>
        /// Отчеты по квитациям
@@ -58,12 +58,12 @@ namespace TestIFNSTools.Arhivator.Arhiv.Farhiv.LoadingFormReport
        /// <param name="list">Элемент хранения</param>
         public void ReportKvOtchet(string path, System.Windows.Forms.ListView list)
         {
-            String[] dirarr = Directory.GetFiles(path, "*.xlsx").Select(Path.GetFileName).ToArray();
-            list.Items.Clear();
-            foreach (String item in dirarr)
-            {
-                list.Items.Add(item);
-            }
+            //String[] dirarr = Directory.GetFiles(path, "*.xlsx").Select(Path.GetFileName).ToArray();
+            //list.Items.Clear();
+            //foreach (String item in dirarr)
+            //{
+            //    list.Items.Add(item);
+            //}
         }
     }
 }

@@ -242,6 +242,21 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
+			<xs:attribute name="Link" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>УН должности</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Link_Gr" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>УН группы рабочего времени</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameGr" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наменование группы рабочего времени</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="ItemVacation">

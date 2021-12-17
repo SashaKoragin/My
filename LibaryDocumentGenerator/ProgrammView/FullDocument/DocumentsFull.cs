@@ -974,7 +974,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             cellCollection.Add(CellGenerate.GenerateCell( paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Bottom, null, 11));
             table3.Append(rows.GenerateRow(ref cellCollection));
             cellCollection.Add(CellGenerate.GenerateCell(
-                paragraphGenerate.RunParagraphGeneratorStandart("Исполнено отделом информатизации:", "18", JustificationValues.Left, 3),
+                paragraphGenerate.RunParagraphGeneratorStandart("Исполнено отделом информационной безопасности:", "18", JustificationValues.Left, 3),
                 "0", TableWidthUnitValues.Auto, "0", "0", TableVerticalAlignmentValues.Bottom, null, 11));
             table3.Append(rows.GenerateRow(ref cellCollection));
             cellCollection.Add(CellGenerate.GenerateCell(

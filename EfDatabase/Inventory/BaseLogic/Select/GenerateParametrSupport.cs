@@ -53,73 +53,77 @@ namespace EfDatabase.Inventory.BaseLogic.Select
            {
                var description = modelSupport.Discription;
                modelSupport.TemplateSupport.Where(discription => discription.NameGuidParametr == "UF_DESCRIPTION").ToList().ForEach(d=>d.Parametr = description);
-               var modelParameterInput = modelSupport.TemplateSupport.Where(temple =>temple.NameStepSupport == "Step2" && temple.TemplateParametrType != null);
-
-               foreach (var template in modelParameterInput)
+               var modelParameterInputStep2 = modelSupport.TemplateSupport.Where(temple =>temple.NameStepSupport == "Step2" && temple.TemplateParametrType != null);
+             
+               foreach (var templateStep2 in modelParameterInputStep2)
                {
-                   if (template.TemplateParametrType.Equals("CalendarVKS") && modelSupport.IdCalendarVks != 0)
+                   if (templateStep2.TemplateParametrType.Equals("CalendarVKS") && modelSupport.IdCalendarVks != 0)
                    {
-                       template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr,
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr,
                            new SqlParameter("CalendarVKS", modelSupport.IdCalendarVks)).FirstOrDefault();
                    }
-                   if (template.TemplateParametrType.Equals("User") && modelSupport.IdUser != 0)
+                   if (templateStep2.TemplateParametrType.Equals("User") && modelSupport.IdUser != 0)
                    {
-                       template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr,
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr,
                                new SqlParameter("IdUser", modelSupport.IdUser)).FirstOrDefault();
                    }
-                   if (template.TemplateParametrType.Equals("SysBlock") &&  modelSupport.IdSysBlock != 0)
+                   if (templateStep2.TemplateParametrType.Equals("SysBlock") &&  modelSupport.IdSysBlock != 0)
                    {
-                       template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr, 
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr, 
                               new SqlParameter("IdSysBlock", modelSupport.IdSysBlock)).FirstOrDefault();
                    }
-                   if (template.TemplateParametrType.Equals("Monitors") && modelSupport.IdMonitor != 0)
+                   if (templateStep2.TemplateParametrType.Equals("Monitors") && modelSupport.IdMonitor != 0)
                    {
-                       template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr,
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr,
                            new SqlParameter("IdMonitor", modelSupport.IdMonitor)).FirstOrDefault();
                    }
-                   if (template.TemplateParametrType.Equals("Printer") &&  modelSupport.IdPrinter != 0)
+                   if (templateStep2.TemplateParametrType.Equals("Printer") &&  modelSupport.IdPrinter != 0)
                    {
-                       template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr,
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr,
                            new SqlParameter("IdPrinter", modelSupport.IdPrinter)).FirstOrDefault();
                    }
-                   if (template.TemplateParametrType.Equals("Mfu") &&  modelSupport.IdMfu != 0)
+                   if (templateStep2.TemplateParametrType.Equals("Mfu") &&  modelSupport.IdMfu != 0)
                    {
-                       template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr,
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr,
                            new SqlParameter("IdMfu", modelSupport.IdMfu)).FirstOrDefault();
                    }
-                   if (template.TemplateParametrType.Equals("Scanner") &&  modelSupport.IdScanner != 0)
+                   if (templateStep2.TemplateParametrType.Equals("Scanner") &&  modelSupport.IdScanner != 0)
                    {
-                       template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr,
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr,
                            new SqlParameter("IdScaner", modelSupport.IdScanner)).FirstOrDefault();
                    }
-                   if (template.TemplateParametrType.Equals("Telephon") && modelSupport.IdTelephon != 0)
+                   if (templateStep2.TemplateParametrType.Equals("Telephon") && modelSupport.IdTelephon != 0)
                    {
-                       template.Parametr = Inventory.Database.SqlQuery<string>(template.SelectParametr,
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr,
                            new SqlParameter("IdTelephon", modelSupport.IdTelephon)).FirstOrDefault();
                    }
-                   if (template.TemplateParametrType.Equals("DomainUser") && modelSupport.IdUser != 0)
+                   if (templateStep2.TemplateParametrType.Equals("DomainUser") && modelSupport.IdUser != 0)
                    {
-                       var personnelNumberAndGroupOtdel = Inventory.Database.SqlQuery<string>(template.SelectParametr,
+                       var personnelNumberAndGroupOtdel = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr,
                            new SqlParameter("IdUser", modelSupport.IdUser)).FirstOrDefault();
-                       if (template.NameParametrType.Equals("Group"))
+                       if (templateStep2.NameParametrType.Equals("Group"))
                        {
-                           template.Parametr = FindGroupAccess(personnelNumberAndGroupOtdel).Aggregate((element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : ",") + next);
+                           templateStep2.Parametr = FindGroupAccess(personnelNumberAndGroupOtdel).Aggregate((element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : ",") + next);
                        }
-                       if (template.NameParametrType.Equals("GroupOtdel"))
+                       if (templateStep2.NameParametrType.Equals("GroupOtdel"))
                        {
-                           template.Parametr = FindIdentytyGroup(personnelNumberAndGroupOtdel.Replace("№","№ "));
+                           templateStep2.Parametr = FindIdentytyGroup(personnelNumberAndGroupOtdel.Replace("№","№ "));
                        }
 
-                       if (template.NameParametrType.Contains("GroupOtdelBoss"))
+                       if (templateStep2.NameParametrType.Contains("GroupOtdelBoss"))
                        {
-                           template.Parametr = FindFullPathActiveDirectory(personnelNumberAndGroupOtdel);
+                           templateStep2.Parametr = FindFullPathActiveDirectory(personnelNumberAndGroupOtdel);
                        }
                    }
-                   if(template.TemplateParametrType.Equals("DomainSysBlock") && modelSupport.IdSysBlock != 0)
+                   if(templateStep2.TemplateParametrType.Equals("DomainSysBlock") && modelSupport.IdSysBlock != 0)
                    {
-                       var nameComputer = Inventory.Database.SqlQuery<string>(template.SelectParametr, new SqlParameter("IdSysBlock", modelSupport.IdSysBlock)).FirstOrDefault();
-                       var parameters = template.Parametr.Split('/');
-                       template.Parametr = IsCheckComputer(nameComputer) ? parameters[0] : parameters[1];
+                       var nameComputer = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr, new SqlParameter("IdSysBlock", modelSupport.IdSysBlock)).FirstOrDefault();
+                       var parameters = templateStep2.Parametr.Split('/');
+                       templateStep2.Parametr = IsCheckComputer(nameComputer) ? parameters[0] : parameters[1];
+                   }
+                   if (templateStep2.TemplateParametrType.Equals("AnalisysEpo") && modelSupport.IdAnalisysEpo != 0)
+                   {
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr, new SqlParameter("IdAnalisysEpo", modelSupport.IdAnalisysEpo)).FirstOrDefault();
                    }
                }
            }

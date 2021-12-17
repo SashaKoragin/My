@@ -15,6 +15,7 @@ using EfDatabaseParametrsModel;
 using EfDatabaseXsdInventoryAutorization;
 using EfDatabaseXsdMail;
 using EfDatabaseXsdSupportNalog;
+using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using SqlLibaryIfns.Inventory.ModelParametr;
 using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
 using Printer = EfDatabase.Inventory.Base.Printer;
@@ -1066,10 +1067,12 @@ namespace TestIFNSLibary.Inventarka
         /// Создание журнала
         /// </summary>
         /// <param name="year">Год журнала</param>
+        /// <param name="idOtdel">УН отдела</param>
+        /// <param name="isAllJournal">Журнал полный или не полный</param>
         /// <returns></returns>
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreateJournalAis3?year={year}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<Stream> CreateJournalAis3(int year);
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreateJournalAis3?year={year}&idOtdel={idOtdel}&isAllJournal={isAllJournal}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> CreateJournalAis3(int year,int idOtdel, bool isAllJournal);
         /// <summary>
         /// Создание табеля
         /// </summary>
@@ -1165,5 +1168,31 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteOtherAll?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn<OtherAll> DeleteOtherAll(OtherAll otherAll, string userIdEdit);
-    }
+        /// <summary>
+        /// Актуализация данных с СТО
+        /// http://localhost:8182/Inventarka/UpdateDataSto?idProcess=4
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/UpdateDataSto?idProcess={idProcess}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        void UpdateDataSto(int idProcess);
+        /// <summary>
+        /// Все отчеты из БД для выполнения сравнения ЭПО и Инвентаризации
+        /// http://localhost:8182/Inventarka/GetModelReportAnalysisEpo
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GetModelReportAnalysisEpo", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> GetModelReportAnalysisEpo();
+
+        /// <summary>
+        /// Полные отчеты инвентаризации с ЭПО
+        /// http://localhost:8182/Inventarka/AllReportInventoryAndEpo
+        /// </summary>
+        /// <param name="idReport">Уникальные номера отчетов ЭПО</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllReportInventoryAndEpo", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> AllReportInventoryAndEpo(int[] idReport);
+   }
 }

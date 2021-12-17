@@ -867,6 +867,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
         /// <returns></returns>
         private string GetDateLogicStatus(UsersReportCard userCard, Holidays[] holiDays, DateTime date) 
         {
+
             if (userCard.Status_link == 5)
             {
                 if (userCard.ItemVacation != null)
@@ -877,13 +878,17 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                         {
                             return "А";
                         }
+                        if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end && itemVacation.TypeVacation.Code == "40")
+                        {
+                            return "Р";
+                        }
                     }
                 }
                 return "ОЧ";
             }
             if (userCard.Date_out != DateTime.MinValue)
             {
-                if (date > userCard.Date_out)
+                if (date > userCard.Date_out) //Ошибка если уволен то больше на примере Севастьянова 21 включительно и на премере перевода Андрей Август
                 {
                     return "-";
                 }
@@ -950,6 +955,10 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             {
                 return "B";
             }
+            if (userCard.Link_Gr == 6)
+            {
+                return "Я";
+            }
             return null;
         }
 
@@ -962,6 +971,34 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
         /// <returns></returns>
         private double GetDateLogicTimeWork(UsersReportCard userCard, Holidays[] holiDays, DateTime date)
         {
+
+            if (userCard.Date_out != DateTime.MinValue)
+            {
+                if (date >= userCard.Date_out)
+                {
+                    return 0.00;
+                }
+            }
+            if (date < userCard.Date_in)
+            {
+                return 0.00;
+            }
+            if (userCard.Link_Gr == 6)
+            {
+                if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                    {
+                        return 5.00;
+                    }
+                    return 0.00;
+                }
+                if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == true))
+                {
+                    return 0.00;
+                }
+                return 5.00;
+            }
             if (userCard.Status_link == 5)
             {
                 if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)

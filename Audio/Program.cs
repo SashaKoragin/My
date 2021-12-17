@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Audio
@@ -11,12 +8,13 @@ namespace Audio
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
-        [STAThread]
-        static void Main()
+         [STAThread]
+        static  void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
         }
     }
 }

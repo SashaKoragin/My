@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sql="urn:schemas-microsoft-com:mapping-schema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="PassportSto" sql:is-constant="true">
+		<xs:annotation>
+			<xs:documentation>СТО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EquipmentSto" maxOccurs="unbounded" sql:relation="PassportEquipment"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EquipmentSto" sql:relation="PassportEquipment">
+		<xs:annotation>
+			<xs:documentation>Техника СТО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CountOfLicensesSip" sql:datatype="int"/>
+				<xs:element ref="CountProcessor" sql:datatype="int"/>
+				<xs:element ref="CountCores" sql:datatype="int"/>
+				<xs:element ref="CountBoards" sql:datatype="int"/>
+				<xs:element ref="CountFreeBoards" sql:datatype="int"/>
+				<xs:element ref="CountSubscribersAnalog" sql:datatype="int"/>
+				<xs:element ref="CountSubscribersDigital" sql:datatype="int"/>
+				<xs:element ref="CountAdmin" sql:datatype="int"/>
+			</xs:sequence>
+			<xs:attribute name="ID" type="xs:int" use="required" sql:datatype="int">
+				<xs:annotation>
+					<xs:documentation>ID</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Soun" type="xs:int" use="required" sql:datatype="int">
+				<xs:annotation>
+					<xs:documentation>СОУН</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MifnsObject" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Объект ФНС России</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CodeObject" type="xs:int" use="required" sql:datatype="int">
+				<xs:annotation>
+					<xs:documentation>Код объекта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ViewObject" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Вид оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeObject" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Тип оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ManufacturerObject" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Производитель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ModelObject" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Модель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SetObject" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Комплект</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ClusterObject" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Кластер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Sto2019" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>СТО 2019</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Sto2020" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>СТО 2020</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Sto" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>СТО</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerialNumber" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumber" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNumber" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumber2017" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер 2017</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsNotBalansObject" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Не на балансе</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameComputer" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="YearOfIssue" type="xs:int" use="required" sql:datatype="int">
+				<xs:annotation>
+					<xs:documentation>Год выпуска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Guarantee" type="xs:dateTime" use="required" sql:datatype="smalldatetime">
+				<xs:annotation>
+					<xs:documentation>Гарантия</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceStatus" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Статус обслуживания</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SupplyContract" type="xs:string" use="required" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Контракт на поставку</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContractSto" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Контракт на СТО</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Number" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Comment" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Комментарии</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ModelDeliveryNote" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Модель в соответствии с накладной/поставкой</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ActualOsVersion" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Фактическая версия ОС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VersionOs" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Версия фактической ОС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameZags" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Наименование органа ЗАГС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AdressZags" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Адрес органа ЗАГС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TransferAgreementNumber" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Номер договора передачи</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsNotNullBalansObject" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>На балансе</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Ippointment" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Назначение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeUse" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Тип использования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VirtualizationEnvironment" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Среда виртуализации</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Department" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Отдел</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Plot" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Участок (здание)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LocationFloor" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Расположение. Этаж</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LocationRoom" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Расположение. Комната</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Room" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Комната</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VersionPs" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Версия ПС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NetworkName" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Сетевое имя (NetBIOS)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdrees" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>IP адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AdditionalIpAdrees" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Дополнительные IP адреса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdreesStk" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>IP адрес в СТК</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdreesStkMikro" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>IP адрес в СТК (для объектов без МикроРТУ)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MacAdrees" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>MAC-адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Mhz" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Частота процессора, МГц</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeMemory" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>ОЗУ (тип)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SizeMemory" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>ОЗУ (размер)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeProcessor" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Тип процессора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CdDvd" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>CD/DVD</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Fdd" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>FDD</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Raid" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>RAID</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PublicMemory" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Общее дисковое пространство, Gb</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CountHdd" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Количество HDD</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VolumeHdd" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Объем жесткого диска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeHdd" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Тип жесткого диска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NetworkCard" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Сетевая карта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SpeedNetworkCard" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Скорость сетевой карты</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNumberPc" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер ПК, к которому подключен</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNumberIbp" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер ИБП, к которому подключен</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNumberMonitor" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumberMonitor" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ModelMonitor" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Монитор, марка</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeMonitor" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Тип монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SizeMonitor" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Размер экрана</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MaxSizeMonitor" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Максимальное разрешение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeAnalog" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Тип аналогового подключения городской ввод</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeDigital" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Тип цифрового подключения городской ввод</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NumberKey" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Номер Ключа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MarkaStrim" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Марка стримера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MarkaKardStrim" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Маркировка картриджей стримера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Os" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Операционная система</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServicePack" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Сервис пак</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OfficePack" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Офисный пакет</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Fio" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Фамилия И.О.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MainFio" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Ответственный</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Info" type="xs:string" sql:datatype="varchar">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateCreate" type="xs:dateTime" use="optional" sql:datatype="smalldatetime" sql:mapped="false">
+				<xs:annotation>
+					<xs:documentation>Дата записи</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CountOfLicensesSip" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Кол-во лицензий внутренних абонентов SIP</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountProcessor" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Количество процессоров</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountCores" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Количество ядер</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountBoards" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Кол-во плат</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountFreeBoards" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Кол-во свободных платомест</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountSubscribersAnalog" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Кол-во внутр абон аналог</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountSubscribersDigital" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Кол-во внутр абон цифровых</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountAdmin" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Численность администраторов УАТС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

@@ -22,6 +22,7 @@
 			<xs:element ref="IdTemplate"/>
 			<xs:element ref="IdScanner"/>
 			<xs:element ref="IdTelephon"/>
+			<xs:element ref="IdAnalisysEpo"/>
 			<xs:element ref="TemplateSupport" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="Step3ResponseSupport"/>
 			<xs:element ref="Error"/>
@@ -107,6 +108,11 @@
 				<xs:documentation>Параметр</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name="ParameterStep3" type="xs:base64Binary">
+			<xs:annotation>
+				<xs:documentation>Параметр шага 3 Файл</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attribute name="TypeParametr" type="xs:string">
 			<xs:annotation>
 				<xs:documentation>Тип параметра вводимый, выбираемый</xs:documentation>
@@ -166,6 +172,11 @@
 	<xs:element name="IdCalendarVks" type="xs:int" default="0" nillable="false">
 		<xs:annotation>
 			<xs:documentation>Ун календаря ВКС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdAnalisysEpo" type="xs:int" default="0" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Ун отчета с ошибками ЭПО</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

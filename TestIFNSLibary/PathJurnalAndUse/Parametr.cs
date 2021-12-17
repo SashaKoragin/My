@@ -25,6 +25,7 @@ namespace TestIFNSLibary.PathJurnalAndUse
             Report = ConfigurationManager.AppSettings["SaveReport"];
             ReportMassTemplate = ConfigurationManager.AppSettings["ReportMassTemplate"];
             Inventarization = ConfigurationManager.ConnectionStrings["Inventarization"].ConnectionString;
+            BulkCopyXmlSto = ConfigurationManager.ConnectionStrings["BulkCopyXmlSto"].ConnectionString;
             ConnectImns51 = ConfigurationManager.AppSettings["ConnectImns51"];
             PathDomainComputer = ConfigurationManager.AppSettings["PathDomainComputer"];
             PathDomainGroup = ConfigurationManager.AppSettings["PathDomainGroup"];
@@ -33,6 +34,9 @@ namespace TestIFNSLibary.PathJurnalAndUse
             Password = ConfigurationManager.AppSettings["Password"];
             DayX = Convert.ToInt32(ConfigurationManager.AppSettings["DayX"]);
             SendServiceLotus = ConfigurationManager.AppSettings["SendServiceLotus"];
+            LoginSto = ConfigurationManager.AppSettings["LoginSto"];
+            PasswordSto = ConfigurationManager.AppSettings["PasswordSto"];
+            XsdReport = ConfigurationManager.AppSettings["XsdReport"];
         }
 
         public void SettingEdit(string testDb, string workDb, int hours, int minutes)
@@ -130,5 +134,21 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// Отправка модели для генерации писем
         /// </summary>
         public string SendServiceLotus { get; set; }
+        /// <summary>
+        /// Логин для СТО
+        /// </summary>
+        public string LoginSto { get; set; }
+        /// <summary>
+        /// Пароль СТО
+        /// </summary>
+        public string PasswordSto { get; set; }
+        /// <summary>
+        /// Загрузка данных с СТО
+        /// </summary>
+        public string BulkCopyXmlSto { get; set; }
+        /// <summary>
+        /// XSD Схема
+        /// </summary>
+        public string XsdReport { get; set; }
     }
 }
