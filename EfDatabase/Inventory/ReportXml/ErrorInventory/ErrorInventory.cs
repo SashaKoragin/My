@@ -158,8 +158,6 @@ namespace EfDatabaseErrorInventory {
         
         private UsersNotTechnical[] usersNotTechnicalField;
         
-        private IsProcessComplete[] isProcessCompleteField;
-        
         private ComputerIpAdressSynhronization[] computerIpAdressSynhronizationField;
         
         private InventarNotHostName[] inventarNotHostNameField;
@@ -177,6 +175,8 @@ namespace EfDatabaseErrorInventory {
         private AllTechnics[] allTechnicsField;
         
         private ErrorTokenUser[] errorTokenUserField;
+        
+        private SynchronizationPrintServerToDataBase[] synchronizationPrintServerToDataBaseField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Error")]
@@ -219,17 +219,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.usersNotTechnicalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("IsProcessComplete")]
-        public IsProcessComplete[] IsProcessComplete {
-            get {
-                return this.isProcessCompleteField;
-            }
-            set {
-                this.isProcessCompleteField = value;
             }
         }
         
@@ -329,6 +318,17 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.errorTokenUserField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SynchronizationPrintServerToDataBase")]
+        public SynchronizationPrintServerToDataBase[] SynchronizationPrintServerToDataBase {
+            get {
+                return this.synchronizationPrintServerToDataBaseField;
+            }
+            set {
+                this.synchronizationPrintServerToDataBaseField = value;
             }
         }
     }
@@ -1071,81 +1071,6 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.nameOtdelField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class IsProcessComplete {
-        
-        private System.Nullable<System.DateTime> dataStartField;
-        
-        private System.Nullable<System.DateTime> dataFinishField;
-        
-        private int idField;
-        
-        private string nameProcessField;
-        
-        private bool isCompleteField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> DataStart {
-            get {
-                return this.dataStartField;
-            }
-            set {
-                this.dataStartField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> DataFinish {
-            get {
-                return this.dataFinishField;
-            }
-            set {
-                this.dataFinishField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameProcess {
-            get {
-                return this.nameProcessField;
-            }
-            set {
-                this.nameProcessField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool IsComplete {
-            get {
-                return this.isCompleteField;
-            }
-            set {
-                this.isCompleteField = value;
             }
         }
     }
@@ -2154,6 +2079,224 @@ namespace EfDatabaseErrorInventory {
             }
             set {
                 this.nameComputerFactField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class SynchronizationPrintServerToDataBase {
+        
+        private int idField;
+        
+        private string nameModelField;
+        
+        private string serNumberPrintServerField;
+        
+        private string namePrintServerField;
+        
+        private string ipPrintServerField;
+        
+        private string descriptionPrinterField;
+        
+        private string fullUrlField;
+        
+        private string oldNameDataBaseField;
+        
+        private string oldIpDataBaseField;
+        
+        private string newNameDataBaseField;
+        
+        private string newIpDataBaseField;
+        
+        private string isTonerLowAndHasField;
+        
+        private string isSupportApplicationDateField;
+        
+        private string infoField;
+        
+        private string nameStatusField;
+        
+        private string colorField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameModel {
+            get {
+                return this.nameModelField;
+            }
+            set {
+                this.nameModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNumberPrintServer {
+            get {
+                return this.serNumberPrintServerField;
+            }
+            set {
+                this.serNumberPrintServerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NamePrintServer {
+            get {
+                return this.namePrintServerField;
+            }
+            set {
+                this.namePrintServerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IpPrintServer {
+            get {
+                return this.ipPrintServerField;
+            }
+            set {
+                this.ipPrintServerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DescriptionPrinter {
+            get {
+                return this.descriptionPrinterField;
+            }
+            set {
+                this.descriptionPrinterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FullUrl {
+            get {
+                return this.fullUrlField;
+            }
+            set {
+                this.fullUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string OldNameDataBase {
+            get {
+                return this.oldNameDataBaseField;
+            }
+            set {
+                this.oldNameDataBaseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string OldIpDataBase {
+            get {
+                return this.oldIpDataBaseField;
+            }
+            set {
+                this.oldIpDataBaseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NewNameDataBase {
+            get {
+                return this.newNameDataBaseField;
+            }
+            set {
+                this.newNameDataBaseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NewIpDataBase {
+            get {
+                return this.newIpDataBaseField;
+            }
+            set {
+                this.newIpDataBaseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IsTonerLowAndHas {
+            get {
+                return this.isTonerLowAndHasField;
+            }
+            set {
+                this.isTonerLowAndHasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string IsSupportApplicationDate {
+            get {
+                return this.isSupportApplicationDateField;
+            }
+            set {
+                this.isSupportApplicationDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Info {
+            get {
+                return this.infoField;
+            }
+            set {
+                this.infoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameStatus {
+            get {
+                return this.nameStatusField;
+            }
+            set {
+                this.nameStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Color {
+            get {
+                return this.colorField;
+            }
+            set {
+                this.colorField = value;
             }
         }
     }

@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
-using EfDatabase.ReportCard;
+using EfDatabase.Inventory.Base;
 using LibaryDocumentGenerator.ProgrammView.Excel.Library;
 using LibaryDocumentGenerator.ProgrammView.FullDocumentExcel;
+
 
 namespace LibaryDocumentGenerator.Documents.TemplateExcel
 {
     /// <summary>
-    /// Документ табель
+    /// Генерация отчета по серверам
     /// </summary>
-    public class ReportCard : ITemplateExcel<ReportCardModel>
+    public class ReportServerIpStatus : ITemplateExcel<List<AllIpServerSelect>>
     {
         public string FullPathDocumentWord { get; set; }
 
@@ -26,9 +28,9 @@ namespace LibaryDocumentGenerator.Documents.TemplateExcel
             return new MemoryStream(file);
         }
 
-        public void CreateDocument(string path, ReportCardModel template, object obj = null)
+        public void CreateDocument(string path, List<AllIpServerSelect> template, object obj = null)
         {
-            FullPathDocumentWord = path + "Табель_"+DateTime.Now.ToString("yyyy-dd-M_HH-mm-ss") + Constant.WordConstant.FormatXlsx;
+            FullPathDocumentWord = path + "Статистика доступности_" + DateTime.Now.ToString("yyyy-dd-M_HH-mm-ss") + Constant.WordConstant.FormatXlsx;
             using (SpreadsheetDocument package = SpreadsheetDocument.Create(FullPathDocumentWord, SpreadsheetDocumentType.Workbook))
             {
                 CreateExcel(package, template, obj);
@@ -36,12 +38,12 @@ namespace LibaryDocumentGenerator.Documents.TemplateExcel
             }
         }
 
-        public void CreateExcel(SpreadsheetDocument document, ReportCardModel template, object obj = null)
+        public void CreateExcel(SpreadsheetDocument document, List<AllIpServerSelect> template, object obj = null)
         {
             ListExcel excel = new ListExcel(document);
-            var list1 = excel.CreateExcelList("Табель");
+            var list1 = excel.CreateExcelList("Сервера");
             AllDocumentExcel docCard = new AllDocumentExcel(excel.Document, excel.WorkBookPart);
-            list1.Worksheet = docCard.ReportCard(template);
+            list1.Worksheet = docCard.ReportStatusIpServer(template);
             excel.WorkBookPart.Workbook.Save();
         }
     }

@@ -15,6 +15,7 @@ using LibaryDocumentGenerator.Documents.TemplateExcel;
 using LibaryXMLAuto.ReadOrWrite;
 using LibraryAutoSupportSto.Support.SupportPostGet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SqlLibaryIfns.PingIp;
 using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
 
@@ -162,6 +163,18 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
             }
             ReportCard report = new ReportCard();
             report.CreateDocument("D:\\Testing\\", model);
+        }
+        [TestMethod()]
+        public void StatusServer()
+        {
+            Select select = new Select();
+            ReportServerIpStatus memo = new ReportServerIpStatus();
+            var modelServerIp = select.AllIpServerSelectDataBase();
+            PingIp ping = new PingIp();
+            ping.PingServerDataBase(ref modelServerIp);
+            memo.CreateDocument("D:\\Testing\\", modelServerIp);
+            select.Dispose();
+          //  return memo.FileArray();
         }
     }
 }

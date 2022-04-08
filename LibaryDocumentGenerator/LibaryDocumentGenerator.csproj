@@ -70,6 +70,7 @@
     <Compile Include="Documents\TemplateExcel\ITemplateExcel.cs" />
     <Compile Include="Documents\TemplateExcel\ReportAskNds.cs" />
     <Compile Include="Documents\TemplateExcel\ReportCard.cs" />
+    <Compile Include="Documents\TemplateExcel\ReportServerIpStatus.cs" />
     <Compile Include="Documents\Template\BookAccountingInventarka.cs" />
     <Compile Include="Documents\Template\InvoiceInventarka.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />

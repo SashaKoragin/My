@@ -57,7 +57,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
         {
             SectionProperties sectionProperties = new SectionProperties();
             PageSize pageSize = new PageSize() { Width = 16800U, Height = 11900U, Orient = PageOrientationValues.Landscape };
-            PageMargin pageMargin = new PageMargin() { Top = 500, Right = 500, Bottom = 500, Left = 500, Header = 710U, Footer = 700U, Gutter = 0U };
+            PageMargin pageMargin = new PageMargin() { Top = 283, Right = 500, Bottom = 283, Left = 500, Header = 710U, Footer = 700U, Gutter = 0U };
             sectionProperties.Append(pageSize);
             sectionProperties.Append(pageMargin);
             body.Append(sectionProperties);

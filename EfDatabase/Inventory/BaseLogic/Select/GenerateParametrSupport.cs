@@ -57,6 +57,10 @@ namespace EfDatabase.Inventory.BaseLogic.Select
              
                foreach (var templateStep2 in modelParameterInputStep2)
                {
+                   if (templateStep2.TemplateParametrType.Equals("Setting"))
+                   {
+                       templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr).FirstOrDefault();
+                   }
                    if (templateStep2.TemplateParametrType.Equals("CalendarVKS") && modelSupport.IdCalendarVks != 0)
                    {
                        templateStep2.Parametr = Inventory.Database.SqlQuery<string>(templateStep2.SelectParametr,

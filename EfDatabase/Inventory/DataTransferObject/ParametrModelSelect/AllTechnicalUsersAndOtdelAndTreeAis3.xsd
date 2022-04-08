@@ -31,6 +31,7 @@
 				<xs:element ref="Telephon" minOccurs="0"/>
 				<xs:element ref="Swithe" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="Token" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="OtherAll" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 			<xs:attribute name="IdUser" type="xs:int">
 				<xs:annotation>
@@ -203,9 +204,19 @@
 			<xs:documentation>Имена мониторов</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameManufacturer" type="xs:string">
 				<xs:annotation>
-					<xs:documentation>Имя монитора</xs:documentation>
+					<xs:documentation>Производитель монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameModel">
+				<xs:annotation>
+					<xs:documentation>Модель монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Info">
+				<xs:annotation>
+					<xs:documentation>Дополнительная информация</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -512,6 +523,62 @@
 			<xs:attribute name="Type" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Тип ветки (ПЗ или ИР)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OtherAll">
+		<xs:annotation>
+			<xs:documentation>Разное оборудование</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Kabinet" minOccurs="0"/>
+				<xs:element ref="ProizvoditelOther"/>
+				<xs:element ref="ModelOther"/>
+			</xs:sequence>
+			<xs:attribute name="ServiceNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventarNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Coment" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Комментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProizvoditelOther">
+		<xs:annotation>
+			<xs:documentation>Производитель разного</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование производителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModelOther">
+		<xs:annotation>
+			<xs:documentation>Модель разного</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование модели</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

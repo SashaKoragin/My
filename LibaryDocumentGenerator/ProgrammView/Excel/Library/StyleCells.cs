@@ -66,8 +66,9 @@ namespace LibaryDocumentGenerator.ProgrammView.Excel.Library
         /// <param name="valueVerticalAlignment">Выравнивание по Вертикале</param>
         /// <param name="isFill">Наполнение Fill</param>
         /// <param name="isFormatDouble">Формат с плавающей точкой</param>
+        /// <param name="fill">Наполнение</param>
         /// <returns></returns>
-        public uint StyleTimesNewRoman(Font font, Border border = null, HorizontalAlignmentValues valueAlignment = HorizontalAlignmentValues.Left, VerticalAlignmentValues valueVerticalAlignment = VerticalAlignmentValues.Bottom, bool isFill = false, bool isFormatDouble = false)
+        public uint StyleTimesNewRoman(Font font, Border border = null, HorizontalAlignmentValues valueAlignment = HorizontalAlignmentValues.Left, VerticalAlignmentValues valueVerticalAlignment = VerticalAlignmentValues.Bottom, bool isFill = false, bool isFormatDouble = false, Fill fill = null)
         {
             uint idBorder = 0;
             uint idFill = 0;
@@ -82,7 +83,10 @@ namespace LibaryDocumentGenerator.ProgrammView.Excel.Library
             {
                 idBorder = InsertBorder(border);
             }
-
+            if (fill != null)
+            {
+                idFill = InsertFill(fill);
+            }
             if (isFormatDouble)
             {
                 idnumberingFormats = InsertNumberingFormats(GenerateNumberingFormats());

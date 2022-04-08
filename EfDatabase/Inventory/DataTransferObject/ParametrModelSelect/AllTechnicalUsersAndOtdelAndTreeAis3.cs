@@ -90,6 +90,8 @@ namespace EfDatabaseParametrsModel {
         
         private Token[] tokenField;
         
+        private OtherAll[] otherAllField;
+        
         private int idUserField;
         
         private bool idUserFieldSpecified;
@@ -191,6 +193,17 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.tokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("OtherAll")]
+        public OtherAll[] OtherAll {
+            get {
+                return this.otherAllField;
+            }
+            set {
+                this.otherAllField = value;
             }
         }
         
@@ -333,16 +346,42 @@ namespace EfDatabaseParametrsModel {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class NameMonitor {
         
-        private string nameField;
+        private string nameManufacturerField;
+        
+        private string nameModelField;
+        
+        private string infoField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameManufacturer {
             get {
-                return this.nameField;
+                return this.nameManufacturerField;
             }
             set {
-                this.nameField = value;
+                this.nameManufacturerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameModel {
+            get {
+                return this.nameModelField;
+            }
+            set {
+                this.nameModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Info {
+            get {
+                return this.infoField;
+            }
+            set {
+                this.infoField = value;
             }
         }
     }
@@ -1280,6 +1319,150 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.proizvoditelNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class OtherAll {
+        
+        private Kabinet kabinetField;
+        
+        private ProizvoditelOther proizvoditelOtherField;
+        
+        private ModelOther modelOtherField;
+        
+        private string serviceNumberField;
+        
+        private string serNumField;
+        
+        private string inventarNumField;
+        
+        private string comentField;
+        
+        /// <remarks/>
+        public Kabinet Kabinet {
+            get {
+                return this.kabinetField;
+            }
+            set {
+                this.kabinetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ProizvoditelOther ProizvoditelOther {
+            get {
+                return this.proizvoditelOtherField;
+            }
+            set {
+                this.proizvoditelOtherField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ModelOther ModelOther {
+            get {
+                return this.modelOtherField;
+            }
+            set {
+                this.modelOtherField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ServiceNumber {
+            get {
+                return this.serviceNumberField;
+            }
+            set {
+                this.serviceNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SerNum {
+            get {
+                return this.serNumField;
+            }
+            set {
+                this.serNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string InventarNum {
+            get {
+                return this.inventarNumField;
+            }
+            set {
+                this.inventarNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Coment {
+            get {
+                return this.comentField;
+            }
+            set {
+                this.comentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class ProizvoditelOther {
+        
+        private string nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class ModelOther {
+        
+        private string nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
             }
         }
     }

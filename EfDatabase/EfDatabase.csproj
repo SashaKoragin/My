@@ -73,6 +73,7 @@
       <HintPath>C:\Nuget\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -80,6 +81,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
@@ -95,6 +97,7 @@
     <Compile Include="Inventory\BaseLogic\Login\Login.cs" />
     <Compile Include="Inventory\BaseLogic\DeleteObjectDb\DeleteObjectDb.cs" />
     <Compile Include="Inventory\BaseLogic\HistoryLog\HistoryLog.cs" />
+    <Compile Include="Inventory\BaseLogic\ProcessSynchronization\ProcessSynhronizationPrintServer.cs" />
     <Compile Include="Inventory\BaseLogic\Select\GenerateParametrSupport.cs" />
     <Compile Include="Inventory\BaseLogic\Select\Report.cs" />
     <Compile Include="Inventory\BaseLogic\Select\Select.cs" />
@@ -337,7 +340,7 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdReportError.FullPath)&quot; /c /namespace:$(RootNamespace)ErrorInventory /outputdir:Inventory\ReportXml\ErrorInventory\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdTelephoneHelp.FullPath)&quot; /c /namespace:$(RootNamespace)TelephoneHelp /outputdir:Inventory\ReportXml\TelephoneHelp\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdBookAccounting.FullPath)&quot; /c /namespace:$(RootNamespace).XsdBookAccounting /outputdir:Inventory\ReportXml\BookAccounting\" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdLotusUser.FullPath)&quot; /c /namespace:$(RootNamespace)XsdLotusUser /outputdir:Inventory\MailLogicLotus\MailXsdSheme\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdLotusUser.FullPath)&quot; /c /namespace:$(RootNamespace).XsdLotusUser /outputdir:Inventory\MailLogicLotus\MailXsdSheme\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdMail.FullPath)&quot; /c /namespace:$(RootNamespace)XsdMail /outputdir:Inventory\ReportXml\Mail\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdSupportNalog.FullPath)&quot; /c /namespace:$(RootNamespace)XsdSupportNalog /outputdir:Inventory\ReportXml\ModelSupportNalog\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdInventoryAutorization.FullPath)&quot; /c /namespace:$(RootNamespace)XsdInventoryAutorization /outputdir:Inventory\ReportXml\InventoryAutorization\" />

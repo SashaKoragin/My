@@ -76,12 +76,12 @@
 					<xs:documentation>Кластер</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Sto2019" type="xs:string" use="required" sql:datatype="varchar">
+			<xs:attribute name="StoPrevious" type="xs:string" use="required" sql:datatype="varchar">
 				<xs:annotation>
 					<xs:documentation>СТО 2019</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Sto2020" type="xs:string" use="required" sql:datatype="varchar">
+			<xs:attribute name="StoCurrent" type="xs:string" use="required" sql:datatype="varchar">
 				<xs:annotation>
 					<xs:documentation>СТО 2020</xs:documentation>
 				</xs:annotation>

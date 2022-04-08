@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="ReportSheme" type="Report">
 		<xs:annotation>
@@ -111,6 +111,11 @@
 			<xs:attribute name="SmallName" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Сокращенное имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UserPosition" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Должность пользователя</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name="NameOtdel" type="xs:string">

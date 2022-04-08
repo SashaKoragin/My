@@ -28,12 +28,12 @@ using LibaryDocumentGenerator.Documents.Template;
 using LibaryDocumentGenerator.Documents.TemplateExcel;
 using LibaryXMLAuto.ReadOrWrite;
 using LibraryAutoSupportSto.PassportSto.PassportStoPostGet;
-using SqlLibaryIfns.Inventory.ModelParametr;
-using SqlLibaryIfns.Inventory.Select;
 using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
 using SqlLibaryIfns.ZaprosSelectNotParam;
 using TestIFNSLibary.PathJurnalAndUse;
+using LibraryAutoSupportSto.Support.SupportPostGet;
+using SqlLibaryIfns.PingIp;
 using BlockPower = EfDatabase.Inventory.Base.BlockPower;
 using CopySave = EfDatabase.Inventory.Base.CopySave;
 using FullModel = EfDatabase.Inventory.Base.FullModel;
@@ -52,17 +52,19 @@ using Swithe = EfDatabase.Inventory.Base.Swithe;
 using SysBlock = EfDatabase.Inventory.Base.SysBlock;
 using Telephon = EfDatabase.Inventory.Base.Telephon;
 using User = EfDatabase.Inventory.Base.User;
-using LibraryAutoSupportSto.Support.SupportPostGet;
 using Organization = EfDatabase.Inventory.Base.Organization;
 using Type = System.Type;
+using OtherAll = EfDatabase.Inventory.Base.OtherAll;
+using ProizvoditelOther = EfDatabase.Inventory.Base.ProizvoditelOther;
+using ModelOther = EfDatabase.Inventory.Base.ModelOther;
 
 namespace TestIFNSLibary.Inventarka
 {
-   public class Inventarka  : IInventarka
-   {
-       private readonly Parameter parametersService = new Parameter();
+    public class Inventarka : IInventarka
+    {
+        private readonly Parameter parametersService = new Parameter();
 
-       /// <summary>
+        /// <summary>
         /// Запрос всех отделов
         /// </summary>
         /// <returns></returns>
@@ -71,6 +73,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.DepartmentAll());
         }
+
         /// <summary>
         /// Авторизация
         /// </summary>
@@ -83,31 +86,24 @@ namespace TestIFNSLibary.Inventarka
             {
                 if (user.Login != null)
                 {
-                    using (PrincipalContext context = new PrincipalContext(ContextType.Domain, null, user.Login, user.Password))
+                    using (PrincipalContext context =
+                        new PrincipalContext(ContextType.Domain, null, user.Login, user.Password))
                     {
                         if (context.ValidateCredentials(user.Login, user.Password))
                         {
                             return auto.Identification(user);
                         }
+
                         user.ErrorAutorization = "Не правильный логин/пароль!!!";
                         return user;
                     }
                 }
+
                 user.ErrorAutorization = "Пользователь не введен!!!";
                 return user;
             });
         }
-        /// <summary>
-        /// Простой запрос к БД
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public async Task<string> SelectAllUsers(ModelParametr model)
-        {
-            var param = new Parameter();
-            SelectInventory select = new SelectInventory(param.Inventarization);
-            return await Task.Factory.StartNew((() => select.SelectFull(model)));
-        }
+
         /// <summary>
         /// Получение статистики актулизированных пользователей
         /// </summary>
@@ -117,6 +113,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.ActualsUsersKladr());
         }
+
         /// <summary>
         /// Добавление или обновление пользователя
         /// </summary>
@@ -127,11 +124,16 @@ namespace TestIFNSLibary.Inventarka
         {
 
             AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditUser(user,SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = add.AddAndEditUser(user, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeUser(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeUser(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление или обновление принтера
         /// </summary>
@@ -141,11 +143,17 @@ namespace TestIFNSLibary.Inventarka
         public ModelReturn<Printer> AddAndEditPrinter(Printer printer, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditPrinter(printer, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = add.AddAndEditPrinter(printer,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribePrinter(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribePrinter(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление или обновление Коммутаторов
         /// </summary>
@@ -153,11 +161,16 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
         public ModelReturn<Swithe> AddAndEditSwith(Swithe swith, string userIdEdit)
-       {
+        {
             AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditSwiths(swith, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = add.AddAndEditSwiths(swith,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSwithe(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSwithe(model.Model);
+            }
+
             return model;
         }
 
@@ -170,25 +183,38 @@ namespace TestIFNSLibary.Inventarka
         public ModelReturn<ScanerAndCamer> AddAndEditScaner(ScanerAndCamer scaner, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditScaner(scaner, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = add.AddAndEditScaner(scaner,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeScanerAndCamer(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeScanerAndCamer(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление или редактирование серверного оборудования
         /// </summary>
         /// <param name="serverEquipment">Серверное оборудование</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<ServerEquipment> AddAndEditServerEquipment(ServerEquipment serverEquipment, string userIdEdit)
+        public ModelReturn<ServerEquipment> AddAndEditServerEquipment(ServerEquipment serverEquipment,
+            string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditServerEquipment(serverEquipment, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = add.AddAndEditServerEquipment(serverEquipment,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeServerEquipment(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeServerEquipment(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление или редактирования модели серверного оборудования
         /// </summary>
@@ -199,20 +225,30 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditModelSeverEquipment(modelSeverEquipment);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSeverEquipment(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSeverEquipment(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление или редактирования производителя серверного оборудования
         /// </summary>
         /// <param name="manufacturerSeverEquipment">Производитель серверного оборудования</param>
         /// <returns></returns>
-        public ModelReturn<ManufacturerSeverEquipment> AddAndEditManufacturerSeverEquipment(ManufacturerSeverEquipment manufacturerSeverEquipment)
+        public ModelReturn<ManufacturerSeverEquipment> AddAndEditManufacturerSeverEquipment(
+            ManufacturerSeverEquipment manufacturerSeverEquipment)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditManufacturerSeverEquipment(manufacturerSeverEquipment);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeManufacturerSeverEquipment(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeManufacturerSeverEquipment(model.Model);
+            }
+
             return model;
         }
 
@@ -221,7 +257,11 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditTypeServer(typeServer);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTypeServer(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTypeServer(model.Model);
+            }
+
             return model;
         }
 
@@ -231,28 +271,39 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="mfu">МФУ</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventory.Base.Mfu> AddAndEditMfu(EfDatabase.Inventory.Base.Mfu mfu, string userIdEdit)
+        public ModelReturn<Mfu> AddAndEditMfu(Mfu mfu, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditMfu(mfu, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMfu(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMfu(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление или обновление Системного блока
         /// </summary>
         /// <param name="sysblock">Системный блок</param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventory.Base.SysBlock> AddAndEditSysBlok(EfDatabase.Inventory.Base.SysBlock sysblock, string userIdEdit)
+        public ModelReturn<SysBlock> AddAndEditSysBlok(SysBlock sysblock, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditSysBlok(sysblock, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = add.AddAndEditSysBlok(sysblock,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSysBlok(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSysBlok(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление или редактирование отдела
         /// </summary>
@@ -263,9 +314,14 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditDepartment(otdel);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOtdel(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOtdel(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление или обновление Монитора
         /// </summary>
@@ -275,11 +331,17 @@ namespace TestIFNSLibary.Inventarka
         public ModelReturn<Monitor> AddAndEditMonitor(Monitor monitor, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
-            var model = add.AddAndEditMonitors(monitor, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = add.AddAndEditMonitors(monitor,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMonitor(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMonitor(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Выгрузка ролей пользователя по IdUser
         /// </summary>
@@ -289,6 +351,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.AllRuleUser(idUser));
         }
+
         /// <summary>
         /// Выгрузка праздничных дней
         /// </summary>
@@ -298,6 +361,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.GetHolidays());
         }
+
         /// <summary>
         /// Добавление или редактирование справочника праздничных дней
         /// </summary>
@@ -310,9 +374,14 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditHoliday(holidays);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeRbHoliday(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeRbHoliday(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Удаление не актуальных праздничных дней
         /// </summary>
@@ -322,7 +391,8 @@ namespace TestIFNSLibary.Inventarka
         public ModelReturn<Rb_Holiday> DeleteRbHoliday(Rb_Holiday holidays, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteHoliday(holidays, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = delete.DeleteHoliday(holidays,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteHoliday(model);
             return model;
         }
@@ -341,9 +411,10 @@ namespace TestIFNSLibary.Inventarka
             {
                 add.AddAndDeleteRuleUsers(ruleUsers);
                 add.Dispose();
-                return auto.AllRuleUser((int)ruleUsers.IdUser);
+                return auto.AllRuleUser((int) ruleUsers.IdUser);
             });
         }
+
         /// <summary>
         /// Редактирование или добавление настроек организации
         /// </summary>
@@ -355,37 +426,54 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditOrganization(organization);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOrganization(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOrganization(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Редактирование или добавление настроек падежей отдела 
         /// </summary>
         /// <param name="settingDepartmentCase">падежи отдела</param>
         /// <param name="userIdEdit">Пользователь вносивший изменения</param>
         /// <returns></returns>
-        public ModelReturn<SettingDepartmentCase> AddAndEditSettingDepartmentCase(SettingDepartmentCase settingDepartmentCase, string userIdEdit)
+        public ModelReturn<SettingDepartmentCase> AddAndEditSettingDepartmentCase(
+            SettingDepartmentCase settingDepartmentCase, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditSettingDepartmentCase(settingDepartmentCase);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDepartmentCase(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDepartmentCase(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Обновление или обновление регламентов отдела
         /// </summary>
         /// <param name="regulationsDepartment">Регламент отдела</param>
         /// <param name="userIdEdit">Пользователь вносивший изменения</param>
         /// <returns></returns>
-        public ModelReturn<RegulationsDepartment> AddAndEditSettingDepartmentRegulations(RegulationsDepartment regulationsDepartment, string userIdEdit)
+        public ModelReturn<RegulationsDepartment> AddAndEditSettingDepartmentRegulations(
+            RegulationsDepartment regulationsDepartment, string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditSettingDepartmentRegulations(regulationsDepartment);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDepartmentRegulations(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDepartmentRegulations(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Глобальные настройки организации
         /// </summary>
@@ -395,6 +483,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.SettingOrganization());
         }
+
         /// <summary>
         /// Настройки падежей организации
         /// </summary>
@@ -404,6 +493,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.SettingDepartmentCase());
         }
+
         /// <summary>
         /// Регламенты отделов 
         /// </summary>
@@ -413,6 +503,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.SettingDepartmentRegulations());
         }
+
         /// <summary>
         /// Запрос всех пользователей
         /// </summary>
@@ -422,6 +513,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.UsersAll(filterActual));
         }
+
         /// <summary>
         /// Запрос на все роли
         /// </summary>
@@ -431,6 +523,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.RuleAll());
         }
+
         /// <summary>
         /// Запрос всех должностей
         /// </summary>
@@ -441,6 +534,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.PositionUsers());
         }
+
         /// <summary>
         /// Загрузка всех принтеров
         /// </summary>
@@ -450,6 +544,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Printers());
         }
+
         /// <summary>
         /// Выгрузка всех моделей коммутаторов
         /// </summary>
@@ -479,6 +574,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Scaner());
         }
+
         /// <summary>
         /// Запрос на все МФУ
         /// </summary>
@@ -488,6 +584,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Mfu());
         }
+
         /// <summary>
         /// Запрос всех системных блоков
         /// </summary>
@@ -497,6 +594,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.SysBloks());
         }
+
         /// <summary>
         /// Запрос всех мониторов
         /// </summary>
@@ -506,6 +604,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Monitors());
         }
+
         /// <summary>
         /// Запрос всего разного оборудования
         /// </summary>
@@ -515,6 +614,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.OtherAll());
         }
+
         /// <summary>
         /// Все модели разного оборудования
         /// </summary>
@@ -524,6 +624,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.AllModelOther());
         }
+
         /// <summary>
         /// Все типы разного оборудования
         /// </summary>
@@ -533,6 +634,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.AllTypeOther());
         }
+
         /// <summary>
         /// Все производители разного оборудования
         /// </summary>
@@ -542,6 +644,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.AllProizvoditelOther());
         }
+
         /// <summary>
         /// Запрос на все CopySave
         /// </summary>
@@ -561,6 +664,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Proizvoditel());
         }
+
         /// <summary>
         /// Загрузка всех моделей
         /// </summary>
@@ -570,6 +674,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Model());
         }
+
         /// <summary>
         /// Загрузка всех кабинетов
         /// </summary>
@@ -579,6 +684,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Kabinet());
         }
+
         /// <summary>
         /// загрузка всех статусов
         /// </summary>
@@ -588,6 +694,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.Status());
         }
+
         /// <summary>
         /// загрузка всех производителей системных блоков
         /// </summary>
@@ -597,6 +704,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.NameSysBlock());
         }
+
         /// <summary>
         /// загрузка всех производителей мониторов
         /// </summary>
@@ -606,6 +714,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.NameMonitor());
         }
+
         /// <summary>
         /// Генерация выборки на клиенте 
         /// </summary>
@@ -614,7 +723,7 @@ namespace TestIFNSLibary.Inventarka
         public async Task<ModelSelect> GenerateSqlSelect(ModelSelect model)
         {
             SelectSql select = new SelectSql();
-            return await Task.Factory.StartNew(() =>  select.SqlSelect(model));
+            return await Task.Factory.StartNew(() => select.SqlSelect(model));
         }
 
         /// <summary>
@@ -630,9 +739,11 @@ namespace TestIFNSLibary.Inventarka
                 var selectfull = new SelectFull(parametersService.Inventarization);
                 TelephoneHelp invoice = new TelephoneHelp();
                 return await Task.Factory.StartNew(() =>
-                { 
+                {
                     telephonehelper.LogicaSelect = select.SqlSelectModel(telephonehelper.ParametrsSelect.Id);
-                    invoice.CreateDocument(parametersService.Report, (EfDatabaseTelephoneHelp.TelephoneHelp)selectfull.GenerateSchemeXsdSql<string,string>(telephonehelper.LogicaSelect), null);
+                    invoice.CreateDocument(parametersService.Report,
+                        (EfDatabaseTelephoneHelp.TelephoneHelp) selectfull.GenerateSchemeXsdSql<string, string>(
+                            telephonehelper.LogicaSelect), null);
                     return invoice.FileArray();
                 });
             }
@@ -640,8 +751,10 @@ namespace TestIFNSLibary.Inventarka
             {
                 Loggers.Log4NetLogger.Error(e);
             }
+
             return null;
         }
+
         /// <summary>
         /// Запрос на get получение файла по телефонам
         /// </summary>
@@ -649,7 +762,8 @@ namespace TestIFNSLibary.Inventarka
         public async Task<Stream> GenerateFileXlsxSqlView(LogicaSelect selectLogic)
         {
             var selectFull = new SelectFull(parametersService.Inventarization);
-            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(selectLogic.SelectUser, selectLogic.NameReportFile, selectLogic.NameReportList, parametersService.ReportMassTemplate));
+            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(selectLogic.SelectUser,
+                selectLogic.NameReportFile, selectLogic.NameReportList, parametersService.ReportMassTemplate));
         }
 
         /// <summary>
@@ -669,19 +783,21 @@ namespace TestIFNSLibary.Inventarka
                     GenerateBarcode barecode = new GenerateBarcode();
                     SelectFull selectfull = new SelectFull(parametersService.Inventarization);
                     ModelSelect modelSelect = new ModelSelect
-                         {
-                           ParametrsSelect = new ParametrsSelect {Id = 12},
-                           LogicaSelect = new LogicaSelect() {Id = 12}
-                         };
+                    {
+                        ParametrsSelect = new ParametrsSelect {Id = 12},
+                        LogicaSelect = new LogicaSelect() {Id = 12}
+                    };
                     modelSelect.LogicaSelect = select.SqlSelectModel(modelSelect.ParametrsSelect.Id);
                     Dictionary<string, string> parametr = new Dictionary<string, string>
                     {
                         {modelSelect.LogicaSelect.SelectedParametr.Split(',')[0], bookModels.Name},
                         {modelSelect.LogicaSelect.SelectedParametr.Split(',')[1], bookModels.Id.ToString()}
                     };
-                    Book book =(Book) selectfull.GenerateSchemeXsdSql( modelSelect.LogicaSelect,parametr); //Получение данных для модели
+                    Book book = (Book) selectfull.GenerateSchemeXsdSql(modelSelect.LogicaSelect,
+                        parametr); //Получение данных для модели
                     book.BareCodeBook = rep.BookInvoce(book.BareCodeBook, bookModels); //Раскладывает в БД
-                    barecode.GenerateBookCode(book.BareCodeBook, parametersService.Report);//Генерит Штрихкод на основе раскладки БД
+                    barecode.GenerateBookCode(book.BareCodeBook,
+                        parametersService.Report); //Генерит Штрихкод на основе раскладки БД
                     bookAccounting.CreateDocument(parametersService.Report, book, null);
                     File.Delete(book.BareCodeBook.FullPathSave);
                     return bookAccounting.FileArray();
@@ -689,8 +805,9 @@ namespace TestIFNSLibary.Inventarka
             }
             catch (Exception e)
             {
-               Loggers.Log4NetLogger.Error(e);
+                Loggers.Log4NetLogger.Error(e);
             }
+
             return null;
         }
 
@@ -707,42 +824,47 @@ namespace TestIFNSLibary.Inventarka
                 if (logica.SelectUser != null)
                 {
                     Type type = Type.GetType($"{logica.FindNameSpace}, {logica.NameDll}");
-                    model = (string)typeof(FullSelectModelInventory).GetMethod("SqlModelInventory")?.MakeGenericMethod(type).Invoke(new FullSelectModelInventory(), new object[] { logica });
+                    model = (string) typeof(FullSelectModelInventory).GetMethod("SqlModelInventory")
+                        ?.MakeGenericMethod(type).Invoke(new FullSelectModelInventory(), new object[] {logica});
                 }
+
                 return model;
             });
         }
+
         /// <summary>
         /// Генерация накладной
         /// </summary>
         public async Task<Stream> GenerateDocuments(EfDatabaseInvoice.Report report)
         {
-               try
-               {
+            try
+            {
                 return await Task.Factory.StartNew(() =>
-                    {
-                       Report rep = new Report();
-                       InvoiceInventarka invoice = new InvoiceInventarka();
-                       GenerateBarcode barecode = new GenerateBarcode();
-                       rep.ReportInvoice(ref report);
-                       barecode.GenerateCode(ref report, parametersService.Report);
-                       invoice.CreateDocument(parametersService.Report, report, null);
-                       File.Delete(report.Main.Barcode.PathBarcode);
-                       return invoice.FileArray();
-                    });
-               }
-               catch (Exception e)
-               {
-                   Loggers.Log4NetLogger.Error(e);
-               }
+                {
+                    Report rep = new Report();
+                    InvoiceInventarka invoice = new InvoiceInventarka();
+                    GenerateBarcode barecode = new GenerateBarcode();
+                    rep.ReportInvoice(ref report);
+                    barecode.GenerateCode(ref report, parametersService.Report);
+                    invoice.CreateDocument(parametersService.Report, report);
+                    File.Delete(report.Main.Barcode.PathBarcode);
+                    return invoice.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+
             return null;
         }
 
         public string DeleteDocument(int iddoc)
         {
-                AddObjectDb delete = new AddObjectDb();
-                return delete.DeleteDocument(iddoc);            
+            AddObjectDb delete = new AddObjectDb();
+            return delete.DeleteDocument(iddoc);
         }
+
         /// <summary>
         /// Выгрузка документа
         /// </summary>
@@ -753,6 +875,7 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb selectdocument = new AddObjectDb();
             return selectdocument.LoadDocuments(iddoc);
         }
+
         /// <summary>
         /// Выгрузка последней актуальной книги учета 
         /// </summary>
@@ -800,9 +923,11 @@ namespace TestIFNSLibary.Inventarka
                     };
                 }
             }
+
             add.Dispose();
             return error;
         }
+
         /// <summary>
         /// Актуализация пользователей
         /// </summary>
@@ -819,10 +944,12 @@ namespace TestIFNSLibary.Inventarka
             }
             catch (Exception e)
             {
-               Loggers.Log4NetLogger.Error(e);
+                Loggers.Log4NetLogger.Error(e);
             }
+
             return "Возникла не предвиденная ошибка смотри Log.txt";
         }
+
         /// <summary>
         /// Актуализация Ip Адресов в БД
         /// </summary>
@@ -847,19 +974,19 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         public async Task<string> Telephon()
         {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.Telephon());
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.Telephon());
         }
+
         /// <summary>
         /// Типы серверов
         /// </summary>
         /// <returns></returns>
         public async Task<string> TypeServer()
         {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.TypeServer());
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.TypeServer());
         }
-
 
         /// <summary>
         /// Выгрузка бесперебойников
@@ -867,54 +994,60 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         public async Task<string> BlockPower()
         {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.BlockPower());
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.BlockPower());
         }
+
         /// <summary>
         /// Серверное оборудование
         /// </summary>
         /// <returns></returns>
         public async Task<string> ServerEquipment()
         {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.ServerEquipment());
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.ServerEquipment());
         }
+
         /// <summary>
         /// Модели серверного оборудования
         /// </summary>
         /// <returns></returns>
         public async Task<string> ModelSeverEquipment()
         {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.ModelSeverEquipment());
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.ModelSeverEquipment());
         }
+
         /// <summary>
         /// Получение ресурсов для заявки АИС 3
         /// </summary>
         /// <returns></returns>
         public async Task<string> GetResourceIt()
         {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.GetResourceIt());
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.GetResourceIt());
         }
+
         /// <summary>
         /// Получение задач для заявки АИС 3
         /// </summary>
         /// <returns></returns>
         public async Task<string> GetTaskAis3()
         {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.GetTaskAis3());
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.GetTaskAis3());
         }
+
         /// <summary>
         /// Получение журнала заявок на различные ресурсы
         /// </summary>
         /// <returns></returns>
         public async Task<string> GetJournalAis3()
         {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.GetJournalAis3());
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.GetJournalAis3());
         }
+
         /// <summary>
         /// Добавление или обновление ресурса для заявки
         /// </summary>
@@ -925,7 +1058,11 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditResourceIt(resourceIt);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeResourceIt(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeResourceIt(model.Model);
+            }
+
             return model;
         }
 
@@ -939,9 +1076,14 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditTaskAis3(taskAis3);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTaskAis3(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTaskAis3(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление или удаление записи в журнале доступа
         /// </summary>
@@ -953,111 +1095,147 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditJournalAis3(journalAis3);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeJournalAis3(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeJournalAis3(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// производители серверного оборудования
         /// </summary>
         /// <returns></returns>
         public async Task<string> ManufacturerSeverEquipment()
-       {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.ManufacturerSeverEquipment());
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.ManufacturerSeverEquipment());
         }
 
-       /// <summary>
-       /// Поставщики
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> Supply()
-       {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.Supply());
-       }
-       /// <summary>
-       /// Все модели системных блоков
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> ModelBlockPower()
-       {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.ModelBlockPower());
-       }
-       /// <summary>
-       /// Все производители системных блоков
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> ProizvoditelBlockPower()
-       {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.ProizvoditelBlockPower());
-       }
-       /// <summary>
-       /// Добавление или обновление телефона
-       /// </summary>
-       /// <param name="telephon">Телефон</param>
-       /// <param name="userIdEdit">Пользователь кто редактировал</param>
-       /// <returns></returns>
-       public ModelReturn<EfDatabase.Inventory.Base.Telephon> AddAndEditTelephon(EfDatabase.Inventory.Base.Telephon telephon,string userIdEdit)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model =  add.AddAndEditTelephone(telephon, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           add.Dispose();
-            if (model.Model != null){ SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTelephone(model.Model);}
-           return model;
-       }
-       /// <summary>
-       /// Добавление или обновление ИБП
-       /// </summary>
-       /// <param name="blockpower">ИБП</param>
-       /// <param name="userIdEdit">Пользователь кто редактировал</param>
-       /// <returns></returns>
-       public ModelReturn<EfDatabase.Inventory.Base.BlockPower> AddAndEditBlockPower(EfDatabase.Inventory.Base.BlockPower blockpower, string userIdEdit)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditPowerBlock(blockpower, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeBlockPower(model.Model); }
-           return model;
-       }
+        /// <summary>
+        /// Поставщики
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> Supply()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.Supply());
+        }
 
-       public ModelReturn<NameSysBlock> AddAndEditNameSysBlock(NameSysBlock nameSysBlock)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameSysBlock(nameSysBlock);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameSysBlock(model.Model); }
-           return model;
-       }
+        /// <summary>
+        /// Все модели системных блоков
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ModelBlockPower()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.ModelBlockPower());
+        }
 
-       public ModelReturn<EfDatabase.Inventory.Base.NameMonitor> AddAndEditNameMonitor(EfDatabase.Inventory.Base.NameMonitor nameMonitor)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameMonitor(nameMonitor);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameMonitor(model.Model); }
+        /// <summary>
+        /// Все производители системных блоков
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ProizvoditelBlockPower()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.ProizvoditelBlockPower());
+        }
 
-           return model;
-       }
+        /// <summary>
+        /// Добавление или обновление телефона
+        /// </summary>
+        /// <param name="telephon">Телефон</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
+        /// <returns></returns>
+        public ModelReturn<Telephon> AddAndEditTelephon(Telephon telephon, string userIdEdit)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditTelephone(telephon,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTelephone(model.Model);
+            }
 
-       public ModelReturn<ModelBlockPower> AddAndEditNameModelBlokPower(ModelBlockPower nameModelBlokPower)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameModelBlokPower(nameModelBlokPower);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelBlockPower(model.Model); }
-           return model;
-       }
+            return model;
+        }
 
-       public ModelReturn<ProizvoditelBlockPower> AddAndEditNameProizvoditelBlockPower(ProizvoditelBlockPower nameProizvoditelBlockPower)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameProizvoditelBlockPower(nameProizvoditelBlockPower);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelBlockPower(model.Model); }
-           return model;
-       }
+        /// <summary>
+        /// Добавление или обновление ИБП
+        /// </summary>
+        /// <param name="blockpower">ИБП</param>
+        /// <param name="userIdEdit">Пользователь кто редактировал</param>
+        /// <returns></returns>
+        public ModelReturn<BlockPower> AddAndEditBlockPower(BlockPower blockpower, string userIdEdit)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditPowerBlock(blockpower,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeBlockPower(model.Model);
+            }
+
+            return model;
+        }
+
+        public ModelReturn<NameSysBlock> AddAndEditNameSysBlock(NameSysBlock nameSysBlock)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameSysBlock(nameSysBlock);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameSysBlock(model.Model);
+            }
+
+            return model;
+        }
+
+        public ModelReturn<EfDatabase.Inventory.Base.NameMonitor> AddAndEditNameMonitor(
+            EfDatabase.Inventory.Base.NameMonitor nameMonitor)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameMonitor(nameMonitor);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameMonitor(model.Model);
+            }
+
+            return model;
+        }
+
+        public ModelReturn<ModelBlockPower> AddAndEditNameModelBlokPower(ModelBlockPower nameModelBlokPower)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameModelBlokPower(nameModelBlokPower);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelBlockPower(model.Model);
+            }
+
+            return model;
+        }
+
+        public ModelReturn<ProizvoditelBlockPower> AddAndEditNameProizvoditelBlockPower(
+            ProizvoditelBlockPower nameProizvoditelBlockPower)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameProizvoditelBlockPower(nameProizvoditelBlockPower);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelBlockPower(model.Model);
+            }
+
+            return model;
+        }
 
         public ModelReturn<Supply> AddAndEditNameSupply(Supply nameSupply)
         {
@@ -1066,61 +1244,89 @@ namespace TestIFNSLibary.Inventarka
             {
                 nameSupply.DatePostavki = nameSupply.DatePostavki.Value.AddHours(4);
             }
+
             var model = add.AddAndEditNameSupply(nameSupply);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSupply(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSupply(model.Model);
+            }
+
             return model;
         }
 
         public ModelReturn<Statusing> AddAndEditNameStatus(Statusing nameStatus)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameStatus(nameStatus);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusing(model.Model); }
-           return model;
-       }
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameStatus(nameStatus);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusing(model.Model);
+            }
 
-       public ModelReturn<Kabinet> AddAndEditNameKabinet(Kabinet nameKabinet)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameKabinetr(nameKabinet);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeKabinet(model.Model); }
-           return model;
-       }
+            return model;
+        }
 
-       public ModelReturn<FullModel> AddAndEditNameFullModel(FullModel nameFullModel)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameFullModel(nameFullModel);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullModel(model.Model); }
-           return model;
-       }
+        public ModelReturn<Kabinet> AddAndEditNameKabinet(Kabinet nameKabinet)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameKabinetr(nameKabinet);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeKabinet(model.Model);
+            }
 
-       public ModelReturn<Classification> AddAndEditNameClassification(Classification nameClassification)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameClassification(nameClassification);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeClassification(model.Model); }
-           return model;
-       }
+            return model;
+        }
+
+        public ModelReturn<FullModel> AddAndEditNameFullModel(FullModel nameFullModel)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameFullModel(nameFullModel);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullModel(model.Model);
+            }
+
+            return model;
+        }
+
+        public ModelReturn<Classification> AddAndEditNameClassification(Classification nameClassification)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameClassification(nameClassification);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeClassification(model.Model);
+            }
+
+            return model;
+        }
+
         /// <summary>
         /// Добавление объекта в Разное
         /// </summary>
         /// <param name="otherAll">Разное</param>
         /// <param name="userIdEdit">Ун пользователя</param>
         /// <returns></returns>
-       public ModelReturn<OtherAll> AddAndEditOtherAll(OtherAll otherAll, string userIdEdit)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditOtherAll(otherAll, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOtherAll(model.Model); }
-           return model;
-       }
+        public ModelReturn<OtherAll> AddAndEditOtherAll(OtherAll otherAll, string userIdEdit)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditOtherAll(otherAll,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOtherAll(model.Model);
+            }
+
+            return model;
+        }
+
         /// <summary>
         /// Добавление модели разного
         /// </summary>
@@ -1131,9 +1337,14 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditModelOther(modelOther);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelOther(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelOther(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление типа разного
         /// </summary>
@@ -1144,9 +1355,14 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditTypeOther(typeOther);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTypeOther(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTypeOther(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Добавление производителя в разное
         /// </summary>
@@ -1157,9 +1373,14 @@ namespace TestIFNSLibary.Inventarka
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditProizvoditelOther(proizvoditelOther);
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelOther(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelOther(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Удаление не актуального разного оборудования
         /// </summary>
@@ -1168,70 +1389,86 @@ namespace TestIFNSLibary.Inventarka
         public ModelReturn<OtherAll> DeleteOtherAll(OtherAll otherAll, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteOtherAll(otherAll, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = delete.DeleteOtherAll(otherAll,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteOtherAll(model);
             return model;
         }
 
         public ModelReturn<FullProizvoditel> AddAndEditNameFullProizvoditel(FullProizvoditel nameFullProizvoditel)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameFullProizvoditel(nameFullProizvoditel);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullProizvoditel(model.Model); }
-           return model;
-       }
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameFullProizvoditel(nameFullProizvoditel);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullProizvoditel(model.Model);
+            }
 
-       public ModelReturn<CopySave> AddAndEditNameCopySave(CopySave nameCopySave)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditNameCopySave(nameCopySave);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeCopySave(model.Model); }
-           return model;
-       }
+            return model;
+        }
 
-       public async Task<string> AllClasification()
-       {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.AllClasification());
-       }
+        public ModelReturn<CopySave> AddAndEditNameCopySave(CopySave nameCopySave)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditNameCopySave(nameCopySave);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeCopySave(model.Model);
+            }
 
-       public ModelReturn<EfDatabase.Inventory.Base.ModelSwithe> AddAndEditModelSwith(EfDatabase.Inventory.Base.ModelSwithe modelswith)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditModelSwithe(modelswith);
-           add.Dispose();
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSwithe(model.Model); }
-           return model;
-       }
+            return model;
+        }
 
-       /// <summary>
-       /// Удаление пользователя
-       /// </summary>
-       /// <param name="user">Пользователь</param>
-       /// <param name="userIdEdit">Ун пользователя</param>
-       /// <returns></returns>
-       public ModelReturn<User> DeleteUser(User user, string userIdEdit)
-       {
-           DeleteObjectDb delete = new DeleteObjectDb();
-           var model = delete.DeleteUser(user, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteUser(model);
-           return model;
-       }
-       /// <summary>
-       /// Удаление системных блоков
-       /// </summary>
-       /// <param name="sysBlock">Системный блок</param>
-       /// <param name="userIdEdit">Ун пользователя</param>
-       /// <returns></returns>
-       public ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock, string userIdEdit)
-       {
-           DeleteObjectDb delete = new DeleteObjectDb();
-           var model = delete.DeleteSystemUnit(sysBlock, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSystemUnit(model);
-           return model;
-       }
+        public async Task<string> AllClasification()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllClasification());
+        }
+
+        public ModelReturn<EfDatabase.Inventory.Base.ModelSwithe> AddAndEditModelSwith(EfDatabase.Inventory.Base.ModelSwithe modelswith)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditModelSwithe(modelswith);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSwithe(model.Model);
+            }
+
+            return model;
+        }
+
+        /// <summary>
+        /// Удаление пользователя
+        /// </summary>
+        /// <param name="user">Пользователь</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<User> DeleteUser(User user, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteUser(user, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteUser(model);
+            return model;
+        }
+
+        /// <summary>
+        /// Удаление системных блоков
+        /// </summary>
+        /// <param name="sysBlock">Системный блок</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<SysBlock> DeleteSysBlock(SysBlock sysBlock, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteSystemUnit(sysBlock,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSystemUnit(model);
+            return model;
+        }
+
         /// <summary>
         /// Удаление не актуального серверного оборудования
         /// </summary>
@@ -1240,249 +1477,282 @@ namespace TestIFNSLibary.Inventarka
         public ModelReturn<ServerEquipment> DeleteServerEquipment(ServerEquipment serverEquipment, string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
-            var model = delete.DeleteServerEquipment(serverEquipment, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            var model = delete.DeleteServerEquipment(serverEquipment,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteServerEquipment(model);
             return model;
         }
 
-       /// <summary>
-       /// Удаление Мониторов
-       /// </summary>
-       /// <param name="monitor">Монитор</param>
-       /// <param name="userIdEdit">Ун пользователя</param>
-       /// <returns></returns>
-       public ModelReturn<Monitor> DeleteMonitor(Monitor monitor, string userIdEdit)
-       {
-           DeleteObjectDb delete = new DeleteObjectDb();
-           var model = delete.DeleteMonitor(monitor, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMonitor(model);
-           return model;
-       }
+        /// <summary>
+        /// Удаление Мониторов
+        /// </summary>
+        /// <param name="monitor">Монитор</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<Monitor> DeleteMonitor(Monitor monitor, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteMonitor(monitor,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMonitor(model);
+            return model;
+        }
 
-       /// <summary>
-       /// Удаление принтеров
-       /// </summary>
-       /// <param name="printer">Принтер</param>
-       /// <param name="userIdEdit">Ун пользователя</param>
-       /// <returns></returns>
-       public ModelReturn<Printer> DeletePrinter(Printer printer, string userIdEdit)
-       {
-           DeleteObjectDb delete = new DeleteObjectDb();
-           var model = delete.DeletePrinter(printer, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeletePrinter(model);
-           return model;
-       }
-       /// <summary>
-       /// Удаление сканеров и камер
-       /// </summary>
-       /// <param name="scanner">Сканер или камера</param>
-       /// <param name="userIdEdit">Пользователь</param>
-       /// <returns></returns>
-       public ModelReturn<ScanerAndCamer> DeleteScannerAndCamera(ScanerAndCamer scanner, string userIdEdit)
-       {
-           DeleteObjectDb delete = new DeleteObjectDb();
-           var model = delete.DeleteScannerAndCamera(scanner, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteScannerAndCamera(model);
-           return model;
-       }
-       /// <summary>
-       /// Удаление МФУ
-       /// </summary>
-       /// <param name="mfu">МФУ</param>
-       /// <param name="userIdEdit">Ун пользователя</param>
-       /// <returns></returns>
-       public ModelReturn<Mfu> DeleteMfu(Mfu mfu, string userIdEdit)
-       {
-           DeleteObjectDb delete = new DeleteObjectDb();
-           var model = delete.DeleteMfu(mfu, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMfu(model);
-           return model;
-       }
-       /// <summary>
-       /// Удаление ИБП
-       /// </summary>
-       /// <param name="blockPower">ИБП</param>
-       /// <param name="userIdEdit">Ун пользователя</param>
-       /// <returns></returns>
-       public ModelReturn<BlockPower> DeleteBlockPower(BlockPower blockPower, string userIdEdit)
-       {
-           DeleteObjectDb delete = new DeleteObjectDb();
-           var model = delete.DeleteBlockPower(blockPower, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteBlockPower(model);
-           return model;
-       }
-       /// <summary>
-       /// Удаление коммутаторов
-       /// </summary>
-       /// <param name="switches">Коммутатор</param>
-       /// <param name="userIdEdit">Ун пользователя</param>
-       /// <returns></returns>
-       public ModelReturn<Swithe> DeleteSwitch(Swithe switches, string userIdEdit)
-       {
-           DeleteObjectDb delete = new DeleteObjectDb();
-           var model = delete.DeleteSwitch(switches, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSwitch(model);
-           return model;
-       }
-       /// <summary>
-       /// Удаление телефонов
-       /// </summary>
-       /// <param name="telephone">Телефон</param>
-       /// <param name="userIdEdit">Ун пользователя</param>
-       /// <returns></returns>
-       public ModelReturn<Telephon> DeleteTelephone(Telephon telephone, string userIdEdit)
-       {
-           DeleteObjectDb delete = new DeleteObjectDb();
-           var model = delete.DeleteTelephone(telephone, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
-           SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteTelephone(model);
-           return model;
-       }
-       /// <summary>
-       /// Просмотр Body
-       /// </summary>
-       /// <param name="model">Модель почты</param>
-       /// <returns></returns>
-       public async Task<string> VisibilityBodyMail(WebMailModel model)
-       {
-           MailLogicLotus mail = new MailLogicLotus();
-           return await Task.Factory.StartNew(() => mail.ReturnMailBody(model));
-       }
-       /// <summary>
-       /// Выгрузка файла вложения
-       /// </summary>
-       /// <param name="model">Модель почты</param>
-       /// <returns></returns>
-       public async Task<Stream> OutputMail(WebMailModel model)
-       {
-           MailLogicLotus mail = new MailLogicLotus();
-           return await Task.Factory.StartNew(() => mail.OutputMail(model));
-       }
-       /// <summary>
-       /// Удаление письма
-       /// </summary>
-       /// <param name="model">Модель почты</param>
-       /// <returns></returns>
-       public async Task<string> DeleteMail(WebMailModel model)
-       {
-           MailLogicLotus mail = new MailLogicLotus();
-           return await Task.Factory.StartNew(() => mail.DeleteMail(model));
-       }
+        /// <summary>
+        /// Удаление принтеров
+        /// </summary>
+        /// <param name="printer">Принтер</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<Printer> DeletePrinter(Printer printer, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeletePrinter(printer,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeletePrinter(model);
+            return model;
+        }
 
-       /// <summary>
-       /// Все идентификаторы пользователей
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> AllMailIdentifies()
-       {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.AllMailIdentifier());
-       }
+        /// <summary>
+        /// Удаление сканеров и камер
+        /// </summary>
+        /// <param name="scanner">Сканер или камера</param>
+        /// <param name="userIdEdit">Пользователь</param>
+        /// <returns></returns>
+        public ModelReturn<ScanerAndCamer> DeleteScannerAndCamera(ScanerAndCamer scanner, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteScannerAndCamera(scanner,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteScannerAndCamera(model);
+            return model;
+        }
 
-       /// <summary>
-       /// Все идентификаторы пользователей
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> AllMailGroups()
-       {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.AllMailGroup());
-       }
+        /// <summary>
+        /// Удаление МФУ
+        /// </summary>
+        /// <param name="mfu">МФУ</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<Mfu> DeleteMfu(Mfu mfu, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteMfu(mfu, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMfu(model);
+            return model;
+        }
 
-       /// <summary>
-       /// Обновление идентификаторов пользователя
-       /// </summary>
-       /// <param name="nameMailIdentifier"></param>
-       /// <returns></returns>
-       public  ModelReturn<MailIdentifier> AddAndEditMailIdentifies(MailIdentifier nameMailIdentifier)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditMailIdentifies(nameMailIdentifier);
-           if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailIdentifier(model.Model); }
-           return model;
-       }
-       /// <summary>
-       /// Обновление групп для абонентов
-       /// </summary>
-       /// <param name="nameMailGroups">Группа для абонентов</param>
-       /// <returns></returns>
-       public ModelReturn<MailGroup> AddAndEditMailGroups(MailGroup nameMailGroups)
-       {
-           AddObjectDb add = new AddObjectDb();
-           var model = add.AddAndEditMailGroup(nameMailGroups);
-           if (model.Model != null)
-           {
-               SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailGroups(model.Model); }
-           return model;
-       }
-       /// <summary>
-       /// Шаблоны для СТО по категориям
-       /// </summary>
-       /// <returns></returns>
-       public async Task<string> AllTemplateSupport()
-       {
-           Select auto = new Select();
-           return await Task.Factory.StartNew(() => auto.AllTemplate());
-       }
+        /// <summary>
+        /// Удаление ИБП
+        /// </summary>
+        /// <param name="blockPower">ИБП</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<BlockPower> DeleteBlockPower(BlockPower blockPower, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteBlockPower(blockPower,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteBlockPower(model);
+            return model;
+        }
+
+        /// <summary>
+        /// Удаление коммутаторов
+        /// </summary>
+        /// <param name="switches">Коммутатор</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<Swithe> DeleteSwitch(Swithe switches, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteSwitch(switches,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSwitch(model);
+            return model;
+        }
+
+        /// <summary>
+        /// Удаление телефонов
+        /// </summary>
+        /// <param name="telephone">Телефон</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
+        /// <returns></returns>
+        public ModelReturn<Telephon> DeleteTelephone(Telephon telephone, string userIdEdit)
+        {
+            DeleteObjectDb delete = new DeleteObjectDb();
+            var model = delete.DeleteTelephone(telephone,
+                SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
+            SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteTelephone(model);
+            return model;
+        }
+
+        /// <summary>
+        /// Просмотр Body
+        /// </summary>
+        /// <param name="model">Модель почты</param>
+        /// <returns></returns>
+        public async Task<string> VisibilityBodyMail(WebMailModel model)
+        {
+            MailLogicLotus mail = new MailLogicLotus();
+            return await Task.Factory.StartNew(() => mail.ReturnMailBody(model));
+        }
+
+        /// <summary>
+        /// Выгрузка файла вложения
+        /// </summary>
+        /// <param name="model">Модель почты</param>
+        /// <returns></returns>
+        public async Task<Stream> OutputMail(WebMailModel model)
+        {
+            MailLogicLotus mail = new MailLogicLotus();
+            return await Task.Factory.StartNew(() => mail.OutputMail(model));
+        }
+
+        /// <summary>
+        /// Удаление письма
+        /// </summary>
+        /// <param name="model">Модель почты</param>
+        /// <returns></returns>
+        public async Task<string> DeleteMail(WebMailModel model)
+        {
+            MailLogicLotus mail = new MailLogicLotus();
+            return await Task.Factory.StartNew(() => mail.DeleteMail(model));
+        }
+
+        /// <summary>
+        /// Все идентификаторы пользователей
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllMailIdentifies()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllMailIdentifier());
+        }
+
+        /// <summary>
+        /// Все идентификаторы пользователей
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllMailGroups()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllMailGroup());
+        }
+
+        /// <summary>
+        /// Обновление идентификаторов пользователя
+        /// </summary>
+        /// <param name="nameMailIdentifier"></param>
+        /// <returns></returns>
+        public ModelReturn<MailIdentifier> AddAndEditMailIdentifies(MailIdentifier nameMailIdentifier)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditMailIdentifies(nameMailIdentifier);
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailIdentifier(model.Model);
+            }
+
+            return model;
+        }
+
+        /// <summary>
+        /// Обновление групп для абонентов
+        /// </summary>
+        /// <param name="nameMailGroups">Группа для абонентов</param>
+        /// <returns></returns>
+        public ModelReturn<MailGroup> AddAndEditMailGroups(MailGroup nameMailGroups)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditMailGroup(nameMailGroups);
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailGroups(model.Model);
+            }
+
+            return model;
+        }
+
+        /// <summary>
+        /// Шаблоны для СТО по категориям
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllTemplateSupport()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllTemplate());
+        }
 
 
-       /// <summary>
-       /// Данный api создан для генерации и отправки запроса в СТО по ун шаблону
-       /// </summary>
-       /// <param name="modelSupport">Модель генерации для отправки на СТО</param>
-       /// <returns></returns>
-       public async Task<ModelParametrSupport> ServiceSupport(ModelParametrSupport modelSupport)
-       {
-           return await Task.Factory.StartNew(() =>
-           {
-               if (modelSupport.IdCalendarVks != 0)
-               {
-                   var stpCalender = new MailLogicLotus();
-                   stpCalender.ModifiedCalender(modelSupport.IdCalendarVks);
-                   stpCalender.Dispose();
-               }
-               var support = new CreateTiсketSupport(modelSupport.Login, modelSupport.Password);
-               var generate = new GenerateParameterSupport(parametersService.PathDomainGroup);
-               var selectReportPassportTechnique = new SelectReportPassportTechnique(parametersService.Inventarization);
-               try
-               {
-                   
-                   generate.GenerateTemplateUrlParameter(ref modelSupport);
-                   generate.IsCheckAllParameter(modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
-                   var modelParameterInputStep3 = modelSupport.TemplateSupport.Where(temple => temple.NameStepSupport == "Step3" && temple.TemplateParametrType != null).ToArray();
-                   if (modelParameterInputStep3.Length > 0)
-                   {
-                       selectReportPassportTechnique.CreateStoParametersStep3(ref modelSupport, parametersService.Report);
-                   }
-                   modelSupport.Step3ResponseSupport = support.CreateFullSupportTax(modelSupport);
-                   Loggers.Log4NetLogger.Info(new Exception($"Пользователем {modelSupport.Login} создана заявка по теме {modelSupport.TemplateSupport.FirstOrDefault(description => description.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}"));
-                   return modelSupport;
-               }
-               catch (Exception ex)
-               {
-                   Loggers.Log4NetLogger.Error(ex);
-                   modelSupport.Error = ex.Message;
-                   Loggers.Log4NetLogger.Info(new Exception($"Пользователем {modelSupport.Login} была вызвана ошибка по теме {modelSupport.TemplateSupport.FirstOrDefault(description => description.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}"));
-                   return modelSupport;
-               }
-               finally
-               {
-                   generate.Dispose();
-                   support.Steps(support.Logon, "GET");
-                   support.Dispose();
-                   selectReportPassportTechnique.Dispose();
-               }
-           });
-       }
+        /// <summary>
+        /// Данный api создан для генерации и отправки запроса в СТО по ун шаблону
+        /// </summary>
+        /// <param name="modelSupport">Модель генерации для отправки на СТО</param>
+        /// <returns></returns>
+        public async Task<ModelParametrSupport> ServiceSupport(ModelParametrSupport modelSupport)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                if (modelSupport.IdCalendarVks != 0)
+                {
+                    var stpCalender = new MailLogicLotus();
+                    stpCalender.ModifiedCalender(modelSupport.IdCalendarVks);
+                    stpCalender.Dispose();
+                }
+
+                var support = new CreateTiсketSupport(modelSupport.Login, modelSupport.Password);
+                var generate = new GenerateParameterSupport(parametersService.PathDomainGroup);
+                var selectReportPassportTechnique =
+                    new SelectReportPassportTechnique(parametersService.Inventarization);
+                try
+                {
+
+                    generate.GenerateTemplateUrlParameter(ref modelSupport);
+                    generate.IsCheckAllParameter(modelSupport.TemplateSupport
+                        .Where(param => param.NameStepSupport == "Step2").ToArray());
+                    var modelParameterInputStep3 = modelSupport.TemplateSupport.Where(temple =>
+                        temple.NameStepSupport == "Step3" && temple.TemplateParametrType != null).ToArray();
+                    if (modelParameterInputStep3.Length > 0)
+                    {
+                        selectReportPassportTechnique.CreateStoParametersStep3(ref modelSupport,
+                            parametersService.Report);
+                    }
+
+                    modelSupport.Step3ResponseSupport = support.CreateFullSupportTax(modelSupport);
+                    Loggers.Log4NetLogger.Info(new Exception(
+                        $"Пользователем {modelSupport.Login} создана заявка по теме {modelSupport.TemplateSupport.FirstOrDefault(description => description.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}"));
+                    return modelSupport;
+                }
+                catch (Exception ex)
+                {
+                    Loggers.Log4NetLogger.Error(ex);
+                    modelSupport.Error = ex.Message;
+                    Loggers.Log4NetLogger.Info(new Exception(
+                        $"Пользователем {modelSupport.Login} была вызвана ошибка по теме {modelSupport.TemplateSupport.FirstOrDefault(description => description.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}"));
+                    return modelSupport;
+                }
+                finally
+                {
+                    generate.Dispose();
+                    support.Steps(support.Logon, "GET");
+                    support.Dispose();
+                    selectReportPassportTechnique.Dispose();
+                }
+            });
+        }
+
         /// <summary>
         /// Снятие статуса со списанной техники
         /// </summary>
         /// <param name="allTechnical">списанная техника</param>
         /// <returns></returns>
         public async Task<string> IsCheckStatusNull(AllTechnic allTechnical)
-       {
-           SelectSql selectSql = new SelectSql();
-           return await Task.Factory.StartNew(() => selectSql.CheckStatus(allTechnical));
-       }
+        {
+            SelectSql selectSql = new SelectSql();
+            return await Task.Factory.StartNew(() => selectSql.CheckStatus(allTechnical));
+        }
+
         /// <summary>
         /// Генерация QR Code для инвентаризации
         /// </summary>
@@ -1491,67 +1761,74 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="isAll">Генерация на все кабинеты или на один</param>
         public async Task<Stream> GenerateQrCodeTechnical(string serialNumber, bool isAll = false)
         {
-           try
-           {
-               return await Task.Factory.StartNew(() =>
-               {
-                   var auto = new Select();
-                   var i = 0;
-                   var sticker = new StickerCode();
-                   var technical = auto.SelectTechnical(serialNumber, isAll);
-                   if (technical.Count == 0) return null;
-                   var qrCode = new GenerateBarcode();
-                   technical.ForEach(x => {
-                       var templateContent = $"{ x.Item}: { x.NameManufacturer} { x.NameModel}\r\n" +
-                                             $"s/n: {x.SerNum}\r\n" +
-                                             $"Инв.: {x.InventarNum}\r\n" +
-                                             $"Сервис.: {x.ServiceNum}\r\n" +
-                                             $"Kaб.: {x.NumberKabinet}\r\n" +
-                                             $"User: {x.Name}";
-                       x.Coment = qrCode.GenerateQrCode(parametersService.Report + i, templateContent);
-                       i++;
-                   });
-                   sticker.CreateDocument(parametersService.Report + "QrCodeOffice", technical);
-                   technical.Select(x => x.Coment).ToList().ForEach(File.Delete);
-                   return sticker.FileArray();
-               });
-           }
-           catch (Exception e)
-           {
-               Loggers.Log4NetLogger.Error(e);
-           }
-           return null;
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    var auto = new Select();
+                    var i = 0;
+                    var sticker = new StickerCode();
+                    var technical = auto.SelectTechnical(serialNumber, isAll);
+                    if (technical.Count == 0) return null;
+                    var qrCode = new GenerateBarcode();
+                    technical.ForEach(x =>
+                    {
+                        var templateContent = $"{x.Item}: {x.NameManufacturer} {x.NameModel}\r\n" +
+                                              $"s/n: {x.SerNum}\r\n" +
+                                              $"Инв.: {x.InventarNum}\r\n" +
+                                              $"Сервис.: {x.ServiceNum}\r\n" +
+                                              $"Kaб.: {x.NumberKabinet}\r\n" +
+                                              $"User: {x.Name}";
+                        x.Coment = qrCode.GenerateQrCode(parametersService.Report + i, templateContent);
+                        i++;
+                    });
+                    sticker.CreateDocument(parametersService.Report + "QrCodeOffice", technical);
+                    technical.Select(x => x.Coment).ToList().ForEach(File.Delete);
+                    return sticker.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+
+            return null;
         }
+
         /// <summary>
         /// Генерация QR Кодов на кабинет
         /// </summary>
         /// <param name="numberOffice">Номер кабинета</param>
         /// <param name="isAll">Генерация на все кабинеты или на один</param>
         /// <returns></returns>
-       public async Task<Stream> GenerateQrCodeOffice(string numberOffice, bool isAll = false)
-       {
-           try
-           {
-               return await Task.Factory.StartNew(() =>
-               {
-                   var auto = new Select();
-                   QrCodeOffice office = auto.SelectOffice(numberOffice,isAll);
-                   var qrCode = new GenerateBarcode();
-                   var stickerQrOffice = new OfficeStikerCode();
-                   //Создание qr кодов
-                   if (office.Kabinet == null) return null;
-                   office.Kabinet.AsEnumerable().Select(x => x).ToList().ForEach(x => x.FullPathPng = qrCode.GenerateQrCode(parametersService.Report + x.IdNumberKabinet, x.NumberKabinet));
-                   stickerQrOffice.CreateDocument(parametersService.Report + "QrCodeOffice", office);
-                   office.Kabinet.AsEnumerable().Select(x => x.FullPathPng).ToList().ForEach(File.Delete);
-                   return stickerQrOffice.FileArray();
-               });
-           }
-           catch (Exception e)
-           {
-               Loggers.Log4NetLogger.Error(e);
-           }
-           return null;
+        public async Task<Stream> GenerateQrCodeOffice(string numberOffice, bool isAll = false)
+        {
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    var auto = new Select();
+                    QrCodeOffice office = auto.SelectOffice(numberOffice, isAll);
+                    var qrCode = new GenerateBarcode();
+                    var stickerQrOffice = new OfficeStikerCode();
+                    //Создание qr кодов
+                    if (office.Kabinet == null) return null;
+                    office.Kabinet.AsEnumerable().Select(x => x).ToList().ForEach(x =>
+                        x.FullPathPng = qrCode.GenerateQrCode(parametersService.Report + x.IdNumberKabinet,
+                            x.NumberKabinet));
+                    stickerQrOffice.CreateDocument(parametersService.Report + "QrCodeOffice", office);
+                    office.Kabinet.AsEnumerable().Select(x => x.FullPathPng).ToList().ForEach(File.Delete);
+                    return stickerQrOffice.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+
+            return null;
         }
+
         /// <summary>
         /// Вся техника для личного кабинета
         /// </summary>
@@ -1562,6 +1839,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.AllTechicsLkInventory(idUser));
         }
+
         /// <summary>
         /// Все пользователи отдела для генерации служебных записок
         /// </summary>
@@ -1572,6 +1850,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.AllUsersDepartmentLk(idUser));
         }
+
         /// <summary>
         /// Выгрузка токенов ключей
         /// </summary>
@@ -1588,26 +1867,34 @@ namespace TestIFNSLibary.Inventarka
         /// <param name="token"></param>
         /// <param name="userIdEdit">Пользователь кто редактировал</param>
         /// <returns></returns>
-        public ModelReturn<EfDatabase.Inventory.Base.Token> AddAndEditToken(EfDatabase.Inventory.Base.Token token, string userIdEdit)
+        public ModelReturn<EfDatabase.Inventory.Base.Token> AddAndEditToken(EfDatabase.Inventory.Base.Token token,
+            string userIdEdit)
         {
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditToken(token, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             add.Dispose();
-            if (model.Model != null) { SignalRLibary.SignalRinventory.SignalRinventory.SubscribeToken(model.Model); }
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeToken(model.Model);
+            }
+
             return model;
         }
+
         /// <summary>
         /// Удаление не актуального Токена ключа
         /// </summary>
         /// <param name="token">Токен ключ</param>
         /// <param name="userIdEdit">Ун пользователя</param>
-        public ModelReturn<EfDatabase.Inventory.Base.Token> DeleteToken(EfDatabase.Inventory.Base.Token token, string userIdEdit)
+        public ModelReturn<EfDatabase.Inventory.Base.Token> DeleteToken(EfDatabase.Inventory.Base.Token token,
+            string userIdEdit)
         {
             DeleteObjectDb delete = new DeleteObjectDb();
             var model = delete.DeleteToken(token, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteToken(model);
             return model;
         }
+
         /// <summary>
         /// Проверка по УН процесса запущен ли он или нет
         /// </summary>
@@ -1618,6 +1905,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() => auto.IsBeginTask(idTask));
         }
+
         /// <summary>
         /// Создание Акта списания техники
         /// </summary>
@@ -1627,8 +1915,8 @@ namespace TestIFNSLibary.Inventarka
         {
             try
             {
-               return await Task.Factory.StartNew(() =>
-              {
+                return await Task.Factory.StartNew(() =>
+                {
                     var generate = new GenerateParameterSupport(parametersService.PathDomainGroup);
                     var act = generate.GenerateParameterAct(modelParameterAct);
                     var templateAct = new TemplateAct();
@@ -1640,8 +1928,10 @@ namespace TestIFNSLibary.Inventarka
             {
                 Loggers.Log4NetLogger.Error(e);
             }
+
             return null;
         }
+
         /// <summary>
         /// Создание журнала доступа АИС 3
         /// </summary>
@@ -1666,8 +1956,10 @@ namespace TestIFNSLibary.Inventarka
             {
                 Loggers.Log4NetLogger.Error(e);
             }
+
             return null;
         }
+
         /// <summary>
         /// Создание табеля
         /// </summary>
@@ -1684,26 +1976,37 @@ namespace TestIFNSLibary.Inventarka
                     XmlReadOrWrite xml = new XmlReadOrWrite();
                     SelectSql select = new SelectSql();
                     select.SelectCardModelLeader(ref model);
-                    var dateParameter = $"{model.SettingParameters.Year}-{model.SettingParameters.Mouth.NumberMouthString}-01";
-                    var command = string.Format(selectFrames.UserReportCard, dateParameter, dateParameter, model.SettingParameters.LeaderD.NameDepartment, dateParameter);
+                    var dateParameter =
+                        $"{model.SettingParameters.Year}-{model.SettingParameters.Mouth.NumberMouthString}-01";
+                    var command = string.Format(selectFrames.UserReportCard, dateParameter, dateParameter,
+                        model.SettingParameters.LeaderD.NameDepartment, dateParameter);
                     var userReportCard = sql.XmlString(parametersService.ConnectImns51, command);
                     userReportCard = string.Concat("<SettingParameters>", userReportCard, "</SettingParameters>");
-                    model.SettingParameters.UsersReportCard = ((SettingParameters)xml.ReadXmlText(userReportCard, typeof(SettingParameters))).UsersReportCard;
+                    model.SettingParameters.UsersReportCard =
+                        ((SettingParameters) xml.ReadXmlText(userReportCard, typeof(SettingParameters)))
+                        .UsersReportCard;
                     foreach (var usersReportCard in model.SettingParameters.UsersReportCard)
                     {
-                        var commandVacation = string.Format(selectFrames.ItemVacationNew, usersReportCard.Tab_num, $"{model.SettingParameters.Year}", $"{model.SettingParameters.Year}");
+                        var commandVacation = string.Format(selectFrames.ItemVacationNew, usersReportCard.Tab_num,
+                            $"{model.SettingParameters.Year}", $"{model.SettingParameters.Year}");
                         var userVacation = sql.XmlString(parametersService.ConnectImns51, commandVacation);
                         userVacation = string.Concat("<UsersReportCard>", userVacation, "</UsersReportCard>");
-                        usersReportCard.ItemVacation = ((UsersReportCard)xml.ReadXmlText(userVacation, typeof(UsersReportCard))).ItemVacation;
-                        var commandDisability = string.Format(selectFrames.Disability, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
+                        usersReportCard.ItemVacation =
+                            ((UsersReportCard) xml.ReadXmlText(userVacation, typeof(UsersReportCard))).ItemVacation;
+                        var commandDisability = string.Format(selectFrames.Disability, usersReportCard.Tab_num,
+                            $"{model.SettingParameters.Year}");
                         var userDisability = sql.XmlString(parametersService.ConnectImns51, commandDisability);
                         userDisability = string.Concat("<UsersReportCard>", userDisability, "</UsersReportCard>");
-                        usersReportCard.Disability = ((UsersReportCard)xml.ReadXmlText(userDisability, typeof(UsersReportCard))).Disability;
-                        var commandBusiness = string.Format(selectFrames.Business, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
+                        usersReportCard.Disability =
+                            ((UsersReportCard) xml.ReadXmlText(userDisability, typeof(UsersReportCard))).Disability;
+                        var commandBusiness = string.Format(selectFrames.Business, usersReportCard.Tab_num,
+                            $"{model.SettingParameters.Year}");
                         var userBusiness = sql.XmlString(parametersService.ConnectImns51, commandBusiness);
                         userBusiness = string.Concat("<UsersReportCard>", userBusiness, "</UsersReportCard>");
-                        usersReportCard.Business = ((UsersReportCard)xml.ReadXmlText(userBusiness, typeof(UsersReportCard))).Business;
+                        usersReportCard.Business =
+                            ((UsersReportCard) xml.ReadXmlText(userBusiness, typeof(UsersReportCard))).Business;
                     }
+
                     ReportCard report = new ReportCard();
                     report.CreateDocument(parametersService.Report, model);
                     return report.FileArray();
@@ -1712,9 +2015,13 @@ namespace TestIFNSLibary.Inventarka
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
+                Loggers.Log4NetLogger.Error(
+                    new Exception($"Ошибка была вызвана {model.SettingParameters.TabelNumber}"));
             }
+
             return null;
         }
+
         /// <summary>
         /// Создание служебных записок для ЛК 
         /// </summary>
@@ -1732,13 +2039,15 @@ namespace TestIFNSLibary.Inventarka
                     XmlReadOrWrite xml = new XmlReadOrWrite();
                     MemoReport memo = new MemoReport();
                     select.SelectMemoReport(ref memoReport);
-                    var commandOrders = string.Format(selectFrames.LastOrder, memoReport.UserDepartment.SmallTabelNumber);
+                    var commandOrders =
+                        string.Format(selectFrames.LastOrder, memoReport.UserDepartment.SmallTabelNumber);
                     var userOrder = sql.XmlString(parametersService.ConnectImns51, commandOrders);
                     if (userOrder != null)
                     {
                         userOrder = string.Concat("<Orders>", userOrder, "</Orders>");
-                        memoReport.UserDepartment.Orders = ((Orders)xml.ReadXmlText(userOrder, typeof(Orders)));
+                        memoReport.UserDepartment.Orders = ((Orders) xml.ReadXmlText(userOrder, typeof(Orders)));
                     }
+
                     memo.CreateDocument(parametersService.Report, memoReport);
                     return memo.FileArray();
                 });
@@ -1746,10 +2055,13 @@ namespace TestIFNSLibary.Inventarka
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
-                Loggers.Log4NetLogger.Error(new Exception($"Возникла ошибка при создании пользователя {memoReport.SelectParameterDocument.IdUser}, документа {memoReport.SelectParameterDocument.NameDocument}, исполнителя {memoReport.SelectParameterDocument.TabelNumber}"));
+                Loggers.Log4NetLogger.Error(new Exception(
+                    $"Возникла ошибка при создании пользователя {memoReport.SelectParameterDocument.IdUser}, документа {memoReport.SelectParameterDocument.NameDocument}, исполнителя {memoReport.SelectParameterDocument.TabelNumber}"));
             }
+
             return null;
         }
+
         /// <summary>
         /// Актуализация данных с СТО
         /// </summary>
@@ -1760,36 +2072,45 @@ namespace TestIFNSLibary.Inventarka
             {
                 Select auto = new Select();
                 var process = auto.SelectProcess(idProcess);
-                if (process.IsComplete != null && (bool)process.IsComplete)
+                if (process.IsComplete != null && (bool) process.IsComplete)
                 {
                     var addObjectDb = new AddObjectDb();
                     addObjectDb.IsProcessComplete(idProcess, false);
                     var task = Task.Run(() =>
                     {
-                        var sto = new PassportStoPostGet(parametersService.LoginSto, parametersService.PasswordSto, parametersService.Report);
+                        var sto = new PassportStoPostGet(parametersService.LoginSto, parametersService.PasswordSto,
+                            parametersService.Report);
                         var fullPathXlsx = sto.DownloadReportSto();
-                        addObjectDb.CreateAndDownloadSto(fullPathXlsx, parametersService.Report, parametersService.XsdReport, parametersService.BulkCopyXmlSto);
+                        addObjectDb.CreateAndDownloadSto(fullPathXlsx, parametersService.Report,
+                            parametersService.XsdReport, parametersService.BulkCopyXmlSto);
                     });
-                    task.ConfigureAwait(true).GetAwaiter().OnCompleted(()=>
+                    task.ConfigureAwait(true).GetAwaiter().OnCompleted(() =>
                     {
                         addObjectDb.IsProcessComplete(idProcess, true);
                         addObjectDb.Dispose();
-                        SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>($"{process.NameProcess} завершен!",null,3));
+                        SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
+                            new ModelReturn<string>($"{process.NameProcess} завершен!", null, 3));
                     });
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>($"{process.NameProcess} запущен!",null,1) );
+                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
+                        new ModelReturn<string>($"{process.NameProcess} запущен!", null, 1));
                 }
                 else
                 {
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>($"{process.NameProcess} уже запущен ожидайте окончание процесса!",null,2)  );
+                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
+                        new ModelReturn<string>($"{process.NameProcess} уже запущен ожидайте окончание процесса!", null,
+                            2));
                 }
+
                 auto.Dispose();
             }
             catch (Exception e)
             {
-                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>(e.Message));
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
+                    new ModelReturn<string>(e.Message));
                 Loggers.Log4NetLogger.Error(e);
             }
         }
+
         /// <summary>
         /// Получение всех отчетов сравнения ЭПО
         /// </summary>
@@ -1808,7 +2129,110 @@ namespace TestIFNSLibary.Inventarka
         public async Task<Stream> AllReportInventoryAndEpo(int[] idReport)
         {
             var selectReportPassportTechnique = new SelectReportPassportTechnique(parametersService.Inventarization);
-            return await Task.Factory.StartNew(() => selectReportPassportTechnique.CreateFullReportEpo(parametersService.Report, idReport));
+            return await Task.Factory.StartNew(() =>
+                selectReportPassportTechnique.CreateFullReportEpo(parametersService.Report, idReport));
+        }
+
+        /// <summary>
+        /// Все параметры для процессов
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllEventProcessParameters()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.AllEventProcessParameter());
+        }
+
+        /// <summary>
+        /// Добавление или редактирование параметров для процесса
+        /// </summary>
+        /// <param name="eventProcess">Модель параметров для процесса</param>
+        /// <returns></returns>
+        public ModelReturn<EventProcess> AddAndEditEventProcess(EventProcess eventProcess)
+        {
+            eventProcess.DataStart = eventProcess.DataStart?.AddHours(3).AddMonths(-1);
+            eventProcess.DataFinish = eventProcess.DataFinish?.AddHours(3).AddMonths(-1);
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditEventProcess(eventProcess);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeEventProcess(model.Model);
+            }
+
+            return model;
+        }
+
+        /// <summary>
+        /// Актуализация Ip Адресов в БД
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ActualPrintServer()
+        {
+            try
+            {
+                SelectSql select = new SelectSql();
+                return await Task.Factory.StartNew(() => select.ActualPrintServer());
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+                return e.Message;
+            }
+        }
+
+        /// <summary>
+        /// Запрос статистики по доступности серверов на Ping 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Stream> StatusIpServerOnline()
+        {
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    Select select = new Select();
+                    ReportServerIpStatus memo = new ReportServerIpStatus();
+                    var modelServerIp = select.AllIpServerSelectDataBase();
+                    PingIp ping = new PingIp();
+                    ping.PingServerDataBase(ref modelServerIp);
+                    memo.CreateDocument(parametersService.Report, modelServerIp);
+                    select.Dispose();
+                    return memo.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+                Loggers.Log4NetLogger.Error(new Exception($"Возникла ошибка при сбора статистики Ping серверов!!!"));
+            }
+
+            return null;
+        }
+        /// <summary>
+        /// Все категории телефонов
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllCategoryPhoneHeader()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() => auto.CategoryPhoneHeader());
+        }
+        /// <summary>
+        /// Добавление или редактирование категории телефонного справочника
+        /// </summary>
+        /// <param name="categoryPhoneHeader">Категория телефонного справочника</param>
+        /// <returns></returns>
+        public ModelReturn<CategoryPhoneHeader> AddAndEditCategoryPhoneHeader(CategoryPhoneHeader categoryPhoneHeader)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditCategoryPhoneHeader(categoryPhoneHeader);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeCategoryPhoneHeader(model.Model);
+            }
+            return model;
         }
     }
 }

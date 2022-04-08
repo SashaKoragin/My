@@ -12,7 +12,7 @@ using EfDatabase.MemoReport;
 using EfDatabase.ReportCard;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
-using EfDatabaseXsdLotusUser;
+using EfDatabase.XsdLotusUser;
 using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.ReadOrWrite;
 using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
@@ -261,7 +261,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             var report = new ModelPathReport();
             try
             {
-                var isProcessTrue = Inventory.IsProcessCompletes.FirstOrDefault(complete => complete.Id == idProcessBlock);
+                var isProcessTrue = Inventory.EventProcesses.FirstOrDefault(complete => complete.Id == idProcessBlock);
                 if (isProcessTrue == null)
                     throw new InvalidOperationException($"Фатальная ошибка отсутствует процесс Id - {idProcessBlock} в системе!");
                 if (isProcessTrue.IsComplete == true)
@@ -338,8 +338,8 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// Актуализация Ip Адресов в БД
         /// </summary>
         /// <returns></returns>
-       public string ActualIp()
-       {
+        public string ActualIp()
+        {
             try
             {
                 ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(19) };
@@ -352,7 +352,27 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 Loggers.Log4NetLogger.Error(exception);
                 return exception.Message;
             }
-       }
+        }
+        /// <summary>
+        /// Актуализация с PrintServer
+        /// </summary>
+        /// <returns></returns>
+        public string ActualPrintServer()
+        {
+            try
+            {
+                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(52) };
+                var resultCommands = new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], DBNull.Value) { Direction = ParameterDirection.Output, Size = 8000 };
+                Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser, resultCommands);
+                return (string)resultCommands.Value;
+            }
+            catch (Exception exception)
+            {
+                Loggers.Log4NetLogger.Error(exception);
+                return exception.Message;
+            }
+        }
+
 
         /// <summary>
         /// Снятие статуса по технике 
@@ -392,7 +412,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                         join otdel in Inventory.Otdels on user.IdOtdel equals otdel.IdOtdel
                         where keyUser.Any(idUser => idUser.Contains(id.IdentifierUser))
                         select
-                            new EfDatabaseXsdLotusUser.User
+                            new EfDatabase.XsdLotusUser.User
                             {
                                 Name = user.Name,
                                 TabelNumber = user.TabelNumber,
@@ -461,13 +481,13 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(26) };
                if (idDepNumber != null)
                {
-                   userLotus.User = Inventory.Database.SqlQuery<EfDatabaseXsdLotusUser.User>(model.LogicaSelect.SelectUser,
+                   userLotus.User = Inventory.Database.SqlQuery<XsdLotusUser.User>(model.LogicaSelect.SelectUser,
                               new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], idDepNumber),
                                            new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], DBNull.Value)).ToArray();
                }
                else
                {
-                   userLotus.User = Inventory.Database.SqlQuery<EfDatabaseXsdLotusUser.User>(model.LogicaSelect.SelectUser,
+                   userLotus.User = Inventory.Database.SqlQuery<XsdLotusUser.User>(model.LogicaSelect.SelectUser,
                        new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], DBNull.Value),
                        new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], nameGroup)).ToArray();
                }

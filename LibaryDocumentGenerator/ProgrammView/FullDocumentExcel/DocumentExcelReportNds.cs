@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using EfDatabase.Inventory.Base;
 using EfDatabase.ReportCard;
 using LibaryDocumentGenerator.ProgrammView.Excel.BorderModel;
 using LibaryDocumentGenerator.ProgrammView.Excel.CellAndRowsStyle;
@@ -25,6 +26,62 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             Document = document;
             WorkBookPart = workBookPart;
         }
+
+        /// <summary>
+        /// Отчет о доступности серверов 
+        /// </summary>
+        /// <param name="template">Сервера из БД</param>
+        /// <returns></returns>
+        public Worksheet ReportStatusIpServer(List<AllIpServerSelect> template)
+        {
+            Worksheet worksheet = new Worksheet();
+            CellAndRowsStyle generateCellAndRowsStyle = new CellAndRowsStyle();
+            StyleCellsAndGenerateText style = new StyleCellsAndGenerateText(Document, WorkBookPart);
+            FontModel fontModel = new FontModel();
+            BorderModel modelBorder = new BorderModel();
+            var listValueCell = new List<ModelRowFormat>();
+            var modelExcel = new ModelXmlExcel();
+            var stileFullBorderCenter = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium), HorizontalAlignmentValues.Center, VerticalAlignmentValues.Center);
+            listValueCell.Add(new ModelRowFormat() { HeightRow = 16.50D, ModelCell = new List<ModelCellFormat>() { new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 5, ValueCell = "Анализ доступности серверов в налоговом органе!", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenter, MergeHorizontalInt = 5 } } });
+            listValueCell.Add(new ModelRowFormat()
+            {
+                HeightRow = 15.75D,
+                ModelCell = new List<ModelCellFormat>()
+            {
+                new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = "Id", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenter, WidthColumn = 3.50D},
+                new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = "Наименование сервера", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenter, WidthColumn = 45.50D},
+                new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 1, ValueCell = "Ip Адрес", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenter, WidthColumn = 20.50D},
+                new ModelCellFormat() { IndexCellStart = 4, IndexCellFinish = 1, ValueCell = "Полное наименование Ip в БД", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenter, WidthColumn = 40.00D},
+                new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 1, ValueCell = "Статус сервера", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenter, WidthColumn = 36.00D}
+            }
+            });
+            foreach (var allIpServerSelect in template)
+            {
+                var fill = new Fill();
+                fill.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = allIpServerSelect.ColorStatus } });
+                var stileFullBorderLeft = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fill);
+                listValueCell.Add(new ModelRowFormat()
+                {
+                    HeightRow = 15.75D,
+                    ModelCell = new List<ModelCellFormat>()
+                    {
+                        new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = allIpServerSelect.Id.ToString(), CellFormat = CellValues.String, StyleIndex = (uint)stileFullBorderLeft},
+                        new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = allIpServerSelect.NameServer, CellFormat = CellValues.String, StyleIndex = (uint)stileFullBorderLeft},
+                        new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 1, ValueCell = allIpServerSelect.IpAdress, CellFormat = CellValues.String, StyleIndex = (uint)stileFullBorderLeft},
+                        new ModelCellFormat() { IndexCellStart = 4, IndexCellFinish = 1, ValueCell = allIpServerSelect.FullIpAdressDataBase, CellFormat = CellValues.String, StyleIndex = (uint)stileFullBorderLeft},
+                        new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 1, ValueCell = allIpServerSelect.InfoStatusReport, CellFormat = CellValues.String, StyleIndex = (uint)stileFullBorderLeft}
+                    }
+                });
+            }
+            generateCellAndRowsStyle.GenerateCell(listValueCell, ref modelExcel);
+            generateCellAndRowsStyle.MergeCells(listValueCell, ref modelExcel);
+            generateCellAndRowsStyle.GenerateSheetDataAddRowsList(ref modelExcel);
+            worksheet.Append(modelExcel.SheetData);
+            worksheet.InsertAfter(modelExcel.MergeCells, worksheet.Elements<SheetData>().First());
+            worksheet.InsertAt(modelExcel.Сolumns, 0);
+            return worksheet;
+        }
+
         /// <summary>
         /// Генерация отчета по АСК НДС Excel
         /// </summary>
@@ -974,7 +1031,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
 
             if (userCard.Date_out != DateTime.MinValue)
             {
-                if (date >= userCard.Date_out)
+                if (date > userCard.Date_out)
                 {
                     return 0.00;
                 }

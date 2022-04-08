@@ -268,6 +268,8 @@ namespace EfDatabaseInvoice {
         
         private string smallNameField;
         
+        private string userPositionField;
+        
         private string nameOtdelField;
         
         private string chiefNameField;
@@ -295,6 +297,17 @@ namespace EfDatabaseInvoice {
             }
             set {
                 this.smallNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string UserPosition {
+            get {
+                return this.userPositionField;
+            }
+            set {
+                this.userPositionField = value;
             }
         }
         

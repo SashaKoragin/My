@@ -56,50 +56,46 @@ Patch dialog sequence:
             <!--Начало моего окна-->
             <Dialog Id="NDFLConect" Width="370" Height="270" Title="Настройка обновление актуальности копии!!!">
                 <Control Id="Title" Type="Text" X="10" Y="8" Width="400" Height="15" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}В данном окне пишется пути к рабочей БД чтобы взять с нее копию!!!" />
-                <Control Id="Title1" Type="Text" X="15" Y="30" Width="106" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь к Work DB:" />
-                <Control Id="SimpleEdit" Type="Edit" X="90" Y="30" Width="195" Height="15" Property="WORKDB" Text="[WORKDB]" Sunken="no">
-                    <Property Id="WORKDB" Value="\\i7751-app127\2NDFL\stat" />
+                <Control Id="Title1" Type="Text" X="11" Y="30" Width="106" Height="15" Transparent="yes" NoPrefix="yes" Text="Номер инспекции:" />
+                <Control Id="SimpleEdit" Type="Edit" X="90" Y="30" Width="50" Height="15" Property="NUMBERIFNS" Text="[NUMBERIFNS]" Sunken="no">
+                    <Property Id="NUMBERIFNS" Value="7751" />
                 </Control>
-                <Control Id="ResultComment" Type="Text" X="15" Y="50" Width="60" Height="15" Transparent="yes" NoPrefix="yes" Text="Путь Теsт DB:" />
-                <Control Id="ResultFolder" Type="Edit" X="90" Y="50" Width="194" Height="15" Property="TESTDB" Text="[TESTDB]" Sunken="no" ToolTip="Use Folder Result ГОД УКАЗЫВАЕТСЯ В ВИДЕ {0}">
-                    <Property Id="TESTDB" Value="\\I7751-W40204180\SrezDBF" />
-                </Control>
-                <Control Id="Title2" Type="Text" Text="Настройки для Rest приложения:" Height="17" Width="140" X="11" Y="70" />
-                <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="80" X="11" Y="90" />
-              <Control Id="Db" Type="Edit" X="90" Y="90" Height="15" Width="240" Property="DATABASESQL" Text="[DATABASESQL]" Sunken="no">
+                <Control Id="Title2" Type="Text" Text="Настройки для Rest приложения:" Height="17" Width="140" X="11" Y="50" />
+                <Control Id="Sqldb" Type="Text" Text="База данных Sql:" Height="17" Width="80" X="11" Y="70" />
+              <Control Id="Db" Type="Edit" X="90" Y="70" Height="15" Width="240" Property="DATABASESQL" Text="[DATABASESQL]" Sunken="no">
                 <Property Id="DATABASESQL" Value="i7751-app051" />
               </Control>
-              <Control Id="ReportBdkText" Type="Text" Text="Путь для отчетов:" Height="15" Width="80" X="11" Y="110" />
-              <Control Id="ReportBdkEdit" Type="Edit" X="90" Y="110" Height="15" Width="240" Property="PATHREPORTFULL" Text="[PATHREPORTFULL]" Sunken="no">
+              <Control Id="ReportBdkText" Type="Text" Text="Путь для отчетов:" Height="15" Width="80" X="11" Y="90" />
+              <Control Id="ReportBdkEdit" Type="Edit" X="90" Y="90" Height="15" Width="240" Property="PATHREPORTFULL" Text="[PATHREPORTFULL]" Sunken="no">
                 <Property Id="PATHREPORTFULL" Value="\\i7751-app014\Network-Disk\!!! PUBLIC !!!\TestingSystem\" />
               </Control>
-              <Control Id="InventoryParametr" Type="Text" Text="Настройки для БД инвенторизация:" Height="17" Width="140" X="11" Y="130" />
-              <Control Id="IMNSText1" Type="Text" Text="Server IMNS:" Height="15" ToolTip="Сервер КАДРЫ" Width="75" X="10" Y="152" />
-              <Control Id="IMNSDbEdit1" Type="Edit" X="85" Y="150" Height="15" Width="75" Property="SERVERPATHIMNS" Text="[SERVERPATHIMNS]" Sunken="no">
+              <Control Id="InventoryParametr" Type="Text" Text="Настройки для БД инвенторизация:" Height="17" Width="140" X="11" Y="110" />
+              <Control Id="IMNSText1" Type="Text" Text="Server IMNS:" Height="15" ToolTip="Сервер КАДРЫ" Width="75" X="10" Y="132" />
+              <Control Id="IMNSDbEdit1" Type="Edit" X="85" Y="130" Height="15" Width="75" Property="SERVERPATHIMNS" Text="[SERVERPATHIMNS]" Sunken="no">
                 <Property Id="SERVERPATHIMNS" Value="i7751-app020" />
               </Control>
-              <Control Id="IMNSText2" Type="Text" Text="DataBase IMNS:" Height="15" ToolTip="База КАДРЫ" Width="80" X="165" Y="152" />
-              <Control Id="IMNSDbEdit2" Type="Edit" X="255" Y="150" Height="15" Width="75" Property="DATABASEIMNS" Text="[DATABASEIMNS]" Sunken="no">
+              <Control Id="IMNSText2" Type="Text" Text="DataBase IMNS:" Height="15" ToolTip="База КАДРЫ" Width="80" X="165" Y="132" />
+              <Control Id="IMNSDbEdit2" Type="Edit" X="255" Y="130" Height="15" Width="75" Property="DATABASEIMNS" Text="[DATABASEIMNS]" Sunken="no">
                 <Property Id="DATABASEIMNS" Value="imns51" />
               </Control>
 
-              <Control Id="InventoryText1" Type="Text" Text="Server Inventory:" Height="15" ToolTip="Сервер КАДРЫ" Width="75" X="10" Y="172" />
-              <Control Id="InventoryDbEdit1" Type="Edit" X="85" Y="170" Height="15" Width="75" Property="SERVERPATHINVENTORY" Text="[SERVERPATHINVENTORY]" Sunken="no">
+              <Control Id="InventoryText1" Type="Text" Text="Server Inventory:" Height="15" ToolTip="Сервер КАДРЫ" Width="75" X="10" Y="152" />
+              <Control Id="InventoryDbEdit1" Type="Edit" X="85" Y="150" Height="15" Width="75" Property="SERVERPATHINVENTORY" Text="[SERVERPATHINVENTORY]" Sunken="no">
                 <Property Id="SERVERPATHINVENTORY" Value="i7751-app127" />
               </Control>
-              <Control Id="InventoryText2" Type="Text" Text="DataBase Inventory:" Height="15" ToolTip="База КАДРЫ" Width="80" X="165" Y="172" />
-              <Control Id="InventoryDbEdit2" Type="Edit" X="255" Y="170" Height="15" Width="75" Property="DATABASEINVENTORY" Text="[DATABASEINVENTORY]" Sunken="no">
+              <Control Id="InventoryText2" Type="Text" Text="DataBase Inventory:" Height="15" ToolTip="База КАДРЫ" Width="80" X="165" Y="152" />
+              <Control Id="InventoryDbEdit2" Type="Edit" X="255" Y="150" Height="15" Width="75" Property="DATABASEINVENTORY" Text="[DATABASEINVENTORY]" Sunken="no">
                 <Property Id="DATABASEINVENTORY" Value="Inventarka" />
               </Control>
 
-              <Control Id="SettingEpo" Type="Text" Text="Настройки для ЭПО:" Height="17" Width="140" X="11" Y="190" />
-              <Control Id="EpoText1" Type="Text" Text="Login ЭПО:" Height="15" ToolTip="Login ЭПО" Width="50" X="10" Y="213" />
-              <Control Id="LoginEpoEdit" Type="Edit" X="60" Y="210" Height="15" Width="90" Property="LOGINEPO" Text="[LOGINEPO]" Sunken="no">
+              <Control Id="SettingEpo" Type="Text" Text="Настройки для ЭПО:" Height="17" Width="140" X="11" Y="170" />
+              <Control Id="EpoText1" Type="Text" Text="Login ЭПО:" Height="15" ToolTip="Login ЭПО" Width="50" X="10" Y="193" />
+              <Control Id="LoginEpoEdit" Type="Edit" X="60" Y="190" Height="15" Width="90" Property="LOGINEPO" Text="[LOGINEPO]" Sunken="no">
                 <Property Id="LOGINEPO" Value="7751_Slavgorodceva" />
               </Control>
 
-              <Control Id="EpoText2" Type="Text" Text="Password ЭПО:" Height="15" ToolTip="Password ЭПО" Width="60" X="165" Y="213" />
-              <Control Id="PasswordEpoEdit" Type="Edit" X="235" Y="210" Height="15" Width="75" Property="PASSWORDEPO" Text="[PASSWORDEPO]" Sunken="no">
+              <Control Id="EpoText2" Type="Text" Text="Password ЭПО:" Height="15" ToolTip="Password ЭПО" Width="60" X="165" Y="193" />
+              <Control Id="PasswordEpoEdit" Type="Edit" X="235" Y="190" Height="15" Width="75" Property="PASSWORDEPO" Text="[PASSWORDEPO]" Sunken="no">
                 <Property Id="PASSWORDEPO" Value="z755PZUK" />
               </Control>
 

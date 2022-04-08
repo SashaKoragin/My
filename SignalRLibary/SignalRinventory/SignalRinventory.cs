@@ -349,7 +349,7 @@ namespace SignalRLibary.SignalRinventory
         public static void SubscribeNameMonitor(NameMonitor nameMonitor)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
-            Loggers.Log4NetLogger.Info(new Exception("Модель Наименование монитора рассылка пошла: " + nameMonitor.Name));
+            Loggers.Log4NetLogger.Info(new Exception("Модель Наименование монитора рассылка пошла: " + nameMonitor.NameModel));
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeNameMonitor(json.JsonLibaryIgnoreDate(nameMonitor));
         }
@@ -650,6 +650,28 @@ namespace SignalRLibary.SignalRinventory
             Loggers.Log4NetLogger.Info(new Exception("Наименование типы разного рассылка пошла: " + proizvoditelOther.IdProizvoditelOther));
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeProizvoditelOther(json.JsonLibaryIgnoreDate(proizvoditelOther));
+        }
+        /// <summary>
+        /// Параметры для процеса рассылка пошла
+        /// </summary>
+        /// <param name="eventProcess">Параметры для процесса</param>
+        public static void SubscribeEventProcess(EventProcess eventProcess)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Параметры для процесса рассылка пошла: " + eventProcess.Id));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeEventProcess(json.JsonLibaryIgnoreDate(eventProcess, "dd.MM.yyyy HH:mm"));
+        }
+        /// <summary>
+        /// Подписка на наименование категории справочника
+        /// </summary>
+        /// <param name="modelCategoryPhoneHeader">Категория справочника</param>
+        public static void SubscribeCategoryPhoneHeader(CategoryPhoneHeader modelCategoryPhoneHeader)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Параметры для процесса рассылка пошла: " + modelCategoryPhoneHeader.IdCategoryHeaders));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeCategoryPhoneHeader(json.JsonLibaryIgnoreDate(modelCategoryPhoneHeader));
         }
 
         /// <summary>

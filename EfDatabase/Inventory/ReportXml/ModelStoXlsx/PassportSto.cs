@@ -84,9 +84,9 @@ namespace EfDatabase.PassportSto {
         
         private string clusterObjectField;
         
-        private string sto2019Field;
+        private string stoPreviousField;
         
-        private string sto2020Field;
+        private string stoCurrentField;
         
         private string stoField;
         
@@ -446,25 +446,25 @@ namespace EfDatabase.PassportSto {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        [DataNames(@"СТО 2019")]
-        public string Sto2019 {
+        [DataNames(@"СТО 2020")]
+        public string StoPrevious {
             get {
-                return this.sto2019Field;
+                return this.stoPreviousField;
             }
             set {
-                this.sto2019Field = value;
+                this.stoPreviousField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        [DataNames(@"СТО 2020")]
-        public string Sto2020 {
+        [DataNames(@"СТО 2021")]
+        public string StoCurrent {
             get {
-                return this.sto2020Field;
+                return this.stoCurrentField;
             }
             set {
-                this.sto2020Field = value;
+                this.stoCurrentField = value;
             }
         }
         

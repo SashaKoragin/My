@@ -16,8 +16,6 @@ namespace TestIFNSLibary.PathJurnalAndUse
             PathJurnal = ConfigurationManager.AppSettings["PathJurnal"];
             TestDB = ConfigurationManager.AppSettings["TestDb"];
             WorkDB = ConfigurationManager.AppSettings["WorkDb"];
-            Hours = Convert.ToInt32(ConfigurationManager.AppSettings["Hours"]);
-            Minutes = Convert.ToInt32(ConfigurationManager.AppSettings["Minutes"]);
             Log = ConfigurationManager.AppSettings["Log4Net"];
             ConnectionString = ConfigurationManager.AppSettings["Connect"];
             ConectTest = ConfigurationManager.AppSettings["ConectTest"];
@@ -27,12 +25,9 @@ namespace TestIFNSLibary.PathJurnalAndUse
             Inventarization = ConfigurationManager.ConnectionStrings["Inventarization"].ConnectionString;
             BulkCopyXmlSto = ConfigurationManager.ConnectionStrings["BulkCopyXmlSto"].ConnectionString;
             ConnectImns51 = ConfigurationManager.AppSettings["ConnectImns51"];
-            PathDomainComputer = ConfigurationManager.AppSettings["PathDomainComputer"];
             PathDomainGroup = ConfigurationManager.AppSettings["PathDomainGroup"];
-            FindWorkStations = ConfigurationManager.AppSettings["FindWorkStations"];
             User = ConfigurationManager.AppSettings["User"];
             Password = ConfigurationManager.AppSettings["Password"];
-            DayX = Convert.ToInt32(ConfigurationManager.AppSettings["DayX"]);
             SendServiceLotus = ConfigurationManager.AppSettings["SendServiceLotus"];
             LoginSto = ConfigurationManager.AppSettings["LoginSto"];
             PasswordSto = ConfigurationManager.AppSettings["PasswordSto"];
@@ -44,8 +39,6 @@ namespace TestIFNSLibary.PathJurnalAndUse
            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings["TestDb"].Value = testDb;
             config.AppSettings.Settings["WorkDb"].Value = workDb;
-            config.AppSettings.Settings["Hours"].Value = hours.ToString();
-            config.AppSettings.Settings["Minutes"].Value = minutes.ToString();
             config.Save(ConfigurationSaveMode.Modified);
         }
 
@@ -63,16 +56,6 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// </summary>
         [DataMember]
         public string WorkDB { get; set; }
-        /// <summary>
-        /// Часы
-        /// </summary>
-        [DataMember]
-        public int Hours { get; set; }
-        /// <summary>
-        /// Минуты
-        /// </summary>
-        [DataMember]
-        public int Minutes { get; set; }
         /// <summary>
         /// Файл Лога
         /// </summary>
@@ -107,17 +90,9 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// </summary>
         public string ConnectImns51 { get; set; }
         /// <summary>
-        /// Путь к домену Компьютеры
-        /// </summary>
-        public string PathDomainComputer { get; set; }
-        /// <summary>
         /// Группы пользователей поиск
         /// </summary>
         public string PathDomainGroup { get; set; }
-        /// <summary>
-        /// Поиск рабочих станций
-        /// </summary>
-        public string FindWorkStations { get; set; }
         /// <summary>
         /// Логин 
         /// </summary>
@@ -126,10 +101,6 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// Пароль
         /// </summary>
         public string Password { get; set; }
-        /// <summary>
-        /// День заявки
-        /// </summary>
-        public int DayX { get; set; }
         /// <summary>
         /// Отправка модели для генерации писем
         /// </summary>

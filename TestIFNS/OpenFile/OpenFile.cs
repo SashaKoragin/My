@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-
 namespace TestIFNSTools.OpenFile
 {
     public class OpenFile

@@ -9,6 +9,7 @@ using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdQrCodeModel;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
+using FullModel = EfDatabase.Inventory.Base.FullModel;
 
 
 namespace EfDatabase.Inventory.BaseLogic.Select
@@ -117,10 +118,29 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             SerializeJson json = new SerializeJson();
             if (filterActual.FilterActual.IsFilter)
             {
-                return json.JsonLibaryIgnoreDate(Inventory.Users.Where(user => user.StatusUser != null).Where(u=> u.StatusUser.IdStatusUser != 4));
+                var usersIsStatus = Inventory.Users.Where(user => user.StatusUser != null).Where(u => u.StatusUser.IdStatusUser != 4).ToArray();
+                DeleteOwnerUserPhone(ref usersIsStatus);
+                return json.JsonLibaryIgnoreDate(usersIsStatus);
             }
-            return json.JsonLibaryIgnoreDate(Inventory.Users);
+            var users = Inventory.Users.ToArray();
+            DeleteOwnerUserPhone(ref users);
+            return json.JsonLibaryIgnoreDate(users);
         }
+        /// <summary>
+        /// Удаление владельцев телефонов
+        /// </summary>
+        /// <param name="users"></param>
+        private void DeleteOwnerUserPhone(ref User[] users)
+        {
+            foreach (var user in users)
+            {
+                if (user.Telephon != null)
+                {
+                    user.Telephon.User = null;
+                }
+            }
+        }
+
         /// <summary>
         /// Запрос всех должностей
         /// </summary>
@@ -138,7 +158,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Printers()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Printers.Where(x=>x.IdStatus!=31));
+            return json.JsonLibaryIgnoreDate(Inventory.Printers.Where(x=> !x.WriteOffSign));
         }
         /// <summary>
         /// Выгрузка всех Коммутаторов
@@ -147,7 +167,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Swithes()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Swithes.Where(x => x.IdStatus != 31));
+            return json.JsonLibaryIgnoreDate(Inventory.Swithes.Where(x => !x.WriteOffSign));
         }
 
         public string ModelSwitch()
@@ -163,7 +183,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Scaner()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.ScanerAndCamers.Where(x => x.IdStatus != 31));
+            return json.JsonLibaryIgnoreDate(Inventory.ScanerAndCamers.Where(x => !x.WriteOffSign));
         }
 
         /// <summary>
@@ -173,7 +193,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Mfu()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Mfus.Where(x => x.IdStatus != 31));
+            return json.JsonLibaryIgnoreDate(Inventory.Mfus.Where(x => !x.WriteOffSign));
         }
 
         /// <summary>
@@ -183,7 +203,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string SysBloks()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.SysBlocks.Where(x => x.IdStatus != 31));
+            return json.JsonLibaryIgnoreDate(Inventory.SysBlocks.Where(x => !x.WriteOffSign));
         }
 
         /// <summary>
@@ -193,7 +213,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Monitors()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Monitors.Where(x => x.IdStatus != 31));
+            return json.JsonLibaryIgnoreDate(Inventory.Monitors.Where(x => !x.WriteOffSign));
         }
         /// <summary>
         /// Разное оборудование
@@ -202,7 +222,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string OtherAll()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.OtherAlls.Where(x => x.IdStatus != 31));
+            return json.JsonLibaryIgnoreDate(Inventory.OtherAlls.Where(x => !x.WriteOffSign));
         }
         /// <summary>
         /// Все модели разного оборудования
@@ -270,6 +290,50 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.FullModels);
         }
+        /// <summary>
+        /// Все категории телефона для справочника
+        /// </summary>
+        /// <returns></returns>
+        public string CategoryPhoneHeader()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.CategoryPhoneHeaders);
+        }
+
+        /// <summary>
+        /// Все модели принтеров
+        /// </summary>
+        /// <returns></returns>
+        public FullModel[] AllFullModel()
+        {
+           return Inventory.FullModels.Where(x=>x.IdClasification == 1 || x.IdClasification == 3).ToArray();
+        }
+        /// <summary>
+        /// Получение всех серийных номеров прикладных аппаратов в БД
+        /// </summary>
+        /// <returns></returns>
+        public List<string> AllSerNumber()
+        {
+            return Inventory.AllTechnics.Where(x => x.Item == "Принтер" || x.Item == "МФУ").Select(sel => sel.SerNum.Trim()).ToList();
+        }
+        /// <summary>
+        /// Получения по табельному номеру Id пользователя
+        /// </summary>
+        /// <param name="personnelNumber">Табельный номер</param>
+        /// <returns></returns>
+        public int SelectIdUser(string personnelNumber)
+        {
+            return Inventory.Users.First(user => user.TabelNumber == personnelNumber).IdUser;
+        }
+        /// <summary>
+        /// Получение найденного экземпляра оборудования в PrintServer для создания заявки
+        /// </summary>
+        /// <param name="serNumber">Ser\number</param>
+        /// <returns></returns>
+        public AllTechnic TypeModelAndIdSelect(string serNumber)
+        {
+            return Inventory.AllTechnics.FirstOrDefault(x => x.SerNum == serNumber && x.AutoSupport == 1);
+        }
 
         /// <summary>
         /// Запрос всех статусов с БД
@@ -307,7 +371,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string Telephon()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Telephons.Where(x => x.IdStatus != 31));
+            return json.JsonLibaryIgnoreDate(Inventory.Telephons.Where(x => !x.WriteOffSign));
         }
         /// <summary>
         /// Выгрузка типов серверов
@@ -325,7 +389,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string BlockPower()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.BlockPowers.Where(x => x.IdStatus != 31));
+            return json.JsonLibaryIgnoreDate(Inventory.BlockPowers.Where(x => !x.WriteOffSign));
         }
         /// <summary>
         /// Все серверное оборудование
@@ -334,7 +398,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string ServerEquipment()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.ServerEquipments.Where(x => x.IdStatus != 31));
+            return json.JsonLibaryIgnoreDate(Inventory.ServerEquipments.Where(x => !x.WriteOffSign));
         }
         /// <summary>
         /// Все модели серверного оборудования
@@ -462,7 +526,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string AllToken()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Tokens);
+            return json.JsonLibaryIgnoreDate(Inventory.Tokens.Where(x => !x.WriteOffSign));
         }
         /// <summary>
         /// Запрос на технику претендующую на QR code
@@ -472,7 +536,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// <returns></returns>
         public List<AllTechnic> SelectTechnical(string serialNumber, bool isAll = false)
         {
-            return isAll ? Inventory.AllTechnics.Where(x => x.IdStatus != 31).ToList() : Inventory.AllTechnics.Where(x => x.SerNum == serialNumber).ToList();
+            return isAll ? Inventory.AllTechnics.Where(x => !x.WriteOffSign).ToList() : Inventory.AllTechnics.Where(x => x.SerNum == serialNumber).ToList();
         }
         /// <summary>
         /// Отбираем все или конкретный
@@ -547,7 +611,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// <returns></returns>
         public bool IsBeginTask(int idTask)
         {
-            var isComplete = Inventory.IsProcessCompletes.FirstOrDefault(x => x.Id == idTask)?.IsComplete;
+            var isComplete = Inventory.EventProcesses.FirstOrDefault(x => x.Id == idTask)?.IsComplete;
             return isComplete != null && (bool)isComplete;
         }
         /// <summary>
@@ -555,9 +619,36 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// </summary>
         /// <param name="isProcess">Номер процесса</param>
         /// <returns></returns>
-        public IsProcessComplete SelectProcess(int isProcess)
+        public EventProcess SelectProcess(int isProcess)
         {
-            return Inventory.IsProcessCompletes.FirstOrDefault(x => x.Id == isProcess);
+            return Inventory.EventProcesses.FirstOrDefault(x => x.Id == isProcess);
+        }
+        /// <summary>
+        /// Вытаскиваем параметры задачи параметры через ;
+        /// </summary>
+        /// <param name="idEvent">Ун параметров</param>
+        /// <returns></returns>
+        public EventProcess SelectEvent(int idEvent)
+        {
+            return Inventory.EventProcesses.FirstOrDefault(x => x.Id == idEvent);
+        }
+        /// <summary>
+        /// Все Ip Серверов в БД для отчета пинга
+        /// </summary>
+        /// <returns></returns>
+        public List<AllIpServerSelect> AllIpServerSelectDataBase()
+        {
+            return Inventory.AllIpServerSelects.ToList();
+        }
+
+        /// <summary>
+        /// Запрос всех параметров для процесса
+        /// </summary>
+        /// <returns></returns>
+        public string AllEventProcessParameter()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.EventProcesses, "dd.MM.yyyy HH:mm");
         }
 
         /// <summary>

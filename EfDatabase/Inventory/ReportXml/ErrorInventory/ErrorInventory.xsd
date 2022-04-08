@@ -67,7 +67,6 @@
 			<xs:element ref="ErrorUsersNotActual" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="AnaliticaSysBlokAndMonitors" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="UsersNotTechnical" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element ref="IsProcessComplete" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="ComputerIpAdressSynhronization" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="InventarNotHostName" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="DoubleComputersName" minOccurs="0" maxOccurs="unbounded"/>
@@ -77,6 +76,7 @@
 			<xs:element ref="TecnicalOtdel" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="AllTechnics" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="ErrorTokenUser" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="SynchronizationPrintServerToDataBase" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="ErrorUsersNotActual">
@@ -373,32 +373,6 @@
 			<xs:attribute name="NameOtdel" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Наименование отдела</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="IsProcessComplete">
-		<xs:annotation>
-			<xs:documentation>Аналитика запущенных процосов</xs:documentation>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="DataStart"/>
-				<xs:element ref="DataFinish"/>
-			</xs:sequence>
-			<xs:attribute name="Id" type="xs:int" use="required">
-				<xs:annotation>
-					<xs:documentation>Ун процесса</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="NameProcess" type="xs:string">
-				<xs:annotation>
-					<xs:documentation>Наименование процесса</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="IsComplete" type="xs:boolean" use="required">
-				<xs:annotation>
-					<xs:documentation>Статус</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -800,16 +774,6 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="DataStart" type="xs:dateTime" nillable="true">
-		<xs:annotation>
-			<xs:documentation>Дата начала процесса</xs:documentation>
-		</xs:annotation>
-	</xs:element>
-	<xs:element name="DataFinish" type="xs:dateTime" nillable="true">
-		<xs:annotation>
-			<xs:documentation>Дата окончания процесса</xs:documentation>
-		</xs:annotation>
-	</xs:element>
 	<xs:element name="DateCreate" type="xs:dateTime" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Дата записи</xs:documentation>
@@ -829,5 +793,92 @@
 		<xs:annotation>
 			<xs:documentation>УН пользователя</xs:documentation>
 		</xs:annotation>
+	</xs:element>
+	<xs:element name="SynchronizationPrintServerToDataBase">
+		<xs:annotation>
+			<xs:documentation>Модель синхронизации с PrintServer и базой данных</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун записи</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameModel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование модели оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNumberPrintServer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NamePrintServer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование принтера PrintServer</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpPrintServer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ip принтера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DescriptionPrinter" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Описание на PrintServer</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FullUrl" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Web ссылка</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OldNameDataBase" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Старое наименование в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OldIpDataBase" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Старый IP Адрес в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NewNameDataBase" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Новое наименование в БД после синхрнонизации</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NewIpDataBase" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Новый IP в БД после синхрнонизации</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsTonerLowAndHas" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Статус тонера в аппарате</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSupportApplicationDate" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Автоматическая заявка и дата</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Info" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Описание ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameStatus" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименовние статуса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Color" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Цвет статуса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
 	</xs:element>
 </xs:schema>

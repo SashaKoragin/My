@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -83,6 +84,9 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             var organizationAddAndModified = new Organization()
             {
                 Id = organization.Id,
+                NumberIfns = organization.NumberIfns,
+                CodeIfns = organization.CodeIfns,
+                AddressOrganization = organization.AddressOrganization,
                 NameOrganization = organization.NameOrganization,
                 NameFullOrganization = organization.NameFullOrganization,
                 NameFaceLeader = organization.NameFaceLeader,
@@ -93,7 +97,12 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 TnameOrganization = organization.TnameOrganization,
                 PnameOrganization = organization.PnameOrganization,
                 NameFace = organization.NameFace,
-                NameDepartament = organization.NameDepartament
+                NameDepartament = organization.NameDepartament,
+                Room = organization.Room,
+                Mail = organization.Mail,
+                CodeObject = organization.CodeObject,
+                ScenarioEntrance = organization.ScenarioEntrance,
+                IdUserDks = organization.IdUserDks
             };
             try
             {
@@ -274,13 +283,14 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IdModel = printer.IdModel,
                 IdNumberKabinet = printer.IdNumberKabinet,
                 IdSupply = printer.IdSupply,
+                Name = printer.Name,
                 ZavNumber = printer.ZavNumber,
                 ServiceNumber = printer.ServiceNumber,
                 InventarNumber = printer.InventarNumber,
-                IzmInventarNumber = printer.IzmInventarNumber,
                 IpAdress = printer.IpAdress,
                 Coment = printer.Coment,
                 IdStatus = printer.IdStatus,
+                WriteOffSign = printer.WriteOffSign,
                 IdHistory = printer.IdHistory
             };
             try
@@ -333,6 +343,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 InventarNum = swithe.InventarNum,
                 Coment = swithe.Coment,
                 IdStatus = swithe.IdStatus,
+                WriteOffSign = swithe.WriteOffSign,
                 IdHistory = swithe.IdHistory
             };
             try
@@ -386,10 +397,10 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 ZavNumber = scaner.ZavNumber,
                 ServiceNumber = scaner.ServiceNumber,
                 InventarNumber = scaner.InventarNumber,
-                IzmInventarNumber = scaner.IzmInventarNumber,
                 IpAdress = scaner.IpAdress,
                 Coment = scaner.Coment,
                 IdStatus = scaner.IdStatus,
+                WriteOffSign = scaner.WriteOffSign,
                 IdHistory = scaner.IdHistory
             };
             try
@@ -448,6 +459,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IpAdress = serverEquipment.IpAdress,
                 Coment = serverEquipment.Coment,
                 IdStatus = serverEquipment.IdStatus,
+                WriteOffSign = serverEquipment.WriteOffSign,
                 IdHistory = serverEquipment.IdHistory
             };
             try
@@ -499,14 +511,15 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IdModel = mfu.IdModel,
                 IdSupply = mfu.IdSupply,
                 IdNumberKabinet = mfu.IdNumberKabinet,
+                Name = mfu.Name,
                 ZavNumber = mfu.ZavNumber,
                 ServiceNumber = mfu.ServiceNumber,
                 InventarNumber = mfu.InventarNumber,
-                IzmInventarNumber = mfu.IzmInventarNumber,
                 IpAdress = mfu.IpAdress,
                 Coment = mfu.Coment,
                 IdCopySave = mfu.IdCopySave,
                 IdStatus = mfu.IdStatus,
+                WriteOffSign = mfu.WriteOffSign,
                 IdHistory = mfu.IdHistory,
             };
             try
@@ -564,6 +577,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IpAdress = sysblok.IpAdress,
                 Coment = sysblok.Coment,
                 IdStatus = sysblok.IdStatus,
+                WriteOffSign = sysblok.WriteOffSign,
                 IdHistory = sysblok.IdHistory,
             };
             try
@@ -620,6 +634,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 InventarNumMonitor = monitor.InventarNumMonitor,
                 Coment = monitor.Coment,
                 IdStatus = monitor.IdStatus,
+                WriteOffSign = monitor.WriteOffSign,
                 IdHistory = monitor.IdHistory
             };
             try
@@ -673,6 +688,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 SerNum = token.SerNum,
                 Coment = token.Coment,
                 IdStatus = token.IdStatus,
+                WriteOffSign = token.WriteOffSign,
                 IdHistory = token.IdHistory
             };
             try
@@ -716,9 +732,10 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         public ModelReturn<Telephon> AddAndEditTelephone(Telephon telephone, int? idUser)
         {
             HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
-            var telephoneAddadnModified = new Telephon()
+            var telephoneAddAndModified = new Telephon()
             {
                 IdTelephon = telephone.IdTelephon,
+                IdUser =  telephone.IdUser,
                 IdSupply = telephone.IdSupply,
                 IdNumberKabinet = telephone.IdNumberKabinet,
                 ServiceNum = telephone.ServiceNum,
@@ -730,38 +747,40 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IpTelephon = telephone.IpTelephon,
                 MacTelephon = telephone.MacTelephon,
                 IdStatus = telephone.IdStatus,
+                IdCategoryHeaders = telephone.IdCategoryHeaders,
+                WriteOffSign = telephone.WriteOffSign,
                 Coment = telephone.Coment
             };
             try
             {
-                var newmodel = $"Кабинет: {telephone.Kabinet?.NumberKabinet}; Комментарий: {telephone.Coment}; Статус: {telephone.Statusing?.Name}";
+                var newModel = $"Владелец: {telephone.User?.Name}; Кабинет: {telephone.Kabinet?.NumberKabinet}; Комментарий: {telephone.Coment}; Статус: {telephone.Statusing?.Name}";
                 using (var context = new InventoryContext())
                 {
-                    var modeldb = from Telephone in context.Telephons where Telephone.IdTelephon == telephone.IdTelephon select new { Telephone };
-                    if (modeldb.Any())
+                    var modelDb = from Telephone in context.Telephons where Telephone.IdTelephon == telephone.IdTelephon select new { Telephone };
+                    if (modelDb.Any())
                     {
-                        var oldmodel = $"Кабинет: {modeldb.First().Telephone?.Kabinet?.NumberKabinet}; Комментарий: {modeldb.First().Telephone.Coment}; Статус: {modeldb.First().Telephone?.Statusing?.Name}";
-                        Inventory.Entry(telephoneAddadnModified).State = EntityState.Modified;
+                        var oldModel = $"Владелец: {modelDb.First().Telephone?.User?.Name}; Кабинет: {modelDb.First().Telephone?.Kabinet?.NumberKabinet}; Комментарий: {modelDb.First().Telephone.Coment}; Статус: {modelDb.First().Telephone?.Statusing?.Name}";
+                        Inventory.Entry(telephoneAddAndModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
                         log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
-                            oldmodel,
-                            newmodel);
-                        return new ModelReturn<Telephon>("Обновили Телефон: " + telephoneAddadnModified.IdTelephon, telephone);
+                            oldModel,
+                            newModel);
+                        return new ModelReturn<Telephon>("Обновили Телефон: " + telephoneAddAndModified.IdTelephon, telephone);
                     }
                 }
-                Inventory.Telephons.Add(telephoneAddadnModified);
+                Inventory.Telephons.Add(telephoneAddAndModified);
                 Inventory.SaveChanges();
-                telephone.IdTelephon = telephoneAddadnModified.IdTelephon;
+                telephone.IdTelephon = telephoneAddAndModified.IdTelephon;
                 log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
                    $"Отсутствует модель при добавлении нового устройства",
-                   newmodel);
-                return new ModelReturn<Telephon>("Добавили Телефон: " + telephoneAddadnModified.IdTelephon, telephone, telephoneAddadnModified.IdTelephon);
+                   newModel);
+                return new ModelReturn<Telephon>("Добавили Телефон: " + telephoneAddAndModified.IdTelephon, telephone, telephoneAddAndModified.IdTelephon);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn<Telephon>("При обновлении/добавлении данных 'Телефон' по : " + telephoneAddadnModified.IdTelephon + " произошла ошибка смотри log.txt");
+            return new ModelReturn<Telephon>("При обновлении/добавлении данных 'Телефон' по : " + telephoneAddAndModified.IdTelephon + " произошла ошибка смотри log.txt");
         }
 
 
@@ -786,6 +805,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 InventarNumber = blokpower.InventarNumber,
                 Coment = blokpower.Coment,
                 IdStatus = blokpower.IdStatus,
+                WriteOffSign = blokpower.WriteOffSign,
                 IdHistory = blokpower.IdHistory
 
             };
@@ -1013,7 +1033,9 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             var nameMonitorAddadnModified = new NameMonitor()
             {
                 IdModelMonitor = nameMonitor.IdModelMonitor,
-                Name = nameMonitor.Name,
+                NameManufacturer = nameMonitor.NameManufacturer,
+                NameModel = nameMonitor.NameModel,
+                Info = nameMonitor.Info
             };
             try
             {
@@ -1367,6 +1389,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 InventarNum = modelOtherAll.InventarNum,
                 Coment = modelOtherAll.Coment,
                 IdStatus = modelOtherAll.IdStatus,
+                WriteOffSign = modelOtherAll.WriteOffSign,
                 IdHistory = modelOtherAll.IdHistory
             };
             try
@@ -1512,6 +1535,9 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             {
                 IdModel = nameFullModel.IdModel,
                 NameModel = nameFullModel.NameModel,
+                UrlModel = nameFullModel.UrlModel,
+                AutoSupport = nameFullModel.AutoSupport,
+                TypeToner = nameFullModel.TypeToner,
                 IdClasification = nameFullModel.IdClasification
             };
             try
@@ -1759,6 +1785,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 {
                     Inventory.Entry(taskAis3AddAndModified).State = EntityState.Modified;
                     Inventory.SaveChanges();
+                    
                     return new ModelReturn<TaskAis3>("Обновили справочник задачи для заявки: " + taskAis3AddAndModified.IdTask, taskAis3);
                 }
                 Inventory.TaskAis3.Add(taskAis3AddAndModified);
@@ -1772,6 +1799,40 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             }
             return new ModelReturn<TaskAis3> ("При обновлении/добавлении данных 'Наименование задачи для заявки' по : " + taskAis3AddAndModified.IdTask + " произошла ошибка смотри log.txt");
 
+        }
+        /// <summary>
+        /// Добавление или редактирование категории телефонного справочника
+        /// </summary>
+        /// <param name="nameCategoryPhoneHeader">Категория телефонного справочника</param>
+        /// <returns></returns>
+        public ModelReturn<CategoryPhoneHeader> AddAndEditCategoryPhoneHeader(CategoryPhoneHeader nameCategoryPhoneHeader)
+        {
+            var nameCategoryPhoneHeaderAddAndModified = new CategoryPhoneHeader()
+            {
+                IdCategoryHeaders = nameCategoryPhoneHeader.IdCategoryHeaders,
+                NameHeaders = nameCategoryPhoneHeader.NameHeaders
+            };
+            try
+            {
+                if ((from CategoryPhoneHeaders in Inventory.CategoryPhoneHeaders
+                    where CategoryPhoneHeaders.IdCategoryHeaders ==
+                          nameCategoryPhoneHeaderAddAndModified.IdCategoryHeaders
+                    select new {CategoryPhoneHeaders}).Any())
+                {
+                    Inventory.Entry(nameCategoryPhoneHeaderAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<CategoryPhoneHeader>("Обновили справочник наименование Категория телефона: " + nameCategoryPhoneHeaderAddAndModified.IdCategoryHeaders, nameCategoryPhoneHeader);
+                }
+                Inventory.CategoryPhoneHeaders.Add(nameCategoryPhoneHeaderAddAndModified);
+                Inventory.SaveChanges();
+                nameCategoryPhoneHeader.IdCategoryHeaders = nameCategoryPhoneHeaderAddAndModified.IdCategoryHeaders;
+                return new ModelReturn<CategoryPhoneHeader>("Добавили новое наименование Категории телефона: " + nameCategoryPhoneHeaderAddAndModified.IdCategoryHeaders, nameCategoryPhoneHeader, nameCategoryPhoneHeaderAddAndModified.IdCategoryHeaders);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<CategoryPhoneHeader>("При обновлении/добавлении данных 'Категории телефона' по : " + nameCategoryPhoneHeaderAddAndModified.IdCategoryHeaders + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
@@ -1793,6 +1854,12 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             };
             try
             {
+                using (var contextEditIndex = new InventoryContext())
+                {
+                    contextEditIndex.Database.CommandTimeout = 120000;
+                    contextEditIndex.Database.ExecuteSqlCommand("declare @max int select @max=max(JournalAis3.IdJournal) from JournalAis3 if @max IS NULL SET @max = 0 DBCC CHECKIDENT ([JournalAis3], RESEED, @max)");
+                }
+
                 if ((from journalAis in Inventory.JournalAis3
                      where journalAis.IdJournal == journalAis3AddAndModified.IdJournal
                     select new { journalAis }).Any())
@@ -1811,6 +1878,47 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 Loggers.Log4NetLogger.Error(e);
             }
             return new ModelReturn<JournalAis3>("При обновлении/добавлении данных 'Наименование задачи для заявки' по : " + journalAis3AddAndModified.IdJournal + " произошла ошибка смотри log.txt");
+        }
+        /// <summary>
+        /// Обновление или добавление параметров для процесса
+        /// </summary>
+        /// <param name="eventProcess">Модель параметров для процесса</param>
+        /// <returns></returns>
+        public ModelReturn<EventProcess> AddAndEditEventProcess(EventProcess eventProcess)
+        {
+            var eventProcessAddAndModified = new EventProcess()
+            {
+                Id = eventProcess.Id,
+                NameProcess = eventProcess.NameProcess,
+                DayX = eventProcess.DayX,
+                HoursX = eventProcess.HoursX,
+                MinutesX = eventProcess.MinutesX,
+                ParametersEvent = eventProcess.ParametersEvent,
+                IsComplete = eventProcess.IsComplete,
+                DataStart =  eventProcess.DataStart,
+                DataFinish = eventProcess.DataFinish
+            };
+            try
+            {
+                if ((from EventProcess in Inventory.EventProcesses
+                     where EventProcess.Id == eventProcess.Id
+                    select new { EventProcess }).Any())
+                {
+                    Inventory.Entry(eventProcessAddAndModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+
+                    return new ModelReturn<EventProcess>("Обновили параметры для процессов: " + eventProcessAddAndModified.Id, eventProcess);
+                }
+                Inventory.EventProcesses.Add(eventProcessAddAndModified);
+                Inventory.SaveChanges();
+                eventProcess.Id = eventProcessAddAndModified.Id;
+                return new ModelReturn<EventProcess>("Добавили новые параметры для процессов " + eventProcessAddAndModified.Id, eventProcess, eventProcessAddAndModified.Id);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<EventProcess>("При обновлении/добавлении данных 'Параметры для процессов' по: " + eventProcessAddAndModified.Id + " произошла ошибка смотри log.txt");
         }
 
         /// <summary>
@@ -1842,6 +1950,45 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 }
             }
         }
+        /// <summary>
+        /// Сохранение данных в БД
+        /// </summary>
+        /// <param name="listPrintServer">Принтеры с PrintServer</param>
+        public void AddListSynchronizationPrintServer(ref List<SynchronizationPrintServer> listPrintServer)
+        {
+            using (var contextUpdate = new InventoryContext())
+            {
+                
+                foreach (var inventorySynchronizationPrintServer in contextUpdate.SynchronizationPrintServers)
+                {
+                    listPrintServer.ForEach(x =>
+                    {
+                        if (x.NamePrintServer != inventorySynchronizationPrintServer.NamePrintServer) return;
+                        x.IsSupportApplication = inventorySynchronizationPrintServer.IsSupportApplication;
+                        x.DateCreateSupportApplication = inventorySynchronizationPrintServer.DateCreateSupportApplication;
+                    });
+                }
+            }
+            using (var contextDelete = new InventoryContext())
+            {
+                //Удаляем старые записи 
+                contextDelete.Database.CommandTimeout = 120000;
+                contextDelete.Database.ExecuteSqlCommand("TRUNCATE TABLE SynchronizationPrintServer");
+                contextDelete.Database.ExecuteSqlCommand("DBCC CHECKIDENT ([SynchronizationPrintServer], RESEED, 1)");
+            }
+            Inventory.SynchronizationPrintServers.AddRange(listPrintServer);
+            Inventory.SaveChanges();
+        }
+        /// <summary>
+        /// Обновить Запись о принтере в реестре
+        /// </summary>
+        /// <param name="printServer">Запись о принтере</param>
+        public void UpdateSynchronizationPrintServer(SynchronizationPrintServer printServer)
+        {
+            Inventory.Entry(printServer).State = EntityState.Modified;
+            Inventory.SaveChanges();
+        }
+
         /// <summary>
         /// Загрузка STO
         /// </summary>
@@ -1884,7 +2031,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         /// <param name="isComplete">Завершен ли процесс или начат</param>
         public void IsProcessComplete(int idProcess, bool isComplete)
         {
-            var process = Inventory.IsProcessCompletes.FirstOrDefault(x => x.Id == idProcess);
+            var process = Inventory.EventProcesses.FirstOrDefault(x => x.Id == idProcess);
                 if (process != null)
                 {
                     process.IsComplete = isComplete;

@@ -82,7 +82,7 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
             {
                 using (var context = new InventoryContext())
                 {
-                    var isExistSystemUnit = context.Database.SqlQuery<object>($"Select * From SysBlock Where IdSysBlock = {systemUnit.IdSysBlock} and IdUser is null and IdStatus is null");
+                    var isExistSystemUnit = context.Database.SqlQuery<object>($"Select * From SysBlock Left Join Token on Token.IdSysBlock = SysBlock.IdSysBlock Where SysBlock.IdSysBlock = {systemUnit.IdSysBlock} and SysBlock.IdUser is null and SysBlock.IdStatus is null and Token.IdSysBlock is null");
                     if (isExistSystemUnit.Any())
                     {
                         HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
@@ -92,7 +92,7 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
                             "Произведено удаление!");
                         return new ModelReturn<SysBlock>("Системный блок удален!", systemUnit);
                     }
-                    return new ModelReturn<SysBlock>("Не возможно удалить системный блок! Есть привязки к пользователю или к статусу!", systemUnit, 1);
+                    return new ModelReturn<SysBlock>("Не возможно удалить системный блок! Есть привязки к пользователю или к статусу! Или к Токену ключу!", systemUnit, 1);
                 }
             }
             catch (Exception e)
@@ -241,7 +241,7 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
                         HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
                         DeleteModelDb(context, new Monitor() { IdMonitor = monitor.IdMonitor });
                         log.GenerateHistory(monitor.IdHistory, monitor.IdMonitor, "Монитор", idUser,
-                            $"Модель: {monitor.NameMonitor?.Name} Серийный номер: {monitor.SerNum} Инвентарный номер: {monitor.InventarNumMonitor}",
+                            $"Модель: {monitor.NameMonitor?.NameManufacturer} {monitor.NameMonitor?.NameModel} Серийный номер: {monitor.SerNum} Инвентарный номер: {monitor.InventarNumMonitor}",
                             "Произведено удаление!");
                         return new ModelReturn<Monitor>("Монитор удален!", monitor);
                     }

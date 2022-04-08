@@ -161,7 +161,26 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("расшифровка подписи", "16", JustificationValues.Center), "0", TableWidthUnitValues.Auto));
             table5.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.4)));
+
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Получил:"), "0", TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(report.Main.Received.UserPosition, "20", JustificationValues.Center), "0", TableWidthUnitValues.Auto,
+                "0", "0", TableVerticalAlignmentValues.Bottom, CellBorders.GenerateBorder()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto,
+                "0", "0", TableVerticalAlignmentValues.Bottom, CellBorders.GenerateBorder()));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(report.Main.Received.SmallName, "20", JustificationValues.Center), "0", TableWidthUnitValues.Auto,
+                "0", "0", TableVerticalAlignmentValues.Bottom, CellBorders.GenerateBorder()));
+            table5.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.8)));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("должность", "16", JustificationValues.Center), "0", TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("подпись", "16", JustificationValues.Center), "0", TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto));
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("расшифровка подписи", "16", JustificationValues.Center), "0", TableWidthUnitValues.Auto));
+            table5.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.4)));
+
+            cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("Утвердил:"), "0", TableWidthUnitValues.Auto));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(report.Main.Received.ChiefPosition, "20", JustificationValues.Center), "0", TableWidthUnitValues.Auto,
                 "0", "0", TableVerticalAlignmentValues.Bottom, CellBorders.GenerateBorder()));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto));
@@ -178,7 +197,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart(), "0", TableWidthUnitValues.Auto));
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("расшифровка подписи", "16", JustificationValues.Center), "0", TableWidthUnitValues.Auto));
             table5.Append(rows.GenerateRow(ref cellCollection, true, rows.FormulHeightRow(0.4)));
-            
+
             body.Append(table);
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart());
             body.Append(table2);

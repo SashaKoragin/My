@@ -15,14 +15,15 @@ using EfDatabaseParametrsModel;
 using EfDatabaseXsdInventoryAutorization;
 using EfDatabaseXsdMail;
 using EfDatabaseXsdSupportNalog;
-using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
-using SqlLibaryIfns.Inventory.ModelParametr;
 using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
+using ModelOther = EfDatabase.Inventory.Base.ModelOther;
 using Printer = EfDatabase.Inventory.Base.Printer;
 using ScanerAndCamer = EfDatabase.Inventory.Base.ScanerAndCamer;
 using SysBlock = EfDatabase.Inventory.Base.SysBlock;
 using Token = EfDatabase.Inventory.Base.Token;
 using User = EfDatabase.Inventory.Base.User;
+using OtherAll = EfDatabase.Inventory.Base.OtherAll;
+using ProizvoditelOther = EfDatabase.Inventory.Base.ProizvoditelOther;
 
 namespace TestIFNSLibary.Inventarka
 {
@@ -71,15 +72,6 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/Authorization", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<Autorization> Authorization(Autorization user);
-
-        /// <summary>
-        /// Выбор всех пользователей c SQL запроса
-        /// http://localhost:8182/Inventarka/SelectDb
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectDb", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-       Task<string> SelectAllUsers(ModelParametr model);
         /// <summary>
         /// Все отделы в БД
         /// http://localhost:8182/Inventarka/AllOtdels
@@ -526,7 +518,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditScaner?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<EfDatabase.Inventory.Base.ScanerAndCamer> AddAndEditScaner(EfDatabase.Inventory.Base.ScanerAndCamer scaner, string userIdEdit);
+        ModelReturn<ScanerAndCamer> AddAndEditScaner(ScanerAndCamer scaner, string userIdEdit);
         /// <summary>
         /// Добавление или редактирования серверного оборудования
         /// http://localhost:8182/Inventarka/AddAndEditServerEquipment
@@ -815,6 +807,7 @@ namespace TestIFNSLibary.Inventarka
         /// Удаление не актуальных пользователей
         /// </summary>
         /// <param name="user">Пользователь</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteUser?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
@@ -844,6 +837,7 @@ namespace TestIFNSLibary.Inventarka
         /// Удаление не актуальных мониторов
         /// </summary>
         /// <param name="monitor">Монитор</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteMonitor?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
@@ -853,6 +847,7 @@ namespace TestIFNSLibary.Inventarka
         /// Удаление не актуальных Принтеров
         /// </summary>
         /// <param name="printer">Принтер</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeletePrinter?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
@@ -862,6 +857,7 @@ namespace TestIFNSLibary.Inventarka
         /// Удаление не актуальных Сканеров или Камер
         /// </summary>
         /// <param name="scanner">Сканеров или Камера</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteScannerAndCamera?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
@@ -871,6 +867,7 @@ namespace TestIFNSLibary.Inventarka
         /// Удаление не актуальных МФУ
         /// </summary>
         /// <param name="mfu">МФУ</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteMfu?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
@@ -880,6 +877,7 @@ namespace TestIFNSLibary.Inventarka
         /// Удаление не актуальных ИБП
         /// </summary>
         /// <param name="blockPower">ИБП</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteBlockPower?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
@@ -889,6 +887,7 @@ namespace TestIFNSLibary.Inventarka
         /// Удаление не актуальных Коммутаторов
         /// </summary>
         /// <param name="switches">Коммутатор</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteSwitch?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
@@ -898,6 +897,7 @@ namespace TestIFNSLibary.Inventarka
         /// Удаление не актуальных Телефонов
         /// </summary>
         /// <param name="telephone">Телефон</param>
+        /// <param name="userIdEdit">Ун пользователя</param>
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteTelephone?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
@@ -1130,7 +1130,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditOtherAll?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<OtherAll> AddAndEditOtherAll(OtherAll otherAll, string userIdEdit);
+        ModelReturn<EfDatabase.Inventory.Base.OtherAll> AddAndEditOtherAll(OtherAll otherAll, string userIdEdit);
         /// <summary>
         /// http://localhost:8182/Inventarka/AddAndEditModelOther
         /// Добавление модели разного
@@ -1139,7 +1139,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditModelOther", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<ModelOther> AddAndEditModelOther(ModelOther modelOther);
+        ModelReturn<EfDatabase.Inventory.Base.ModelOther> AddAndEditModelOther(ModelOther modelOther);
         /// <summary>
         /// http://localhost:8182/Inventarka/AddAndEditTypeOther
         /// Добавление типа разного
@@ -1194,5 +1194,57 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllReportInventoryAndEpo", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<Stream> AllReportInventoryAndEpo(int[] idReport);
+
+        /// <summary>
+        /// Все параметры для процессов
+        /// http://localhost:8182/Inventarka/AllEventProcess
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllEventProcess", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllEventProcessParameters();
+
+        /// <summary>
+        /// Редактирование или добавление параметров для процесса
+        /// http://localhost:8182/Inventarka/AddAndEditEventProcess"
+        /// </summary>
+        /// <param name="eventProcessParameter">Параметры для процесса</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditEventProcess", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<EventProcess> AddAndEditEventProcess(EventProcess eventProcessParameter);
+
+        /// <summary>
+        /// Синхронизация с PrintServer
+        /// http://localhost:8182/Inventarka/ActualPrintServer
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ActualPrintServer", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> ActualPrintServer();
+
+        /// <summary>
+        /// Создание отчета статуса Серверов на работуспособность
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StatusIpServerOnline", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> StatusIpServerOnline();
+        /// <summary>
+        /// Категория телефонов модель для шапки справочника телефонов
+        /// http://localhost:8182/Inventarka/AllCategoryPhoneHeader
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllCategoryPhoneHeader", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllCategoryPhoneHeader();
+        /// <summary>
+        /// Редактирование или добавление категории для шапки справочника
+        /// http://localhost:8182/Inventarka/AddAndEditCategoryPhoneHeader
+        /// </summary>
+        /// <param name="categoryPhoneHeader">Параметры для справочника</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditCategoryPhoneHeader", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<CategoryPhoneHeader> AddAndEditCategoryPhoneHeader(CategoryPhoneHeader categoryPhoneHeader);
    }
 }
