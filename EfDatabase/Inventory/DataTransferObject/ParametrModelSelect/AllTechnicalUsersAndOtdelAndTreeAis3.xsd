@@ -38,7 +38,7 @@
 					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Имя пользователя</xs:documentation>
 				</xs:annotation>
@@ -207,16 +207,6 @@
 			<xs:attribute name="NameManufacturer" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Производитель монитора</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="NameModel">
-				<xs:annotation>
-					<xs:documentation>Модель монитора</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="Info">
-				<xs:annotation>
-					<xs:documentation>Дополнительная информация</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

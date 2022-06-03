@@ -185,7 +185,7 @@ namespace EfDatabase.MemoReport {
         
         private Orders ordersField;
         
-        private string nameField;
+        private string nameUserField;
         
         private string nameOtdelField;
         
@@ -218,12 +218,12 @@ namespace EfDatabase.MemoReport {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
         
@@ -453,18 +453,18 @@ namespace EfDatabase.MemoReport {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Executor {
         
-        private string nameField;
+        private string nameUserField;
         
         private string phoneField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
         

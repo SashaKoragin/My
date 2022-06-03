@@ -76,7 +76,7 @@
 			<xs:documentation>Кто формировал запрос</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="UserName" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Имя сформировавшего отчет</xs:documentation>
 				</xs:annotation>
@@ -103,7 +103,7 @@
 			<xs:documentation>Получатели</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="UserName" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Наименование Пользователя</xs:documentation>
 				</xs:annotation>
@@ -145,7 +145,7 @@
 			<xs:documentation>Тело отчета (тоесть суть)</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Наименование пользователя</xs:documentation>
 				</xs:annotation>

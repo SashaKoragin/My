@@ -6,6 +6,7 @@ using DocumentFormat.OpenXml.Packaging;
 using EfDatabase.Inventory.Base;
 using LibaryDocumentGenerator.ProgrammView.Excel.Library;
 using LibaryDocumentGenerator.ProgrammView.FullDocumentExcel;
+using File = System.IO.File;
 
 
 namespace LibaryDocumentGenerator.Documents.TemplateExcel

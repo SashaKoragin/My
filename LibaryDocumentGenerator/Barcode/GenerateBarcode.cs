@@ -44,7 +44,7 @@ namespace LibaryDocumentGenerator.Barcode
         /// <param name="path">Путь к сохранению</param>
         public void GenerateCode(ref Report report,string path)
         {
-            report.Main.Barcode.PathBarcode = path + report.Main.Received.UserName + WordConstant.FormatPng;
+            report.Main.Barcode.PathBarcode = path + report.Main.Received.NameUser + WordConstant.FormatPng;
             BarcodeWriter writer = new BarcodeWriter
             {
                 Format = BarcodeFormat.CODE_128,

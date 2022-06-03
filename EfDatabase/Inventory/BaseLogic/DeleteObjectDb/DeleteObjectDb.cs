@@ -9,7 +9,7 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
     /// <summary>
     /// Класс удаления объектов из БД
     /// </summary>
-   public class DeleteObjectDb
+   public class DeleteObjectDb : IDisposable
     {
         public InventoryContext Inventory { get; set; }
 
@@ -29,7 +29,7 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
             var usersDelete = new User()
             {
                 IdUser = user.IdUser,
-                Name = user.Name,
+                NameUser = user.NameUser,
                 SmallName = user.SmallName,
                 IdOtdel = user.IdOtdel,
                 IdPosition = user.IdPosition,
@@ -182,7 +182,7 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
                         
                         DeleteModelDb(context, new Token() { IdToken = token.IdToken });
                         log.GenerateHistory(token.IdHistory, token.IdToken, "Токен", idUser,
-                            $"Пользователь: {token.User?.Name}; Серийный номер: {token.SerNum} Комментарий: {token.Coment}; Статус: {token.Statusing?.Name}",
+                            $"Пользователь: {token.User?.NameUser}; Серийный номер: {token.SerNum} Комментарий: {token.Coment}; Статус: {token.Statusing?.NameStatus}",
                             "Произведено удаление!");
                         return new ModelReturn<Token>("Токен удалён!", token);
                     }
@@ -241,7 +241,7 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
                         HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
                         DeleteModelDb(context, new Monitor() { IdMonitor = monitor.IdMonitor });
                         log.GenerateHistory(monitor.IdHistory, monitor.IdMonitor, "Монитор", idUser,
-                            $"Модель: {monitor.NameMonitor?.NameManufacturer} {monitor.NameMonitor?.NameModel} Серийный номер: {monitor.SerNum} Инвентарный номер: {monitor.InventarNumMonitor}",
+                            $"Модель: {monitor.NameMonitor?.NameManufacturer} {monitor.NameMonitor?.NameManufacturer} Серийный номер: {monitor.SerNum} Инвентарный номер: {monitor.InventarNumMonitor}",
                             "Произведено удаление!");
                         return new ModelReturn<Monitor>("Монитор удален!", monitor);
                     }
@@ -455,6 +455,24 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
         {
             context.Entry(modelDelete).State = EntityState.Deleted;
             context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Inventory?.Dispose();
+                Inventory = null;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
         }
     }
 }

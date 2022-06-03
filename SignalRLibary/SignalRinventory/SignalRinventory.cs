@@ -349,7 +349,7 @@ namespace SignalRLibary.SignalRinventory
         public static void SubscribeNameMonitor(NameMonitor nameMonitor)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
-            Loggers.Log4NetLogger.Info(new Exception("Модель Наименование монитора рассылка пошла: " + nameMonitor.NameModel));
+            Loggers.Log4NetLogger.Info(new Exception("Модель Наименование монитора рассылка пошла: " + nameMonitor.NameManufacturer));
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeNameMonitor(json.JsonLibaryIgnoreDate(nameMonitor));
         }
@@ -429,7 +429,7 @@ namespace SignalRLibary.SignalRinventory
         public static void SubscribeStatusing(Statusing nameStatus)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
-            Loggers.Log4NetLogger.Info(new Exception("Модель Статуса рассылка пошла: " + nameStatus.Name));
+            Loggers.Log4NetLogger.Info(new Exception("Модель Статуса рассылка пошла: " + nameStatus.NameStatus));
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeStatusing(json.JsonLibaryIgnoreDate(nameStatus));
         }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
@@ -7,13 +8,14 @@ using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabase.MemoReport;
+using EfDatabase.ModelAksiok.Aksiok;
 using EfDatabase.ReportCard;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdInventoryAutorization;
-using EfDatabaseXsdMail;
+using EfDatabase.ReportXml.XsdMail;
 using EfDatabaseXsdSupportNalog;
 using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
 using ModelOther = EfDatabase.Inventory.Base.ModelOther;
@@ -298,7 +300,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllNameMonitor", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> NameMonitor();
+        Task<string> AllNameMonitor();
 
         /// <summary>
         /// Все CopySave
@@ -1176,6 +1178,15 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/UpdateDataSto?idProcess={idProcess}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         void UpdateDataSto(int idProcess);
+
+        /// <summary>
+        /// Актуализация данных с АКСИОК
+        /// http://localhost:8182/Inventarka/UpdateAksiok?idProcess=5?userLogin=login?passwordUser=password
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/UpdateAksiok?idProcess={idProcess}&userLogin={userLogin}&passwordUser={passwordUser}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        void UpdateAksiok(int idProcess, string userLogin, string passwordUser);
         /// <summary>
         /// Все отчеты из БД для выполнения сравнения ЭПО и Инвентаризации
         /// http://localhost:8182/Inventarka/GetModelReportAnalysisEpo
@@ -1246,5 +1257,56 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditCategoryPhoneHeader", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn<CategoryPhoneHeader> AddAndEditCategoryPhoneHeader(CategoryPhoneHeader categoryPhoneHeader);
+
+        /// <summary>
+        /// Вытащить дополнительные характеристики объекта АКСИОК
+        /// http://localhost:8182/Inventarka/SelectModelCharacteristicJson?idModel={idModel}
+        /// </summary>
+        /// <param name="idModel">Ун модели</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectModelCharacteristicJson?idModel={idModel}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<EfDatabase.ModelAksiok.DtoAksiok.ValueCharacteristicJson> SelectModelCharacteristicJson(int idModel);
+        /// <summary>
+        /// Проверка модели в АКСИОК на правомерность свершения действий Редактирования/Добавление
+        /// http://localhost:8182/Inventarka/AksiokAddAndEditModelValidation
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AksiokAddAndEditModelValidation", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<AksiokAddAndEdit> AksiokAddAndEditModelValidation(AksiokAddAndEdit aksiokAddAndEdit);
+        /// <summary>
+        /// Вытащить все категории из БД
+        /// http://localhost:8182/Inventarka/SelectAllFullСategories
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllFullСategories", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SelectAllFullСategories();
+        /// <summary>
+        /// Вытащить все типы из БД
+        /// http://localhost:8182/Inventarka/SelectAllEquipmentType
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllEquipmentType", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SelectAllEquipmentType();
+        /// <summary>
+        /// Вытащить все производители из БД
+        /// http://localhost:8182/Inventarka/SelectAllProducer
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllProducer", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SelectAllProducer();
+        /// <summary>
+        /// Вытащить все модели из БД
+        /// http://localhost:8182/Inventarka/SelectAllEquipmentModel
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllEquipmentModel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SelectAllEquipmentModel();
+
    }
 }

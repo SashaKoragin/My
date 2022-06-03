@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ModelAksiok" type="ModelAksiok">
+		<xs:annotation>
+			<xs:documentation>Модель данных АКСИОК</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ModelAksiok">
+		<xs:annotation>
+			<xs:documentation>Модель данных АКСИОК</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ModelDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ModelDocument" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="EpoDocument" minOccurs="0"/>
+			<xs:element ref="ValueCharacteristicJson" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ModelDocumentType" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Модель документов типы</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Soun" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>КОД СОУН</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DocumentType" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="KindEquipmentName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Вид оборудования/ПО</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CategoriesTruName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Атрибут ТРУ (Тип оборудования)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Number" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Author" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Автор документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanDelete" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Атрибут удаления</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AgencyName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование учреждения</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CreateDate" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModelDocument" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Модели оборудования в данном документе</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FileId"/>
+				<xs:element ref="ExpertiseFileId"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Producer" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Кто выпускал</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentModel" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Модель оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerialNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentState" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Статус оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentStateSto" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Статус СТО</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsKit" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Комплект</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ExpertiseStatus" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Статус Экспертизы</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsTruInSettings" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Параметр настроек</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Id" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Ун файла</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EpoDocument" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Документ ЭПО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EquipmentType"/>
+				<xs:element ref="Producer"/>
+				<xs:element ref="EquipmentModel"/>
+				<xs:element ref="ActDate"/>
+				<xs:element ref="DateOfStatement"/>
+				<xs:element ref="File"/>
+				<xs:element ref="ExpertiseFile"/>
+				<xs:element ref="ExploitationStartYear"/>
+				<xs:element ref="DeliveryContract"/>
+				<xs:element ref="ContractOnSto"/>
+				<xs:element ref="Guarantee"/>
+				<xs:element ref="BoardsNumber"/>
+				<xs:element ref="FreeBoardsNumber"/>
+				<xs:element ref="InternalAnalogNumber"/>
+				<xs:element ref="InternalDigitNumber"/>
+				<xs:element ref="AdminsCount"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун документа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EpoDocument" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун объекта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ComputerName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerialNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Identifier" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Идентификатор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsKit" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Комплект</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentStateSto" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Статус СТО</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentState" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Статус Экспертизы</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ActNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер акта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ExpertiseStatus" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Статус Экспертизы</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IndividualServiceNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Индивидуальный сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NotOnBalance" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Что то с балансом</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="YearOfIssue" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Год выпуска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Comment" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Комментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceStatus" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сервисный статус</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OsActualVersion" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия фактической ОС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ActualOsVersion" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Актуальная версия ОС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Appointment" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Назначение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeOfUse" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип использования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Division" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Отдел</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ModelInDeliveryAccordance" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Модель соответствия отправки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Building" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Участок (Здание)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FloorLocation" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Расположение. Этаж</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomLocation" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Расположение. Комната</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PsVersion" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия ПС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAddress" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>IP адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeOfAnalogConnection" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип аналогового подключения городской ввод</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeOfDigitConnection" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип цифрового подключения городской ввод</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="KeyNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер ключа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RequiresReplacement" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Требует замены</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EquipmentType" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Справочник тип оборудования</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StartDate" minOccurs="0"/>
+				<xs:element ref="EndDate" minOccurs="0"/>
+				<xs:element ref="Producer"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Code" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Код оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Comment" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Комментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StartDate" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation>Дата начала</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Producer" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Справочник производителя</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StartDate" minOccurs="0"/>
+				<xs:element ref="EndDate" minOccurs="0"/>
+				<xs:element ref="EquipmentModel"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун производителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Code" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Код оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Производитель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EquipmentModel" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Справочник моделей</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="StartDate" minOccurs="0"/>
+				<xs:element ref="EndDate" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Code" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Код модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ActDate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата акта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateOfStatement" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата утверждения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="File" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Файл акта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Id"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ExpertiseFile" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Файл экспертизы</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Id"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ExploitationStartYear" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Год ввода в эксплуатацию</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DeliveryContract" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Справочник контрактов</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Number" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContractDate" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Executor" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Выполневший контракт</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContractOnSto" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Справочник контрактов СТО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Number" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContractDate" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Executor" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Исполнитель контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ValueCharacteristicJson" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Атрибуты оборудования ЭПО</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="CpuCount"/>
+				<xs:element ref="CoreCount"/>
+				<xs:element ref="HddCount"/>
+				<xs:element ref="BoardsNumber"/>
+				<xs:element ref="FreeBoardsNumber"/>
+				<xs:element ref="InternalAnalogNumber"/>
+				<xs:element ref="InternalDigitNumber"/>
+				<xs:element ref="AdminsCount"/>
+				<xs:element ref="Guarantee"/>
+				<xs:element ref="HddSize"/>
+				<xs:element ref="NetworkAdapterSpeed"/>
+				<xs:element ref="TotalDiskSpaceGb"/>
+				<xs:element ref="RamSize"/>
+				<xs:element ref="CpuFrequencyMhz"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун объекта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NotOnBalance" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Не на балансе</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RequiresReplacement" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Требует замены</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Appointment" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Назначение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="VirtualizationEnvironment" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Среда виртуализации</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Building" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Участок (Здание)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FloorLocation" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Расположение. Этаж</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RoomLocation" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Расположение. Комната</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Room" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Комната</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Division" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Отдел</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ActualOsVersion" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Актуальная версия ОС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OsActualVersion" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия фактической ОС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ZagsName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование загса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ZagsAddress" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Адрес загса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeOfUse" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип использования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ModelInDeliveryAccordance" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Модель соответствия отправки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TransferContractNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер трансфера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PsVersion" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Версия ПС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NetBiosName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сетевое имя (NetBIOS)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAddress" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>IP адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AdditionalIPs" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Дополнительные IP адреса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CpuType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип процессора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RamType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>ОЗУ (тип)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CdOrDvd" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>CD/DVD</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Fdd" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>FDD</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Raid" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>RAID</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HddType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип жесткого диска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NetworkAdapter" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сетевая карта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ConnectedPcInventoryNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер ПК, к которому подключен</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ConnectedUpsInventoryNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер ИБП, к которому подключен</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DisplayInventoryNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DisplayServiceNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DisplayBrand" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Монитор, марка</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DisplayType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип монитора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DisplaySize" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Размер экрана</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DisplayMaxResolution" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Максимальное разрешение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeOfAnalogConnection" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип аналогового подключения городской ввод</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeOfDigitConnection" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип цифрового подключения городской ввод</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="KeyNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер ключа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StreamerBrand" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Марка стримера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="StreamerCartridgeMark" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Маркировка картриджей стримера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OperatingSystem" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Операционная система</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServicePack" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сервис пак</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OfficeSuite" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Офисный пакет</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Fio" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Фамилия И.О.:</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ResponsiblePerson" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Ответственный</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Description" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MacAddress" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>МАК Адресс</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="YearOfIssue" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Год выпуска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ComputerName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Имя компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Comments" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Комментарий</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SupplyContract" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Контракт</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContractSto" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Контракт СТО</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerialNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MailServer" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сервер почты</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FirewallMailServer" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сервер Файлвола</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FirewallForVks" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Файлвол ВКС</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CpuCount" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Количество процессоров</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CoreCount" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Количество ядер</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CpuFrequencyMhz" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Частота процессора, МГц</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RamSize" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>ОЗУ (размер)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TotalDiskSpaceGb" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Общее дисковое пространство, Gb</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="HddCount" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Количество HDD</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="HddSize" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Объем жесткого диска</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BoardsNumber" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Кол-во плат</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FreeBoardsNumber" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Кол-во свободных плат</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NetworkAdapterSpeed" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Скорость сетевой карты</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InternalAnalogNumber" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Кол-во внутр абон аналог</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InternalDigitNumber" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Кол-во внутр абон цифровых</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AdminsCount" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Численность администраторов УАТС</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Guarantee" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Гарантия</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:dateTime"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StartDate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата начала</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EndDate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата окончания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FileId" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Ун файла</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ExpertiseFileId" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Ун файла</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AllModel">
+		<xs:annotation>
+			<xs:documentation>Полная модель Аксиока для web сайта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EquipmentType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

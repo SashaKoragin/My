@@ -59,7 +59,7 @@
 			<xs:sequence>
 				<xs:element ref="Orders" minOccurs="0"/>
 			</xs:sequence>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Имя пользователя</xs:documentation>
 				</xs:annotation>
@@ -150,7 +150,7 @@
 			<xs:documentation>Исполнитель</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Имя пользователя</xs:documentation>
 				</xs:annotation>

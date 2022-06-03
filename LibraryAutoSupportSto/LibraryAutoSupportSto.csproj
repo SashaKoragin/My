@@ -35,6 +35,10 @@
     <Reference Include="HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>C:\Nuget\HtmlAgilityPack.1.11.24\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Nuget\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aksiok\AksiokPostGetSystem\AksiokPostGet.cs" />
+    <Compile Include="Aksiok\AksiokPostGetSystem\ModelParametersAksiok.cs" />
     <Compile Include="PassportSto\PassportStoPostGet\ParametersStoPostGet.cs" />
     <Compile Include="PassportSto\PassportStoPostGet\PassportStoPostGet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,7 +68,13 @@
       <Project>{578cf45e-310b-4e2e-9c94-5a9f16b736ae}</Project>
       <Name>EfDatabase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Loggers\Loggers.csproj">
+      <Project>{9bac233e-ed3d-493e-b7f6-f26f8091968d}</Project>
+      <Name>Loggers</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Aksiok\AksiokPostUpdeteSystem\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

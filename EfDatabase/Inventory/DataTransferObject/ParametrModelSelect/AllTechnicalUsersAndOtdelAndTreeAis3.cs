@@ -96,7 +96,7 @@ namespace EfDatabaseParametrsModel {
         
         private bool idUserFieldSpecified;
         
-        private string nameField;
+        private string nameUserField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Monitors")]
@@ -231,12 +231,12 @@ namespace EfDatabaseParametrsModel {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
     }
@@ -348,10 +348,6 @@ namespace EfDatabaseParametrsModel {
         
         private string nameManufacturerField;
         
-        private string nameModelField;
-        
-        private string infoField;
-        
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string NameManufacturer {
@@ -360,28 +356,6 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.nameManufacturerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameModel {
-            get {
-                return this.nameModelField;
-            }
-            set {
-                this.nameModelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Info {
-            get {
-                return this.infoField;
-            }
-            set {
-                this.infoField = value;
             }
         }
     }

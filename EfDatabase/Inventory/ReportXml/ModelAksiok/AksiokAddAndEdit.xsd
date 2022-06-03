@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="AksiokAddAndEdit" type="AksiokAddAndEdit">
+		<xs:annotation>
+			<xs:documentation>Модель добавления или редактирования записи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AksiokAddAndEdit">
+		<xs:annotation>
+			<xs:documentation>Модель добавления или редактирования записи</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ParametersModel"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ParametersModel">
+		<xs:annotation>
+			<xs:documentation>Модель параметров</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="IdFullCategoria"/>
+			</xs:sequence>
+			<xs:attribute name="ModelRequest" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Модель Add or Edit</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер для сопоставления</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CodeError" type="xs:int" default="0">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ErrorServer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ошибка сервера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IdFullCategoria" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Ун категории</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

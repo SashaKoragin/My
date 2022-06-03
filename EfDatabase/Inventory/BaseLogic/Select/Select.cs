@@ -10,6 +10,7 @@ using EfDatabaseParametrsModel;
 using EfDatabaseXsdQrCodeModel;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 using FullModel = EfDatabase.Inventory.Base.FullModel;
+using SysBlock = EfDatabase.Inventory.Base.SysBlock;
 
 
 namespace EfDatabase.Inventory.BaseLogic.Select
@@ -141,6 +142,8 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             }
         }
 
+
+
         /// <summary>
         /// Запрос всех должностей
         /// </summary>
@@ -203,7 +206,24 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string SysBloks()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.SysBlocks.Where(x => !x.WriteOffSign));
+            var sysBlock = Inventory.SysBlocks.Where(x => !x.WriteOffSign).ToArray();
+            DeleteChief(ref sysBlock);
+            return json.JsonLibaryIgnoreDate(sysBlock);
+        }
+
+        private void DeleteChief(ref SysBlock[] sys)
+        {
+            foreach (var sy in sys)
+            {
+                if (sy.User != null)
+                {
+                    sy.User.Otdel.User = null;
+                    if (sy.User.Telephon != null)
+                    {
+                        sy.User.Telephon.User = null;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -359,7 +379,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// Запрос всех наименований монитора
         /// </summary>
         /// <returns></returns>
-        public string NameMonitor()
+        public string AllNameMonitor()
         {
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.NameMonitors);
@@ -650,7 +670,42 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.EventProcesses, "dd.MM.yyyy HH:mm");
         }
-
+        /// <summary>
+        /// Вытаскиваем все категории
+        /// </summary>
+        /// <returns></returns>
+        public string AllFullСategories()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<FullСategory>("Select * From FullСategory"));
+        }
+        /// <summary>
+        /// Вытаскиваем все типы
+        /// </summary>
+        /// <returns></returns>
+        public string AllEquipmentType()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<EquipmentType>("Select * From EquipmentType"));
+        }
+        /// <summary>
+        /// Вытаскиваем все производители
+        /// </summary>
+        /// <returns></returns>
+        public string AllProducer()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<Producer>("Select * From Producer"));
+        }
+        /// <summary>
+        /// Вытаскиваем все модели
+        /// </summary>
+        /// <returns></returns>
+        public string AllEquipmentModel()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<EquipmentModel>("Select * From EquipmentModel"));
+        }
         /// <summary>
         /// Dispose
         /// </summary>

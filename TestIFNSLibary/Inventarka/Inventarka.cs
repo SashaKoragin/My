@@ -14,19 +14,21 @@ using EfDatabase.Inventory.MailLogicLotus;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabase.Inventory.SqlModelSelect;
 using EfDatabase.MemoReport;
+using EfDatabase.ModelAksiok.Aksiok;
 using EfDatabase.ReportCard;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
 using EfDatabaseParametrsModel;
 using EfDatabaseXsdInventoryAutorization;
-using EfDatabaseXsdMail;
+using EfDatabase.ReportXml.XsdMail;
 using EfDatabaseXsdQrCodeModel;
 using EfDatabaseXsdSupportNalog;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
 using LibaryDocumentGenerator.Documents.TemplateExcel;
 using LibaryXMLAuto.ReadOrWrite;
+using LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem;
 using LibraryAutoSupportSto.PassportSto.PassportStoPostGet;
 using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
@@ -36,6 +38,7 @@ using LibraryAutoSupportSto.Support.SupportPostGet;
 using SqlLibaryIfns.PingIp;
 using BlockPower = EfDatabase.Inventory.Base.BlockPower;
 using CopySave = EfDatabase.Inventory.Base.CopySave;
+using File = System.IO.File;
 using FullModel = EfDatabase.Inventory.Base.FullModel;
 using FullProizvoditel = EfDatabase.Inventory.Base.FullProizvoditel;
 using Kabinet = EfDatabase.Inventory.Base.Kabinet;
@@ -71,7 +74,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllOtdels()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.DepartmentAll());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.DepartmentAll();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -91,7 +99,9 @@ namespace TestIFNSLibary.Inventarka
                     {
                         if (context.ValidateCredentials(user.Login, user.Password))
                         {
-                            return auto.Identification(user);
+                            var model = auto.Identification(user);
+                            auto.Dispose();
+                            return model;
                         }
 
                         user.ErrorAutorization = "Не правильный логин/пароль!!!";
@@ -111,7 +121,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllActualsProcedureUsers()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.ActualsUsersKladr());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.ActualsUsersKladr();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -130,7 +145,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeUser(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -150,7 +165,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribePrinter(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -170,7 +185,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSwithe(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -190,7 +205,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeScanerAndCamer(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -211,7 +226,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeServerEquipment(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -229,7 +244,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSeverEquipment(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -248,7 +263,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeManufacturerSeverEquipment(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -261,7 +276,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTypeServer(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -280,7 +295,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMfu(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -300,7 +315,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSysBlok(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -318,7 +333,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOtdel(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -338,7 +353,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMonitor(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -349,7 +364,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<RuleUsers[]> RuleAndUsers(int idUser)
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllRuleUser(idUser));
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllRuleUser(idUser);
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -359,7 +379,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> GetHoliday()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.GetHolidays());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.GetHolidays();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -378,7 +403,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeRbHoliday(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -394,6 +419,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeleteHoliday(holidays,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteHoliday(model);
+            delete.Dispose();
             return model;
         }
 
@@ -430,7 +456,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOrganization(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -450,7 +476,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDepartmentCase(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -470,7 +496,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDepartmentRegulations(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -481,7 +507,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<Organization> SettingOrganization()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.SettingOrganization());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.SettingOrganization();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -491,7 +522,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> SettingDepartmentCase()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.SettingDepartmentCase());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.SettingDepartmentCase();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -501,7 +537,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> SettingDepartmentRegulations()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.SettingDepartmentRegulations());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.SettingDepartmentRegulations();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -511,7 +552,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllUsers(AllUsersFilters filterActual)
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.UsersAll(filterActual));
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.UsersAll(filterActual);
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -521,7 +567,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllRules()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.RuleAll());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.RuleAll();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -532,7 +583,12 @@ namespace TestIFNSLibary.Inventarka
         {
 
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.PositionUsers());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.PositionUsers();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -542,7 +598,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllPrinters()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Printers());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Printers();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -552,7 +613,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllModelSwithes()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.ModelSwitch());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.ModelSwitch();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -562,7 +628,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllSwithes()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Swithes());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Swithes();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -572,7 +643,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllScaners()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Scaner());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Scaner();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -582,7 +658,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllMfu()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Mfu());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Mfu();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -592,7 +673,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllSysBlok()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.SysBloks());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.SysBloks();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -602,7 +688,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllMonitors()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Monitors());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Monitors();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -612,7 +703,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllOtherAll()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.OtherAll());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.OtherAll();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -622,7 +718,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllModelOther()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllModelOther());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllModelOther();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -632,7 +733,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllTypeOther()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllTypeOther());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllTypeOther();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -642,7 +748,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllProizvoditelOther()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllProizvoditelOther());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllProizvoditelOther();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -652,7 +763,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> CopySave()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.CopySave());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.CopySave();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -662,7 +778,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> Proizvoditel()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Proizvoditel());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Proizvoditel();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -672,7 +793,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> Model()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Model());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Model();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -682,7 +808,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> Kabinet()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Kabinet());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Kabinet();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -692,7 +823,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> Statusing()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Status());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Status();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -702,17 +838,27 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> NameSysBlock()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.NameSysBlock());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.NameSysBlock();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
         /// загрузка всех производителей мониторов
         /// </summary>
         /// <returns></returns>
-        public async Task<string> NameMonitor()
+        public async Task<string> AllNameMonitor()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.NameMonitor());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllNameMonitor();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -723,7 +869,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<ModelSelect> GenerateSqlSelect(ModelSelect model)
         {
             SelectSql select = new SelectSql();
-            return await Task.Factory.StartNew(() => select.SqlSelect(model));
+            return await Task.Factory.StartNew(() =>
+            {
+                var models = select.SqlSelect(model);
+                select.Dispose();
+                return models;
+            });
         }
 
         /// <summary>
@@ -744,6 +895,7 @@ namespace TestIFNSLibary.Inventarka
                     invoice.CreateDocument(parametersService.Report,
                         (EfDatabaseTelephoneHelp.TelephoneHelp) selectfull.GenerateSchemeXsdSql<string, string>(
                             telephonehelper.LogicaSelect), null);
+                    select.Dispose();
                     return invoice.FileArray();
                 });
             }
@@ -800,6 +952,7 @@ namespace TestIFNSLibary.Inventarka
                         parametersService.Report); //Генерит Штрихкод на основе раскладки БД
                     bookAccounting.CreateDocument(parametersService.Report, book, null);
                     File.Delete(book.BareCodeBook.FullPathSave);
+                    select.Dispose();
                     return bookAccounting.FileArray();
                 });
             }
@@ -862,7 +1015,9 @@ namespace TestIFNSLibary.Inventarka
         public string DeleteDocument(int iddoc)
         {
             AddObjectDb delete = new AddObjectDb();
-            return delete.DeleteDocument(iddoc);
+            var model = delete.DeleteDocument(iddoc);
+            delete.Dispose();
+            return model;
         }
 
         /// <summary>
@@ -873,7 +1028,9 @@ namespace TestIFNSLibary.Inventarka
         public Stream LoadDocument(int iddoc)
         {
             AddObjectDb selectdocument = new AddObjectDb();
-            return selectdocument.LoadDocuments(iddoc);
+            var model = selectdocument.LoadDocuments(iddoc);
+            selectdocument.Dispose();
+            return model;
         }
 
         /// <summary>
@@ -884,7 +1041,9 @@ namespace TestIFNSLibary.Inventarka
         public Stream LoadBook(int iddoc)
         {
             AddObjectDb selectdocument = new AddObjectDb();
-            return selectdocument.LoadBook(iddoc);
+            var model = selectdocument.LoadBook(iddoc);
+            selectdocument.Dispose();
+            return model;
         }
 
 
@@ -940,7 +1099,12 @@ namespace TestIFNSLibary.Inventarka
                 SqlConnectionType sql = new SqlConnectionType();
                 SelectImns selectFrames = new SelectImns();
                 var isActualizationUser = sql.XmlString(parametersService.ConnectImns51, selectFrames.ActualUsers);
-                return await Task.Factory.StartNew(() => select.ActualUserModel(isActualizationUser));
+                return await Task.Factory.StartNew(() =>
+                {
+                    var model = select.ActualUserModel(isActualizationUser);
+                    select.Dispose();
+                    return model;
+                });
             }
             catch (Exception e)
             {
@@ -959,7 +1123,12 @@ namespace TestIFNSLibary.Inventarka
             try
             {
                 SelectSql select = new SelectSql();
-                return await Task.Factory.StartNew(() => select.ActualIp());
+                return await Task.Factory.StartNew(() =>
+                {
+                    var model = select.ActualIp();
+                    select.Dispose();
+                    return model;
+                });
             }
             catch (Exception e)
             {
@@ -975,7 +1144,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> Telephon()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Telephon());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Telephon();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -985,7 +1159,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> TypeServer()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.TypeServer());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.TypeServer();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -995,7 +1174,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> BlockPower()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.BlockPower());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.BlockPower();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1005,7 +1189,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> ServerEquipment()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.ServerEquipment());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.ServerEquipment();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1015,7 +1204,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> ModelSeverEquipment()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.ModelSeverEquipment());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.ModelSeverEquipment();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1025,7 +1219,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> GetResourceIt()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.GetResourceIt());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.GetResourceIt();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1035,7 +1234,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> GetTaskAis3()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.GetTaskAis3());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.GetTaskAis3();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1045,7 +1249,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> GetJournalAis3()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.GetJournalAis3());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.GetJournalAis3();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1062,7 +1271,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeResourceIt(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1080,7 +1289,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTaskAis3(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1099,7 +1308,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeJournalAis3(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1110,7 +1319,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> ManufacturerSeverEquipment()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.ManufacturerSeverEquipment());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.ManufacturerSeverEquipment();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1120,7 +1334,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> Supply()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.Supply());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.Supply();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1130,7 +1349,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> ModelBlockPower()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.ModelBlockPower());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.ModelBlockPower();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1140,7 +1364,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> ProizvoditelBlockPower()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.ProizvoditelBlockPower());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.ProizvoditelBlockPower();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1159,7 +1388,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTelephone(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1179,7 +1408,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeBlockPower(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1192,7 +1421,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameSysBlock(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1206,7 +1435,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeNameMonitor(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1219,7 +1448,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelBlockPower(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1233,7 +1462,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelBlockPower(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1251,7 +1480,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeSupply(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1264,7 +1493,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusing(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1277,7 +1506,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeKabinet(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1290,7 +1519,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullModel(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1303,7 +1532,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeClassification(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1323,7 +1552,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeOtherAll(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1341,7 +1570,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelOther(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1359,7 +1588,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeTypeOther(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1377,7 +1606,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeProizvoditelOther(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1392,6 +1621,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeleteOtherAll(otherAll,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteOtherAll(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1404,7 +1634,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeFullProizvoditel(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1417,14 +1647,19 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeCopySave(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
         public async Task<string> AllClasification()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllClasification());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllClasification();
+                auto.Dispose();
+                return model;
+            });
         }
 
         public ModelReturn<EfDatabase.Inventory.Base.ModelSwithe> AddAndEditModelSwith(EfDatabase.Inventory.Base.ModelSwithe modelswith)
@@ -1436,7 +1671,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelSwithe(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1451,6 +1686,7 @@ namespace TestIFNSLibary.Inventarka
             DeleteObjectDb delete = new DeleteObjectDb();
             var model = delete.DeleteUser(user, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteUser(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1466,6 +1702,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeleteSystemUnit(sysBlock,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSystemUnit(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1480,6 +1717,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeleteServerEquipment(serverEquipment,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteServerEquipment(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1495,6 +1733,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeleteMonitor(monitor,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMonitor(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1510,6 +1749,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeletePrinter(printer,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeletePrinter(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1525,6 +1765,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeleteScannerAndCamera(scanner,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteScannerAndCamera(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1539,6 +1780,7 @@ namespace TestIFNSLibary.Inventarka
             DeleteObjectDb delete = new DeleteObjectDb();
             var model = delete.DeleteMfu(mfu, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteMfu(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1554,6 +1796,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeleteBlockPower(blockPower,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteBlockPower(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1569,6 +1812,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeleteSwitch(switches,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteSwitch(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1584,6 +1828,7 @@ namespace TestIFNSLibary.Inventarka
             var model = delete.DeleteTelephone(telephone,
                 SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteTelephone(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1595,7 +1840,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> VisibilityBodyMail(WebMailModel model)
         {
             MailLogicLotus mail = new MailLogicLotus();
-            return await Task.Factory.StartNew(() => mail.ReturnMailBody(model));
+            return await Task.Factory.StartNew(() =>
+            {
+                var models = mail.ReturnMailBody(model);
+                mail.Dispose();
+                return models;
+            });
         }
 
         /// <summary>
@@ -1606,7 +1856,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<Stream> OutputMail(WebMailModel model)
         {
             MailLogicLotus mail = new MailLogicLotus();
-            return await Task.Factory.StartNew(() => mail.OutputMail(model));
+            return await Task.Factory.StartNew(() =>
+            {
+                var models = mail.OutputMail(model);
+                mail.Dispose();
+                return models;
+            });
         }
 
         /// <summary>
@@ -1617,7 +1872,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> DeleteMail(WebMailModel model)
         {
             MailLogicLotus mail = new MailLogicLotus();
-            return await Task.Factory.StartNew(() => mail.DeleteMail(model));
+            return await Task.Factory.StartNew(() =>
+            {
+                var models = mail.DeleteMail(model);
+                mail.Dispose();
+                return models;
+            });
         }
 
         /// <summary>
@@ -1627,7 +1887,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllMailIdentifies()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllMailIdentifier());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllMailIdentifier();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1637,7 +1902,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllMailGroups()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllMailGroup());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllMailGroup();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1653,7 +1923,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailIdentifier(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1670,7 +1940,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelMailGroups(model.Model);
             }
-
+            add.Dispose();
             return model;
         }
 
@@ -1681,7 +1951,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllTemplateSupport()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllTemplate());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllTemplate();
+                auto.Dispose();
+                return model;
+            });
         }
 
 
@@ -1750,7 +2025,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> IsCheckStatusNull(AllTechnic allTechnical)
         {
             SelectSql selectSql = new SelectSql();
-            return await Task.Factory.StartNew(() => selectSql.CheckStatus(allTechnical));
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = selectSql.CheckStatus(allTechnical);
+                selectSql.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1778,12 +2058,13 @@ namespace TestIFNSLibary.Inventarka
                                               $"Инв.: {x.InventarNum}\r\n" +
                                               $"Сервис.: {x.ServiceNum}\r\n" +
                                               $"Kaб.: {x.NumberKabinet}\r\n" +
-                                              $"User: {x.Name}";
+                                              $"User: {x.NameUser}";
                         x.Coment = qrCode.GenerateQrCode(parametersService.Report + i, templateContent);
                         i++;
                     });
                     sticker.CreateDocument(parametersService.Report + "QrCodeOffice", technical);
                     technical.Select(x => x.Coment).ToList().ForEach(File.Delete);
+                    auto.Dispose();
                     return sticker.FileArray();
                 });
             }
@@ -1818,6 +2099,7 @@ namespace TestIFNSLibary.Inventarka
                             x.NumberKabinet));
                     stickerQrOffice.CreateDocument(parametersService.Report + "QrCodeOffice", office);
                     office.Kabinet.AsEnumerable().Select(x => x.FullPathPng).ToList().ForEach(File.Delete);
+                    auto.Dispose();
                     return stickerQrOffice.FileArray();
                 });
             }
@@ -1837,7 +2119,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllTechnicsLk(int idUser)
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllTechicsLkInventory(idUser));
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllTechicsLkInventory(idUser);
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1848,7 +2135,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllUsersDepartmentLk(int idUser)
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllUsersDepartmentLk(idUser));
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllUsersDepartmentLk(idUser);
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1858,7 +2150,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllToken()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllToken());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllToken();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1877,7 +2174,6 @@ namespace TestIFNSLibary.Inventarka
             {
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeToken(model.Model);
             }
-
             return model;
         }
 
@@ -1892,6 +2188,7 @@ namespace TestIFNSLibary.Inventarka
             DeleteObjectDb delete = new DeleteObjectDb();
             var model = delete.DeleteToken(token, SignalRLibary.SignalRinventory.SignalRinventory.GetUser(userIdEdit));
             SignalRLibary.SignalRinventory.SignalRinventory.SubscribeDeleteToken(model);
+            delete.Dispose();
             return model;
         }
 
@@ -1903,7 +2200,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<bool> IsBeginTask(int idTask)
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.IsBeginTask(idTask));
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.IsBeginTask(idTask);
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -1921,6 +2223,7 @@ namespace TestIFNSLibary.Inventarka
                     var act = generate.GenerateParameterAct(modelParameterAct);
                     var templateAct = new TemplateAct();
                     templateAct.CreateDocument(parametersService.Report + "Акт списания ", act);
+                    generate.Dispose();
                     return templateAct.FileArray();
                 });
             }
@@ -1949,6 +2252,7 @@ namespace TestIFNSLibary.Inventarka
                     EfDatabase.Journal.AllJournal journal = select.SelectJournalAis3(year, idOtdel, isAllJournal);
                     var templateJournal = new TemplateJournalAis3();
                     templateJournal.CreateDocument(parametersService.Report, journal, null);
+                    select.Dispose();
                     return templateJournal.FileArray();
                 });
             }
@@ -2039,8 +2343,7 @@ namespace TestIFNSLibary.Inventarka
                     XmlReadOrWrite xml = new XmlReadOrWrite();
                     MemoReport memo = new MemoReport();
                     select.SelectMemoReport(ref memoReport);
-                    var commandOrders =
-                        string.Format(selectFrames.LastOrder, memoReport.UserDepartment.SmallTabelNumber);
+                    var commandOrders = string.Format(selectFrames.LastOrder, memoReport.UserDepartment.SmallTabelNumber);
                     var userOrder = sql.XmlString(parametersService.ConnectImns51, commandOrders);
                     if (userOrder != null)
                     {
@@ -2100,7 +2403,54 @@ namespace TestIFNSLibary.Inventarka
                         new ModelReturn<string>($"{process.NameProcess} уже запущен ожидайте окончание процесса!", null,
                             2));
                 }
+                auto.Dispose();
+            }
+            catch (Exception e)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
+                    new ModelReturn<string>(e.Message));
+                Loggers.Log4NetLogger.Error(e);
+            }
+        }
+        /// <summary>
+        /// Синхронизация данных с АКСИОК
+        /// </summary>
+        /// <param name="idProcess">Ун процесса</param>
+        /// <param name="userLogin">Логин пользователя</param>
+        /// <param name="passwordUser">Пароль пользователя</param>
+        public void UpdateAksiok(int idProcess, string userLogin, string passwordUser)
+        {
+            try
+            {
+                Select auto = new Select();
+                var process = auto.SelectProcess(idProcess);
+                if (process.IsComplete != null && (bool)process.IsComplete)
+                {
+                    var addObjectDb = new AddObjectDb();
+                    addObjectDb.IsProcessComplete(idProcess, false);
+                    var task = Task.Run(() =>
+                    {
+                        var aksiok = new AksiokPostGetSystem(userLogin, passwordUser);
+                        aksiok.StartUpdateAksiok();
+                        
 
+                    });
+                    task.ConfigureAwait(true).GetAwaiter().OnCompleted(() =>
+                    {
+                        addObjectDb.IsProcessComplete(idProcess, true);
+                        addObjectDb.Dispose();
+                        SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
+                            new ModelReturn<string>($"{process.NameProcess} завершен!", null, 3));
+                    });
+                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
+                        new ModelReturn<string>($"{process.NameProcess} запущен!", null, 1));
+                }
+                else
+                {
+                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
+                        new ModelReturn<string>($"{process.NameProcess} уже запущен ожидайте окончание процесса!", null,
+                            2));
+                }
                 auto.Dispose();
             }
             catch (Exception e)
@@ -2118,7 +2468,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> GetModelReportAnalysisEpo()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.GetModelReportAnalysisEpo());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.GetModelReportAnalysisEpo();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -2130,7 +2485,11 @@ namespace TestIFNSLibary.Inventarka
         {
             var selectReportPassportTechnique = new SelectReportPassportTechnique(parametersService.Inventarization);
             return await Task.Factory.StartNew(() =>
-                selectReportPassportTechnique.CreateFullReportEpo(parametersService.Report, idReport));
+                {
+                    var model = selectReportPassportTechnique.CreateFullReportEpo(parametersService.Report, idReport);
+                    selectReportPassportTechnique.Dispose();
+                    return model;
+                });
         }
 
         /// <summary>
@@ -2140,7 +2499,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllEventProcessParameters()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.AllEventProcessParameter());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllEventProcessParameter();
+                auto.Dispose();
+                return model;
+            });
         }
 
         /// <summary>
@@ -2172,7 +2536,12 @@ namespace TestIFNSLibary.Inventarka
             try
             {
                 SelectSql select = new SelectSql();
-                return await Task.Factory.StartNew(() => select.ActualPrintServer());
+                return await Task.Factory.StartNew(() =>
+                {
+                    var model = select.ActualPrintServer();
+                    select.Dispose();
+                    return model;
+                });
             }
             catch (Exception e)
             {
@@ -2216,7 +2585,12 @@ namespace TestIFNSLibary.Inventarka
         public async Task<string> AllCategoryPhoneHeader()
         {
             Select auto = new Select();
-            return await Task.Factory.StartNew(() => auto.CategoryPhoneHeader());
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.CategoryPhoneHeader();
+                auto.Dispose();
+                return model;
+            });
         }
         /// <summary>
         /// Добавление или редактирование категории телефонного справочника
@@ -2233,6 +2607,93 @@ namespace TestIFNSLibary.Inventarka
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeCategoryPhoneHeader(model.Model);
             }
             return model;
+        }
+        /// <summary>
+        /// Вытащить дополнительные характеристики объекта АКСИОК
+        /// </summary>
+        /// <param name="idModel">Ун модели</param>
+        /// <returns></returns>
+        public async Task<EfDatabase.ModelAksiok.DtoAksiok.ValueCharacteristicJson> SelectModelCharacteristicJson(int idModel)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSal = new SelectSql();
+                var model = selectSal.SelectModelCharacteristicJson(idModel);
+                selectSal.Dispose();
+                return model;
+
+            });
+        }
+        /// <summary>
+        /// Проверка модели в АКСИОК на правомерность свершения действий Редактирования/Добавление 
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Модель проверки данных</param>
+        /// <returns></returns>
+        public async Task<AksiokAddAndEdit> AksiokAddAndEditModelValidation(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSal = new SelectSql();
+                var model = selectSal.ModelValidation(aksiokAddAndEdit);
+                selectSal.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Вытащить все категории из БД
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> SelectAllFullСategories()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllFullСategories();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Вытащить все типы из БД
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> SelectAllEquipmentType()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllEquipmentType();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Вытащить все производители из БД
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> SelectAllProducer()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllProducer();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Вытащить все производители из БД
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> SelectAllEquipmentModel()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllEquipmentModel();
+                auto.Dispose();
+                return model;
+            });
         }
     }
 }

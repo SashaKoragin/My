@@ -28,7 +28,7 @@ namespace LibaryDocumentGenerator.Documents.TemplateExcel
 
         public void CreateDocument(string path, ReportCardModel template, object obj = null)
         {
-            FullPathDocumentWord = path + "Табель_"+DateTime.Now.ToString("yyyy-dd-M_HH-mm-ss") + Constant.WordConstant.FormatXlsx;
+            FullPathDocumentWord = path + "Табель_"+DateTime.Now.ToString("yyyy-dd-M_HH-mm-ss-fff") + Constant.WordConstant.FormatXlsx;
             using (SpreadsheetDocument package = SpreadsheetDocument.Create(FullPathDocumentWord, SpreadsheetDocumentType.Workbook))
             {
                 CreateExcel(package, template, obj);

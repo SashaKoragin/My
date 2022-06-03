@@ -497,7 +497,7 @@ namespace EfDatabaseErrorInventory {
         
         private int idUserField;
         
-        private string nameField;
+        private string nameUserField;
         
         private int statusActualField;
         
@@ -536,12 +536,12 @@ namespace EfDatabaseErrorInventory {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
         
@@ -998,7 +998,7 @@ namespace EfDatabaseErrorInventory {
         
         private int idUserField;
         
-        private string nameField;
+        private string nameUserField;
         
         private string smallNameField;
         
@@ -1021,12 +1021,12 @@ namespace EfDatabaseErrorInventory {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
         
@@ -1518,7 +1518,7 @@ namespace EfDatabaseErrorInventory {
         
         private int idModelField;
         
-        private string nameField;
+        private string nameUserField;
         
         private string nameModelClassField;
         
@@ -1556,12 +1556,12 @@ namespace EfDatabaseErrorInventory {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
         
@@ -1643,7 +1643,7 @@ namespace EfDatabaseErrorInventory {
         
         private string nameOtdelField;
         
-        private string nameField;
+        private string nameUserField;
         
         private string nameClassField;
         
@@ -1670,12 +1670,12 @@ namespace EfDatabaseErrorInventory {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
         
@@ -1761,7 +1761,7 @@ namespace EfDatabaseErrorInventory {
         
         private string itemField;
         
-        private string nameField;
+        private string nameUserField;
         
         private string nameTypeField;
         
@@ -1827,12 +1827,12 @@ namespace EfDatabaseErrorInventory {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
         

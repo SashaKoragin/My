@@ -21,7 +21,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             AddObjectDb.AddObjectDb adddoc = new AddObjectDb.AddObjectDb();
             select.ReportInvoice(ref report);
             report.Main.Barcode = new Barcode();
-            report.Main.Barcode.Id = adddoc.AddDocument(report.ParamRequest.IdNameDocument, report.Main.Received.UserName,report.ParamRequest.IdUsers);
+            report.Main.Barcode.Id = adddoc.AddDocument(report.ParamRequest.IdNameDocument, report.Main.Received.NameUser, report.ParamRequest.IdUsers);
         }
 
         public BareCodeBook BookInvoce(BareCodeBook barecode, BookModels bookModels)

@@ -3,8 +3,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using EfDatabase.Inventory.Base;
-using EfDatabaseXsdMail;
-
+using EfDatabase.ReportXml.XsdMail;
 namespace EfDatabase.Inventory.MailLogicLotus
 {
     /// <summary>

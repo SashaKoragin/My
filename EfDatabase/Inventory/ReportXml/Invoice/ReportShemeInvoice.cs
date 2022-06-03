@@ -202,7 +202,7 @@ namespace EfDatabaseInvoice {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Formed {
         
-        private string userNameField;
+        private string nameUserField;
         
         private string smallNameField;
         
@@ -212,12 +212,12 @@ namespace EfDatabaseInvoice {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string UserName {
+        public string NameUser {
             get {
-                return this.userNameField;
+                return this.nameUserField;
             }
             set {
-                this.userNameField = value;
+                this.nameUserField = value;
             }
         }
         
@@ -264,7 +264,7 @@ namespace EfDatabaseInvoice {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Received {
         
-        private string userNameField;
+        private string nameUserField;
         
         private string smallNameField;
         
@@ -280,12 +280,12 @@ namespace EfDatabaseInvoice {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string UserName {
+        public string NameUser {
             get {
-                return this.userNameField;
+                return this.nameUserField;
             }
             set {
-                this.userNameField = value;
+                this.nameUserField = value;
             }
         }
         
@@ -437,7 +437,7 @@ namespace EfDatabaseInvoice {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
     public partial class Body {
         
-        private string nameField;
+        private string nameUserField;
         
         private string nameCategoryField;
         
@@ -461,12 +461,12 @@ namespace EfDatabaseInvoice {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
         

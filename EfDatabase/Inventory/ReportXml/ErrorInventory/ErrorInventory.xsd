@@ -89,7 +89,7 @@
 					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Пользователь</xs:documentation>
 				</xs:annotation>
@@ -350,7 +350,7 @@
 					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Полное Ноиенование пользователя</xs:documentation>
 				</xs:annotation>
@@ -560,7 +560,7 @@
 					<xs:documentation>Наименование модели ID</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Кто изменил модель</xs:documentation>
 				</xs:annotation>
@@ -607,7 +607,7 @@
 					<xs:documentation>Наименование отдела</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Имя пользователя</xs:documentation>
 				</xs:annotation>
@@ -660,7 +660,7 @@
 					<xs:documentation>Классификация</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Пользователь</xs:documentation>
 				</xs:annotation>

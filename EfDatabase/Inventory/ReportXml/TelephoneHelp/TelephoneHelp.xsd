@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by Sasha (IFNS) -->
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="TelephoneHelp" type="TelephoneHelp">
 		<xs:annotation>
@@ -91,7 +91,7 @@
 				<xs:element ref="Position"/>
 				<xs:element ref="Telephon" minOccurs="0"/>
 			</xs:sequence>
-			<xs:attribute name="Name" type="xs:string">
+			<xs:attribute name="NameUser" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Имя пользователя</xs:documentation>
 				</xs:annotation>

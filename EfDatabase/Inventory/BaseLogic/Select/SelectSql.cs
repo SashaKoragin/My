@@ -9,6 +9,7 @@ using System.Xml;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Journal;
 using EfDatabase.MemoReport;
+using EfDatabase.ModelAksiok.Aksiok;
 using EfDatabase.ReportCard;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
@@ -203,7 +204,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                                                      new SqlParameter(sqlSelect.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).FirstOrDefault() ??
                                                      new LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Users()
                                                      {
-                                                          Name = userRole.Fio, NamePosition = userRole.Dolj, IpAdress = null,
+                                                          NameUser = userRole.Fio, NamePosition = userRole.Dolj, IpAdress = null,
                                                           Tabel = $"regions\\{userRole.SysName.Split('@')[0]}", NumberKabinet = null,
                                                           RuleTemplate = null
                                                      };
@@ -414,7 +415,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                         select
                             new EfDatabase.XsdLotusUser.User
                             {
-                                Name = user.Name,
+                                NameUser = user.NameUser,
                                 TabelNumber = user.TabelNumber,
                                 NameOtdel = otdel.NameOtdel,
                                 IdentifierUser = id.IdentifierUser
@@ -612,6 +613,63 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 Loggers.Log4NetLogger.Error(e);
             }
         }
+        /// <summary>
+        /// Возврат дополнительных атрибутов моделей АКСИОК
+        /// </summary>
+        /// <param name="idModel">Ун интересуем ого объекта</param>
+        /// <returns></returns>
+        public ModelAksiok.DtoAksiok.ValueCharacteristicJson SelectModelCharacteristicJson(int idModel)
+        {
+            try
+            {
+                ModelSelect selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(56) };
+                return Inventory.Database.SqlQuery<ModelAksiok.DtoAksiok.ValueCharacteristicJson>(
+                        selectModel.LogicaSelect.SelectUser,
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], idModel))
+                    .FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
+        /// <summary>
+        /// Проверка модели на действия с ней Редактирование или Добавление
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Транспортная модель с параметрами</param>
+        /// <returns></returns>
+        public AksiokAddAndEdit ModelValidation(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            try
+            {
+                ModelSelect selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(57) };
+                var idFullCategoria = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], aksiokAddAndEdit.ParametersModel.IdFullCategoria) {Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int};
+                var codeError = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[4], aksiokAddAndEdit.ParametersModel.CodeError) {Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int};
+                var errorServer = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[5], aksiokAddAndEdit.ParametersModel.ErrorServer) {Direction = ParameterDirection.Output, Size = 512, SqlDbType = SqlDbType.VarChar};
+                Inventory.Database.ExecuteSqlCommand(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0],
+                        aksiokAddAndEdit.ParametersModel.ModelRequest),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1],
+                        aksiokAddAndEdit.ParametersModel.SerNumber),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2],
+                        aksiokAddAndEdit.ParametersModel.InventoryNum),
+                    idFullCategoria, codeError, errorServer
+                );
+                aksiokAddAndEdit.ParametersModel.IdFullCategoria = (int?)idFullCategoria.Value;
+                aksiokAddAndEdit.ParametersModel.CodeError = (int)codeError.Value;
+                aksiokAddAndEdit.ParametersModel.ErrorServer = (string)errorServer.Value;
+                return aksiokAddAndEdit;
+            }
+            //В случае исключения
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+                aksiokAddAndEdit.ParametersModel.CodeError = 404;
+                aksiokAddAndEdit.ParametersModel.ErrorServer = e.Message;
+            }
+            return aksiokAddAndEdit;
+        }
 
         /// <summary>
         /// Выборка модели для манипуляции
@@ -619,9 +677,9 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// <param name="id">Параметр индекса в таблицы</param>
         /// <returns></returns>
         public EfDatabaseParametrsModel.LogicaSelect SqlSelectModel(int id)
-       {
+        {
             return Inventory.Database.SqlQuery<EfDatabaseParametrsModel.LogicaSelect>(String.Format(ProcedureSelect, id)).ToList()[0];
-       }
+        }
         /// <summary>
         /// Dispose
         /// </summary>

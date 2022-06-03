@@ -47,7 +47,7 @@ namespace LibaryDocumentGenerator.Documents.Template
             if (template.SelectParameterDocument.NumberDocument != 4)
             {
                 Fotters footers = new Fotters();
-                footers.FottersAddDocument(mainDocumentPart, template.Executor.Name, template.Executor.Phone);
+                footers.FottersAddDocument(mainDocumentPart, template.Executor.NameUser, template.Executor.Phone);
                 document.Append(settingPage.AddSetting(mainDocumentPart));
                 document.Append(documentInvoke.CreateDocMemoReport(template));
             }

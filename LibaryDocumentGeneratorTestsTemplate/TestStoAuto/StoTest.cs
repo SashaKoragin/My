@@ -24,6 +24,7 @@ using LibaryXMLAuto.ReadOrWrite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Win32;
 using TestIFNSLibary.Inventarka;
+using File = System.IO.File;
 
 namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
 {
@@ -40,7 +41,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
            try
            {
                var t1 = Inventory.Users.Where(user => user.StatusUser != null)
-                   .Where(u => u.StatusUser.IdStatusUser != 4).Where(u1 =>u1.Name == "Яшина Полина Денисовна").ToArray();
+                   .Where(u => u.StatusUser.IdStatusUser != 4).Where(u1 =>u1.NameUser == "Яшина Полина Денисовна").ToArray();
                TT(ref t1);
 
            }

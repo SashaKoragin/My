@@ -11,7 +11,7 @@
 // 
 // Этот исходный код был создан с помощью xsd, версия=4.7.2046.0.
 // 
-namespace EfDatabase.XsdLotusUser {
+namespace EfDatabase.ModelAksiok.Aksiok {
     using System.Xml.Serialization;
     
     
@@ -21,18 +21,17 @@ namespace EfDatabase.XsdLotusUser {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class UserLotus {
+    public partial class AksiokAddAndEdit {
         
-        private User[] userField;
+        private ParametersModel parametersModelField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("User")]
-        public User[] User {
+        public ParametersModel ParametersModel {
             get {
-                return this.userField;
+                return this.parametersModelField;
             }
             set {
-                this.userField = value;
+                this.parametersModelField = value;
             }
         }
     }
@@ -44,57 +43,88 @@ namespace EfDatabase.XsdLotusUser {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class User {
+    public partial class ParametersModel {
         
-        private string nameUserField;
+        private System.Nullable<int> idFullCategoriaField;
         
-        private string tabelNumberField;
+        private string modelRequestField;
         
-        private string nameOtdelField;
+        private string serNumberField;
         
-        private string identifierUserField;
+        private string inventoryNumField;
+        
+        private int codeErrorField;
+        
+        private string errorServerField;
+        
+        public ParametersModel() {
+            this.codeErrorField = 0;
+        }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameUser {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> IdFullCategoria {
             get {
-                return this.nameUserField;
+                return this.idFullCategoriaField;
             }
             set {
-                this.nameUserField = value;
+                this.idFullCategoriaField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TabelNumber {
+        public string ModelRequest {
             get {
-                return this.tabelNumberField;
+                return this.modelRequestField;
             }
             set {
-                this.tabelNumberField = value;
+                this.modelRequestField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameOtdel {
+        public string SerNumber {
             get {
-                return this.nameOtdelField;
+                return this.serNumberField;
             }
             set {
-                this.nameOtdelField = value;
+                this.serNumberField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string IdentifierUser {
+        public string InventoryNum {
             get {
-                return this.identifierUserField;
+                return this.inventoryNumField;
             }
             set {
-                this.identifierUserField = value;
+                this.inventoryNumField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int CodeError {
+            get {
+                return this.codeErrorField;
+            }
+            set {
+                this.codeErrorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ErrorServer {
+            get {
+                return this.errorServerField;
+            }
+            set {
+                this.errorServerField = value;
             }
         }
     }

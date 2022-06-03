@@ -94,6 +94,7 @@
     <Compile Include="AddTable\PredPro\PredProverkaTempl.cs" />
     <Compile Include="Inventory\BaseLogic\AddObjectDb\AddObjectDb.cs" />
     <Compile Include="Inventory\BaseLogic\AddObjectDb\ModelReturn.cs" />
+    <Compile Include="Inventory\BaseLogic\AksiokAddAndUpdateObjectDb\AksiokAddAndUpdateObjectDb.cs" />
     <Compile Include="Inventory\BaseLogic\Login\Login.cs" />
     <Compile Include="Inventory\BaseLogic\DeleteObjectDb\DeleteObjectDb.cs" />
     <Compile Include="Inventory\BaseLogic\HistoryLog\HistoryLog.cs" />
@@ -129,6 +130,9 @@
     <Compile Include="Inventory\ReportXml\BookAccounting\Books.cs">
       <DependentUpon>Books.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ReportXml\DtoAksiok\AllModelAksiok.cs">
+      <DependentUpon>AllModelAksiok.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\ReportXml\ErrorInventory\ErrorInventory.cs">
       <DependentUpon>ErrorInventory.xsd</DependentUpon>
     </Compile>
@@ -150,6 +154,13 @@
     <Compile Include="Inventory\ReportXml\Mail\Mail.cs">
       <DependentUpon>Mail.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ReportXml\ModelAksiok\Aksiok.cs">
+      <DependentUpon>Aksiok.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\ModelAksiok\AksiokAddAndEdit.cs">
+      <DependentUpon>AksiokAddAndEdit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\ModelAksiok\DataAksiokFullSheme.cs" />
     <Compile Include="Inventory\ReportXml\ModelReportCard\ReportCard.cs">
       <DependentUpon>ReportCard.xsd</DependentUpon>
     </Compile>
@@ -218,6 +229,9 @@
     <None Include="Inventory\ReportXml\BookAccounting\Books.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Inventory\ReportXml\DtoAksiok\AllModelAksiok.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventory\ReportXml\ErrorInventory\ErrorInventory.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -237,6 +251,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\Mail\Mail.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\ModelAksiok\Aksiok.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\ModelAksiok\AksiokAddAndEdit.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\ModelReportCard\ReportCard.xsd">
@@ -325,6 +345,8 @@
       <XsdReportCard Include="Inventory\ReportXml\ModelReportCard\*.xsd" />
       <XmlFilterModel Include="Inventory\DataTransferObject\FilterModel\*.xsd" />
       <XmlMemoReport Include="Inventory\DataTransferObject\MemoReport\*.xsd" />
+      <XmlModelAksiok Include="Inventory\ReportXml\ModelAksiok\*.xsd" />
+      <XmlDtoAksiok Include="Inventory\ReportXml\DtoAksiok\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -341,7 +363,7 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdTelephoneHelp.FullPath)&quot; /c /namespace:$(RootNamespace)TelephoneHelp /outputdir:Inventory\ReportXml\TelephoneHelp\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdBookAccounting.FullPath)&quot; /c /namespace:$(RootNamespace).XsdBookAccounting /outputdir:Inventory\ReportXml\BookAccounting\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdLotusUser.FullPath)&quot; /c /namespace:$(RootNamespace).XsdLotusUser /outputdir:Inventory\MailLogicLotus\MailXsdSheme\" />
-    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdMail.FullPath)&quot; /c /namespace:$(RootNamespace)XsdMail /outputdir:Inventory\ReportXml\Mail\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdMail.FullPath)&quot; /c /namespace:$(RootNamespace).ReportXml.XsdMail /outputdir:Inventory\ReportXml\Mail\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdSupportNalog.FullPath)&quot; /c /namespace:$(RootNamespace)XsdSupportNalog /outputdir:Inventory\ReportXml\ModelSupportNalog\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdInventoryAutorization.FullPath)&quot; /c /namespace:$(RootNamespace)XsdInventoryAutorization /outputdir:Inventory\ReportXml\InventoryAutorization\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdQrCodeModel.FullPath)&quot; /c /namespace:$(RootNamespace)XsdQrCodeModel /outputdir:Inventory\DataTransferObject\QrCodeOffice\" />
@@ -353,5 +375,7 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlFilterModel.FullPath)&quot; /c /namespace:$(RootNamespace).FilterModel /outputdir:Inventory\DataTransferObject\FilterModel\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlMemoReport.FullPath)&quot; /c /namespace:$(RootNamespace).MemoReport /outputdir:Inventory\DataTransferObject\MemoReport\" />
     <!--<Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdModelSto.FullPath)&quot; /c /namespace:$(RootNamespace).PassportSto /outputdir:Inventory\ReportXml\ModelStoXlsx\" />-->
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlModelAksiok.FullPath)&quot; /c /namespace:$(RootNamespace).ModelAksiok.Aksiok /outputdir:Inventory\ReportXml\ModelAksiok\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlDtoAksiok.FullPath)&quot; /c /namespace:$(RootNamespace).ModelAksiok.DtoAksiok /outputdir:Inventory\ReportXml\DtoAksiok\" />
   </Target>
 </Project>

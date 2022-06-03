@@ -11,7 +11,7 @@
 // 
 // Этот исходный код был создан с помощью xsd, версия=4.7.2046.0.
 // 
-namespace EfDatabaseXsdMail {
+namespace EfDatabase.ReportXml.XsdMail {
     using System.Xml.Serialization;
     
     

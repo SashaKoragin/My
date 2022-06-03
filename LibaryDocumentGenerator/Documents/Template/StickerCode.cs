@@ -6,6 +6,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using EfDatabase.Inventory.Base;
 using LibaryDocumentGenerator.ProgrammView.FullDocument;
 using LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage;
+using File = System.IO.File;
 
 namespace LibaryDocumentGenerator.Documents.Template
 {

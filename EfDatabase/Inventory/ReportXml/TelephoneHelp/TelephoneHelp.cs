@@ -219,7 +219,7 @@ namespace EfDatabaseTelephoneHelp {
         
         private Telephon telephonField;
         
-        private string nameField;
+        private string nameUserField;
         
         private string numberKabinetField;
         
@@ -245,12 +245,12 @@ namespace EfDatabaseTelephoneHelp {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string NameUser {
             get {
-                return this.nameField;
+                return this.nameUserField;
             }
             set {
-                this.nameField = value;
+                this.nameUserField = value;
             }
         }
         
