@@ -72,7 +72,7 @@ Patch dialog sequence:
               <Control Id="InventoryParametr" Type="Text" Text="Настройки для БД инвенторизация:" Height="17" Width="140" X="11" Y="110" />
               <Control Id="IMNSText1" Type="Text" Text="Server IMNS:" Height="15" ToolTip="Сервер КАДРЫ" Width="75" X="10" Y="132" />
               <Control Id="IMNSDbEdit1" Type="Edit" X="85" Y="130" Height="15" Width="75" Property="SERVERPATHIMNS" Text="[SERVERPATHIMNS]" Sunken="no">
-                <Property Id="SERVERPATHIMNS" Value="i7751-app020" />
+                <Property Id="SERVERPATHIMNS" Value="77068-app016" />
               </Control>
               <Control Id="IMNSText2" Type="Text" Text="DataBase IMNS:" Height="15" ToolTip="База КАДРЫ" Width="80" X="165" Y="132" />
               <Control Id="IMNSDbEdit2" Type="Edit" X="255" Y="130" Height="15" Width="75" Property="DATABASEIMNS" Text="[DATABASEIMNS]" Sunken="no">
@@ -81,7 +81,7 @@ Patch dialog sequence:
 
               <Control Id="InventoryText1" Type="Text" Text="Server Inventory:" Height="15" ToolTip="Сервер КАДРЫ" Width="75" X="10" Y="152" />
               <Control Id="InventoryDbEdit1" Type="Edit" X="85" Y="150" Height="15" Width="75" Property="SERVERPATHINVENTORY" Text="[SERVERPATHINVENTORY]" Sunken="no">
-                <Property Id="SERVERPATHINVENTORY" Value="i7751-app127" />
+                <Property Id="SERVERPATHINVENTORY" Value="77068-app065" />
               </Control>
               <Control Id="InventoryText2" Type="Text" Text="DataBase Inventory:" Height="15" ToolTip="База КАДРЫ" Width="80" X="165" Y="152" />
               <Control Id="InventoryDbEdit2" Type="Edit" X="255" Y="150" Height="15" Width="75" Property="DATABASEINVENTORY" Text="[DATABASEINVENTORY]" Sunken="no">

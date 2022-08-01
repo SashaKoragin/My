@@ -11,7 +11,7 @@
 // 
 // Этот исходный код был создан с помощью xsd, версия=4.7.2046.0.
 // 
-namespace EfDatabase.ModelAksiok.Aksiok {
+namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
     using System.Xml.Serialization;
     
     
@@ -21,57 +21,29 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class ModelAksiok {
+    public partial class AksiokEditAndAddProcedure {
         
-        private ModelDocumentType[] modelDocumentTypeField;
+        private AksiokEditPublicModel aksiokEditPublicModelField;
         
-        private ModelDocument[] modelDocumentField;
-        
-        private EpoDocument epoDocumentField;
-        
-        private ValueCharacteristicJson valueCharacteristicJsonField;
+        private PublicModelValueJson publicModelValueJsonField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ModelDocumentType", IsNullable=true)]
-        public ModelDocumentType[] ModelDocumentType {
+        public AksiokEditPublicModel AksiokEditPublicModel {
             get {
-                return this.modelDocumentTypeField;
+                return this.aksiokEditPublicModelField;
             }
             set {
-                this.modelDocumentTypeField = value;
+                this.aksiokEditPublicModelField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ModelDocument", IsNullable=true)]
-        public ModelDocument[] ModelDocument {
+        public PublicModelValueJson PublicModelValueJson {
             get {
-                return this.modelDocumentField;
+                return this.publicModelValueJsonField;
             }
             set {
-                this.modelDocumentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public EpoDocument EpoDocument {
-            get {
-                return this.epoDocumentField;
-            }
-            set {
-                this.epoDocumentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public ValueCharacteristicJson ValueCharacteristicJson {
-            get {
-                return this.valueCharacteristicJsonField;
-            }
-            set {
-                this.valueCharacteristicJsonField = value;
+                this.publicModelValueJsonField = value;
             }
         }
     }
@@ -82,327 +54,8 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    public partial class ModelDocumentType {
-        
-        private int idField;
-        
-        private string sounField;
-        
-        private int documentTypeField;
-        
-        private string kindEquipmentNameField;
-        
-        private string categoriesTruNameField;
-        
-        private string numberField;
-        
-        private string authorField;
-        
-        private bool canDeleteField;
-        
-        private string agencyNameField;
-        
-        private System.DateTime createDateField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Soun {
-            get {
-                return this.sounField;
-            }
-            set {
-                this.sounField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int DocumentType {
-            get {
-                return this.documentTypeField;
-            }
-            set {
-                this.documentTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string KindEquipmentName {
-            get {
-                return this.kindEquipmentNameField;
-            }
-            set {
-                this.kindEquipmentNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CategoriesTruName {
-            get {
-                return this.categoriesTruNameField;
-            }
-            set {
-                this.categoriesTruNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Number {
-            get {
-                return this.numberField;
-            }
-            set {
-                this.numberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Author {
-            get {
-                return this.authorField;
-            }
-            set {
-                this.authorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool CanDelete {
-            get {
-                return this.canDeleteField;
-            }
-            set {
-                this.canDeleteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string AgencyName {
-            get {
-                return this.agencyNameField;
-            }
-            set {
-                this.agencyNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime CreateDate {
-            get {
-                return this.createDateField;
-            }
-            set {
-                this.createDateField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    public partial class ModelDocument {
-        
-        private System.Nullable<long> fileIdField;
-        
-        private System.Nullable<long> expertiseFileIdField;
-        
-        private int idField;
-        
-        private string equipmentTypeField;
-        
-        private string producerField;
-        
-        private string equipmentModelField;
-        
-        private string serialNumberField;
-        
-        private string inventoryNumberField;
-        
-        private int equipmentStateField;
-        
-        private int equipmentStateStoField;
-        
-        private bool isKitField;
-        
-        private int expertiseStatusField;
-        
-        private bool isTruInSettingsField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<long> FileId {
-            get {
-                return this.fileIdField;
-            }
-            set {
-                this.fileIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<long> ExpertiseFileId {
-            get {
-                return this.expertiseFileIdField;
-            }
-            set {
-                this.expertiseFileIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string EquipmentType {
-            get {
-                return this.equipmentTypeField;
-            }
-            set {
-                this.equipmentTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Producer {
-            get {
-                return this.producerField;
-            }
-            set {
-                this.producerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string EquipmentModel {
-            get {
-                return this.equipmentModelField;
-            }
-            set {
-                this.equipmentModelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SerialNumber {
-            get {
-                return this.serialNumberField;
-            }
-            set {
-                this.serialNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string InventoryNumber {
-            get {
-                return this.inventoryNumberField;
-            }
-            set {
-                this.inventoryNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int EquipmentState {
-            get {
-                return this.equipmentStateField;
-            }
-            set {
-                this.equipmentStateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int EquipmentStateSto {
-            get {
-                return this.equipmentStateStoField;
-            }
-            set {
-                this.equipmentStateStoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool IsKit {
-            get {
-                return this.isKitField;
-            }
-            set {
-                this.isKitField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int ExpertiseStatus {
-            get {
-                return this.expertiseStatusField;
-            }
-            set {
-                this.expertiseStatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool IsTruInSettings {
-            get {
-                return this.isTruInSettingsField;
-            }
-            set {
-                this.isTruInSettingsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    public partial class EpoDocument {
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class AksiokEditPublicModel {
         
         private EquipmentType equipmentTypeField;
         
@@ -410,19 +63,13 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private EquipmentModel equipmentModelField;
         
-        private System.Nullable<System.DateTime> actDateField;
-        
-        private System.Nullable<System.DateTime> dateOfStatementField;
-        
         private File fileField;
         
-        private ExpertiseFile expertiseFileField;
+        private System.Nullable<System.DateTime> dateOfStatementField;
         
         private DeliveryContract deliveryContractField;
         
         private ContractOnSto contractOnStoField;
-        
-        private System.Nullable<System.DateTime> guaranteeField;
         
         private System.Nullable<int> boardsNumberField;
         
@@ -434,15 +81,11 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private System.Nullable<int> adminsCountField;
         
-        private System.Nullable<int> exploitationStartYearField;
-        
-        private bool exploitationStartYearFieldSpecified;
+        private ExpertiseFile expertiseFileField;
         
         private int idField;
         
-        private int epoDocument1Field;
-        
-        private string computerNameField;
+        private int epoDocumentField;
         
         private string serialNumberField;
         
@@ -454,15 +97,13 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private int equipmentStateStoField;
         
-        private int equipmentStateField;
-        
-        private string actNumberField;
-        
-        private int expertiseStatusField;
-        
         private string serviceNumberField;
         
         private string individualServiceNumberField;
+        
+        private int equipmentStateField;
+        
+        private string actNumberField;
         
         private string notOnBalanceField;
         
@@ -500,7 +141,19 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private string keyNumberField;
         
+        private string computerNameField;
+        
         private bool requiresReplacementField;
+        
+        private int expertiseStatusField;
+        
+        private System.DateTime guaranteeField;
+        
+        private int exploitationStartYearField;
+        
+        private System.DateTime actDateField;
+        
+        private bool actDateFieldSpecified;
         
         /// <remarks/>
         public EquipmentType EquipmentType {
@@ -534,12 +187,12 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> ActDate {
+        public File File {
             get {
-                return this.actDateField;
+                return this.fileField;
             }
             set {
-                this.actDateField = value;
+                this.fileField = value;
             }
         }
         
@@ -551,26 +204,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.dateOfStatementField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public File File {
-            get {
-                return this.fileField;
-            }
-            set {
-                this.fileField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public ExpertiseFile ExpertiseFile {
-            get {
-                return this.expertiseFileField;
-            }
-            set {
-                this.expertiseFileField = value;
             }
         }
         
@@ -591,17 +224,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.contractOnStoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> Guarantee {
-            get {
-                return this.guaranteeField;
-            }
-            set {
-                this.guaranteeField = value;
             }
         }
         
@@ -662,23 +284,12 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> ExploitationStartYear {
+        public ExpertiseFile ExpertiseFile {
             get {
-                return this.exploitationStartYearField;
+                return this.expertiseFileField;
             }
             set {
-                this.exploitationStartYearField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ExploitationStartYearSpecified {
-            get {
-                return this.exploitationStartYearFieldSpecified;
-            }
-            set {
-                this.exploitationStartYearFieldSpecified = value;
+                this.expertiseFileField = value;
             }
         }
         
@@ -694,24 +305,13 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute("EpoDocument")]
-        public int EpoDocument1 {
-            get {
-                return this.epoDocument1Field;
-            }
-            set {
-                this.epoDocument1Field = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ComputerName {
+        public int EpoDocument {
             get {
-                return this.computerNameField;
+                return this.epoDocumentField;
             }
             set {
-                this.computerNameField = value;
+                this.epoDocumentField = value;
             }
         }
         
@@ -772,39 +372,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int EquipmentState {
-            get {
-                return this.equipmentStateField;
-            }
-            set {
-                this.equipmentStateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ActNumber {
-            get {
-                return this.actNumberField;
-            }
-            set {
-                this.actNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int ExpertiseStatus {
-            get {
-                return this.expertiseStatusField;
-            }
-            set {
-                this.expertiseStatusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ServiceNumber {
             get {
                 return this.serviceNumberField;
@@ -822,6 +389,28 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.individualServiceNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int EquipmentState {
+            get {
+                return this.equipmentStateField;
+            }
+            set {
+                this.equipmentStateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ActNumber {
+            get {
+                return this.actNumberField;
+            }
+            set {
+                this.actNumberField = value;
             }
         }
         
@@ -1025,12 +614,78 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ComputerName {
+            get {
+                return this.computerNameField;
+            }
+            set {
+                this.computerNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool RequiresReplacement {
             get {
                 return this.requiresReplacementField;
             }
             set {
                 this.requiresReplacementField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int ExpertiseStatus {
+            get {
+                return this.expertiseStatusField;
+            }
+            set {
+                this.expertiseStatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime Guarantee {
+            get {
+                return this.guaranteeField;
+            }
+            set {
+                this.guaranteeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int ExploitationStartYear {
+            get {
+                return this.exploitationStartYearField;
+            }
+            set {
+                this.exploitationStartYearField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime ActDate {
+            get {
+                return this.actDateField;
+            }
+            set {
+                this.actDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ActDateSpecified {
+            get {
+                return this.actDateFieldSpecified;
+            }
+            set {
+                this.actDateFieldSpecified = value;
             }
         }
     }
@@ -1044,92 +699,11 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class EquipmentType {
         
-        private System.Nullable<System.DateTime> startDateField;
-        
-        private bool startDateFieldSpecified;
-        
-        private System.Nullable<System.DateTime> endDateField;
-        
-        private bool endDateFieldSpecified;
-        
-        private Producer producerField;
-        
-        private int idField;
-        
         private string codeField;
         
         private string nameField;
         
-        private string commentField;
-        
-        private System.DateTime startDate1Field;
-        
-        private bool startDate1FieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> StartDate {
-            get {
-                return this.startDateField;
-            }
-            set {
-                this.startDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StartDateSpecified {
-            get {
-                return this.startDateFieldSpecified;
-            }
-            set {
-                this.startDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> EndDate {
-            get {
-                return this.endDateField;
-            }
-            set {
-                this.endDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool EndDateSpecified {
-            get {
-                return this.endDateFieldSpecified;
-            }
-            set {
-                this.endDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Producer Producer {
-            get {
-                return this.producerField;
-            }
-            set {
-                this.producerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
+        private int idField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1155,34 +729,12 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Comment {
+        public int Id {
             get {
-                return this.commentField;
+                return this.idField;
             }
             set {
-                this.commentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute("StartDate")]
-        public System.DateTime StartDate1 {
-            get {
-                return this.startDate1Field;
-            }
-            set {
-                this.startDate1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StartDate1Specified {
-            get {
-                return this.startDate1FieldSpecified;
-            }
-            set {
-                this.startDate1FieldSpecified = value;
+                this.idField = value;
             }
         }
     }
@@ -1196,90 +748,15 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class Producer {
         
-        private System.Nullable<System.DateTime> startDateField;
-        
-        private bool startDateFieldSpecified;
-        
-        private System.Nullable<System.DateTime> endDateField;
-        
-        private bool endDateFieldSpecified;
-        
-        private EquipmentModel equipmentModelField;
-        
-        private int idField;
-        
-        private string codeField;
+        private int codeField;
         
         private string nameField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> StartDate {
-            get {
-                return this.startDateField;
-            }
-            set {
-                this.startDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StartDateSpecified {
-            get {
-                return this.startDateFieldSpecified;
-            }
-            set {
-                this.startDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> EndDate {
-            get {
-                return this.endDateField;
-            }
-            set {
-                this.endDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool EndDateSpecified {
-            get {
-                return this.endDateFieldSpecified;
-            }
-            set {
-                this.endDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public EquipmentModel EquipmentModel {
-            get {
-                return this.equipmentModelField;
-            }
-            set {
-                this.equipmentModelField = value;
-            }
-        }
+        private int idField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Code {
+        public int Code {
             get {
                 return this.codeField;
             }
@@ -1296,6 +773,17 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
             }
         }
     }
@@ -1309,74 +797,11 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class EquipmentModel {
         
-        private System.Nullable<System.DateTime> startDateField;
-        
-        private bool startDateFieldSpecified;
-        
-        private System.Nullable<System.DateTime> endDateField;
-        
-        private bool endDateFieldSpecified;
-        
-        private int idField;
-        
         private string codeField;
         
         private string nameField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> StartDate {
-            get {
-                return this.startDateField;
-            }
-            set {
-                this.startDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StartDateSpecified {
-            get {
-                return this.startDateFieldSpecified;
-            }
-            set {
-                this.startDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> EndDate {
-            get {
-                return this.endDateField;
-            }
-            set {
-                this.endDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool EndDateSpecified {
-            get {
-                return this.endDateFieldSpecified;
-            }
-            set {
-                this.endDateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
+        private int idField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1399,23 +824,10 @@ namespace EfDatabase.ModelAksiok.Aksiok {
                 this.nameField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class File {
-        
-        private long idField;
-        
-        private string nameField;
         
         /// <remarks/>
-        public long Id {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Id {
             get {
                 return this.idField;
             }
@@ -1423,17 +835,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
                 this.idField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1442,14 +843,15 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class ExpertiseFile {
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    public partial class File {
         
         private long idField;
         
         private string nameField;
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public long Id {
             get {
                 return this.idField;
@@ -1628,17 +1030,63 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
-    public partial class ValueCharacteristicJson {
+    public partial class ExpertiseFile {
+        
+        private long idField;
+        
+        private string nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class PublicModelValueJson {
         
         private System.Nullable<int> cpuCountField;
         
         private System.Nullable<int> coreCountField;
         
+        private System.Nullable<int> cpuFrequencyMhzField;
+        
+        private System.Nullable<int> ramSizeField;
+        
+        private System.Nullable<int> totalDiskSpaceGbField;
+        
         private System.Nullable<int> hddCountField;
+        
+        private System.Nullable<int> hddSizeField;
         
         private System.Nullable<int> boardsNumberField;
         
         private System.Nullable<int> freeBoardsNumberField;
+        
+        private System.Nullable<int> networkAdapterSpeedField;
         
         private System.Nullable<int> internalAnalogNumberField;
         
@@ -1647,16 +1095,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         private System.Nullable<int> adminsCountField;
         
         private System.Nullable<System.DateTime> guaranteeField;
-        
-        private System.Nullable<int> hddSizeField;
-        
-        private System.Nullable<int> networkAdapterSpeedField;
-        
-        private System.Nullable<int> totalDiskSpaceGbField;
-        
-        private System.Nullable<int> ramSizeField;
-        
-        private System.Nullable<int> cpuFrequencyMhzField;
         
         private int idField;
         
@@ -1800,12 +1238,56 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> CpuFrequencyMhz {
+            get {
+                return this.cpuFrequencyMhzField;
+            }
+            set {
+                this.cpuFrequencyMhzField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> RamSize {
+            get {
+                return this.ramSizeField;
+            }
+            set {
+                this.ramSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> TotalDiskSpaceGb {
+            get {
+                return this.totalDiskSpaceGbField;
+            }
+            set {
+                this.totalDiskSpaceGbField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public System.Nullable<int> HddCount {
             get {
                 return this.hddCountField;
             }
             set {
                 this.hddCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> HddSize {
+            get {
+                return this.hddSizeField;
+            }
+            set {
+                this.hddSizeField = value;
             }
         }
         
@@ -1828,6 +1310,17 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.freeBoardsNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> NetworkAdapterSpeed {
+            get {
+                return this.networkAdapterSpeedField;
+            }
+            set {
+                this.networkAdapterSpeedField = value;
             }
         }
         
@@ -1872,61 +1365,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.guaranteeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> HddSize {
-            get {
-                return this.hddSizeField;
-            }
-            set {
-                this.hddSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> NetworkAdapterSpeed {
-            get {
-                return this.networkAdapterSpeedField;
-            }
-            set {
-                this.networkAdapterSpeedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> TotalDiskSpaceGb {
-            get {
-                return this.totalDiskSpaceGbField;
-            }
-            set {
-                this.totalDiskSpaceGbField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> RamSize {
-            get {
-                return this.ramSizeField;
-            }
-            set {
-                this.ramSizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> CpuFrequencyMhz {
-            get {
-                return this.cpuFrequencyMhzField;
-            }
-            set {
-                this.cpuFrequencyMhzField = value;
             }
         }
         
@@ -2576,28 +2014,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.firewallForVksField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class AllModel {
-        
-        private EquipmentType equipmentTypeField;
-        
-        /// <remarks/>
-        public EquipmentType EquipmentType {
-            get {
-                return this.equipmentTypeField;
-            }
-            set {
-                this.equipmentTypeField = value;
             }
         }
     }

@@ -80,6 +80,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -108,6 +109,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ComparableSystem\ComparableActiveDirectory\ComparableActiveDirectory.cs" />
+    <Compile Include="Inventory\ComparableSystem\ComparableDks\ComparableDks.cs" />
+    <Compile Include="Inventory\ComparableSystem\ComparableLotusNotes\ComparableLotusNotes.cs" />
+    <Compile Include="Inventory\ComparableSystem\StartComparable\StartComparable.cs" />
     <Compile Include="Inventory\DataTransferObject\FilterModel\FilterModel.cs">
       <DependentUpon>FilterModel.xsd</DependentUpon>
     </Compile>
@@ -154,11 +159,14 @@
     <Compile Include="Inventory\ReportXml\Mail\Mail.cs">
       <DependentUpon>Mail.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEdit.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEditModelRequest.cs">
+      <SubType>code</SubType>
+    </Compile>
     <Compile Include="Inventory\ReportXml\ModelAksiok\Aksiok.cs">
       <DependentUpon>Aksiok.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Inventory\ReportXml\ModelAksiok\AksiokAddAndEdit.cs">
-      <DependentUpon>AksiokAddAndEdit.xsd</DependentUpon>
     </Compile>
     <Compile Include="Inventory\ReportXml\ModelAksiok\DataAksiokFullSheme.cs" />
     <Compile Include="Inventory\ReportXml\ModelReportCard\ReportCard.cs">
@@ -253,10 +261,13 @@
     <None Include="Inventory\ReportXml\Mail\Mail.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventory\ReportXml\ModelAksiok\Aksiok.xsd">
+    <None Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEdit.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventory\ReportXml\ModelAksiok\AksiokAddAndEdit.xsd">
+    <None Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEditModelRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\ModelAksiok\Aksiok.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\ModelReportCard\ReportCard.xsd">
@@ -347,6 +358,7 @@
       <XmlMemoReport Include="Inventory\DataTransferObject\MemoReport\*.xsd" />
       <XmlModelAksiok Include="Inventory\ReportXml\ModelAksiok\*.xsd" />
       <XmlDtoAksiok Include="Inventory\ReportXml\DtoAksiok\*.xsd" />
+      <XmlModelAksiokEditAndAdd Include="Inventory\ReportXml\ModelAksiokEditAndAdd\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -377,5 +389,6 @@
     <!--<Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdModelSto.FullPath)&quot; /c /namespace:$(RootNamespace).PassportSto /outputdir:Inventory\ReportXml\ModelStoXlsx\" />-->
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlModelAksiok.FullPath)&quot; /c /namespace:$(RootNamespace).ModelAksiok.Aksiok /outputdir:Inventory\ReportXml\ModelAksiok\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlDtoAksiok.FullPath)&quot; /c /namespace:$(RootNamespace).ModelAksiok.DtoAksiok /outputdir:Inventory\ReportXml\DtoAksiok\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlModelAksiokEditAndAdd.FullPath)&quot; /c /namespace:$(RootNamespace).ModelAksiok.ModelAksiokEditAndAdd /outputdir:Inventory\ReportXml\ModelAksiokEditAndAdd\" />
   </Target>
 </Project>

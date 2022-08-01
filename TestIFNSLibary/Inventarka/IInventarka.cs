@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
@@ -8,7 +7,7 @@ using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabase.MemoReport;
-using EfDatabase.ModelAksiok.Aksiok;
+using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
 using EfDatabase.ReportCard;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
@@ -1308,5 +1307,36 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllEquipmentModel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> SelectAllEquipmentModel();
 
+        /// <summary>
+        /// Проверка оборудования на комплектность
+        /// http://localhost:8182/Inventarka/KitsEquipmentValidation
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/KitsEquipmentValidation", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<KitsEquipment> KitsEquipmentValidation(KitsEquipment kitsEquipment);
+
+        /// <summary>
+        /// Функция Редактирования или добавления в АКСИОК данных
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Заполненная модель данных для выполнения действий</param>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AksiokAddAndEditModel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AksiokAddAndEditModel(AksiokAddAndEdit aksiokAddAndEdit);
+        /// <summary>
+        /// Выгрузка файла из АКСИОК для просмотра
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Заполненная модель данных для выполнения действий</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/UploadFileAksiok", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<UploadFileAksiok> UploadFileAksiok(AksiokAddAndEdit aksiokAddAndEdit);
+
+        /// <summary>
+        /// Будущий процесс по сравниванию учетных данных (AD, Lotus, ДКС)
+        /// </summary>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ProcessComparableUser", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        void ProcessComparableUser();
    }
 }

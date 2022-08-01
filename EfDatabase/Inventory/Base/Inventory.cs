@@ -1508,36 +1508,13 @@ namespace EfDatabase.Inventory.Base
     }
 
     // ContractOnSto
-    ///<summary>
-    /// Контракт на СТО АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ContractOnSto
     {
-
-        ///<summary>
-        /// Ун контракта
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
-
-        ///<summary>
-        /// Номер контракта
-        ///</summary>
         public string Number { get; set; } // Number (length: 256)
-
-        ///<summary>
-        /// Наименование контракта
-        ///</summary>
         public string Name { get; set; } // Name
-
-        ///<summary>
-        /// Дата контракта
-        ///</summary>
         public System.DateTime ContractDate { get; set; } // ContractDate
-
-        ///<summary>
-        /// Исполнитель контракта
-        ///</summary>
         public string Executor { get; set; } // Executor
 
         // Reverse navigation
@@ -1603,36 +1580,13 @@ namespace EfDatabase.Inventory.Base
     }
 
     // DeliveryContract
-    ///<summary>
-    /// Контракт на поставку АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class DeliveryContract
     {
-
-        ///<summary>
-        /// Ун контракта
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
-
-        ///<summary>
-        /// Номер контракта
-        ///</summary>
         public string Number { get; set; } // Number (length: 256)
-
-        ///<summary>
-        /// Наименование контракта
-        ///</summary>
         public string Name { get; set; } // Name
-
-        ///<summary>
-        /// Дата контракта
-        ///</summary>
         public System.DateTime ContractDate { get; set; } // ContractDate
-
-        ///<summary>
-        /// Исполнитель контракта
-        ///</summary>
         public string Executor { get; set; } // Executor
 
         // Reverse navigation
@@ -1840,251 +1794,56 @@ namespace EfDatabase.Inventory.Base
     }
 
     // EpoDocument
-    ///<summary>
-    /// Оборудование ЭПО АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class EpoDocument
     {
-
-        ///<summary>
-        /// Ун документа
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
-
-        ///<summary>
-        /// Ун типа документа АКСИОК
-        ///</summary>
         public int? IdEpoDocument { get; set; } // IdEpoDocument
-
-        ///<summary>
-        /// Ун типа оборудования АКСИОК
-        ///</summary>
         public int? IdEquipmentType { get; set; } // IdEquipmentType
-
-        ///<summary>
-        /// Ун производителя АКСИОК
-        ///</summary>
         public int? IdProducer { get; set; } // IdProducer
-
-        ///<summary>
-        /// Ун модели АКСИОК
-        ///</summary>
         public int? IdEquipmentModel { get; set; } // IdEquipmentModel
-
-        ///<summary>
-        /// Ун Контракта на поставку АКСИОК
-        ///</summary>
         public int? IdDeliveryContract { get; set; } // IdDeliveryContract
-
-        ///<summary>
-        /// Ун Контракта на ЭПО АКСИОК
-        ///</summary>
         public int? IdContractOnSto { get; set; } // IdContractOnSto
-
-        ///<summary>
-        /// Ун файла Акта списания АКСИОК
-        ///</summary>
-        public int? IdFile { get; set; } // IdFile
-
-        ///<summary>
-        /// Ун файла Экспертизы АКСИОК
-        ///</summary>
-        public int? IdExpertiseFile { get; set; } // IdExpertiseFile
-
-        ///<summary>
-        /// Имя компьютера
-        ///</summary>
+        public long? IdFile { get; set; } // IdFile
+        public long? IdExpertiseFile { get; set; } // IdExpertiseFile
         public string ComputerName { get; set; } // ComputerName (length: 128)
-
-        ///<summary>
-        /// Серийный номер
-        ///</summary>
         public string SerialNumber { get; set; } // SerialNumber (length: 64)
-
-        ///<summary>
-        /// Идентификатор
-        ///</summary>
         public string Identifier { get; set; } // Identifier (length: 128)
-
-        ///<summary>
-        /// Инвентарный номер
-        ///</summary>
         public string InventoryNumber { get; set; } // InventoryNumber (length: 128)
-
-        ///<summary>
-        /// Комплект
-        ///</summary>
         public bool IsKit { get; set; } // IsKit
-
-        ///<summary>
-        /// Статус СТО
-        ///</summary>
         public int? EquipmentStateSto { get; set; } // EquipmentStateSto
-
-        ///<summary>
-        /// Статус Экспертизы
-        ///</summary>
         public int? EquipmentState { get; set; } // EquipmentState
-
-        ///<summary>
-        /// Номер акта
-        ///</summary>
         public string ActNumber { get; set; } // ActNumber (length: 256)
-
-        ///<summary>
-        /// Дата акта
-        ///</summary>
         public System.DateTime? ActDate { get; set; } // ActDate
-
-        ///<summary>
-        /// Дата утверждения
-        ///</summary>
         public System.DateTime? DateOfStatement { get; set; } // DateOfStatement
-
-        ///<summary>
-        /// Статус Экспертизы
-        ///</summary>
         public int? ExpertiseStatus { get; set; } // ExpertiseStatus
-
-        ///<summary>
-        /// Сервисный номер
-        ///</summary>
         public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
-
-        ///<summary>
-        /// Индивидуальный сервисный номер
-        ///</summary>
         public string IndividualServiceNumber { get; set; } // IndividualServiceNumber (length: 128)
-
-        ///<summary>
-        /// Что то с балансом
-        ///</summary>
         public string NotOnBalance { get; set; } // NotOnBalance (length: 256)
-
-        ///<summary>
-        /// Год выпуска
-        ///</summary>
         public int YearOfIssue { get; set; } // YearOfIssue
-
-        ///<summary>
-        /// Год ввода в эксплуатацию
-        ///</summary>
         public int? ExploitationStartYear { get; set; } // ExploitationStartYear
-
-        ///<summary>
-        /// Гарантия
-        ///</summary>
         public System.DateTime? Guarantee { get; set; } // Guarantee
-
-        ///<summary>
-        /// Комментарий
-        ///</summary>
         public string Comment { get; set; } // Comment (length: 256)
-
-        ///<summary>
-        /// Сервисный статус
-        ///</summary>
         public string ServiceStatus { get; set; } // ServiceStatus (length: 256)
-
-        ///<summary>
-        /// Версия фактической ОС
-        ///</summary>
         public string OsActualVersion { get; set; } // OsActualVersion (length: 128)
-
-        ///<summary>
-        /// Актуальная версия ОС
-        ///</summary>
         public string ActualOsVersion { get; set; } // ActualOsVersion (length: 128)
-
-        ///<summary>
-        /// Назначение
-        ///</summary>
         public string Appointment { get; set; } // Appointment (length: 128)
-
-        ///<summary>
-        /// Тип использования
-        ///</summary>
         public string TypeOfUse { get; set; } // TypeOfUse (length: 128)
-
-        ///<summary>
-        /// Отдел
-        ///</summary>
         public string Division { get; set; } // Division (length: 256)
-
-        ///<summary>
-        /// Модель соответствия отправки
-        ///</summary>
         public string ModelInDeliveryAccordance { get; set; } // ModelInDeliveryAccordance (length: 128)
-
-        ///<summary>
-        /// Участок (Здание)
-        ///</summary>
         public string Building { get; set; } // Building (length: 128)
-
-        ///<summary>
-        /// Расположение. Этаж
-        ///</summary>
         public string FloorLocation { get; set; } // FloorLocation (length: 128)
-
-        ///<summary>
-        /// Расположение. Комната
-        ///</summary>
         public string RoomLocation { get; set; } // RoomLocation (length: 128)
-
-        ///<summary>
-        /// Версия ПС
-        ///</summary>
         public string PsVersion { get; set; } // PsVersion (length: 128)
-
-        ///<summary>
-        /// IP адрес
-        ///</summary>
         public string IpAddress { get; set; } // IpAddress (length: 128)
-
-        ///<summary>
-        /// Кол-во плат
-        ///</summary>
         public int? BoardsNumber { get; set; } // BoardsNumber
-
-        ///<summary>
-        /// Кол-во свободных плат
-        ///</summary>
         public int? FreeBoardsNumber { get; set; } // FreeBoardsNumber
-
-        ///<summary>
-        /// Кол-во внутр абон аналог
-        ///</summary>
         public int? InternalAnalogNumber { get; set; } // InternalAnalogNumber
-
-        ///<summary>
-        /// Кол-во внутр абон цифровых
-        ///</summary>
         public int? InternalDigitNumber { get; set; } // InternalDigitNumber
-
-        ///<summary>
-        /// Тип аналогового подключения городской ввод
-        ///</summary>
         public string TypeOfAnalogConnection { get; set; } // TypeOfAnalogConnection (length: 128)
-
-        ///<summary>
-        /// Тип цифрового подключения городской ввод
-        ///</summary>
         public string TypeOfDigitConnection { get; set; } // TypeOfDigitConnection (length: 128)
-
-        ///<summary>
-        /// Численность администраторов УАТС
-        ///</summary>
         public int? AdminsCount { get; set; } // AdminsCount
-
-        ///<summary>
-        /// Номер ключа
-        ///</summary>
         public string KeyNumber { get; set; } // KeyNumber (length: 256)
-
-        ///<summary>
-        /// Требует замены
-        ///</summary>
         public bool RequiresReplacement { get; set; } // RequiresReplacement
 
         // Reverse navigation
@@ -2139,36 +1898,13 @@ namespace EfDatabase.Inventory.Base
     }
 
     // EquipmentModel
-    ///<summary>
-    /// Модель ЭПО АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class EquipmentModel
     {
-
-        ///<summary>
-        /// Ун модели
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
-
-        ///<summary>
-        /// Код модели
-        ///</summary>
         public string Code { get; set; } // Code (length: 10)
-
-        ///<summary>
-        /// Наименование модели
-        ///</summary>
         public string Name { get; set; } // Name (length: 512)
-
-        ///<summary>
-        /// Дата начала
-        ///</summary>
         public System.DateTime? StartDate { get; set; } // StartDate
-
-        ///<summary>
-        /// Дата окончания
-        ///</summary>
         public System.DateTime? EndDate { get; set; } // EndDate
 
         // Reverse navigation
@@ -2287,41 +2023,14 @@ namespace EfDatabase.Inventory.Base
     }
 
     // EquipmentType
-    ///<summary>
-    /// Тип оборудования АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class EquipmentType
     {
-
-        ///<summary>
-        /// Ун оборудования
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
-
-        ///<summary>
-        /// Код оборудования
-        ///</summary>
         public string Code { get; set; } // Code (length: 10)
-
-        ///<summary>
-        /// Тип оборудования
-        ///</summary>
         public string Name { get; set; } // Name (length: 512)
-
-        ///<summary>
-        /// Комментарий
-        ///</summary>
         public string Comment { get; set; } // Comment (length: 1024)
-
-        ///<summary>
-        /// Дата начала
-        ///</summary>
         public System.DateTime? StartDate { get; set; } // StartDate
-
-        ///<summary>
-        /// Дата окончания
-        ///</summary>
         public System.DateTime? EndDate { get; set; } // EndDate
 
         // Reverse navigation
@@ -2461,17 +2170,11 @@ namespace EfDatabase.Inventory.Base
     }
 
     // ExpertiseFile
-    ///<summary>
-    /// Предворительно файл Экспертизы АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ExpertiseFile
     {
-
-        ///<summary>
-        /// Ун файла Экспертизы
-        ///</summary>
-        public int Id { get; set; } // Id (Primary key)
+        public long Id { get; set; } // Id (Primary key)
+        public string Name { get; set; } // Name
 
         // Reverse navigation
 
@@ -2488,17 +2191,11 @@ namespace EfDatabase.Inventory.Base
     }
 
     // File
-    ///<summary>
-    /// Предворительно файл Акт списания АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class File
     {
-
-        ///<summary>
-        /// Ун файла Акт списания
-        ///</summary>
-        public int Id { get; set; } // Id (Primary key)
+        public long Id { get; set; } // Id (Primary key)
+        public string Name { get; set; } // Name
 
         // Reverse navigation
 
@@ -2710,41 +2407,14 @@ namespace EfDatabase.Inventory.Base
     }
 
     // FullСategory
-    ///<summary>
-    /// Сводная таблица (Тип, Производитель, Модель) АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class FullСategory
     {
-
-        ///<summary>
-        /// Ун категории АКСИОК
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
-
-        ///<summary>
-        /// Ун типа оборудования АКСИОК
-        ///</summary>
         public int? IdEquipmentType { get; set; } // IdEquipmentType
-
-        ///<summary>
-        /// Ун производителя АКСИОК
-        ///</summary>
         public int? IdProducer { get; set; } // IdProducer
-
-        ///<summary>
-        /// Ун модели АКСИОК
-        ///</summary>
         public int? IdEquipmentModel { get; set; } // IdEquipmentModel
-
-        ///<summary>
-        /// Актуальность записи АКСИОК
-        ///</summary>
         public bool IsSignOfRelevance { get; set; } // IsSignOfRelevance
-
-        ///<summary>
-        /// Дата записи
-        ///</summary>
         public System.DateTime DateCreate { get; set; } // DateCreate
 
         // Reverse navigation
@@ -3841,61 +3511,18 @@ namespace EfDatabase.Inventory.Base
     }
 
     // ModelDocumentType
-    ///<summary>
-    /// Тип оборудования АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ModelDocumentType
     {
-
-        ///<summary>
-        /// Ун документа
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
-
-        ///<summary>
-        /// КОД СОУН
-        ///</summary>
         public int Soun { get; set; } // Soun
-
-        ///<summary>
-        /// Тип документа
-        ///</summary>
         public int DocumentType { get; set; } // DocumentType
-
-        ///<summary>
-        /// Вид оборудования/ПО
-        ///</summary>
         public string KindEquipmentName { get; set; } // KindEquipmentName (length: 512)
-
-        ///<summary>
-        /// Атрибут ТРУ (Тип оборудования)
-        ///</summary>
         public string CategoriesTruName { get; set; } // CategoriesTruName (length: 512)
-
-        ///<summary>
-        /// Номер документа
-        ///</summary>
         public string Number { get; set; } // Number (length: 128)
-
-        ///<summary>
-        /// Автор документа
-        ///</summary>
         public string Author { get; set; } // Author (length: 256)
-
-        ///<summary>
-        /// Атрибут удаления
-        ///</summary>
         public bool CanDelete { get; set; } // CanDelete
-
-        ///<summary>
-        /// Наименование учреждения
-        ///</summary>
         public string AgencyName { get; set; } // AgencyName (length: 512)
-
-        ///<summary>
-        /// Дата документа
-        ///</summary>
         public System.DateTime CreateDate { get; set; } // CreateDate
 
         // Reverse navigation
@@ -5572,36 +5199,13 @@ namespace EfDatabase.Inventory.Base
     }
 
     // Producer
-    ///<summary>
-    /// Производитель оборудования АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class Producer
     {
-
-        ///<summary>
-        /// Ун производителя
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
-
-        ///<summary>
-        /// Код оборудования
-        ///</summary>
         public string Code { get; set; } // Code (length: 10)
-
-        ///<summary>
-        /// Производитель
-        ///</summary>
         public string Name { get; set; } // Name (length: 512)
-
-        ///<summary>
-        /// Дата начала
-        ///</summary>
         public System.DateTime? StartDate { get; set; } // StartDate
-
-        ///<summary>
-        /// Дата окончания
-        ///</summary>
         public System.DateTime? EndDate { get; set; } // EndDate
 
         // Reverse navigation
@@ -8256,376 +7860,81 @@ namespace EfDatabase.Inventory.Base
     }
 
     // ValueCharacteristicJson
-    ///<summary>
-    /// Расширяющие атрибуты ЭПО АКСИОК
-    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ValueCharacteristicJson
     {
-
-        ///<summary>
-        /// Ун объекта
-        ///</summary>
         public int Id { get; set; } // Id (Primary key)
-
-        ///<summary>
-        /// Не на балансе
-        ///</summary>
         public string NotOnBalance { get; set; } // NotOnBalance (length: 256)
-
-        ///<summary>
-        /// Требует замены
-        ///</summary>
         public bool RequiresReplacement { get; set; } // RequiresReplacement
-
-        ///<summary>
-        /// Назначение
-        ///</summary>
         public string Appointment { get; set; } // Appointment (length: 128)
-
-        ///<summary>
-        /// Среда виртуализации
-        ///</summary>
         public string VirtualizationEnvironment { get; set; } // VirtualizationEnvironment (length: 128)
-
-        ///<summary>
-        /// Участок (Здание)
-        ///</summary>
         public string Building { get; set; } // Building (length: 128)
-
-        ///<summary>
-        /// Расположение. Этаж
-        ///</summary>
         public string FloorLocation { get; set; } // FloorLocation (length: 128)
-
-        ///<summary>
-        /// Расположение. Комната
-        ///</summary>
         public string RoomLocation { get; set; } // RoomLocation (length: 128)
-
-        ///<summary>
-        /// Комната
-        ///</summary>
         public string Room { get; set; } // Room (length: 128)
-
-        ///<summary>
-        /// Отдел
-        ///</summary>
         public string Division { get; set; } // Division (length: 256)
-
-        ///<summary>
-        /// Актуальная версия ОС
-        ///</summary>
         public string ActualOsVersion { get; set; } // ActualOsVersion (length: 128)
-
-        ///<summary>
-        /// Версия фактической ОС
-        ///</summary>
         public string OsActualVersion { get; set; } // OsActualVersion (length: 128)
-
-        ///<summary>
-        /// Наименование загса
-        ///</summary>
         public string ZagsName { get; set; } // ZagsName (length: 128)
-
-        ///<summary>
-        /// Адрес загса
-        ///</summary>
         public string ZagsAddress { get; set; } // ZagsAddress (length: 128)
-
-        ///<summary>
-        /// Тип использования
-        ///</summary>
         public string TypeOfUse { get; set; } // TypeOfUse (length: 128)
-
-        ///<summary>
-        /// Модель соответствия отправки
-        ///</summary>
         public string ModelInDeliveryAccordance { get; set; } // ModelInDeliveryAccordance (length: 128)
-
-        ///<summary>
-        /// Номер трансфера
-        ///</summary>
         public string TransferContractNumber { get; set; } // TransferContractNumber (length: 128)
-
-        ///<summary>
-        /// Версия ПС
-        ///</summary>
         public string PsVersion { get; set; } // PsVersion (length: 128)
-
-        ///<summary>
-        /// Сетевое имя (NetBIOS)
-        ///</summary>
         public string NetBiosName { get; set; } // NetBiosName (length: 128)
-
-        ///<summary>
-        /// IP адрес
-        ///</summary>
         public string IpAddress { get; set; } // IpAddress (length: 128)
-
-        ///<summary>
-        /// Дополнительные IP адреса
-        ///</summary>
         public string AdditionalIPs { get; set; } // AdditionalIPs (length: 128)
-
-        ///<summary>
-        /// Количество процессоров
-        ///</summary>
         public int? CpuCount { get; set; } // CpuCount
-
-        ///<summary>
-        /// Количество ядер
-        ///</summary>
         public int? CoreCount { get; set; } // CoreCount
-
-        ///<summary>
-        /// Тип процессора
-        ///</summary>
         public string CpuType { get; set; } // CpuType (length: 128)
-
-        ///<summary>
-        /// Частота процессора, МГц
-        ///</summary>
         public int? CpuFrequencyMhz { get; set; } // CpuFrequencyMhz
-
-        ///<summary>
-        /// ОЗУ (тип)
-        ///</summary>
         public string RamType { get; set; } // RamType (length: 128)
-
-        ///<summary>
-        /// ОЗУ (размер)
-        ///</summary>
         public int? RamSize { get; set; } // RamSize
-
-        ///<summary>
-        /// CD/DVD
-        ///</summary>
         public string CdOrDvd { get; set; } // CdOrDvd (length: 128)
-
-        ///<summary>
-        /// FDD
-        ///</summary>
         public string Fdd { get; set; } // Fdd (length: 128)
-
-        ///<summary>
-        /// RAID
-        ///</summary>
         public string Raid { get; set; } // Raid (length: 128)
-
-        ///<summary>
-        /// Общее дисковое пространство, Gb
-        ///</summary>
         public int? TotalDiskSpaceGb { get; set; } // TotalDiskSpaceGb
-
-        ///<summary>
-        /// Количество HDD
-        ///</summary>
         public int? HddCount { get; set; } // HddCount
-
-        ///<summary>
-        /// Объем жесткого диска
-        ///</summary>
         public int? HddSize { get; set; } // HddSize
-
-        ///<summary>
-        /// Тип жесткого диска
-        ///</summary>
         public string HddType { get; set; } // HddType (length: 128)
-
-        ///<summary>
-        /// Кол-во плат
-        ///</summary>
         public int? BoardsNumber { get; set; } // BoardsNumber
-
-        ///<summary>
-        /// Кол-во свободных плат
-        ///</summary>
         public int? FreeBoardsNumber { get; set; } // FreeBoardsNumber
-
-        ///<summary>
-        /// Сетевая карта
-        ///</summary>
         public string NetworkAdapter { get; set; } // NetworkAdapter (length: 128)
-
-        ///<summary>
-        /// Скорость сетевой карты
-        ///</summary>
         public int? NetworkAdapterSpeed { get; set; } // NetworkAdapterSpeed
-
-        ///<summary>
-        /// Кол-во внутр абон аналог
-        ///</summary>
         public int? InternalAnalogNumber { get; set; } // InternalAnalogNumber
-
-        ///<summary>
-        /// Кол-во внутр абон цифровых
-        ///</summary>
         public int? InternalDigitNumber { get; set; } // InternalDigitNumber
-
-        ///<summary>
-        /// Инвентарный номер ПК, к которому подключен
-        ///</summary>
         public string ConnectedPcInventoryNumber { get; set; } // ConnectedPcInventoryNumber (length: 128)
-
-        ///<summary>
-        /// Инвентарный номер ИБП, к которому подключен
-        ///</summary>
         public string ConnectedUpsInventoryNumber { get; set; } // ConnectedUpsInventoryNumber (length: 128)
-
-        ///<summary>
-        /// Инвентарный номер монитора
-        ///</summary>
         public string DisplayInventoryNumber { get; set; } // DisplayInventoryNumber (length: 128)
-
-        ///<summary>
-        /// Сервисный номер монитора
-        ///</summary>
         public string DisplayServiceNumber { get; set; } // DisplayServiceNumber (length: 128)
-
-        ///<summary>
-        /// Монитор, марка
-        ///</summary>
         public string DisplayBrand { get; set; } // DisplayBrand (length: 128)
-
-        ///<summary>
-        /// Тип монитора
-        ///</summary>
         public string DisplayType { get; set; } // DisplayType (length: 128)
-
-        ///<summary>
-        /// Размер экрана
-        ///</summary>
         public string DisplaySize { get; set; } // DisplaySize (length: 128)
-
-        ///<summary>
-        /// Максимальное разрешение
-        ///</summary>
         public string DisplayMaxResolution { get; set; } // DisplayMaxResolution (length: 128)
-
-        ///<summary>
-        /// Тип аналогового подключения городской ввод
-        ///</summary>
         public string TypeOfAnalogConnection { get; set; } // TypeOfAnalogConnection (length: 128)
-
-        ///<summary>
-        /// Тип цифрового подключения городской ввод
-        ///</summary>
         public string TypeOfDigitConnection { get; set; } // TypeOfDigitConnection (length: 128)
-
-        ///<summary>
-        /// Численность администраторов УАТС
-        ///</summary>
         public int? AdminsCount { get; set; } // AdminsCount
-
-        ///<summary>
-        /// Номер ключа
-        ///</summary>
         public string KeyNumber { get; set; } // KeyNumber (length: 128)
-
-        ///<summary>
-        /// Марка стримера
-        ///</summary>
         public string StreamerBrand { get; set; } // StreamerBrand (length: 128)
-
-        ///<summary>
-        /// Маркировка картриджей стримера
-        ///</summary>
         public string StreamerCartridgeMark { get; set; } // StreamerCartridgeMark (length: 128)
-
-        ///<summary>
-        /// Операционная система
-        ///</summary>
         public string OperatingSystem { get; set; } // OperatingSystem (length: 128)
-
-        ///<summary>
-        /// Сервис пак
-        ///</summary>
         public string ServicePack { get; set; } // ServicePack (length: 128)
-
-        ///<summary>
-        /// Офисный пакет
-        ///</summary>
         public string OfficeSuite { get; set; } // OfficeSuite (length: 128)
-
-        ///<summary>
-        /// Фамилия И.О.
-        ///</summary>
         public string Fio { get; set; } // Fio (length: 128)
-
-        ///<summary>
-        /// Ответственный
-        ///</summary>
         public string ResponsiblePerson { get; set; } // ResponsiblePerson (length: 128)
-
-        ///<summary>
-        /// Описание
-        ///</summary>
         public string Description { get; set; } // Description (length: 128)
-
-        ///<summary>
-        /// МАК Адресс
-        ///</summary>
         public string MacAddress { get; set; } // MacAddress (length: 128)
-
-        ///<summary>
-        /// Гарантия
-        ///</summary>
         public System.DateTime? Guarantee { get; set; } // Guarantee
-
-        ///<summary>
-        /// Год выпуска
-        ///</summary>
         public string YearOfIssue { get; set; } // YearOfIssue (length: 128)
-
-        ///<summary>
-        /// Имя компьютера
-        ///</summary>
         public string ComputerName { get; set; } // ComputerName (length: 128)
-
-        ///<summary>
-        /// Инвентарный номер
-        ///</summary>
         public string InventoryNumber { get; set; } // InventoryNumber (length: 128)
-
-        ///<summary>
-        /// Комментарий
-        ///</summary>
         public string Comments { get; set; } // Comments (length: 128)
-
-        ///<summary>
-        /// Контракт
-        ///</summary>
         public string SupplyContract { get; set; } // SupplyContract (length: 128)
-
-        ///<summary>
-        /// Контракт СТО
-        ///</summary>
         public string ContractSto { get; set; } // ContractSto (length: 128)
-
-        ///<summary>
-        /// Сервисный номер
-        ///</summary>
         public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
-
-        ///<summary>
-        /// Серийный номер
-        ///</summary>
         public string SerialNumber { get; set; } // SerialNumber (length: 128)
-
-        ///<summary>
-        /// Сервер почты
-        ///</summary>
         public string MailServer { get; set; } // MailServer (length: 128)
-
-        ///<summary>
-        /// Сервер Файлвола
-        ///</summary>
         public string FirewallMailServer { get; set; } // FirewallMailServer (length: 128)
-
-        ///<summary>
-        /// Файлвол ВКС
-        ///</summary>
         public string FirewallForVks { get; set; } // FirewallForVks (length: 128)
 
         // Foreign keys
@@ -9499,8 +8808,8 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.IdEquipmentModel).HasColumnName(@"IdEquipmentModel").HasColumnType("int").IsOptional();
             Property(x => x.IdDeliveryContract).HasColumnName(@"IdDeliveryContract").HasColumnType("int").IsOptional();
             Property(x => x.IdContractOnSto).HasColumnName(@"IdContractOnSto").HasColumnType("int").IsOptional();
-            Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("int").IsOptional();
-            Property(x => x.IdExpertiseFile).HasColumnName(@"IdExpertiseFile").HasColumnType("int").IsOptional();
+            Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("bigint").IsOptional();
+            Property(x => x.IdExpertiseFile).HasColumnName(@"IdExpertiseFile").HasColumnType("bigint").IsOptional();
             Property(x => x.ComputerName).HasColumnName(@"ComputerName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.SerialNumber).HasColumnName(@"SerialNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.Identifier).HasColumnName(@"Identifier").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
@@ -9830,7 +9139,8 @@ namespace EfDatabase.Inventory.Base
             ToTable("ExpertiseFile", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("bigint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
         }
     }
 
@@ -9848,7 +9158,8 @@ namespace EfDatabase.Inventory.Base
             ToTable("File", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("bigint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
         }
     }
 

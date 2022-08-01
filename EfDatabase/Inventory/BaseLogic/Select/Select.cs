@@ -215,13 +215,11 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             foreach (var sy in sys)
             {
-                if (sy.User != null)
+                if (sy.User == null) continue;
+                sy.User.Otdel.User = null;
+                if (sy.User.Telephon != null)
                 {
-                    sy.User.Otdel.User = null;
-                    if (sy.User.Telephon != null)
-                    {
-                        sy.User.Telephon.User = null;
-                    }
+                    sy.User.Telephon.User = null;
                 }
             }
         }

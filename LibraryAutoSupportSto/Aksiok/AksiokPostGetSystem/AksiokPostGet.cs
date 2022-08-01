@@ -179,6 +179,30 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
                 Dispose();
             }
         }
+        /// <summary>
+        /// Точечная синхронизация
+        /// </summary>
+        /// <param name="idModel">Ун модели</param>
+        /// <param name="idDocument">Ун документа</param>
+        /// <param name="serialNumber">Серийный номер</param>
+        public void PointSynchronizationAksiok(int idModel,int idDocument, string serialNumber)
+        {
+            try
+            {
+                PostAksiok<EfDatabase.ModelAksiok.Aksiok.EpoDocument>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 7), 0, 0, 0, idModel), idDocument);
+                PostAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 8), 0, 0, 0, idModel));
+                AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(null, AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 9)?.ModelUpdateSql);
+                Dispose();
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+                Loggers.Log4NetLogger.Error(
+                    new Exception("Данные не соответствуют формату int в Ун модели: " + idModel + ", Серийный номер: " + serialNumber + ", Категория: " + idDocument + "."));
+
+                Dispose();
+            }
+        }
 
         /// <summary>
         /// Dispose 

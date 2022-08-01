@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Aksiok\AksiokPostGetSystem\AksiokPostGet.cs" />
     <Compile Include="Aksiok\AksiokPostGetSystem\ModelParametersAksiok.cs" />
+    <Compile Include="Aksiok\AksiokPostUpdeteAndAddSystem\AksiokPostGetEditAndAdd.cs" />
+    <Compile Include="Aksiok\AksiokPostUpdeteAndAddSystem\ModelParameterAksiokEditAndAdd.cs" />
     <Compile Include="PassportSto\PassportStoPostGet\ParametersStoPostGet.cs" />
     <Compile Include="PassportSto\PassportStoPostGet\PassportStoPostGet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +66,10 @@
       <Project>{91fad00a-d052-4dd6-a9bb-544782a0d2c4}</Project>
       <Name>AttributeHelperModelXml</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
+      <Project>{A2BC3AE2-4A61-4E9E-9FA4-96A02677C79C}</Project>
+      <Name>LibaryXMLAuto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EfDatabase\EfDatabase.csproj">
       <Project>{578cf45e-310b-4e2e-9c94-5a9f16b736ae}</Project>
       <Name>EfDatabase</Name>
@@ -73,8 +79,6 @@
       <Name>Loggers</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Aksiok\AksiokPostUpdeteSystem\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

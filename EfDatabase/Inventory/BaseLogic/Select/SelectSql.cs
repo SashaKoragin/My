@@ -9,7 +9,7 @@ using System.Xml;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Journal;
 using EfDatabase.MemoReport;
-using EfDatabase.ModelAksiok.Aksiok;
+using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
 using EfDatabase.ReportCard;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
@@ -647,6 +647,11 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 var idFullCategoria = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], aksiokAddAndEdit.ParametersModel.IdFullCategoria) {Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int};
                 var codeError = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[4], aksiokAddAndEdit.ParametersModel.CodeError) {Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int};
                 var errorServer = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[5], aksiokAddAndEdit.ParametersModel.ErrorServer) {Direction = ParameterDirection.Output, Size = 512, SqlDbType = SqlDbType.VarChar};
+                var idState = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[6], aksiokAddAndEdit.ParametersModel.IdState) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
+                var idStateSto = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[7], aksiokAddAndEdit.ParametersModel.IdStateSto) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
+                var idExpertise = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[8], aksiokAddAndEdit.ParametersModel.IdExpertise) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
+                var yearOfIssue = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[9], aksiokAddAndEdit.ParametersModel.IdExpertise) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
+                var exploitationStartYear = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[10], aksiokAddAndEdit.ParametersModel.IdExpertise) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
                 Inventory.Database.ExecuteSqlCommand(selectModel.LogicaSelect.SelectUser,
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0],
                         aksiokAddAndEdit.ParametersModel.ModelRequest),
@@ -654,9 +659,17 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                         aksiokAddAndEdit.ParametersModel.SerNumber),
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2],
                         aksiokAddAndEdit.ParametersModel.InventoryNum),
-                    idFullCategoria, codeError, errorServer
+                    idFullCategoria, codeError, errorServer, idState, idStateSto, idExpertise, yearOfIssue, exploitationStartYear
                 );
-                aksiokAddAndEdit.ParametersModel.IdFullCategoria = (int?)idFullCategoria.Value;
+                if (idFullCategoria.Value != DBNull.Value)
+                {
+                    aksiokAddAndEdit.ParametersModel.IdFullCategoria = (int)idFullCategoria.Value;
+                    aksiokAddAndEdit.ParametersModel.IdState = (int)idState.Value;
+                    aksiokAddAndEdit.ParametersModel.IdStateSto = (int)idStateSto.Value;
+                    aksiokAddAndEdit.ParametersModel.IdExpertise = (int)idExpertise.Value;
+                    aksiokAddAndEdit.ParametersModel.YearOfIssue = (int) yearOfIssue.Value;
+                    aksiokAddAndEdit.ParametersModel.ExploitationStartYear = (int)exploitationStartYear.Value;
+                }
                 aksiokAddAndEdit.ParametersModel.CodeError = (int)codeError.Value;
                 aksiokAddAndEdit.ParametersModel.ErrorServer = (string)errorServer.Value;
                 return aksiokAddAndEdit;
@@ -669,6 +682,112 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 aksiokAddAndEdit.ParametersModel.ErrorServer = e.Message;
             }
             return aksiokAddAndEdit;
+        }
+        /// <summary>
+        /// Проверка комплектов оборудования 
+        /// </summary>
+        /// <param name="kitsEquipment">Параметры для проверки комплектов оборудования</param>
+        /// <returns></returns>
+        public KitsEquipment ModelValidationKits(KitsEquipment kitsEquipment)
+        {
+            try
+            {
+                XmlReadOrWrite xml = new XmlReadOrWrite();
+                ModelSelect selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(58) };
+                var errorServer = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], kitsEquipment.ErrorServer) { Direction = ParameterDirection.Output, Size = 512, SqlDbType = SqlDbType.VarChar };
+                var xmlModel = new  SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2],null) { Direction = ParameterDirection.Output,  SqlDbType = SqlDbType.Xml };
+                Inventory.Database.ExecuteSqlCommand(selectModel.LogicaSelect.SelectUser, new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], kitsEquipment.InventoryNum), errorServer, xmlModel
+                );
+                if (xmlModel.Value != DBNull.Value)
+                {
+                    kitsEquipment.KitsEquipmentServer = ((KitsEquipment)xml.ReadXmlText((string) xmlModel.Value, typeof(KitsEquipment))).KitsEquipmentServer;
+                }
+                else
+                {
+                    kitsEquipment.ErrorServer = (string)errorServer.Value;
+                }
+            }
+            //В случае исключения
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+                kitsEquipment.ErrorServer = e.Message;
+            }
+            return kitsEquipment;
+        }
+        /// <summary>
+        /// Сбор модели для отпраки на сервер для редактирования
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Модель параметров</param>
+        /// <returns></returns>
+        public AksiokEditAndAddProcedure ReturnModelAksiokEditAndAdd(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            try
+            {
+                var aksiokAddAndEditReturn = new AksiokEditAndAddProcedure();
+                var xml = new XmlReadOrWrite();
+                var selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(59) };
+                var xmlModel = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[6], null) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Xml };
+                Inventory.Database.ExecuteSqlCommand(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], aksiokAddAndEdit.ParametersRequestAksiok.IdType),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], aksiokAddAndEdit.ParametersRequestAksiok.IdProducer),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], aksiokAddAndEdit.ParametersRequestAksiok.IdModel),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], aksiokAddAndEdit.ParametersModel.SerNumber),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[4], aksiokAddAndEdit.ParametersModel.ModelRequest),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[5], 1), xmlModel,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[7], aksiokAddAndEdit.ParametersRequestAksiok.IdState),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[8], aksiokAddAndEdit.ParametersRequestAksiok.IdStateSto),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[9], aksiokAddAndEdit.ParametersRequestAksiok.IdExpertise),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[10], aksiokAddAndEdit.ParametersModel.YearOfIssue),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[11], aksiokAddAndEdit.ParametersModel.ExploitationStartYear));
+                if (xmlModel.Value == DBNull.Value)
+                {
+                    return null;
+                }
+                aksiokAddAndEditReturn.AksiokEditPublicModel = ((AksiokEditAndAddProcedure) xml.ReadXmlText((string) xmlModel.Value, typeof(AksiokEditAndAddProcedure))).AksiokEditPublicModel;
+                aksiokAddAndEditReturn.PublicModelValueJson = Inventory.Database.SqlQuery<PublicModelValueJson>(selectModel.LogicaSelect.SelectUser,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], aksiokAddAndEdit.ParametersRequestAksiok.IdType),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], aksiokAddAndEdit.ParametersRequestAksiok.IdProducer),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2], aksiokAddAndEdit.ParametersRequestAksiok.IdModel),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[3], aksiokAddAndEdit.ParametersModel.SerNumber),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[4], aksiokAddAndEdit.ParametersModel.ModelRequest),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[5], 2), xmlModel,
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[7], aksiokAddAndEdit.ParametersRequestAksiok.IdState),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[8], aksiokAddAndEdit.ParametersRequestAksiok.IdStateSto),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[9], aksiokAddAndEdit.ParametersRequestAksiok.IdExpertise),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[10], aksiokAddAndEdit.ParametersModel.YearOfIssue),
+                    new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[11], aksiokAddAndEdit.ParametersModel.ExploitationStartYear)).FirstOrDefault();
+                if (aksiokAddAndEditReturn.PublicModelValueJson == null)
+                {
+                    return null;
+                }
+                return aksiokAddAndEditReturn;
+            }
+            //В случае исключения
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
+        /// <summary>
+        /// Выгрузка файла из АКСИОК
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Модель файла</param>
+        /// <returns>Ун файла для url</returns>
+        public long? SelectFileId(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            long? fileId = null;
+            switch (aksiokAddAndEdit.ParametersModel.ModelRequest)
+            {
+                case "ExpertiseFile":
+                    fileId = Inventory.EpoDocuments.Where(model=>model.SerialNumber== aksiokAddAndEdit.ParametersModel.SerNumber).Select(x=>x.IdExpertiseFile).FirstOrDefault();
+                    break;
+                case "FileAct":
+                    fileId = Inventory.EpoDocuments.Where(model => model.SerialNumber == aksiokAddAndEdit.ParametersModel.SerNumber).Select(x => x.IdFile).FirstOrDefault();
+                    break;
+            }
+            return fileId;
         }
 
         /// <summary>

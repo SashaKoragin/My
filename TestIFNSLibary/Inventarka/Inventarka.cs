@@ -14,7 +14,7 @@ using EfDatabase.Inventory.MailLogicLotus;
 using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabase.Inventory.SqlModelSelect;
 using EfDatabase.MemoReport;
-using EfDatabase.ModelAksiok.Aksiok;
+using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
 using EfDatabase.ReportCard;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
@@ -29,6 +29,7 @@ using LibaryDocumentGenerator.Documents.Template;
 using LibaryDocumentGenerator.Documents.TemplateExcel;
 using LibaryXMLAuto.ReadOrWrite;
 using LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem;
+using LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem;
 using LibraryAutoSupportSto.PassportSto.PassportStoPostGet;
 using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
@@ -437,7 +438,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 add.AddAndDeleteRuleUsers(ruleUsers);
                 add.Dispose();
-                return auto.AllRuleUser((int) ruleUsers.IdUser);
+                return auto.AllRuleUser((int)ruleUsers.IdUser);
             });
         }
 
@@ -2432,8 +2433,6 @@ namespace TestIFNSLibary.Inventarka
                     {
                         var aksiok = new AksiokPostGetSystem(userLogin, passwordUser);
                         aksiok.StartUpdateAksiok();
-                        
-
                     });
                     task.ConfigureAwait(true).GetAwaiter().OnCompleted(() =>
                     {
@@ -2682,7 +2681,7 @@ namespace TestIFNSLibary.Inventarka
             });
         }
         /// <summary>
-        /// Вытащить все производители из БД
+        /// Вытащить все модели из БД
         /// </summary>
         /// <returns></returns>
         public async Task<string> SelectAllEquipmentModel()
@@ -2694,6 +2693,71 @@ namespace TestIFNSLibary.Inventarka
                 auto.Dispose();
                 return model;
             });
+        }
+        /// <summary>
+        /// Проверка оборудование на комплектность!!!
+        /// </summary>
+        /// <param name="kitsEquipment">Параметры комплектов</param>
+        /// <returns></returns>
+        public async Task<KitsEquipment> KitsEquipmentValidation(KitsEquipment kitsEquipment)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSal = new SelectSql();
+                var modelKitsEquipment = selectSal.ModelValidationKits(kitsEquipment);
+                selectSal.Dispose();
+                return modelKitsEquipment;
+            });
+        }
+        /// <summary>
+        /// Функция Редактирования или добавления в АКСИОК данных
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Заполненная модель данных для выполнения действий</param>
+        public async Task<string> AksiokAddAndEditModel(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                var aksiokModelEditAndAdd = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit);
+                selectSql.Dispose();
+                if (aksiokModelEditAndAdd != null)
+                {
+                    var aksiokEditAndAdd = new AksiokPostGetEditAndAdd(aksiokAddAndEdit.ParametersModel.LoginUser, aksiokAddAndEdit.ParametersModel.Password, aksiokModelEditAndAdd);
+                    var message = aksiokEditAndAdd.StartEditAndAddAksiok(aksiokAddAndEdit);
+                    aksiokEditAndAdd.Dispose();
+                    return message;
+                }
+                return "Процедура вернула null Добавление или Редактирование невозможно!!!";
+            });
+        }
+        /// <summary>
+        /// Выгрузка файла из АКСИОК для просмотра
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Заполненная модель данных для выполнения действий</param>
+        /// <returns></returns>
+        public async Task<UploadFileAksiok> UploadFileAksiok(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                var idFile = selectSql.SelectFileId(aksiokAddAndEdit);
+                selectSql.Dispose();
+                if (idFile != null)
+                {
+                    var aksiokEditAndAdd = new AksiokPostGetEditAndAdd(aksiokAddAndEdit.ParametersModel.LoginUser, aksiokAddAndEdit.ParametersModel.Password, null);
+                    var fileAksiok = aksiokEditAndAdd.UploadFileAksiok((long)idFile);
+                    aksiokEditAndAdd.Dispose(); 
+                    return fileAksiok;
+                }
+                return null;
+            });
+        }
+        /// <summary>
+        /// Будущий процесс по сравниванию учетных данных (AD, Lotus, ДКС)
+        /// </summary>
+        public void ProcessComparableUser()
+        {
+
         }
     }
 }
