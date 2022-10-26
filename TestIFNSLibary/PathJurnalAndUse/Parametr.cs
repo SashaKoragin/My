@@ -20,17 +20,12 @@ namespace TestIFNSLibary.PathJurnalAndUse
             ConnectionString = ConfigurationManager.AppSettings["Connect"];
             ConectTest = ConfigurationManager.AppSettings["ConectTest"];
             ConectWork = ConfigurationManager.AppSettings["ConectWork"];
-            Report = ConfigurationManager.AppSettings["SaveReport"];
+            SaveReport = ConfigurationManager.AppSettings["SaveReport"];
             ReportMassTemplate = ConfigurationManager.AppSettings["ReportMassTemplate"];
             Inventarization = ConfigurationManager.ConnectionStrings["Inventarization"].ConnectionString;
             BulkCopyXmlSto = ConfigurationManager.ConnectionStrings["BulkCopyXmlSto"].ConnectionString;
             ConnectImns51 = ConfigurationManager.AppSettings["ConnectImns51"];
             PathDomainGroup = ConfigurationManager.AppSettings["PathDomainGroup"];
-            User = ConfigurationManager.AppSettings["User"];
-            Password = ConfigurationManager.AppSettings["Password"];
-            SendServiceLotus = ConfigurationManager.AppSettings["SendServiceLotus"];
-            LoginSto = ConfigurationManager.AppSettings["LoginSto"];
-            PasswordSto = ConfigurationManager.AppSettings["PasswordSto"];
             XsdReport = ConfigurationManager.AppSettings["XsdReport"];
         }
 
@@ -76,7 +71,7 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// <summary>
         /// Сохранение отчетов в автомате
         /// </summary>
-        public string Report { get; set; }
+        public string SaveReport { get; set; }
         /// <summary>
         /// Путь для массовой печати
         /// </summary>
@@ -93,26 +88,6 @@ namespace TestIFNSLibary.PathJurnalAndUse
         /// Группы пользователей поиск
         /// </summary>
         public string PathDomainGroup { get; set; }
-        /// <summary>
-        /// Логин 
-        /// </summary>
-        public string User { get; set; }
-        /// <summary>
-        /// Пароль
-        /// </summary>
-        public string Password { get; set; }
-        /// <summary>
-        /// Отправка модели для генерации писем
-        /// </summary>
-        public string SendServiceLotus { get; set; }
-        /// <summary>
-        /// Логин для СТО
-        /// </summary>
-        public string LoginSto { get; set; }
-        /// <summary>
-        /// Пароль СТО
-        /// </summary>
-        public string PasswordSto { get; set; }
         /// <summary>
         /// Загрузка данных с СТО
         /// </summary>

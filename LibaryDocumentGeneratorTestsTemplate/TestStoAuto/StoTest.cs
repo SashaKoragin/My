@@ -287,7 +287,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
 
                 return null;
             }
-            catch (Exception e)
+            catch
             {
 
             }
@@ -375,7 +375,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
                     mac.Ip = ipAdress;
                     mac.Mac = string.Join(":", macAddressString);
                 }
-                catch (Exception exception)
+                catch
                 {
                     mac.Ip = ipAdress;
                     mac.Mac = "Mac не определен";

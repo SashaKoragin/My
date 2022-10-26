@@ -99,6 +99,8 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 PnameOrganization = organization.PnameOrganization,
                 NameFace = organization.NameFace,
                 NameDepartament = organization.NameDepartament,
+                CodeRegion = organization.CodeRegion,
+                CodeCyti = organization.CodeCyti,
                 Room = organization.Room,
                 Mail = organization.Mail,
                 CodeObject = organization.CodeObject,
@@ -741,7 +743,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IdNumberKabinet = telephone.IdNumberKabinet,
                 ServiceNum = telephone.ServiceNum,
                 SerNumber = telephone.SerNumber,
-                InventarNum = telephone.InventarNum,
+                InventarNumberTelephone = telephone.InventarNumberTelephone,
                 NameTelephone = telephone.NameTelephone,
                 Telephon_ = telephone.Telephon_,
                 TelephonUndeground = telephone.TelephonUndeground,
@@ -1893,38 +1895,73 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         {
             var eventProcessAddAndModified = new EventProcess()
             {
-                Id = eventProcess.Id,
-                NameProcess = eventProcess.NameProcess,
-                DayX = eventProcess.DayX,
+                IdProcess = eventProcess.IdProcess,
+                InfoEvent = eventProcess.InfoEvent,
+                IdDayOfTheWeek = eventProcess.IdDayOfTheWeek,
                 HoursX = eventProcess.HoursX,
                 MinutesX = eventProcess.MinutesX,
-                ParametersEvent = eventProcess.ParametersEvent,
+                IsTimeEventProcess = eventProcess.IsTimeEventProcess,
+                IsExistsParameters = eventProcess.IsExistsParameters,
                 IsComplete = eventProcess.IsComplete,
                 DataStart =  eventProcess.DataStart,
-                DataFinish = eventProcess.DataFinish
+                DataFinish = eventProcess.DataFinish,
+                FindNameSpace = eventProcess.FindNameSpace,
+                NameDll = eventProcess.NameDll,
+                NameMethodProcess = eventProcess.NameMethodProcess
             };
             try
             {
                 if ((from EventProcess in Inventory.EventProcesses
-                     where EventProcess.Id == eventProcess.Id
-                    select new { EventProcess }).Any())
+                     where EventProcess.IdProcess == eventProcess.IdProcess
+                     select new { EventProcess }).Any())
                 {
                     Inventory.Entry(eventProcessAddAndModified).State = EntityState.Modified;
                     Inventory.SaveChanges();
 
-                    return new ModelReturn<EventProcess>("Обновили параметры для процессов: " + eventProcessAddAndModified.Id, eventProcess);
+                    return new ModelReturn<EventProcess>("Обновили параметры для процессов: " + eventProcessAddAndModified.IdProcess, eventProcess);
                 }
                 Inventory.EventProcesses.Add(eventProcessAddAndModified);
                 Inventory.SaveChanges();
-                eventProcess.Id = eventProcessAddAndModified.Id;
-                return new ModelReturn<EventProcess>("Добавили новые параметры для процессов " + eventProcessAddAndModified.Id, eventProcess, eventProcessAddAndModified.Id);
+                eventProcess.IdProcess = eventProcessAddAndModified.IdProcess;
+                return new ModelReturn<EventProcess>("Добавили новые параметры для процессов " + eventProcessAddAndModified.IdProcess, eventProcess, eventProcessAddAndModified.IdProcess);
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-            return new ModelReturn<EventProcess>("При обновлении/добавлении данных 'Параметры для процессов' по: " + eventProcessAddAndModified.Id + " произошла ошибка смотри log.txt");
+            return new ModelReturn<EventProcess>("При обновлении/добавлении данных 'Параметры для процессов' по: " + eventProcessAddAndModified.IdProcess + " произошла ошибка смотри log.txt");
         }
+        /// <summary>
+        /// Редактирование параметров для процессов 
+        /// </summary>
+        /// <param name="parameterEventProcess">Параметры для процесса</param>
+        /// <returns></returns>
+        public ModelReturn<ParameterEventProcess> EditParameterEventProcess(ParameterEventProcess parameterEventProcess)
+        {
+            var parameterEventProcessAddAndModified = new ParameterEventProcess()
+            {
+              IdParameters = parameterEventProcess.IdParameters,
+              NameParameters = parameterEventProcess.NameParameters,
+              InfoParameters = parameterEventProcess.InfoParameters,
+              Parameters = parameterEventProcess.Parameters,
+              DateCreate = DateTime.Now
+            };
+            try
+            {
+                if (!(from parameterEventProcesses in Inventory.ParameterEventProcesses
+                    where parameterEventProcesses.IdParameters == parameterEventProcess.IdParameters
+                    select new {ParameterEventProcesses = parameterEventProcesses}).Any()) return null;
+                Inventory.Entry(parameterEventProcessAddAndModified).State = EntityState.Modified;
+                Inventory.SaveChanges();
+                return new ModelReturn<ParameterEventProcess>("Обновили параметры для процессов: " + parameterEventProcessAddAndModified.IdParameters, parameterEventProcess);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ParameterEventProcess>("При обновлении/добавлении данных 'Параметры для процессов' по: " + parameterEventProcessAddAndModified.IdParameters + " произошла ошибка смотри log.txt");
+        }
+
 
         /// <summary>
         /// Удаление или добавление роли пользователя в БД
@@ -2036,7 +2073,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
         /// <param name="isComplete">Завершен ли процесс или начат</param>
         public void IsProcessComplete(int idProcess, bool isComplete)
         {
-            var process = Inventory.EventProcesses.FirstOrDefault(x => x.Id == idProcess);
+            var process = Inventory.EventProcesses.FirstOrDefault(x => x.IdProcess == idProcess);
                 if (process != null)
                 {
                     process.IsComplete = isComplete;

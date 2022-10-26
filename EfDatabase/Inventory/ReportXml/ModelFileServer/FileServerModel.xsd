@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="AllFileServerModel" type="AllFileServerModel">
+		<xs:annotation>
+			<xs:documentation>Модель файлов на сервере</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AllFileServerModel">
+		<xs:annotation>
+			<xs:documentation>Модель файлов на сервере</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="AllFileServer" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AllFileServer">
+		<xs:annotation>
+			<xs:documentation>Файловый сервер</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SizeFile"/>
+				<xs:element ref="DateCreated"/>
+				<xs:element ref="DateAccessed"/>
+				<xs:element ref="DateModified"/>
+				<xs:element ref="DateSaved"/>
+				<xs:element ref="AuthorAll" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="NameSave" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Кем сохранен</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FileOwnerAuthor" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Владелец файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LastAuthor" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Последний автор на сохранение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FullPathFile" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Полный путь к файлу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PathFile" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Путь к файлу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameFile" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ItemTypeText" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeMime" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FileExtension" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Расширение файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SizeFileText" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Размер в текстовом виде</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HashFile" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Хэш файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AuthorAll" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Все авторы редактировшие файл</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SizeFile" type="xs:unsignedLong" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Размер файла</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateCreated" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата создания</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateAccessed" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата последнего доступа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateModified" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата изменения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateSaved" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата последнего сохранения</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

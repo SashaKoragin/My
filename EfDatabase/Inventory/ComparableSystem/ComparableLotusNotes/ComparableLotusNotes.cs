@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Net;
+using LibaryXMLAuto.Inventarization.ModelComparableUserAllSystem;
+using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 
 namespace EfDatabase.Inventory.ComparableSystem.ComparableLotusNotes
 {
@@ -12,6 +12,32 @@ namespace EfDatabase.Inventory.ComparableSystem.ComparableLotusNotes
     /// </summary>
     public class ComparableLotusNotes
     {
+        private string UrlLotusNotes { get; set; }
+
+
+        public ComparableLotusNotes(string urlLotus)
+        {
+            UrlLotusNotes = urlLotus;
+        }
+
+        /// <summary>
+        /// Загрузка моделей из Lotus Notes
+        /// </summary>
+        public ModelComparableUser DownloadModelLotusNotes()
+        {
+            var json = new SerializeJson();
+            var request = (HttpWebRequest)WebRequest.Create(UrlLotusNotes);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            string resultServer;
+            using (StreamReader rdr = new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException($"Ошибка запроса в {UrlLotusNotes} вернул NULL!")))
+            {
+                resultServer = rdr.ReadToEnd();
+            }
+            response.Dispose();
+            return (ModelComparableUser)json.JsonDeserializeObjectClass<ModelComparableUser>(resultServer);
+        }
 
     }
 }

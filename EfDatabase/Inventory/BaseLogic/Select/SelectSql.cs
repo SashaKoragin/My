@@ -2,10 +2,12 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Serialization;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Journal;
 using EfDatabase.MemoReport;
@@ -14,10 +16,12 @@ using EfDatabase.ReportCard;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
 using EfDatabase.XsdLotusUser;
+using LibaryXMLAuto.Inventarization.ModelComparableUserAllSystem;
 using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.ReadOrWrite;
 using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
+using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
 using Otdel = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel;
 using RuleTemplate = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.RuleTemplate;
 
@@ -65,7 +69,6 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public SelectSql()
         {
             Inventory?.Dispose();
-
             Inventory = new InventoryContext();
         }
         /// <summary>
@@ -262,7 +265,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             var report = new ModelPathReport();
             try
             {
-                var isProcessTrue = Inventory.EventProcesses.FirstOrDefault(complete => complete.Id == idProcessBlock);
+                var isProcessTrue = Inventory.EventProcesses.FirstOrDefault(complete => complete.IdProcess == idProcessBlock);
                 if (isProcessTrue == null)
                     throw new InvalidOperationException($"Фатальная ошибка отсутствует процесс Id - {idProcessBlock} в системе!");
                 if (isProcessTrue.IsComplete == true)
@@ -300,11 +303,11 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                         addObjectDb.IsProcessComplete(idProcessBlock, true);
                         addObjectDb.Dispose();
                     }));
-                    report.Note = $"{isProcessTrue.NameProcess} запущен!";
+                    report.Note = $"{isProcessTrue.InfoEvent} запущен!";
                 }
                 else
                 {
-                    report.Note = $"{isProcessTrue.NameProcess} уже запущен ожидайте окончание процесса!";
+                    report.Note = $"{isProcessTrue.InfoEvent} уже запущен ожидайте окончание процесса!";
                 }
             }
             catch (Exception e)
@@ -727,6 +730,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 var aksiokAddAndEditReturn = new AksiokEditAndAddProcedure();
                 var xml = new XmlReadOrWrite();
                 var selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(59) };
+
                 var xmlModel = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[6], null) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Xml };
                 Inventory.Database.ExecuteSqlCommand(selectModel.LogicaSelect.SelectUser,
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], aksiokAddAndEdit.ParametersRequestAksiok.IdType),
@@ -789,7 +793,25 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             }
             return fileId;
         }
-
+        /// <summary>
+        /// Модель возврата отчета на сервер
+        /// </summary>
+        /// <typeparam name="T">Тип получаемого объекта</typeparam>
+        /// <param name="selectLogic">Sql запрос для получения объекта</param>
+        /// <returns></returns>
+        public T[] SelectObjectModelSql<T>(LogicaSelect selectLogic)
+        {
+            try
+            {
+               return Inventory.Database.SqlQuery<T>(selectLogic.SelectUser).ToArray();
+            }
+            //В случае исключения
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
         /// <summary>
         /// Выборка модели для манипуляции
         /// </summary>
@@ -799,6 +821,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             return Inventory.Database.SqlQuery<EfDatabaseParametrsModel.LogicaSelect>(String.Format(ProcedureSelect, id)).ToList()[0];
         }
+
         /// <summary>
         /// Dispose
         /// </summary>
@@ -807,6 +830,8 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             if (disposing)
             {
+                Inventory.Database.Connection.Close();
+                Inventory.Database.Connection.Dispose();
                 Inventory?.Dispose();
                 Inventory = null;
             }

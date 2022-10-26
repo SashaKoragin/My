@@ -42,7 +42,7 @@ namespace EfDatabase.Inventory.BaseLogic.ProcessSynchronization
             try
             {
                 var selectProcess = new Select.Select();
-                var process = selectProcess.SelectProcess(IndexProcess);
+                var process = selectProcess.SelectProcessAndParameters(IndexProcess);
                 if (process.IsComplete != null && (bool)process.IsComplete)
                 {
                     var addObjectDb = new AddObjectDb.AddObjectDb();

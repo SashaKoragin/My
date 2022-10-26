@@ -652,15 +652,26 @@ namespace SignalRLibary.SignalRinventory
             context.Clients.All.SubscribeProizvoditelOther(json.JsonLibaryIgnoreDate(proizvoditelOther));
         }
         /// <summary>
-        /// Параметры для процеса рассылка пошла
+        ///  Процессы рассылка пошла
         /// </summary>
-        /// <param name="eventProcess">Параметры для процесса</param>
+        /// <param name="eventProcess">Процессы</param>
         public static void SubscribeEventProcess(EventProcess eventProcess)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
-            Loggers.Log4NetLogger.Info(new Exception("Параметры для процесса рассылка пошла: " + eventProcess.Id));
+            Loggers.Log4NetLogger.Info(new Exception("Процессы рассылка пошла: " + eventProcess.IdProcess));
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeEventProcess(json.JsonLibaryIgnoreDate(eventProcess, "dd.MM.yyyy HH:mm"));
+        }
+        /// <summary>
+        /// Параметры для процесса рассылка пошла
+        /// </summary>
+        /// <param name="parameterEventProcess">Параметры для процесса</param>
+        public static void SubscribeParameterEventProcess(ParameterEventProcess parameterEventProcess)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Параметры для процесса рассылка пошла: " + parameterEventProcess.IdParameters));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeParameterEventProcess(json.JsonLibaryIgnoreDate(parameterEventProcess, "dd.MM.yyyy HH:mm"));
         }
         /// <summary>
         /// Подписка на наименование категории справочника

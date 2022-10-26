@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ModelComparableUserResultWork" type="ModelComparableUserResultWork">
+		<xs:annotation>
+			<xs:documentation>Все результаты анализа работы процесса сравнеия данных</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ModelComparableUserResultWork">
+		<xs:annotation>
+			<xs:documentation>Все результаты анализа работы процесса сравнеия данных</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ComparableUserResult" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ModelComparableAllSystemInventory" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ComparableUserResult" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Результат работы сравнения пользователей из всех систем</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="LogicsButton" type="xs:string" use="optional" default="Button">
+				<xs:annotation>
+					<xs:documentation>Логика кнопок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameSystem" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование системы данных</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdUser" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FullName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Полное имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PersonnelNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Табельный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Department" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Отдел</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Room" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Комната</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NamePosition" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Должность</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Ranks" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Чин</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InternalPhone" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Телефон внутренний</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TelephonUndeground" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Городской телефон</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Mail" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Почта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Имя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Surname" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Фамилия</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Patronymic" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Отчество</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CountGrooup" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Колличество в группе</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModelComparableAllSystemInventory" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Результат работы сравнения моделей техники систем</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="LogicsButton" type="xs:string" use="optional" default="Button">
+				<xs:annotation>
+					<xs:documentation>Логика кнопок</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameSystem" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование системы данных</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RowNumber" type="xs:long" use="required">
+				<xs:annotation>
+					<xs:documentation>Номер строки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ProducerName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование производителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ModelName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ComputerName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IpAdress" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Ip Адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerialNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ServiceNumber" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Сервисный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="AddressOrganization" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Адрес расположения</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Bulding" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Этаж</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Room" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Комната</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Division" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Отдел</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FullName" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Полное имя пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Info" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Описание</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CountGroup" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Колличество в группе</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

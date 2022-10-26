@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("16.6.2.*")]  //С версии 2.0 Добавлено приложение типа REST API
+[assembly: AssemblyVersion("16.8.73.*")]  //С версии 2.0 Добавлено приложение типа REST API
 //[assembly: AssemblyFileVersion("1.0.0.0")]

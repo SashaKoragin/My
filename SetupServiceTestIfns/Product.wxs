@@ -38,6 +38,9 @@
       <ComponentRef Id="CreateFolderReport" />
       <ComponentRef Id="CreateLog" />
       <ComponentRef Id="CreateXsd" />
+      <ComponentRef Id="CreateErrorXmlFile" />
+      <ComponentRef Id="CreateInXmlFile" />
+      <ComponentRef Id="CreateOutXmlFile" />
 			<!--<ComponentGroupRef Id="Scripts_files" />-->
 		</Feature>
 	</Product>
@@ -82,7 +85,36 @@
     </DirectoryRef>
   </Fragment>
 
-      
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="PathErrorXmlFile" Name="ErrorXmlFile">
+        <Component Id="CreateErrorXmlFile" Guid="C77532E4-EDBC-424F-9915-64E01171520E">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="PathInXmlFile" Name="InXmlFile">
+        <Component Id="CreateInXmlFile" Guid="5FE42225-5480-4AB9-BF13-9E09B568403B">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Directory Id="PathOutXmlFile" Name="OutXmlFile">
+        <Component Id="CreateOutXmlFile" Guid="2B7E6656-077E-4AF4-AF93-37D6C0ECCFD5">
+          <CreateFolder />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
+
   <Fragment>
     <DirectoryRef Id="INSTALLLOCATION">
       <Directory Id="Path" Name="Xml">
@@ -102,8 +134,14 @@
         <RemoveFile Id="RemoveFileReport" On="uninstall" Name="*.*" Directory="PathReport" />
         <RemoveFolder Id="RemoveFolderReport" On="uninstall" Directory="PathReport" />
         <RemoveFile Id="RemoveFileLog" On="uninstall" Name="*.*" Directory="PathLog" />
+        <RemoveFile Id="RemovePathErrorXmlFile" On="uninstall" Name="*.*" Directory="PathErrorXmlFile" />
+        <RemoveFile Id="RemovePathInXmlFile" On="uninstall" Name="*.*" Directory="PathInXmlFile" />
+        <RemoveFile Id="RemovePathOutXmlFile" On="uninstall" Name="*.*" Directory="PathOutXmlFile" />
         <RemoveFolder Id="RemoveFolderLog" On="uninstall" Directory="PathLog" />
         <RemoveFolder Id="RemoveFolderXsd" On="uninstall" Directory="PathXsd" />
+        <RemoveFolder Id="RemoveFolderErrorXmlFile" On="uninstall" Directory="PathErrorXmlFile" />
+        <RemoveFolder Id="RemoveFolderInXmlFile" On="uninstall" Directory="PathInXmlFile" />
+        <RemoveFolder Id="RemoveFolderOutXmlFile" On="uninstall" Directory="PathOutXmlFile" />
       </Component>
     </DirectoryRef>
   </Fragment>
@@ -111,6 +149,9 @@
 <Fragment>
   <DirectoryRef Id="INSTALLFOLDER">
     <Component Id="ClearAll" Guid="C4349956-E92E-4304-BA58-E7D30A6A77D9">
+      <RemoveFile Id="RemoveFileAllPathErrorXmlFile" Directory="PathErrorXmlFile" Name="*.*" On="uninstall" />
+      <RemoveFile Id="RemoveFileAllPathInXmlFile" Directory="PathInXmlFile" Name="*.*" On="uninstall" />
+      <RemoveFile Id="RemoveFileAllPathOutXmlFile" Directory="PathOutXmlFile" Name="*.*" On="uninstall" />
       <RemoveFile Id="RemoveFileAll" Directory="INSTALLFOLDER" Name="*.*" On="uninstall" />
       <RemoveFolder Id="Removeall" On="uninstall" Directory="INSTALLFOLDER" />
     </Component>
@@ -135,8 +176,6 @@
       <util:XmlFile Id="ConnectImns51" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='ConnectImns51'[\]]//@value" Value="Data Source=[SERVERPATHIMNS];Initial Catalog=[DATABASEIMNS];Integrated Security=True;MultipleActiveResultSets=True" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="ConnectInventory" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//connectionStrings//add[\[]@name='Inventarization'[\]]//@connectionString" Value="Data Source=[SERVERPATHINVENTORY];Initial Catalog=[DATABASEINVENTORY];Integrated Security=True;MultipleActiveResultSets=True" SelectionLanguage="XPath" Sequence="1" />
       <util:XmlFile Id="ConnectInventoryBulkCopyXmlSto" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//connectionStrings//add[\[]@name='BulkCopyXmlSto'[\]]//@connectionString" Value="provider=SQLOLEDB;data source=[SERVERPATHINVENTORY];database=[DATABASEINVENTORY];integrated security=SSPI" SelectionLanguage="XPath" Sequence="1" />
-      <util:XmlFile Id="LoginEpo" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='LoginSto'[\]]//@value" Value="[LOGINEPO]" SelectionLanguage="XPath" Sequence="1" />
-      <util:XmlFile Id="PasswordEpo" File="[#TestIFNSService.exe.config]" Action="setValue" ElementPath="//configuration//appSettings//add[\[]@key='PasswordSto'[\]]//@value" Value="[PASSWORDEPO]" SelectionLanguage="XPath" Sequence="1" />
     </Component>
 		<Component Id="TestIFNSLibary.dll" Guid="bae45c5b-9bd2-4d6a-a979-dc0d7c13d0cf">
 		  <File Id="TestIFNSLibary.dll" Name="TestIFNSLibary.dll" Source="$(var.TestIFNSLibary_TargetDir)TestIFNSLibary.dll" />
@@ -159,9 +198,9 @@
 		<Component Id="ExcelNumberFormat.dll" Guid="41db810a-bd13-4f23-9651-6f923976efcf">
 		  <File Id="ExcelNumberFormat.dll" Name="ExcelNumberFormat.dll" Source="$(var.TestIFNSService_TargetDir)ExcelNumberFormat.dll" />
 		</Component>
-		<Component Id="FastMember.dll" Guid="54db0ec9-b793-48e2-8a6f-f6c38ebeafe3">
+		<!--<Component Id="FastMember.dll" Guid="54db0ec9-b793-48e2-8a6f-f6c38ebeafe3">
 		  <File Id="FastMember.dll" Name="FastMember.dll" Source="$(var.TestIFNSService_TargetDir)FastMember.dll" />
-		</Component>
+		</Component>-->
 		<Component Id="Newtonsoft.Json.dll" Guid="4b16e079-f550-4f34-9033-69340d9ac3ef">
 		  <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.TestIFNSService_TargetDir)Newtonsoft.Json.dll" />
 		</Component>
@@ -218,6 +257,15 @@
       </Component>
       <Component Id="AttributeHelperModelXml.dll" Guid="B834C7C9-6873-4C5E-AD66-2BE9438F011C">
         <File Id="AttributeHelperModelXml.dll" Name="AttributeHelperModelXml.dll" Source="$(var.TestIFNSService_TargetDir)AttributeHelperModelXml.dll" />
+      </Component>
+      <Component Id="InventoryProcess.dll" Guid="26D7910F-7869-4C2A-AC45-F43E7F716F43">
+        <File Id="InventoryProcess.dll" Name="InventoryProcess.dll" Source="$(var.TestIFNSService_TargetDir)InventoryProcess.dll" />
+      </Component>
+      <Component Id="Microsoft.WindowsAPICodePack.dll" Guid="E5FDC621-F257-46A3-8E70-D5730759EAAF">
+        <File Id="Microsoft.WindowsAPICodePack.dll" Name="Microsoft.WindowsAPICodePack.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.WindowsAPICodePack.dll" />
+      </Component>
+      <Component Id="Microsoft.WindowsAPICodePack.Shell.dll" Guid="3172779F-BD34-439B-B038-BC360BBC5C36">
+        <File Id="Microsoft.WindowsAPICodePack.Shell.dll" Name="Microsoft.WindowsAPICodePack.Shell.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.WindowsAPICodePack.Shell.dll" />
       </Component>
 		</ComponentGroup>
 	</Fragment>

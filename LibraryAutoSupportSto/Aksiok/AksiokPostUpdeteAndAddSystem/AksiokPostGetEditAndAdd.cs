@@ -69,8 +69,17 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
             Password = password;
             MyCache = new CredentialCache();
             MyCache.Add(new Uri("https://aksiok.dpc.tax.nalog.ru"), "Negotiate", new NetworkCredential(login, password));
+            Request = (HttpWebRequest)WebRequest.Create("https://aksiok.dpc.tax.nalog.ru/ ");
+            Request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
+            Request.KeepAlive = true;
+            Request.Credentials = MyCache;
+            Request.Host = "aksiok.dpc.tax.nalog.ru";
+            Request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36";
+            Request.Method = "GET";
+            Response = (HttpWebResponse)Request.GetResponse();
+            var cookie = Response.Headers[HttpResponseHeader.SetCookie].Split('=');
             Сookies = new CookieContainer();
-            Сookies.Add(new Cookie(".ASPXAUTH", "B7E5B1099BCC52241B91069C23397F1924B0507485C4C3874514D4420501D1AE7CE53DCF36DAFC0BC43985446E06235B8DF89D2E6073CA733BB7435374F842565187B4CF26C3576E15AD13CCD528D8A1305DC746AEB31336E682AEE2821F26ABA7302EB2404B8C6717F0818C1734F0D6DFDF60D022784FC8F2044AC1098E3795AABB054776FCA57F20607141BE9FDAAEC72611D7A4736B7831E4D345194F42573D50509B88B8F044B9CCA371352347977C03E1A7153BAB9A080635C1A76F487258A1EC99C0DCFD12389800FC6C3D85011C64109478511A137FCDBA21F662DD08A6A1E11097C5732A3FA15F03328374CA4C2CAC586C93B077A3C2E5368095791652E16C46E9D119EC9F5A15CEBA5EA4D90EF8F795940307098E329A797053AF633D1F38E1C9CEA9BEC2636B9EFA86C051EA36EDFA652494737B7DAA082BE6080887B0046384A7FA935032EFF8DBB2C5888159D9E572DA9E287CD485C42A6378D0E5F4FDE4AEAE9F08F2111B4EE2E06CDFB19B360382B72545E1BFBFCA5733A66EF40C66AA11FC9806A6F46F4812C626568AC5230947137DEB5341877F827A9BF7", "/", "dpc.tax.nalog.ru"));
+            Сookies.Add(new Cookie(cookie[0], cookie[1].Split(';')[0], "/", "dpc.tax.nalog.ru"));
         }
         /// <summary>
         /// Редактирование или добавление модели
@@ -307,7 +316,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
             {
                 if (aksiokAddAndEdit.ParametersModel.ModelRequest == "Edit")
                 {
-                    PostEditAndAddModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0],aksiokAddAndEdit), Encoding.UTF8);
+                    PostEditAndAddModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0],aksiokAddAndEdit), Encoding.Default); //Русские буквы так и не побеждены 
                     PostEditAndAddModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
                 }
                 else

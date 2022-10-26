@@ -629,27 +629,30 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// <returns></returns>
         public bool IsBeginTask(int idTask)
         {
-            var isComplete = Inventory.EventProcesses.FirstOrDefault(x => x.Id == idTask)?.IsComplete;
+            var isComplete = Inventory.EventProcesses.FirstOrDefault(x => x.IdProcess == idTask)?.IsComplete;
             return isComplete != null && (bool)isComplete;
         }
+
         /// <summary>
         /// Вытаскивание процесса а по ID
         /// </summary>
         /// <param name="isProcess">Номер процесса</param>
         /// <returns></returns>
-        public EventProcess SelectProcess(int isProcess)
+        public EventProcess SelectProcessAndParameters(int isProcess)
         {
-            return Inventory.EventProcesses.FirstOrDefault(x => x.Id == isProcess);
+            var query = Inventory.EventProcesses.FirstOrDefault(events => events.IdProcess == isProcess);
+            return query;
         }
         /// <summary>
-        /// Вытаскиваем параметры задачи параметры через ;
+        /// Запрос всех процеcов запускаемых по времени
         /// </summary>
-        /// <param name="idEvent">Ун параметров</param>
         /// <returns></returns>
-        public EventProcess SelectEvent(int idEvent)
+        public List<EventProcess> SelectAllProcessTimeStart()
         {
-            return Inventory.EventProcesses.FirstOrDefault(x => x.Id == idEvent);
+            var query = Inventory.EventProcesses.Where(process=>process.IsTimeEventProcess).ToList();
+            return query;
         }
+
         /// <summary>
         /// Все Ip Серверов в БД для отчета пинга
         /// </summary>
@@ -660,14 +663,38 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         }
 
         /// <summary>
-        /// Запрос всех параметров для процесса
+        /// Запрос всех процессов
         /// </summary>
         /// <returns></returns>
-        public string AllEventProcessParameter()
+        public string AllEventProcess()
         {
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.EventProcesses, "dd.MM.yyyy HH:mm");
         }
+        /// <summary>
+        /// Дни запуска процесса
+        /// </summary>
+        /// <returns></returns>
+        public string AllDayOfTheWeek()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.SelectDayOfTheWeeks, "dd.MM.yyyy HH:mm");
+        }
+        /// <summary>
+        /// Запрос параметров для процеса
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="idProcess">Ун процеса</param>
+        public string AllParametersProcess(int idProcess)
+        {
+            SerializeJson json = new SerializeJson();
+            if (idProcess == 0)
+            {
+                return json.JsonLibaryIgnoreDate(Inventory.ParameterEventProcesses);
+            }
+            return json.JsonLibaryIgnoreDate(Inventory.ProcessAndParameters.Where(x=>x.IdProcess==idProcess).Select(x=>x.ParameterEventProcess).ToList(), "dd.MM.yyyy HH:mm");
+        }
+
         /// <summary>
         /// Вытаскиваем все категории
         /// </summary>

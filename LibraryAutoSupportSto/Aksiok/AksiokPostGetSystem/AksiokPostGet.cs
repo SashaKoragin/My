@@ -52,8 +52,17 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
             };
             MyCache = new CredentialCache();
             MyCache.Add(new Uri("https://aksiok.dpc.tax.nalog.ru"), "Negotiate", new NetworkCredential(login, password));
+            Request = (HttpWebRequest)WebRequest.Create("https://aksiok.dpc.tax.nalog.ru/ ");
+            Request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
+            Request.KeepAlive = true;
+            Request.Credentials = MyCache;
+            Request.Host = "aksiok.dpc.tax.nalog.ru";
+            Request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36";
+            Request.Method = "GET";
+            Response = (HttpWebResponse)Request.GetResponse();
+            var cookie = Response.Headers[HttpResponseHeader.SetCookie].Split('=');
             Сookies = new CookieContainer();
-            Сookies.Add(new Cookie(".ASPXAUTH", "585B2C7DA8479B5A1A355A9F3CED47C3BDE9539CD6924311DDAAC368C951513252E0F2C706D11BF4E3FE31B2869A374962E555235370CED6DD63BD067095D3CA6CCF470768E7C61FB6C796A080FDE124CBB359D96133240B1983198864BE9836763DD7C13122BDE0703A5A760F3ACAD8FF62F43EF367170C1617A3DC956EBA471A7F81BC7F76C5B4C9B643C4AF5559F7B81100F25E81BB997A02BC99985B2F57D45A6F4FBAAD9B43D9A0EC7CDCB6C96C2AC2FB6C677AB2DAB99DC56CDF7D0CD9398671643E630F126A26230990F07DEA19DB6FC52AE3C450598FB3BAF75C3C9CD18B6E3AF61482DE5E4006BB3BDC5E909B1945D775E57D10837CBF2138E7F742255B522AEFBB296ABA7553CC5FC89AA0D97951003D431095E4D10B7C9F9BAF761D62E45475E9A99394FE4D3789A7D88E5429B1280A5EA9859C0446A1C6E74FFA6282CF4309A11F30DF0320343F40BC0D97F640E635637A8618E7EF35B8E43774C1305E4B3BC5FA7DA6A237F19452082C95229D90566C2BE802ACEF1EDB8EFBC199EC9D55C9F7C28064CFAB322930BE5454B12B99E430BF7E5B37F3678D5720AD", "/", "dpc.tax.nalog.ru"));
+            Сookies.Add(new Cookie(cookie[0], cookie[1].Split(';')[0], "/", "dpc.tax.nalog.ru"));
         }
         /// <summary>
         /// Запрос в Аксиок получения моделей

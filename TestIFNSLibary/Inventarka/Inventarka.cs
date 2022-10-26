@@ -16,6 +16,7 @@ using EfDatabase.Inventory.SqlModelSelect;
 using EfDatabase.MemoReport;
 using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
 using EfDatabase.ReportCard;
+using EfDatabase.ReportXml.ModelComparableUserResult;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
@@ -24,13 +25,12 @@ using EfDatabaseXsdInventoryAutorization;
 using EfDatabase.ReportXml.XsdMail;
 using EfDatabaseXsdQrCodeModel;
 using EfDatabaseXsdSupportNalog;
+using InventoryProcess.StartProcessInventory.ProcessStart;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
 using LibaryDocumentGenerator.Documents.TemplateExcel;
 using LibaryXMLAuto.ReadOrWrite;
-using LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem;
 using LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem;
-using LibraryAutoSupportSto.PassportSto.PassportStoPostGet;
 using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
 using SqlLibaryIfns.ZaprosSelectNotParam;
@@ -61,6 +61,7 @@ using Type = System.Type;
 using OtherAll = EfDatabase.Inventory.Base.OtherAll;
 using ProizvoditelOther = EfDatabase.Inventory.Base.ProizvoditelOther;
 using ModelOther = EfDatabase.Inventory.Base.ModelOther;
+
 
 namespace TestIFNSLibary.Inventarka
 {
@@ -893,7 +894,7 @@ namespace TestIFNSLibary.Inventarka
                 return await Task.Factory.StartNew(() =>
                 {
                     telephonehelper.LogicaSelect = select.SqlSelectModel(telephonehelper.ParametrsSelect.Id);
-                    invoice.CreateDocument(parametersService.Report,
+                    invoice.CreateDocument(parametersService.SaveReport,
                         (EfDatabaseTelephoneHelp.TelephoneHelp) selectfull.GenerateSchemeXsdSql<string, string>(
                             telephonehelper.LogicaSelect), null);
                     select.Dispose();
@@ -909,14 +910,63 @@ namespace TestIFNSLibary.Inventarka
         }
 
         /// <summary>
-        /// Запрос на get получение файла по телефонам
+        /// Запрос на get получение файла sql => xlsx
         /// </summary>
         /// <returns></returns>
         public async Task<Stream> GenerateFileXlsxSqlView(LogicaSelect selectLogic)
         {
             var selectFull = new SelectFull(parametersService.Inventarization);
-            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(selectLogic.SelectUser,
-                selectLogic.NameReportFile, selectLogic.NameReportList, parametersService.ReportMassTemplate));
+            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(selectLogic, parametersService.ReportMassTemplate));
+        }
+        /// <summary>
+        /// Сбор сложного отчета по модели ComparableUserResult
+        /// </summary>
+        /// <param name="modelSelect">Собранная выборка view</param>
+        /// <returns></returns>
+        public async Task<Stream> ReportFileXlsxSqlView(ModelSelect modelSelect)
+        {
+            try { 
+                return await Task.Factory.StartNew(() =>
+                {
+                    SelectSql select = new SelectSql();
+                    ReportComparableUserResult reportUsersComparableUserResult = new ReportComparableUserResult();
+                    var modelServer = select.SelectObjectModelSql<ComparableUserResult>(modelSelect.LogicaSelect);
+                    reportUsersComparableUserResult.CreateDocument(parametersService.SaveReport, modelServer, modelSelect.Parametrs);
+                    select.Dispose();
+                    return reportUsersComparableUserResult.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Технический отчет сравнения 3 БД АКСИОК, Инвентаризация, AD
+        /// </summary>
+        /// <param name="modelSelect">Собранная выборка view</param>
+        /// <returns></returns>
+        public async Task<Stream> ReportFileSqlViewTechReport(ModelSelect modelSelect)
+        {
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    SelectSql select = new SelectSql();
+                    ReportComparableTechResult reportUsersComparableTechResult = new ReportComparableTechResult();
+                    var modelServer = select.SelectObjectModelSql<ModelComparableAllSystemInventory>(modelSelect.LogicaSelect);
+                    reportUsersComparableTechResult.CreateDocument(parametersService.SaveReport, modelServer, modelSelect.Parametrs);
+                    select.Dispose();
+                    return reportUsersComparableTechResult.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
         }
 
         /// <summary>
@@ -950,8 +1000,8 @@ namespace TestIFNSLibary.Inventarka
                         parametr); //Получение данных для модели
                     book.BareCodeBook = rep.BookInvoce(book.BareCodeBook, bookModels); //Раскладывает в БД
                     barecode.GenerateBookCode(book.BareCodeBook,
-                        parametersService.Report); //Генерит Штрихкод на основе раскладки БД
-                    bookAccounting.CreateDocument(parametersService.Report, book, null);
+                        parametersService.SaveReport); //Генерит Штрихкод на основе раскладки БД
+                    bookAccounting.CreateDocument(parametersService.SaveReport, book, null);
                     File.Delete(book.BareCodeBook.FullPathSave);
                     select.Dispose();
                     return bookAccounting.FileArray();
@@ -999,8 +1049,8 @@ namespace TestIFNSLibary.Inventarka
                     InvoiceInventarka invoice = new InvoiceInventarka();
                     GenerateBarcode barecode = new GenerateBarcode();
                     rep.ReportInvoice(ref report);
-                    barecode.GenerateCode(ref report, parametersService.Report);
-                    invoice.CreateDocument(parametersService.Report, report);
+                    barecode.GenerateCode(ref report, parametersService.SaveReport);
+                    invoice.CreateDocument(parametersService.SaveReport, report);
                     File.Delete(report.Main.Barcode.PathBarcode);
                     return invoice.FileArray();
                 });
@@ -1060,7 +1110,7 @@ namespace TestIFNSLibary.Inventarka
             ModelError[] error = new ModelError[uploadFileModel.Upload.Length];
             for (int i = 0; i < uploadFileModel.Upload.Length; i++)
             {
-                identitybarcode.DecodeBarCodePng(ref uploadFileModel.Upload[i], parametersService.Report);
+                identitybarcode.DecodeBarCodePng(ref uploadFileModel.Upload[i], parametersService.SaveReport);
                 if (uploadFileModel.Upload[i].IdDocument != 0)
                 {
                     switch (uploadFileModel.ClassFileToServer)
@@ -1970,51 +2020,8 @@ namespace TestIFNSLibary.Inventarka
         {
             return await Task.Factory.StartNew(() =>
             {
-                if (modelSupport.IdCalendarVks != 0)
-                {
-                    var stpCalender = new MailLogicLotus();
-                    stpCalender.ModifiedCalender(modelSupport.IdCalendarVks);
-                    stpCalender.Dispose();
-                }
-
-                var support = new CreateTiсketSupport(modelSupport.Login, modelSupport.Password);
-                var generate = new GenerateParameterSupport(parametersService.PathDomainGroup);
-                var selectReportPassportTechnique =
-                    new SelectReportPassportTechnique(parametersService.Inventarization);
-                try
-                {
-
-                    generate.GenerateTemplateUrlParameter(ref modelSupport);
-                    generate.IsCheckAllParameter(modelSupport.TemplateSupport
-                        .Where(param => param.NameStepSupport == "Step2").ToArray());
-                    var modelParameterInputStep3 = modelSupport.TemplateSupport.Where(temple =>
-                        temple.NameStepSupport == "Step3" && temple.TemplateParametrType != null).ToArray();
-                    if (modelParameterInputStep3.Length > 0)
-                    {
-                        selectReportPassportTechnique.CreateStoParametersStep3(ref modelSupport,
-                            parametersService.Report);
-                    }
-
-                    modelSupport.Step3ResponseSupport = support.CreateFullSupportTax(modelSupport);
-                    Loggers.Log4NetLogger.Info(new Exception(
-                        $"Пользователем {modelSupport.Login} создана заявка по теме {modelSupport.TemplateSupport.FirstOrDefault(description => description.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}"));
-                    return modelSupport;
-                }
-                catch (Exception ex)
-                {
-                    Loggers.Log4NetLogger.Error(ex);
-                    modelSupport.Error = ex.Message;
-                    Loggers.Log4NetLogger.Info(new Exception(
-                        $"Пользователем {modelSupport.Login} была вызвана ошибка по теме {modelSupport.TemplateSupport.FirstOrDefault(description => description.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}"));
-                    return modelSupport;
-                }
-                finally
-                {
-                    generate.Dispose();
-                    support.Steps(support.Logon, "GET");
-                    support.Dispose();
-                    selectReportPassportTechnique.Dispose();
-                }
+                LoadModelSupport loadModelSupport = new LoadModelSupport(parametersService.PathDomainGroup, parametersService.SaveReport);
+                return loadModelSupport.CreateSupportModelSto(modelSupport);
             });
         }
 
@@ -2060,10 +2067,10 @@ namespace TestIFNSLibary.Inventarka
                                               $"Сервис.: {x.ServiceNum}\r\n" +
                                               $"Kaб.: {x.NumberKabinet}\r\n" +
                                               $"User: {x.NameUser}";
-                        x.Coment = qrCode.GenerateQrCode(parametersService.Report + i, templateContent);
+                        x.Coment = qrCode.GenerateQrCode(parametersService.SaveReport + i, templateContent);
                         i++;
                     });
-                    sticker.CreateDocument(parametersService.Report + "QrCodeOffice", technical);
+                    sticker.CreateDocument(parametersService.SaveReport + "QrCodeOffice", technical);
                     technical.Select(x => x.Coment).ToList().ForEach(File.Delete);
                     auto.Dispose();
                     return sticker.FileArray();
@@ -2096,9 +2103,9 @@ namespace TestIFNSLibary.Inventarka
                     //Создание qr кодов
                     if (office.Kabinet == null) return null;
                     office.Kabinet.AsEnumerable().Select(x => x).ToList().ForEach(x =>
-                        x.FullPathPng = qrCode.GenerateQrCode(parametersService.Report + x.IdNumberKabinet,
+                        x.FullPathPng = qrCode.GenerateQrCode(parametersService.SaveReport + x.IdNumberKabinet,
                             x.NumberKabinet));
-                    stickerQrOffice.CreateDocument(parametersService.Report + "QrCodeOffice", office);
+                    stickerQrOffice.CreateDocument(parametersService.SaveReport + "QrCodeOffice", office);
                     office.Kabinet.AsEnumerable().Select(x => x.FullPathPng).ToList().ForEach(File.Delete);
                     auto.Dispose();
                     return stickerQrOffice.FileArray();
@@ -2223,7 +2230,7 @@ namespace TestIFNSLibary.Inventarka
                     var generate = new GenerateParameterSupport(parametersService.PathDomainGroup);
                     var act = generate.GenerateParameterAct(modelParameterAct);
                     var templateAct = new TemplateAct();
-                    templateAct.CreateDocument(parametersService.Report + "Акт списания ", act);
+                    templateAct.CreateDocument(parametersService.SaveReport + "Акт списания ", act);
                     generate.Dispose();
                     return templateAct.FileArray();
                 });
@@ -2252,7 +2259,7 @@ namespace TestIFNSLibary.Inventarka
                     SelectSql select = new SelectSql();
                     EfDatabase.Journal.AllJournal journal = select.SelectJournalAis3(year, idOtdel, isAllJournal);
                     var templateJournal = new TemplateJournalAis3();
-                    templateJournal.CreateDocument(parametersService.Report, journal, null);
+                    templateJournal.CreateDocument(parametersService.SaveReport, journal, null);
                     select.Dispose();
                     return templateJournal.FileArray();
                 });
@@ -2313,7 +2320,7 @@ namespace TestIFNSLibary.Inventarka
                     }
 
                     ReportCard report = new ReportCard();
-                    report.CreateDocument(parametersService.Report, model);
+                    report.CreateDocument(parametersService.SaveReport, model);
                     return report.FileArray();
                 });
             }
@@ -2352,7 +2359,7 @@ namespace TestIFNSLibary.Inventarka
                         memoReport.UserDepartment.Orders = ((Orders) xml.ReadXmlText(userOrder, typeof(Orders)));
                     }
 
-                    memo.CreateDocument(parametersService.Report, memoReport);
+                    memo.CreateDocument(parametersService.SaveReport, memoReport);
                     return memo.FileArray();
                 });
             }
@@ -2365,101 +2372,6 @@ namespace TestIFNSLibary.Inventarka
 
             return null;
         }
-
-        /// <summary>
-        /// Актуализация данных с СТО
-        /// </summary>
-        /// <returns></returns>
-        public void UpdateDataSto(int idProcess)
-        {
-            try
-            {
-                Select auto = new Select();
-                var process = auto.SelectProcess(idProcess);
-                if (process.IsComplete != null && (bool) process.IsComplete)
-                {
-                    var addObjectDb = new AddObjectDb();
-                    addObjectDb.IsProcessComplete(idProcess, false);
-                    var task = Task.Run(() =>
-                    {
-                        var sto = new PassportStoPostGet(parametersService.LoginSto, parametersService.PasswordSto,
-                            parametersService.Report);
-                        var fullPathXlsx = sto.DownloadReportSto();
-                        addObjectDb.CreateAndDownloadSto(fullPathXlsx, parametersService.Report,
-                            parametersService.XsdReport, parametersService.BulkCopyXmlSto);
-                    });
-                    task.ConfigureAwait(true).GetAwaiter().OnCompleted(() =>
-                    {
-                        addObjectDb.IsProcessComplete(idProcess, true);
-                        addObjectDb.Dispose();
-                        SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                            new ModelReturn<string>($"{process.NameProcess} завершен!", null, 3));
-                    });
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                        new ModelReturn<string>($"{process.NameProcess} запущен!", null, 1));
-                }
-                else
-                {
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                        new ModelReturn<string>($"{process.NameProcess} уже запущен ожидайте окончание процесса!", null,
-                            2));
-                }
-                auto.Dispose();
-            }
-            catch (Exception e)
-            {
-                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                    new ModelReturn<string>(e.Message));
-                Loggers.Log4NetLogger.Error(e);
-            }
-        }
-        /// <summary>
-        /// Синхронизация данных с АКСИОК
-        /// </summary>
-        /// <param name="idProcess">Ун процесса</param>
-        /// <param name="userLogin">Логин пользователя</param>
-        /// <param name="passwordUser">Пароль пользователя</param>
-        public void UpdateAksiok(int idProcess, string userLogin, string passwordUser)
-        {
-            try
-            {
-                Select auto = new Select();
-                var process = auto.SelectProcess(idProcess);
-                if (process.IsComplete != null && (bool)process.IsComplete)
-                {
-                    var addObjectDb = new AddObjectDb();
-                    addObjectDb.IsProcessComplete(idProcess, false);
-                    var task = Task.Run(() =>
-                    {
-                        var aksiok = new AksiokPostGetSystem(userLogin, passwordUser);
-                        aksiok.StartUpdateAksiok();
-                    });
-                    task.ConfigureAwait(true).GetAwaiter().OnCompleted(() =>
-                    {
-                        addObjectDb.IsProcessComplete(idProcess, true);
-                        addObjectDb.Dispose();
-                        SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                            new ModelReturn<string>($"{process.NameProcess} завершен!", null, 3));
-                    });
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                        new ModelReturn<string>($"{process.NameProcess} запущен!", null, 1));
-                }
-                else
-                {
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                        new ModelReturn<string>($"{process.NameProcess} уже запущен ожидайте окончание процесса!", null,
-                            2));
-                }
-                auto.Dispose();
-            }
-            catch (Exception e)
-            {
-                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                    new ModelReturn<string>(e.Message));
-                Loggers.Log4NetLogger.Error(e);
-            }
-        }
-
         /// <summary>
         /// Получение всех отчетов сравнения ЭПО
         /// </summary>
@@ -2485,22 +2397,51 @@ namespace TestIFNSLibary.Inventarka
             var selectReportPassportTechnique = new SelectReportPassportTechnique(parametersService.Inventarization);
             return await Task.Factory.StartNew(() =>
                 {
-                    var model = selectReportPassportTechnique.CreateFullReportEpo(parametersService.Report, idReport);
+                    var model = selectReportPassportTechnique.CreateFullReportEpo(parametersService.SaveReport, idReport);
                     selectReportPassportTechnique.Dispose();
                     return model;
                 });
         }
 
         /// <summary>
-        /// Все параметры для процессов
+        /// Все процессы
         /// </summary>
         /// <returns></returns>
-        public async Task<string> AllEventProcessParameters()
+        public async Task<string> AllEventProcess()
         {
             Select auto = new Select();
             return await Task.Factory.StartNew(() =>
             {
-                var model = auto.AllEventProcessParameter();
+                var model = auto.AllEventProcess();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Расписание запуска процесса
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllDayOfTheWeekProcess()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllDayOfTheWeek();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Запрос на параметры для процесса
+        /// </summary>
+        /// <param name="idProcess">Ун процесса</param>
+        /// <returns></returns>
+        public async Task<string> AllEventProcessParameters(int idProcess)
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllParametersProcess(idProcess);
                 auto.Dispose();
                 return model;
             });
@@ -2523,6 +2464,22 @@ namespace TestIFNSLibary.Inventarka
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeEventProcess(model.Model);
             }
 
+            return model;
+        }
+        /// <summary>
+        /// Редактирование параметров для процесса
+        /// </summary>
+        /// <param name="parameterEventProcess">Параметры процесса</param>
+        /// <returns></returns>
+        public ModelReturn<ParameterEventProcess> EditParameterEventProcess(ParameterEventProcess parameterEventProcess)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.EditParameterEventProcess(parameterEventProcess);
+            add.Dispose();
+            if (model?.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeParameterEventProcess(model.Model);
+            }
             return model;
         }
 
@@ -2564,7 +2521,7 @@ namespace TestIFNSLibary.Inventarka
                     var modelServerIp = select.AllIpServerSelectDataBase();
                     PingIp ping = new PingIp();
                     ping.PingServerDataBase(ref modelServerIp);
-                    memo.CreateDocument(parametersService.Report, modelServerIp);
+                    memo.CreateDocument(parametersService.SaveReport, modelServerIp);
                     select.Dispose();
                     return memo.FileArray();
                 });
@@ -2753,11 +2710,20 @@ namespace TestIFNSLibary.Inventarka
             });
         }
         /// <summary>
-        /// Будущий процесс по сравниванию учетных данных (AD, Lotus, ДКС)
+        /// Общий метод обработки процессов 
         /// </summary>
-        public void ProcessComparableUser()
+        public void StartProcessInventory(int idProcess, string userLogin, string passwordUser)
         {
-
+            try
+            {
+                var process = new ProcessStart(idProcess, userLogin, passwordUser);
+                process.StartProcess();
+            }
+            catch (Exception e)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>(e.Message));
+                Loggers.Log4NetLogger.Error(e);
+            }
         }
     }
 }

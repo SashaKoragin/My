@@ -57,6 +57,22 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/GenerateFileXlsxSqlView", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<Stream> GenerateFileXlsxSqlView(LogicaSelect selectLogic);
         /// <summary>
+        /// Генерация файла умного отчета по модели данных ComparableUserResult из View
+        /// </summary>
+        /// <param name="modelSelect">Собранная выборка view</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ReportFileXlsxSqlView", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> ReportFileXlsxSqlView(ModelSelect modelSelect);
+        /// <summary>
+        /// Технический отчет сравнения 3 БД АКСИОК, Инвентаризация, AD
+        /// </summary>
+        /// <param name="modelSelect">Собранная выборка view</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ReportFileSqlViewTechReport", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<Stream> ReportFileSqlViewTechReport(ModelSelect modelSelect);
+        /// <summary>
         /// http://localhost:8182/Inventarka/GenerateBookAccounting
         /// Генерация книги учета материальных ценностей
         /// </summary>
@@ -1131,7 +1147,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditOtherAll?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<EfDatabase.Inventory.Base.OtherAll> AddAndEditOtherAll(OtherAll otherAll, string userIdEdit);
+        ModelReturn<OtherAll> AddAndEditOtherAll(OtherAll otherAll, string userIdEdit);
         /// <summary>
         /// http://localhost:8182/Inventarka/AddAndEditModelOther
         /// Добавление модели разного
@@ -1140,7 +1156,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditModelOther", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        ModelReturn<EfDatabase.Inventory.Base.ModelOther> AddAndEditModelOther(ModelOther modelOther);
+        ModelReturn<ModelOther> AddAndEditModelOther(ModelOther modelOther);
         /// <summary>
         /// http://localhost:8182/Inventarka/AddAndEditTypeOther
         /// Добавление типа разного
@@ -1170,23 +1186,6 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DeleteOtherAll?userIdEdit={userIdEdit}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn<OtherAll> DeleteOtherAll(OtherAll otherAll, string userIdEdit);
         /// <summary>
-        /// Актуализация данных с СТО
-        /// http://localhost:8182/Inventarka/UpdateDataSto?idProcess=4
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/UpdateDataSto?idProcess={idProcess}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        void UpdateDataSto(int idProcess);
-
-        /// <summary>
-        /// Актуализация данных с АКСИОК
-        /// http://localhost:8182/Inventarka/UpdateAksiok?idProcess=5?userLogin=login?passwordUser=password
-        /// </summary>
-        /// <returns></returns>
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/UpdateAksiok?idProcess={idProcess}&userLogin={userLogin}&passwordUser={passwordUser}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        void UpdateAksiok(int idProcess, string userLogin, string passwordUser);
-        /// <summary>
         /// Все отчеты из БД для выполнения сравнения ЭПО и Инвентаризации
         /// http://localhost:8182/Inventarka/GetModelReportAnalysisEpo
         /// </summary>
@@ -1212,8 +1211,25 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllEventProcess", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> AllEventProcessParameters();
+        Task<string> AllEventProcess();
 
+        /// <summary>
+        /// Все параметры для процессов
+        /// http://localhost:8182/Inventarka/AllDayOfTheWeekProcess
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllDayOfTheWeekProcess", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+
+        Task<string> AllDayOfTheWeekProcess();
+        /// <summary>
+        /// Все параметры для процессов
+        /// http://localhost:8182/Inventarka/AllEventProcessParameters?idProcess=1
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AllEventProcessParameters?idProcess={idProcess}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> AllEventProcessParameters(int idProcess);
         /// <summary>
         /// Редактирование или добавление параметров для процесса
         /// http://localhost:8182/Inventarka/AddAndEditEventProcess"
@@ -1224,6 +1240,15 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddAndEditEventProcess", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         ModelReturn<EventProcess> AddAndEditEventProcess(EventProcess eventProcessParameter);
 
+        /// <summary>
+        /// Редактирование или добавление параметров для процесса
+        /// http://localhost:8182/Inventarka/AddEditParameterEventProcess"
+        /// </summary>
+        /// <param name="parameterEventProcess">Редактирование параметров для процессов</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/EditParameterEventProcess", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        ModelReturn<ParameterEventProcess> EditParameterEventProcess(ParameterEventProcess parameterEventProcess);
         /// <summary>
         /// Синхронизация с PrintServer
         /// http://localhost:8182/Inventarka/ActualPrintServer
@@ -1336,7 +1361,7 @@ namespace TestIFNSLibary.Inventarka
         /// Будущий процесс по сравниванию учетных данных (AD, Lotus, ДКС)
         /// </summary>
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ProcessComparableUser", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        void ProcessComparableUser();
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StartProcessInventory?idProcess={idProcess}&userLogin={userLogin}&passwordUser={passwordUser}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        void StartProcessInventory(int idProcess, string userLogin, string passwordUser);
    }
 }

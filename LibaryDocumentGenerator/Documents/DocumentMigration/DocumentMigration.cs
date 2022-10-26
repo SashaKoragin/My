@@ -38,9 +38,8 @@ namespace LibaryDocumentGenerator.Documents.DocumentMigration
         /// </summary>
         /// <param name="connectionStringTemplate">Строка соединения</param>
         /// <param name="path">Путь к папке сохранения</param>
-        /// <param name="model">Модель миграции</param>\
-        /// <param name="postAddress">Модель адреса</param>
-        public void MigrationDocument(string connectionStringTemplate, string path, MigrationParse model, string postAddress = null)
+        /// <param name="model">Модель миграции</param>
+        public void MigrationDocument(string connectionStringTemplate, string path, MigrationParse model)
         {
             ServiceRestLotus lotus = new ServiceRestLotus();
             SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate template = new SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate();
@@ -77,23 +76,6 @@ namespace LibaryDocumentGenerator.Documents.DocumentMigration
                         fullPath = path + fileName;
                     }
                     GenerateDoc(fullPath, documentTemplate, param, model, isTemplate, key.Key);
-                    //Отправка на сервис в Lotus
-                    if (postAddress != null)
-                    {
-                        Letter modeLetter = new Letter() {Attachments = new Attachment[1],DestinationCodes = new string[1]};
-                        modeLetter.Attachments[0] = new Attachment
-                        {
-                            FileName = fileName,
-                            Extension = Constant.WordConstant.FormatWord,
-                            Data = File.ReadAllBytes(fullPath)
-                        };
-                        modeLetter.Id = Guid.NewGuid().ToString();
-                        modeLetter.Subscriber = documentTemplate.Templates.Stone.Stone3;
-                        modeLetter.DestinationCodes[0] = key.Key;
-                        modeLetter.File = "07-10";
-                        modeLetter.Author = null;
-                        lotus.ServicePostLotus(postAddress,modeLetter);
-                    }
                 }
                 report.Clear();
             });

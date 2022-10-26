@@ -37,6 +37,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<AnaliticaSysBlokAndMonitor> AnaliticaSysBlokAndMonitors { get; set; } // AnaliticaSysBlokAndMonitors
         System.Data.Entity.DbSet<AnalysisEpoAndInventarka> AnalysisEpoAndInventarkas { get; set; } // AnalysisEpoAndInventarka
         System.Data.Entity.DbSet<ApplicationsIfn> ApplicationsIfns { get; set; } // ApplicationsIfns
+        System.Data.Entity.DbSet<AuthorAll> AuthorAlls { get; set; } // AuthorAll
         System.Data.Entity.DbSet<BlockPower> BlockPowers { get; set; } // BlockPower
         System.Data.Entity.DbSet<BookAccounting> BookAccountings { get; set; } // BookAccounting
         System.Data.Entity.DbSet<BookModel> BookModels { get; set; } // BookModels
@@ -48,6 +49,11 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<ClasificationAct> ClasificationActs { get; set; } // ClasificationAct
         System.Data.Entity.DbSet<Classification> Classifications { get; set; } // Classification
         System.Data.Entity.DbSet<ClassParameterTemplate> ClassParameterTemplates { get; set; } // ClassParameterTemplate
+        System.Data.Entity.DbSet<ComparableUserAllSystem> ComparableUserAllSystems { get; set; } // ComparableUserAllSystem
+        System.Data.Entity.DbSet<ComparableUserAndGroup> ComparableUserAndGroups { get; set; } // ComparableUserAndGroup
+        System.Data.Entity.DbSet<ComparableUserAndPhoneNumber> ComparableUserAndPhoneNumbers { get; set; } // ComparableUserAndPhoneNumbers
+        System.Data.Entity.DbSet<ComparableUserAndStatusUserAccount> ComparableUserAndStatusUserAccounts { get; set; } // ComparableUserAndStatusUserAccount
+        System.Data.Entity.DbSet<ComparableUserAndWorkStation> ComparableUserAndWorkStations { get; set; } // ComparableUserAndWorkStation
         System.Data.Entity.DbSet<ComputerIpAdressSynhronization> ComputerIpAdressSynhronizations { get; set; } // ComputerIpAdressSynhronization
         System.Data.Entity.DbSet<ComputersAndEpo> ComputersAndEpoes { get; set; } // ComputersAndEpo
         System.Data.Entity.DbSet<ContractOnSto> ContractOnStoes { get; set; } // ContractOnSto
@@ -69,10 +75,13 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<EventProcess> EventProcesses { get; set; } // EventProcess
         System.Data.Entity.DbSet<ExpertiseFile> ExpertiseFiles { get; set; } // ExpertiseFile
         System.Data.Entity.DbSet<File> Files { get; set; } // File
+        System.Data.Entity.DbSet<FileServerAllFile> FileServerAllFiles { get; set; } // FileServerAllFile
+        System.Data.Entity.DbSet<FileServerAllFileAndAuthorAll> FileServerAllFileAndAuthorAlls { get; set; } // FileServerAllFileAndAuthorAll
         System.Data.Entity.DbSet<FullModel> FullModels { get; set; } // FullModel
         System.Data.Entity.DbSet<FullProizvoditel> FullProizvoditels { get; set; } // FullProizvoditel
         System.Data.Entity.DbSet<FullTemplateSupport> FullTemplateSupports { get; set; } // FullTemplateSupport
         System.Data.Entity.DbSet<FullСategory> FullСategory { get; set; } // FullСategory
+        System.Data.Entity.DbSet<GroupActiveDerectory> GroupActiveDerectories { get; set; } // GroupActiveDerectory
         System.Data.Entity.DbSet<History> Histories { get; set; } // History
         System.Data.Entity.DbSet<HistoryLog> HistoryLogs { get; set; } // HistoryLog
         System.Data.Entity.DbSet<InfoColumn> InfoColumns { get; set; } // InfoColumn
@@ -95,6 +104,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         System.Data.Entity.DbSet<MfuAndEpo> MfuAndEpoes { get; set; } // MfuAndEpo
         System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
+        System.Data.Entity.DbSet<ModelComparableUserResult> ModelComparableUserResults { get; set; } // ModelComparableUserResult
         System.Data.Entity.DbSet<ModelDocumentType> ModelDocumentTypes { get; set; } // ModelDocumentType
         System.Data.Entity.DbSet<ModelOtdel> ModelOtdels { get; set; } // ModelOtdels
         System.Data.Entity.DbSet<ModelOther> ModelOthers { get; set; } // ModelOther
@@ -111,11 +121,15 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<OtdelPadeg> OtdelPadegs { get; set; } // OtdelPadeg
         System.Data.Entity.DbSet<OtherAll> OtherAlls { get; set; } // OtherAll
         System.Data.Entity.DbSet<ParameterAct> ParameterActs { get; set; } // ParameterAct
+        System.Data.Entity.DbSet<ParameterEventProcess> ParameterEventProcesses { get; set; } // ParameterEventProcess
         System.Data.Entity.DbSet<ParametrSupport> ParametrSupports { get; set; } // ParametrSupport
         System.Data.Entity.DbSet<PassportEquipment> PassportEquipments { get; set; } // PassportEquipment
+        System.Data.Entity.DbSet<PhoneNumber> PhoneNumbers { get; set; } // PhoneNumbers
+        System.Data.Entity.DbSet<PhoneType> PhoneTypes { get; set; } // PhoneType
         System.Data.Entity.DbSet<Position> Positions { get; set; } // Position
         System.Data.Entity.DbSet<Printer> Printers { get; set; } // Printer
         System.Data.Entity.DbSet<PrinterAndEpo> PrinterAndEpoes { get; set; } // PrinterAndEpo
+        System.Data.Entity.DbSet<ProcessAndParameter> ProcessAndParameters { get; set; } // ProcessAndParameters
         System.Data.Entity.DbSet<Producer> Producers { get; set; } // Producer
         System.Data.Entity.DbSet<ProizvoditelBlockPower> ProizvoditelBlockPowers { get; set; } // ProizvoditelBlockPower
         System.Data.Entity.DbSet<ProizvoditelOther> ProizvoditelOthers { get; set; } // ProizvoditelOther
@@ -127,17 +141,20 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<RuleNotTemplateUser> RuleNotTemplateUsers { get; set; } // RuleNotTemplateUser
         System.Data.Entity.DbSet<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer
         System.Data.Entity.DbSet<ScanerAndEpo> ScanerAndEpoes { get; set; } // ScanerAndEpo
+        System.Data.Entity.DbSet<SelectDayOfTheWeek> SelectDayOfTheWeeks { get; set; } // SelectDayOfTheWeek
         System.Data.Entity.DbSet<ServerEquipment> ServerEquipments { get; set; } // ServerEquipment
         System.Data.Entity.DbSet<ServiceModelInventory> ServiceModelInventories { get; set; } // ServiceModelInventory
         System.Data.Entity.DbSet<SigmentIfn> SigmentIfns { get; set; } // SigmentIfns
         System.Data.Entity.DbSet<Statusing> Statusings { get; set; } // Statusing
         System.Data.Entity.DbSet<StatusProcessSynchronization> StatusProcessSynchronizations { get; set; } // StatusProcessSynchronization
         System.Data.Entity.DbSet<StatusUser> StatusUsers { get; set; } // StatusUser
+        System.Data.Entity.DbSet<StatusUserAccount> StatusUserAccounts { get; set; } // StatusUserAccount
         System.Data.Entity.DbSet<Supply> Supplies { get; set; } // Supply
         System.Data.Entity.DbSet<Swithe> Swithes { get; set; } // Swithes
         System.Data.Entity.DbSet<SynchronizationPrintServer> SynchronizationPrintServers { get; set; } // SynchronizationPrintServer
         System.Data.Entity.DbSet<SynchronizationPrintServerToDataBase> SynchronizationPrintServerToDataBases { get; set; } // SynchronizationPrintServerToDataBase
         System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
+        System.Data.Entity.DbSet<SystemModel> SystemModels { get; set; } // SystemModel
         System.Data.Entity.DbSet<TableAllModel> TableAllModels { get; set; } // TableAllModel
         System.Data.Entity.DbSet<TableFolder> TableFolders { get; set; } // TableFolders
         System.Data.Entity.DbSet<TableRole> TableRoles { get; set; } // TableRoles
@@ -161,6 +178,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<UsersIsActualsStat> UsersIsActualsStats { get; set; } // UsersIsActualsStat
         System.Data.Entity.DbSet<UsersNotTechnical> UsersNotTechnicals { get; set; } // UsersNotTechnical
         System.Data.Entity.DbSet<ValueCharacteristicJson> ValueCharacteristicJsons { get; set; } // ValueCharacteristicJson
+        System.Data.Entity.DbSet<WorkStation> WorkStations { get; set; } // WorkStations
 
         int SaveChanges();
         System.Threading.Tasks.Task<int> SaveChangesAsync();
@@ -192,6 +210,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<AnaliticaSysBlokAndMonitor> AnaliticaSysBlokAndMonitors { get; set; } // AnaliticaSysBlokAndMonitors
         public System.Data.Entity.DbSet<AnalysisEpoAndInventarka> AnalysisEpoAndInventarkas { get; set; } // AnalysisEpoAndInventarka
         public System.Data.Entity.DbSet<ApplicationsIfn> ApplicationsIfns { get; set; } // ApplicationsIfns
+        public System.Data.Entity.DbSet<AuthorAll> AuthorAlls { get; set; } // AuthorAll
         public System.Data.Entity.DbSet<BlockPower> BlockPowers { get; set; } // BlockPower
         public System.Data.Entity.DbSet<BookAccounting> BookAccountings { get; set; } // BookAccounting
         public System.Data.Entity.DbSet<BookModel> BookModels { get; set; } // BookModels
@@ -203,6 +222,11 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<ClasificationAct> ClasificationActs { get; set; } // ClasificationAct
         public System.Data.Entity.DbSet<Classification> Classifications { get; set; } // Classification
         public System.Data.Entity.DbSet<ClassParameterTemplate> ClassParameterTemplates { get; set; } // ClassParameterTemplate
+        public System.Data.Entity.DbSet<ComparableUserAllSystem> ComparableUserAllSystems { get; set; } // ComparableUserAllSystem
+        public System.Data.Entity.DbSet<ComparableUserAndGroup> ComparableUserAndGroups { get; set; } // ComparableUserAndGroup
+        public System.Data.Entity.DbSet<ComparableUserAndPhoneNumber> ComparableUserAndPhoneNumbers { get; set; } // ComparableUserAndPhoneNumbers
+        public System.Data.Entity.DbSet<ComparableUserAndStatusUserAccount> ComparableUserAndStatusUserAccounts { get; set; } // ComparableUserAndStatusUserAccount
+        public System.Data.Entity.DbSet<ComparableUserAndWorkStation> ComparableUserAndWorkStations { get; set; } // ComparableUserAndWorkStation
         public System.Data.Entity.DbSet<ComputerIpAdressSynhronization> ComputerIpAdressSynhronizations { get; set; } // ComputerIpAdressSynhronization
         public System.Data.Entity.DbSet<ComputersAndEpo> ComputersAndEpoes { get; set; } // ComputersAndEpo
         public System.Data.Entity.DbSet<ContractOnSto> ContractOnStoes { get; set; } // ContractOnSto
@@ -224,10 +248,13 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<EventProcess> EventProcesses { get; set; } // EventProcess
         public System.Data.Entity.DbSet<ExpertiseFile> ExpertiseFiles { get; set; } // ExpertiseFile
         public System.Data.Entity.DbSet<File> Files { get; set; } // File
+        public System.Data.Entity.DbSet<FileServerAllFile> FileServerAllFiles { get; set; } // FileServerAllFile
+        public System.Data.Entity.DbSet<FileServerAllFileAndAuthorAll> FileServerAllFileAndAuthorAlls { get; set; } // FileServerAllFileAndAuthorAll
         public System.Data.Entity.DbSet<FullModel> FullModels { get; set; } // FullModel
         public System.Data.Entity.DbSet<FullProizvoditel> FullProizvoditels { get; set; } // FullProizvoditel
         public System.Data.Entity.DbSet<FullTemplateSupport> FullTemplateSupports { get; set; } // FullTemplateSupport
         public System.Data.Entity.DbSet<FullСategory> FullСategory { get; set; } // FullСategory
+        public System.Data.Entity.DbSet<GroupActiveDerectory> GroupActiveDerectories { get; set; } // GroupActiveDerectory
         public System.Data.Entity.DbSet<History> Histories { get; set; } // History
         public System.Data.Entity.DbSet<HistoryLog> HistoryLogs { get; set; } // HistoryLog
         public System.Data.Entity.DbSet<InfoColumn> InfoColumns { get; set; } // InfoColumn
@@ -250,6 +277,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         public System.Data.Entity.DbSet<MfuAndEpo> MfuAndEpoes { get; set; } // MfuAndEpo
         public System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
+        public System.Data.Entity.DbSet<ModelComparableUserResult> ModelComparableUserResults { get; set; } // ModelComparableUserResult
         public System.Data.Entity.DbSet<ModelDocumentType> ModelDocumentTypes { get; set; } // ModelDocumentType
         public System.Data.Entity.DbSet<ModelOtdel> ModelOtdels { get; set; } // ModelOtdels
         public System.Data.Entity.DbSet<ModelOther> ModelOthers { get; set; } // ModelOther
@@ -266,11 +294,15 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<OtdelPadeg> OtdelPadegs { get; set; } // OtdelPadeg
         public System.Data.Entity.DbSet<OtherAll> OtherAlls { get; set; } // OtherAll
         public System.Data.Entity.DbSet<ParameterAct> ParameterActs { get; set; } // ParameterAct
+        public System.Data.Entity.DbSet<ParameterEventProcess> ParameterEventProcesses { get; set; } // ParameterEventProcess
         public System.Data.Entity.DbSet<ParametrSupport> ParametrSupports { get; set; } // ParametrSupport
         public System.Data.Entity.DbSet<PassportEquipment> PassportEquipments { get; set; } // PassportEquipment
+        public System.Data.Entity.DbSet<PhoneNumber> PhoneNumbers { get; set; } // PhoneNumbers
+        public System.Data.Entity.DbSet<PhoneType> PhoneTypes { get; set; } // PhoneType
         public System.Data.Entity.DbSet<Position> Positions { get; set; } // Position
         public System.Data.Entity.DbSet<Printer> Printers { get; set; } // Printer
         public System.Data.Entity.DbSet<PrinterAndEpo> PrinterAndEpoes { get; set; } // PrinterAndEpo
+        public System.Data.Entity.DbSet<ProcessAndParameter> ProcessAndParameters { get; set; } // ProcessAndParameters
         public System.Data.Entity.DbSet<Producer> Producers { get; set; } // Producer
         public System.Data.Entity.DbSet<ProizvoditelBlockPower> ProizvoditelBlockPowers { get; set; } // ProizvoditelBlockPower
         public System.Data.Entity.DbSet<ProizvoditelOther> ProizvoditelOthers { get; set; } // ProizvoditelOther
@@ -282,17 +314,20 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<RuleNotTemplateUser> RuleNotTemplateUsers { get; set; } // RuleNotTemplateUser
         public System.Data.Entity.DbSet<ScanerAndCamer> ScanerAndCamers { get; set; } // ScanerAndCamer
         public System.Data.Entity.DbSet<ScanerAndEpo> ScanerAndEpoes { get; set; } // ScanerAndEpo
+        public System.Data.Entity.DbSet<SelectDayOfTheWeek> SelectDayOfTheWeeks { get; set; } // SelectDayOfTheWeek
         public System.Data.Entity.DbSet<ServerEquipment> ServerEquipments { get; set; } // ServerEquipment
         public System.Data.Entity.DbSet<ServiceModelInventory> ServiceModelInventories { get; set; } // ServiceModelInventory
         public System.Data.Entity.DbSet<SigmentIfn> SigmentIfns { get; set; } // SigmentIfns
         public System.Data.Entity.DbSet<Statusing> Statusings { get; set; } // Statusing
         public System.Data.Entity.DbSet<StatusProcessSynchronization> StatusProcessSynchronizations { get; set; } // StatusProcessSynchronization
         public System.Data.Entity.DbSet<StatusUser> StatusUsers { get; set; } // StatusUser
+        public System.Data.Entity.DbSet<StatusUserAccount> StatusUserAccounts { get; set; } // StatusUserAccount
         public System.Data.Entity.DbSet<Supply> Supplies { get; set; } // Supply
         public System.Data.Entity.DbSet<Swithe> Swithes { get; set; } // Swithes
         public System.Data.Entity.DbSet<SynchronizationPrintServer> SynchronizationPrintServers { get; set; } // SynchronizationPrintServer
         public System.Data.Entity.DbSet<SynchronizationPrintServerToDataBase> SynchronizationPrintServerToDataBases { get; set; } // SynchronizationPrintServerToDataBase
         public System.Data.Entity.DbSet<SysBlock> SysBlocks { get; set; } // SysBlock
+        public System.Data.Entity.DbSet<SystemModel> SystemModels { get; set; } // SystemModel
         public System.Data.Entity.DbSet<TableAllModel> TableAllModels { get; set; } // TableAllModel
         public System.Data.Entity.DbSet<TableFolder> TableFolders { get; set; } // TableFolders
         public System.Data.Entity.DbSet<TableRole> TableRoles { get; set; } // TableRoles
@@ -316,6 +351,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<UsersIsActualsStat> UsersIsActualsStats { get; set; } // UsersIsActualsStat
         public System.Data.Entity.DbSet<UsersNotTechnical> UsersNotTechnicals { get; set; } // UsersNotTechnical
         public System.Data.Entity.DbSet<ValueCharacteristicJson> ValueCharacteristicJsons { get; set; } // ValueCharacteristicJson
+        public System.Data.Entity.DbSet<WorkStation> WorkStations { get; set; } // WorkStations
 
         static InventoryContext()
         {
@@ -379,6 +415,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new AnaliticaSysBlokAndMonitorConfiguration());
             modelBuilder.Configurations.Add(new AnalysisEpoAndInventarkaConfiguration());
             modelBuilder.Configurations.Add(new ApplicationsIfnConfiguration());
+            modelBuilder.Configurations.Add(new AuthorAllConfiguration());
             modelBuilder.Configurations.Add(new BlockPowerConfiguration());
             modelBuilder.Configurations.Add(new BookAccountingConfiguration());
             modelBuilder.Configurations.Add(new BookModelConfiguration());
@@ -390,6 +427,11 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new ClasificationActConfiguration());
             modelBuilder.Configurations.Add(new ClassificationConfiguration());
             modelBuilder.Configurations.Add(new ClassParameterTemplateConfiguration());
+            modelBuilder.Configurations.Add(new ComparableUserAllSystemConfiguration());
+            modelBuilder.Configurations.Add(new ComparableUserAndGroupConfiguration());
+            modelBuilder.Configurations.Add(new ComparableUserAndPhoneNumberConfiguration());
+            modelBuilder.Configurations.Add(new ComparableUserAndStatusUserAccountConfiguration());
+            modelBuilder.Configurations.Add(new ComparableUserAndWorkStationConfiguration());
             modelBuilder.Configurations.Add(new ComputerIpAdressSynhronizationConfiguration());
             modelBuilder.Configurations.Add(new ComputersAndEpoConfiguration());
             modelBuilder.Configurations.Add(new ContractOnStoConfiguration());
@@ -411,10 +453,13 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new EventProcessConfiguration());
             modelBuilder.Configurations.Add(new ExpertiseFileConfiguration());
             modelBuilder.Configurations.Add(new FileConfiguration());
+            modelBuilder.Configurations.Add(new FileServerAllFileConfiguration());
+            modelBuilder.Configurations.Add(new FileServerAllFileAndAuthorAllConfiguration());
             modelBuilder.Configurations.Add(new FullModelConfiguration());
             modelBuilder.Configurations.Add(new FullProizvoditelConfiguration());
             modelBuilder.Configurations.Add(new FullTemplateSupportConfiguration());
             modelBuilder.Configurations.Add(new FullСategoryConfiguration());
+            modelBuilder.Configurations.Add(new GroupActiveDerectoryConfiguration());
             modelBuilder.Configurations.Add(new HistoryConfiguration());
             modelBuilder.Configurations.Add(new HistoryLogConfiguration());
             modelBuilder.Configurations.Add(new InfoColumnConfiguration());
@@ -437,6 +482,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new MfuConfiguration());
             modelBuilder.Configurations.Add(new MfuAndEpoConfiguration());
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration());
+            modelBuilder.Configurations.Add(new ModelComparableUserResultConfiguration());
             modelBuilder.Configurations.Add(new ModelDocumentTypeConfiguration());
             modelBuilder.Configurations.Add(new ModelOtdelConfiguration());
             modelBuilder.Configurations.Add(new ModelOtherConfiguration());
@@ -453,11 +499,15 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new OtdelPadegConfiguration());
             modelBuilder.Configurations.Add(new OtherAllConfiguration());
             modelBuilder.Configurations.Add(new ParameterActConfiguration());
+            modelBuilder.Configurations.Add(new ParameterEventProcessConfiguration());
             modelBuilder.Configurations.Add(new ParametrSupportConfiguration());
             modelBuilder.Configurations.Add(new PassportEquipmentConfiguration());
+            modelBuilder.Configurations.Add(new PhoneNumberConfiguration());
+            modelBuilder.Configurations.Add(new PhoneTypeConfiguration());
             modelBuilder.Configurations.Add(new PositionConfiguration());
             modelBuilder.Configurations.Add(new PrinterConfiguration());
             modelBuilder.Configurations.Add(new PrinterAndEpoConfiguration());
+            modelBuilder.Configurations.Add(new ProcessAndParameterConfiguration());
             modelBuilder.Configurations.Add(new ProducerConfiguration());
             modelBuilder.Configurations.Add(new ProizvoditelBlockPowerConfiguration());
             modelBuilder.Configurations.Add(new ProizvoditelOtherConfiguration());
@@ -469,17 +519,20 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new RuleNotTemplateUserConfiguration());
             modelBuilder.Configurations.Add(new ScanerAndCamerConfiguration());
             modelBuilder.Configurations.Add(new ScanerAndEpoConfiguration());
+            modelBuilder.Configurations.Add(new SelectDayOfTheWeekConfiguration());
             modelBuilder.Configurations.Add(new ServerEquipmentConfiguration());
             modelBuilder.Configurations.Add(new ServiceModelInventoryConfiguration());
             modelBuilder.Configurations.Add(new SigmentIfnConfiguration());
             modelBuilder.Configurations.Add(new StatusingConfiguration());
             modelBuilder.Configurations.Add(new StatusProcessSynchronizationConfiguration());
             modelBuilder.Configurations.Add(new StatusUserConfiguration());
+            modelBuilder.Configurations.Add(new StatusUserAccountConfiguration());
             modelBuilder.Configurations.Add(new SupplyConfiguration());
             modelBuilder.Configurations.Add(new SwitheConfiguration());
             modelBuilder.Configurations.Add(new SynchronizationPrintServerConfiguration());
             modelBuilder.Configurations.Add(new SynchronizationPrintServerToDataBaseConfiguration());
             modelBuilder.Configurations.Add(new SysBlockConfiguration());
+            modelBuilder.Configurations.Add(new SystemModelConfiguration());
             modelBuilder.Configurations.Add(new TableAllModelConfiguration());
             modelBuilder.Configurations.Add(new TableFolderConfiguration());
             modelBuilder.Configurations.Add(new TableRoleConfiguration());
@@ -503,6 +556,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new UsersIsActualsStatConfiguration());
             modelBuilder.Configurations.Add(new UsersNotTechnicalConfiguration());
             modelBuilder.Configurations.Add(new ValueCharacteristicJsonConfiguration());
+            modelBuilder.Configurations.Add(new WorkStationConfiguration());
         }
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
@@ -516,6 +570,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new AnaliticaSysBlokAndMonitorConfiguration(schema));
             modelBuilder.Configurations.Add(new AnalysisEpoAndInventarkaConfiguration(schema));
             modelBuilder.Configurations.Add(new ApplicationsIfnConfiguration(schema));
+            modelBuilder.Configurations.Add(new AuthorAllConfiguration(schema));
             modelBuilder.Configurations.Add(new BlockPowerConfiguration(schema));
             modelBuilder.Configurations.Add(new BookAccountingConfiguration(schema));
             modelBuilder.Configurations.Add(new BookModelConfiguration(schema));
@@ -527,6 +582,11 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new ClasificationActConfiguration(schema));
             modelBuilder.Configurations.Add(new ClassificationConfiguration(schema));
             modelBuilder.Configurations.Add(new ClassParameterTemplateConfiguration(schema));
+            modelBuilder.Configurations.Add(new ComparableUserAllSystemConfiguration(schema));
+            modelBuilder.Configurations.Add(new ComparableUserAndGroupConfiguration(schema));
+            modelBuilder.Configurations.Add(new ComparableUserAndPhoneNumberConfiguration(schema));
+            modelBuilder.Configurations.Add(new ComparableUserAndStatusUserAccountConfiguration(schema));
+            modelBuilder.Configurations.Add(new ComparableUserAndWorkStationConfiguration(schema));
             modelBuilder.Configurations.Add(new ComputerIpAdressSynhronizationConfiguration(schema));
             modelBuilder.Configurations.Add(new ComputersAndEpoConfiguration(schema));
             modelBuilder.Configurations.Add(new ContractOnStoConfiguration(schema));
@@ -548,10 +608,13 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new EventProcessConfiguration(schema));
             modelBuilder.Configurations.Add(new ExpertiseFileConfiguration(schema));
             modelBuilder.Configurations.Add(new FileConfiguration(schema));
+            modelBuilder.Configurations.Add(new FileServerAllFileConfiguration(schema));
+            modelBuilder.Configurations.Add(new FileServerAllFileAndAuthorAllConfiguration(schema));
             modelBuilder.Configurations.Add(new FullModelConfiguration(schema));
             modelBuilder.Configurations.Add(new FullProizvoditelConfiguration(schema));
             modelBuilder.Configurations.Add(new FullTemplateSupportConfiguration(schema));
             modelBuilder.Configurations.Add(new FullСategoryConfiguration(schema));
+            modelBuilder.Configurations.Add(new GroupActiveDerectoryConfiguration(schema));
             modelBuilder.Configurations.Add(new HistoryConfiguration(schema));
             modelBuilder.Configurations.Add(new HistoryLogConfiguration(schema));
             modelBuilder.Configurations.Add(new InfoColumnConfiguration(schema));
@@ -574,6 +637,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new MfuConfiguration(schema));
             modelBuilder.Configurations.Add(new MfuAndEpoConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration(schema));
+            modelBuilder.Configurations.Add(new ModelComparableUserResultConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelDocumentTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelOtdelConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelOtherConfiguration(schema));
@@ -590,11 +654,15 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new OtdelPadegConfiguration(schema));
             modelBuilder.Configurations.Add(new OtherAllConfiguration(schema));
             modelBuilder.Configurations.Add(new ParameterActConfiguration(schema));
+            modelBuilder.Configurations.Add(new ParameterEventProcessConfiguration(schema));
             modelBuilder.Configurations.Add(new ParametrSupportConfiguration(schema));
             modelBuilder.Configurations.Add(new PassportEquipmentConfiguration(schema));
+            modelBuilder.Configurations.Add(new PhoneNumberConfiguration(schema));
+            modelBuilder.Configurations.Add(new PhoneTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new PositionConfiguration(schema));
             modelBuilder.Configurations.Add(new PrinterConfiguration(schema));
             modelBuilder.Configurations.Add(new PrinterAndEpoConfiguration(schema));
+            modelBuilder.Configurations.Add(new ProcessAndParameterConfiguration(schema));
             modelBuilder.Configurations.Add(new ProducerConfiguration(schema));
             modelBuilder.Configurations.Add(new ProizvoditelBlockPowerConfiguration(schema));
             modelBuilder.Configurations.Add(new ProizvoditelOtherConfiguration(schema));
@@ -606,17 +674,20 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new RuleNotTemplateUserConfiguration(schema));
             modelBuilder.Configurations.Add(new ScanerAndCamerConfiguration(schema));
             modelBuilder.Configurations.Add(new ScanerAndEpoConfiguration(schema));
+            modelBuilder.Configurations.Add(new SelectDayOfTheWeekConfiguration(schema));
             modelBuilder.Configurations.Add(new ServerEquipmentConfiguration(schema));
             modelBuilder.Configurations.Add(new ServiceModelInventoryConfiguration(schema));
             modelBuilder.Configurations.Add(new SigmentIfnConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusingConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusProcessSynchronizationConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusUserConfiguration(schema));
+            modelBuilder.Configurations.Add(new StatusUserAccountConfiguration(schema));
             modelBuilder.Configurations.Add(new SupplyConfiguration(schema));
             modelBuilder.Configurations.Add(new SwitheConfiguration(schema));
             modelBuilder.Configurations.Add(new SynchronizationPrintServerConfiguration(schema));
             modelBuilder.Configurations.Add(new SynchronizationPrintServerToDataBaseConfiguration(schema));
             modelBuilder.Configurations.Add(new SysBlockConfiguration(schema));
+            modelBuilder.Configurations.Add(new SystemModelConfiguration(schema));
             modelBuilder.Configurations.Add(new TableAllModelConfiguration(schema));
             modelBuilder.Configurations.Add(new TableFolderConfiguration(schema));
             modelBuilder.Configurations.Add(new TableRoleConfiguration(schema));
@@ -640,6 +711,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new UsersIsActualsStatConfiguration(schema));
             modelBuilder.Configurations.Add(new UsersNotTechnicalConfiguration(schema));
             modelBuilder.Configurations.Add(new ValueCharacteristicJsonConfiguration(schema));
+            modelBuilder.Configurations.Add(new WorkStationConfiguration(schema));
             return modelBuilder;
         }
     }
@@ -734,7 +806,7 @@ namespace EfDatabase.Inventory.Base
         public int? ExpertiseStatus { get; set; } // ExpertiseStatus
         public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
         public string IndividualServiceNumber { get; set; } // IndividualServiceNumber (length: 128)
-        public string NotOnBalance { get; set; } // NotOnBalance (length: 256)
+        public string NotOnBalance { get; set; } // NotOnBalance (length: 30)
         public int YearOfIssue { get; set; } // YearOfIssue (Primary key)
         public int? ExploitationStartYear { get; set; } // ExploitationStartYear
         public System.DateTime? Guarantee { get; set; } // Guarantee
@@ -749,7 +821,7 @@ namespace EfDatabase.Inventory.Base
         public int Id { get; set; } // Id (Primary key)
         public string NameServer { get; set; } // NameServer (length: 128)
         public string IpAdress { get; set; } // IpAdress (length: 8000)
-        public string FullIpAdressDataBase { get; set; } // FullIpAdressDataBase (length: 128)
+        public string FullIpAdressDataBase { get; set; } // FullIpAdressDataBase (length: 254)
         public string InfoStatusReport { get; set; } // InfoStatusReport (Primary key) (length: 1)
         public string ColorStatus { get; set; } // ColorStatus (Primary key) (length: 1)
     }
@@ -940,6 +1012,44 @@ namespace EfDatabase.Inventory.Base
         {
             DateCreate = System.DateTime.Now;
             RuleIfns = new System.Collections.Generic.List<RuleIfn>();
+        }
+    }
+
+    // AuthorAll
+    ///<summary>
+    /// Авторы файлов на файловом сервере
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class AuthorAll
+    {
+
+        ///<summary>
+        /// Ун автора
+        ///</summary>
+        public int IdAuthor { get; set; } // IdAuthor (Primary key)
+
+        ///<summary>
+        /// Наименование всех авторов редактиравших файл
+        ///</summary>
+        public string Name { get; set; } // Name
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child FileServerAllFileAndAuthorAlls where [FileServerAllFileAndAuthorAll].[IdAuthor] point to this entity (FK_FileServerAllFileAndAuthorAll_AuthorAll)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<FileServerAllFileAndAuthorAll> FileServerAllFileAndAuthorAlls { get; set; } // FileServerAllFileAndAuthorAll.FK_FileServerAllFileAndAuthorAll_AuthorAll
+
+        public AuthorAll()
+        {
+            DateCreate = System.DateTime.Now;
+            FileServerAllFileAndAuthorAlls = new System.Collections.Generic.List<FileServerAllFileAndAuthorAll>();
         }
     }
 
@@ -1437,6 +1547,334 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // ComparableUserAllSystem
+    ///<summary>
+    /// Сравнение пользовательских данных со всеми системами
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAllSystem
+    {
+
+        ///<summary>
+        /// Ун строки сравняемого лица
+        ///</summary>
+        public int IdComparableUser { get; set; } // IdComparableUser (Primary key)
+
+        ///<summary>
+        /// Ун пользователя Инвенторизации
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+        ///<summary>
+        /// Ун сравняемой системы
+        ///</summary>
+        public int IdSystemModel { get; set; } // IdSystemModel
+
+        ///<summary>
+        /// Фамилия
+        ///</summary>
+        public string Surname { get; set; } // Surname (length: 512)
+
+        ///<summary>
+        /// Имя
+        ///</summary>
+        public string Name { get; set; } // Name (length: 512)
+
+        ///<summary>
+        /// Отчество
+        ///</summary>
+        public string Patronymic { get; set; } // Patronymic (length: 512)
+
+        ///<summary>
+        /// Полное имя
+        ///</summary>
+        public string FullName { get; set; } // FullName (length: 512)
+
+        ///<summary>
+        /// Табельный номер
+        ///</summary>
+        public string PersonnelNumber { get; set; } // PersonnelNumber (length: 512)
+
+        ///<summary>
+        /// Отдел
+        ///</summary>
+        public string Department { get; set; } // Department (length: 1024)
+
+        ///<summary>
+        /// Должность
+        ///</summary>
+        public string JobTitle { get; set; } // JobTitle (length: 1024)
+
+        ///<summary>
+        /// Чин
+        ///</summary>
+        public string Ranks { get; set; } // Ranks (length: 1024)
+
+        ///<summary>
+        /// Почта
+        ///</summary>
+        public string NameMail { get; set; } // NameMail (length: 256)
+
+        ///<summary>
+        /// Комната
+        ///</summary>
+        public string Room { get; set; } // Room (length: 64)
+
+        ///<summary>
+        /// Параметры учетной записи
+        ///</summary>
+        public int? UserAccountControl { get; set; } // UserAccountControl
+
+        ///<summary>
+        /// Управляющий
+        ///</summary>
+        public string DistingUishedName { get; set; } // DistingUishedName (length: 512)
+
+        ///<summary>
+        /// Номер телефона (Текст)
+        ///</summary>
+        public string PhoneNumberText { get; set; } // PhoneNumberText (length: 512)
+
+        ///<summary>
+        /// Ун типа телефона
+        ///</summary>
+        public int? TypePhoneInt { get; set; } // TypePhoneInt
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ComparableUserAndGroups where [ComparableUserAndGroup].[IdComparableUser] point to this entity (FK_ComparableUserAndGroup_ComparableUserAllSystem)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAndGroup> ComparableUserAndGroups { get; set; } // ComparableUserAndGroup.FK_ComparableUserAndGroup_ComparableUserAllSystem
+        /// <summary>
+        /// Child ComparableUserAndPhoneNumbers where [ComparableUserAndPhoneNumbers].[IdComparableUser] point to this entity (FK_ComparableUserAndPhoneNumbers_ComparableUserAllSystem)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAndPhoneNumber> ComparableUserAndPhoneNumbers { get; set; } // ComparableUserAndPhoneNumbers.FK_ComparableUserAndPhoneNumbers_ComparableUserAllSystem
+        /// <summary>
+        /// Child ComparableUserAndStatusUserAccounts where [ComparableUserAndStatusUserAccount].[IdComparableUser] point to this entity (FK_ComparableUserAndStatusUserAccount_ComparableUserAllSystem)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAndStatusUserAccount> ComparableUserAndStatusUserAccounts { get; set; } // ComparableUserAndStatusUserAccount.FK_ComparableUserAndStatusUserAccount_ComparableUserAllSystem
+        /// <summary>
+        /// Child ComparableUserAndWorkStations where [ComparableUserAndWorkStation].[IdComparableUser] point to this entity (FK_ComparableUserAndWorkStation_ComparableUserAllSystem)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAndWorkStation> ComparableUserAndWorkStations { get; set; } // ComparableUserAndWorkStation.FK_ComparableUserAndWorkStation_ComparableUserAllSystem
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent SystemModel pointed by [ComparableUserAllSystem].([IdSystemModel]) (FK_ComparableUserAllSystem_SystemModel)
+        /// </summary>
+        public virtual SystemModel SystemModel { get; set; } // FK_ComparableUserAllSystem_SystemModel
+
+        /// <summary>
+        /// Parent User pointed by [ComparableUserAllSystem].([IdUser]) (FK_ComparableUserAllSystem_Users)
+        /// </summary>
+        public virtual User User { get; set; } // FK_ComparableUserAllSystem_Users
+
+        public ComparableUserAllSystem()
+        {
+            UserAccountControl = 0;
+            DateCreate = System.DateTime.Now;
+            ComparableUserAndGroups = new System.Collections.Generic.List<ComparableUserAndGroup>();
+            ComparableUserAndPhoneNumbers = new System.Collections.Generic.List<ComparableUserAndPhoneNumber>();
+            ComparableUserAndStatusUserAccounts = new System.Collections.Generic.List<ComparableUserAndStatusUserAccount>();
+            ComparableUserAndWorkStations = new System.Collections.Generic.List<ComparableUserAndWorkStation>();
+        }
+    }
+
+    // ComparableUserAndGroup
+    ///<summary>
+    /// Сводная с группы и пользователи
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAndGroup
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Ун пользователя
+        ///</summary>
+        public int IdComparableUser { get; set; } // IdComparableUser
+
+        ///<summary>
+        /// Ун группы
+        ///</summary>
+        public int IdGroup { get; set; } // IdGroup
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ComparableUserAllSystem pointed by [ComparableUserAndGroup].([IdComparableUser]) (FK_ComparableUserAndGroup_ComparableUserAllSystem)
+        /// </summary>
+        public virtual ComparableUserAllSystem ComparableUserAllSystem { get; set; } // FK_ComparableUserAndGroup_ComparableUserAllSystem
+
+        /// <summary>
+        /// Parent GroupActiveDerectory pointed by [ComparableUserAndGroup].([IdGroup]) (FK_ComparableUserAndGroup_GroupActiveDerectory)
+        /// </summary>
+        public virtual GroupActiveDerectory GroupActiveDerectory { get; set; } // FK_ComparableUserAndGroup_GroupActiveDerectory
+
+        public ComparableUserAndGroup()
+        {
+            DateCreate = System.DateTime.Now;
+        }
+    }
+
+    // ComparableUserAndPhoneNumbers
+    ///<summary>
+    /// Сводная с номерами телефонов
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAndPhoneNumber
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Ун пользователя
+        ///</summary>
+        public int IdComparableUser { get; set; } // IdComparableUser
+
+        ///<summary>
+        /// Ун телефона
+        ///</summary>
+        public int IdPhone { get; set; } // IdPhone
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ComparableUserAllSystem pointed by [ComparableUserAndPhoneNumbers].([IdComparableUser]) (FK_ComparableUserAndPhoneNumbers_ComparableUserAllSystem)
+        /// </summary>
+        public virtual ComparableUserAllSystem ComparableUserAllSystem { get; set; } // FK_ComparableUserAndPhoneNumbers_ComparableUserAllSystem
+
+        /// <summary>
+        /// Parent PhoneNumber pointed by [ComparableUserAndPhoneNumbers].([IdPhone]) (FK_ComparableUserAndPhoneNumbers_PhoneNumbers)
+        /// </summary>
+        public virtual PhoneNumber PhoneNumber { get; set; } // FK_ComparableUserAndPhoneNumbers_PhoneNumbers
+
+        public ComparableUserAndPhoneNumber()
+        {
+            DateCreate = System.DateTime.Now;
+        }
+    }
+
+    // ComparableUserAndStatusUserAccount
+    ///<summary>
+    /// Сводная с статусами пользователя
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAndStatusUserAccount
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Ун пользователя
+        ///</summary>
+        public int IdComparableUser { get; set; } // IdComparableUser
+
+        ///<summary>
+        /// Ун статуса пользователя
+        ///</summary>
+        public int IdStatusUserAccount { get; set; } // IdStatusUserAccount
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ComparableUserAllSystem pointed by [ComparableUserAndStatusUserAccount].([IdComparableUser]) (FK_ComparableUserAndStatusUserAccount_ComparableUserAllSystem)
+        /// </summary>
+        public virtual ComparableUserAllSystem ComparableUserAllSystem { get; set; } // FK_ComparableUserAndStatusUserAccount_ComparableUserAllSystem
+
+        /// <summary>
+        /// Parent StatusUserAccount pointed by [ComparableUserAndStatusUserAccount].([IdStatusUserAccount]) (FK_ComparableUserAndStatusUserAccount_StatusUserAccount)
+        /// </summary>
+        public virtual StatusUserAccount StatusUserAccount { get; set; } // FK_ComparableUserAndStatusUserAccount_StatusUserAccount
+
+        public ComparableUserAndStatusUserAccount()
+        {
+            DateCreate = System.DateTime.Now;
+        }
+    }
+
+    // ComparableUserAndWorkStation
+    ///<summary>
+    /// Сводная с рабочими станциями пользователя
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAndWorkStation
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Ун пользователя
+        ///</summary>
+        public int IdComparableUser { get; set; } // IdComparableUser
+
+        ///<summary>
+        /// Ун рабочей станции
+        ///</summary>
+        public int IdWorkStations { get; set; } // IdWorkStations
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent ComparableUserAllSystem pointed by [ComparableUserAndWorkStation].([IdComparableUser]) (FK_ComparableUserAndWorkStation_ComparableUserAllSystem)
+        /// </summary>
+        public virtual ComparableUserAllSystem ComparableUserAllSystem { get; set; } // FK_ComparableUserAndWorkStation_ComparableUserAllSystem
+
+        /// <summary>
+        /// Parent WorkStation pointed by [ComparableUserAndWorkStation].([IdWorkStations]) (FK_ComparableUserAndWorkStation_WorkStations)
+        /// </summary>
+        public virtual WorkStation WorkStation { get; set; } // FK_ComparableUserAndWorkStation_WorkStations
+
+        public ComparableUserAndWorkStation()
+        {
+            DateCreate = System.DateTime.Now;
+        }
+    }
+
     // ComputerIpAdressSynhronization
     ///<summary>
     /// Мониторинг компьютеров Active Derectory
@@ -1508,13 +1946,36 @@ namespace EfDatabase.Inventory.Base
     }
 
     // ContractOnSto
+    ///<summary>
+    /// Контракт на СТО АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ContractOnSto
     {
+
+        ///<summary>
+        /// Ун контракта
+        ///</summary>
         public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Номер контракта
+        ///</summary>
         public string Number { get; set; } // Number (length: 256)
+
+        ///<summary>
+        /// Наименование контракта
+        ///</summary>
         public string Name { get; set; } // Name
+
+        ///<summary>
+        /// Дата контракта
+        ///</summary>
         public System.DateTime ContractDate { get; set; } // ContractDate
+
+        ///<summary>
+        /// Исполнитель контракта
+        ///</summary>
         public string Executor { get; set; } // Executor
 
         // Reverse navigation
@@ -1580,13 +2041,36 @@ namespace EfDatabase.Inventory.Base
     }
 
     // DeliveryContract
+    ///<summary>
+    /// Контракт на поставку АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class DeliveryContract
     {
+
+        ///<summary>
+        /// Ун контракта
+        ///</summary>
         public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Номер контракта
+        ///</summary>
         public string Number { get; set; } // Number (length: 256)
+
+        ///<summary>
+        /// Наименование контракта
+        ///</summary>
         public string Name { get; set; } // Name
+
+        ///<summary>
+        /// Дата контракта
+        ///</summary>
         public System.DateTime ContractDate { get; set; } // ContractDate
+
+        ///<summary>
+        /// Исполнитель контракта
+        ///</summary>
         public string Executor { get; set; } // Executor
 
         // Reverse navigation
@@ -1794,56 +2278,251 @@ namespace EfDatabase.Inventory.Base
     }
 
     // EpoDocument
+    ///<summary>
+    /// Оборудование ЭПО АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class EpoDocument
     {
+
+        ///<summary>
+        /// Ун документа
+        ///</summary>
         public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Ун типа документа АКСИОК
+        ///</summary>
         public int? IdEpoDocument { get; set; } // IdEpoDocument
+
+        ///<summary>
+        /// Ун типа оборудования АКСИОК
+        ///</summary>
         public int? IdEquipmentType { get; set; } // IdEquipmentType
+
+        ///<summary>
+        /// Ун производителя АКСИОК
+        ///</summary>
         public int? IdProducer { get; set; } // IdProducer
+
+        ///<summary>
+        /// Ун модели АКСИОК
+        ///</summary>
         public int? IdEquipmentModel { get; set; } // IdEquipmentModel
+
+        ///<summary>
+        /// Ун Контракта на поставку АКСИОК
+        ///</summary>
         public int? IdDeliveryContract { get; set; } // IdDeliveryContract
+
+        ///<summary>
+        /// Ун Контракта на ЭПО АКСИОК
+        ///</summary>
         public int? IdContractOnSto { get; set; } // IdContractOnSto
+
+        ///<summary>
+        /// Ун файла Акта списания АКСИОК
+        ///</summary>
         public long? IdFile { get; set; } // IdFile
+
+        ///<summary>
+        /// Ун файла Экспертизы АКСИОК
+        ///</summary>
         public long? IdExpertiseFile { get; set; } // IdExpertiseFile
+
+        ///<summary>
+        /// Имя компьютера
+        ///</summary>
         public string ComputerName { get; set; } // ComputerName (length: 128)
+
+        ///<summary>
+        /// Серийный номер
+        ///</summary>
         public string SerialNumber { get; set; } // SerialNumber (length: 64)
+
+        ///<summary>
+        /// Идентификатор
+        ///</summary>
         public string Identifier { get; set; } // Identifier (length: 128)
+
+        ///<summary>
+        /// Инвентарный номер
+        ///</summary>
         public string InventoryNumber { get; set; } // InventoryNumber (length: 128)
+
+        ///<summary>
+        /// Комплект
+        ///</summary>
         public bool IsKit { get; set; } // IsKit
+
+        ///<summary>
+        /// Статус СТО
+        ///</summary>
         public int? EquipmentStateSto { get; set; } // EquipmentStateSto
+
+        ///<summary>
+        /// Статус Экспертизы
+        ///</summary>
         public int? EquipmentState { get; set; } // EquipmentState
+
+        ///<summary>
+        /// Номер акта
+        ///</summary>
         public string ActNumber { get; set; } // ActNumber (length: 256)
+
+        ///<summary>
+        /// Дата акта
+        ///</summary>
         public System.DateTime? ActDate { get; set; } // ActDate
+
+        ///<summary>
+        /// Дата утверждения
+        ///</summary>
         public System.DateTime? DateOfStatement { get; set; } // DateOfStatement
+
+        ///<summary>
+        /// Статус Экспертизы
+        ///</summary>
         public int? ExpertiseStatus { get; set; } // ExpertiseStatus
+
+        ///<summary>
+        /// Сервисный номер
+        ///</summary>
         public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
+
+        ///<summary>
+        /// Индивидуальный сервисный номер
+        ///</summary>
         public string IndividualServiceNumber { get; set; } // IndividualServiceNumber (length: 128)
+
+        ///<summary>
+        /// Что то с балансом
+        ///</summary>
         public string NotOnBalance { get; set; } // NotOnBalance (length: 256)
+
+        ///<summary>
+        /// Год выпуска
+        ///</summary>
         public int YearOfIssue { get; set; } // YearOfIssue
+
+        ///<summary>
+        /// Год ввода в эксплуатацию
+        ///</summary>
         public int? ExploitationStartYear { get; set; } // ExploitationStartYear
+
+        ///<summary>
+        /// Гарантия
+        ///</summary>
         public System.DateTime? Guarantee { get; set; } // Guarantee
+
+        ///<summary>
+        /// Комментарий
+        ///</summary>
         public string Comment { get; set; } // Comment (length: 256)
+
+        ///<summary>
+        /// Сервисный статус
+        ///</summary>
         public string ServiceStatus { get; set; } // ServiceStatus (length: 256)
+
+        ///<summary>
+        /// Версия фактической ОС
+        ///</summary>
         public string OsActualVersion { get; set; } // OsActualVersion (length: 128)
+
+        ///<summary>
+        /// Актуальная версия ОС
+        ///</summary>
         public string ActualOsVersion { get; set; } // ActualOsVersion (length: 128)
+
+        ///<summary>
+        /// Назначение
+        ///</summary>
         public string Appointment { get; set; } // Appointment (length: 128)
+
+        ///<summary>
+        /// Тип использования
+        ///</summary>
         public string TypeOfUse { get; set; } // TypeOfUse (length: 128)
+
+        ///<summary>
+        /// Отдел
+        ///</summary>
         public string Division { get; set; } // Division (length: 256)
+
+        ///<summary>
+        /// Модель соответствия отправки
+        ///</summary>
         public string ModelInDeliveryAccordance { get; set; } // ModelInDeliveryAccordance (length: 128)
+
+        ///<summary>
+        /// Участок (Здание)
+        ///</summary>
         public string Building { get; set; } // Building (length: 128)
+
+        ///<summary>
+        /// Расположение. Этаж
+        ///</summary>
         public string FloorLocation { get; set; } // FloorLocation (length: 128)
+
+        ///<summary>
+        /// Расположение. Комната
+        ///</summary>
         public string RoomLocation { get; set; } // RoomLocation (length: 128)
+
+        ///<summary>
+        /// Версия ПС
+        ///</summary>
         public string PsVersion { get; set; } // PsVersion (length: 128)
+
+        ///<summary>
+        /// IP адрес
+        ///</summary>
         public string IpAddress { get; set; } // IpAddress (length: 128)
+
+        ///<summary>
+        /// Кол-во плат
+        ///</summary>
         public int? BoardsNumber { get; set; } // BoardsNumber
+
+        ///<summary>
+        /// Кол-во свободных плат
+        ///</summary>
         public int? FreeBoardsNumber { get; set; } // FreeBoardsNumber
+
+        ///<summary>
+        /// Кол-во внутр абон аналог
+        ///</summary>
         public int? InternalAnalogNumber { get; set; } // InternalAnalogNumber
+
+        ///<summary>
+        /// Кол-во внутр абон цифровых
+        ///</summary>
         public int? InternalDigitNumber { get; set; } // InternalDigitNumber
+
+        ///<summary>
+        /// Тип аналогового подключения городской ввод
+        ///</summary>
         public string TypeOfAnalogConnection { get; set; } // TypeOfAnalogConnection (length: 128)
+
+        ///<summary>
+        /// Тип цифрового подключения городской ввод
+        ///</summary>
         public string TypeOfDigitConnection { get; set; } // TypeOfDigitConnection (length: 128)
+
+        ///<summary>
+        /// Численность администраторов УАТС
+        ///</summary>
         public int? AdminsCount { get; set; } // AdminsCount
+
+        ///<summary>
+        /// Номер ключа
+        ///</summary>
         public string KeyNumber { get; set; } // KeyNumber (length: 256)
+
+        ///<summary>
+        /// Требует замены
+        ///</summary>
         public bool RequiresReplacement { get; set; } // RequiresReplacement
 
         // Reverse navigation
@@ -1898,13 +2577,36 @@ namespace EfDatabase.Inventory.Base
     }
 
     // EquipmentModel
+    ///<summary>
+    /// Модель ЭПО АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class EquipmentModel
     {
+
+        ///<summary>
+        /// Ун модели
+        ///</summary>
         public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Код модели
+        ///</summary>
         public string Code { get; set; } // Code (length: 10)
+
+        ///<summary>
+        /// Наименование модели
+        ///</summary>
         public string Name { get; set; } // Name (length: 512)
+
+        ///<summary>
+        /// Дата начала
+        ///</summary>
         public System.DateTime? StartDate { get; set; } // StartDate
+
+        ///<summary>
+        /// Дата окончания
+        ///</summary>
         public System.DateTime? EndDate { get; set; } // EndDate
 
         // Reverse navigation
@@ -2023,14 +2725,41 @@ namespace EfDatabase.Inventory.Base
     }
 
     // EquipmentType
+    ///<summary>
+    /// Тип оборудования АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class EquipmentType
     {
+
+        ///<summary>
+        /// Ун оборудования
+        ///</summary>
         public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Код оборудования
+        ///</summary>
         public string Code { get; set; } // Code (length: 10)
+
+        ///<summary>
+        /// Тип оборудования
+        ///</summary>
         public string Name { get; set; } // Name (length: 512)
+
+        ///<summary>
+        /// Комментарий
+        ///</summary>
         public string Comment { get; set; } // Comment (length: 1024)
+
+        ///<summary>
+        /// Дата начала
+        ///</summary>
         public System.DateTime? StartDate { get; set; } // StartDate
+
+        ///<summary>
+        /// Дата окончания
+        ///</summary>
         public System.DateTime? EndDate { get; set; } // EndDate
 
         // Reverse navigation
@@ -2116,17 +2845,17 @@ namespace EfDatabase.Inventory.Base
         ///<summary>
         /// Ун процесса
         ///</summary>
-        public int Id { get; set; } // Id (Primary key)
+        public int IdProcess { get; set; } // IdProcess (Primary key)
 
         ///<summary>
-        /// Наименование процесса
+        /// Наименование (описание) процесса
         ///</summary>
-        public string NameProcess { get; set; } // NameProcess (length: 256)
+        public string InfoEvent { get; set; } // InfoEvent (length: 1024)
 
         ///<summary>
-        /// День запуска если не указан то каждый день по часам и минутам
+        /// Ун дня запуска процесса
         ///</summary>
-        public int? DayX { get; set; } // DayX
+        public int? IdDayOfTheWeek { get; set; } // IdDayOfTheWeek
 
         ///<summary>
         /// Час запуска
@@ -2139,9 +2868,14 @@ namespace EfDatabase.Inventory.Base
         public int? MinutesX { get; set; } // MinutesX
 
         ///<summary>
-        /// Параметры чарез точку с запятой
+        /// Тригер запускать ли по времени (1-да 0-нет)
         ///</summary>
-        public string ParametersEvent { get; set; } // ParametersEvent (length: 1024)
+        public bool IsTimeEventProcess { get; set; } // IsTimeEventProcess
+
+        ///<summary>
+        /// Есть ли параметры у процесса
+        ///</summary>
+        public bool IsExistsParameters { get; set; } // IsExistsParameters
 
         ///<summary>
         /// Признак завершения процесса 1(Завершен)/0(Не завершен)
@@ -2159,21 +2893,63 @@ namespace EfDatabase.Inventory.Base
         public System.DateTime? DataFinish { get; set; } // DataFinish
 
         ///<summary>
+        /// Пространство имен для запуска C#
+        ///</summary>
+        public string FindNameSpace { get; set; } // FindNameSpace (length: 1024)
+
+        ///<summary>
+        /// Наименование Dll для запуска C#
+        ///</summary>
+        public string NameDll { get; set; } // NameDll (length: 1024)
+
+        ///<summary>
+        /// Наименование метода для запуска C#
+        ///</summary>
+        public string NameMethodProcess { get; set; } // NameMethodProcess (length: 1024)
+
+        ///<summary>
         /// Дата записи
         ///</summary>
         public System.DateTime DateCreate { get; set; } // DateCreate
 
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ProcessAndParameters where [ProcessAndParameters].[IdProcess] point to this entity (FK_ProcessAndParameters_EventProcess)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ProcessAndParameter> ProcessAndParameters { get; set; } // ProcessAndParameters.FK_ProcessAndParameters_EventProcess
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent SelectDayOfTheWeek pointed by [EventProcess].([IdDayOfTheWeek]) (FK_EventProcess_SelectDayOfTheWeek)
+        /// </summary>
+        public virtual SelectDayOfTheWeek SelectDayOfTheWeek { get; set; } // FK_EventProcess_SelectDayOfTheWeek
+
         public EventProcess()
         {
             DateCreate = System.DateTime.Now;
+            ProcessAndParameters = new System.Collections.Generic.List<ProcessAndParameter>();
         }
     }
 
     // ExpertiseFile
+    ///<summary>
+    /// Файл Экспертизы АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ExpertiseFile
     {
+
+        ///<summary>
+        /// Ун файла Экспертизы АКСИОК
+        ///</summary>
         public long Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Наименование файла
+        ///</summary>
         public string Name { get; set; } // Name
 
         // Reverse navigation
@@ -2191,10 +2967,21 @@ namespace EfDatabase.Inventory.Base
     }
 
     // File
+    ///<summary>
+    /// Файл Акт списания АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class File
     {
+
+        ///<summary>
+        /// Ун файла Акт списания
+        ///</summary>
         public long Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Наименование файла
+        ///</summary>
         public string Name { get; set; } // Name
 
         // Reverse navigation
@@ -2208,6 +2995,177 @@ namespace EfDatabase.Inventory.Base
         public File()
         {
             EpoDocuments = new System.Collections.Generic.List<EpoDocument>();
+        }
+    }
+
+    // FileServerAllFile
+    ///<summary>
+    /// Таблица со всеми описаниями файла с файлового сервера
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class FileServerAllFile
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int IdFile { get; set; } // IdFile (Primary key)
+
+        ///<summary>
+        /// Ун пользователя
+        ///</summary>
+        public int? IdUser { get; set; } // IdUser
+
+        ///<summary>
+        /// Кем сохранен
+        ///</summary>
+        public string NameSave { get; set; } // NameSave
+
+        ///<summary>
+        /// Владелец файла
+        ///</summary>
+        public string FileOwnerAuthor { get; set; } // FileOwnerAuthor
+
+        ///<summary>
+        /// Последний автор на сохранение
+        ///</summary>
+        public string LastAuthor { get; set; } // LastAuthor
+
+        ///<summary>
+        /// Полный путь к файлу
+        ///</summary>
+        public string FullPathFile { get; set; } // FullPathFile
+
+        ///<summary>
+        /// Путь к файлу
+        ///</summary>
+        public string PathFile { get; set; } // PathFile
+
+        ///<summary>
+        /// Наименование файла
+        ///</summary>
+        public string NameFile { get; set; } // NameFile
+
+        ///<summary>
+        /// Тип файла текстовый
+        ///</summary>
+        public string ItemTypeText { get; set; } // ItemTypeText
+
+        ///<summary>
+        /// ContentType файла
+        ///</summary>
+        public string TypeMime { get; set; } // TypeMime
+
+        ///<summary>
+        /// Расширение файла
+        ///</summary>
+        public string FileExtension { get; set; } // FileExtension (length: 64)
+
+        ///<summary>
+        /// Размер файла текстовый
+        ///</summary>
+        public string SizeFileText { get; set; } // SizeFileText (length: 64)
+
+        ///<summary>
+        /// Размер файла
+        ///</summary>
+        public long? SizeFile { get; set; } // SizeFile
+
+        ///<summary>
+        /// Hash файла
+        ///</summary>
+        public string HashFile { get; set; } // HashFile (length: 256)
+
+        ///<summary>
+        /// Дата создания файла
+        ///</summary>
+        public System.DateTime? DateCreated { get; set; } // DateCreated
+
+        ///<summary>
+        /// Дата последнего доступа к файлу
+        ///</summary>
+        public System.DateTime? DateAccessed { get; set; } // DateAccessed
+
+        ///<summary>
+        /// Дата последнего изменения файла
+        ///</summary>
+        public System.DateTime? DateModified { get; set; } // DateModified
+
+        ///<summary>
+        /// Дата последнего сохранения файла
+        ///</summary>
+        public System.DateTime? DateSaved { get; set; } // DateSaved
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child FileServerAllFileAndAuthorAlls where [FileServerAllFileAndAuthorAll].[IdFile] point to this entity (FK_FileServerAllFileAndAuthorAll_FileServerAllFile)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<FileServerAllFileAndAuthorAll> FileServerAllFileAndAuthorAlls { get; set; } // FileServerAllFileAndAuthorAll.FK_FileServerAllFileAndAuthorAll_FileServerAllFile
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent User pointed by [FileServerAllFile].([IdUser]) (FK_FileServerAllFile_Users)
+        /// </summary>
+        public virtual User User { get; set; } // FK_FileServerAllFile_Users
+
+        public FileServerAllFile()
+        {
+            DateCreate = System.DateTime.Now;
+            FileServerAllFileAndAuthorAlls = new System.Collections.Generic.List<FileServerAllFileAndAuthorAll>();
+        }
+    }
+
+    // FileServerAllFileAndAuthorAll
+    ///<summary>
+    /// Сводная все авторы и файл
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class FileServerAllFileAndAuthorAll
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Ун файла
+        ///</summary>
+        public int IdFile { get; set; } // IdFile
+
+        ///<summary>
+        /// Ун автора
+        ///</summary>
+        public int IdAuthor { get; set; } // IdAuthor
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent AuthorAll pointed by [FileServerAllFileAndAuthorAll].([IdAuthor]) (FK_FileServerAllFileAndAuthorAll_AuthorAll)
+        /// </summary>
+        public virtual AuthorAll AuthorAll { get; set; } // FK_FileServerAllFileAndAuthorAll_AuthorAll
+
+        /// <summary>
+        /// Parent FileServerAllFile pointed by [FileServerAllFileAndAuthorAll].([IdFile]) (FK_FileServerAllFileAndAuthorAll_FileServerAllFile)
+        /// </summary>
+        public virtual FileServerAllFile FileServerAllFile { get; set; } // FK_FileServerAllFileAndAuthorAll_FileServerAllFile
+
+        public FileServerAllFileAndAuthorAll()
+        {
+            DateCreate = System.DateTime.Now;
         }
     }
 
@@ -2407,14 +3365,41 @@ namespace EfDatabase.Inventory.Base
     }
 
     // FullСategory
+    ///<summary>
+    /// Сводная таблица (Тип, Производитель, Модель) АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class FullСategory
     {
+
+        ///<summary>
+        /// Ун категории АКСИОК
+        ///</summary>
         public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Ун типа оборудования АКСИОК
+        ///</summary>
         public int? IdEquipmentType { get; set; } // IdEquipmentType
+
+        ///<summary>
+        /// Ун производителя АКСИОК
+        ///</summary>
         public int? IdProducer { get; set; } // IdProducer
+
+        ///<summary>
+        /// Ун модели АКСИОК
+        ///</summary>
         public int? IdEquipmentModel { get; set; } // IdEquipmentModel
+
+        ///<summary>
+        /// Актуальность записи АКСИОК
+        ///</summary>
         public bool IsSignOfRelevance { get; set; } // IsSignOfRelevance
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
         public System.DateTime DateCreate { get; set; } // DateCreate
 
         // Reverse navigation
@@ -2483,6 +3468,54 @@ namespace EfDatabase.Inventory.Base
             ModelSwithes = new System.Collections.Generic.List<ModelSwithe>();
             NameMonitors = new System.Collections.Generic.List<NameMonitor>();
             NameSysBlocks = new System.Collections.Generic.List<NameSysBlock>();
+        }
+    }
+
+    // GroupActiveDerectory
+    ///<summary>
+    /// Группы из Active Derectory
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class GroupActiveDerectory
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int IdGroup { get; set; } // IdGroup (Primary key)
+
+        ///<summary>
+        /// Наименование группы
+        ///</summary>
+        public string NameGroup { get; set; } // NameGroup (length: 512)
+
+        ///<summary>
+        /// Описание группы
+        ///</summary>
+        public string InfoGroup { get; set; } // InfoGroup (length: 1024)
+
+        ///<summary>
+        /// Управляется группа
+        ///</summary>
+        public string ControlledGroup { get; set; } // ControlledGroup (length: 1024)
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ComparableUserAndGroups where [ComparableUserAndGroup].[IdGroup] point to this entity (FK_ComparableUserAndGroup_GroupActiveDerectory)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAndGroup> ComparableUserAndGroups { get; set; } // ComparableUserAndGroup.FK_ComparableUserAndGroup_GroupActiveDerectory
+
+        public GroupActiveDerectory()
+        {
+            DateCreate = System.DateTime.Now;
+            ComparableUserAndGroups = new System.Collections.Generic.List<ComparableUserAndGroup>();
         }
     }
 
@@ -2751,6 +3784,26 @@ namespace EfDatabase.Inventory.Base
         public string Name { get; set; } // Name (length: 4)
         public string Coment { get; set; } // Coment (length: 254)
         public string NameStatus { get; set; } // NameStatus (length: 64)
+    }
+
+    // The table 'InventoryModelComparable' is not usable by entity framework because it
+    // does not have a primary key. It is listed here for completeness.
+    // InventoryModelComparable
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class InventoryModelComparable
+    {
+        public string Name { get; set; } // Name (length: 128)
+        public string IpAdress { get; set; } // IpAdress (length: 128)
+        public string ZavNumber { get; set; } // ZavNumber (length: 128)
+        public string InventarNumber { get; set; } // InventarNumber (length: 128)
+        public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
+        public string AddressOrganization { get; set; } // AddressOrganization (length: 1024)
+        public string Bulding { get; set; } // Bulding (length: 1)
+        public string NumberKabinet { get; set; } // NumberKabinet (length: 5)
+        public string NameOtdel { get; set; } // NameOtdel (length: 256)
+        public string NameUser { get; set; } // NameUser (length: 256)
+        public string Coment { get; set; } // Coment (length: 254)
+        public int? IdStatus { get; set; } // IdStatus
     }
 
     // JournalAis3
@@ -3510,19 +4563,84 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // ModelComparableUserResult
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ModelComparableUserResult
+    {
+        public string LogicsButton { get; set; } // LogicsButton (Primary key) (length: 6)
+        public string NameSystem { get; set; } // NameSystem (Primary key) (length: 256)
+        public int? IdUser { get; set; } // IdUser
+        public string FullName { get; set; } // FullName (length: 1024)
+        public string PersonnelNumber { get; set; } // PersonnelNumber (length: 1024)
+        public string Department { get; set; } // Department (length: 1024)
+        public string Room { get; set; } // Room (length: 1024)
+        public string NamePosition { get; set; } // NamePosition (length: 1024)
+        public string Ranks { get; set; } // Ranks (length: 1024)
+        public string InternalPhone { get; set; } // InternalPhone (length: 1024)
+        public string TelephonUndeground { get; set; } // TelephonUndeground (length: 1024)
+        public string Mail { get; set; } // Mail (length: 1024)
+        public string Name { get; set; } // Name (length: 1024)
+        public string Surname { get; set; } // Surname (length: 1024)
+        public string Patronymic { get; set; } // Patronymic (length: 1024)
+        public int? CountGrooup { get; set; } // CountGrooup
+    }
+
     // ModelDocumentType
+    ///<summary>
+    /// Тип оборудования АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ModelDocumentType
     {
+
+        ///<summary>
+        /// Ун документа
+        ///</summary>
         public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// КОД СОУН
+        ///</summary>
         public int Soun { get; set; } // Soun
+
+        ///<summary>
+        /// Тип документа
+        ///</summary>
         public int DocumentType { get; set; } // DocumentType
+
+        ///<summary>
+        /// Вид оборудования/ПО
+        ///</summary>
         public string KindEquipmentName { get; set; } // KindEquipmentName (length: 512)
+
+        ///<summary>
+        /// Атрибут ТРУ (Тип оборудования)
+        ///</summary>
         public string CategoriesTruName { get; set; } // CategoriesTruName (length: 512)
+
+        ///<summary>
+        /// Номер документа
+        ///</summary>
         public string Number { get; set; } // Number (length: 128)
+
+        ///<summary>
+        /// Автор документа
+        ///</summary>
         public string Author { get; set; } // Author (length: 256)
+
+        ///<summary>
+        /// Атрибут удаления
+        ///</summary>
         public bool CanDelete { get; set; } // CanDelete
+
+        ///<summary>
+        /// Наименование учреждения
+        ///</summary>
         public string AgencyName { get; set; } // AgencyName (length: 512)
+
+        ///<summary>
+        /// Дата документа
+        ///</summary>
         public System.DateTime CreateDate { get; set; } // CreateDate
 
         // Reverse navigation
@@ -4111,6 +5229,8 @@ namespace EfDatabase.Inventory.Base
         /// Ответственный департамент
         ///</summary>
         public string NameDepartament { get; set; } // NameDepartament (length: 512)
+        public int CodeRegion { get; set; } // CodeRegion
+        public int CodeCyti { get; set; } // CodeCyti
 
         ///<summary>
         /// Комната ответственного
@@ -4145,6 +5265,8 @@ namespace EfDatabase.Inventory.Base
         public Organization()
         {
             NumberIfns = 0;
+            CodeRegion = 0;
+            CodeCyti = 0;
             IdUserDks = 0;
             DataCreate = System.DateTime.Now;
         }
@@ -4466,6 +5588,54 @@ namespace EfDatabase.Inventory.Base
         public ParameterAct()
         {
             Acts = new System.Collections.Generic.List<Act>();
+        }
+    }
+
+    // ParameterEventProcess
+    ///<summary>
+    /// Таблица параметров для процесса
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ParameterEventProcess
+    {
+
+        ///<summary>
+        /// Ун параметра
+        ///</summary>
+        public int IdParameters { get; set; } // IdParameters (Primary key)
+
+        ///<summary>
+        /// Наименование параметра
+        ///</summary>
+        public string NameParameters { get; set; } // NameParameters (length: 128)
+
+        ///<summary>
+        /// Информация о параметре
+        ///</summary>
+        public string InfoParameters { get; set; } // InfoParameters (length: 1024)
+
+        ///<summary>
+        /// Параметр
+        ///</summary>
+        public string Parameters { get; set; } // Parameters (length: 1024)
+
+        ///<summary>
+        /// Дата создания
+        ///</summary>
+        public System.DateTime DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ProcessAndParameters where [ProcessAndParameters].[IdParameters] point to this entity (FK_ProcessAndParameters_ParameterEventProcess)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ProcessAndParameter> ProcessAndParameters { get; set; } // ProcessAndParameters.FK_ProcessAndParameters_ParameterEventProcess
+
+        public ParameterEventProcess()
+        {
+            DateCreate = System.DateTime.Now;
+            ProcessAndParameters = new System.Collections.Generic.List<ProcessAndParameter>();
         }
     }
 
@@ -5011,6 +6181,94 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // PhoneNumbers
+    ///<summary>
+    /// Телефонные номера сравнение БД
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class PhoneNumber
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int IdPhone { get; set; } // IdPhone (Primary key)
+
+        ///<summary>
+        /// Телефонный номер
+        ///</summary>
+        public string PhoneNumber_ { get; set; } // PhoneNumber (length: 512)
+
+        ///<summary>
+        /// Ун типа телефона
+        ///</summary>
+        public int? IdType { get; set; } // IdType
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ComparableUserAndPhoneNumbers where [ComparableUserAndPhoneNumbers].[IdPhone] point to this entity (FK_ComparableUserAndPhoneNumbers_PhoneNumbers)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAndPhoneNumber> ComparableUserAndPhoneNumbers { get; set; } // ComparableUserAndPhoneNumbers.FK_ComparableUserAndPhoneNumbers_PhoneNumbers
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent PhoneType pointed by [PhoneNumbers].([IdType]) (FK_PhoneNumbers_PhoneType)
+        /// </summary>
+        public virtual PhoneType PhoneType { get; set; } // FK_PhoneNumbers_PhoneType
+
+        public PhoneNumber()
+        {
+            DateCreate = System.DateTime.Now;
+            ComparableUserAndPhoneNumbers = new System.Collections.Generic.List<ComparableUserAndPhoneNumber>();
+        }
+    }
+
+    // PhoneType
+    ///<summary>
+    /// Типы телефонов
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class PhoneType
+    {
+
+        ///<summary>
+        /// Ун типа телефона
+        ///</summary>
+        public int IdType { get; set; } // IdType (Primary key)
+
+        ///<summary>
+        /// Тип телефона
+        ///</summary>
+        public string TypePhone { get; set; } // TypePhone (length: 512)
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child PhoneNumbers where [PhoneNumbers].[IdType] point to this entity (FK_PhoneNumbers_PhoneType)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<PhoneNumber> PhoneNumbers { get; set; } // PhoneNumbers.FK_PhoneNumbers_PhoneType
+
+        public PhoneType()
+        {
+            DateCreate = System.DateTime.Now;
+            PhoneNumbers = new System.Collections.Generic.List<PhoneNumber>();
+        }
+    }
+
     // Position
     ///<summary>
     /// Должности ДКС
@@ -5198,14 +6456,83 @@ namespace EfDatabase.Inventory.Base
         public int КомнатанесоответствиеБДЭПО { get; set; } // Комната несоответствие БД ЭПО (Primary key)
     }
 
+    // ProcessAndParameters
+    ///<summary>
+    /// Сводная процессы и параметры
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ProcessAndParameter
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Ун процесса
+        ///</summary>
+        public int? IdProcess { get; set; } // IdProcess
+
+        ///<summary>
+        /// Ун параметра
+        ///</summary>
+        public int? IdParameters { get; set; } // IdParameters
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime DateCreate { get; set; } // DateCreate
+
+        // Foreign keys
+
+        /// <summary>
+        /// Parent EventProcess pointed by [ProcessAndParameters].([IdProcess]) (FK_ProcessAndParameters_EventProcess)
+        /// </summary>
+        public virtual EventProcess EventProcess { get; set; } // FK_ProcessAndParameters_EventProcess
+
+        /// <summary>
+        /// Parent ParameterEventProcess pointed by [ProcessAndParameters].([IdParameters]) (FK_ProcessAndParameters_ParameterEventProcess)
+        /// </summary>
+        public virtual ParameterEventProcess ParameterEventProcess { get; set; } // FK_ProcessAndParameters_ParameterEventProcess
+
+        public ProcessAndParameter()
+        {
+            DateCreate = System.DateTime.Now;
+        }
+    }
+
     // Producer
+    ///<summary>
+    /// Производитель оборудования АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class Producer
     {
+
+        ///<summary>
+        /// Ун производителя
+        ///</summary>
         public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Код оборудования
+        ///</summary>
         public string Code { get; set; } // Code (length: 10)
+
+        ///<summary>
+        /// Производитель
+        ///</summary>
         public string Name { get; set; } // Name (length: 512)
+
+        ///<summary>
+        /// Дата начала
+        ///</summary>
         public System.DateTime? StartDate { get; set; } // StartDate
+
+        ///<summary>
+        /// Дата окончания
+        ///</summary>
         public System.DateTime? EndDate { get; set; } // EndDate
 
         // Reverse navigation
@@ -5699,6 +7026,54 @@ namespace EfDatabase.Inventory.Base
         public int КомнатанесоответствиеБДЭПО { get; set; } // Комната несоответствие БД ЭПО (Primary key)
     }
 
+    // SelectDayOfTheWeek
+    ///<summary>
+    /// Таблица дней недели для запуска процесса
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class SelectDayOfTheWeek
+    {
+
+        ///<summary>
+        /// Ун записи дня
+        ///</summary>
+        public int IdDayOfTheWeek { get; set; } // IdDayOfTheWeek (Primary key)
+
+        ///<summary>
+        /// День в текстовом виде Ru
+        ///</summary>
+        public string RuTextDayOfTheWeek { get; set; } // RuTextDayOfTheWeek (length: 128)
+
+        ///<summary>
+        /// День в текстовом виде Eng
+        ///</summary>
+        public string EngTextDayOfTheWeek { get; set; } // EngTextDayOfTheWeek (length: 128)
+
+        ///<summary>
+        /// Номер дня недели
+        ///</summary>
+        public int EnumDay { get; set; } // EnumDay
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child EventProcesses where [EventProcess].[IdDayOfTheWeek] point to this entity (FK_EventProcess_SelectDayOfTheWeek)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<EventProcess> EventProcesses { get; set; } // EventProcess.FK_EventProcess_SelectDayOfTheWeek
+
+        public SelectDayOfTheWeek()
+        {
+            DateCreate = System.DateTime.Now;
+            EventProcesses = new System.Collections.Generic.List<EventProcess>();
+        }
+    }
+
     // ServerEquipment
     ///<summary>
     /// Сервера
@@ -6100,6 +7475,59 @@ namespace EfDatabase.Inventory.Base
         {
             DataCreate = System.DateTime.Now;
             Users = new System.Collections.Generic.List<User>();
+        }
+    }
+
+    // StatusUserAccount
+    ///<summary>
+    /// Статусы пользователей из Active Derectory
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class StatusUserAccount
+    {
+
+        ///<summary>
+        /// Ун записи статуса
+        ///</summary>
+        public int IdStatusUserAccount { get; set; } // IdStatusUserAccount (Primary key)
+
+        ///<summary>
+        /// Флаг описание Microsoft
+        ///</summary>
+        public string FlagProperties { get; set; } // FlagProperties (length: 64)
+
+        ///<summary>
+        /// Hex Двоичный вид
+        ///</summary>
+        public string ValueHexDecimal { get; set; } // ValueHexDecimal (length: 64)
+
+        ///<summary>
+        /// Числовой вид
+        ///</summary>
+        public int ValueInt { get; set; } // ValueInt
+
+        ///<summary>
+        /// Описание статуса
+        ///</summary>
+        public string Info { get; set; } // Info (length: 2048)
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ComparableUserAndStatusUserAccounts where [ComparableUserAndStatusUserAccount].[IdStatusUserAccount] point to this entity (FK_ComparableUserAndStatusUserAccount_StatusUserAccount)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAndStatusUserAccount> ComparableUserAndStatusUserAccounts { get; set; } // ComparableUserAndStatusUserAccount.FK_ComparableUserAndStatusUserAccount_StatusUserAccount
+
+        public StatusUserAccount()
+        {
+            DateCreate = System.DateTime.Now;
+            ComparableUserAndStatusUserAccounts = new System.Collections.Generic.List<ComparableUserAndStatusUserAccount>();
         }
     }
 
@@ -6628,6 +8056,44 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // SystemModel
+    ///<summary>
+    /// Справочник информационных систем
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class SystemModel
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int IdSystemModel { get; set; } // IdSystemModel (Primary key)
+
+        ///<summary>
+        /// Наименование системы
+        ///</summary>
+        public string NameSystem { get; set; } // NameSystem (length: 256)
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ComparableUserAllSystems where [ComparableUserAllSystem].[IdSystemModel] point to this entity (FK_ComparableUserAllSystem_SystemModel)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAllSystem> ComparableUserAllSystems { get; set; } // ComparableUserAllSystem.FK_ComparableUserAllSystem_SystemModel
+
+        public SystemModel()
+        {
+            DateCreate = System.DateTime.Now;
+            ComparableUserAllSystems = new System.Collections.Generic.List<ComparableUserAllSystem>();
+        }
+    }
+
     // TableAllModel
     ///<summary>
     /// Таблица всех моделей и веток АИС 3
@@ -6963,7 +8429,7 @@ namespace EfDatabase.Inventory.Base
 
     // Telephon
     ///<summary>
-    /// Тедлефон
+    /// Телефоны
     ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class Telephon
@@ -7017,7 +8483,7 @@ namespace EfDatabase.Inventory.Base
         ///<summary>
         /// Инвентарный номер
         ///</summary>
-        public string InventarNum { get; set; } // InventarNum (length: 64)
+        public string InventarNumberTelephone { get; set; } // InventarNumberTelephone (length: 64)
 
         ///<summary>
         /// Ip адрес телефона
@@ -7488,10 +8954,20 @@ namespace EfDatabase.Inventory.Base
         [JsonIgnore]
         public virtual System.Collections.Generic.ICollection<BlockPower> BlockPowers { get; set; } // BlockPower.FK_BlockPower_Users
         /// <summary>
+        /// Child ComparableUserAllSystems where [ComparableUserAllSystem].[IdUser] point to this entity (FK_ComparableUserAllSystem_Users)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAllSystem> ComparableUserAllSystems { get; set; } // ComparableUserAllSystem.FK_ComparableUserAllSystem_Users
+        /// <summary>
         /// Child Documents where [Document].[IdUser] point to this entity (FK_Users_Document)
         /// </summary>
         [JsonIgnore]
         public virtual System.Collections.Generic.ICollection<Document> Documents { get; set; } // Document.FK_Users_Document
+        /// <summary>
+        /// Child FileServerAllFiles where [FileServerAllFile].[IdUser] point to this entity (FK_FileServerAllFile_Users)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<FileServerAllFile> FileServerAllFiles { get; set; } // FileServerAllFile.FK_FileServerAllFile_Users
         /// <summary>
         /// Child JournalAis3 where [JournalAis3].[IdUser] point to this entity (FK_Users_JournalAis3)
         /// </summary>
@@ -7580,7 +9056,9 @@ namespace EfDatabase.Inventory.Base
             IdHistory = System.Guid.NewGuid().ToString();
             DataCreate = System.DateTime.Now;
             BlockPowers = new System.Collections.Generic.List<BlockPower>();
+            ComparableUserAllSystems = new System.Collections.Generic.List<ComparableUserAllSystem>();
             Documents = new System.Collections.Generic.List<Document>();
+            FileServerAllFiles = new System.Collections.Generic.List<FileServerAllFile>();
             JournalAis3 = new System.Collections.Generic.List<JournalAis3>();
             Mfus = new System.Collections.Generic.List<Mfu>();
             Monitors = new System.Collections.Generic.List<Monitor>();
@@ -7682,7 +9160,7 @@ namespace EfDatabase.Inventory.Base
 
     // UsersAis3TemplateAndRule
     ///<summary>
-    /// Связка пользователей с ролями ишаблонами
+    /// Связка пользователей с ролями и шаблонами
     ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class UsersAis3TemplateAndRule
@@ -7860,81 +9338,376 @@ namespace EfDatabase.Inventory.Base
     }
 
     // ValueCharacteristicJson
+    ///<summary>
+    /// Расширяющие атрибуты ЭПО АКСИОК
+    ///</summary>
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ValueCharacteristicJson
     {
+
+        ///<summary>
+        /// Ун объекта
+        ///</summary>
         public int Id { get; set; } // Id (Primary key)
+
+        ///<summary>
+        /// Не на балансе
+        ///</summary>
         public string NotOnBalance { get; set; } // NotOnBalance (length: 256)
+
+        ///<summary>
+        /// Требует замены
+        ///</summary>
         public bool RequiresReplacement { get; set; } // RequiresReplacement
+
+        ///<summary>
+        /// Назначение
+        ///</summary>
         public string Appointment { get; set; } // Appointment (length: 128)
+
+        ///<summary>
+        /// Среда виртуализации
+        ///</summary>
         public string VirtualizationEnvironment { get; set; } // VirtualizationEnvironment (length: 128)
+
+        ///<summary>
+        /// Участок (Здание)
+        ///</summary>
         public string Building { get; set; } // Building (length: 128)
+
+        ///<summary>
+        /// Расположение. Этаж
+        ///</summary>
         public string FloorLocation { get; set; } // FloorLocation (length: 128)
+
+        ///<summary>
+        /// Расположение. Комната
+        ///</summary>
         public string RoomLocation { get; set; } // RoomLocation (length: 128)
+
+        ///<summary>
+        /// Комната
+        ///</summary>
         public string Room { get; set; } // Room (length: 128)
+
+        ///<summary>
+        /// Отдел
+        ///</summary>
         public string Division { get; set; } // Division (length: 256)
+
+        ///<summary>
+        /// Актуальная версия ОС
+        ///</summary>
         public string ActualOsVersion { get; set; } // ActualOsVersion (length: 128)
+
+        ///<summary>
+        /// Версия фактической ОС
+        ///</summary>
         public string OsActualVersion { get; set; } // OsActualVersion (length: 128)
+
+        ///<summary>
+        /// Наименование загса
+        ///</summary>
         public string ZagsName { get; set; } // ZagsName (length: 128)
+
+        ///<summary>
+        /// Адрес загса
+        ///</summary>
         public string ZagsAddress { get; set; } // ZagsAddress (length: 128)
+
+        ///<summary>
+        /// Тип использования
+        ///</summary>
         public string TypeOfUse { get; set; } // TypeOfUse (length: 128)
+
+        ///<summary>
+        /// Модель соответствия отправки
+        ///</summary>
         public string ModelInDeliveryAccordance { get; set; } // ModelInDeliveryAccordance (length: 128)
+
+        ///<summary>
+        /// Номер трансфера
+        ///</summary>
         public string TransferContractNumber { get; set; } // TransferContractNumber (length: 128)
+
+        ///<summary>
+        /// Версия ПС
+        ///</summary>
         public string PsVersion { get; set; } // PsVersion (length: 128)
+
+        ///<summary>
+        /// Сетевое имя (NetBIOS)
+        ///</summary>
         public string NetBiosName { get; set; } // NetBiosName (length: 128)
+
+        ///<summary>
+        /// IP адрес
+        ///</summary>
         public string IpAddress { get; set; } // IpAddress (length: 128)
+
+        ///<summary>
+        /// Дополнительные IP адреса
+        ///</summary>
         public string AdditionalIPs { get; set; } // AdditionalIPs (length: 128)
+
+        ///<summary>
+        /// Количество процессоров
+        ///</summary>
         public int? CpuCount { get; set; } // CpuCount
+
+        ///<summary>
+        /// Количество ядер
+        ///</summary>
         public int? CoreCount { get; set; } // CoreCount
+
+        ///<summary>
+        /// Тип процессора
+        ///</summary>
         public string CpuType { get; set; } // CpuType (length: 128)
+
+        ///<summary>
+        /// Частота процессора, МГц
+        ///</summary>
         public int? CpuFrequencyMhz { get; set; } // CpuFrequencyMhz
+
+        ///<summary>
+        /// ОЗУ (тип)
+        ///</summary>
         public string RamType { get; set; } // RamType (length: 128)
+
+        ///<summary>
+        /// ОЗУ (размер)
+        ///</summary>
         public int? RamSize { get; set; } // RamSize
+
+        ///<summary>
+        /// CD/DVD
+        ///</summary>
         public string CdOrDvd { get; set; } // CdOrDvd (length: 128)
+
+        ///<summary>
+        /// FDD
+        ///</summary>
         public string Fdd { get; set; } // Fdd (length: 128)
+
+        ///<summary>
+        /// RAID
+        ///</summary>
         public string Raid { get; set; } // Raid (length: 128)
+
+        ///<summary>
+        /// Общее дисковое пространство, Gb
+        ///</summary>
         public int? TotalDiskSpaceGb { get; set; } // TotalDiskSpaceGb
+
+        ///<summary>
+        /// Количество HDD
+        ///</summary>
         public int? HddCount { get; set; } // HddCount
+
+        ///<summary>
+        /// Объем жесткого диска
+        ///</summary>
         public int? HddSize { get; set; } // HddSize
+
+        ///<summary>
+        /// Тип жесткого диска
+        ///</summary>
         public string HddType { get; set; } // HddType (length: 128)
+
+        ///<summary>
+        /// Кол-во плат
+        ///</summary>
         public int? BoardsNumber { get; set; } // BoardsNumber
+
+        ///<summary>
+        /// Кол-во свободных плат
+        ///</summary>
         public int? FreeBoardsNumber { get; set; } // FreeBoardsNumber
+
+        ///<summary>
+        /// Сетевая карта
+        ///</summary>
         public string NetworkAdapter { get; set; } // NetworkAdapter (length: 128)
+
+        ///<summary>
+        /// Скорость сетевой карты
+        ///</summary>
         public int? NetworkAdapterSpeed { get; set; } // NetworkAdapterSpeed
+
+        ///<summary>
+        /// Кол-во внутр абон аналог
+        ///</summary>
         public int? InternalAnalogNumber { get; set; } // InternalAnalogNumber
+
+        ///<summary>
+        /// Кол-во внутр абон цифровых
+        ///</summary>
         public int? InternalDigitNumber { get; set; } // InternalDigitNumber
+
+        ///<summary>
+        /// Инвентарный номер ПК, к которому подключен
+        ///</summary>
         public string ConnectedPcInventoryNumber { get; set; } // ConnectedPcInventoryNumber (length: 128)
+
+        ///<summary>
+        /// Инвентарный номер ИБП, к которому подключен
+        ///</summary>
         public string ConnectedUpsInventoryNumber { get; set; } // ConnectedUpsInventoryNumber (length: 128)
+
+        ///<summary>
+        /// Инвентарный номер монитора
+        ///</summary>
         public string DisplayInventoryNumber { get; set; } // DisplayInventoryNumber (length: 128)
+
+        ///<summary>
+        /// Сервисный номер монитора
+        ///</summary>
         public string DisplayServiceNumber { get; set; } // DisplayServiceNumber (length: 128)
+
+        ///<summary>
+        /// Монитор, марка
+        ///</summary>
         public string DisplayBrand { get; set; } // DisplayBrand (length: 128)
+
+        ///<summary>
+        /// Тип монитора
+        ///</summary>
         public string DisplayType { get; set; } // DisplayType (length: 128)
+
+        ///<summary>
+        /// Размер экрана
+        ///</summary>
         public string DisplaySize { get; set; } // DisplaySize (length: 128)
+
+        ///<summary>
+        /// Максимальное разрешение
+        ///</summary>
         public string DisplayMaxResolution { get; set; } // DisplayMaxResolution (length: 128)
+
+        ///<summary>
+        /// Тип аналогового подключения городской ввод
+        ///</summary>
         public string TypeOfAnalogConnection { get; set; } // TypeOfAnalogConnection (length: 128)
+
+        ///<summary>
+        /// Тип цифрового подключения городской ввод
+        ///</summary>
         public string TypeOfDigitConnection { get; set; } // TypeOfDigitConnection (length: 128)
+
+        ///<summary>
+        /// Численность администраторов УАТС
+        ///</summary>
         public int? AdminsCount { get; set; } // AdminsCount
+
+        ///<summary>
+        /// Номер ключа
+        ///</summary>
         public string KeyNumber { get; set; } // KeyNumber (length: 128)
+
+        ///<summary>
+        /// Марка стримера
+        ///</summary>
         public string StreamerBrand { get; set; } // StreamerBrand (length: 128)
+
+        ///<summary>
+        /// Маркировка картриджей стримера
+        ///</summary>
         public string StreamerCartridgeMark { get; set; } // StreamerCartridgeMark (length: 128)
+
+        ///<summary>
+        /// Операционная система
+        ///</summary>
         public string OperatingSystem { get; set; } // OperatingSystem (length: 128)
+
+        ///<summary>
+        /// Сервис пак
+        ///</summary>
         public string ServicePack { get; set; } // ServicePack (length: 128)
+
+        ///<summary>
+        /// Офисный пакет
+        ///</summary>
         public string OfficeSuite { get; set; } // OfficeSuite (length: 128)
+
+        ///<summary>
+        /// Фамилия И.О.
+        ///</summary>
         public string Fio { get; set; } // Fio (length: 128)
+
+        ///<summary>
+        /// Ответственный
+        ///</summary>
         public string ResponsiblePerson { get; set; } // ResponsiblePerson (length: 128)
+
+        ///<summary>
+        /// Описание
+        ///</summary>
         public string Description { get; set; } // Description (length: 128)
+
+        ///<summary>
+        /// МАК Адресс
+        ///</summary>
         public string MacAddress { get; set; } // MacAddress (length: 128)
+
+        ///<summary>
+        /// Гарантия
+        ///</summary>
         public System.DateTime? Guarantee { get; set; } // Guarantee
+
+        ///<summary>
+        /// Год выпуска
+        ///</summary>
         public string YearOfIssue { get; set; } // YearOfIssue (length: 128)
+
+        ///<summary>
+        /// Имя компьютера
+        ///</summary>
         public string ComputerName { get; set; } // ComputerName (length: 128)
+
+        ///<summary>
+        /// Инвентарный номер
+        ///</summary>
         public string InventoryNumber { get; set; } // InventoryNumber (length: 128)
+
+        ///<summary>
+        /// Комментарий
+        ///</summary>
         public string Comments { get; set; } // Comments (length: 128)
+
+        ///<summary>
+        /// Контракт
+        ///</summary>
         public string SupplyContract { get; set; } // SupplyContract (length: 128)
+
+        ///<summary>
+        /// Контракт СТО
+        ///</summary>
         public string ContractSto { get; set; } // ContractSto (length: 128)
+
+        ///<summary>
+        /// Сервисный номер
+        ///</summary>
         public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
+
+        ///<summary>
+        /// Серийный номер
+        ///</summary>
         public string SerialNumber { get; set; } // SerialNumber (length: 128)
+
+        ///<summary>
+        /// Сервер почты
+        ///</summary>
         public string MailServer { get; set; } // MailServer (length: 128)
+
+        ///<summary>
+        /// Сервер Файлвола
+        ///</summary>
         public string FirewallMailServer { get; set; } // FirewallMailServer (length: 128)
+
+        ///<summary>
+        /// Файлвол ВКС
+        ///</summary>
         public string FirewallForVks { get; set; } // FirewallForVks (length: 128)
 
         // Foreign keys
@@ -7943,6 +9716,74 @@ namespace EfDatabase.Inventory.Base
         /// Parent EpoDocument pointed by [ValueCharacteristicJson].([Id]) (FK_ValueCharacteristicJson_EpoDocument)
         /// </summary>
         public virtual EpoDocument EpoDocument { get; set; } // FK_ValueCharacteristicJson_EpoDocument
+    }
+
+    // WorkStations
+    ///<summary>
+    /// Рабочие станции AD
+    ///</summary>
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class WorkStation
+    {
+
+        ///<summary>
+        /// Ун записи
+        ///</summary>
+        public int IdWorkStations { get; set; } // IdWorkStations (Primary key)
+
+        ///<summary>
+        /// Наименование рабочей станции
+        ///</summary>
+        public string NameWorkStation { get; set; } // NameWorkStation (length: 128)
+
+        ///<summary>
+        /// DNS имя
+        ///</summary>
+        public string DnsName { get; set; } // DnsName (length: 128)
+
+        ///<summary>
+        /// Описание
+        ///</summary>
+        public string Info { get; set; } // Info (length: 512)
+
+        ///<summary>
+        /// Управляется пользователем
+        ///</summary>
+        public string ControlledUser { get; set; } // ControlledUser (length: 512)
+
+        ///<summary>
+        /// Наименование Windows
+        ///</summary>
+        public string WindowsName { get; set; } // WindowsName (length: 128)
+
+        ///<summary>
+        /// Версия Windows
+        ///</summary>
+        public string WindowsVersion { get; set; } // WindowsVersion (length: 64)
+
+        ///<summary>
+        /// Комната
+        ///</summary>
+        public string Room { get; set; } // Room (length: 64)
+
+        ///<summary>
+        /// Дата записи
+        ///</summary>
+        public System.DateTime? DateCreate { get; set; } // DateCreate
+
+        // Reverse navigation
+
+        /// <summary>
+        /// Child ComparableUserAndWorkStations where [ComparableUserAndWorkStation].[IdWorkStations] point to this entity (FK_ComparableUserAndWorkStation_WorkStations)
+        /// </summary>
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<ComparableUserAndWorkStation> ComparableUserAndWorkStations { get; set; } // ComparableUserAndWorkStation.FK_ComparableUserAndWorkStation_WorkStations
+
+        public WorkStation()
+        {
+            DateCreate = System.DateTime.Now;
+            ComparableUserAndWorkStations = new System.Collections.Generic.List<ComparableUserAndWorkStation>();
+        }
     }
 
     #endregion
@@ -8018,7 +9859,7 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.ExpertiseStatus).HasColumnName(@"ExpertiseStatus").HasColumnType("int").IsOptional();
             Property(x => x.ServiceNumber).HasColumnName(@"ServiceNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.IndividualServiceNumber).HasColumnName(@"IndividualServiceNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
-            Property(x => x.NotOnBalance).HasColumnName(@"NotOnBalance").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.NotOnBalance).HasColumnName(@"NotOnBalance").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(30);
             Property(x => x.YearOfIssue).HasColumnName(@"YearOfIssue").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ExploitationStartYear).HasColumnName(@"ExploitationStartYear").HasColumnType("int").IsOptional();
             Property(x => x.Guarantee).HasColumnName(@"Guarantee").HasColumnType("datetime").IsOptional();
@@ -8041,10 +9882,10 @@ namespace EfDatabase.Inventory.Base
             ToTable("AllIpServerSelect", schema);
             HasKey(x => new { x.Id, x.InfoStatusReport, x.ColorStatus });
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.NameServer).HasColumnName(@"NameServer").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.IpAdress).HasColumnName(@"IpAdress").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(8000);
-            Property(x => x.FullIpAdressDataBase).HasColumnName(@"FullIpAdressDataBase").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.FullIpAdressDataBase).HasColumnName(@"FullIpAdressDataBase").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(254);
             Property(x => x.InfoStatusReport).HasColumnName(@"InfoStatusReport").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.ColorStatus).HasColumnName(@"ColorStatus").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
         }
@@ -8229,6 +10070,26 @@ namespace EfDatabase.Inventory.Base
 
             // Foreign keys
             HasRequired(a => a.SigmentIfn).WithMany(b => b.ApplicationsIfns).HasForeignKey(c => c.IdSigmentIfns); // FK_ApplicationsIfns_SigmentIfns
+        }
+    }
+
+    // AuthorAll
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class AuthorAllConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AuthorAll>
+    {
+        public AuthorAllConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AuthorAllConfiguration(string schema)
+        {
+            ToTable("AuthorAll", schema);
+            HasKey(x => x.IdAuthor);
+
+            Property(x => x.IdAuthor).HasColumnName(@"IdAuthor").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
     }
 
@@ -8502,6 +10363,145 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.IdClassParameter).HasColumnName(@"IdClassParameter").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.NameClassParameter).HasColumnName(@"NameClassParameter").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // ComparableUserAllSystem
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAllSystemConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ComparableUserAllSystem>
+    {
+        public ComparableUserAllSystemConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ComparableUserAllSystemConfiguration(string schema)
+        {
+            ToTable("ComparableUserAllSystem", schema);
+            HasKey(x => x.IdComparableUser);
+
+            Property(x => x.IdComparableUser).HasColumnName(@"IdComparableUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+            Property(x => x.IdSystemModel).HasColumnName(@"IdSystemModel").HasColumnType("int").IsRequired();
+            Property(x => x.Surname).HasColumnName(@"Surname").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.Patronymic).HasColumnName(@"Patronymic").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.FullName).HasColumnName(@"FullName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.PersonnelNumber).HasColumnName(@"PersonnelNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.Department).HasColumnName(@"Department").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.JobTitle).HasColumnName(@"JobTitle").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.Ranks).HasColumnName(@"Ranks").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.NameMail).HasColumnName(@"NameMail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.Room).HasColumnName(@"Room").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.UserAccountControl).HasColumnName(@"UserAccountControl").HasColumnType("int").IsOptional();
+            Property(x => x.DistingUishedName).HasColumnName(@"DistingUishedName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.PhoneNumberText).HasColumnName(@"PhoneNumberText").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.TypePhoneInt).HasColumnName(@"TypePhoneInt").HasColumnType("int").IsOptional();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasOptional(a => a.User).WithMany(b => b.ComparableUserAllSystems).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_ComparableUserAllSystem_Users
+            HasRequired(a => a.SystemModel).WithMany(b => b.ComparableUserAllSystems).HasForeignKey(c => c.IdSystemModel).WillCascadeOnDelete(false); // FK_ComparableUserAllSystem_SystemModel
+        }
+    }
+
+    // ComparableUserAndGroup
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAndGroupConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ComparableUserAndGroup>
+    {
+        public ComparableUserAndGroupConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ComparableUserAndGroupConfiguration(string schema)
+        {
+            ToTable("ComparableUserAndGroup", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdComparableUser).HasColumnName(@"IdComparableUser").HasColumnType("int").IsRequired();
+            Property(x => x.IdGroup).HasColumnName(@"IdGroup").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.ComparableUserAllSystem).WithMany(b => b.ComparableUserAndGroups).HasForeignKey(c => c.IdComparableUser).WillCascadeOnDelete(false); // FK_ComparableUserAndGroup_ComparableUserAllSystem
+            HasRequired(a => a.GroupActiveDerectory).WithMany(b => b.ComparableUserAndGroups).HasForeignKey(c => c.IdGroup).WillCascadeOnDelete(false); // FK_ComparableUserAndGroup_GroupActiveDerectory
+        }
+    }
+
+    // ComparableUserAndPhoneNumbers
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAndPhoneNumberConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ComparableUserAndPhoneNumber>
+    {
+        public ComparableUserAndPhoneNumberConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ComparableUserAndPhoneNumberConfiguration(string schema)
+        {
+            ToTable("ComparableUserAndPhoneNumbers", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdComparableUser).HasColumnName(@"IdComparableUser").HasColumnType("int").IsRequired();
+            Property(x => x.IdPhone).HasColumnName(@"IdPhone").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.ComparableUserAllSystem).WithMany(b => b.ComparableUserAndPhoneNumbers).HasForeignKey(c => c.IdComparableUser).WillCascadeOnDelete(false); // FK_ComparableUserAndPhoneNumbers_ComparableUserAllSystem
+            HasRequired(a => a.PhoneNumber).WithMany(b => b.ComparableUserAndPhoneNumbers).HasForeignKey(c => c.IdPhone).WillCascadeOnDelete(false); // FK_ComparableUserAndPhoneNumbers_PhoneNumbers
+        }
+    }
+
+    // ComparableUserAndStatusUserAccount
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAndStatusUserAccountConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ComparableUserAndStatusUserAccount>
+    {
+        public ComparableUserAndStatusUserAccountConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ComparableUserAndStatusUserAccountConfiguration(string schema)
+        {
+            ToTable("ComparableUserAndStatusUserAccount", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdComparableUser).HasColumnName(@"IdComparableUser").HasColumnType("int").IsRequired();
+            Property(x => x.IdStatusUserAccount).HasColumnName(@"IdStatusUserAccount").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.ComparableUserAllSystem).WithMany(b => b.ComparableUserAndStatusUserAccounts).HasForeignKey(c => c.IdComparableUser).WillCascadeOnDelete(false); // FK_ComparableUserAndStatusUserAccount_ComparableUserAllSystem
+            HasRequired(a => a.StatusUserAccount).WithMany(b => b.ComparableUserAndStatusUserAccounts).HasForeignKey(c => c.IdStatusUserAccount).WillCascadeOnDelete(false); // FK_ComparableUserAndStatusUserAccount_StatusUserAccount
+        }
+    }
+
+    // ComparableUserAndWorkStation
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ComparableUserAndWorkStationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ComparableUserAndWorkStation>
+    {
+        public ComparableUserAndWorkStationConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ComparableUserAndWorkStationConfiguration(string schema)
+        {
+            ToTable("ComparableUserAndWorkStation", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdComparableUser).HasColumnName(@"IdComparableUser").HasColumnType("int").IsRequired();
+            Property(x => x.IdWorkStations).HasColumnName(@"IdWorkStations").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.ComparableUserAllSystem).WithMany(b => b.ComparableUserAndWorkStations).HasForeignKey(c => c.IdComparableUser).WillCascadeOnDelete(false); // FK_ComparableUserAndWorkStation_ComparableUserAllSystem
+            HasRequired(a => a.WorkStation).WithMany(b => b.ComparableUserAndWorkStations).HasForeignKey(c => c.IdWorkStations).WillCascadeOnDelete(false); // FK_ComparableUserAndWorkStation_WorkStations
         }
     }
 
@@ -9110,18 +11110,25 @@ namespace EfDatabase.Inventory.Base
         public EventProcessConfiguration(string schema)
         {
             ToTable("EventProcess", schema);
-            HasKey(x => x.Id);
+            HasKey(x => x.IdProcess);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.NameProcess).HasColumnName(@"NameProcess").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
-            Property(x => x.DayX).HasColumnName(@"DayX").HasColumnType("int").IsOptional();
+            Property(x => x.IdProcess).HasColumnName(@"IdProcess").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.InfoEvent).HasColumnName(@"InfoEvent").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.IdDayOfTheWeek).HasColumnName(@"IdDayOfTheWeek").HasColumnType("int").IsOptional();
             Property(x => x.HoursX).HasColumnName(@"HoursX").HasColumnType("int").IsOptional();
             Property(x => x.MinutesX).HasColumnName(@"MinutesX").HasColumnType("int").IsOptional();
-            Property(x => x.ParametersEvent).HasColumnName(@"ParametersEvent").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.IsTimeEventProcess).HasColumnName(@"IsTimeEventProcess").HasColumnType("bit").IsRequired();
+            Property(x => x.IsExistsParameters).HasColumnName(@"IsExistsParameters").HasColumnType("bit").IsRequired();
             Property(x => x.IsComplete).HasColumnName(@"IsComplete").HasColumnType("bit").IsOptional();
             Property(x => x.DataStart).HasColumnName(@"DataStart").HasColumnType("smalldatetime").IsOptional();
             Property(x => x.DataFinish).HasColumnName(@"DataFinish").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.FindNameSpace).HasColumnName(@"FindNameSpace").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.NameDll).HasColumnName(@"NameDll").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.NameMethodProcess).HasColumnName(@"NameMethodProcess").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsRequired();
+
+            // Foreign keys
+            HasOptional(a => a.SelectDayOfTheWeek).WithMany(b => b.EventProcesses).HasForeignKey(c => c.IdDayOfTheWeek).WillCascadeOnDelete(false); // FK_EventProcess_SelectDayOfTheWeek
         }
     }
 
@@ -9160,6 +11167,70 @@ namespace EfDatabase.Inventory.Base
 
             Property(x => x.Id).HasColumnName(@"Id").HasColumnType("bigint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+        }
+    }
+
+    // FileServerAllFile
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class FileServerAllFileConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<FileServerAllFile>
+    {
+        public FileServerAllFileConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public FileServerAllFileConfiguration(string schema)
+        {
+            ToTable("FileServerAllFile", schema);
+            HasKey(x => x.IdFile);
+
+            Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+            Property(x => x.NameSave).HasColumnName(@"NameSave").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileOwnerAuthor).HasColumnName(@"FileOwnerAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.LastAuthor).HasColumnName(@"LastAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FullPathFile).HasColumnName(@"FullPathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.PathFile).HasColumnName(@"PathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.NameFile).HasColumnName(@"NameFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ItemTypeText).HasColumnName(@"ItemTypeText").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.TypeMime).HasColumnName(@"TypeMime").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileExtension).HasColumnName(@"FileExtension").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFileText).HasColumnName(@"SizeFileText").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFile).HasColumnName(@"SizeFile").HasColumnType("bigint").IsOptional();
+            Property(x => x.HashFile).HasColumnName(@"HashFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateAccessed).HasColumnName(@"DateAccessed").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateModified).HasColumnName(@"DateModified").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateSaved).HasColumnName(@"DateSaved").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasOptional(a => a.User).WithMany(b => b.FileServerAllFiles).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_FileServerAllFile_Users
+        }
+    }
+
+    // FileServerAllFileAndAuthorAll
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class FileServerAllFileAndAuthorAllConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<FileServerAllFileAndAuthorAll>
+    {
+        public FileServerAllFileAndAuthorAllConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public FileServerAllFileAndAuthorAllConfiguration(string schema)
+        {
+            ToTable("FileServerAllFileAndAuthorAll", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("int").IsRequired();
+            Property(x => x.IdAuthor).HasColumnName(@"IdAuthor").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasRequired(a => a.AuthorAll).WithMany(b => b.FileServerAllFileAndAuthorAlls).HasForeignKey(c => c.IdAuthor).WillCascadeOnDelete(false); // FK_FileServerAllFileAndAuthorAll_AuthorAll
+            HasRequired(a => a.FileServerAllFile).WithMany(b => b.FileServerAllFileAndAuthorAlls).HasForeignKey(c => c.IdFile).WillCascadeOnDelete(false); // FK_FileServerAllFileAndAuthorAll_FileServerAllFile
         }
     }
 
@@ -9264,6 +11335,28 @@ namespace EfDatabase.Inventory.Base
             HasOptional(a => a.EquipmentModel).WithMany(b => b.FullСategory).HasForeignKey(c => c.IdEquipmentModel).WillCascadeOnDelete(false); // FK_FullСategory_EquipmentModel
             HasOptional(a => a.EquipmentType).WithMany(b => b.FullСategory).HasForeignKey(c => c.IdEquipmentType).WillCascadeOnDelete(false); // FK_FullСategory_EquipmentType
             HasOptional(a => a.Producer).WithMany(b => b.FullСategory).HasForeignKey(c => c.IdProducer).WillCascadeOnDelete(false); // FK_FullСategory_Producer
+        }
+    }
+
+    // GroupActiveDerectory
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class GroupActiveDerectoryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<GroupActiveDerectory>
+    {
+        public GroupActiveDerectoryConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public GroupActiveDerectoryConfiguration(string schema)
+        {
+            ToTable("GroupActiveDerectory", schema);
+            HasKey(x => x.IdGroup);
+
+            Property(x => x.IdGroup).HasColumnName(@"IdGroup").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.NameGroup).HasColumnName(@"NameGroup").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.InfoGroup).HasColumnName(@"InfoGroup").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.ControlledGroup).HasColumnName(@"ControlledGroup").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
     }
 
@@ -9835,6 +11928,39 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // ModelComparableUserResult
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ModelComparableUserResultConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ModelComparableUserResult>
+    {
+        public ModelComparableUserResultConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ModelComparableUserResultConfiguration(string schema)
+        {
+            ToTable("ModelComparableUserResult", schema);
+            HasKey(x => new { x.LogicsButton, x.NameSystem });
+
+            Property(x => x.LogicsButton).HasColumnName(@"LogicsButton").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(6).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NameSystem).HasColumnName(@"NameSystem").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsOptional();
+            Property(x => x.FullName).HasColumnName(@"FullName").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.PersonnelNumber).HasColumnName(@"PersonnelNumber").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.Department).HasColumnName(@"Department").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.Room).HasColumnName(@"Room").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.NamePosition).HasColumnName(@"NamePosition").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.Ranks).HasColumnName(@"Ranks").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.InternalPhone).HasColumnName(@"InternalPhone").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.TelephonUndeground).HasColumnName(@"TelephonUndeground").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.Mail).HasColumnName(@"Mail").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.Surname).HasColumnName(@"Surname").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.Patronymic).HasColumnName(@"Patronymic").HasColumnType("nvarchar").IsOptional().HasMaxLength(1024);
+            Property(x => x.CountGrooup).HasColumnName(@"CountGrooup").HasColumnType("int").IsOptional();
+        }
+    }
+
     // ModelDocumentType
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ModelDocumentTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ModelDocumentType>
@@ -10137,6 +12263,8 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.PnameOrganization).HasColumnName(@"PnameOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.NameFace).HasColumnName(@"NameFace").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.NameDepartament).HasColumnName(@"NameDepartament").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.CodeRegion).HasColumnName(@"CodeRegion").HasColumnType("int").IsRequired();
+            Property(x => x.CodeCyti).HasColumnName(@"CodeCyti").HasColumnType("int").IsRequired();
             Property(x => x.Room).HasColumnName(@"Room").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
             Property(x => x.Mail).HasColumnName(@"Mail").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.CodeObject).HasColumnName(@"CodeObject").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(12);
@@ -10263,6 +12391,28 @@ namespace EfDatabase.Inventory.Base
 
             // Foreign keys
             HasOptional(a => a.ClassParameterTemplate).WithMany(b => b.ParameterActs).HasForeignKey(c => c.IdClassParameter).WillCascadeOnDelete(false); // FK_ClassParameterTemplate_ParameterAct
+        }
+    }
+
+    // ParameterEventProcess
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ParameterEventProcessConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ParameterEventProcess>
+    {
+        public ParameterEventProcessConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ParameterEventProcessConfiguration(string schema)
+        {
+            ToTable("ParameterEventProcess", schema);
+            HasKey(x => x.IdParameters);
+
+            Property(x => x.IdParameters).HasColumnName(@"IdParameters").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.NameParameters).HasColumnName(@"NameParameters").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.InfoParameters).HasColumnName(@"InfoParameters").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.Parameters).HasColumnName(@"Parameters").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(1024);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsRequired();
         }
     }
 
@@ -10401,6 +12551,50 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // PhoneNumbers
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class PhoneNumberConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<PhoneNumber>
+    {
+        public PhoneNumberConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public PhoneNumberConfiguration(string schema)
+        {
+            ToTable("PhoneNumbers", schema);
+            HasKey(x => x.IdPhone);
+
+            Property(x => x.IdPhone).HasColumnName(@"IdPhone").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.PhoneNumber_).HasColumnName(@"PhoneNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.IdType).HasColumnName(@"IdType").HasColumnType("int").IsOptional();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+
+            // Foreign keys
+            HasOptional(a => a.PhoneType).WithMany(b => b.PhoneNumbers).HasForeignKey(c => c.IdType).WillCascadeOnDelete(false); // FK_PhoneNumbers_PhoneType
+        }
+    }
+
+    // PhoneType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class PhoneTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<PhoneType>
+    {
+        public PhoneTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public PhoneTypeConfiguration(string schema)
+        {
+            ToTable("PhoneType", schema);
+            HasKey(x => x.IdType);
+
+            Property(x => x.IdType).HasColumnName(@"IdType").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TypePhone).HasColumnName(@"TypePhone").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
     // Position
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class PositionConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Position>
@@ -10491,6 +12685,31 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.КомнатавБД).HasColumnName(@"Комната в БД").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(5);
             Property(x => x.КомнатавЭПО).HasColumnName(@"Комната в ЭПО").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.КомнатанесоответствиеБДЭПО).HasColumnName(@"Комната несоответствие БД ЭПО").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // ProcessAndParameters
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ProcessAndParameterConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ProcessAndParameter>
+    {
+        public ProcessAndParameterConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ProcessAndParameterConfiguration(string schema)
+        {
+            ToTable("ProcessAndParameters", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.IdProcess).HasColumnName(@"IdProcess").HasColumnType("int").IsOptional();
+            Property(x => x.IdParameters).HasColumnName(@"IdParameters").HasColumnType("int").IsOptional();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsRequired();
+
+            // Foreign keys
+            HasOptional(a => a.EventProcess).WithMany(b => b.ProcessAndParameters).HasForeignKey(c => c.IdProcess).WillCascadeOnDelete(false); // FK_ProcessAndParameters_EventProcess
+            HasOptional(a => a.ParameterEventProcess).WithMany(b => b.ProcessAndParameters).HasForeignKey(c => c.IdParameters).WillCascadeOnDelete(false); // FK_ProcessAndParameters_ParameterEventProcess
         }
     }
 
@@ -10765,6 +12984,28 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // SelectDayOfTheWeek
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class SelectDayOfTheWeekConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SelectDayOfTheWeek>
+    {
+        public SelectDayOfTheWeekConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public SelectDayOfTheWeekConfiguration(string schema)
+        {
+            ToTable("SelectDayOfTheWeek", schema);
+            HasKey(x => x.IdDayOfTheWeek);
+
+            Property(x => x.IdDayOfTheWeek).HasColumnName(@"IdDayOfTheWeek").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.RuTextDayOfTheWeek).HasColumnName(@"RuTextDayOfTheWeek").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.EngTextDayOfTheWeek).HasColumnName(@"EngTextDayOfTheWeek").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.EnumDay).HasColumnName(@"EnumDay").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsRequired();
+        }
+    }
+
     // ServerEquipment
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ServerEquipmentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ServerEquipment>
@@ -10910,6 +13151,29 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.StatusText).HasColumnName(@"StatusText").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(128);
             Property(x => x.ColorStatus).HasColumnName(@"ColorStatus").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
             Property(x => x.DataCreate).HasColumnName(@"DataCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // StatusUserAccount
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class StatusUserAccountConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<StatusUserAccount>
+    {
+        public StatusUserAccountConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public StatusUserAccountConfiguration(string schema)
+        {
+            ToTable("StatusUserAccount", schema);
+            HasKey(x => x.IdStatusUserAccount);
+
+            Property(x => x.IdStatusUserAccount).HasColumnName(@"IdStatusUserAccount").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.FlagProperties).HasColumnName(@"FlagProperties").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.ValueHexDecimal).HasColumnName(@"ValueHexDecimal").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.ValueInt).HasColumnName(@"ValueInt").HasColumnType("int").IsRequired();
+            Property(x => x.Info).HasColumnName(@"Info").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(2048);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
     }
 
@@ -11078,6 +13342,26 @@ namespace EfDatabase.Inventory.Base
             HasOptional(a => a.Statusing).WithMany(b => b.SysBlocks).HasForeignKey(c => c.IdStatus).WillCascadeOnDelete(false); // FK_SysBlock_Statusing
             HasOptional(a => a.Supply).WithMany(b => b.SysBlocks).HasForeignKey(c => c.IdSupply).WillCascadeOnDelete(false); // FK_SysBlock_Supply
             HasOptional(a => a.User).WithMany(b => b.SysBlocks).HasForeignKey(c => c.IdUser).WillCascadeOnDelete(false); // FK_SysBlock_Users
+        }
+    }
+
+    // SystemModel
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class SystemModelConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SystemModel>
+    {
+        public SystemModelConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public SystemModelConfiguration(string schema)
+        {
+            ToTable("SystemModel", schema);
+            HasKey(x => x.IdSystemModel);
+
+            Property(x => x.IdSystemModel).HasColumnName(@"IdSystemModel").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.NameSystem).HasColumnName(@"NameSystem").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
     }
 
@@ -11283,7 +13567,7 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.TelephonUndeground).HasColumnName(@"TelephonUndeground").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
             Property(x => x.ServiceNum).HasColumnName(@"ServiceNum").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.SerNumber).HasColumnName(@"SerNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
-            Property(x => x.InventarNum).HasColumnName(@"InventarNum").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.InventarNumberTelephone).HasColumnName(@"InventarNumberTelephone").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.IpTelephon).HasColumnName(@"IpTelephon").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.MacTelephon).HasColumnName(@"MacTelephon").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.Coment).HasColumnName(@"Coment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(254);
@@ -11722,6 +14006,32 @@ namespace EfDatabase.Inventory.Base
 
             // Foreign keys
             HasRequired(a => a.EpoDocument).WithOptional(b => b.ValueCharacteristicJson); // FK_ValueCharacteristicJson_EpoDocument
+        }
+    }
+
+    // WorkStations
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class WorkStationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<WorkStation>
+    {
+        public WorkStationConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public WorkStationConfiguration(string schema)
+        {
+            ToTable("WorkStations", schema);
+            HasKey(x => x.IdWorkStations);
+
+            Property(x => x.IdWorkStations).HasColumnName(@"IdWorkStations").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.NameWorkStation).HasColumnName(@"NameWorkStation").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.DnsName).HasColumnName(@"DnsName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.Info).HasColumnName(@"Info").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.ControlledUser).HasColumnName(@"ControlledUser").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.WindowsName).HasColumnName(@"WindowsName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.WindowsVersion).HasColumnName(@"WindowsVersion").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.Room).HasColumnName(@"Room").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
         }
     }
 

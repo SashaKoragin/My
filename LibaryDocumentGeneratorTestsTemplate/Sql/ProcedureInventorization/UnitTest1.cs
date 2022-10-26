@@ -166,13 +166,13 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
             //arrLetterStatus[2] = "ОЧ";
             //var notCount = new[] { "ОЧ", "B" };
             var selectEvent = new Select();
-            var eventParameters = selectEvent.SelectEvent(1);
+
+            var process = selectEvent.SelectProcessAndParameters(1);
             DateTime date = DateTime.Now;
-          //  if (date.Hour == eventParameters.HoursX && date.Minute == eventParameters.MinutesX)
-         //   {
-                var parameter = eventParameters.ParametersEvent.Split(';');
-                PingIp ping = new PingIp();
-                ping.FindIpHost(parameter[0].Trim(), parameter[1].Trim(), parameter[2].Trim());
+            //  if (date.Hour == eventParameters.HoursX && date.Minute == eventParameters.MinutesX)
+            //   {
+                var parameters = process.ProcessAndParameters.Select(x => x.ParameterEventProcess).ToList();
+       
          //   }
             selectEvent.Dispose();
         }
