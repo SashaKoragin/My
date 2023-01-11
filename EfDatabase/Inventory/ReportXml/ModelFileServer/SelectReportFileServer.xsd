@@ -15,6 +15,9 @@
 			<xs:element ref="DublicatteFileServerSelect" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="SizeMaxFileServerSelect" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="ErrorFileServerSelect" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="DspFileServer" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="DownloadFileServer" minOccurs="0"/>
+			<xs:element ref="ModelFileDetals" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="AllFileServerSelect">
@@ -27,12 +30,12 @@
 					<xs:documentation>Логика над файлом</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IdFile" type="xs:int">
+			<xs:attribute name="IdFile" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IdUser" type="xs:int">
+			<xs:attribute name="IdUser" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
@@ -107,7 +110,7 @@
 					<xs:documentation>Размер файла (текст)</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="SizeFile" type="xs:long">
+			<xs:attribute name="SizeFile" type="xs:long" use="required">
 				<xs:annotation>
 					<xs:documentation>Размер файла</xs:documentation>
 				</xs:annotation>
@@ -117,22 +120,22 @@
 					<xs:documentation>Hash файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateCreated" type="xs:dateTime">
+			<xs:attribute name="DateCreated" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата создания файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateAccessed" type="xs:dateTime">
+			<xs:attribute name="DateAccessed" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата последнего доступа</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateModified" type="xs:dateTime">
+			<xs:attribute name="DateModified" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата последнего редактирования</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateSaved" type="xs:dateTime">
+			<xs:attribute name="DateSaved" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата сохранения файла</xs:documentation>
 				</xs:annotation>
@@ -149,12 +152,12 @@
 					<xs:documentation>Логика над файлом</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IdFile" type="xs:int">
+			<xs:attribute name="IdFile" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IdUser" type="xs:int">
+			<xs:attribute name="IdUser" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
@@ -229,7 +232,7 @@
 					<xs:documentation>Размер файла (текст)</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="SizeFile" type="xs:long">
+			<xs:attribute name="SizeFile" type="xs:long" use="required">
 				<xs:annotation>
 					<xs:documentation>Размер файла</xs:documentation>
 				</xs:annotation>
@@ -239,22 +242,22 @@
 					<xs:documentation>Hash файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateCreated" type="xs:dateTime">
+			<xs:attribute name="DateCreated" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата создания файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateAccessed" type="xs:dateTime">
+			<xs:attribute name="DateAccessed" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата последнего доступа</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateModified" type="xs:dateTime">
+			<xs:attribute name="DateModified" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата последнего редактирования</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateSaved" type="xs:dateTime">
+			<xs:attribute name="DateSaved" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата сохранения файла</xs:documentation>
 				</xs:annotation>
@@ -271,12 +274,12 @@
 					<xs:documentation>Логика над файлом</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IdFile" type="xs:int">
+			<xs:attribute name="IdFile" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IdUser" type="xs:int">
+			<xs:attribute name="IdUser" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
@@ -351,7 +354,7 @@
 					<xs:documentation>Размер файла (текст)</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="SizeFile" type="xs:long">
+			<xs:attribute name="SizeFile" type="xs:long" use="required">
 				<xs:annotation>
 					<xs:documentation>Размер файла</xs:documentation>
 				</xs:annotation>
@@ -361,22 +364,22 @@
 					<xs:documentation>Hash файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateCreated" type="xs:dateTime">
+			<xs:attribute name="DateCreated" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата создания файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateAccessed" type="xs:dateTime">
+			<xs:attribute name="DateAccessed" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата последнего доступа</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateModified" type="xs:dateTime">
+			<xs:attribute name="DateModified" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата последнего редактирования</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateSaved" type="xs:dateTime">
+			<xs:attribute name="DateSaved" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата сохранения файла</xs:documentation>
 				</xs:annotation>
@@ -393,12 +396,134 @@
 					<xs:documentation>Логика над файлом</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IdFile" type="xs:int">
+			<xs:attribute name="IdFile" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IdUser" type="xs:int">
+			<xs:attribute name="NameUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование пользователя в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сокращенное имя пользователя в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TabelNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Табельный номер в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameSave" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Кто сохранил</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FileOwnerAuthor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Владелец файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LastAuthor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Последний автор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FullPathFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Полный путь к файлу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PathFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Путь к файлу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ItemTypeText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тип файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeMime" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Mime файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FileExtension" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Расширение файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SizeFileText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Размер файла (текст)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SizeFile" type="xs:long" use="required">
+				<xs:annotation>
+					<xs:documentation>Размер файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HashFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Hash файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateCreated" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата создания файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateAccessed" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата последнего доступа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateModified" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата последнего редактирования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateSaved" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата сохранения файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdUser" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DspFileServer">
+		<xs:annotation>
+			<xs:documentation>ДСП файлы</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="LogicsButton" type="xs:string" default="Button">
+				<xs:annotation>
+					<xs:documentation>Логика над файлом</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdFile" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdUser" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун пользователя</xs:documentation>
 				</xs:annotation>
@@ -473,7 +598,7 @@
 					<xs:documentation>Размер файла (текст)</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="SizeFile" type="xs:long">
+			<xs:attribute name="SizeFile" type="xs:long" use="required">
 				<xs:annotation>
 					<xs:documentation>Размер файла</xs:documentation>
 				</xs:annotation>
@@ -483,26 +608,188 @@
 					<xs:documentation>Hash файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateCreated" type="xs:dateTime">
+			<xs:attribute name="DateCreated" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата создания файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateAccessed" type="xs:dateTime">
+			<xs:attribute name="DateAccessed" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата последнего доступа</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateModified" type="xs:dateTime">
+			<xs:attribute name="DateModified" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата последнего редактирования</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="DateSaved" type="xs:dateTime">
+			<xs:attribute name="DateSaved" type="xs:dateTime" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата сохранения файла</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
+	</xs:element>
+	<xs:element name="DownloadFileServer" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Модель выгрузки файла</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="FullPathFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Полный путь к файлу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ItemTypeText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тип файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeMime" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Mime файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FileExtension" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Расширение файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FileByte" type="xs:base64Binary">
+				<xs:annotation>
+					<xs:documentation>Файл в байтах</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModelFileDetals" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Детальная модель файла</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AllAutorFile" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="IdFile" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdUser" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование пользователя в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SmallName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сокращенное имя пользователя в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TabelNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Табельный номер в БД</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameOtdel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование отдела</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameSave" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Кто сохранил</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FileOwnerAuthor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Владелец файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LastAuthor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Последний автор</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FullPathFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Полный путь к файлу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PathFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Путь к файлу</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ItemTypeText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тип файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeMime" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Mime файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="FileExtension" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Расширение файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SizeFileText" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Размер файла (текст)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SizeFile" type="xs:long" use="required">
+				<xs:annotation>
+					<xs:documentation>Размер файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HashFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Hash файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateCreated" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата создания файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateAccessed" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата последнего доступа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateModified" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата последнего редактирования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DateSaved" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата сохранения файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AllAutorFile" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Все авторы файла</xs:documentation>
+		</xs:annotation>
 	</xs:element>
 </xs:schema>

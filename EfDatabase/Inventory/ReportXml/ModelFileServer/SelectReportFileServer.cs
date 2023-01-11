@@ -31,6 +31,12 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         
         private ErrorFileServerSelect[] errorFileServerSelectField;
         
+        private DspFileServer[] dspFileServerField;
+        
+        private DownloadFileServer downloadFileServerField;
+        
+        private ModelFileDetals modelFileDetalsField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("AllFileServerSelect")]
         public AllFileServerSelect[] AllFileServerSelect {
@@ -74,6 +80,39 @@ namespace EfDatabase.ReportXml.ModelFileServer {
                 this.errorFileServerSelectField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("DspFileServer")]
+        public DspFileServer[] DspFileServer {
+            get {
+                return this.dspFileServerField;
+            }
+            set {
+                this.dspFileServerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public DownloadFileServer DownloadFileServer {
+            get {
+                return this.downloadFileServerField;
+            }
+            set {
+                this.downloadFileServerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public ModelFileDetals ModelFileDetals {
+            get {
+                return this.modelFileDetalsField;
+            }
+            set {
+                this.modelFileDetalsField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -89,11 +128,7 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         
         private int idFileField;
         
-        private bool idFileFieldSpecified;
-        
         private int idUserField;
-        
-        private bool idUserFieldSpecified;
         
         private string nameUserField;
         
@@ -125,25 +160,15 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         
         private long sizeFileField;
         
-        private bool sizeFileFieldSpecified;
-        
         private string hashFileField;
         
         private System.DateTime dateCreatedField;
         
-        private bool dateCreatedFieldSpecified;
-        
         private System.DateTime dateAccessedField;
-        
-        private bool dateAccessedFieldSpecified;
         
         private System.DateTime dateModifiedField;
         
-        private bool dateModifiedFieldSpecified;
-        
         private System.DateTime dateSavedField;
-        
-        private bool dateSavedFieldSpecified;
         
         public AllFileServerSelect() {
             this.logicsButtonField = "Button";
@@ -173,17 +198,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdFileSpecified {
-            get {
-                return this.idFileFieldSpecified;
-            }
-            set {
-                this.idFileFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public int IdUser {
             get {
@@ -191,17 +205,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.idUserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdUserSpecified {
-            get {
-                return this.idUserFieldSpecified;
-            }
-            set {
-                this.idUserFieldSpecified = value;
             }
         }
         
@@ -371,17 +374,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SizeFileSpecified {
-            get {
-                return this.sizeFileFieldSpecified;
-            }
-            set {
-                this.sizeFileFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string HashFile {
             get {
@@ -404,17 +396,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateCreatedSpecified {
-            get {
-                return this.dateCreatedFieldSpecified;
-            }
-            set {
-                this.dateCreatedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public System.DateTime DateAccessed {
             get {
@@ -422,17 +403,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.dateAccessedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateAccessedSpecified {
-            get {
-                return this.dateAccessedFieldSpecified;
-            }
-            set {
-                this.dateAccessedFieldSpecified = value;
             }
         }
         
@@ -448,17 +418,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateModifiedSpecified {
-            get {
-                return this.dateModifiedFieldSpecified;
-            }
-            set {
-                this.dateModifiedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public System.DateTime DateSaved {
             get {
@@ -466,17 +425,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.dateSavedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateSavedSpecified {
-            get {
-                return this.dateSavedFieldSpecified;
-            }
-            set {
-                this.dateSavedFieldSpecified = value;
             }
         }
     }
@@ -494,11 +442,7 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         
         private int idFileField;
         
-        private bool idFileFieldSpecified;
-        
         private int idUserField;
-        
-        private bool idUserFieldSpecified;
         
         private string nameUserField;
         
@@ -530,25 +474,15 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         
         private long sizeFileField;
         
-        private bool sizeFileFieldSpecified;
-        
         private string hashFileField;
         
         private System.DateTime dateCreatedField;
         
-        private bool dateCreatedFieldSpecified;
-        
         private System.DateTime dateAccessedField;
-        
-        private bool dateAccessedFieldSpecified;
         
         private System.DateTime dateModifiedField;
         
-        private bool dateModifiedFieldSpecified;
-        
         private System.DateTime dateSavedField;
-        
-        private bool dateSavedFieldSpecified;
         
         public DublicatteFileServerSelect() {
             this.logicsButtonField = "Button";
@@ -578,17 +512,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdFileSpecified {
-            get {
-                return this.idFileFieldSpecified;
-            }
-            set {
-                this.idFileFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public int IdUser {
             get {
@@ -596,17 +519,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.idUserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdUserSpecified {
-            get {
-                return this.idUserFieldSpecified;
-            }
-            set {
-                this.idUserFieldSpecified = value;
             }
         }
         
@@ -776,17 +688,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SizeFileSpecified {
-            get {
-                return this.sizeFileFieldSpecified;
-            }
-            set {
-                this.sizeFileFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string HashFile {
             get {
@@ -809,17 +710,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateCreatedSpecified {
-            get {
-                return this.dateCreatedFieldSpecified;
-            }
-            set {
-                this.dateCreatedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public System.DateTime DateAccessed {
             get {
@@ -827,17 +717,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.dateAccessedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateAccessedSpecified {
-            get {
-                return this.dateAccessedFieldSpecified;
-            }
-            set {
-                this.dateAccessedFieldSpecified = value;
             }
         }
         
@@ -853,17 +732,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateModifiedSpecified {
-            get {
-                return this.dateModifiedFieldSpecified;
-            }
-            set {
-                this.dateModifiedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public System.DateTime DateSaved {
             get {
@@ -871,17 +739,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.dateSavedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateSavedSpecified {
-            get {
-                return this.dateSavedFieldSpecified;
-            }
-            set {
-                this.dateSavedFieldSpecified = value;
             }
         }
     }
@@ -899,11 +756,7 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         
         private int idFileField;
         
-        private bool idFileFieldSpecified;
-        
         private int idUserField;
-        
-        private bool idUserFieldSpecified;
         
         private string nameUserField;
         
@@ -935,25 +788,15 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         
         private long sizeFileField;
         
-        private bool sizeFileFieldSpecified;
-        
         private string hashFileField;
         
         private System.DateTime dateCreatedField;
         
-        private bool dateCreatedFieldSpecified;
-        
         private System.DateTime dateAccessedField;
-        
-        private bool dateAccessedFieldSpecified;
         
         private System.DateTime dateModifiedField;
         
-        private bool dateModifiedFieldSpecified;
-        
         private System.DateTime dateSavedField;
-        
-        private bool dateSavedFieldSpecified;
         
         public SizeMaxFileServerSelect() {
             this.logicsButtonField = "Button";
@@ -983,17 +826,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdFileSpecified {
-            get {
-                return this.idFileFieldSpecified;
-            }
-            set {
-                this.idFileFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public int IdUser {
             get {
@@ -1001,17 +833,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.idUserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdUserSpecified {
-            get {
-                return this.idUserFieldSpecified;
-            }
-            set {
-                this.idUserFieldSpecified = value;
             }
         }
         
@@ -1181,17 +1002,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SizeFileSpecified {
-            get {
-                return this.sizeFileFieldSpecified;
-            }
-            set {
-                this.sizeFileFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string HashFile {
             get {
@@ -1214,17 +1024,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateCreatedSpecified {
-            get {
-                return this.dateCreatedFieldSpecified;
-            }
-            set {
-                this.dateCreatedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public System.DateTime DateAccessed {
             get {
@@ -1232,17 +1031,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.dateAccessedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateAccessedSpecified {
-            get {
-                return this.dateAccessedFieldSpecified;
-            }
-            set {
-                this.dateAccessedFieldSpecified = value;
             }
         }
         
@@ -1258,17 +1046,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateModifiedSpecified {
-            get {
-                return this.dateModifiedFieldSpecified;
-            }
-            set {
-                this.dateModifiedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public System.DateTime DateSaved {
             get {
@@ -1276,17 +1053,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.dateSavedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateSavedSpecified {
-            get {
-                return this.dateSavedFieldSpecified;
-            }
-            set {
-                this.dateSavedFieldSpecified = value;
             }
         }
     }
@@ -1303,12 +1069,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         private string logicsButtonField;
         
         private int idFileField;
-        
-        private bool idFileFieldSpecified;
-        
-        private int idUserField;
-        
-        private bool idUserFieldSpecified;
         
         private string nameUserField;
         
@@ -1340,25 +1100,17 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         
         private long sizeFileField;
         
-        private bool sizeFileFieldSpecified;
-        
         private string hashFileField;
         
         private System.DateTime dateCreatedField;
         
-        private bool dateCreatedFieldSpecified;
-        
         private System.DateTime dateAccessedField;
-        
-        private bool dateAccessedFieldSpecified;
         
         private System.DateTime dateModifiedField;
         
-        private bool dateModifiedFieldSpecified;
-        
         private System.DateTime dateSavedField;
         
-        private bool dateSavedFieldSpecified;
+        private int idUserField;
         
         public ErrorFileServerSelect() {
             this.logicsButtonField = "Button";
@@ -1384,39 +1136,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.idFileField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdFileSpecified {
-            get {
-                return this.idFileFieldSpecified;
-            }
-            set {
-                this.idFileFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int IdUser {
-            get {
-                return this.idUserField;
-            }
-            set {
-                this.idUserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdUserSpecified {
-            get {
-                return this.idUserFieldSpecified;
-            }
-            set {
-                this.idUserFieldSpecified = value;
             }
         }
         
@@ -1586,13 +1305,327 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool SizeFileSpecified {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string HashFile {
             get {
-                return this.sizeFileFieldSpecified;
+                return this.hashFileField;
             }
             set {
-                this.sizeFileFieldSpecified = value;
+                this.hashFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DateAccessed {
+            get {
+                return this.dateAccessedField;
+            }
+            set {
+                this.dateAccessedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DateModified {
+            get {
+                return this.dateModifiedField;
+            }
+            set {
+                this.dateModifiedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DateSaved {
+            get {
+                return this.dateSavedField;
+            }
+            set {
+                this.dateSavedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int IdUser {
+            get {
+                return this.idUserField;
+            }
+            set {
+                this.idUserField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class DspFileServer {
+        
+        private string logicsButtonField;
+        
+        private int idFileField;
+        
+        private int idUserField;
+        
+        private string nameUserField;
+        
+        private string smallNameField;
+        
+        private string tabelNumberField;
+        
+        private string nameOtdelField;
+        
+        private string nameSaveField;
+        
+        private string fileOwnerAuthorField;
+        
+        private string lastAuthorField;
+        
+        private string fullPathFileField;
+        
+        private string pathFileField;
+        
+        private string nameFileField;
+        
+        private string itemTypeTextField;
+        
+        private string typeMimeField;
+        
+        private string fileExtensionField;
+        
+        private string sizeFileTextField;
+        
+        private long sizeFileField;
+        
+        private string hashFileField;
+        
+        private System.DateTime dateCreatedField;
+        
+        private System.DateTime dateAccessedField;
+        
+        private System.DateTime dateModifiedField;
+        
+        private System.DateTime dateSavedField;
+        
+        public DspFileServer() {
+            this.logicsButtonField = "Button";
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("Button")]
+        public string LogicsButton {
+            get {
+                return this.logicsButtonField;
+            }
+            set {
+                this.logicsButtonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int IdFile {
+            get {
+                return this.idFileField;
+            }
+            set {
+                this.idFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int IdUser {
+            get {
+                return this.idUserField;
+            }
+            set {
+                this.idUserField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameUser {
+            get {
+                return this.nameUserField;
+            }
+            set {
+                this.nameUserField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SmallName {
+            get {
+                return this.smallNameField;
+            }
+            set {
+                this.smallNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string TabelNumber {
+            get {
+                return this.tabelNumberField;
+            }
+            set {
+                this.tabelNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameOtdel {
+            get {
+                return this.nameOtdelField;
+            }
+            set {
+                this.nameOtdelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameSave {
+            get {
+                return this.nameSaveField;
+            }
+            set {
+                this.nameSaveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FileOwnerAuthor {
+            get {
+                return this.fileOwnerAuthorField;
+            }
+            set {
+                this.fileOwnerAuthorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string LastAuthor {
+            get {
+                return this.lastAuthorField;
+            }
+            set {
+                this.lastAuthorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FullPathFile {
+            get {
+                return this.fullPathFileField;
+            }
+            set {
+                this.fullPathFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string PathFile {
+            get {
+                return this.pathFileField;
+            }
+            set {
+                this.pathFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameFile {
+            get {
+                return this.nameFileField;
+            }
+            set {
+                this.nameFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ItemTypeText {
+            get {
+                return this.itemTypeTextField;
+            }
+            set {
+                this.itemTypeTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string TypeMime {
+            get {
+                return this.typeMimeField;
+            }
+            set {
+                this.typeMimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FileExtension {
+            get {
+                return this.fileExtensionField;
+            }
+            set {
+                this.fileExtensionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SizeFileText {
+            get {
+                return this.sizeFileTextField;
+            }
+            set {
+                this.sizeFileTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long SizeFile {
+            get {
+                return this.sizeFileField;
+            }
+            set {
+                this.sizeFileField = value;
             }
         }
         
@@ -1619,17 +1652,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateCreatedSpecified {
-            get {
-                return this.dateCreatedFieldSpecified;
-            }
-            set {
-                this.dateCreatedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public System.DateTime DateAccessed {
             get {
@@ -1637,17 +1659,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
             }
             set {
                 this.dateAccessedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateAccessedSpecified {
-            get {
-                return this.dateAccessedFieldSpecified;
-            }
-            set {
-                this.dateAccessedFieldSpecified = value;
             }
         }
         
@@ -1663,17 +1674,6 @@ namespace EfDatabase.ReportXml.ModelFileServer {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateModifiedSpecified {
-            get {
-                return this.dateModifiedFieldSpecified;
-            }
-            set {
-                this.dateModifiedFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public System.DateTime DateSaved {
             get {
@@ -1683,15 +1683,401 @@ namespace EfDatabase.ReportXml.ModelFileServer {
                 this.dateSavedField = value;
             }
         }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    public partial class DownloadFileServer {
+        
+        private string fullPathFileField;
+        
+        private string nameFileField;
+        
+        private string itemTypeTextField;
+        
+        private string typeMimeField;
+        
+        private string fileExtensionField;
+        
+        private byte[] fileByteField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DateSavedSpecified {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FullPathFile {
             get {
-                return this.dateSavedFieldSpecified;
+                return this.fullPathFileField;
             }
             set {
-                this.dateSavedFieldSpecified = value;
+                this.fullPathFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameFile {
+            get {
+                return this.nameFileField;
+            }
+            set {
+                this.nameFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ItemTypeText {
+            get {
+                return this.itemTypeTextField;
+            }
+            set {
+                this.itemTypeTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string TypeMime {
+            get {
+                return this.typeMimeField;
+            }
+            set {
+                this.typeMimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FileExtension {
+            get {
+                return this.fileExtensionField;
+            }
+            set {
+                this.fileExtensionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
+        public byte[] FileByte {
+            get {
+                return this.fileByteField;
+            }
+            set {
+                this.fileByteField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    public partial class ModelFileDetals {
+        
+        private string[] allAutorFileField;
+        
+        private int idFileField;
+        
+        private int idUserField;
+        
+        private string nameUserField;
+        
+        private string smallNameField;
+        
+        private string tabelNumberField;
+        
+        private string nameOtdelField;
+        
+        private string nameSaveField;
+        
+        private string fileOwnerAuthorField;
+        
+        private string lastAuthorField;
+        
+        private string fullPathFileField;
+        
+        private string pathFileField;
+        
+        private string nameFileField;
+        
+        private string itemTypeTextField;
+        
+        private string typeMimeField;
+        
+        private string fileExtensionField;
+        
+        private string sizeFileTextField;
+        
+        private long sizeFileField;
+        
+        private string hashFileField;
+        
+        private string dateCreatedField;
+        
+        private string dateAccessedField;
+        
+        private string dateModifiedField;
+        
+        private string dateSavedField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("AllAutorFile", IsNullable=true)]
+        public string[] AllAutorFile {
+            get {
+                return this.allAutorFileField;
+            }
+            set {
+                this.allAutorFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int IdFile {
+            get {
+                return this.idFileField;
+            }
+            set {
+                this.idFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int IdUser {
+            get {
+                return this.idUserField;
+            }
+            set {
+                this.idUserField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameUser {
+            get {
+                return this.nameUserField;
+            }
+            set {
+                this.nameUserField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SmallName {
+            get {
+                return this.smallNameField;
+            }
+            set {
+                this.smallNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string TabelNumber {
+            get {
+                return this.tabelNumberField;
+            }
+            set {
+                this.tabelNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameOtdel {
+            get {
+                return this.nameOtdelField;
+            }
+            set {
+                this.nameOtdelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameSave {
+            get {
+                return this.nameSaveField;
+            }
+            set {
+                this.nameSaveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FileOwnerAuthor {
+            get {
+                return this.fileOwnerAuthorField;
+            }
+            set {
+                this.fileOwnerAuthorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string LastAuthor {
+            get {
+                return this.lastAuthorField;
+            }
+            set {
+                this.lastAuthorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FullPathFile {
+            get {
+                return this.fullPathFileField;
+            }
+            set {
+                this.fullPathFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string PathFile {
+            get {
+                return this.pathFileField;
+            }
+            set {
+                this.pathFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameFile {
+            get {
+                return this.nameFileField;
+            }
+            set {
+                this.nameFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ItemTypeText {
+            get {
+                return this.itemTypeTextField;
+            }
+            set {
+                this.itemTypeTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string TypeMime {
+            get {
+                return this.typeMimeField;
+            }
+            set {
+                this.typeMimeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FileExtension {
+            get {
+                return this.fileExtensionField;
+            }
+            set {
+                this.fileExtensionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SizeFileText {
+            get {
+                return this.sizeFileTextField;
+            }
+            set {
+                this.sizeFileTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long SizeFile {
+            get {
+                return this.sizeFileField;
+            }
+            set {
+                this.sizeFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string HashFile {
+            get {
+                return this.hashFileField;
+            }
+            set {
+                this.hashFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DateCreated {
+            get {
+                return this.dateCreatedField;
+            }
+            set {
+                this.dateCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DateAccessed {
+            get {
+                return this.dateAccessedField;
+            }
+            set {
+                this.dateAccessedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DateModified {
+            get {
+                return this.dateModifiedField;
+            }
+            set {
+                this.dateModifiedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DateSaved {
+            get {
+                return this.dateSavedField;
+            }
+            set {
+                this.dateSavedField = value;
             }
         }
     }

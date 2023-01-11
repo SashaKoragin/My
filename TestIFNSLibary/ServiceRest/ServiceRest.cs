@@ -401,7 +401,9 @@ namespace TestIFNSLibary.ServiceRest
         public ModelPathReport LoadInfoTemplateToDataBase(InfoRuleTemplate infoTemplate)
         {
             var sql = new SelectSql();
-            return sql.LoadModelToDataBase(infoTemplate, 36, 2);
+            var report = sql.LoadModelToDataBase(infoTemplate, 36, 2);
+            sql.Dispose();
+            return report;
         }
         /// <summary>
         /// Загрузка справочников по шаблонам ролям пользователям
@@ -411,7 +413,9 @@ namespace TestIFNSLibary.ServiceRest
         public ModelPathReport LoadInfoUserTemplateAndRuleToDataBase(InfoUserTemlateAndRule infoUserTemlateAndRule)
         {
             var sql = new SelectSql();
-            return sql.LoadModelToDataBase(infoUserTemlateAndRule, 38, 3);
+            var report = sql.LoadModelToDataBase(infoUserTemlateAndRule, 38, 3);
+            sql.Dispose();
+            return report;
         }
     }
 }

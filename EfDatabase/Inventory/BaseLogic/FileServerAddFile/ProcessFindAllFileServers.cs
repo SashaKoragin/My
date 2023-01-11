@@ -121,6 +121,7 @@ namespace EfDatabase.Inventory.BaseLogic.FileServerAddFile
             var countFile = 0;
             var shi = ShareCollection.GetShares(nameFileServer);
             var fileServerAddDataBase = new FileServerAddFile(ErrorXmlFile);
+            fileServerAddDataBase.AddFileServerToDataBase(null,true);
             if (shi != null)
             {
                 foreach (Share si in shi)

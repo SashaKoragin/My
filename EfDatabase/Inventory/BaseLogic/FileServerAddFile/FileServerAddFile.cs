@@ -31,7 +31,8 @@ namespace EfDatabase.Inventory.BaseLogic.FileServerAddFile
         /// Добавление в БД файла с описанием атрибутов для анализа
         /// </summary>
         ///<param name="allFileServer">Файл с атрибутами для раскладки на сервере</param>
-        public void AddFileServerToDataBase(AllFileServerModel allFileServer)
+        /// <param name="isTruncateTable">Очистить предыдущие результаты и сбросить индекс 0 нет 1 да</param>
+        public void AddFileServerToDataBase(AllFileServerModel allFileServer, bool isTruncateTable = false)
         {
             //Как оказывается через MemoryStream завернуть можно!!!
             try
@@ -46,7 +47,8 @@ namespace EfDatabase.Inventory.BaseLogic.FileServerAddFile
                         using (XmlReader reader = XmlReader.Create(buffer))
                         {
                             Inventory.Database.CommandTimeout = 12000;
-                            Inventory.Database.ExecuteSqlCommand(LogicaSelect.SelectUser, new SqlParameter(LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml) { Value = new SqlXml(reader) });
+                            Inventory.Database.ExecuteSqlCommand(LogicaSelect.SelectUser, new SqlParameter(LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml) { Value = new SqlXml(reader) },
+                                new SqlParameter(LogicaSelect.SelectedParametr.Split(',')[1], SqlDbType.Bit) { Value = isTruncateTable});
                             reader.Close();
                             reader.Dispose();
                         }
@@ -57,7 +59,8 @@ namespace EfDatabase.Inventory.BaseLogic.FileServerAddFile
                 else
                 {
                     Inventory.Database.CommandTimeout = 12000;
-                    Inventory.Database.ExecuteSqlCommand(LogicaSelect.SelectUser, new SqlParameter(LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml) { Value = DBNull.Value });
+                    Inventory.Database.ExecuteSqlCommand(LogicaSelect.SelectUser, new SqlParameter(LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml) { Value = DBNull.Value },
+                        new SqlParameter(LogicaSelect.SelectedParametr.Split(',')[1], SqlDbType.Bit) { Value = isTruncateTable });
                 }
             }
             catch (Exception eX)

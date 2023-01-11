@@ -30,6 +30,7 @@ namespace EfDatabase.Inventory.Base
     {
         System.Data.Entity.DbSet<Act> Acts { get; set; } // Act
         System.Data.Entity.DbSet<AksiokAllModel> AksiokAllModels { get; set; } // AksiokAllModel
+        System.Data.Entity.DbSet<AllFileServerSelect> AllFileServerSelects { get; set; } // AllFileServerSelect
         System.Data.Entity.DbSet<AllIpServerSelect> AllIpServerSelects { get; set; } // AllIpServerSelect
         System.Data.Entity.DbSet<AllTechnic> AllTechnics { get; set; } // AllTechnics
         System.Data.Entity.DbSet<AllTelephon> AllTelephons { get; set; } // AllTelephon
@@ -63,6 +64,8 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<Document> Documents { get; set; } // Document
         System.Data.Entity.DbSet<DocumentModel> DocumentModels { get; set; } // DocumentModel
         System.Data.Entity.DbSet<DoubleComputersName> DoubleComputersNames { get; set; } // DoubleComputersName
+        System.Data.Entity.DbSet<DspFileServer> DspFileServers { get; set; } // DspFileServer
+        System.Data.Entity.DbSet<DublicatteFileServerSelect> DublicatteFileServerSelects { get; set; } // DublicatteFileServerSelect
         System.Data.Entity.DbSet<EmptyMonitorSupply38> EmptyMonitorSupply38 { get; set; } // EmptyMonitorSupply38
         System.Data.Entity.DbSet<EmptySysBlokSupply40> EmptySysBlokSupply40 { get; set; } // EmptySysBlokSupply40
         System.Data.Entity.DbSet<EpoDocument> EpoDocuments { get; set; } // EpoDocument
@@ -70,6 +73,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<EquipmentSto> EquipmentStoes { get; set; } // EquipmentSto
         System.Data.Entity.DbSet<EquipmentType> EquipmentTypes { get; set; } // EquipmentType
         System.Data.Entity.DbSet<Error> Errors { get; set; } // Error
+        System.Data.Entity.DbSet<ErrorFileServerSelect> ErrorFileServerSelects { get; set; } // ErrorFileServerSelect
         System.Data.Entity.DbSet<ErrorTokenUser> ErrorTokenUsers { get; set; } // ErrorTokenUser
         System.Data.Entity.DbSet<ErrorUsersNotActual> ErrorUsersNotActuals { get; set; } // ErrorUsersNotActual
         System.Data.Entity.DbSet<EventProcess> EventProcesses { get; set; } // EventProcess
@@ -104,6 +108,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         System.Data.Entity.DbSet<MfuAndEpo> MfuAndEpoes { get; set; } // MfuAndEpo
         System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
+        System.Data.Entity.DbSet<ModelComparableAllSystemInventory> ModelComparableAllSystemInventories { get; set; } // ModelComparableAllSystemInventory
         System.Data.Entity.DbSet<ModelComparableUserResult> ModelComparableUserResults { get; set; } // ModelComparableUserResult
         System.Data.Entity.DbSet<ModelDocumentType> ModelDocumentTypes { get; set; } // ModelDocumentType
         System.Data.Entity.DbSet<ModelOtdel> ModelOtdels { get; set; } // ModelOtdels
@@ -145,6 +150,7 @@ namespace EfDatabase.Inventory.Base
         System.Data.Entity.DbSet<ServerEquipment> ServerEquipments { get; set; } // ServerEquipment
         System.Data.Entity.DbSet<ServiceModelInventory> ServiceModelInventories { get; set; } // ServiceModelInventory
         System.Data.Entity.DbSet<SigmentIfn> SigmentIfns { get; set; } // SigmentIfns
+        System.Data.Entity.DbSet<SizeMaxFileServerSelect> SizeMaxFileServerSelects { get; set; } // SizeMaxFileServerSelect
         System.Data.Entity.DbSet<Statusing> Statusings { get; set; } // Statusing
         System.Data.Entity.DbSet<StatusProcessSynchronization> StatusProcessSynchronizations { get; set; } // StatusProcessSynchronization
         System.Data.Entity.DbSet<StatusUser> StatusUsers { get; set; } // StatusUser
@@ -203,6 +209,7 @@ namespace EfDatabase.Inventory.Base
     {
         public System.Data.Entity.DbSet<Act> Acts { get; set; } // Act
         public System.Data.Entity.DbSet<AksiokAllModel> AksiokAllModels { get; set; } // AksiokAllModel
+        public System.Data.Entity.DbSet<AllFileServerSelect> AllFileServerSelects { get; set; } // AllFileServerSelect
         public System.Data.Entity.DbSet<AllIpServerSelect> AllIpServerSelects { get; set; } // AllIpServerSelect
         public System.Data.Entity.DbSet<AllTechnic> AllTechnics { get; set; } // AllTechnics
         public System.Data.Entity.DbSet<AllTelephon> AllTelephons { get; set; } // AllTelephon
@@ -236,6 +243,8 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<Document> Documents { get; set; } // Document
         public System.Data.Entity.DbSet<DocumentModel> DocumentModels { get; set; } // DocumentModel
         public System.Data.Entity.DbSet<DoubleComputersName> DoubleComputersNames { get; set; } // DoubleComputersName
+        public System.Data.Entity.DbSet<DspFileServer> DspFileServers { get; set; } // DspFileServer
+        public System.Data.Entity.DbSet<DublicatteFileServerSelect> DublicatteFileServerSelects { get; set; } // DublicatteFileServerSelect
         public System.Data.Entity.DbSet<EmptyMonitorSupply38> EmptyMonitorSupply38 { get; set; } // EmptyMonitorSupply38
         public System.Data.Entity.DbSet<EmptySysBlokSupply40> EmptySysBlokSupply40 { get; set; } // EmptySysBlokSupply40
         public System.Data.Entity.DbSet<EpoDocument> EpoDocuments { get; set; } // EpoDocument
@@ -243,6 +252,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<EquipmentSto> EquipmentStoes { get; set; } // EquipmentSto
         public System.Data.Entity.DbSet<EquipmentType> EquipmentTypes { get; set; } // EquipmentType
         public System.Data.Entity.DbSet<Error> Errors { get; set; } // Error
+        public System.Data.Entity.DbSet<ErrorFileServerSelect> ErrorFileServerSelects { get; set; } // ErrorFileServerSelect
         public System.Data.Entity.DbSet<ErrorTokenUser> ErrorTokenUsers { get; set; } // ErrorTokenUser
         public System.Data.Entity.DbSet<ErrorUsersNotActual> ErrorUsersNotActuals { get; set; } // ErrorUsersNotActual
         public System.Data.Entity.DbSet<EventProcess> EventProcesses { get; set; } // EventProcess
@@ -277,6 +287,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<Mfu> Mfus { get; set; } // Mfu
         public System.Data.Entity.DbSet<MfuAndEpo> MfuAndEpoes { get; set; } // MfuAndEpo
         public System.Data.Entity.DbSet<ModelBlockPower> ModelBlockPowers { get; set; } // ModelBlockPower
+        public System.Data.Entity.DbSet<ModelComparableAllSystemInventory> ModelComparableAllSystemInventories { get; set; } // ModelComparableAllSystemInventory
         public System.Data.Entity.DbSet<ModelComparableUserResult> ModelComparableUserResults { get; set; } // ModelComparableUserResult
         public System.Data.Entity.DbSet<ModelDocumentType> ModelDocumentTypes { get; set; } // ModelDocumentType
         public System.Data.Entity.DbSet<ModelOtdel> ModelOtdels { get; set; } // ModelOtdels
@@ -318,6 +329,7 @@ namespace EfDatabase.Inventory.Base
         public System.Data.Entity.DbSet<ServerEquipment> ServerEquipments { get; set; } // ServerEquipment
         public System.Data.Entity.DbSet<ServiceModelInventory> ServiceModelInventories { get; set; } // ServiceModelInventory
         public System.Data.Entity.DbSet<SigmentIfn> SigmentIfns { get; set; } // SigmentIfns
+        public System.Data.Entity.DbSet<SizeMaxFileServerSelect> SizeMaxFileServerSelects { get; set; } // SizeMaxFileServerSelect
         public System.Data.Entity.DbSet<Statusing> Statusings { get; set; } // Statusing
         public System.Data.Entity.DbSet<StatusProcessSynchronization> StatusProcessSynchronizations { get; set; } // StatusProcessSynchronization
         public System.Data.Entity.DbSet<StatusUser> StatusUsers { get; set; } // StatusUser
@@ -408,6 +420,7 @@ namespace EfDatabase.Inventory.Base
 
             modelBuilder.Configurations.Add(new ActConfiguration());
             modelBuilder.Configurations.Add(new AksiokAllModelConfiguration());
+            modelBuilder.Configurations.Add(new AllFileServerSelectConfiguration());
             modelBuilder.Configurations.Add(new AllIpServerSelectConfiguration());
             modelBuilder.Configurations.Add(new AllTechnicConfiguration());
             modelBuilder.Configurations.Add(new AllTelephonConfiguration());
@@ -441,6 +454,8 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new DocumentConfiguration());
             modelBuilder.Configurations.Add(new DocumentModelConfiguration());
             modelBuilder.Configurations.Add(new DoubleComputersNameConfiguration());
+            modelBuilder.Configurations.Add(new DspFileServerConfiguration());
+            modelBuilder.Configurations.Add(new DublicatteFileServerSelectConfiguration());
             modelBuilder.Configurations.Add(new EmptyMonitorSupply38Configuration());
             modelBuilder.Configurations.Add(new EmptySysBlokSupply40Configuration());
             modelBuilder.Configurations.Add(new EpoDocumentConfiguration());
@@ -448,6 +463,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new EquipmentStoConfiguration());
             modelBuilder.Configurations.Add(new EquipmentTypeConfiguration());
             modelBuilder.Configurations.Add(new ErrorConfiguration());
+            modelBuilder.Configurations.Add(new ErrorFileServerSelectConfiguration());
             modelBuilder.Configurations.Add(new ErrorTokenUserConfiguration());
             modelBuilder.Configurations.Add(new ErrorUsersNotActualConfiguration());
             modelBuilder.Configurations.Add(new EventProcessConfiguration());
@@ -482,6 +498,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new MfuConfiguration());
             modelBuilder.Configurations.Add(new MfuAndEpoConfiguration());
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration());
+            modelBuilder.Configurations.Add(new ModelComparableAllSystemInventoryConfiguration());
             modelBuilder.Configurations.Add(new ModelComparableUserResultConfiguration());
             modelBuilder.Configurations.Add(new ModelDocumentTypeConfiguration());
             modelBuilder.Configurations.Add(new ModelOtdelConfiguration());
@@ -523,6 +540,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new ServerEquipmentConfiguration());
             modelBuilder.Configurations.Add(new ServiceModelInventoryConfiguration());
             modelBuilder.Configurations.Add(new SigmentIfnConfiguration());
+            modelBuilder.Configurations.Add(new SizeMaxFileServerSelectConfiguration());
             modelBuilder.Configurations.Add(new StatusingConfiguration());
             modelBuilder.Configurations.Add(new StatusProcessSynchronizationConfiguration());
             modelBuilder.Configurations.Add(new StatusUserConfiguration());
@@ -563,6 +581,7 @@ namespace EfDatabase.Inventory.Base
         {
             modelBuilder.Configurations.Add(new ActConfiguration(schema));
             modelBuilder.Configurations.Add(new AksiokAllModelConfiguration(schema));
+            modelBuilder.Configurations.Add(new AllFileServerSelectConfiguration(schema));
             modelBuilder.Configurations.Add(new AllIpServerSelectConfiguration(schema));
             modelBuilder.Configurations.Add(new AllTechnicConfiguration(schema));
             modelBuilder.Configurations.Add(new AllTelephonConfiguration(schema));
@@ -596,6 +615,8 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new DocumentConfiguration(schema));
             modelBuilder.Configurations.Add(new DocumentModelConfiguration(schema));
             modelBuilder.Configurations.Add(new DoubleComputersNameConfiguration(schema));
+            modelBuilder.Configurations.Add(new DspFileServerConfiguration(schema));
+            modelBuilder.Configurations.Add(new DublicatteFileServerSelectConfiguration(schema));
             modelBuilder.Configurations.Add(new EmptyMonitorSupply38Configuration(schema));
             modelBuilder.Configurations.Add(new EmptySysBlokSupply40Configuration(schema));
             modelBuilder.Configurations.Add(new EpoDocumentConfiguration(schema));
@@ -603,6 +624,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new EquipmentStoConfiguration(schema));
             modelBuilder.Configurations.Add(new EquipmentTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new ErrorConfiguration(schema));
+            modelBuilder.Configurations.Add(new ErrorFileServerSelectConfiguration(schema));
             modelBuilder.Configurations.Add(new ErrorTokenUserConfiguration(schema));
             modelBuilder.Configurations.Add(new ErrorUsersNotActualConfiguration(schema));
             modelBuilder.Configurations.Add(new EventProcessConfiguration(schema));
@@ -637,6 +659,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new MfuConfiguration(schema));
             modelBuilder.Configurations.Add(new MfuAndEpoConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelBlockPowerConfiguration(schema));
+            modelBuilder.Configurations.Add(new ModelComparableAllSystemInventoryConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelComparableUserResultConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelDocumentTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new ModelOtdelConfiguration(schema));
@@ -678,6 +701,7 @@ namespace EfDatabase.Inventory.Base
             modelBuilder.Configurations.Add(new ServerEquipmentConfiguration(schema));
             modelBuilder.Configurations.Add(new ServiceModelInventoryConfiguration(schema));
             modelBuilder.Configurations.Add(new SigmentIfnConfiguration(schema));
+            modelBuilder.Configurations.Add(new SizeMaxFileServerSelectConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusingConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusProcessSynchronizationConfiguration(schema));
             modelBuilder.Configurations.Add(new StatusUserConfiguration(schema));
@@ -812,6 +836,35 @@ namespace EfDatabase.Inventory.Base
         public System.DateTime? Guarantee { get; set; } // Guarantee
         public string Comment { get; set; } // Comment (length: 256)
         public string ServiceStatus { get; set; } // ServiceStatus (length: 256)
+    }
+
+    // AllFileServerSelect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class AllFileServerSelect
+    {
+        public string LogicsButton { get; set; } // LogicsButton (Primary key) (length: 6)
+        public int IdFile { get; set; } // IdFile (Primary key)
+        public int IdUser { get; set; } // IdUser (Primary key)
+        public string NameUser { get; set; } // NameUser (length: 256)
+        public string SmallName { get; set; } // SmallName (length: 128)
+        public string TabelNumber { get; set; } // TabelNumber (length: 32)
+        public string NameOtdel { get; set; } // NameOtdel (length: 256)
+        public string NameSave { get; set; } // NameSave
+        public string FileOwnerAuthor { get; set; } // FileOwnerAuthor
+        public string LastAuthor { get; set; } // LastAuthor
+        public string FullPathFile { get; set; } // FullPathFile
+        public string PathFile { get; set; } // PathFile
+        public string NameFile { get; set; } // NameFile
+        public string ItemTypeText { get; set; } // ItemTypeText
+        public string TypeMime { get; set; } // TypeMime
+        public string FileExtension { get; set; } // FileExtension (length: 64)
+        public string SizeFileText { get; set; } // SizeFileText (length: 64)
+        public long? SizeFile { get; set; } // SizeFile
+        public string HashFile { get; set; } // HashFile (length: 256)
+        public System.DateTime? DateCreated { get; set; } // DateCreated
+        public System.DateTime? DateAccessed { get; set; } // DateAccessed
+        public System.DateTime? DateModified { get; set; } // DateModified
+        public System.DateTime? DateSaved { get; set; } // DateSaved
     }
 
     // AllIpServerSelect
@@ -2227,6 +2280,64 @@ namespace EfDatabase.Inventory.Base
         public string IpAdress { get; set; } // IpAdress (length: 128)
     }
 
+    // DspFileServer
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class DspFileServer
+    {
+        public string LogicsButton { get; set; } // LogicsButton (Primary key) (length: 6)
+        public int IdFile { get; set; } // IdFile (Primary key)
+        public int IdUser { get; set; } // IdUser (Primary key)
+        public string NameUser { get; set; } // NameUser (length: 256)
+        public string SmallName { get; set; } // SmallName (length: 128)
+        public string TabelNumber { get; set; } // TabelNumber (length: 32)
+        public string NameOtdel { get; set; } // NameOtdel (length: 256)
+        public string NameSave { get; set; } // NameSave
+        public string FileOwnerAuthor { get; set; } // FileOwnerAuthor
+        public string LastAuthor { get; set; } // LastAuthor
+        public string FullPathFile { get; set; } // FullPathFile
+        public string PathFile { get; set; } // PathFile
+        public string NameFile { get; set; } // NameFile
+        public string ItemTypeText { get; set; } // ItemTypeText
+        public string TypeMime { get; set; } // TypeMime
+        public string FileExtension { get; set; } // FileExtension (length: 64)
+        public string SizeFileText { get; set; } // SizeFileText (length: 64)
+        public long? SizeFile { get; set; } // SizeFile
+        public string HashFile { get; set; } // HashFile (length: 256)
+        public System.DateTime? DateCreated { get; set; } // DateCreated
+        public System.DateTime? DateAccessed { get; set; } // DateAccessed
+        public System.DateTime? DateModified { get; set; } // DateModified
+        public System.DateTime? DateSaved { get; set; } // DateSaved
+    }
+
+    // DublicatteFileServerSelect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class DublicatteFileServerSelect
+    {
+        public string LogicsButton { get; set; } // LogicsButton (Primary key) (length: 6)
+        public int IdFile { get; set; } // IdFile (Primary key)
+        public int IdUser { get; set; } // IdUser (Primary key)
+        public string NameUser { get; set; } // NameUser (length: 256)
+        public string SmallName { get; set; } // SmallName (length: 128)
+        public string TabelNumber { get; set; } // TabelNumber (length: 32)
+        public string NameOtdel { get; set; } // NameOtdel (length: 256)
+        public string NameSave { get; set; } // NameSave
+        public string FileOwnerAuthor { get; set; } // FileOwnerAuthor
+        public string LastAuthor { get; set; } // LastAuthor
+        public string FullPathFile { get; set; } // FullPathFile
+        public string PathFile { get; set; } // PathFile
+        public string NameFile { get; set; } // NameFile
+        public string ItemTypeText { get; set; } // ItemTypeText
+        public string TypeMime { get; set; } // TypeMime
+        public string FileExtension { get; set; } // FileExtension (length: 64)
+        public string SizeFileText { get; set; } // SizeFileText (length: 64)
+        public long? SizeFile { get; set; } // SizeFile
+        public string HashFile { get; set; } // HashFile (length: 256)
+        public System.DateTime? DateCreated { get; set; } // DateCreated
+        public System.DateTime? DateAccessed { get; set; } // DateAccessed
+        public System.DateTime? DateModified { get; set; } // DateModified
+        public System.DateTime? DateSaved { get; set; } // DateSaved
+    }
+
     // EmptyMonitorSupply38
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class EmptyMonitorSupply38
@@ -2798,6 +2909,35 @@ namespace EfDatabase.Inventory.Base
         public string IpAdress { get; set; } // IpAdress (length: 128)
         public string Coment { get; set; } // Coment (length: 254)
         public bool WriteOffSign { get; set; } // WriteOffSign (Primary key)
+    }
+
+    // ErrorFileServerSelect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ErrorFileServerSelect
+    {
+        public string LogicsButton { get; set; } // LogicsButton (Primary key) (length: 6)
+        public int IdFile { get; set; } // IdFile (Primary key)
+        public int IdUser { get; set; } // IdUser (Primary key)
+        public string NameUser { get; set; } // NameUser (length: 256)
+        public string SmallName { get; set; } // SmallName (length: 128)
+        public string TabelNumber { get; set; } // TabelNumber (length: 32)
+        public string NameOtdel { get; set; } // NameOtdel (length: 256)
+        public string NameSave { get; set; } // NameSave
+        public string FileOwnerAuthor { get; set; } // FileOwnerAuthor
+        public string LastAuthor { get; set; } // LastAuthor
+        public string FullPathFile { get; set; } // FullPathFile
+        public string PathFile { get; set; } // PathFile
+        public string NameFile { get; set; } // NameFile
+        public string ItemTypeText { get; set; } // ItemTypeText
+        public string TypeMime { get; set; } // TypeMime
+        public string FileExtension { get; set; } // FileExtension (length: 64)
+        public string SizeFileText { get; set; } // SizeFileText (length: 64)
+        public long? SizeFile { get; set; } // SizeFile
+        public string HashFile { get; set; } // HashFile (length: 256)
+        public System.DateTime? DateCreated { get; set; } // DateCreated
+        public System.DateTime? DateAccessed { get; set; } // DateAccessed
+        public System.DateTime? DateModified { get; set; } // DateModified
+        public System.DateTime? DateSaved { get; set; } // DateSaved
     }
 
     // ErrorTokenUser
@@ -3792,12 +3932,14 @@ namespace EfDatabase.Inventory.Base
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class InventoryModelComparable
     {
+        public string ProducerName { get; set; } // ProducerName (length: 512)
+        public string NameModel { get; set; } // NameModel (length: 512)
         public string Name { get; set; } // Name (length: 128)
-        public string IpAdress { get; set; } // IpAdress (length: 128)
+        public string IpAdress { get; set; } // IpAdress (length: 8000)
         public string ZavNumber { get; set; } // ZavNumber (length: 128)
         public string InventarNumber { get; set; } // InventarNumber (length: 128)
         public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
-        public string AddressOrganization { get; set; } // AddressOrganization (length: 1024)
+        public string AddressOrganization { get; set; } // AddressOrganization (length: 1057)
         public string Bulding { get; set; } // Bulding (length: 1)
         public string NumberKabinet { get; set; } // NumberKabinet (length: 5)
         public string NameOtdel { get; set; } // NameOtdel (length: 256)
@@ -4561,6 +4703,29 @@ namespace EfDatabase.Inventory.Base
             DataCreate = System.DateTime.Now;
             BlockPowers = new System.Collections.Generic.List<BlockPower>();
         }
+    }
+
+    // ModelComparableAllSystemInventory
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ModelComparableAllSystemInventory
+    {
+        public string LogicsButton { get; set; } // LogicsButton (Primary key) (length: 6)
+        public string NameSystem { get; set; } // NameSystem (Primary key) (length: 16)
+        public long? RowNumber { get; set; } // RowNumber
+        public string ProducerName { get; set; } // ProducerName (length: 1057)
+        public string ModelName { get; set; } // ModelName (length: 1057)
+        public string ComputerName { get; set; } // ComputerName (length: 1057)
+        public string IpAdress { get; set; } // IpAdress (length: 1057)
+        public string SerialNumber { get; set; } // SerialNumber (length: 1057)
+        public string InventoryNumber { get; set; } // InventoryNumber (length: 1057)
+        public string ServiceNumber { get; set; } // ServiceNumber (length: 1057)
+        public string AddressOrganization { get; set; } // AddressOrganization (length: 1057)
+        public string Bulding { get; set; } // Bulding (length: 1057)
+        public string Room { get; set; } // Room (length: 1057)
+        public string Division { get; set; } // Division (length: 1057)
+        public string FullName { get; set; } // FullName (length: 1057)
+        public string Info { get; set; } // Info (length: 1057)
+        public int? CountGroup { get; set; } // CountGroup
     }
 
     // ModelComparableUserResult
@@ -7289,6 +7454,35 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // SizeMaxFileServerSelect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class SizeMaxFileServerSelect
+    {
+        public string LogicsButton { get; set; } // LogicsButton (Primary key) (length: 6)
+        public int IdFile { get; set; } // IdFile (Primary key)
+        public int IdUser { get; set; } // IdUser (Primary key)
+        public string NameUser { get; set; } // NameUser (length: 256)
+        public string SmallName { get; set; } // SmallName (length: 128)
+        public string TabelNumber { get; set; } // TabelNumber (length: 32)
+        public string NameOtdel { get; set; } // NameOtdel (length: 256)
+        public string NameSave { get; set; } // NameSave
+        public string FileOwnerAuthor { get; set; } // FileOwnerAuthor
+        public string LastAuthor { get; set; } // LastAuthor
+        public string FullPathFile { get; set; } // FullPathFile
+        public string PathFile { get; set; } // PathFile
+        public string NameFile { get; set; } // NameFile
+        public string ItemTypeText { get; set; } // ItemTypeText
+        public string TypeMime { get; set; } // TypeMime
+        public string FileExtension { get; set; } // FileExtension (length: 64)
+        public string SizeFileText { get; set; } // SizeFileText (length: 64)
+        public long? SizeFile { get; set; } // SizeFile
+        public string HashFile { get; set; } // HashFile (length: 256)
+        public System.DateTime? DateCreated { get; set; } // DateCreated
+        public System.DateTime? DateAccessed { get; set; } // DateAccessed
+        public System.DateTime? DateModified { get; set; } // DateModified
+        public System.DateTime? DateSaved { get; set; } // DateSaved
+    }
+
     // Statusing
     ///<summary>
     /// Статусы в инвенторизации
@@ -9868,6 +10062,46 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // AllFileServerSelect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class AllFileServerSelectConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AllFileServerSelect>
+    {
+        public AllFileServerSelectConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AllFileServerSelectConfiguration(string schema)
+        {
+            ToTable("AllFileServerSelect", schema);
+            HasKey(x => new { x.LogicsButton, x.IdFile, x.IdUser });
+
+            Property(x => x.LogicsButton).HasColumnName(@"LogicsButton").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(6).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NameUser).HasColumnName(@"NameUser").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.SmallName).HasColumnName(@"SmallName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.TabelNumber).HasColumnName(@"TabelNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.NameOtdel).HasColumnName(@"NameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.NameSave).HasColumnName(@"NameSave").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileOwnerAuthor).HasColumnName(@"FileOwnerAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.LastAuthor).HasColumnName(@"LastAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FullPathFile).HasColumnName(@"FullPathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.PathFile).HasColumnName(@"PathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.NameFile).HasColumnName(@"NameFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ItemTypeText).HasColumnName(@"ItemTypeText").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.TypeMime).HasColumnName(@"TypeMime").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileExtension).HasColumnName(@"FileExtension").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFileText).HasColumnName(@"SizeFileText").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFile).HasColumnName(@"SizeFile").HasColumnType("bigint").IsOptional();
+            Property(x => x.HashFile).HasColumnName(@"HashFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateAccessed).HasColumnName(@"DateAccessed").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateModified).HasColumnName(@"DateModified").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateSaved).HasColumnName(@"DateSaved").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
     // AllIpServerSelect
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class AllIpServerSelectConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AllIpServerSelect>
@@ -10731,6 +10965,86 @@ namespace EfDatabase.Inventory.Base
         }
     }
 
+    // DspFileServer
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class DspFileServerConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<DspFileServer>
+    {
+        public DspFileServerConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DspFileServerConfiguration(string schema)
+        {
+            ToTable("DspFileServer", schema);
+            HasKey(x => new { x.LogicsButton, x.IdFile, x.IdUser });
+
+            Property(x => x.LogicsButton).HasColumnName(@"LogicsButton").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(6).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NameUser).HasColumnName(@"NameUser").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.SmallName).HasColumnName(@"SmallName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.TabelNumber).HasColumnName(@"TabelNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.NameOtdel).HasColumnName(@"NameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.NameSave).HasColumnName(@"NameSave").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileOwnerAuthor).HasColumnName(@"FileOwnerAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.LastAuthor).HasColumnName(@"LastAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FullPathFile).HasColumnName(@"FullPathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.PathFile).HasColumnName(@"PathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.NameFile).HasColumnName(@"NameFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ItemTypeText).HasColumnName(@"ItemTypeText").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.TypeMime).HasColumnName(@"TypeMime").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileExtension).HasColumnName(@"FileExtension").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFileText).HasColumnName(@"SizeFileText").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFile).HasColumnName(@"SizeFile").HasColumnType("bigint").IsOptional();
+            Property(x => x.HashFile).HasColumnName(@"HashFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateAccessed).HasColumnName(@"DateAccessed").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateModified).HasColumnName(@"DateModified").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateSaved).HasColumnName(@"DateSaved").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // DublicatteFileServerSelect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class DublicatteFileServerSelectConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<DublicatteFileServerSelect>
+    {
+        public DublicatteFileServerSelectConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public DublicatteFileServerSelectConfiguration(string schema)
+        {
+            ToTable("DublicatteFileServerSelect", schema);
+            HasKey(x => new { x.LogicsButton, x.IdFile, x.IdUser });
+
+            Property(x => x.LogicsButton).HasColumnName(@"LogicsButton").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(6).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NameUser).HasColumnName(@"NameUser").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.SmallName).HasColumnName(@"SmallName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.TabelNumber).HasColumnName(@"TabelNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.NameOtdel).HasColumnName(@"NameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.NameSave).HasColumnName(@"NameSave").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileOwnerAuthor).HasColumnName(@"FileOwnerAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.LastAuthor).HasColumnName(@"LastAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FullPathFile).HasColumnName(@"FullPathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.PathFile).HasColumnName(@"PathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.NameFile).HasColumnName(@"NameFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ItemTypeText).HasColumnName(@"ItemTypeText").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.TypeMime).HasColumnName(@"TypeMime").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileExtension).HasColumnName(@"FileExtension").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFileText).HasColumnName(@"SizeFileText").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFile).HasColumnName(@"SizeFile").HasColumnType("bigint").IsOptional();
+            Property(x => x.HashFile).HasColumnName(@"HashFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateAccessed).HasColumnName(@"DateAccessed").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateModified).HasColumnName(@"DateModified").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateSaved).HasColumnName(@"DateSaved").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
     // EmptyMonitorSupply38
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class EmptyMonitorSupply38Configuration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<EmptyMonitorSupply38>
@@ -11039,6 +11353,46 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.IpAdress).HasColumnName(@"IpAdress").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.Coment).HasColumnName(@"Coment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(254);
             Property(x => x.WriteOffSign).HasColumnName(@"WriteOffSign").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // ErrorFileServerSelect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ErrorFileServerSelectConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ErrorFileServerSelect>
+    {
+        public ErrorFileServerSelectConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ErrorFileServerSelectConfiguration(string schema)
+        {
+            ToTable("ErrorFileServerSelect", schema);
+            HasKey(x => new { x.LogicsButton, x.IdFile, x.IdUser });
+
+            Property(x => x.LogicsButton).HasColumnName(@"LogicsButton").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(6).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NameUser).HasColumnName(@"NameUser").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.SmallName).HasColumnName(@"SmallName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.TabelNumber).HasColumnName(@"TabelNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.NameOtdel).HasColumnName(@"NameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.NameSave).HasColumnName(@"NameSave").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileOwnerAuthor).HasColumnName(@"FileOwnerAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.LastAuthor).HasColumnName(@"LastAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FullPathFile).HasColumnName(@"FullPathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.PathFile).HasColumnName(@"PathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.NameFile).HasColumnName(@"NameFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ItemTypeText).HasColumnName(@"ItemTypeText").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.TypeMime).HasColumnName(@"TypeMime").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileExtension).HasColumnName(@"FileExtension").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFileText).HasColumnName(@"SizeFileText").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFile).HasColumnName(@"SizeFile").HasColumnType("bigint").IsOptional();
+            Property(x => x.HashFile).HasColumnName(@"HashFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateAccessed).HasColumnName(@"DateAccessed").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateModified).HasColumnName(@"DateModified").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateSaved).HasColumnName(@"DateSaved").HasColumnType("smalldatetime").IsOptional();
         }
     }
 
@@ -11925,6 +12279,40 @@ namespace EfDatabase.Inventory.Base
 
             // Foreign keys
             HasOptional(a => a.FullСategory).WithMany(b => b.ModelBlockPowers).HasForeignKey(c => c.IdFullCategoria).WillCascadeOnDelete(false); // FK_ModelBlockPower_FullСategory
+        }
+    }
+
+    // ModelComparableAllSystemInventory
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class ModelComparableAllSystemInventoryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ModelComparableAllSystemInventory>
+    {
+        public ModelComparableAllSystemInventoryConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ModelComparableAllSystemInventoryConfiguration(string schema)
+        {
+            ToTable("ModelComparableAllSystemInventory", schema);
+            HasKey(x => new { x.LogicsButton, x.NameSystem });
+
+            Property(x => x.LogicsButton).HasColumnName(@"LogicsButton").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(6).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NameSystem).HasColumnName(@"NameSystem").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(16).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.RowNumber).HasColumnName(@"RowNumber").HasColumnType("bigint").IsOptional();
+            Property(x => x.ProducerName).HasColumnName(@"ProducerName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.ModelName).HasColumnName(@"ModelName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.ComputerName).HasColumnName(@"ComputerName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.IpAdress).HasColumnName(@"IpAdress").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.SerialNumber).HasColumnName(@"SerialNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.InventoryNumber).HasColumnName(@"InventoryNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.ServiceNumber).HasColumnName(@"ServiceNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.AddressOrganization).HasColumnName(@"AddressOrganization").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.Bulding).HasColumnName(@"Bulding").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.Room).HasColumnName(@"Room").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.Division).HasColumnName(@"Division").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.FullName).HasColumnName(@"FullName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.Info).HasColumnName(@"Info").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(1057);
+            Property(x => x.CountGroup).HasColumnName(@"CountGroup").HasColumnType("int").IsOptional();
         }
     }
 
@@ -13088,6 +13476,46 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.IdSigmentIfns).HasColumnName(@"IdSigmentIfns").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
             Property(x => x.DateCreate).HasColumnName(@"DateCreate").HasColumnType("smalldatetime").IsOptional();
+        }
+    }
+
+    // SizeMaxFileServerSelect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class SizeMaxFileServerSelectConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SizeMaxFileServerSelect>
+    {
+        public SizeMaxFileServerSelectConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public SizeMaxFileServerSelectConfiguration(string schema)
+        {
+            ToTable("SizeMaxFileServerSelect", schema);
+            HasKey(x => new { x.LogicsButton, x.IdFile, x.IdUser });
+
+            Property(x => x.LogicsButton).HasColumnName(@"LogicsButton").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(6).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IdUser).HasColumnName(@"IdUser").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NameUser).HasColumnName(@"NameUser").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.SmallName).HasColumnName(@"SmallName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
+            Property(x => x.TabelNumber).HasColumnName(@"TabelNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(32);
+            Property(x => x.NameOtdel).HasColumnName(@"NameOtdel").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.NameSave).HasColumnName(@"NameSave").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileOwnerAuthor).HasColumnName(@"FileOwnerAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.LastAuthor).HasColumnName(@"LastAuthor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FullPathFile).HasColumnName(@"FullPathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.PathFile).HasColumnName(@"PathFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.NameFile).HasColumnName(@"NameFile").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ItemTypeText).HasColumnName(@"ItemTypeText").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.TypeMime).HasColumnName(@"TypeMime").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.FileExtension).HasColumnName(@"FileExtension").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFileText).HasColumnName(@"SizeFileText").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
+            Property(x => x.SizeFile).HasColumnName(@"SizeFile").HasColumnType("bigint").IsOptional();
+            Property(x => x.HashFile).HasColumnName(@"HashFile").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateAccessed).HasColumnName(@"DateAccessed").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateModified).HasColumnName(@"DateModified").HasColumnType("smalldatetime").IsOptional();
+            Property(x => x.DateSaved).HasColumnName(@"DateSaved").HasColumnType("smalldatetime").IsOptional();
         }
     }
 

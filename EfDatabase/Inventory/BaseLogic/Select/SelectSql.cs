@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
@@ -13,6 +14,7 @@ using EfDatabase.Journal;
 using EfDatabase.MemoReport;
 using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
 using EfDatabase.ReportCard;
+using EfDatabase.ReportXml.ModelFileServer;
 using EfDatabaseInvoice;
 using EfDatabaseParametrsModel;
 using EfDatabase.XsdLotusUser;
@@ -21,6 +23,7 @@ using LibaryXMLAuto.ModelServiceWcfCommand.ModelPathReport;
 using LibaryXMLAuto.ReadOrWrite;
 using LibaryXMLAuto.ModelXmlAuto.MigrationReport;
 using LibaryXMLAutoModelXmlAuto.OtdelRuleUsers;
+using File = EfDatabase.Inventory.Base.File;
 using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
 using Otdel = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.Otdel;
 using RuleTemplate = LibaryXMLAutoModelXmlAuto.OtdelRuleUsers.RuleTemplate;
@@ -273,20 +276,27 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                     var addObjectDb = new AddObjectDb.AddObjectDb();
                     var task = Task.Run(() =>
                     {
-
                             ModelSelect model = new ModelSelect {LogicaSelect = SqlSelectModel(idProcedureLoad)};
-                            XmlReadOrWrite xml = new XmlReadOrWrite();
                             addObjectDb.IsProcessComplete(idProcessBlock, false);
                             using (var transaction = Inventory.Database.BeginTransaction())
                             {
                                 try
                                 {
-                                    Inventory.Database.CommandTimeout = 18000; 
-                                    Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser,
-                                new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml)
-                                             {
-                                                    Value = new SqlXml(new XmlTextReader(xml.ClassToXml(modelTemplate, modelTemplate.GetType()), XmlNodeType.Document, null))
-                                             });
+                                    using (var buffer = new MemoryStream())
+                                    {
+                                        var serializer = new XmlSerializer(modelTemplate.GetType());
+                                        serializer.Serialize(buffer, modelTemplate);
+                                        buffer.Seek(0, SeekOrigin.Begin);
+                                        using (XmlReader reader = XmlReader.Create(buffer))
+                                        {
+                                            Inventory.Database.CommandTimeout = 18000;
+                                            Inventory.Database.ExecuteSqlCommand(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], SqlDbType.Xml) { Value = new SqlXml(reader) } );
+                                            reader.Close();
+                                            reader.Dispose();
+                                        }
+                                        buffer.Close();
+                                        buffer.Dispose();
+                                    }
                                     transaction.Commit();
                                     Inventory.Dispose();
                                 }
@@ -775,6 +785,44 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             return null;
         }
         /// <summary>
+        /// Выгрузка файла с сервера
+        /// </summary>
+        /// <param name="idFile">Ун файла</param>
+        /// <returns></returns>
+        public DownloadFileServer SelectFile(int idFile)
+        {
+            ModelSelect selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(70) };
+            DownloadFileServer downloadFileServer = Inventory.Database.SqlQuery<DownloadFileServer>(selectModel.LogicaSelect.SelectUser,
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], idFile)).FirstOrDefault();
+            if (downloadFileServer != null && System.IO.File.Exists(downloadFileServer.FullPathFile))
+            {
+                downloadFileServer.FileByte = FileArray(downloadFileServer.FullPathFile);
+                return downloadFileServer;
+            }
+
+            return downloadFileServer;
+        }
+        /// <summary>
+        /// Выгрузка детализации файла с сервера со всеми авторами
+        /// </summary>
+        /// <param name="idFile">Ун файла</param>
+        /// <returns></returns>
+        public ModelFileDetals SelectModelFileDetals(int idFile)
+        {
+            ModelSelect selectModel = new ModelSelect { LogicaSelect = SqlSelectModel(71) };
+            ModelFileDetals modelFile = Inventory.Database.SqlQuery<ModelFileDetals>(selectModel.LogicaSelect.SelectUser,
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], idFile),
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], 1)).FirstOrDefault();
+            if (modelFile == null) return null;
+            modelFile.AllAutorFile = Inventory.Database.SqlQuery<string>(selectModel.LogicaSelect.SelectUser,
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0], idFile),
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[1], 2)).ToArray();
+            return modelFile;
+
+        }
+
+
+        /// <summary>
         /// Выгрузка файла из АКСИОК
         /// </summary>
         /// <param name="aksiokAddAndEdit">Модель файла</param>
@@ -821,7 +869,15 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         {
             return Inventory.Database.SqlQuery<EfDatabaseParametrsModel.LogicaSelect>(String.Format(ProcedureSelect, id)).ToList()[0];
         }
-
+        /// <summary>
+        /// Выгрузка и удаление файла отчета
+        /// </summary>
+        /// <param name="fullPathFile">Полный путь к файлу</param>
+        /// <returns></returns>
+        private byte[] FileArray(string fullPathFile)
+        {
+            return System.IO.File.ReadAllBytes(fullPathFile);
+        }
         /// <summary>
         /// Dispose
         /// </summary>

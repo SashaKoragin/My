@@ -14,6 +14,7 @@ using LibaryDocumentGenerator.ProgrammView.Excel.ColumnModelWidth;
 using LibaryDocumentGenerator.ProgrammView.Excel.FontModel;
 using LibaryDocumentGenerator.ProgrammView.Excel.Library;
 using LibaryXMLAutoModelXmlSql.PreCheck.ModelCard;
+using ModelComparableAllSystemInventory = EfDatabase.ReportXml.ModelComparableUserResult.ModelComparableAllSystemInventory;
 
 namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
 {

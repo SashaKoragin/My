@@ -9,6 +9,7 @@ using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabase.MemoReport;
 using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
 using EfDatabase.ReportCard;
+using EfDatabase.ReportXml.ModelFileServer;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
@@ -1363,5 +1364,24 @@ namespace TestIFNSLibary.Inventarka
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/StartProcessInventory?idProcess={idProcess}&userLogin={userLogin}&passwordUser={passwordUser}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         void StartProcessInventory(int idProcess, string userLogin, string passwordUser);
+        /// <summary>
+        /// http://localhost:8182/Inventarka/DownloadFileServer
+        /// Выгрузка файла с файлового сервера
+        /// </summary>
+        /// <param name="idFile">Ун файла на сервере</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/DownloadFileServer?idFile={idFile}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<DownloadFileServer> DownloadFileServer(int idFile);
+
+        /// <summary>
+        /// http://localhost:8182/Inventarka/ModelFileDetailing
+        /// Детализация файла со всеми авторами
+        /// </summary>
+        /// <param name="idFile">Ун файла на сервере</param>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ModelFileDetailing?idFile={idFile}", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<ModelFileDetals> ModelFileDetailing(int idFile);
    }
 }

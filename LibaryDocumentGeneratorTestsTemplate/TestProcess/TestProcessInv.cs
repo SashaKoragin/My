@@ -45,7 +45,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestProcess
         public void ProcessCreateXml()
         {
             var fileServerAddDataBase = new FileServerAddFile(null);
-            fileServerAddDataBase.AddFileServerToDataBase(null);
+            fileServerAddDataBase.AddFileServerToDataBase(null,true);
             fileServerAddDataBase.Dispose();
         }
 

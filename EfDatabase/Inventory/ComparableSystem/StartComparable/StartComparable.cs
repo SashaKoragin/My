@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.ComparableFileAddToDataBase;
 using EfDatabase.Inventory.BaseLogic.Select;
+using EfDatabase.ReportXml.ModelFileServer;
+using LibaryXMLAuto.Inventarization.ModelComparableUserAllSystem;
+using LibaryXMLAuto.ReadOrWrite;
 
 namespace EfDatabase.Inventory.ComparableSystem.StartComparable
 {

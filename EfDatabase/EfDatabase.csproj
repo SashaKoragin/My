@@ -330,7 +330,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WPFLib\WPFLib\AttributeHelperModelXml\AttributeHelperModelXml.csproj">
-      <Project>{91FAD00A-D052-4DD6-A9BB-544782A0D2C4}</Project>
+      <Project>{91fad00a-d052-4dd6-a9bb-544782a0d2c4}</Project>
       <Name>AttributeHelperModelXml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">

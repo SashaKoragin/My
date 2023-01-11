@@ -17,6 +17,7 @@ using EfDatabase.MemoReport;
 using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
 using EfDatabase.ReportCard;
 using EfDatabase.ReportXml.ModelComparableUserResult;
+using EfDatabase.ReportXml.ModelFileServer;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
@@ -956,7 +957,7 @@ namespace TestIFNSLibary.Inventarka
                 {
                     SelectSql select = new SelectSql();
                     ReportComparableTechResult reportUsersComparableTechResult = new ReportComparableTechResult();
-                    var modelServer = select.SelectObjectModelSql<ModelComparableAllSystemInventory>(modelSelect.LogicaSelect);
+                    var modelServer = select.SelectObjectModelSql<EfDatabase.ReportXml.ModelComparableUserResult.ModelComparableAllSystemInventory>(modelSelect.LogicaSelect);
                     reportUsersComparableTechResult.CreateDocument(parametersService.SaveReport, modelServer, modelSelect.Parametrs);
                     select.Dispose();
                     return reportUsersComparableTechResult.FileArray();
@@ -2724,6 +2725,36 @@ namespace TestIFNSLibary.Inventarka
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>(e.Message));
                 Loggers.Log4NetLogger.Error(e);
             }
+        }
+        /// <summary>
+        /// Выгрузка файла с сервера
+        /// </summary>
+        /// <param name="idFile">Ун файла</param>
+        /// <returns></returns>
+        public async Task<DownloadFileServer> DownloadFileServer(int idFile)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                var model = selectSql.SelectFile(idFile);
+                selectSql.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Выгрузка детализации файла с сервера
+        /// </summary>
+        /// <param name="idFile">Ун файла</param>
+        /// <returns></returns>
+        public async Task<ModelFileDetals> ModelFileDetailing(int idFile)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                var model = selectSql.SelectModelFileDetals(idFile);
+                selectSql.Dispose();
+                return model;
+            });
         }
     }
 }
