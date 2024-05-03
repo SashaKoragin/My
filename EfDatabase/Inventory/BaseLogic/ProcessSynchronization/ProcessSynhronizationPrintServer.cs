@@ -41,83 +41,77 @@ namespace EfDatabase.Inventory.BaseLogic.ProcessSynchronization
         {
             try
             {
-                var selectProcess = new Select.Select();
-                var process = selectProcess.SelectProcess(IndexProcess);
-                if (process.IsComplete != null && (bool)process.IsComplete)
+                var addObjectDb = new AddObjectDb.AddObjectDb();
+                addObjectDb.IsProcessComplete(IndexProcess, false);
+                var task = Task.Factory.StartNew(() =>
                 {
-                    var addObjectDb = new AddObjectDb.AddObjectDb();
-                    addObjectDb.IsProcessComplete(IndexProcess, false);
-                    var task = Task.Factory.StartNew(() =>
-                   {
-                       try
-                       {
-                           var ping = new Ping();
-                           var printServer = new PrintServer(PrintServer);
-                           var selectModel = new Select.Select();
-                           var allModel = selectModel.AllFullModel();
-                           var allSerialNumberModel = selectModel.AllSerNumber();
-                           var prQueue = printServer.GetPrintQueues();
-                           var listPrinters = (from printer in prQueue
-                                               select new SynchronizationPrintServer()
-                                               {
-                                                   DescriptionPrinter = printer.Comment,
-                                                   NamePrintServer = printer.Name,
-                                                   IpPrintServer = UnderTheNetwork + Regex.Match(printer.QueuePort.Name, @"(\d+)(?!.*\d)").Value,
-                                                   HasToner = printer.HasToner,
-                                                   IsTonerLow = printer.IsTonerLow
-                                               }
-                               ).ToList();
-                           foreach (var model in allModel)
-                           {
-                               var findModelName = Regex.Match(model.NameModel, @"(\d+)(?!.*\d)").Value;
-                               if (!string.IsNullOrWhiteSpace(findModelName))
-                               {
-                                   foreach (var printer in listPrinters)
-                                   {
-                                       if (printer.DescriptionPrinter.Contains(findModelName))
-                                       {
-                                           printer.FullUrl = string.Format(string.IsNullOrWhiteSpace(model.UrlModel) ? "http://{0}" : model.UrlModel, printer.IpPrintServer);
-                                           PingReply pingReply = ping.Send(printer.IpPrintServer);
-                                           if (pingReply != null && pingReply.Status == IPStatus.Success)
+                    try
+                    {
+                        var ping = new Ping();
+                        var printServer = new PrintServer(PrintServer);
+                        var selectModel = new Select.Select();
+                        var allModel = selectModel.AllFullModel();
+                        var allSerialNumberModel = selectModel.AllSerNumber();
+                        var prQueue = printServer.GetPrintQueues();
+                        var listPrinters = (from printer in prQueue
+                                           select new SynchronizationPrintServer()
                                            {
-                                               if (findModelName == "7030")
-                                               {
-                                                   SoapClientPrinter(allSerialNumberModel, printer);
-                                                   Dispose();
-                                               }
-                                               else
-                                               {
-                                                   ClientSendWebForm(allSerialNumberModel, printer);
-                                                   Dispose();
-                                               }
+                                               DescriptionPrinter = printer.Comment,
+                                               NamePrintServer = printer.Name,
+                                               IpPrintServer = UnderTheNetwork + Regex.Match(printer.QueuePort.Name, @"(\d+)(?!.*\d)").Value,
+                                               HasToner = printer.HasToner,
+                                               IsTonerLow = printer.IsTonerLow
                                            }
-                                           else
-                                           {
-                                               printer.IsErrorInfo = "Удаленный IP не пингуется!";
-                                               printer.StatusFindPrintServerAndSynchronization = 4;
-                                           }
-                                       }
-                                   }
-                               }
-                           }
-                           addObjectDb.AddListSynchronizationPrintServer(ref listPrinters);
-                           selectModel.Dispose();
-                           return listPrinters;
-                       }
-                       catch (Exception e)
-                       {
-                           Loggers.Log4NetLogger.Error(e);
-                       }
-                       return null;
-                   }, TaskCreationOptions.LongRunning);
+                           ).ToList();
+                        foreach (var model in allModel)
+                        {
+                            var findModelName = Regex.Match(model.NameModel, @"(\d+)(?!.*\d)").Value;
+                            if (!string.IsNullOrWhiteSpace(findModelName))
+                            {
+                                foreach (var printer in listPrinters)
+                                {
+                                    if (printer.DescriptionPrinter.Contains(findModelName))
+                                    {
+                                        printer.FullUrl = string.Format(string.IsNullOrWhiteSpace(model.UrlModel) ? "http://{0}" : model.UrlModel, printer.IpPrintServer);
+                                        PingReply pingReply = ping.Send(printer.IpPrintServer);
+                                        if (pingReply != null && pingReply.Status == IPStatus.Success)
+                                        {
+                                            if (findModelName == "7030")
+                                            {
+                                                SoapClientPrinter(allSerialNumberModel, printer);
+                                                Dispose();
+                                            }
+                                            else
+                                            {
+                                                ClientSendWebForm(allSerialNumberModel, printer);
+                                                Dispose();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            printer.IsErrorInfo = "Удаленный IP не пингуется!";
+                                            printer.StatusFindPrintServerAndSynchronization = 4;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        addObjectDb.AddListSynchronizationPrintServer(ref listPrinters);
+                        selectModel.Dispose();
+                        return listPrinters;
+                    }
+                    catch (Exception e)
+                    {
+                        Loggers.Log4NetLogger.Error(e);
+                    }
+                    return null;
+                    }, TaskCreationOptions.LongRunning);
                     task.ConfigureAwait(true).GetAwaiter().OnCompleted(() =>
                     {
                         addObjectDb.IsProcessComplete(IndexProcess, true);
                         addObjectDb.Dispose();
                     });
                     return task.Result;
-                }
-                selectProcess.Dispose();
             }
             catch (Exception e)
             {

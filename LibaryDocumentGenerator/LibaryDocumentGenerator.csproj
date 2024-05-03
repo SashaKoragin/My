@@ -11,6 +11,7 @@
     <AssemblyName>LibaryDocumentGenerator</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,14 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.8.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\DocumentFormat.OpenXml.2.8.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.18.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\..\WPFLib\WPFLib\packages\DocumentFormat.OpenXml.2.18.0\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
-    <Reference Include="EfDatabaseAutomation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\WPFLib\WPFLib\EfDatabaseAutomation\bin\Debug\EfDatabaseAutomation.dll</HintPath>
-    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed" />
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,13 +45,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="zxing, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\ZXing.Net.0.16.4\lib\net45\zxing.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net45\zxing.dll</HintPath>
     </Reference>
-    <Reference Include="zxing.presentation, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\ZXing.Net.0.16.4\lib\net45\zxing.presentation.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net45\zxing.presentation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -70,8 +65,14 @@
     <Compile Include="Documents\TemplateExcel\ITemplateExcel.cs" />
     <Compile Include="Documents\TemplateExcel\ReportAskNds.cs" />
     <Compile Include="Documents\TemplateExcel\ReportCard.cs" />
+    <Compile Include="Documents\TemplateExcel\ReportComparableAksiokAndInventoryResult.cs" />
+    <Compile Include="Documents\TemplateExcel\ReportComparableTechResult.cs" />
+    <Compile Include="Documents\TemplateExcel\ReportComparableUserResult.cs" />
+    <Compile Include="Documents\TemplateExcel\ReportDocumentContainerInventory.cs" />
     <Compile Include="Documents\TemplateExcel\ReportServerIpStatus.cs" />
     <Compile Include="Documents\Template\BookAccountingInventarka.cs" />
+    <Compile Include="Documents\Template\DocCode128.cs" />
+    <Compile Include="Documents\Template\DocCodePdf417.cs" />
     <Compile Include="Documents\Template\InvoiceInventarka.cs" />
     <Compile Include="Documents\Template\ITemplate.cs" />
     <Compile Include="Documents\Template\MemoReport.cs" />
@@ -94,7 +95,7 @@
     <Compile Include="ProgrammView\Excel\Library\ListExcel.cs" />
     <Compile Include="ProgrammView\Excel\Library\ModelCellFormat.cs" />
     <Compile Include="ProgrammView\Excel\Library\StyleCells.cs" />
-    <Compile Include="ProgrammView\FullDocumentExcel\DocumentExcelReportNds.cs" />
+    <Compile Include="ProgrammView\FullDocumentExcel\AllDocumentExcel.cs" />
     <Compile Include="ProgrammView\FullDocument\DocumentsFull.cs" />
     <Compile Include="ProgrammView\FullDocument\DocumentsPreChek.cs" />
     <Compile Include="ProgrammView\FullDocument\GenerateStatementPreCheck.cs" />
@@ -119,13 +120,13 @@
     <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\WPFLib\WPFLib\EfDatabaseAutomation\EfDatabaseAutomation.csproj">
+      <Project>{fdad249d-cd7d-4581-b945-90d2f9dad698}</Project>
+      <Name>EfDatabaseAutomation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
       <Project>{a2bc3ae2-4a61-4e9e-9fa4-96a02677c79c}</Project>
       <Name>LibaryXMLAuto</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WPFLib\WPFLib\SqlLibaryIfns\SqlLibaryIfns.csproj">
-      <Project>{128c2bf1-de92-4bb8-bda0-eefc5eab66d2}</Project>
-      <Name>SqlLibaryIfns</Name>
     </ProjectReference>
     <ProjectReference Include="..\EfDatabase\EfDatabase.csproj">
       <Project>{578cf45e-310b-4e2e-9c94-5a9f16b736ae}</Project>

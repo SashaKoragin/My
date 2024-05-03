@@ -4,6 +4,7 @@ using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DataTransportInventoryToSnmp.ModelTransportXml;
 using EfDatabase.FilterModel;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
@@ -11,11 +12,11 @@ using EfDatabase.Inventory.BaseLogic.DeleteObjectDb;
 using EfDatabase.Inventory.BaseLogic.Login;
 using EfDatabase.Inventory.BaseLogic.Select;
 using EfDatabase.Inventory.MailLogicLotus;
-using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabase.Inventory.SqlModelSelect;
 using EfDatabase.MemoReport;
-using EfDatabase.ModelAksiok.Aksiok;
 using EfDatabase.ReportCard;
+using EfDatabase.ReportXml.ModelComparableUserResult;
+using EfDatabase.ReportXml.ModelFileServer;
 using EfDatabase.SettingModelInventory;
 using EfDatabase.XsdBookAccounting;
 using EfDatabase.XsdInventoryRuleAndUsers;
@@ -24,12 +25,13 @@ using EfDatabaseXsdInventoryAutorization;
 using EfDatabase.ReportXml.XsdMail;
 using EfDatabaseXsdQrCodeModel;
 using EfDatabaseXsdSupportNalog;
+using InventoryProcess.StartProcessInventory.ModelSelectProcess;
+using InventoryProcess.StartProcessInventory.ProcessStart;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
 using LibaryDocumentGenerator.Documents.TemplateExcel;
 using LibaryXMLAuto.ReadOrWrite;
-using LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem;
-using LibraryAutoSupportSto.PassportSto.PassportStoPostGet;
+using LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem;
 using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
 using SqlLibaryIfns.ZaprosSelectNotParam;
@@ -45,6 +47,7 @@ using Kabinet = EfDatabase.Inventory.Base.Kabinet;
 using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
 using Mfu = EfDatabase.Inventory.Base.Mfu;
 using ModelBlockPower = EfDatabase.Inventory.Base.ModelBlockPower;
+using ModelError = EfDatabase.Inventory.ReportXml.ReturnModelError.ModelError;
 using NameSysBlock = EfDatabase.Inventory.Base.NameSysBlock;
 using Otdel = EfDatabase.Inventory.Base.Otdel;
 using Printer = EfDatabase.Inventory.Base.Printer;
@@ -60,6 +63,8 @@ using Type = System.Type;
 using OtherAll = EfDatabase.Inventory.Base.OtherAll;
 using ProizvoditelOther = EfDatabase.Inventory.Base.ProizvoditelOther;
 using ModelOther = EfDatabase.Inventory.Base.ModelOther;
+using ModelPhone = EfDatabase.Inventory.Base.ModelPhone;
+
 
 namespace TestIFNSLibary.Inventarka
 {
@@ -386,6 +391,21 @@ namespace TestIFNSLibary.Inventarka
                 return model;
             });
         }
+        /// <summary>
+        /// Получение всех статусов особых дней
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetStatusHoliday()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.GetStatusHoliday();
+                auto.Dispose();
+                return model;
+            });
+        }
+
 
         /// <summary>
         /// Добавление или редактирование справочника праздничных дней
@@ -395,7 +415,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         public ModelReturn<Rb_Holiday> AddAndEditRbHoliday(Rb_Holiday holidays, string userIdEdit)
         {
-            holidays.DateTime_Holiday = holidays.DateTime_Holiday.AddHours(3);
+           // holidays.DateTime_Holiday = holidays.DateTime_Holiday.AddHours(3);
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditHoliday(holidays);
             add.Dispose();
@@ -437,7 +457,7 @@ namespace TestIFNSLibary.Inventarka
             {
                 add.AddAndDeleteRuleUsers(ruleUsers);
                 add.Dispose();
-                return auto.AllRuleUser((int) ruleUsers.IdUser);
+                return auto.AllRuleUser((int)ruleUsers.IdUser);
             });
         }
 
@@ -892,7 +912,7 @@ namespace TestIFNSLibary.Inventarka
                 return await Task.Factory.StartNew(() =>
                 {
                     telephonehelper.LogicaSelect = select.SqlSelectModel(telephonehelper.ParametrsSelect.Id);
-                    invoice.CreateDocument(parametersService.Report,
+                    invoice.CreateDocument(parametersService.SaveReport,
                         (EfDatabaseTelephoneHelp.TelephoneHelp) selectfull.GenerateSchemeXsdSql<string, string>(
                             telephonehelper.LogicaSelect), null);
                     select.Dispose();
@@ -908,14 +928,63 @@ namespace TestIFNSLibary.Inventarka
         }
 
         /// <summary>
-        /// Запрос на get получение файла по телефонам
+        /// Запрос на get получение файла sql => xlsx
         /// </summary>
         /// <returns></returns>
         public async Task<Stream> GenerateFileXlsxSqlView(LogicaSelect selectLogic)
         {
             var selectFull = new SelectFull(parametersService.Inventarization);
-            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(selectLogic.SelectUser,
-                selectLogic.NameReportFile, selectLogic.NameReportList, parametersService.ReportMassTemplate));
+            return await Task.Factory.StartNew(() => selectFull.GenerateStreamToSqlViewFile(selectLogic, parametersService.ReportMassTemplate));
+        }
+        /// <summary>
+        /// Сбор сложного отчета по модели ComparableUserResult
+        /// </summary>
+        /// <param name="modelSelect">Собранная выборка view</param>
+        /// <returns></returns>
+        public async Task<Stream> ReportFileXlsxSqlView(ModelSelect modelSelect)
+        {
+            try { 
+                return await Task.Factory.StartNew(() =>
+                {
+                    SelectSql select = new SelectSql();
+                    ReportComparableUserResult reportUsersComparableUserResult = new ReportComparableUserResult();
+                    var modelServer = select.SelectObjectModelSql<ComparableUserResult>(modelSelect.LogicaSelect);
+                    reportUsersComparableUserResult.CreateDocument(parametersService.SaveReport, modelServer, modelSelect.Parametrs);
+                    select.Dispose();
+                    return reportUsersComparableUserResult.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Технический отчет сравнения 3 БД АКСИОК, Инвентаризация, AD
+        /// </summary>
+        /// <param name="modelSelect">Собранная выборка view</param>
+        /// <returns></returns>
+        public async Task<Stream> ReportFileSqlViewTechReport(ModelSelect modelSelect)
+        {
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    SelectSql select = new SelectSql();
+                    ReportComparableTechResult reportUsersComparableTechResult = new ReportComparableTechResult();
+                    var modelServer = select.SelectObjectModelSql<EfDatabase.ReportXml.ModelComparableUserResult.ModelComparableAllSystemInventory>(modelSelect.LogicaSelect);
+                    reportUsersComparableTechResult.CreateDocument(parametersService.SaveReport, modelServer, modelSelect.Parametrs);
+                    select.Dispose();
+                    return reportUsersComparableTechResult.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
         }
 
         /// <summary>
@@ -949,8 +1018,8 @@ namespace TestIFNSLibary.Inventarka
                         parametr); //Получение данных для модели
                     book.BareCodeBook = rep.BookInvoce(book.BareCodeBook, bookModels); //Раскладывает в БД
                     barecode.GenerateBookCode(book.BareCodeBook,
-                        parametersService.Report); //Генерит Штрихкод на основе раскладки БД
-                    bookAccounting.CreateDocument(parametersService.Report, book, null);
+                        parametersService.SaveReport); //Генерит Штрихкод на основе раскладки БД
+                    bookAccounting.CreateDocument(parametersService.SaveReport, book, null);
                     File.Delete(book.BareCodeBook.FullPathSave);
                     select.Dispose();
                     return bookAccounting.FileArray();
@@ -998,8 +1067,8 @@ namespace TestIFNSLibary.Inventarka
                     InvoiceInventarka invoice = new InvoiceInventarka();
                     GenerateBarcode barecode = new GenerateBarcode();
                     rep.ReportInvoice(ref report);
-                    barecode.GenerateCode(ref report, parametersService.Report);
-                    invoice.CreateDocument(parametersService.Report, report);
+                    barecode.GenerateCode(ref report, parametersService.SaveReport);
+                    invoice.CreateDocument(parametersService.SaveReport, report);
                     File.Delete(report.Main.Barcode.PathBarcode);
                     return invoice.FileArray();
                 });
@@ -1059,7 +1128,7 @@ namespace TestIFNSLibary.Inventarka
             ModelError[] error = new ModelError[uploadFileModel.Upload.Length];
             for (int i = 0; i < uploadFileModel.Upload.Length; i++)
             {
-                identitybarcode.DecodeBarCodePng(ref uploadFileModel.Upload[i], parametersService.Report);
+                identitybarcode.DecodeBarCodePng(ref uploadFileModel.Upload[i], parametersService.SaveReport);
                 if (uploadFileModel.Upload[i].IdDocument != 0)
                 {
                     switch (uploadFileModel.ClassFileToServer)
@@ -1969,51 +2038,8 @@ namespace TestIFNSLibary.Inventarka
         {
             return await Task.Factory.StartNew(() =>
             {
-                if (modelSupport.IdCalendarVks != 0)
-                {
-                    var stpCalender = new MailLogicLotus();
-                    stpCalender.ModifiedCalender(modelSupport.IdCalendarVks);
-                    stpCalender.Dispose();
-                }
-
-                var support = new CreateTiсketSupport(modelSupport.Login, modelSupport.Password);
-                var generate = new GenerateParameterSupport(parametersService.PathDomainGroup);
-                var selectReportPassportTechnique =
-                    new SelectReportPassportTechnique(parametersService.Inventarization);
-                try
-                {
-
-                    generate.GenerateTemplateUrlParameter(ref modelSupport);
-                    generate.IsCheckAllParameter(modelSupport.TemplateSupport
-                        .Where(param => param.NameStepSupport == "Step2").ToArray());
-                    var modelParameterInputStep3 = modelSupport.TemplateSupport.Where(temple =>
-                        temple.NameStepSupport == "Step3" && temple.TemplateParametrType != null).ToArray();
-                    if (modelParameterInputStep3.Length > 0)
-                    {
-                        selectReportPassportTechnique.CreateStoParametersStep3(ref modelSupport,
-                            parametersService.Report);
-                    }
-
-                    modelSupport.Step3ResponseSupport = support.CreateFullSupportTax(modelSupport);
-                    Loggers.Log4NetLogger.Info(new Exception(
-                        $"Пользователем {modelSupport.Login} создана заявка по теме {modelSupport.TemplateSupport.FirstOrDefault(description => description.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}"));
-                    return modelSupport;
-                }
-                catch (Exception ex)
-                {
-                    Loggers.Log4NetLogger.Error(ex);
-                    modelSupport.Error = ex.Message;
-                    Loggers.Log4NetLogger.Info(new Exception(
-                        $"Пользователем {modelSupport.Login} была вызвана ошибка по теме {modelSupport.TemplateSupport.FirstOrDefault(description => description.NameGuidParametr == "UF_SERVICE_EXTID")?.HelpParameter}"));
-                    return modelSupport;
-                }
-                finally
-                {
-                    generate.Dispose();
-                    support.Steps(support.Logon, "GET");
-                    support.Dispose();
-                    selectReportPassportTechnique.Dispose();
-                }
+                LoadModelSupport loadModelSupport = new LoadModelSupport(parametersService.PathDomainGroup, parametersService.SaveReport);
+                return loadModelSupport.CreateSupportModelSto(modelSupport);
             });
         }
 
@@ -2038,8 +2064,9 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <returns></returns>
         /// <param name="serialNumber">Серийный номер техники</param>
+        /// <param name="inventoryNumber">Инвентарный номер</param>
         /// <param name="isAll">Генерация на все кабинеты или на один</param>
-        public async Task<Stream> GenerateQrCodeTechnical(string serialNumber, bool isAll = false)
+        public async Task<Stream> GenerateQrCodeTechnical(string serialNumber, string inventoryNumber, bool isAll = false)
         {
             try
             {
@@ -2048,21 +2075,24 @@ namespace TestIFNSLibary.Inventarka
                     var auto = new Select();
                     var i = 0;
                     var sticker = new StickerCode();
-                    var technical = auto.SelectTechnical(serialNumber, isAll);
+                    var technical = auto.SelectTechnical(serialNumber, inventoryNumber, isAll);
                     if (technical.Count == 0) return null;
                     var qrCode = new GenerateBarcode();
                     technical.ForEach(x =>
                     {
+                        var nameServer = !string.IsNullOrWhiteSpace(x.NameServer) ? $"\r\nИмя PC: {x.NameServer}" : null;
                         var templateContent = $"{x.Item}: {x.NameManufacturer} {x.NameModel}\r\n" +
                                               $"s/n: {x.SerNum}\r\n" +
                                               $"Инв.: {x.InventarNum}\r\n" +
                                               $"Сервис.: {x.ServiceNum}\r\n" +
                                               $"Kaб.: {x.NumberKabinet}\r\n" +
-                                              $"User: {x.NameUser}";
-                        x.Coment = qrCode.GenerateQrCode(parametersService.Report + i, templateContent);
+                                              $"User: {x.NameUser}" +
+                                              nameServer;
+                        
+                        x.Coment = qrCode.GenerateQrCode(parametersService.SaveReport + i, templateContent);
                         i++;
                     });
-                    sticker.CreateDocument(parametersService.Report + "QrCodeOffice", technical);
+                    sticker.CreateDocument(parametersService.SaveReport + "QrCodeOffice", technical);
                     technical.Select(x => x.Coment).ToList().ForEach(File.Delete);
                     auto.Dispose();
                     return sticker.FileArray();
@@ -2075,7 +2105,48 @@ namespace TestIFNSLibary.Inventarka
 
             return null;
         }
-
+        /// <summary>
+        /// Генерация штрих-кода для этикеток 
+        /// </summary>
+        /// <param name="serialNumber">Серийный номер</param>
+        /// <param name="inventoryNumber">Инвентарный номер</param>
+        /// <param name="isAll">Создать этикетки на всю технику</param>
+        /// <returns></returns>
+        public async Task<Stream> GenerateTicket128CodeTechnical(string serialNumber, string inventoryNumber, bool isAll = false)
+        {
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    var auto = new Select();
+                    var i = 0;
+                    var stickerCode128 = new DocCode128();
+                    var technical = auto.SelectTechnical(serialNumber, inventoryNumber, isAll);
+                    if (technical.Count == 0) return null;
+                    var code128 = new GenerateBarcode();
+                    technical.ForEach(x =>
+                    {
+                        var countZero = 25;
+                        var modelZero = "";
+                        for (var j = 0; j < countZero-x?.InventarNum?.Length; j++)
+                        {
+                            modelZero += "0";
+                        }
+                        x.Coment = code128.GenerateCode128(parametersService.SaveReport + i, long.TryParse(x.InventarNum, out var resultInventoryNumber) ? modelZero + resultInventoryNumber : "0000000000000000123456789");
+                        i++;
+                    });
+                    stickerCode128.CreateDocument(parametersService.SaveReport + "Code128Office", technical);
+                    technical.Select(x => x.Coment).ToList().ForEach(File.Delete);
+                    auto.Dispose();
+                    return stickerCode128.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
         /// <summary>
         /// Генерация QR Кодов на кабинет
         /// </summary>
@@ -2095,9 +2166,9 @@ namespace TestIFNSLibary.Inventarka
                     //Создание qr кодов
                     if (office.Kabinet == null) return null;
                     office.Kabinet.AsEnumerable().Select(x => x).ToList().ForEach(x =>
-                        x.FullPathPng = qrCode.GenerateQrCode(parametersService.Report + x.IdNumberKabinet,
+                        x.FullPathPng = qrCode.GenerateQrCode(parametersService.SaveReport + x.IdNumberKabinet,
                             x.NumberKabinet));
-                    stickerQrOffice.CreateDocument(parametersService.Report + "QrCodeOffice", office);
+                    stickerQrOffice.CreateDocument(parametersService.SaveReport + "QrCodeOffice", office);
                     office.Kabinet.AsEnumerable().Select(x => x.FullPathPng).ToList().ForEach(File.Delete);
                     auto.Dispose();
                     return stickerQrOffice.FileArray();
@@ -2222,7 +2293,7 @@ namespace TestIFNSLibary.Inventarka
                     var generate = new GenerateParameterSupport(parametersService.PathDomainGroup);
                     var act = generate.GenerateParameterAct(modelParameterAct);
                     var templateAct = new TemplateAct();
-                    templateAct.CreateDocument(parametersService.Report + "Акт списания ", act);
+                    templateAct.CreateDocument(parametersService.SaveReport + "Акт списания ", act);
                     generate.Dispose();
                     return templateAct.FileArray();
                 });
@@ -2251,7 +2322,7 @@ namespace TestIFNSLibary.Inventarka
                     SelectSql select = new SelectSql();
                     EfDatabase.Journal.AllJournal journal = select.SelectJournalAis3(year, idOtdel, isAllJournal);
                     var templateJournal = new TemplateJournalAis3();
-                    templateJournal.CreateDocument(parametersService.Report, journal, null);
+                    templateJournal.CreateDocument(parametersService.SaveReport, journal, null);
                     select.Dispose();
                     return templateJournal.FileArray();
                 });
@@ -2312,7 +2383,7 @@ namespace TestIFNSLibary.Inventarka
                     }
 
                     ReportCard report = new ReportCard();
-                    report.CreateDocument(parametersService.Report, model);
+                    report.CreateDocument(parametersService.SaveReport, model);
                     return report.FileArray();
                 });
             }
@@ -2351,7 +2422,7 @@ namespace TestIFNSLibary.Inventarka
                         memoReport.UserDepartment.Orders = ((Orders) xml.ReadXmlText(userOrder, typeof(Orders)));
                     }
 
-                    memo.CreateDocument(parametersService.Report, memoReport);
+                    memo.CreateDocument(parametersService.SaveReport, memoReport);
                     return memo.FileArray();
                 });
             }
@@ -2364,103 +2435,6 @@ namespace TestIFNSLibary.Inventarka
 
             return null;
         }
-
-        /// <summary>
-        /// Актуализация данных с СТО
-        /// </summary>
-        /// <returns></returns>
-        public void UpdateDataSto(int idProcess)
-        {
-            try
-            {
-                Select auto = new Select();
-                var process = auto.SelectProcess(idProcess);
-                if (process.IsComplete != null && (bool) process.IsComplete)
-                {
-                    var addObjectDb = new AddObjectDb();
-                    addObjectDb.IsProcessComplete(idProcess, false);
-                    var task = Task.Run(() =>
-                    {
-                        var sto = new PassportStoPostGet(parametersService.LoginSto, parametersService.PasswordSto,
-                            parametersService.Report);
-                        var fullPathXlsx = sto.DownloadReportSto();
-                        addObjectDb.CreateAndDownloadSto(fullPathXlsx, parametersService.Report,
-                            parametersService.XsdReport, parametersService.BulkCopyXmlSto);
-                    });
-                    task.ConfigureAwait(true).GetAwaiter().OnCompleted(() =>
-                    {
-                        addObjectDb.IsProcessComplete(idProcess, true);
-                        addObjectDb.Dispose();
-                        SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                            new ModelReturn<string>($"{process.NameProcess} завершен!", null, 3));
-                    });
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                        new ModelReturn<string>($"{process.NameProcess} запущен!", null, 1));
-                }
-                else
-                {
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                        new ModelReturn<string>($"{process.NameProcess} уже запущен ожидайте окончание процесса!", null,
-                            2));
-                }
-                auto.Dispose();
-            }
-            catch (Exception e)
-            {
-                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                    new ModelReturn<string>(e.Message));
-                Loggers.Log4NetLogger.Error(e);
-            }
-        }
-        /// <summary>
-        /// Синхронизация данных с АКСИОК
-        /// </summary>
-        /// <param name="idProcess">Ун процесса</param>
-        /// <param name="userLogin">Логин пользователя</param>
-        /// <param name="passwordUser">Пароль пользователя</param>
-        public void UpdateAksiok(int idProcess, string userLogin, string passwordUser)
-        {
-            try
-            {
-                Select auto = new Select();
-                var process = auto.SelectProcess(idProcess);
-                if (process.IsComplete != null && (bool)process.IsComplete)
-                {
-                    var addObjectDb = new AddObjectDb();
-                    addObjectDb.IsProcessComplete(idProcess, false);
-                    var task = Task.Run(() =>
-                    {
-                        var aksiok = new AksiokPostGetSystem(userLogin, passwordUser);
-                        aksiok.StartUpdateAksiok();
-                        
-
-                    });
-                    task.ConfigureAwait(true).GetAwaiter().OnCompleted(() =>
-                    {
-                        addObjectDb.IsProcessComplete(idProcess, true);
-                        addObjectDb.Dispose();
-                        SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                            new ModelReturn<string>($"{process.NameProcess} завершен!", null, 3));
-                    });
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                        new ModelReturn<string>($"{process.NameProcess} запущен!", null, 1));
-                }
-                else
-                {
-                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                        new ModelReturn<string>($"{process.NameProcess} уже запущен ожидайте окончание процесса!", null,
-                            2));
-                }
-                auto.Dispose();
-            }
-            catch (Exception e)
-            {
-                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(
-                    new ModelReturn<string>(e.Message));
-                Loggers.Log4NetLogger.Error(e);
-            }
-        }
-
         /// <summary>
         /// Получение всех отчетов сравнения ЭПО
         /// </summary>
@@ -2486,22 +2460,51 @@ namespace TestIFNSLibary.Inventarka
             var selectReportPassportTechnique = new SelectReportPassportTechnique(parametersService.Inventarization);
             return await Task.Factory.StartNew(() =>
                 {
-                    var model = selectReportPassportTechnique.CreateFullReportEpo(parametersService.Report, idReport);
+                    var model = selectReportPassportTechnique.CreateFullReportEpo(parametersService.SaveReport, idReport);
                     selectReportPassportTechnique.Dispose();
                     return model;
                 });
         }
 
         /// <summary>
-        /// Все параметры для процессов
+        /// Все процессы
         /// </summary>
         /// <returns></returns>
-        public async Task<string> AllEventProcessParameters()
+        public async Task<string> AllEventProcess()
         {
             Select auto = new Select();
             return await Task.Factory.StartNew(() =>
             {
-                var model = auto.AllEventProcessParameter();
+                var model = auto.AllEventProcess();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Расписание запуска процесса
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllDayOfTheWeekProcess()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllDayOfTheWeek();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Запрос на параметры для процесса
+        /// </summary>
+        /// <param name="idProcess">Ун процесса</param>
+        /// <returns></returns>
+        public async Task<string> AllEventProcessParameters(int idProcess)
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllParametersProcess(idProcess);
                 auto.Dispose();
                 return model;
             });
@@ -2524,6 +2527,22 @@ namespace TestIFNSLibary.Inventarka
                 SignalRLibary.SignalRinventory.SignalRinventory.SubscribeEventProcess(model.Model);
             }
 
+            return model;
+        }
+        /// <summary>
+        /// Редактирование параметров для процесса
+        /// </summary>
+        /// <param name="parameterEventProcess">Параметры процесса</param>
+        /// <returns></returns>
+        public ModelReturn<ParameterEventProcess> EditParameterEventProcess(ParameterEventProcess parameterEventProcess)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.EditParameterEventProcess(parameterEventProcess);
+            add.Dispose();
+            if (model?.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeParameterEventProcess(model.Model);
+            }
             return model;
         }
 
@@ -2565,7 +2584,7 @@ namespace TestIFNSLibary.Inventarka
                     var modelServerIp = select.AllIpServerSelectDataBase();
                     PingIp ping = new PingIp();
                     ping.PingServerDataBase(ref modelServerIp);
-                    memo.CreateDocument(parametersService.Report, modelServerIp);
+                    memo.CreateDocument(parametersService.SaveReport, modelServerIp);
                     select.Dispose();
                     return memo.FileArray();
                 });
@@ -2682,7 +2701,7 @@ namespace TestIFNSLibary.Inventarka
             });
         }
         /// <summary>
-        /// Вытащить все производители из БД
+        /// Вытащить все модели из БД
         /// </summary>
         /// <returns></returns>
         public async Task<string> SelectAllEquipmentModel()
@@ -2694,6 +2713,174 @@ namespace TestIFNSLibary.Inventarka
                 auto.Dispose();
                 return model;
             });
+        }
+        /// <summary>
+        /// Проверка оборудование на комплектность!!!
+        /// </summary>
+        /// <param name="kitsEquipment">Параметры комплектов</param>
+        /// <returns></returns>
+        public async Task<KitsEquipment> KitsEquipmentValidation(KitsEquipment kitsEquipment)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSal = new SelectSql();
+                var modelKitsEquipment = selectSal.ModelValidationKits(kitsEquipment);
+                selectSal.Dispose();
+                return modelKitsEquipment;
+            });
+        }
+        /// <summary>
+        /// Функция Редактирования или добавления в АКСИОК данных
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Заполненная модель данных для выполнения действий</param>
+        public async Task<string> AksiokAddAndEditModel(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+
+                SelectSql selectSql = new SelectSql();
+                aksiokAddAndEdit.ParametersModel.Guarantee = aksiokAddAndEdit.ParametersModel.Guarantee?.AddHours(3);
+                var aksiokModelEditAndAdd = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit);
+                selectSql.Dispose();
+                if (aksiokModelEditAndAdd != null)
+                {
+                    var aksiokEditAndAdd = new AksiokPostGetEditAndAdd(aksiokAddAndEdit.ParametersModel.LoginUser, aksiokAddAndEdit.ParametersModel.Password, aksiokModelEditAndAdd);
+                    var message = aksiokEditAndAdd.StartEditAndAddAksiok(aksiokAddAndEdit);
+                    aksiokEditAndAdd.Dispose();
+                    return message;
+                }
+                return "Процедура вернула null Добавление или Редактирование невозможно!!!";
+            });
+        }
+        /// <summary>
+        /// Выгрузка файла из АКСИОК для просмотра
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Заполненная модель данных для выполнения действий</param>
+        /// <returns></returns>
+        public async Task<UploadFileAksiok> UploadFileAksiok(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                var idFile = selectSql.SelectFileId(aksiokAddAndEdit);
+                selectSql.Dispose();
+                if (idFile != null)
+                {
+                    var aksiokEditAndAdd = new AksiokPostGetEditAndAdd(aksiokAddAndEdit.ParametersModel.LoginUser, aksiokAddAndEdit.ParametersModel.Password, null);
+                    var fileAksiok = aksiokEditAndAdd.UploadFileAksiok((long)idFile);
+                    aksiokEditAndAdd.Dispose(); 
+                    return fileAksiok;
+                }
+                return null;
+            });
+        }
+        /// <summary>
+        /// Общий метод обработки процессов 
+        /// </summary>
+        public void StartProcessInventory(SelectProcess selectProcess)
+        {
+            try
+            {
+                var process = new ProcessStart(selectProcess.IdProcess, selectProcess.UserLogin, selectProcess.PasswordUser);
+                process.StartProcess();
+            }
+            catch (Exception e)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>(e.Message));
+                Loggers.Log4NetLogger.Error(e);
+            }
+        }
+        /// <summary>
+        /// Выгрузка файла с сервера
+        /// </summary>
+        /// <param name="idFile">Ун файла</param>
+        /// <returns></returns>
+        public async Task<DownloadFileServer> DownloadFileServer(int idFile)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                var model = selectSql.SelectFile(idFile);
+                selectSql.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Выгрузка детализации файла с сервера
+        /// </summary>
+        /// <param name="idFile">Ун файла</param>
+        /// <returns></returns>
+        public async Task<ModelFileDetals> ModelFileDetailing(int idFile)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                var model = selectSql.SelectModelFileDetals(idFile);
+                selectSql.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Создание карточки оборудования 
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Модель карточки оборудования</param>
+        /// <returns></returns>
+        public async Task<Stream> CreateCardAksiokAndInventory(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                aksiokAddAndEdit.ParametersModel.Guarantee = aksiokAddAndEdit.ParametersModel.Guarantee?.AddHours(3);
+                ReportComparableAksiokAndInventoryResult reportCard = new ReportComparableAksiokAndInventoryResult();
+                var model = selectSql.SelectCardAksiokAndInventory(aksiokAddAndEdit);
+                reportCard.CreateDocument(parametersService.SaveReport, model);
+                return reportCard.FileArray();
+            });
+        }
+        /// <summary>
+        /// Вытащить все группы оборудования для синхронизации с SNTP протоколом
+        /// </summary>
+        /// <returns></returns>
+        public async Task<AllTechnicalGroup> GetAllTechnicalGroup()
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                var model = selectSql.AllTechnicalGroup();
+                selectSql.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Все модели телефонов
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllModelPhone()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllModelPhone();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Модель телефона
+        /// </summary>
+        /// <param name="modelPhone">Модель телефона</param>
+        /// <returns></returns>
+        public ModelReturn<ModelPhone> AddAndEditModelPhone(ModelPhone modelPhone)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditModelPhone(modelPhone);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelPhone(model.Model);
+            }
+            add.Dispose();
+            return model;
         }
     }
 }

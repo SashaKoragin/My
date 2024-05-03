@@ -20,7 +20,7 @@ using SqlLibaryIfns.SqlSelect.ImnsKadrsSelect;
 using SqlLibaryIfns.SqlZapros.SqlConnections;
 
 
-namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
+namespace LibraryDocumentGeneratorTestsTemplate.Documents.Template
 {
     [TestClass()]
     public class TemplateUserRuleTestsTemplate
@@ -45,9 +45,9 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
         public void TestReportNote()
         {
             var model = new EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost.ModelGetPost();
-            var card = model.CardUi("7810942860", 2021);
+            var card = model.CardUi("7751024054", 2023);
             ReportNote report = new ReportNote();
-            report.CreateDocument(@"D:\", card, 2021);
+            report.CreateDocument(@"D:\", card, 2023);
         }
         /// <summary>
         /// Только книги покупок-продаж на банк
@@ -56,9 +56,9 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
         public void TestReportBookSales()
         {
             var model = new EfDatabaseAutomation.Automation.BaseLogica.ModelGetPost.ModelGetPost();
-            var card = model.CardUiBookSales("2466118876", 2021);
+            var card = model.CardUiBookSales("7751024054", 2023);
             TemplateBookSalesBank report = new TemplateBookSalesBank();
-            report.CreateDocument(@"D:\", card, 2021);
+            report.CreateDocument(@"D:\", card, 2023);
         }
 
         [TestMethod()]
@@ -110,7 +110,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
             report.CreateDocument("D:\\Testing\\", model, 2021);
         }
         [TestMethod()]
-        public void MemoGen()
+        public void MemoGenerateZ()
         {
             MemoReport memo = new MemoReport();
             //   memo.CreateDocument("D:\\Testing\\",null,null);
@@ -121,7 +121,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
             XmlReadOrWrite xml = new XmlReadOrWrite();
             select.SelectMemoReport(ref memoReport);
             var commandOrders = string.Format(selectFrames.LastOrder, memoReport.UserDepartment.SmallTabelNumber);
-            var userOrder = sql.XmlString("Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandOrders);
+            var userOrder = sql.XmlString("Data Source=77068-app016;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandOrders);
             if (userOrder != null)
             {
                 userOrder = string.Concat("<Orders>", userOrder, "</Orders>");
@@ -132,32 +132,35 @@ namespace LibaryDocumentGeneratorTestsTemplate.Documents.Template
         [TestMethod()]
         public void TestOfficialXlsx()
         {
-            ReportCardModel model = new ReportCardModel() { SettingParameters = new SettingParameters() { TabelNumber = "7751-00-548", Year = 2021, IdDepartment = 8,
+            ReportCardModel model = new ReportCardModel() { SettingParameters = new SettingParameters() { TabelNumber = "7751-00-099", Year = 2023, IdDepartment = 29,
                 Type = new Type() { IdType = 1, NameType = "Полный" },
                 View = new View() { IdView = 0,NameView = "Первичный" },
-                Mouth = new Mouth() { NumberMouthString = "09", NameMouth = "Сентябрь" , NumberMouth =9 }
+                Mouth = new Mouth() { NumberMouthString = "06", NameMouth = "Июнь" , NumberMouth = 6 }
             }};
             SqlConnectionType sql = new SqlConnectionType();
             SelectImns selectFrames = new SelectImns();
             XmlReadOrWrite xml = new XmlReadOrWrite();
             SelectSql select = new SelectSql();
             select.SelectCardModelLeader(ref model);
-            var command = string.Format(selectFrames.UserReportCard, model.SettingParameters.LeaderD.NameDepartment, $"{model.SettingParameters.Year}-{model.SettingParameters.Mouth.NumberMouthString}-01");
-            var userReportCard = sql.XmlString("Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", command);
+            var dateParameter =
+                $"{model.SettingParameters.Year}-{model.SettingParameters.Mouth.NumberMouthString}-01";
+            var command = string.Format(selectFrames.UserReportCard, dateParameter, dateParameter,
+                model.SettingParameters.LeaderD.NameDepartment, dateParameter);
+            var userReportCard = sql.XmlString("Data Source=77068-app016;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", command);
             userReportCard = string.Concat("<SettingParameters>", userReportCard, "</SettingParameters>");
             model.SettingParameters.UsersReportCard = ((SettingParameters)xml.ReadXmlText(userReportCard, typeof(SettingParameters))).UsersReportCard;
             foreach (var usersReportCard in model.SettingParameters.UsersReportCard)
             {
                 var commandVacation = string.Format(selectFrames.ItemVacationNew, usersReportCard.Tab_num, $"{model.SettingParameters.Year}", $"{model.SettingParameters.Year}");
-                var userVacation = sql.XmlString("Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandVacation);
+                var userVacation = sql.XmlString("Data Source=77068-app016;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandVacation);
                 userVacation = string.Concat("<UsersReportCard>", userVacation, "</UsersReportCard>");
                 usersReportCard.ItemVacation = ((UsersReportCard)xml.ReadXmlText(userVacation, typeof(UsersReportCard))).ItemVacation;
                 var commandDisability = string.Format(selectFrames.Disability, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
-                var userDisability = sql.XmlString("Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandDisability);
+                var userDisability = sql.XmlString("Data Source=77068-app016;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandDisability);
                 userDisability = string.Concat("<UsersReportCard>", userDisability, "</UsersReportCard>");
                 usersReportCard.Disability = ((UsersReportCard)xml.ReadXmlText(userDisability, typeof(UsersReportCard))).Disability;
                 var commandBusiness = string.Format(selectFrames.Business, usersReportCard.Tab_num, $"{model.SettingParameters.Year}");
-                var userBusiness = sql.XmlString("Data Source=i7751-app020;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandBusiness);
+                var userBusiness = sql.XmlString("Data Source=77068-app016;Initial Catalog=imns51;Integrated Security=True;MultipleActiveResultSets=True", commandBusiness);
                 userBusiness = string.Concat("<UsersReportCard>", userBusiness, "</UsersReportCard>");
                 usersReportCard.Business = ((UsersReportCard)xml.ReadXmlText(userBusiness, typeof(UsersReportCard))).Business;
             }

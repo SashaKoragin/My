@@ -269,12 +269,12 @@
 					<xs:documentation>Наименование Copy Save</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="SerNum" type="xs:string">
+			<xs:attribute name="SerNumCopySave" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Серийный номер</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="InventarNum" type="xs:string">
+			<xs:attribute name="InventarNumCopySave" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Инвентарный номер</xs:documentation>
 				</xs:annotation>
@@ -364,12 +364,8 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="Kabinet" minOccurs="0"/>
+				<xs:element ref="ModelPhone"/>
 			</xs:sequence>
-			<xs:attribute name="NameTelephone" type="xs:string">
-				<xs:annotation>
-					<xs:documentation>Наименование телефона</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
 			<xs:attribute name="SerNumber" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Серийный номер телефона</xs:documentation>
@@ -567,6 +563,18 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModelPhone">
+		<xs:annotation>
+			<xs:documentation>Модкель телефонов</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameModel" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Наименование модели</xs:documentation>
 				</xs:annotation>

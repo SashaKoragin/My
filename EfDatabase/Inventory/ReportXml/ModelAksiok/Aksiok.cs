@@ -9,14 +9,14 @@
 //------------------------------------------------------------------------------
 
 // 
-// Этот исходный код был создан с помощью xsd, версия=4.7.2046.0.
+// Этот исходный код был создан с помощью xsd, версия=4.7.2053.0.
 // 
 namespace EfDatabase.ModelAksiok.Aksiok {
     using System.Xml.Serialization;
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -77,7 +77,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -217,7 +217,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -225,9 +225,9 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
     public partial class ModelDocument {
         
-        private System.Nullable<int> fileIdField;
+        private System.Nullable<long> fileIdField;
         
-        private System.Nullable<int> expertiseFileIdField;
+        private System.Nullable<long> expertiseFileIdField;
         
         private int idField;
         
@@ -253,7 +253,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> FileId {
+        public System.Nullable<long> FileId {
             get {
                 return this.fileIdField;
             }
@@ -264,7 +264,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> ExpertiseFileId {
+        public System.Nullable<long> ExpertiseFileId {
             get {
                 return this.expertiseFileIdField;
             }
@@ -396,7 +396,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -418,8 +418,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private ExpertiseFile expertiseFileField;
         
-        private System.Nullable<int> exploitationStartYearField;
-        
         private DeliveryContract deliveryContractField;
         
         private ContractOnSto contractOnStoField;
@@ -435,6 +433,10 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         private System.Nullable<int> internalDigitNumberField;
         
         private System.Nullable<int> adminsCountField;
+        
+        private System.Nullable<int> exploitationStartYearField;
+        
+        private bool exploitationStartYearFieldSpecified;
         
         private int idField;
         
@@ -573,17 +575,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> ExploitationStartYear {
-            get {
-                return this.exploitationStartYearField;
-            }
-            set {
-                this.exploitationStartYearField = value;
-            }
-        }
-        
-        /// <remarks/>
         public DeliveryContract DeliveryContract {
             get {
                 return this.deliveryContractField;
@@ -666,6 +657,28 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.adminsCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> ExploitationStartYear {
+            get {
+                return this.exploitationStartYearField;
+            }
+            set {
+                this.exploitationStartYearField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ExploitationStartYearSpecified {
+            get {
+                return this.exploitationStartYearFieldSpecified;
+            }
+            set {
+                this.exploitationStartYearFieldSpecified = value;
             }
         }
         
@@ -1023,7 +1036,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1175,7 +1188,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1288,7 +1301,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1389,7 +1402,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1397,11 +1410,12 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class File {
         
-        private System.Nullable<int> idField;
+        private long idField;
+        
+        private string nameField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> Id {
+        public long Id {
             get {
                 return this.idField;
             }
@@ -1409,10 +1423,21 @@ namespace EfDatabase.ModelAksiok.Aksiok {
                 this.idField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1420,11 +1445,12 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class ExpertiseFile {
         
-        private System.Nullable<int> idField;
+        private long idField;
+        
+        private string nameField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> Id {
+        public long Id {
             get {
                 return this.idField;
             }
@@ -1432,10 +1458,21 @@ namespace EfDatabase.ModelAksiok.Aksiok {
                 this.idField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1510,7 +1547,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1585,7 +1622,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2544,7 +2581,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]

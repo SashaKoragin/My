@@ -9,7 +9,7 @@ namespace TestIFNSLibary.Xml
     class Xml
     {
         Parameter ParametrService = new Parameter();
-        public static XmlSerializer Formatter = new XmlSerializer(typeof(Bakcup));
+        public XmlSerializer Formatter = new XmlSerializer(typeof(Bakcup));
         public bool YesandNo()
         {
             
@@ -23,10 +23,10 @@ namespace TestIFNSLibary.Xml
         public DateTime DateBakcup()
         {
                 using (FileStream fs = new FileStream(ParametrService.PathJurnal, FileMode.Open))
-            {
-                Bakcup newpeople = (Bakcup)Formatter.Deserialize(fs);
-                return newpeople.Date;
-            }
+                {
+                    Bakcup newpeople = (Bakcup)Formatter.Deserialize(fs);
+                    return newpeople.Date;
+                }
         }
 
         public BakcupJurnal[] Jurnal()

@@ -134,12 +134,6 @@ namespace TestIFNSLibary.ServiceRest
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/AddTemplate", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> AngularAddTemplate(AngularTemplate angular);
         /// <summary>
-        /// Создание процессов КРСБ
-        /// </summary>
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/CreteKrsb", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
-        Task<string> AngularCreateKrsb(FullSetting setting);
-        /// <summary>
         /// Выполнения процедур по КРСБ
         /// </summary>
         [OperationContract]

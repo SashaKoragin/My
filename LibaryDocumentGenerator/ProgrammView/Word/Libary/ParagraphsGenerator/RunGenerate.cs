@@ -16,8 +16,9 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
         /// <param name="breake">Кнопка Enter после вставки</param>
         /// <param name="isfoters">Вставка в Foters</param>
         /// <param name="isContextualSpacing">Не добавлять пробел между обзацами одного и того-ж стиля</param>
+        /// <param name="fontClass">Стиль шрифта</param>
         /// <returns>Возвращаем созданный параграф либо пустой либо заполненный</returns>
-        public Paragraph RunParagraphGeneratorStandart(string textparagraph = " ", string fontsize = "20", JustificationValues justifications = JustificationValues.Left, int style = 0, string leftident = "0", bool breake = false, bool isfoters = false,  bool isContextualSpacing = true)
+        public Paragraph RunParagraphGeneratorStandart(string textparagraph = " ", string fontsize = "20", JustificationValues justifications = JustificationValues.Left, int style = 0, string leftident = "0", bool breake = false, bool isfoters = false,  bool isContextualSpacing = true, string fontClass = "Times New Roman")
         {
 
             ParagraphProperties paragraphProperties = new ParagraphProperties();
@@ -49,10 +50,10 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.ParagraphsGenerator
 
             RunFonts runFonts = new RunFonts
             {
-                Ascii = "Times New Roman",
-                HighAnsi = "Times New Roman",
-                EastAsia = "Times New Roman",
-                ComplexScript = "Times New Roman"
+                Ascii = fontClass,
+                HighAnsi = fontClass,
+                EastAsia = fontClass,
+                ComplexScript = fontClass
             };
          
             if (style != 0)

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="KasperskyModel" type="KasperskyModel">
+		<xs:annotation>
+			<xs:documentation>Модель загрузки данных для Инвентаризации</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="KasperskyModel">
+		<xs:annotation>
+			<xs:documentation>Модель загрузки данных для Инвентаризации</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="InvStorageSrvView" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="InvStorageSrvView">
+		<xs:annotation>
+			<xs:documentation>Инвентаризация оборудования </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:long" default="0">
+				<xs:annotation>
+					<xs:documentation>Индекс</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="OperationSystem" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Операционная система</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Description" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Описание оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Manufacturer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Производитель оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CpuType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тип компьютера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CpuMHz" type="xs:string" default="0">
+				<xs:annotation>
+					<xs:documentation>Частота процесора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MemorySize" type="xs:int" default="0">
+				<xs:annotation>
+					<xs:documentation>Объем оперативной памяти</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DiskSize" type="xs:int" default="0">
+				<xs:annotation>
+					<xs:documentation>Объем диска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MotherBoard" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Материнская плата</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Mac" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Мак адрес</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

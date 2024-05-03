@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,6 +12,9 @@
     <AssemblyName>EfDatabase</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,17 +54,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.8.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Nuget\DocumentFormat.OpenXml.2.8.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.18.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\..\WPFLib\WPFLib\packages\DocumentFormat.OpenXml.2.18.0\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer.6.0.0.0.Fakes">
       <HintPath>FakesAssemblies\EntityFramework.SqlServer.6.0.0.0.Fakes.dll</HintPath>
@@ -69,9 +70,15 @@
       <HintPath>..\packages\Koogra.3.1.5.1\lib\net35\Ionic.Utils.Zip.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>C:\Nuget\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack.Core.1.1.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack.Shell.1.1.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
@@ -80,6 +87,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -95,6 +103,10 @@
     <Compile Include="Inventory\BaseLogic\AddObjectDb\AddObjectDb.cs" />
     <Compile Include="Inventory\BaseLogic\AddObjectDb\ModelReturn.cs" />
     <Compile Include="Inventory\BaseLogic\AksiokAddAndUpdateObjectDb\AksiokAddAndUpdateObjectDb.cs" />
+    <Compile Include="Inventory\BaseLogic\ComparableFileAddToDataBase\ComparableFileAddToDataBase.cs" />
+    <Compile Include="Inventory\BaseLogic\FileServerAddFile\FileServerAddFile.cs" />
+    <Compile Include="Inventory\BaseLogic\FileServerAddFile\ProcessFindAllFileServers.cs" />
+    <Compile Include="Inventory\BaseLogic\KasperskyAddInventory\KasperskyAddInventory.cs" />
     <Compile Include="Inventory\BaseLogic\Login\Login.cs" />
     <Compile Include="Inventory\BaseLogic\DeleteObjectDb\DeleteObjectDb.cs" />
     <Compile Include="Inventory\BaseLogic\HistoryLog\HistoryLog.cs" />
@@ -108,6 +120,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inventory.tt</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ComparableSystem\ComparableActiveDirectory\ComparableActiveDirectory.cs" />
+    <Compile Include="Inventory\ComparableSystem\ComparableDks\ComparableDks.cs" />
+    <Compile Include="Inventory\ComparableSystem\ComparableLotusNotes\ComparableLotusNotes.cs" />
+    <Compile Include="Inventory\ComparableSystem\StartComparable\StartComparable.cs" />
     <Compile Include="Inventory\DataTransferObject\FilterModel\FilterModel.cs">
       <DependentUpon>FilterModel.xsd</DependentUpon>
     </Compile>
@@ -123,6 +139,7 @@
     <Compile Include="Inventory\DataTransferObject\QrCodeOffice\QrCodeOfficeModel.cs">
       <DependentUpon>QrCodeOfficeModel.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\FileServerFindPathShares\Shares.cs" />
     <Compile Include="Inventory\MailLogicLotus\MailLogicLotus.cs" />
     <Compile Include="Inventory\MailLogicLotus\MailXsdSheme\LotusUser.cs">
       <DependentUpon>LotusUser.xsd</DependentUpon>
@@ -154,13 +171,25 @@
     <Compile Include="Inventory\ReportXml\Mail\Mail.cs">
       <DependentUpon>Mail.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEditModelRequest.cs">
+      <SubType>code</SubType>
+    </Compile>
     <Compile Include="Inventory\ReportXml\ModelAksiok\Aksiok.cs">
       <DependentUpon>Aksiok.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Inventory\ReportXml\ModelAksiok\AksiokAddAndEdit.cs">
-      <DependentUpon>AksiokAddAndEdit.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Inventory\ReportXml\ModelAksiok\DataAksiokFullSheme.cs" />
+    <Compile Include="Inventory\ReportXml\ModelComparableUserResult\ModelComparableUserWorkResult.cs">
+      <DependentUpon>ModelComparableUserWorkResult.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\ModelFileServer\FileServerModel.cs">
+      <DependentUpon>FileServerModel.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\ModelFileServer\SelectReportFileServer.cs">
+      <DependentUpon>SelectReportFileServer.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\ModelKaspersky\KasperskyModelInventory.cs">
+      <DependentUpon>KasperskyModelInventory.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\ReportXml\ModelReportCard\ReportCard.cs">
       <DependentUpon>ReportCard.xsd</DependentUpon>
     </Compile>
@@ -253,10 +282,22 @@
     <None Include="Inventory\ReportXml\Mail\Mail.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEditModelRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Inventory\ReportXml\ModelAksiok\Aksiok.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventory\ReportXml\ModelAksiok\AksiokAddAndEdit.xsd">
+    <None Include="Inventory\ReportXml\ModelComparableUserResult\ModelComparableUserWorkResult.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\ModelFileServer\FileServerModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\ModelFileServer\SelectReportFileServer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\ModelKaspersky\KasperskyModelInventory.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\ModelReportCard\ReportCard.xsd">
@@ -289,8 +330,16 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Kaspersky\KasperskyXsdModel\KasperskyXsdModel.csproj">
+      <Project>{44da20e2-4732-4dfa-8149-8553deb3c380}</Project>
+      <Name>KasperskyXsdModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Snmp\DataTransportInventory\DataTransportInventoryToSnmp.csproj">
+      <Project>{ed6f57ca-8848-4e6e-a981-44eaf7cc7a02}</Project>
+      <Name>DataTransportInventoryToSnmp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\AttributeHelperModelXml\AttributeHelperModelXml.csproj">
-      <Project>{91FAD00A-D052-4DD6-A9BB-544782A0D2C4}</Project>
+      <Project>{91fad00a-d052-4dd6-a9bb-544782a0d2c4}</Project>
       <Name>AttributeHelperModelXml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
@@ -347,6 +396,10 @@
       <XmlMemoReport Include="Inventory\DataTransferObject\MemoReport\*.xsd" />
       <XmlModelAksiok Include="Inventory\ReportXml\ModelAksiok\*.xsd" />
       <XmlDtoAksiok Include="Inventory\ReportXml\DtoAksiok\*.xsd" />
+      <XmlModelAksiokEditAndAdd Include="Inventory\ReportXml\ModelAksiokEditAndAdd\*.xsd" />
+      <XsdXmlComparableUserResult Include="Inventory\ReportXml\ModelComparableUserResult\*.xsd" />
+      <XsdXmlModelFileServer Include="Inventory\ReportXml\ModelFileServer\*.xsd" />
+      <XsdXmlModelKasperskyApi Include="Inventory\ReportXml\ModelKaspersky\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -377,5 +430,17 @@
     <!--<Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdModelSto.FullPath)&quot; /c /namespace:$(RootNamespace).PassportSto /outputdir:Inventory\ReportXml\ModelStoXlsx\" />-->
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlModelAksiok.FullPath)&quot; /c /namespace:$(RootNamespace).ModelAksiok.Aksiok /outputdir:Inventory\ReportXml\ModelAksiok\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlDtoAksiok.FullPath)&quot; /c /namespace:$(RootNamespace).ModelAksiok.DtoAksiok /outputdir:Inventory\ReportXml\DtoAksiok\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlModelAksiokEditAndAdd.FullPath)&quot; /c /namespace:$(RootNamespace).ModelAksiok.ModelAksiokEditAndAdd /outputdir:Inventory\ReportXml\ModelAksiokEditAndAdd\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdXmlComparableUserResult.FullPath)&quot; /classes /namespace:$(RootNamespace).ReportXml.ModelComparableUserResult /outputdir:Inventory\ReportXml\ModelComparableUserResult\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdXmlModelFileServer.FullPath)&quot; /classes /namespace:$(RootNamespace).ReportXml.ModelFileServer /outputdir:Inventory\ReportXml\ModelFileServer\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdXmlModelKasperskyApi.FullPath)&quot; /classes /namespace:$(RootNamespace).ReportXml.XsdXmlModelKasperskyApi /outputdir:Inventory\ReportXml\ModelKaspersky\" />
   </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

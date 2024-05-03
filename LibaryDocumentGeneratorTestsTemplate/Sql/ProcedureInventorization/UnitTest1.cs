@@ -13,7 +13,7 @@ using TestIFNSLibary.ServiceRest;
 using SqlLibaryIfns.PingIp;
 using Type = System.Type;
 
-namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
+namespace LibraryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
 {
     [TestClass]
     public class ProcedureInventorization
@@ -166,13 +166,13 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
             //arrLetterStatus[2] = "ОЧ";
             //var notCount = new[] { "ОЧ", "B" };
             var selectEvent = new Select();
-            var eventParameters = selectEvent.SelectEvent(1);
+
+            var process = selectEvent.SelectProcessAndParameters(1);
             DateTime date = DateTime.Now;
-          //  if (date.Hour == eventParameters.HoursX && date.Minute == eventParameters.MinutesX)
-         //   {
-                var parameter = eventParameters.ParametersEvent.Split(';');
-                PingIp ping = new PingIp();
-                ping.FindIpHost(parameter[0].Trim(), parameter[1].Trim(), parameter[2].Trim());
+            //  if (date.Hour == eventParameters.HoursX && date.Minute == eventParameters.MinutesX)
+            //   {
+                var parameters = process.ProcessAndParameters.Select(x => x.ParameterEventProcess).ToList();
+       
          //   }
             selectEvent.Dispose();
         }
@@ -236,12 +236,9 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
         [TestMethod]
         public void TestIsHoliday()
         {
-            var dateSign = new DateTime(2021, 1, 3);
-            var date = dateSign.AddWorkdays(1);
-             date = dateSign.AddWorkdays(-1);
-             date = dateSign.AddWorkdays(-3);
-             date = dateSign.AddWorkdays(3);
-
+            Select auto = new Select();
+            var modle = auto.Inventory.SysBlocks.ToArray();
+            
         }
     }
 }

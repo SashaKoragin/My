@@ -33,7 +33,9 @@ namespace TestIFNSService
             ServiceRest.Open();
             ServiceHost.Open();
             Inventarization.Open();
-            var timeEvent = new TestIFNSLibary.TimeEvent.TimeEvent();
+            var timeEvent = new InventoryProcess.StartProcessInventory.ProcessStart.TimeEventProcess();
+            Loggers.LogFileServer.Info(new Exception($"Запустили сервер Инвентаризации!"));
+            Loggers.Log4NetLogger.Info(new Exception($"Запустили сервер Инвентаризации!"));
         }
 
         protected override void OnStop()
@@ -54,6 +56,8 @@ namespace TestIFNSService
                 Inventarization = null;
             }
             MyServerSignalR?.Dispose();
+            Loggers.LogFileServer.Info(new Exception($"Остановили сервер Инвентаризации!"));
+            Loggers.Log4NetLogger.Info(new Exception($"Остановили сервер Инвентаризации!"));
         }
     }
 }

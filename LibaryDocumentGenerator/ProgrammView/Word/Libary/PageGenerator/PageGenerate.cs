@@ -106,6 +106,23 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.PageGenerator
             sectionProperties.Append(margin);
             body.Append(sectionProperties);
         }
+        /// <summary>
+        /// Размер страницы под Термо-принтер размером ширина 56.00мм по 28.00 мм
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="margin"></param>
+        public void ParamDocumentZebraPrinter(ref Body body, PageMargin margin = null)
+        {
+            SectionProperties sectionProperties = new SectionProperties();
+            PageSize pageSize = new PageSize() { Width = 3175U, Height = 1701U, Orient = PageOrientationValues.Portrait };
+            if (margin == null)
+            {
+                margin = new PageMargin() { Top = 114, Right = 57, Bottom = 57, Left = 57, Footer = 57, Gutter = 57, Header = 57};
+            }
+            sectionProperties.Append(pageSize);
+            sectionProperties.Append(margin);
+            body.Append(sectionProperties);
+        }
 
     }
 }

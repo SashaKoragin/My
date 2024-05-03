@@ -67,12 +67,12 @@ Patch dialog sequence:
               </Control>
               <Control Id="ReportBdkText" Type="Text" Text="Путь для отчетов:" Height="15" Width="80" X="11" Y="90" />
               <Control Id="ReportBdkEdit" Type="Edit" X="90" Y="90" Height="15" Width="240" Property="PATHREPORTFULL" Text="[PATHREPORTFULL]" Sunken="no">
-                <Property Id="PATHREPORTFULL" Value="\\i7751-app014\Network-Disk\!!! PUBLIC !!!\TestingSystem\" />
+                <Property Id="PATHREPORTFULL" Value="\\77068-APP041\Network-Disk\!!! PUBLIC !!!\TestingSystem\" />
               </Control>
               <Control Id="InventoryParametr" Type="Text" Text="Настройки для БД инвенторизация:" Height="17" Width="140" X="11" Y="110" />
               <Control Id="IMNSText1" Type="Text" Text="Server IMNS:" Height="15" ToolTip="Сервер КАДРЫ" Width="75" X="10" Y="132" />
               <Control Id="IMNSDbEdit1" Type="Edit" X="85" Y="130" Height="15" Width="75" Property="SERVERPATHIMNS" Text="[SERVERPATHIMNS]" Sunken="no">
-                <Property Id="SERVERPATHIMNS" Value="i7751-app020" />
+                <Property Id="SERVERPATHIMNS" Value="77068-app016" />
               </Control>
               <Control Id="IMNSText2" Type="Text" Text="DataBase IMNS:" Height="15" ToolTip="База КАДРЫ" Width="80" X="165" Y="132" />
               <Control Id="IMNSDbEdit2" Type="Edit" X="255" Y="130" Height="15" Width="75" Property="DATABASEIMNS" Text="[DATABASEIMNS]" Sunken="no">
@@ -81,22 +81,11 @@ Patch dialog sequence:
 
               <Control Id="InventoryText1" Type="Text" Text="Server Inventory:" Height="15" ToolTip="Сервер КАДРЫ" Width="75" X="10" Y="152" />
               <Control Id="InventoryDbEdit1" Type="Edit" X="85" Y="150" Height="15" Width="75" Property="SERVERPATHINVENTORY" Text="[SERVERPATHINVENTORY]" Sunken="no">
-                <Property Id="SERVERPATHINVENTORY" Value="i7751-app127" />
+                <Property Id="SERVERPATHINVENTORY" Value="77068-app065" />
               </Control>
               <Control Id="InventoryText2" Type="Text" Text="DataBase Inventory:" Height="15" ToolTip="База КАДРЫ" Width="80" X="165" Y="152" />
               <Control Id="InventoryDbEdit2" Type="Edit" X="255" Y="150" Height="15" Width="75" Property="DATABASEINVENTORY" Text="[DATABASEINVENTORY]" Sunken="no">
                 <Property Id="DATABASEINVENTORY" Value="Inventarka" />
-              </Control>
-
-              <Control Id="SettingEpo" Type="Text" Text="Настройки для ЭПО:" Height="17" Width="140" X="11" Y="170" />
-              <Control Id="EpoText1" Type="Text" Text="Login ЭПО:" Height="15" ToolTip="Login ЭПО" Width="50" X="10" Y="193" />
-              <Control Id="LoginEpoEdit" Type="Edit" X="60" Y="190" Height="15" Width="90" Property="LOGINEPO" Text="[LOGINEPO]" Sunken="no">
-                <Property Id="LOGINEPO" Value="7751_Slavgorodceva" />
-              </Control>
-
-              <Control Id="EpoText2" Type="Text" Text="Password ЭПО:" Height="15" ToolTip="Password ЭПО" Width="60" X="165" Y="193" />
-              <Control Id="PasswordEpoEdit" Type="Edit" X="235" Y="190" Height="15" Width="75" Property="PASSWORDEPO" Text="[PASSWORDEPO]" Sunken="no">
-                <Property Id="PASSWORDEPO" Value="z755PZUK" />
               </Control>
 
               <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">

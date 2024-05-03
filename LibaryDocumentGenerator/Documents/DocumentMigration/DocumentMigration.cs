@@ -38,65 +38,10 @@ namespace LibaryDocumentGenerator.Documents.DocumentMigration
         /// </summary>
         /// <param name="connectionStringTemplate">Строка соединения</param>
         /// <param name="path">Путь к папке сохранения</param>
-        /// <param name="model">Модель миграции</param>\
-        /// <param name="postAddress">Модель адреса</param>
-        public void MigrationDocument(string connectionStringTemplate, string path, MigrationParse model, string postAddress = null)
+        /// <param name="model">Модель миграции</param>
+        public void MigrationDocument(string connectionStringTemplate, string path, MigrationParse model)
         {
-            ServiceRestLotus lotus = new ServiceRestLotus();
-            SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate template = new SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate();
-            var setting = new FullSetting { UseTemplate = new UseTemplate() { IdTemplate = 3 } };
-            var documentTemplate = template.Template(connectionStringTemplate, setting);
-            model.N280 = template.Inspection(connectionStringTemplate, "7746").Inspection.N280;
-            var ul46 = model.ReportMigration.Where(code => (code.Kpp ?? string.Empty) != "" && code.Problem.Contains("Запись о налогоплательщике в ЦУН не содержит ОКТМО")).ToArray();
-            var fullPath = path + "7746" + "_ЮЛ_" + Constant.WordConstant.FormatWord;
-            GenerateDoc(fullPath, documentTemplate, ul46, model, 1, "7746");
-            setting.UseTemplate.IdTemplate = 2;
-            documentTemplate = template.Template(connectionStringTemplate, setting);
-            model.ReportMigration.GroupBy(x => x.CodeIfns).ToList().ForEach(key =>
-            {
-                model.N280 = template.Inspection(connectionStringTemplate, key.Key).Inspection.N280;
-                List<ReportMigration[]> report = new List<ReportMigration[]>();
-                var fl = model.ReportMigration.Where(code => code.CodeIfns == key.Key && string.IsNullOrWhiteSpace(code.Kpp)).ToArray();
-                var ul = model.ReportMigration.Where(code => code.CodeIfns == key.Key && (code.Kpp ?? string.Empty) != "" && !code.Problem.Contains("Запись о налогоплательщике в ЦУН не содержит ОКТМО")).ToArray();
-                if (fl.Length >= 1) { report.Add(fl);}
-                if (ul.Length >= 1) { report.Add(ul); }
-                foreach (var param in report)
-                {
-                    int isTemplate;
-                    string fileName;
-                    if (!string.IsNullOrWhiteSpace(param[0].Kpp))
-                    {
-                        isTemplate = 1;
-                        fileName = key.Key + "_ЮЛ_" + Constant.WordConstant.FormatWord;
-                        fullPath = path + fileName;
-                    }
-                    else
-                    {
-                        isTemplate = 2;
-                        fileName = key.Key + "_ФЛ_ИП_" + Constant.WordConstant.FormatWord;
-                        fullPath = path + fileName;
-                    }
-                    GenerateDoc(fullPath, documentTemplate, param, model, isTemplate, key.Key);
-                    //Отправка на сервис в Lotus
-                    if (postAddress != null)
-                    {
-                        Letter modeLetter = new Letter() {Attachments = new Attachment[1],DestinationCodes = new string[1]};
-                        modeLetter.Attachments[0] = new Attachment
-                        {
-                            FileName = fileName,
-                            Extension = Constant.WordConstant.FormatWord,
-                            Data = File.ReadAllBytes(fullPath)
-                        };
-                        modeLetter.Id = Guid.NewGuid().ToString();
-                        modeLetter.Subscriber = documentTemplate.Templates.Stone.Stone3;
-                        modeLetter.DestinationCodes[0] = key.Key;
-                        modeLetter.File = "07-10";
-                        modeLetter.Author = null;
-                        lotus.ServicePostLotus(postAddress,modeLetter);
-                    }
-                }
-                report.Clear();
-            });
+
         }
         /// <summary>
         /// Создание документов по Миграции

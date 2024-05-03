@@ -140,7 +140,7 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="Id" type="xs:int" nillable="true">
+	<xs:element name="Id" type="xs:long" nillable="false">
 		<xs:annotation>
 			<xs:documentation>Ун файла</xs:documentation>
 		</xs:annotation>
@@ -158,7 +158,6 @@
 				<xs:element ref="DateOfStatement"/>
 				<xs:element ref="File"/>
 				<xs:element ref="ExpertiseFile"/>
-				<xs:element ref="ExploitationStartYear"/>
 				<xs:element ref="DeliveryContract"/>
 				<xs:element ref="ContractOnSto"/>
 				<xs:element ref="Guarantee"/>
@@ -167,6 +166,7 @@
 				<xs:element ref="InternalAnalogNumber"/>
 				<xs:element ref="InternalDigitNumber"/>
 				<xs:element ref="AdminsCount"/>
+				<xs:element ref="ExploitationStartYear" minOccurs="0"/>
 			</xs:sequence>
 			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
@@ -438,6 +438,11 @@
 			<xs:sequence>
 				<xs:element ref="Id"/>
 			</xs:sequence>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="ExpertiseFile" nillable="false">
@@ -448,12 +453,20 @@
 			<xs:sequence>
 				<xs:element ref="Id"/>
 			</xs:sequence>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Наименование файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="ExploitationStartYear" type="xs:int" nillable="true">
+	<xs:element name="ExploitationStartYear" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Год ввода в эксплуатацию</xs:documentation>
 		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int"/>
+		</xs:simpleType>
 	</xs:element>
 	<xs:element name="DeliveryContract" nillable="false">
 		<xs:annotation>
@@ -923,12 +936,12 @@
 			<xs:documentation>Дата окончания</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="FileId" type="xs:int" nillable="true">
+	<xs:element name="FileId" type="xs:long" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Ун файла</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="ExpertiseFileId" type="xs:int" nillable="true">
+	<xs:element name="ExpertiseFileId" type="xs:long" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Ун файла</xs:documentation>
 		</xs:annotation>

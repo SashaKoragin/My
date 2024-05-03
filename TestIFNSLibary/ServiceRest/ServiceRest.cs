@@ -142,7 +142,7 @@ namespace TestIFNSLibary.ServiceRest
         public async Task<Stream> DonloadFile(string filename)
         {
             DonloadsFile downloads = new DonloadsFile();
-            return await downloads.SelectDonloadsFile(_parameterService.Report, filename, _parameterService.ConectWork);
+            return await downloads.SelectDonloadsFile(_parameterService.SaveReport, filename, _parameterService.ConectWork);
         }
 
         /// <summary>
@@ -290,12 +290,6 @@ namespace TestIFNSLibary.ServiceRest
             return await Task.Factory.StartNew(() => efangular.TemplateSave(angular));
         }
 
-        public async Task<string> AngularCreateKrsb(FullSetting setting)
-        {
-            var efangular = new AngularRestEf();
-            return await Task.Factory.StartNew(() => efangular.CreateKrsb(_parameterService.ConectWork, setting));
-        }
-
         public async Task<Stream> StoreProcedureKam5(FullSetting setting)
         {
             var taskcommand = new TaskResult();
@@ -303,7 +297,7 @@ namespace TestIFNSLibary.ServiceRest
             switch (setting.Db)
             {
                 case "Work":
-                    return await donloads.SelectDonloadsFile(_parameterService.Report, "Камеральный №5.xlsx", null, await taskcommand.TaskSqlProcedureKam5(_parameterService.ConectWork, setting));
+                    return await donloads.SelectDonloadsFile(_parameterService.SaveReport, "Камеральный №5.xlsx", null, await taskcommand.TaskSqlProcedureKam5(_parameterService.ConectWork, setting));
                 default:
                     return null;
             }
@@ -349,7 +343,7 @@ namespace TestIFNSLibary.ServiceRest
              return  await Task.Factory.StartNew(() =>
                 {
                     var docMigration = new DocumentMigration();
-                    docMigration.MigrationDocument(_parameterService.ConectWork, _parameterService.ReportMassTemplate, json, _parameterService.SendServiceLotus);
+                    docMigration.MigrationDocument(_parameterService.ConectWork, _parameterService.ReportMassTemplate, json);
                     report.Note = "Документы для печати запущены и сохраняются в папку ";
                     report.Url = _parameterService.ReportMassTemplate;
                     return report;
@@ -401,7 +395,9 @@ namespace TestIFNSLibary.ServiceRest
         public ModelPathReport LoadInfoTemplateToDataBase(InfoRuleTemplate infoTemplate)
         {
             var sql = new SelectSql();
-            return sql.LoadModelToDataBase(infoTemplate, 36, 2);
+            var report = sql.LoadModelToDataBase(infoTemplate, 36, 2);
+            sql.Dispose();
+            return report;
         }
         /// <summary>
         /// Загрузка справочников по шаблонам ролям пользователям

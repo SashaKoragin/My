@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ModelSelectProcess" type="ModelSelectProcess">
+		<xs:annotation>
+			<xs:documentation>Выбор процесса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ModelSelectProcess">
+		<xs:annotation>
+			<xs:documentation>Выбор процесса</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="SelectProcess"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SelectProcess">
+		<xs:annotation>
+			<xs:documentation>Выбор процесса</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="IdProcess" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун процеса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UserLogin" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Логин пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="PasswordUser" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Пароль пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

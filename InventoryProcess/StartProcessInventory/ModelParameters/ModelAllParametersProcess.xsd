@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ModelAllParametersProcess" type="ModelAllParametersProcess">
+		<xs:annotation>
+			<xs:documentation>Модель всех параметров для процесов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="ModelAllParametersProcess">
+		<xs:annotation>
+			<xs:documentation>Модель всех параметров для процесов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Domain"/>
+			<xs:element ref="DomainIfnsWorkStation"/>
+			<xs:element ref="DomainIfnsWorkStationFilter"/>
+			<xs:element ref="PrintServer"/>
+			<xs:element ref="IpAdressAllPrinter"/>
+			<xs:element ref="LoginUserAdminPrintServer"/>
+			<xs:element ref="PasswordUserAdminPrintServer"/>
+			<xs:element ref="LotusAllUserIMNS"/>
+			<xs:element ref="DomainIfnsAll"/>
+			<xs:element ref="ConnectImns51"/>
+			<xs:element ref="LoginSto"/>
+			<xs:element ref="PasswordSto"/>
+			<xs:element ref="SaveReport"/>
+			<xs:element ref="XsdReport"/>
+			<xs:element ref="BulkCopyXmlSto"/>
+			<xs:element ref="PathDomainGroup"/>
+			<xs:element ref="NameFileServer"/>
+			<xs:element ref="InXmlFile"/>
+			<xs:element ref="OutXmlFile"/>
+			<xs:element ref="ErrorXmlFile"/>
+			<xs:element ref="CountFilePack"/>
+			<xs:element ref="CountParallelProcess"/>
+			<xs:element ref="ServiceInvKaspersky"/>
+			<xs:element ref="ParameterKasperskyModel"/>
+			<xs:element ref="ServiceInvKasperskyAllHostDrivers"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Domain" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Центральный домен НО</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DomainIfnsWorkStation" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Рабочии станции НО</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DomainIfnsWorkStationFilter" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Фильтр имен рабочих станций</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PrintServer" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>PrintServer путь</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IpAdressAllPrinter" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Подсеть Ip для принтеров</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LoginUserAdminPrintServer" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Логин администратора PrintServer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PasswordUserAdminPrintServer" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Пароль администратора PrintServer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LotusAllUserIMNS" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Api GET выгрузки всех пользователей из Lotus Notes</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DomainIfnsAll" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Полный путь к домену ИФНС для сбора информации обо всем</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConnectImns51" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Строка соединения БД ДКС</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LoginSto" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Логин ЭПО</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PasswordSto" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Пароль к учетке ЭПО</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SaveReport" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Путь сохранения отчета как правило папка Report в корне программы</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="XsdReport" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Это путь к xsd файлу к папке Xsd в корне программы</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BulkCopyXmlSto" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Строка соединения с БД Inventarka</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PathDomainGroup" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Путь к группам НО в Active Derectory</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NameFileServer" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Имя файлового сервера</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InXmlFile" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Папка для сохранения Xml документов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OutXmlFile" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Папка для загрузки Xml документов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ErrorXmlFile" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Папка ошибочных Xml документов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountFilePack" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Колличество файлов в пачке</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountParallelProcess" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Колличество паралельных процесов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ServiceInvKaspersky" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Сервис инвентаризации касперского</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParameterKasperskyModel" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Модель параметры для сервиса касперского инвентаризации адрес</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ServiceInvKasperskyAllHostDrivers" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Модель параметры для сервиса касперского инвентаризации адрес всех характеристик</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

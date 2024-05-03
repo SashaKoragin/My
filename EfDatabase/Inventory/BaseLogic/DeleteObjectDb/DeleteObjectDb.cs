@@ -431,7 +431,7 @@ namespace EfDatabase.Inventory.BaseLogic.DeleteObjectDb
                         HistoryLog.HistoryLog log = new HistoryLog.HistoryLog();
                         DeleteModelDb(context, new Telephon() { IdTelephon = telephone.IdTelephon });
                         log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
-                            $"Модель: {telephone.NameTelephone} Серийный номер: {telephone.SerNumber} Мак адрес: {telephone.MacTelephon}",
+                            $"Модель: {telephone.ModelPhone.NameModel} Серийный номер: {telephone.SerNumber} Мак адрес: {telephone.MacTelephon}",
                             "Произведено удаление!");
                         return new ModelReturn<Telephon>("Телефон удален!", telephone);
                     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using LibaryXMLAuto.ModelXmlSql.Model.FullSetting;
-using SqlLibaryIfns.SqlModelReport.Bdk;
 
 namespace LibaryDocumentGenerator.Documents.Model
 {
@@ -19,14 +18,7 @@ namespace LibaryDocumentGenerator.Documents.Model
 
         public OutBdkModel(string connectionstringtemplate, string connectionstringtaxes, string path, FullSetting setting)
         {
-            ModelFull modelFull = new ModelFull();
-            FileLogica.FileLogica logica = new FileLogica.FileLogica();
-            SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate template = new SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate();
-            logica.FileDelete(path);
-            ConectionStringTemplate = connectionstringtemplate;
-            PathSave = path;
-            Report = modelFull.ReportBdk(connectionstringtaxes, connectionstringtemplate, setting);
-            DocumentTemplate = template.Template(connectionstringtemplate, setting);
+           
         }
     }
 }

@@ -185,7 +185,7 @@
 					<xs:documentation>Праздничная дата</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="IS_HOLIDAY" type="xs:boolean">
+			<xs:attribute name="IdStatusHolidays" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Признак 1 - Праздничная дата 0 - Предпразничная дата</xs:documentation>
 				</xs:annotation>

@@ -5,7 +5,7 @@ namespace Loggers
 {
     public class Log4NetLogger
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetLogger("File");
 
         public static void Trace(Exception ex)
         {
