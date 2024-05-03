@@ -290,12 +290,6 @@ namespace TestIFNSLibary.ServiceRest
             return await Task.Factory.StartNew(() => efangular.TemplateSave(angular));
         }
 
-        public async Task<string> AngularCreateKrsb(FullSetting setting)
-        {
-            var efangular = new AngularRestEf();
-            return await Task.Factory.StartNew(() => efangular.CreateKrsb(_parameterService.ConectWork, setting));
-        }
-
         public async Task<Stream> StoreProcedureKam5(FullSetting setting)
         {
             var taskcommand = new TaskResult();
@@ -413,9 +407,7 @@ namespace TestIFNSLibary.ServiceRest
         public ModelPathReport LoadInfoUserTemplateAndRuleToDataBase(InfoUserTemlateAndRule infoUserTemlateAndRule)
         {
             var sql = new SelectSql();
-            var report = sql.LoadModelToDataBase(infoUserTemlateAndRule, 38, 3);
-            sql.Dispose();
-            return report;
+            return sql.LoadModelToDataBase(infoUserTemlateAndRule, 38, 3);
         }
     }
 }

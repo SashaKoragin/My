@@ -13,6 +13,7 @@
 		<xs:sequence>
 			<xs:element ref="ComparableUserResult" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="ModelComparableAllSystemInventory" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ComparableCardAksiokAndInventory" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="ComparableUserResult" nillable="true">
@@ -122,6 +123,11 @@
 					<xs:documentation>Номер строки</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="EquipmentType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 			<xs:attribute name="ProducerName" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Наименование производителя</xs:documentation>
@@ -187,9 +193,106 @@
 					<xs:documentation>Описание</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="OperationSystem" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Операционная система</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CpuType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип процессора</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CpuMHz" type="xs:int" use="optional" default="0">
+				<xs:annotation>
+					<xs:documentation>Частота процессора, МГц</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CoreCount" type="xs:int" use="optional" default="0">
+				<xs:annotation>
+					<xs:documentation>Количество ядер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CpuCount" type="xs:int" use="optional" default="0">
+				<xs:annotation>
+					<xs:documentation>Количество процессоров</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HddType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тип жесткого диска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HddCount" type="xs:int" use="optional" default="0">
+				<xs:annotation>
+					<xs:documentation>Количество HDD</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="HddSize" type="xs:int" use="optional" default="0">
+				<xs:annotation>
+					<xs:documentation>Объем жесткого диска</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NetworkAdapter" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сетевая карта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NetworkAdapterSpeed" type="xs:int" use="optional" default="0">
+				<xs:annotation>
+					<xs:documentation>Скорость сетевой карты</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Mac" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>МАК Адресс</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RamType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>ОЗУ (тип)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MemorySize" type="xs:int" use="optional" default="0">
+				<xs:annotation>
+					<xs:documentation>ОЗУ (размер)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DiskSize" type="xs:int" use="optional" default="0">
+				<xs:annotation>
+					<xs:documentation>Общее дисковое пространство, Gb</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CdOrDvd" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>CD/DVD</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 			<xs:attribute name="CountGroup" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Колличество в группе</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ComparableCardAksiokAndInventory">
+		<xs:annotation>
+			<xs:documentation>Сравнительный анализ карточки оборудования АКСИОК и Инвентаризации</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Memo" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование поля АКСИОК</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Inventory" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Данные инвентаризации</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Aksiok" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Данные АКСИОК</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

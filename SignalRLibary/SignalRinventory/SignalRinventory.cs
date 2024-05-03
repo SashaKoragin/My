@@ -704,6 +704,17 @@ namespace SignalRLibary.SignalRinventory
             Loggers.Log4NetLogger.Info(new Exception(statusProcess.Message));
             context.Clients.All.SubscribeStatusProcess(statusProcess);
         }
+        /// <summary>
+        /// Рассылка моделей телефонов 
+        /// </summary>
+        /// <param name="modelPhone">Модель телефона</param>
+        public static void SubscribeModelPhone(ModelPhone modelPhone)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            Loggers.Log4NetLogger.Info(new Exception("Наименование модели Телефонов рассылка пошла: " + modelPhone.NameModel));
+            SerializeJson json = new SerializeJson();
+            context.Clients.All.SubscribeModelPhone(json.JsonLibaryIgnoreDate(modelPhone));
+        }
 
     }
     public class UsersContext

@@ -155,6 +155,7 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
                 string inputParameterStep3 = null;
                 DatesBytesFile = null;
                 File = null;
+                HtmlNode formNode;
                 using (var receiveStream = Response.GetResponseStream())
                 {
                     StreamReader readStream;
@@ -162,35 +163,35 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
                     string data = readStream.ReadToEnd();
                     HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
                     document.LoadHtml(data);
-                    HtmlNode formNode = document.DocumentNode.SelectSingleNode(findNode);
+                    formNode = document.DocumentNode.SelectSingleNode(findNode);
                    
                     inputParameter = formNode.Elements("input").Where(type => type.GetAttributeValue("type", "hidden") == "hidden").Cast<HtmlNode>()
                             .Select(elem => $"{elem.GetAttributeValue("name", "default")}={elem.GetAttributeValue("value", "default")}")
                             .Aggregate((element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : "&") + next);
-                    if (isStep3)
-                    {
-                        inputParameterStep3 = formNode.Elements("input").Where(type => type.GetAttributeValue("type", "hidden") == "hidden").Cast<HtmlNode>()
-                            .Select(elem => $"------WebKitFormBoundaryTwIa3JXXvh1tOcrg\r\nContent-Disposition: form-data; name=\"{elem.GetAttributeValue("name", "default")}\"\r\n\r\n{elem.GetAttributeValue("value", "default")}")
-                            .Aggregate((element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : "\r\n") + next);
-                    }
                     readStream.Close();
                     receiveStream.Close();
                 }
-
                 if (isStep3)
                 {
                     foreach (var templateSupportAndParameterSupport in modelParameter)
                     {
+                        inputParameterStep3 = formNode.Elements("input").Where(type => type.GetAttributeValue("type", "hidden") == "hidden").Cast<HtmlNode>()
+                            .Select(elem => $"------WebKitFormBoundaryTwIa3JXXvh1tOcrg\r\nContent-Disposition: form-data; name=\"{elem.GetAttributeValue("name", "default")}\"\r\n\r\n{elem.GetAttributeValue("value", "default")}")
+                            .Aggregate((element, next) => element + (string.IsNullOrWhiteSpace(element) ? string.Empty : "\r\n") + next);
                         inputParameterStep3 += $"\r\n------WebKitFormBoundaryTwIa3JXXvh1tOcrg\r\n{templateSupportAndParameterSupport.NameGuidParametr}\r\n\r\n";
                         File = templateSupportAndParameterSupport.ParameterStep3;
+                        DatesBytesFile = Encoding.UTF8.GetBytes(inputParameterStep3);
+                        Steps(Step3UploadFile, "POST", DatesBytesFile);
                     }
-                    DatesBytesFile = Encoding.UTF8.GetBytes(inputParameterStep3);
                 }
-                else
+                if (!isStep3)
                 {
                     if (modelParameter != null)
                     {
-                        inputParameter = modelParameter.Aggregate(inputParameter, (current, templateSupportAndParameterSupport) => current + $"&{templateSupportAndParameterSupport.NameGuidParametr}={WebUtility.UrlEncode(templateSupportAndParameterSupport.Parametr)}");
+                        inputParameter = modelParameter.Aggregate(inputParameter,
+                            (current, templateSupportAndParameterSupport) =>
+                                current +
+                                $"&{templateSupportAndParameterSupport.NameGuidParametr}={WebUtility.UrlEncode(templateSupportAndParameterSupport.Parametr)}");
                     }
                 }
                 DatesBytes = Encoding.ASCII.GetBytes(inputParameter);
@@ -228,10 +229,6 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
             GenerateParameterResponse("//form[@action='/requests/create.php?step=2']", modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step2").ToArray());
             Steps(Step2Post, "POST", DatesBytes);
             GenerateParameterResponse("//form[@action='/requests/create.php?step=3']", modelSupport.TemplateSupport.Where(param => param.NameStepSupport == "Step3").ToArray(),true);
-            if (DatesBytesFile != null)
-            {
-                Steps(Step3UploadFile, "POST", DatesBytesFile);
-            }
             Steps(Step3Post, "POST", DatesBytes);
             return ReturnResponseWebStep3();
         }

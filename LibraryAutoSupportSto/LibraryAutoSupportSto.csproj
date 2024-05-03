@@ -52,6 +52,7 @@
     <Compile Include="Aksiok\AksiokPostGetSystem\ModelParametersAksiok.cs" />
     <Compile Include="Aksiok\AksiokPostUpdeteAndAddSystem\AksiokPostGetEditAndAdd.cs" />
     <Compile Include="Aksiok\AksiokPostUpdeteAndAddSystem\ModelParameterAksiokEditAndAdd.cs" />
+    <Compile Include="InventoryKaspersky\PostServiceInv\PostServiceInv.cs" />
     <Compile Include="PassportSto\PassportStoPostGet\ParametersStoPostGet.cs" />
     <Compile Include="PassportSto\PassportStoPostGet\PassportStoPostGet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Kaspersky\KasperskyXsdModel\KasperskyXsdModel.csproj">
+      <Project>{44DA20E2-4732-4DFA-8149-8553DEB3C380}</Project>
+      <Name>KasperskyXsdModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\AttributeHelperModelXml\AttributeHelperModelXml.csproj">
       <Project>{91fad00a-d052-4dd6-a9bb-544782a0d2c4}</Project>
       <Name>AttributeHelperModelXml</Name>

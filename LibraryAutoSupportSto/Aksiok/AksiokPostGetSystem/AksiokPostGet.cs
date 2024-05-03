@@ -160,7 +160,15 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
                     var modelProduct = PostAksiok<EfDatabase.ModelAksiok.Aksiok.Producer[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 3), type.Id));
                     foreach (var producer in modelProduct.Data)
                     {
-                        PostAksiok<EfDatabase.ModelAksiok.Aksiok.EquipmentModel[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 4), type.Id, producer.Id), type.Id, producer.Id);
+                        try
+                        {
+                            PostAksiok<EfDatabase.ModelAksiok.Aksiok.EquipmentModel[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 4), type.Id, producer.Id), type.Id, producer.Id);
+                        }
+                        catch (Exception e)
+                        {
+                            Loggers.Log4NetLogger.Error(e);
+                            Loggers.Log4NetLogger.Error(new Exception("Ошибки в синхронизации в Ун типа: " + type.Id + " " + type.Name + ", Ун производителя: " + producer.Id+ " " + producer.Name + " ."));
+                        }
                     }
                 }
                 var modelDocumentType = PostAksiok<EfDatabase.ModelAksiok.Aksiok.ModelDocumentType[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 5)));
@@ -211,6 +219,16 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
 
                 Dispose();
             }
+        }
+        /// <summary>
+        /// Обновление комплектности на скомплектованный моделях 
+        /// </summary>
+        /// <param name="idFirst">Ун компьютера</param>
+        /// <param name="idTwo">Ун монитора</param>
+        /// <param name="isKit">Комплектность true/false</param>
+        public void UpdateKitsEquipment(int idFirst, int idTwo, bool isKit)
+        {
+            AksiokAddAndUpdateObjectDb.UpdateKitsEquipmentAksiok(idFirst, idTwo, isKit);
         }
 
         /// <summary>

@@ -468,9 +468,9 @@ namespace EfDatabaseParametrsModel {
         
         private string nameCopySaveField;
         
-        private string serNumField;
+        private string serNumCopySaveField;
         
-        private string inventarNumField;
+        private string inventarNumCopySaveField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -485,23 +485,23 @@ namespace EfDatabaseParametrsModel {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SerNum {
+        public string SerNumCopySave {
             get {
-                return this.serNumField;
+                return this.serNumCopySaveField;
             }
             set {
-                this.serNumField = value;
+                this.serNumCopySaveField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string InventarNum {
+        public string InventarNumCopySave {
             get {
-                return this.inventarNumField;
+                return this.inventarNumCopySaveField;
             }
             set {
-                this.inventarNumField = value;
+                this.inventarNumCopySaveField = value;
             }
         }
     }
@@ -1025,7 +1025,7 @@ namespace EfDatabaseParametrsModel {
         
         private Kabinet kabinetField;
         
-        private string nameTelephoneField;
+        private ModelPhone modelPhoneField;
         
         private string serNumberField;
         
@@ -1046,13 +1046,12 @@ namespace EfDatabaseParametrsModel {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameTelephone {
+        public ModelPhone ModelPhone {
             get {
-                return this.nameTelephoneField;
+                return this.modelPhoneField;
             }
             set {
-                this.nameTelephoneField = value;
+                this.modelPhoneField = value;
             }
         }
         
@@ -1097,6 +1096,29 @@ namespace EfDatabaseParametrsModel {
             }
             set {
                 this.comentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class ModelPhone {
+        
+        private string nameModelField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameModel {
+            get {
+                return this.nameModelField;
+            }
+            set {
+                this.nameModelField = value;
             }
         }
     }

@@ -230,10 +230,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IReaderCommandDbf" contract="ServiceTestIfns.IReaderCommandDbf" bindingType="basicHttpBinding" address="http://localhost:8181/TestIFNSLibary.CommandDbf" bindingConfiguration="BasicHttpBinding_IReaderCommandDbf">
+    <endpoint name="BasicHttpBinding_IReaderCommandDbf" contract="ServiceTestIfns.IReaderCommandDbf" bindingType="basicHttpBinding" address="http://77068-app065:8181/TestIFNSLibary.CommandDbf" bindingConfiguration="BasicHttpBinding_IReaderCommandDbf">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8181/TestIFNSLibary.CommandDbf</serializedValue>
+          <serializedValue>http://77068-app065:8181/TestIFNSLibary.CommandDbf</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -315,10 +315,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="NetTcpBinding_IReaderCommandDbf" contract="ServiceTestIfns.IReaderCommandDbf" bindingType="netTcpBinding" address="net.tcp://localhost:45618/" bindingConfiguration="NetTcpBinding_IReaderCommandDbf">
+    <endpoint name="NetTcpBinding_IReaderCommandDbf" contract="ServiceTestIfns.IReaderCommandDbf" bindingType="netTcpBinding" address="net.tcp://77068-app065:45618/" bindingConfiguration="NetTcpBinding_IReaderCommandDbf">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:45618/</serializedValue>
+          <serializedValue>net.tcp://77068-app065:45618/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

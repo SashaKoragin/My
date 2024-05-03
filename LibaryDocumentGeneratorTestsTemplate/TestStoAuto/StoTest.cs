@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Printing;
@@ -11,7 +10,6 @@ using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using EfDatabase.Inventory.Base;
@@ -22,11 +20,10 @@ using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
 using LibaryXMLAuto.ReadOrWrite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Win32;
 using TestIFNSLibary.Inventarka;
 using File = System.IO.File;
 
-namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
+namespace LibraryDocumentGeneratorTestsTemplate.TestStoAuto
 {
     [TestClass]
    public class StoTest
@@ -37,10 +34,10 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
         public void SelectUsers()
         {
 
-           var Inventory = new InventoryContext();
+           var inventory = new InventoryContext();
            try
            {
-               var t1 = Inventory.Users.Where(user => user.StatusUser != null)
+               var t1 = inventory.Users.Where(user => user.StatusUser != null)
                    .Where(u => u.StatusUser.IdStatusUser != 4).Where(u1 =>u1.NameUser == "Яшина Полина Денисовна").ToArray();
                TT(ref t1);
 
@@ -51,7 +48,7 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
                throw;
            }
 
-           Inventory?.Dispose();
+           inventory?.Dispose();
         }
 
         public void TT(ref User[] users)
@@ -115,11 +112,15 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
         [TestMethod]
         public void TestStoPassportToModel()
         {
-            var pathXlsx = "D:\\Testing\\Оборудование_в_организации.xlsx";
+            var ii = 0;
+            ii = ii == 0 ? 5 : 10;
             DataTable dt = new DataTable();
+
+
+            var pathXlsx = "D:\\Testing\\Оборудование_в_организации.xlsx";
+            
             using (SpreadsheetDocument spreadSheetDocument = SpreadsheetDocument.Open(pathXlsx, false))
             {
-                WorkbookPart workbookPart = spreadSheetDocument.WorkbookPart;
                 IEnumerable<Sheet> sheets = spreadSheetDocument.WorkbookPart.Workbook.GetFirstChild<Sheets>().Elements<Sheet>();
                 string relationshipId = sheets.First().Id.Value;
                 WorksheetPart worksheetPart = (WorksheetPart)spreadSheetDocument.WorkbookPart.GetPartById(relationshipId);
@@ -127,16 +128,17 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
                 SheetData sheetData = workSheet.GetFirstChild<SheetData>();
                 IEnumerable<Row> rows = sheetData.Descendants<Row>();
 
-                foreach (Cell cell in rows.ElementAt(0))
+                foreach (var openXmlElement in rows.ElementAt(0))
                 {
+                    var cell = (Cell) openXmlElement;
                     dt.Columns.Add(GetCellValue(spreadSheetDocument, cell));
                 }
 
-                foreach (Row row in rows) //this will also include your header row...
+                foreach (var row in rows) //this will also include your header row...
                 {
                     DataRow tempRow = dt.NewRow();
 
-                    for (int i = 0; i < row.Descendants<Cell>().Count(); i++)
+                    for (var i = 0; i < row.Descendants<Cell>().Count(); i++)
                     {
                         tempRow[i] = GetCellValue(spreadSheetDocument, row.Descendants<Cell>().ElementAt(i));
                     }
@@ -369,9 +371,8 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestStoAuto
                     string[] macAddressString = new string[(int)len];
                     for (int j = 0; j < len; j++)
                     {
-                        macAddressString[i] = ab[i].ToString("x2");
+                        macAddressString[j] = ab[j].ToString("x2");
                     }
-
                     mac.Ip = ipAdress;
                     mac.Mac = string.Join(":", macAddressString);
                 }

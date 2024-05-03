@@ -106,6 +106,7 @@
     <Compile Include="Inventory\BaseLogic\ComparableFileAddToDataBase\ComparableFileAddToDataBase.cs" />
     <Compile Include="Inventory\BaseLogic\FileServerAddFile\FileServerAddFile.cs" />
     <Compile Include="Inventory\BaseLogic\FileServerAddFile\ProcessFindAllFileServers.cs" />
+    <Compile Include="Inventory\BaseLogic\KasperskyAddInventory\KasperskyAddInventory.cs" />
     <Compile Include="Inventory\BaseLogic\Login\Login.cs" />
     <Compile Include="Inventory\BaseLogic\DeleteObjectDb\DeleteObjectDb.cs" />
     <Compile Include="Inventory\BaseLogic\HistoryLog\HistoryLog.cs" />
@@ -170,9 +171,6 @@
     <Compile Include="Inventory\ReportXml\Mail\Mail.cs">
       <DependentUpon>Mail.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEdit.cs">
-      <SubType>code</SubType>
-    </Compile>
     <Compile Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEditModelRequest.cs">
       <SubType>code</SubType>
     </Compile>
@@ -188,6 +186,9 @@
     </Compile>
     <Compile Include="Inventory\ReportXml\ModelFileServer\SelectReportFileServer.cs">
       <DependentUpon>SelectReportFileServer.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\ReportXml\ModelKaspersky\KasperskyModelInventory.cs">
+      <DependentUpon>KasperskyModelInventory.xsd</DependentUpon>
     </Compile>
     <Compile Include="Inventory\ReportXml\ModelReportCard\ReportCard.cs">
       <DependentUpon>ReportCard.xsd</DependentUpon>
@@ -281,9 +282,6 @@
     <None Include="Inventory\ReportXml\Mail\Mail.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEdit.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Inventory\ReportXml\ModelAksiokEditAndAdd\AksiokAddAndEditModelRequest.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -297,6 +295,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\ModelFileServer\SelectReportFileServer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Inventory\ReportXml\ModelKaspersky\KasperskyModelInventory.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Inventory\ReportXml\ModelReportCard\ReportCard.xsd">
@@ -329,6 +330,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Kaspersky\KasperskyXsdModel\KasperskyXsdModel.csproj">
+      <Project>{44da20e2-4732-4dfa-8149-8553deb3c380}</Project>
+      <Name>KasperskyXsdModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Snmp\DataTransportInventory\DataTransportInventoryToSnmp.csproj">
+      <Project>{ed6f57ca-8848-4e6e-a981-44eaf7cc7a02}</Project>
+      <Name>DataTransportInventoryToSnmp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\AttributeHelperModelXml\AttributeHelperModelXml.csproj">
       <Project>{91fad00a-d052-4dd6-a9bb-544782a0d2c4}</Project>
       <Name>AttributeHelperModelXml</Name>
@@ -390,6 +399,7 @@
       <XmlModelAksiokEditAndAdd Include="Inventory\ReportXml\ModelAksiokEditAndAdd\*.xsd" />
       <XsdXmlComparableUserResult Include="Inventory\ReportXml\ModelComparableUserResult\*.xsd" />
       <XsdXmlModelFileServer Include="Inventory\ReportXml\ModelFileServer\*.xsd" />
+      <XsdXmlModelKasperskyApi Include="Inventory\ReportXml\ModelKaspersky\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -423,6 +433,7 @@
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XmlModelAksiokEditAndAdd.FullPath)&quot; /c /namespace:$(RootNamespace).ModelAksiok.ModelAksiokEditAndAdd /outputdir:Inventory\ReportXml\ModelAksiokEditAndAdd\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdXmlComparableUserResult.FullPath)&quot; /classes /namespace:$(RootNamespace).ReportXml.ModelComparableUserResult /outputdir:Inventory\ReportXml\ModelComparableUserResult\" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdXmlModelFileServer.FullPath)&quot; /classes /namespace:$(RootNamespace).ReportXml.ModelFileServer /outputdir:Inventory\ReportXml\ModelFileServer\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(XsdXmlModelKasperskyApi.FullPath)&quot; /classes /namespace:$(RootNamespace).ReportXml.XsdXmlModelKasperskyApi /outputdir:Inventory\ReportXml\ModelKaspersky\" />
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

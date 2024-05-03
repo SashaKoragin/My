@@ -140,6 +140,26 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
             },
             new ParametersUrlModel()
             {
+                Url = "https://aksiok.dpc.tax.nalog.ru/api/EquipmentKit/DivideKit",
+                Accept = "*/*",
+                ContentType = "application/json",
+                Headers = new Dictionary<string, string>()
+                {
+                    {"Accept-Encoding", "gzip, deflate, br"},
+                    {"Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"},
+                    {"X-Requested-With", "XMLHttpRequest"},
+                    {"Origin", "https://aksiok.dpc.tax.nalog.ru"},
+                    {"sec-ch-ua", "Not A; Brand\";v=\"99\", \"Chromium\"; v=\"102\", \"Google Chrome\"; v=\"102\""},
+                    {"sec-ch-ua-mobile", "?0"},
+                    {"sec-ch-ua-platform", "Windows"},
+                    {"Sec-Fetch-Dest", "empty"},
+                    {"Sec-Fetch-Mode", "cors"},
+                    {"Sec-Fetch-Site", "same-origin"}
+                },
+                Parameters = "{\"eqCardId\":{IdCard}}"
+            }, 
+            new ParametersUrlModel()
+            {
                 Url = "https://aksiok.dpc.tax.nalog.ru/action/FileUpload/Download?id={idFile}&inlineExtensions=",
                 Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                 ContentType = null

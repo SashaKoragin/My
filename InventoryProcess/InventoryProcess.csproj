@@ -60,6 +60,9 @@
     <Compile Include="StartProcessInventory\ModelParameters\ModelAllParametersProcess.cs">
       <DependentUpon>ModelAllParametersProcess.xsd</DependentUpon>
     </Compile>
+    <Compile Include="StartProcessInventory\ModelSelectProcess\SelectProcess.cs">
+      <DependentUpon>SelectProcess.xsd</DependentUpon>
+    </Compile>
     <Compile Include="StartProcessInventory\ProcessStart\ProcessStart.cs" />
     <Compile Include="StartProcessInventory\ProcessStart\TimeEventProcess.cs" />
   </ItemGroup>
@@ -92,6 +95,9 @@
     <None Include="StartProcessInventory\ModelParameters\ModelAllParametersProcess.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="StartProcessInventory\ModelSelectProcess\SelectProcess.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild" DependsOnTargets="XsdSheme">
@@ -106,6 +112,7 @@
   <Target Name="XsdSheme">
     <ItemGroup>
       <ModelParameters Include="StartProcessInventory\ModelParameters\*.xsd" />
+      <SelectProcess Include="StartProcessInventory\ModelSelectProcess\*.xsd" />
     </ItemGroup>
     <Message Importance="high" Text="CreateDTOSheme" />
     <GetFrameworkSdkPath>
@@ -116,5 +123,6 @@
     </PropertyGroup>
     <Message Importance="high" Text="Processing XSD schemas" />
     <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(ModelParameters.FullPath)&quot; /classes /namespace:$(RootNamespace).StartProcessInventory.ModelParameters /outputdir:StartProcessInventory\ModelParameters\" />
+    <Exec Command="&quot;$(XsdToolPath)\xsd.exe&quot; &quot;%(SelectProcess.FullPath)&quot; /classes /namespace:$(RootNamespace).StartProcessInventory.ModelSelectProcess /outputdir:StartProcessInventory\ModelSelectProcess\" />
   </Target>
 </Project>

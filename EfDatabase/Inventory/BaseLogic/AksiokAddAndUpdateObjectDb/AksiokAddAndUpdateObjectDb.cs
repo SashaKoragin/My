@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Data;
-using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
-using System.Diagnostics;
 using System.Linq;
 using System.Xml;
 using EfDatabase.Inventory.Base;
@@ -40,6 +38,21 @@ namespace EfDatabase.Inventory.BaseLogic.AksiokAddAndUpdateObjectDb
                     new SqlParameter(LogicaSelect.SelectedParametr.Split(',')[2], SqlDbType.Int) { Value = idType },
                     new SqlParameter(LogicaSelect.SelectedParametr.Split(',')[3], SqlDbType.Int) { Value = idProduct });
         }
+        /// <summary>
+        /// Обновление комплектности на скомплектованный моделях 
+        /// </summary>
+        /// <param name="idFirstAksiokMonitors">Ун компьютера</param>
+        /// <param name="idTwoAksiokSysBloks">Ун монитора</param>
+        /// <param name="isKit">Комплектность true/false</param>
+        public void UpdateKitsEquipmentAksiok(int idFirstAksiokMonitors, int idTwoAksiokSysBloks, bool isKit)
+        {
+            var updateKit = Inventory.LogicaSelects.First(x => x.Id == 73);
+            Inventory.Database.ExecuteSqlCommand(updateKit.SelectUser,
+                new SqlParameter(updateKit.SelectedParametr.Split(',')[0], SqlDbType.Int) {Value = idFirstAksiokMonitors },
+                             new SqlParameter(updateKit.SelectedParametr.Split(',')[1], SqlDbType.Int) {Value = idTwoAksiokSysBloks },
+                             new SqlParameter(updateKit.SelectedParametr.Split(',')[2], SqlDbType.Bit) { Value = isKit });
+        }
+
         /// <summary>
         /// Disposing
         /// </summary>

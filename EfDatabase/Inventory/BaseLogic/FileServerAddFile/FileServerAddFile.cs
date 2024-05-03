@@ -43,6 +43,7 @@ namespace EfDatabase.Inventory.BaseLogic.FileServerAddFile
                     {
                         var serializer = new XmlSerializer(typeof(AllFileServerModel));
                         serializer.Serialize(buffer, allFileServer);
+                        
                         buffer.Seek(0, SeekOrigin.Begin);
                         using (XmlReader reader = XmlReader.Create(buffer))
                         {
@@ -51,6 +52,7 @@ namespace EfDatabase.Inventory.BaseLogic.FileServerAddFile
                                 new SqlParameter(LogicaSelect.SelectedParametr.Split(',')[1], SqlDbType.Bit) { Value = isTruncateTable});
                             reader.Close();
                             reader.Dispose();
+                            
                         }
                         buffer.Close();
                         buffer.Dispose();

@@ -45,7 +45,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
             {
                 IndexExecute = 6,
                 UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EquipmentCard/ListEquipments?_dc=1649676212262",
-                ParametersAksiok = "{\"records\":[],\"epoDocumentId\":\"{modelDocumentTypeId}\",\"page\":1,\"start\":0,\"limit\":500}",
+                ParametersAksiok = "{\"records\":[],\"epoDocumentId\":\"{modelDocumentTypeId}\",\"showEliminatedEquipment\":true,\"page\":1,\"start\":0,\"limit\":500}",
                 ModelUpdateSql  = null
             },
             new ModelParametersAksiok()

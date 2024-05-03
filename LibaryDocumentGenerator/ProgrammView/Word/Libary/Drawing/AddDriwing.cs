@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
 using A = DocumentFormat.OpenXml.Drawing;
@@ -15,8 +16,10 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.Drawing
         /// <param name="relationshipId">mainDocumentPart.GetIdOfPart(image)</param>
         /// <param name="cx">Размер по X</param>
         /// <param name="cy">Размер по Y</param>
+        /// <param name="cutBottom">Обрезка изображения снизу</param>
+        /// <param name="cutRight">Обрезка изображения справа</param>
         /// <returns></returns>
-        public Run AddImageToParagraph(string relationshipId, long cx = 1500000L, long cy = 500000L)
+        public Run AddImageToParagraph(string relationshipId, long cx = 1500000L, long cy = 500000L, int cutBottom = 0, int cutRight = 0)
         {
             // Define the reference of the image.
             var element =
@@ -61,8 +64,13 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.Drawing
                                              CompressionState =
                                              A.BlipCompressionValues.Print
                                          },
+                                         new A.SourceRectangle()
+                                         {
+                                             Bottom = cutBottom,
+                                             Right = cutRight
+                                         },
                                          new A.Stretch(
-                                             new A.FillRectangle())),
+                                             )),
                                      new PIC.ShapeProperties(
                                          new A.Transform2D(
                                              new A.Offset() { X = 0L, Y = 0L },

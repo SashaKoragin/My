@@ -267,7 +267,13 @@
       <Component Id="Microsoft.WindowsAPICodePack.Shell.dll" Guid="3172779F-BD34-439B-B038-BC360BBC5C36">
         <File Id="Microsoft.WindowsAPICodePack.Shell.dll" Name="Microsoft.WindowsAPICodePack.Shell.dll" Source="$(var.TestIFNSService_TargetDir)Microsoft.WindowsAPICodePack.Shell.dll" />
       </Component>
-		</ComponentGroup>
+      <Component Id="KasperskyXsdModel.dll" Guid="321F20CE-CAFE-415C-B8AB-E43603910891">
+        <File Id="KasperskyXsdModel.dll" Name="KasperskyXsdModel.dll" Source="$(var.TestIFNSService_TargetDir)KasperskyXsdModel.dll" />
+      </Component>
+      <Component Id="DataTransportInventoryToSnmp.dll" Guid="52548AFC-D5A5-41E9-942F-ADF0F62AA1F1">
+        <File Id="DataTransportInventoryToSnmp.dll" Name="DataTransportInventoryToSnmp.dll" Source="$(var.TestIFNSService_TargetDir)DataTransportInventoryToSnmp.dll" />
+      </Component>
+    </ComponentGroup>
 	</Fragment>
   <Fragment>
     <ComponentGroup Id="ProgramFilesFolder_files" Directory="Path">

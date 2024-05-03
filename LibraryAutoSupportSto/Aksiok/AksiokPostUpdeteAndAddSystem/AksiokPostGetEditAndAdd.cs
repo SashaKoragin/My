@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Text;
 using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
+using EfDatabaseXsdSupportNalog;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 
 namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
@@ -89,31 +90,45 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
         private void PostEditAndAddModel(ParametersUrlModel parametersUrlModel, Encoding encoding)
         {
             DatesBytes = encoding.GetBytes(parametersUrlModel.Parameters);
-                Request = (HttpWebRequest)WebRequest.Create(parametersUrlModel.Url);
-                Request.Accept = parametersUrlModel.Accept;
-                Request.Referer = "https://aksiok.dpc.tax.nalog.ru/";
-                Request.KeepAlive = true;
-                Request.Credentials = MyCache;
-                Request.CookieContainer = Сookies;
-                Request.Host = "aksiok.dpc.tax.nalog.ru";
-                Request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36";
-                Request.ContentType = parametersUrlModel.ContentType;
-                foreach (var parametersHeaders in parametersUrlModel.Headers)
-                {
+            Request = (HttpWebRequest)WebRequest.Create(parametersUrlModel.Url);
+            Request.Accept = parametersUrlModel.Accept;
+            Request.Referer = "https://aksiok.dpc.tax.nalog.ru/";
+            Request.KeepAlive = true;
+            Request.Credentials = MyCache;
+            Request.CookieContainer = Сookies;
+            Request.Host = "aksiok.dpc.tax.nalog.ru";
+            Request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36";
+            Request.ContentType = parametersUrlModel.ContentType;
+            foreach (var parametersHeaders in parametersUrlModel.Headers)
+            {
                     Request.Headers.Add(parametersHeaders.Key,parametersHeaders.Value);
-                }
-                Request.Method = "POST";
-                Request.ContentLength = DatesBytes.Length;
-                using (var stream = Request.GetRequestStream())
-                {
-                    stream.Write(DatesBytes, 0, DatesBytes.Length);
-                }
+            }
+            Request.Method = "POST";
+            Request.ContentLength = DatesBytes.Length;
+            using (var stream = Request.GetRequestStream())
+            {
+                stream.Write(DatesBytes, 0, DatesBytes.Length);
+            }
+
+            try
+            {
                 Response = (HttpWebResponse)Request.GetResponse();
                 Сookies.Add(Response.Cookies);
                 if (Response.StatusCode == HttpStatusCode.OK)
                 {
-                   
                 }
+            }
+            catch (WebException webEx)
+            {
+                var messageError = string.Empty;
+                using (Stream respStream = webEx.Response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(respStream);
+                    messageError = reader.ReadToEnd();
+                    Loggers.Log4NetLogger.Error(new Exception(messageError));
+                }
+                throw new InvalidOperationException(messageError);
+            }
         }
 
         /// <summary>
@@ -204,7 +219,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                             AksiokFullDataBaseModel.AksiokEditPublicModel.EquipmentState.ToString())
                         .Replace("{EquipmentStateSto}",
                             AksiokFullDataBaseModel.AksiokEditPublicModel.EquipmentStateSto.ToString())
-                        .Replace("{ComputerName}", AksiokFullDataBaseModel.AksiokEditPublicModel.ComputerName)
+                        .Replace("{ComputerName}", WebUtility.HtmlDecode(AksiokFullDataBaseModel.AksiokEditPublicModel.ComputerName))
                         .Replace("{ExpertiseStatus}",
                             AksiokFullDataBaseModel.AksiokEditPublicModel.ExpertiseStatus.ToString())
                         .Replace("{NameFileExpertise}",
@@ -239,7 +254,6 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
             {
                 Loggers.Log4NetLogger.Error(e);
             }
-
             return null;
         }
 
@@ -288,6 +302,26 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
             };
             return parameters;
         }
+
+        /// <summary>
+        /// Генерация параметров для редактирования на шаге 3 редактирование - Разукомплектование карточек
+        /// </summary>
+        /// <param name="parametersUrlModel">Параметры запроса</param>
+        /// <param name="idCard">Ун карточки</param>
+        /// <returns></returns>
+        private ParametersUrlModel GenerateParametersModelStep4Edit(ParametersUrlModel parametersUrlModel, int idCard)
+        {
+            ParametersUrlModel parameters = new ParametersUrlModel
+            {
+                Url = parametersUrlModel.Url,
+                Accept = parametersUrlModel.Accept,
+                ContentType = parametersUrlModel.ContentType,
+                Headers = parametersUrlModel.Headers,
+                Parameters = parametersUrlModel.Parameters.Replace("{IdCard}", idCard.ToString())
+            };
+            return parameters;
+        }
+
         /// <summary>
         /// Генерация параметров для выгрузки файла
         /// </summary>
@@ -316,18 +350,24 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
             {
                 if (aksiokAddAndEdit.ParametersModel.ModelRequest == "Edit")
                 {
-                    PostEditAndAddModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0],aksiokAddAndEdit), Encoding.Default); //Русские буквы так и не побеждены 
+                    PostEditAndAddModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0],aksiokAddAndEdit), Encoding.Default); //Русские буквы так и не побеждены  Encoding.UTF8 и Encoding.Default
                     PostEditAndAddModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
                 }
                 else
                 {
                    //При добавлении новой записи нужно думать (Пока нет таких записей 20.11.2022)
                 }
-                if (aksiokAddAndEdit.KitsEquipment?.KitsEquipmentServer != null)
+                AksiokPostGetSystem.AksiokPostGetSystem aksiokPostGetSystem = new AksiokPostGetSystem.AksiokPostGetSystem(Login, Password);
+                if (aksiokAddAndEdit.KitsEquipment.IsCheckedKits) //Скомплектовать true
                 {
                     PostEditAndAddModel(GenerateParametersModelStep3Edit(allParameters.ModelParametersAksiok[2], aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id), Encoding.Default);
+                    aksiokPostGetSystem.UpdateKitsEquipment(aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id, true);
                 }
-                AksiokPostGetSystem.AksiokPostGetSystem aksiokPostGetSystem = new AksiokPostGetSystem.AksiokPostGetSystem(Login, Password);
+                if (aksiokAddAndEdit.KitsEquipment.IsNotCheckedKits) //Разукомплектовать true
+                {
+                    PostEditAndAddModel(GenerateParametersModelStep4Edit(allParameters.ModelParametersAksiok[3], AksiokFullDataBaseModel.AksiokEditPublicModel.Id), Encoding.Default);
+                    aksiokPostGetSystem.UpdateKitsEquipment(aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id, false);
+                }
                 aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.AksiokEditPublicModel.Id, AksiokFullDataBaseModel.AksiokEditPublicModel.EpoDocument, AksiokFullDataBaseModel.AksiokEditPublicModel.SerialNumber);
                 aksiokPostGetSystem.Dispose();
                 return "Обновление и синхронизация данных в АКСИОК прошло Успешно!!!";
@@ -345,7 +385,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
         /// <returns></returns>
         public UploadFileAksiok UploadFileAksiok(long idFile)
         {
-            return GetFileAksiok(GenerateParametersUploadFile(allParameters.ModelParametersAksiok[3],idFile));
+            return GetFileAksiok(GenerateParametersUploadFile(allParameters.ModelParametersAksiok[4],idFile));
         }
 
         /// <summary>

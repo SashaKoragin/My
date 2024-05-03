@@ -491,7 +491,7 @@ namespace EfDatabase.MemoReport {
         
         private string nameFaceLeaderField;
         
-        private string rnameOrganizationField;
+        private string inameOrganizationField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -506,12 +506,12 @@ namespace EfDatabase.MemoReport {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RnameOrganization {
+        public string InameOrganization {
             get {
-                return this.rnameOrganizationField;
+                return this.inameOrganizationField;
             }
             set {
-                this.rnameOrganizationField = value;
+                this.inameOrganizationField = value;
             }
         }
     }

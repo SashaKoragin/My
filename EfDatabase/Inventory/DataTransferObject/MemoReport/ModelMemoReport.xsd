@@ -194,7 +194,7 @@
 					<xs:documentation>ФИО Руководителя</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="RnameOrganization" type="xs:string">
+			<xs:attribute name="InameOrganization" type="xs:string">
 				<xs:annotation>
 					<xs:documentation>Должность руководителя</xs:documentation>
 				</xs:annotation>

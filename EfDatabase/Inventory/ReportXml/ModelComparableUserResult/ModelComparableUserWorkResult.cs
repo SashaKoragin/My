@@ -27,6 +27,8 @@ namespace EfDatabase.ReportXml.ModelComparableUserResult {
         
         private ModelComparableAllSystemInventory[] modelComparableAllSystemInventoryField;
         
+        private ComparableCardAksiokAndInventory[] comparableCardAksiokAndInventoryField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ComparableUserResult", IsNullable=true)]
         public ComparableUserResult[] ComparableUserResult {
@@ -46,6 +48,17 @@ namespace EfDatabase.ReportXml.ModelComparableUserResult {
             }
             set {
                 this.modelComparableAllSystemInventoryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ComparableCardAksiokAndInventory")]
+        public ComparableCardAksiokAndInventory[] ComparableCardAksiokAndInventory {
+            get {
+                return this.comparableCardAksiokAndInventoryField;
+            }
+            set {
+                this.comparableCardAksiokAndInventoryField = value;
             }
         }
     }
@@ -288,6 +301,8 @@ namespace EfDatabase.ReportXml.ModelComparableUserResult {
         
         private long rowNumberField;
         
+        private string equipmentTypeField;
+        
         private string producerNameField;
         
         private string modelNameField;
@@ -314,10 +329,48 @@ namespace EfDatabase.ReportXml.ModelComparableUserResult {
         
         private string infoField;
         
+        private string operationSystemField;
+        
+        private string cpuTypeField;
+        
+        private int cpuMHzField;
+        
+        private int coreCountField;
+        
+        private int cpuCountField;
+        
+        private string hddTypeField;
+        
+        private int hddCountField;
+        
+        private int hddSizeField;
+        
+        private string networkAdapterField;
+        
+        private int networkAdapterSpeedField;
+        
+        private string macField;
+        
+        private string ramTypeField;
+        
+        private int memorySizeField;
+        
+        private int diskSizeField;
+        
+        private string cdOrDvdField;
+        
         private int countGroupField;
         
         public ModelComparableAllSystemInventory() {
             this.logicsButtonField = "Button";
+            this.cpuMHzField = 0;
+            this.coreCountField = 0;
+            this.cpuCountField = 0;
+            this.hddCountField = 0;
+            this.hddSizeField = 0;
+            this.networkAdapterSpeedField = 0;
+            this.memorySizeField = 0;
+            this.diskSizeField = 0;
         }
         
         /// <remarks/>
@@ -351,6 +404,17 @@ namespace EfDatabase.ReportXml.ModelComparableUserResult {
             }
             set {
                 this.rowNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string EquipmentType {
+            get {
+                return this.equipmentTypeField;
+            }
+            set {
+                this.equipmentTypeField = value;
             }
         }
         
@@ -499,12 +563,234 @@ namespace EfDatabase.ReportXml.ModelComparableUserResult {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string OperationSystem {
+            get {
+                return this.operationSystemField;
+            }
+            set {
+                this.operationSystemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string CpuType {
+            get {
+                return this.cpuTypeField;
+            }
+            set {
+                this.cpuTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int CpuMHz {
+            get {
+                return this.cpuMHzField;
+            }
+            set {
+                this.cpuMHzField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int CoreCount {
+            get {
+                return this.coreCountField;
+            }
+            set {
+                this.coreCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int CpuCount {
+            get {
+                return this.cpuCountField;
+            }
+            set {
+                this.cpuCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string HddType {
+            get {
+                return this.hddTypeField;
+            }
+            set {
+                this.hddTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int HddCount {
+            get {
+                return this.hddCountField;
+            }
+            set {
+                this.hddCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int HddSize {
+            get {
+                return this.hddSizeField;
+            }
+            set {
+                this.hddSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NetworkAdapter {
+            get {
+                return this.networkAdapterField;
+            }
+            set {
+                this.networkAdapterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int NetworkAdapterSpeed {
+            get {
+                return this.networkAdapterSpeedField;
+            }
+            set {
+                this.networkAdapterSpeedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Mac {
+            get {
+                return this.macField;
+            }
+            set {
+                this.macField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string RamType {
+            get {
+                return this.ramTypeField;
+            }
+            set {
+                this.ramTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int MemorySize {
+            get {
+                return this.memorySizeField;
+            }
+            set {
+                this.memorySizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int DiskSize {
+            get {
+                return this.diskSizeField;
+            }
+            set {
+                this.diskSizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string CdOrDvd {
+            get {
+                return this.cdOrDvdField;
+            }
+            set {
+                this.cdOrDvdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public int CountGroup {
             get {
                 return this.countGroupField;
             }
             set {
                 this.countGroupField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class ComparableCardAksiokAndInventory {
+        
+        private string memoField;
+        
+        private string inventoryField;
+        
+        private string aksiokField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Memo {
+            get {
+                return this.memoField;
+            }
+            set {
+                this.memoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Inventory {
+            get {
+                return this.inventoryField;
+            }
+            set {
+                this.inventoryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Aksiok {
+            get {
+                return this.aksiokField;
+            }
+            set {
+                this.aksiokField = value;
             }
         }
     }

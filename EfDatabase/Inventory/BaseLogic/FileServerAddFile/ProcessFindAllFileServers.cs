@@ -94,11 +94,11 @@ namespace EfDatabase.Inventory.BaseLogic.FileServerAddFile
         /// <summary>
         /// Определения количества в пачке
         /// </summary>
-        public static int CountFilePack { get; set; }
+        public int CountFilePack { get; set; }
         /// <summary>
         /// Количество параллельных процессов обработки пачки 
         /// </summary>
-        public static int CountParallelProcess { get; set; }
+        public int CountParallelProcess { get; set; }
         /// <summary>
         ///   Папка для ошибочных документов xml для БД
         /// </summary>

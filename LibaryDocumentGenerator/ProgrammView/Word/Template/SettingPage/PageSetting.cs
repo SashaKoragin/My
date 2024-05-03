@@ -90,5 +90,17 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Template.SettingPage
             page.ParamDocumentEditMargin(ref body, new PageMargin() { Top = 567, Right = 200, Bottom = 567, Left = 200 });
             return body;
         }
+        /// <summary>
+        /// Генерация страниц для принтера Zebra
+        /// </summary>
+        /// <param name="margin">Отступы</param>
+        /// <returns></returns>
+        public Body AddDocumentZebraPrinter(PageMargin margin = null)
+        {
+            Body body = new Body();
+            var page = new PageGenerate();
+            page.ParamDocumentZebraPrinter(ref body, margin);
+            return body;
+        }
     }
 }

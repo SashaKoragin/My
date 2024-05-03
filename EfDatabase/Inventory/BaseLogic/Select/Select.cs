@@ -88,6 +88,15 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             SerializeJson json = new SerializeJson();
             return json.JsonLibrary(Inventory.Rb_Holidays);
         }
+        /// <summary>
+        /// Статусы праздничных дней
+        /// </summary>
+        /// <returns></returns>
+        public string GetStatusHoliday()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibrary(Inventory.StatusHolydays);
+        }
 
         /// <summary>
         /// Запрос на список отделов
@@ -550,11 +559,12 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// Запрос на технику претендующую на QR code
         /// </summary>
         /// <param name="serialNumber">Серийный номер</param>
+        /// <param name="inventoryNumber">Инвентарный номер</param>
         /// <param name="isAll"></param>
         /// <returns></returns>
-        public List<AllTechnic> SelectTechnical(string serialNumber, bool isAll = false)
+        public List<AllTechnic> SelectTechnical(string serialNumber, string inventoryNumber, bool isAll = false)
         {
-            return isAll ? Inventory.AllTechnics.Where(x => !x.WriteOffSign).ToList() : Inventory.AllTechnics.Where(x => x.SerNum == serialNumber).ToList();
+            return isAll ? Inventory.AllTechnics.Where(x => !x.WriteOffSign).ToList() : Inventory.AllTechnics.Where(x => x.SerNum == serialNumber & x.InventarNum == inventoryNumber).ToList();
         }
         /// <summary>
         /// Отбираем все или конкретный
@@ -731,6 +741,16 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<EquipmentModel>("Select * From EquipmentModel"));
         }
+        /// <summary>
+        /// Все модели телефонов
+        /// </summary>
+        /// <returns></returns>
+        public string AllModelPhone()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.ModelPhones);
+        }
+
         /// <summary>
         /// Dispose
         /// </summary>

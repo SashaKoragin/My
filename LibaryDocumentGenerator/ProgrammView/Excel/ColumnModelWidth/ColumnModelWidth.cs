@@ -95,6 +95,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Excel.ColumnModelWidth
         {
             new ModelReportExcel() {IsComparable = false, NameModel = "NameSystem", Width = 30.00D},
             new ModelReportExcel() {IsComparable = false, NameModel = "RowNumber", Width = 16.00D},
+            new ModelReportExcel() {IsComparable = false, NameModel = "EquipmentType", Width =59.00D },
             new ModelReportExcel() {IsComparable = false, NameModel = "ProducerName", Width = 28.00D},
             new ModelReportExcel() {IsComparable = false, NameModel = "ModelName", Width = 37.00D},
             new ModelReportExcel() {IsComparable = true, NameModel = "ComputerName", Width = 26.00D},
@@ -108,9 +109,23 @@ namespace LibaryDocumentGenerator.ProgrammView.Excel.ColumnModelWidth
             new ModelReportExcel() {IsComparable = true, NameModel = "Division", Width = 45.00D},
             new ModelReportExcel() {IsComparable = true, NameModel = "FullName", Width = 46.00D},
             new ModelReportExcel() {IsComparable = true, NameModel = "Info", Width = 48.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "OperationSystem", Width = 32.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "CpuType", Width = 51.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "CpuMHz", Width = 24.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "CoreCount", Width = 16.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "CpuCount", Width = 24.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "HddType", Width = 64.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "HddCount", Width = 17.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "HddSize", Width = 22.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "NetworkAdapter", Width = 90.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "NetworkAdapterSpeed", Width = 23.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "Mac", Width = 37.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "RamType", Width = 20.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "MemorySize", Width = 15.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "DiskSize", Width = 33.00D},
+            new ModelReportExcel() {IsComparable = true, NameModel = "CdOrDvd", Width = 33.00D},
             new ModelReportExcel() {IsComparable = false, NameModel = "CountGroup", Width = 20.00D}
         };
-
    }
 
    public class ModelReportExcel

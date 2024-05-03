@@ -67,6 +67,12 @@ namespace InventoryProcess.StartProcessInventory.ModelParameters {
         
         private string countParallelProcessField;
         
+        private string serviceInvKasperskyField;
+        
+        private string parameterKasperskyModelField;
+        
+        private string serviceInvKasperskyAllHostDriversField;
+        
         /// <remarks/>
         public string Domain {
             get {
@@ -284,6 +290,36 @@ namespace InventoryProcess.StartProcessInventory.ModelParameters {
             }
             set {
                 this.countParallelProcessField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ServiceInvKaspersky {
+            get {
+                return this.serviceInvKasperskyField;
+            }
+            set {
+                this.serviceInvKasperskyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ParameterKasperskyModel {
+            get {
+                return this.parameterKasperskyModelField;
+            }
+            set {
+                this.parameterKasperskyModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ServiceInvKasperskyAllHostDrivers {
+            get {
+                return this.serviceInvKasperskyAllHostDriversField;
+            }
+            set {
+                this.serviceInvKasperskyAllHostDriversField = value;
             }
         }
     }

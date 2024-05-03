@@ -481,9 +481,7 @@ namespace EfDatabase.ReportCard {
         
         private bool dateTime_HolidayFieldSpecified;
         
-        private bool iS_HOLIDAYField;
-        
-        private bool iS_HOLIDAYFieldSpecified;
+        private int idStatusHolidaysField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -509,23 +507,12 @@ namespace EfDatabase.ReportCard {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool IS_HOLIDAY {
+        public int IdStatusHolidays {
             get {
-                return this.iS_HOLIDAYField;
+                return this.idStatusHolidaysField;
             }
             set {
-                this.iS_HOLIDAYField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IS_HOLIDAYSpecified {
-            get {
-                return this.iS_HOLIDAYFieldSpecified;
-            }
-            set {
-                this.iS_HOLIDAYFieldSpecified = value;
+                this.idStatusHolidaysField = value;
             }
         }
     }

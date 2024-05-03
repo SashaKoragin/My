@@ -7,17 +7,16 @@ using EfDatabase.Inventory.BaseLogic.FileServerAddFile;
 using EfDatabase.Inventory.BaseLogic.ProcessSynchronization;
 using EfDatabase.Inventory.BaseLogic.Select;
 using EfDatabase.Inventory.ComparableSystem.StartComparable;
-using EfDatabaseXsdSupportNalog;
 using InventoryProcess.StartProcessInventory.ModelParameters;
 using LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem;
+using LibraryAutoSupportSto.InventoryKaspersky.PostServiceInv;
 using LibraryAutoSupportSto.PassportSto.PassportStoPostGet;
-using LibraryAutoSupportSto.Support.SupportPostGet;
 using SqlLibaryIfns.PingIp;
 
 namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
 {
-   public class AllDynamicProcessStart
-    {
+   public class AllDynamicProcessStart : IDisposable
+   {
         /// <summary>
         /// Логин пользователя может быть NULL
         /// </summary>
@@ -56,6 +55,7 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
         {
             PingIp ping = new PingIp();
             ping.FindIpHost(Parameters.Domain, Parameters.DomainIfnsWorkStation, Parameters.DomainIfnsWorkStationFilter);
+            Dispose();
         }
       
 
@@ -69,6 +69,7 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
             var fullPathXlsx = sto.DownloadReportSto();
             addObjectDb.CreateAndDownloadSto(fullPathXlsx, Parameters.SaveReport, Parameters.XsdReport, Parameters.BulkCopyXmlSto);
             addObjectDb.Dispose();
+            Dispose();
         }
         /// <summary>
         /// Процесс мониторинга PrintServer для создание заявки на тонер картридж  индекс 5
@@ -83,7 +84,7 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
                 var selectModel = new Select();
                 var addObjectDb = new AddObjectDb();
                 var idUser = selectModel.SelectIdUser(Parameters.LoginUserAdminPrintServer);
-                LoadModelSupport loadModelSupport = new LoadModelSupport(Parameters.PathDomainGroup, Parameters.SaveReport);
+                //LoadModelSupport loadModelSupport = new LoadModelSupport(Parameters.PathDomainGroup, Parameters.SaveReport);
                 foreach (var synchronizationPrintServer in resultFilter)
                 {
                     var allSerialNumberModel =
@@ -99,32 +100,32 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
                         try
                         {
                             //Создать заявку
-                            var modelSto = new ModelParametrSupport()
-                            {
-                                Discription =
-                                    $"Добрый день! Требуется замена {allSerialNumberModel.TypeToner} на {allSerialNumberModel.Item} {allSerialNumberModel.NameModel} в каб. {allSerialNumberModel.NumberKabinet} сер.№ {allSerialNumberModel.SerNum}, сервис.№ {allSerialNumberModel.ServiceNum}, инв.№ {allSerialNumberModel.InventarNum} . Примечание c PrintServer к описанию : {synchronizationPrintServer.DescriptionPrinter}",
-                                IdUser = idUser,
-                                Login = Parameters.LoginUserAdminPrintServer,
-                                Password = Parameters.PasswordUserAdminPrintServer,
-                                IdTemplate = (allSerialNumberModel.Item == "МФУ") ? 6 : 5
-                            };
-                            switch (allSerialNumberModel.Item)
-                            {
-                                case "МФУ":
-                                    modelSto.IdMfu = allSerialNumberModel.Id;
-                                    break;
-                                case "Принтер":
-                                    modelSto.IdPrinter = allSerialNumberModel.Id;
-                                    break;
-                            }
+                            //var modelSto = new ModelParametrSupport()
+                            //{
+                            //    Discription =
+                            //        $"Добрый день! Требуется замена {allSerialNumberModel.TypeToner} на {allSerialNumberModel.Item} {allSerialNumberModel.NameModel} в каб. {allSerialNumberModel.NumberKabinet} сер.№ {allSerialNumberModel.SerNum}, сервис.№ {allSerialNumberModel.ServiceNum}, инв.№ {allSerialNumberModel.InventarNum} . Примечание c PrintServer к описанию : {synchronizationPrintServer.DescriptionPrinter}",
+                            //    IdUser = idUser,
+                            //    Login = Parameters.LoginUserAdminPrintServer,
+                            //    Password = Parameters.PasswordUserAdminPrintServer,
+                            //    IdTemplate = (allSerialNumberModel.Item == "МФУ") ? 6 : 5
+                            //};
+                            //switch (allSerialNumberModel.Item)
+                            //{
+                            //    case "МФУ":
+                            //        modelSto.IdMfu = allSerialNumberModel.Id;
+                            //        break;
+                            //    case "Принтер":
+                            //        modelSto.IdPrinter = allSerialNumberModel.Id;
+                            //        break;
+                            //}
 
-                            var resultStep3 = loadModelSupport.CreateSupportModelSto(modelSto);
+                            //var resultStep3 = loadModelSupport.CreateSupportModelSto(modelSto);
                             synchronizationPrintServer.IsSupportApplication = true;
                             synchronizationPrintServer.DateCreateSupportApplication = DateTime.Now;
-                            if (resultStep3.Step3ResponseSupport != null)
-                            {
-                                Loggers.Log4NetLogger.Info(new Exception($"Создали автоматически заявку на СТП! Для оборудования {allSerialNumberModel.NameModel} сер.№ {allSerialNumberModel.SerNum}"));
-                            }
+                            //if (resultStep3.Step3ResponseSupport != null)
+                            //{
+                            //    Loggers.Log4NetLogger.Info(new Exception($"Создали автоматически заявку на СТП! Для оборудования {allSerialNumberModel.NameModel} сер.№ {allSerialNumberModel.SerNum}"));
+                            //}
                         }
                         catch (Exception exception)
                         {
@@ -137,11 +138,11 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
                         synchronizationPrintServer.IsSupportApplication = false;
                         synchronizationPrintServer.DateCreateSupportApplication = null;
                     }
-
                     addObjectDb.UpdateSynchronizationPrintServer(synchronizationPrintServer);
                 }
                 selectModel.Dispose();
                 addObjectDb.Dispose();
+                Dispose();
             }
         }
         /// <summary>
@@ -151,6 +152,7 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
         {
             var aksiok = new AksiokPostGetSystem(LoginUser, PasswordUser);
             aksiok.StartUpdateAksiok();
+            Dispose();
         }
 
         /// <summary>
@@ -160,6 +162,7 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
         {
             var startComparable = new StartComparable(Parameters.ConnectImns51, Parameters.DomainIfnsAll, Parameters.LotusAllUserIMNS, Parameters.Domain);
             startComparable.StartFullModelComparable();
+            Dispose();
         }
         /// <summary>
         /// Запуск процесса сбора файлов с файлового сервера индекс 8
@@ -168,6 +171,36 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
         {
             var processFindAllFileServers = new ProcessFindAllFileServers(Parameters.InXmlFile,Parameters.OutXmlFile,Parameters.ErrorXmlFile, Convert.ToInt32(Parameters.CountFilePack), Convert.ToInt32(Parameters.CountParallelProcess));
             processFindAllFileServers.ProcessAllFileServer(Parameters.NameFileServer);
+            Dispose();
         }
-    }
+        /// <summary>
+        /// Процесс загрузки данных инвентаризации с касперского
+        /// </summary>
+        public void ProcessStartServiceInventory()
+        {
+            var processStartServiceKaspersky = new PostServiceInv(Parameters.ServiceInvKaspersky, Parameters.ParameterKasperskyModel, Parameters.ServiceInvKasperskyAllHostDrivers);
+            processStartServiceKaspersky.StartKasperskyToInventory();
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            GC.Collect();
+            var order = 0;
+            string[] sizes = {"B", "KB", "MB", "GB", "TB"};
+            var sizeFiles = GC.GetTotalMemory(false);
+            while (sizeFiles >= 1024 && order < sizes.Length - 1)
+            {
+                order++;
+                sizeFiles /= 1024;
+            }
+            Loggers.Log4NetLogger.Info(new Exception($"Разрушили объект и освободили память процесса! Memory: {sizeFiles:0.##} {sizes[order]}"));
+        }
+
+        ~AllDynamicProcessStart()
+        {
+            
+        }
+   }
 }

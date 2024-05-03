@@ -5,7 +5,7 @@ using LibaryXMLAuto.Inventarization.ModelComparableUserAllSystem;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace LibaryDocumentGeneratorTestsTemplate.ComparableUser
+namespace LibraryDocumentGeneratorTestsTemplate.ComparableUser
 {
     [TestClass()]
     public class ComparableUser

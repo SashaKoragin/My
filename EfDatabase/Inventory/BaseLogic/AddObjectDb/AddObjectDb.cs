@@ -139,7 +139,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             {
                 Id = holiday.Id,
                 DateTime_Holiday = holiday.DateTime_Holiday,
-                IS_HOLIDAY = holiday.IS_HOLIDAY
+                IdStatusHolidays = holiday.IdStatusHolidays
             };
             try
             {
@@ -344,6 +344,8 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 ServiceNum = swithe.ServiceNum,
                 SerNum = swithe.SerNum,
                 InventarNum = swithe.InventarNum,
+                NameSwithes = swithe.NameSwithes,
+                IpAdress = swithe.IpAdress,
                 Coment = swithe.Coment,
                 IdStatus = swithe.IdStatus,
                 WriteOffSign = swithe.WriteOffSign,
@@ -460,6 +462,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 InventarNum = serverEquipment.InventarNum,
                 NameServer = serverEquipment.NameServer,
                 IpAdress = serverEquipment.IpAdress,
+                IpIlo = serverEquipment.IpIlo,
                 Coment = serverEquipment.Coment,
                 IdStatus = serverEquipment.IdStatus,
                 WriteOffSign = serverEquipment.WriteOffSign,
@@ -739,12 +742,12 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             {
                 IdTelephon = telephone.IdTelephon,
                 IdUser =  telephone.IdUser,
+                IdModelPhone = telephone.IdModelPhone,
                 IdSupply = telephone.IdSupply,
                 IdNumberKabinet = telephone.IdNumberKabinet,
                 ServiceNum = telephone.ServiceNum,
                 SerNumber = telephone.SerNumber,
                 InventarNumberTelephone = telephone.InventarNumberTelephone,
-                NameTelephone = telephone.NameTelephone,
                 Telephon_ = telephone.Telephon_,
                 TelephonUndeground = telephone.TelephonUndeground,
                 IpTelephon = telephone.IpTelephon,
@@ -752,6 +755,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 IdStatus = telephone.IdStatus,
                 IdCategoryHeaders = telephone.IdCategoryHeaders,
                 WriteOffSign = telephone.WriteOffSign,
+                IdHistory = telephone.IdHistory,
                 Coment = telephone.Coment
             };
             try
@@ -765,7 +769,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                         var oldModel = $"Владелец: {modelDb.First().Telephone?.User?.NameUser}; Кабинет: {modelDb.First().Telephone?.Kabinet?.NumberKabinet}; Комментарий: {modelDb.First().Telephone.Coment}; Статус: {modelDb.First().Telephone?.Statusing?.NameStatus}";
                         Inventory.Entry(telephoneAddAndModified).State = EntityState.Modified;
                         Inventory.SaveChanges();
-                        log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
+                        log.GenerateHistory(telephone.IdHistory, telephone.IdTelephon, "Телефон", idUser,
                             oldModel,
                             newModel);
                         return new ModelReturn<Telephon>("Обновили Телефон: " + telephoneAddAndModified.IdTelephon, telephone);
@@ -774,7 +778,7 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 Inventory.Telephons.Add(telephoneAddAndModified);
                 Inventory.SaveChanges();
                 telephone.IdTelephon = telephoneAddAndModified.IdTelephon;
-                log.GenerateHistory(null, telephone.IdTelephon, "Телефон", idUser,
+                log.GenerateHistory(telephone.IdHistory, telephone.IdTelephon, "Телефон", idUser,
                    $"Отсутствует модель при добавлении нового устройства",
                    newModel);
                 return new ModelReturn<Telephon>("Добавили Телефон: " + telephoneAddAndModified.IdTelephon, telephone, telephoneAddAndModified.IdTelephon);
@@ -786,6 +790,40 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             return new ModelReturn<Telephon>("При обновлении/добавлении данных 'Телефон' по : " + telephoneAddAndModified.IdTelephon + " произошла ошибка смотри log.txt");
         }
 
+        /// <summary>
+        /// Добавление или редактирования модели телефонов
+        /// </summary>
+        /// <param name="modelPhone">Модель серверного оборудования</param>
+        /// <returns></returns>
+        public ModelReturn<ModelPhone> AddAndEditModelPhone(ModelPhone modelPhone)
+        {
+            var modelPhoneAddAdnModified = new ModelPhone()
+            {
+                IdModelPhone = modelPhone.IdModelPhone,
+                NameModel = modelPhone.NameModel,
+                IdFullCategoria = modelPhone.IdFullCategoria
+            };
+            try
+            {
+                if ((from ModelPhone in Inventory.ModelPhones
+                     where ModelPhone.IdModelPhone == modelPhoneAddAdnModified.IdModelPhone
+                     select new { ModelPhone }).Any())
+                {
+                    Inventory.Entry(modelPhoneAddAdnModified).State = EntityState.Modified;
+                    Inventory.SaveChanges();
+                    return new ModelReturn<ModelPhone>("Обновили справочник модели телефонного оборудования: " + modelPhoneAddAdnModified.IdModelPhone, modelPhone);
+                }
+                Inventory.ModelPhones.Add(modelPhoneAddAdnModified);
+                Inventory.SaveChanges();
+                modelPhone.IdModelPhone = modelPhoneAddAdnModified.IdModelPhone;
+                return new ModelReturn<ModelPhone>("Добавили новое имя модели телефонного оборудования: " + modelPhoneAddAdnModified.IdModelPhone, modelPhone, modelPhoneAddAdnModified.IdModelPhone);
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return new ModelReturn<ModelPhone>("При обновлении/добавлении данных 'Наименование модели телефонного оборудования' по : " + modelPhoneAddAdnModified.IdModelPhone + " произошла ошибка смотри log.txt");
+        }
 
         /// <summary>
         /// Добавление или обновление ИБП
@@ -806,6 +844,8 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 ZavNumber = blokpower.ZavNumber,
                 ServiceNumber = blokpower.ServiceNumber,
                 InventarNumber = blokpower.InventarNumber,
+                NameBlockPowers = blokpower.NameBlockPowers,
+                IpAdress = blokpower.IpAdress,
                 Coment = blokpower.Coment,
                 IdStatus = blokpower.IdStatus,
                 WriteOffSign = blokpower.WriteOffSign,
@@ -1392,6 +1432,8 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
                 ServiceNumber = modelOtherAll.ServiceNumber,
                 SerNum = modelOtherAll.SerNum,
                 InventarNum = modelOtherAll.InventarNum,
+                NameOther = modelOtherAll.NameOther,
+                IpOther = modelOtherAll.IpOther,
                 Coment = modelOtherAll.Coment,
                 IdStatus = modelOtherAll.IdStatus,
                 WriteOffSign = modelOtherAll.WriteOffSign,
@@ -1645,8 +1687,8 @@ namespace EfDatabase.Inventory.BaseLogic.AddObjectDb
             {
                 IdCopySave = nameCopySave.IdCopySave,
                 NameCopySave = nameCopySave.NameCopySave,
-                SerNum = nameCopySave.SerNum,
-                InventarNum = nameCopySave.InventarNum
+                SerNumCopySave = nameCopySave.SerNumCopySave,
+                InventarNumCopySave = nameCopySave.InventarNumCopySave
             };
             try
             {

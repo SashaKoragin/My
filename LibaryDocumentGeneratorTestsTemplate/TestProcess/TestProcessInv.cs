@@ -7,6 +7,7 @@ using Microsoft.WindowsAPICodePack.Shell;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -18,10 +19,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using EfDatabase.Inventory.BaseLogic.FileServerAddFile;
 using EfDatabase.Inventory.ComparableSystem.StartComparable;
+using InventoryProcess.StartProcessInventory.ProcessStart;
 using LibaryXMLAuto.ReadOrWrite;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 
-namespace LibaryDocumentGeneratorTestsTemplate.TestProcess
+namespace LibraryDocumentGeneratorTestsTemplate.TestProcess
 {
     [TestClass()]
     public class TestProcessInv
@@ -29,11 +31,31 @@ namespace LibaryDocumentGeneratorTestsTemplate.TestProcess
         private readonly string[] sizes = {"B", "KB", "MB", "GB", "TB"};
 
         /// <summary>
+        /// Тестирование процессов
+        /// </summary>
+        [TestMethod()]
+        public void TestProcessPrintServer()
+        { 
+            Task.Run(() =>
+            {
+                var processStart = new ProcessStart(9, "7751-00-099", "	Qwerty12346&");
+                processStart.StartProcess();
+            });
+            //var start = new ProcessStart(9, "7751-00-099", "	Qwerty12346&");
+            //start.StartProcess();
+        }
+        [TestMethod()]
+        public void TestReplaceSymbol()
+        {
+            var str = "24-1-07/2250";
+            Regex reg = new Regex("[*\",&#^@]-/");
+            var str2 = Regex.Replace(str, "[*\",&#^@/]", "-");
+        }
+
+        /// <summary>
         /// Бд для обновления или добавления в БД
         /// </summary>
         //     private readonly FileServerAddFile FileServerAddDataBase = new FileServerAddFile();
-
-
         [TestMethod()]
         public void TestP()
         {

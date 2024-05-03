@@ -7,6 +7,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using EfDatabase.Inventory.Base;
 using EfDatabase.ReportCard;
 using EfDatabase.ReportXml.ModelComparableUserResult;
+using EfDatabaseAutomation.Automation.BaseLogica.AutoLogicInventory.ModelReportContainer;
 using EfDatabaseParametrsModel;
 using LibaryDocumentGenerator.ProgrammView.Excel.BorderModel;
 using LibaryDocumentGenerator.ProgrammView.Excel.CellAndRowsStyle;
@@ -29,6 +30,153 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             Document = document;
             WorkBookPart = workBookPart;
         }
+        /// <summary>
+        /// Создание отчета о контейнере и внутренних документов
+        /// </summary>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        public Worksheet ReportCreateDocumentContainer(ReportDocumentContainer template)
+        {
+            Worksheet worksheet = new Worksheet();
+
+            CellAndRowsStyle generateCellAndRowsStyle = new CellAndRowsStyle();
+            StyleCellsAndGenerateText style = new StyleCellsAndGenerateText(Document, WorkBookPart);
+            FontModel fontModel = new FontModel();
+            BorderModel modelBorder = new BorderModel();
+            var listValueCell = new List<ModelRowFormat>();
+            var modelExcel = new ModelXmlExcel();
+
+            var stileFullBorderLeftOfTopFirstColumnFirstRow1 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center);
+            var stileFullBorderRightOfTopFirstColumnFirstRow2 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center);
+            var stileFullBorderLeftFirstColumnFirstRow3 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center);
+            var stileFullBorderRightFirstColumnFirstRow4 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center);
+            var stileFullBorderLeftOfBottomFirstColumnFirstRow5 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Medium), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center);
+            var stileFullBorderRightOfBottomFirstColumnFirstRow6 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Medium), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center);
+
+            var stileFullBorder = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium), HorizontalAlignmentValues.Center, VerticalAlignmentValues.Center);
+
+            //var stileFullBorderLeft = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center);
+            var stileFullBorderThin = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center);
+
+            listValueCell.Add(new ModelRowFormat()
+            {
+                HeightRow = 12.75D,
+                ModelCell = new List<ModelCellFormat>()
+                {
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = "Номер тары:", CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftOfTopFirstColumnFirstRow1, WidthColumn = 32.50D},
+                    new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = template.ReportContainer.BarcodeContainer, CellFormat = CellValues.String, StyleIndex = stileFullBorderRightOfTopFirstColumnFirstRow2, WidthColumn = 25.50D}
+                }
+            });
+            listValueCell.Add(new ModelRowFormat()
+            {
+                HeightRow = 12.75D,
+                ModelCell = new List<ModelCellFormat>()
+                {
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = "Минимальное количество листов:", CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftFirstColumnFirstRow3},
+                    new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = template.ReportContainer.CountDocumentMin.ToString(), CellFormat = CellValues.Number, StyleIndex = stileFullBorderRightFirstColumnFirstRow4}
+                }
+            });
+            listValueCell.Add(new ModelRowFormat()
+            {
+                HeightRow = 12.75D,
+                ModelCell = new List<ModelCellFormat>()
+                {
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = "Максимальное количество листов:", CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftFirstColumnFirstRow3},
+                    new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = template.ReportContainer.CountDocumentMax.ToString(), CellFormat = CellValues.Number, StyleIndex = stileFullBorderRightFirstColumnFirstRow4}
+                }
+            });
+            listValueCell.Add(new ModelRowFormat()
+            {
+                HeightRow = 12.75D,
+                ModelCell = new List<ModelCellFormat>()
+                {
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = "Количество документов в Таре:", CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftFirstColumnFirstRow3},
+                    new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = template.ReportContainer.CountDoc.ToString(), CellFormat = CellValues.Number, StyleIndex = stileFullBorderRightFirstColumnFirstRow4}
+                }
+            });
+            listValueCell.Add(new ModelRowFormat()
+            {
+                HeightRow = 12.75D,
+                ModelCell = new List<ModelCellFormat>()
+                {
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = "Количество листов в Таре:", CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftOfBottomFirstColumnFirstRow5},
+                    new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = template.ReportContainer.CountCurrent.ToString(), CellFormat = CellValues.Number, StyleIndex = stileFullBorderRightOfBottomFirstColumnFirstRow6}
+                }
+            });
+            generateCellAndRowsStyle.GenerateEmptyCell(ref listValueCell, 12.75D, 5);
+            listValueCell.Add(new ModelRowFormat()
+            {
+                HeightRow = 12.75D,
+                ModelCell = new List<ModelCellFormat>()
+                {
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 8, ValueCell = "Реестр по Таре", CellFormat = CellValues.String, StyleIndex = stileFullBorder, MergeHorizontalInt = 8}
+                }
+            });
+            listValueCell.Add(new ModelRowFormat()
+            {
+                HeightRow = 12.75D,
+                ModelCell = new List<ModelCellFormat>()
+                {
+                    new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = "Логин пользователя", CellFormat = CellValues.String, StyleIndex = stileFullBorder},
+                    new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = "Номер ОГРН\\ГРН", CellFormat = CellValues.String, StyleIndex = stileFullBorder},
+                    new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 1, ValueCell = "Количество страниц", CellFormat = CellValues.String, StyleIndex = stileFullBorder, WidthColumn = 20.50D},
+                    new ModelCellFormat() { IndexCellStart = 4, IndexCellFinish = 1, ValueCell = "Признак загрузки", CellFormat = CellValues.String, StyleIndex = stileFullBorder, WidthColumn = 29.50D},
+                    new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 1, ValueCell = "Колличество документов", CellFormat = CellValues.String, StyleIndex = stileFullBorder, WidthColumn = 23.50D},
+                    new ModelCellFormat() { IndexCellStart = 6, IndexCellFinish = 1, ValueCell = "Документы", CellFormat = CellValues.String, StyleIndex = stileFullBorder, WidthColumn = 25.50D},
+                    new ModelCellFormat() { IndexCellStart = 7, IndexCellFinish = 1, ValueCell = "Остаток страниц в ГРН", CellFormat = CellValues.String, StyleIndex = stileFullBorder, WidthColumn = 25.50D},
+                    new ModelCellFormat() { IndexCellStart = 8, IndexCellFinish = 1, ValueCell = "Вошедшие по Штрих-коду", CellFormat = CellValues.String, StyleIndex = stileFullBorder, WidthColumn = 38.50D},
+                }
+            });
+            foreach (var grn in template.ReportContainer.ModelReport)
+            {
+
+                listValueCell.Add(new ModelRowFormat()
+                {
+                    HeightRow = 12.75D,
+                    ModelCell = new List<ModelCellFormat>()
+                    {
+                        new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = grn.UserLogin, CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                        new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = grn.NumberOgrnGrn.ToString(), CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                        new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 1, ValueCell = grn.SumPageIncluded.ToString(), CellFormat = CellValues.Number, StyleIndex = stileFullBorderThin},
+                        new ModelCellFormat() { IndexCellStart = 4, IndexCellFinish = 1, ValueCell = grn.State==1 ? "Полный" : "Частичный", CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                        new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 1, ValueCell = grn.CountDocument.ToString(), CellFormat = CellValues.Number, StyleIndex = stileFullBorderThin},
+                        new ModelCellFormat() { IndexCellStart = 6, IndexCellFinish = 1, ValueCell = grn.SumPageNotIncluded==0?"Все":"Не все", CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                        new ModelCellFormat() { IndexCellStart = 7, IndexCellFinish = 1, ValueCell = grn.SumPageNotIncluded.ToString(), CellFormat = CellValues.Number, StyleIndex = stileFullBorderThin},
+                        new ModelCellFormat() { IndexCellStart = 8, IndexCellFinish = 1, ValueCell = "", CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                    }
+                });
+                if (grn.DocumentInventory != null)
+                {
+                    foreach (var documentInventory in grn.DocumentInventory)
+                    {
+                        listValueCell.Add(new ModelRowFormat()
+                        {
+                            HeightRow = 12.75D,
+                            ModelCell = new List<ModelCellFormat>()
+                            {
+                                new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = grn.UserLogin, CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                                new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = grn.NumberOgrnGrn.ToString(), CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                                new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 1, ValueCell = "", CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                                new ModelCellFormat() { IndexCellStart = 4, IndexCellFinish = 1, ValueCell = "Загружено в Тару", CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                                new ModelCellFormat() { IndexCellStart = 5, IndexCellFinish = 1, ValueCell = "", CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                                new ModelCellFormat() { IndexCellStart = 6, IndexCellFinish = 1, ValueCell = "", CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                                new ModelCellFormat() { IndexCellStart = 7, IndexCellFinish = 1, ValueCell = "", CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                                new ModelCellFormat() { IndexCellStart = 8, IndexCellFinish = 1, ValueCell = documentInventory.GuidDocument, CellFormat = CellValues.String, StyleIndex = stileFullBorderThin},
+                            }
+                        });
+                    }
+                }
+            }
+            generateCellAndRowsStyle.GenerateCell(listValueCell, ref modelExcel);
+            generateCellAndRowsStyle.MergeCells(listValueCell, ref modelExcel);
+            generateCellAndRowsStyle.GenerateSheetDataAddRowsList(ref modelExcel);
+            worksheet.Append(modelExcel.SheetData);
+            worksheet.InsertAfter(modelExcel.MergeCells, worksheet.Elements<SheetData>().First());
+            worksheet.InsertAt(modelExcel.Сolumns, 0);
+            return worksheet;
+        }
+
+
         /// <summary>
         /// Умный отчет о выборки разночтений из БД Lotus Notes, AD, DKS
         /// </summary>
@@ -697,6 +845,120 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             return worksheet;
         }
         /// <summary>
+        /// Отчет сравнения АКСИОК и Инвентаризации
+        /// </summary>
+        /// <param name="template">Модель раскладки</param>
+        /// <returns></returns>
+        public Worksheet ReportCardAksiokAndInventory(ComparableCardAksiokAndInventory[] template)
+        {
+            Worksheet worksheet = new Worksheet();
+
+            CellAndRowsStyle generateCellAndRowsStyle = new CellAndRowsStyle();
+
+            StyleCellsAndGenerateText style = new StyleCellsAndGenerateText(Document, WorkBookPart);
+            FontModel fontModel = new FontModel();
+            BorderModel modelBorder = new BorderModel();
+            var listValueCell = new List<ModelRowFormat>();
+            var modelExcel = new ModelXmlExcel();
+
+            var fillOrange = new Fill();
+            var fillHeaders = new Fill();
+            var fillHeaders1 = new Fill();
+            var fillHeaders2 = new Fill();
+            var fillHeaders3 = new Fill();
+   
+            var fillGreen1 = new Fill();
+            var fillGreen2 = new Fill();
+            var fillGreen3 = new Fill();
+            var fillGreenLast1 = new Fill();
+            var fillGreenLast2 = new Fill();
+            var fillGreenLast3 = new Fill();
+            var fillRedLast1 = new Fill();
+            var fillRedLast2 = new Fill();
+            var fillRedLast3 = new Fill();
+
+            fillOrange.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "FFC000" } });
+            fillHeaders.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "FFFFCC" } });
+            fillHeaders1.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "FFFFCC" } });
+            fillHeaders2.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "FFFFCC" } });
+            fillHeaders3.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "FFFFCC" } });
+
+            fillGreen1.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "92D050" } });
+            fillGreen2.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "92D050" } });
+            fillGreen3.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "92D050" } });
+            fillGreenLast1.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "92D050" } });
+            fillGreenLast2.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "92D050" } });
+            fillGreenLast3.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "92D050" } });
+            fillRedLast1.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "FF0000" } });
+            fillRedLast2.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "FF0000" } });
+            fillRedLast3.Append(new PatternFill() { PatternType = PatternValues.Solid, ForegroundColor = new ForegroundColor() { Rgb = "FF0000" } });
+
+            var stileFullBorderCenter = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium), HorizontalAlignmentValues.Center, VerticalAlignmentValues.Center, true, false, fillOrange);
+            var stileFullBorderCenterColorHeaders = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Medium), HorizontalAlignmentValues.Center, VerticalAlignmentValues.Center, true, false, fillHeaders);
+
+            var stileFullBorderLeftFirstColumnFirstRow1 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillHeaders1);
+            var stileFullBorderLeftFirstColumnFirstRow2 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillGreen1);
+            var stileFullBorderLeftFirstColumnFirstRow3 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillRedLast1);
+            var stileFullBorderLeftFirstColumnFirstRow4 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Medium, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillGreenLast1);
+
+            var stileFullBorderLeftFirstColumnRow1 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillHeaders2);
+            var stileFullBorderLeftFirstColumnRow2 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillGreen2);
+            var stileFullBorderLeftFirstColumnRow3 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillRedLast2);
+            var stileFullBorderLeftFirstColumnRow4 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Thin), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillGreenLast2);
+
+            var stileFullBorderLeftFirstColumnFirstLastEndGroupRow1 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Medium), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillHeaders3);
+            var stileFullBorderLeftFirstColumnFirstLastEndGroupRow2 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Thin, BorderStyleValues.Medium), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillGreen3);
+            var stileFullBorderLeftFirstColumnFirstLastEndGroupRow3 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Medium), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillRedLast3);
+            var stileFullBorderLeftFirstColumnFirstLastEndGroupRow4 = style.StyleTimesNewRoman(fontModel.GenerateFont(), modelBorder.GenerateStandardFullBorderSetting(BorderStyleValues.Thin, BorderStyleValues.Medium, BorderStyleValues.Thin, BorderStyleValues.Medium), HorizontalAlignmentValues.Left, VerticalAlignmentValues.Center, true, false, fillGreenLast3);
+            
+            listValueCell.Add(new ModelRowFormat() { HeightRow = 16.50D, ModelCell = new List<ModelCellFormat>() { new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish =  3, ValueCell = "Анализ техники из БД: Инвентаризация, Active Directory, АКСИОК", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenter, MergeHorizontalInt = 3 } } });
+            
+            var cellColumns = new List<ModelCellFormat>();
+            cellColumns.Add(new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = "Наименование параметра", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenterColorHeaders, WidthColumn = 47.00D });
+            cellColumns.Add(new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = "Инвентаризация (Эталон)", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenterColorHeaders, WidthColumn = 83.00D });
+            cellColumns.Add(new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 1, ValueCell = "АКСИОК", CellFormat = CellValues.String, StyleIndex = stileFullBorderCenterColorHeaders, WidthColumn = 82.00D });
+            listValueCell.Add(new ModelRowFormat() { HeightRow = 15.75D, ModelCell = cellColumns });
+
+            var count = 1;
+            var countRow = template.Length;
+            foreach (var row in template)
+            {
+                var cellDataColumnsAllTable = new List<ModelCellFormat>();
+                if (count == 1)
+                {
+                    cellDataColumnsAllTable.Add(new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = row.Memo, CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftFirstColumnFirstRow1, WidthColumn = 47.00D });
+                    cellDataColumnsAllTable.Add(new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = row.Inventory, CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftFirstColumnFirstRow2, WidthColumn = 83.00D });
+                    cellDataColumnsAllTable.Add(new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 1, ValueCell = row.Aksiok, CellFormat = CellValues.String, StyleIndex = row.Inventory == row.Aksiok ? stileFullBorderLeftFirstColumnFirstRow4 : stileFullBorderLeftFirstColumnFirstRow3, WidthColumn = 82.00D });
+                }
+                else
+                {
+                    if (count == countRow)
+                    {
+                        cellDataColumnsAllTable.Add(new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = row.Memo, CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftFirstColumnFirstLastEndGroupRow1, WidthColumn = 47.00D });
+                        cellDataColumnsAllTable.Add(new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = row.Inventory, CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftFirstColumnFirstLastEndGroupRow2, WidthColumn = 83.00D });
+                        cellDataColumnsAllTable.Add(new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 1, ValueCell = row.Aksiok, CellFormat = CellValues.String, StyleIndex = row.Inventory == row.Aksiok ? stileFullBorderLeftFirstColumnFirstLastEndGroupRow4 : stileFullBorderLeftFirstColumnFirstLastEndGroupRow3, WidthColumn = 82.00D });
+                    }
+                    else
+                    {
+                        cellDataColumnsAllTable.Add(new ModelCellFormat() { IndexCellStart = 1, IndexCellFinish = 1, ValueCell = row.Memo, CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftFirstColumnRow1, WidthColumn = 47.00D });
+                        cellDataColumnsAllTable.Add(new ModelCellFormat() { IndexCellStart = 2, IndexCellFinish = 1, ValueCell = row.Inventory, CellFormat = CellValues.String, StyleIndex = stileFullBorderLeftFirstColumnRow2, WidthColumn = 83.00D });
+                        cellDataColumnsAllTable.Add(new ModelCellFormat() { IndexCellStart = 3, IndexCellFinish = 1, ValueCell = row.Aksiok, CellFormat = CellValues.String, StyleIndex = row.Inventory == row.Aksiok ? stileFullBorderLeftFirstColumnRow4 : stileFullBorderLeftFirstColumnRow3, WidthColumn = 82.00D });
+                    }
+                }
+                listValueCell.Add(new ModelRowFormat() { HeightRow = 15.75D, ModelCell = cellDataColumnsAllTable });
+                count++;
+            }
+
+            generateCellAndRowsStyle.GenerateCell(listValueCell, ref modelExcel);
+            generateCellAndRowsStyle.MergeCells(listValueCell, ref modelExcel);
+            generateCellAndRowsStyle.GenerateSheetDataAddRowsList(ref modelExcel);
+            worksheet.Append(modelExcel.SheetData);
+            worksheet.InsertAfter(modelExcel.MergeCells, worksheet.Elements<SheetData>().First());
+            worksheet.InsertAt(modelExcel.Сolumns, 0);
+            return worksheet;
+        }
+
+        /// <summary>
         /// Отчет о доступности серверов 
         /// </summary>
         /// <param name="template">Сервера из БД</param>
@@ -1290,7 +1552,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             });
 
             var iNumber = 1;
-            var notCount = new[] { "ОЧ","ОТ","Б","А","ОД","ОУ","К" }; //Не считать
+            var notCount = new[] { "ОЧ","ОТ","Б","А","ОД","ОУ","К","Р" }; //Не считать
             bool exitTypeModelReport = true;
             foreach (var usersReportCard in model.SettingParameters.UsersReportCard)
             {
@@ -1608,6 +1870,11 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                         {
                             return "Р";
                         }
+                        if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end && itemVacation.TypeVacation.Code == "01")
+                        {
+                            return "ОТ";
+                        }
+
                     }
                 }
                 return "ОЧ";
@@ -1637,6 +1904,10 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     }
                     if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end && (itemVacation.TypeVacation.Code == "13"|| itemVacation.TypeVacation.Code == "16"))
                     {
+                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 1))
+                        {
+                            return "B";
+                        }
                         return "ОД";
                     }
                     if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end && (itemVacation.TypeVacation.Code == "42" || itemVacation.TypeVacation.Code == "43"))
@@ -1645,6 +1916,10 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     }
                     if (date >= itemVacation.Date_begin && date <= itemVacation.Date_end)
                     {
+                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 1))
+                        {
+                            return "B";
+                        }
                         return "ОТ";
                     }
                 }
@@ -1671,13 +1946,17 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             }
             if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
             {
-                if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2))
+                {
+                    return null;
+                }
+                if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 3))
                 {
                     return null;
                 }
                 return "В";
             }
-            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == true))
+            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 1))
             {
                 return "B";
             }
@@ -1713,13 +1992,13 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             {
                 if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
                 {
-                    if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                    if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2))
                     {
                         return 5.00;
                     }
                     return 0.00;
                 }
-                if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == true))
+                if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 1))
                 {
                     return 0.00;
                 }
@@ -1729,17 +2008,21 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
             {
                 if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
                 {
-                    if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                    if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2))
                     {
                         return  7.00;
                     }
+                    if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 3))
+                    {
+                        return 8.00;
+                    }
                     return 0.00;
                 }
-                if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == true))
+                if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 1))
                 {
                     return 0.00;
                 }
-                return (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false) ? 7.00 : 8.00);
+                return (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2) ? 7.00 : 8.00);
             }
             if (userCard.ItemVacation != null)
             {
@@ -1749,17 +2032,21 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     {
                         if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
                         {
-                            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2))
                             {
                                 return 7.00;
                             }
+                            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 3))
+                            {
+                                return 8.00;
+                            }
                             return 0.00;
                         }
-                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2))
                         {
                             return 7.00;
                         }
-                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == true))
+                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 1))
                         {
                             return 0.00;
                         }
@@ -1775,17 +2062,21 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     {
                         if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
                         {
-                            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2))
                             {
                                 return 7.00;
                             }
+                            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 3))
+                            {
+                                return 8.00;
+                            }
                             return 0.00;
                         }
-                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2))
                         {
                             return 7.00;
                         }
-                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == true))
+                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 1))
                         {
                             return 0.00;
                         }
@@ -1801,17 +2092,21 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocumentExcel
                     {
                         if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
                         {
-                            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2))
                             {
                                 return 7.00;
                             }
+                            if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 3))
+                            {
+                                return 8.00;
+                            }
                             return 0.00;
                         }
-                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == false))
+                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 2))
                         {
                             return 7.00;
                         }
-                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IS_HOLIDAY == true))
+                        if (holiDays.Any(x => x.DateTime_Holiday == date && x.IdStatusHolidays == 1))
                         {
                             return 0.00;
                         }

@@ -27,6 +27,7 @@
 			<xs:element ref="Step3ResponseSupport"/>
 			<xs:element ref="Error"/>
 			<xs:element ref="IdCalendarVks"/>
+			<xs:element ref="AksiokAddAndEdit" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="IdTemplate" type="xs:int" default="0" nillable="false">
@@ -177,6 +178,290 @@
 	<xs:element name="IdAnalisysEpo" type="xs:int" default="0" nillable="false">
 		<xs:annotation>
 			<xs:documentation>Ун отчета с ошибками ЭПО</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TypeAny" type="xs:string" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Любой отчет</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AksiokAddAndEdit" type="AksiokAddAndEdit">
+		<xs:annotation>
+			<xs:documentation>Модель добавления или редактирования записи</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AksiokAddAndEdit">
+		<xs:annotation>
+			<xs:documentation>Модель добавления или редактирования записи</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ParametersModel"/>
+			<xs:element ref="KitsEquipment"/>
+			<xs:element ref="ParametersRequestAksiok" minOccurs="0"/>
+			<xs:element ref="UploadFileAksiok" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ParametersModel">
+		<xs:annotation>
+			<xs:documentation>Модель параметров</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="IdFullCategoria"/>
+				<xs:element ref="IdState"/>
+				<xs:element ref="IdStateSto"/>
+				<xs:element ref="IdExpertise"/>
+				<xs:element ref="Guarantee"/>
+			</xs:sequence>
+			<xs:attribute name="ModelRequest" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Модель Add or Edit</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameProducer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование производителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="NameModel" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер для сопоставления</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CodeError" type="xs:int" default="0">
+				<xs:annotation>
+					<xs:documentation>Код ошибки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ErrorServer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ошибка сервера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="YearOfIssue" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Год выпуска оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ExploitationStartYear" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Год ввода в эксплуатацию</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsKit" type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>Признак комплектности 0 нет комплекта 1 есть комплект</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="LoginUser" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Пароль пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Password" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Пароль пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IdFullCategoria" type="xs:int" default="0">
+		<xs:annotation>
+			<xs:documentation>Ун категории</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="KitsEquipment">
+		<xs:annotation>
+			<xs:documentation>Комплекты оборудования</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="KitsEquipmentServer" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="InventoryNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарный номер для сопоставления</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ErrorServer" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ошибка сервера</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsCheckedKits" type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>Комплектовать</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsNotCheckedKits" type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>Разкомплектовать</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="KitsEquipmentServer">
+		<xs:annotation>
+			<xs:documentation>Модель найденных комплектов</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Id" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун объектов АКСИОК</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SerialNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийные номера АКСИОК</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="InventoryNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Инвентарные номера АКСИОК</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsKit" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Комплектность</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ParametersRequestAksiok">
+		<xs:annotation>
+			<xs:documentation>Конечные параметры для запуска процесса Редактирование или Добавления</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FileAkt" minOccurs="0"/>
+				<xs:element ref="FileExpertise" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="IdType" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун типа</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdProducer" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун производителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdModel" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdState" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун статуса</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdStateSto" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун статуса СТО</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IdExpertise" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун экспертизы</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IdState" type="xs:int" default="0">
+		<xs:annotation>
+			<xs:documentation>Ун статуса</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdStateSto" type="xs:int" default="0">
+		<xs:annotation>
+			<xs:documentation>Ун статуса СТО</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FileAkt" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Файл акта</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameFile" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Имя файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="File" type="xs:base64Binary" use="required">
+				<xs:annotation>
+					<xs:documentation>Файл акта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeFile" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FileExpertise" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Файл экспертизы</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameFile" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Имя файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="File" type="xs:base64Binary" use="required">
+				<xs:annotation>
+					<xs:documentation>Файл экспертизы</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeFile" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IdExpertise" type="xs:int" default="0">
+		<xs:annotation>
+			<xs:documentation>Ун экспертизы</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UploadFileAksiok">
+		<xs:annotation>
+			<xs:documentation>Файл для выгрузки из Аксиок</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="NameFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Имя файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="File" type="xs:base64Binary">
+				<xs:annotation>
+					<xs:documentation>Файл с АКСИОК</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="TypeFile" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Тип файла</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Guarantee" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Гарантия</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

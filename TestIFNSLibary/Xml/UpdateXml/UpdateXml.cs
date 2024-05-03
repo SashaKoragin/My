@@ -44,7 +44,7 @@ namespace TestIFNSLibary.Xml.UpdateXml
         /// <param name="xmlDocument">XML Document</param>
         /// <param name="nameAtribute">Имя атрибута</param>
         /// <returns>XML атрибут который можно добавить</returns>
-        internal static XmlAttribute AtributeAddDateNow(XmlDocument xmlDocument, string nameAtribute)
+        internal XmlAttribute AtributeAddDateNow(XmlDocument xmlDocument, string nameAtribute)
         {
             XmlAttribute atributeinn = xmlDocument.CreateAttribute(nameAtribute);
             XmlText inntext = xmlDocument.CreateTextNode(DateTime.Now.ToString("O"));

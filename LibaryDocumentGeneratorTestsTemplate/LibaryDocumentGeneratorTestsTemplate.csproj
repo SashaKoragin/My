@@ -6,8 +6,8 @@
     <ProjectGuid>{667FD566-C84F-491A-B134-1943ADAB951C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LibaryDocumentGeneratorTestsTemplate</RootNamespace>
-    <AssemblyName>LibaryDocumentGeneratorTestsTemplate</AssemblyName>
+    <RootNamespace>LibraryDocumentGeneratorTestsTemplate</RootNamespace>
+    <AssemblyName>LibraryDocumentGeneratorTestsTemplate</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -39,8 +39,9 @@
     <Reference Include="ClosedXML, Version=0.96.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.96.0\lib\net46\ClosedXML.dll</HintPath>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.17.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
-      <HintPath>..\packages\DocumentFormat.OpenXml.2.17.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WPFLib\WPFLib\packages\DocumentFormat.OpenXml.2.18.0\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -59,6 +60,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
@@ -66,6 +68,7 @@
     <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -89,8 +92,9 @@
     <Compile Include="ComparableUser\GuidGenerator.cs" />
     <Compile Include="ComparableUser\GuidVersion.cs" />
     <Compile Include="Documents\Template\TemplateUserRuleTestsTemplate.cs" />
-    <Compile Include="KasperskyTest\KasperskyTest.cs" />
+    <Compile Include="Kaspersky\KasperskyTestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sntp\Sntp.cs" />
     <Compile Include="SoapBynary\NBFSNetConsole.cs" />
     <Compile Include="SoapBynary\TestClass.cs" />
     <Compile Include="SoapBynary\Test\MethodInvokeResult.cs" />
@@ -99,11 +103,16 @@
     <Compile Include="SoapBynary\Test\Polyps\DObject.cs" />
     <Compile Include="SoapBynary\Test\SerializationHelper.cs" />
     <Compile Include="Sql\ProcedureInventorization\UnitTest1.cs" />
+    <Compile Include="PhoneActiveDirectory\PhoneActiveDirectory.cs" />
     <Compile Include="TestProcess\Test.cs" />
     <Compile Include="TestProcess\TestProcessInv.cs" />
     <Compile Include="TestStoAuto\StoTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Kaspersky\KasperskyXsdModel\KasperskyXsdModel.csproj">
+      <Project>{44da20e2-4732-4dfa-8149-8553deb3c380}</Project>
+      <Name>KasperskyXsdModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\EfDatabaseAutomation\EfDatabaseAutomation.csproj">
       <Project>{fdad249d-cd7d-4581-b945-90d2f9dad698}</Project>
       <Name>EfDatabaseAutomation</Name>
@@ -162,6 +171,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

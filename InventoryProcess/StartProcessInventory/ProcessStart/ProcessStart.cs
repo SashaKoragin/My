@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InventoryProcess.StartProcessInventory.ProcessStart
 {
-    public class ProcessStart
+    public class ProcessStart : IDisposable
     {
         /// <summary>
         /// Индекс процесса
@@ -53,6 +53,7 @@ namespace InventoryProcess.StartProcessInventory.ProcessStart
                             addObjectDb.IsProcessComplete(IndexProcess, true);
                             addObjectDb.Dispose();
                             SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>($"{process.InfoEvent} завершен!", null, 3));
+                            Dispose();
                         }
                         catch (Exception e)
                         {
@@ -74,6 +75,26 @@ namespace InventoryProcess.StartProcessInventory.ProcessStart
                 SignalRinventory.SubscribeStatusProcess(new ModelReturn<string>(e.Message));
                 Loggers.Log4NetLogger.Error(e);
             }
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            GC.Collect();
+            var order = 0;
+            string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+            var sizeFiles = GC.GetTotalMemory(false);
+            while (sizeFiles >= 1024 && order < sizes.Length - 1)
+            {
+                order++;
+                sizeFiles /= 1024;
+            }
+            Loggers.Log4NetLogger.Info(new Exception($"Разрушили процесса и освободили память! Memory: {sizeFiles:0.##} {sizes[order]}"));
+        }
+
+        ~ProcessStart()
+        {
+
         }
     }
 }

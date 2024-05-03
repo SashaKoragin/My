@@ -41,44 +41,7 @@ namespace LibaryDocumentGenerator.Documents.DocumentMigration
         /// <param name="model">Модель миграции</param>
         public void MigrationDocument(string connectionStringTemplate, string path, MigrationParse model)
         {
-            ServiceRestLotus lotus = new ServiceRestLotus();
-            SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate template = new SqlLibaryIfns.SqlModelReport.SqlTemplate.ModelTemplate();
-            var setting = new FullSetting { UseTemplate = new UseTemplate() { IdTemplate = 3 } };
-            var documentTemplate = template.Template(connectionStringTemplate, setting);
-            model.N280 = template.Inspection(connectionStringTemplate, "7746").Inspection.N280;
-            var ul46 = model.ReportMigration.Where(code => (code.Kpp ?? string.Empty) != "" && code.Problem.Contains("Запись о налогоплательщике в ЦУН не содержит ОКТМО")).ToArray();
-            var fullPath = path + "7746" + "_ЮЛ_" + Constant.WordConstant.FormatWord;
-            GenerateDoc(fullPath, documentTemplate, ul46, model, 1, "7746");
-            setting.UseTemplate.IdTemplate = 2;
-            documentTemplate = template.Template(connectionStringTemplate, setting);
-            model.ReportMigration.GroupBy(x => x.CodeIfns).ToList().ForEach(key =>
-            {
-                model.N280 = template.Inspection(connectionStringTemplate, key.Key).Inspection.N280;
-                List<ReportMigration[]> report = new List<ReportMigration[]>();
-                var fl = model.ReportMigration.Where(code => code.CodeIfns == key.Key && string.IsNullOrWhiteSpace(code.Kpp)).ToArray();
-                var ul = model.ReportMigration.Where(code => code.CodeIfns == key.Key && (code.Kpp ?? string.Empty) != "" && !code.Problem.Contains("Запись о налогоплательщике в ЦУН не содержит ОКТМО")).ToArray();
-                if (fl.Length >= 1) { report.Add(fl);}
-                if (ul.Length >= 1) { report.Add(ul); }
-                foreach (var param in report)
-                {
-                    int isTemplate;
-                    string fileName;
-                    if (!string.IsNullOrWhiteSpace(param[0].Kpp))
-                    {
-                        isTemplate = 1;
-                        fileName = key.Key + "_ЮЛ_" + Constant.WordConstant.FormatWord;
-                        fullPath = path + fileName;
-                    }
-                    else
-                    {
-                        isTemplate = 2;
-                        fileName = key.Key + "_ФЛ_ИП_" + Constant.WordConstant.FormatWord;
-                        fullPath = path + fileName;
-                    }
-                    GenerateDoc(fullPath, documentTemplate, param, model, isTemplate, key.Key);
-                }
-                report.Clear();
-            });
+
         }
         /// <summary>
         /// Создание документов по Миграции

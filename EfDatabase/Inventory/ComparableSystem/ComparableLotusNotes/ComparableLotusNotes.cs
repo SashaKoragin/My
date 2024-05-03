@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using LibaryXMLAuto.Inventarization.ModelComparableUserAllSystem;
+using LibaryXMLAuto.ReadOrWrite;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
 
 namespace EfDatabase.Inventory.ComparableSystem.ComparableLotusNotes
@@ -36,7 +37,7 @@ namespace EfDatabase.Inventory.ComparableSystem.ComparableLotusNotes
                 resultServer = rdr.ReadToEnd();
             }
             response.Dispose();
-            return (ModelComparableUser)json.JsonDeserializeObjectClass<ModelComparableUser>(resultServer);
+            return json.JsonDeserializeObjectClassModel<ModelComparableUser>(resultServer);
         }
 
     }

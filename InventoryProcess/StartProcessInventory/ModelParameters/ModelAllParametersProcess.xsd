@@ -33,6 +33,9 @@
 			<xs:element ref="ErrorXmlFile"/>
 			<xs:element ref="CountFilePack"/>
 			<xs:element ref="CountParallelProcess"/>
+			<xs:element ref="ServiceInvKaspersky"/>
+			<xs:element ref="ParameterKasperskyModel"/>
+			<xs:element ref="ServiceInvKasperskyAllHostDrivers"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="Domain" type="xs:string">
@@ -143,6 +146,21 @@
 	<xs:element name="CountParallelProcess" type="xs:string">
 		<xs:annotation>
 			<xs:documentation>Колличество паралельных процесов</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ServiceInvKaspersky" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Сервис инвентаризации касперского</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParameterKasperskyModel" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Модель параметры для сервиса касперского инвентаризации адрес</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ServiceInvKasperskyAllHostDrivers" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Модель параметры для сервиса касперского инвентаризации адрес всех характеристик</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

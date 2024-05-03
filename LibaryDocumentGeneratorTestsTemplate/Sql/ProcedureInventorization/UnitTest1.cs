@@ -13,7 +13,7 @@ using TestIFNSLibary.ServiceRest;
 using SqlLibaryIfns.PingIp;
 using Type = System.Type;
 
-namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
+namespace LibraryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
 {
     [TestClass]
     public class ProcedureInventorization
@@ -236,12 +236,9 @@ namespace LibaryDocumentGeneratorTestsTemplate.Sql.ProcedureInventorization
         [TestMethod]
         public void TestIsHoliday()
         {
-            var dateSign = new DateTime(2021, 1, 3);
-            var date = dateSign.AddWorkdays(1);
-             date = dateSign.AddWorkdays(-1);
-             date = dateSign.AddWorkdays(-3);
-             date = dateSign.AddWorkdays(3);
-
+            Select auto = new Select();
+            var modle = auto.Inventory.SysBlocks.ToArray();
+            
         }
     }
 }

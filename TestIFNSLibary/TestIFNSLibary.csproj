@@ -129,6 +129,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Snmp\DataTransportInventory\DataTransportInventoryToSnmp.csproj">
+      <Project>{ed6f57ca-8848-4e6e-a981-44eaf7cc7a02}</Project>
+      <Name>DataTransportInventoryToSnmp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WPFLib\WPFLib\LibaryXMLAuto\LibaryXMLAuto.csproj">
       <Project>{a2bc3ae2-4a61-4e9e-9fa4-96a02677c79c}</Project>
       <Name>LibaryXMLAuto</Name>

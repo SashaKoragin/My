@@ -4,6 +4,7 @@ using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DataTransportInventoryToSnmp.ModelTransportXml;
 using EfDatabase.FilterModel;
 using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AddObjectDb;
@@ -11,10 +12,8 @@ using EfDatabase.Inventory.BaseLogic.DeleteObjectDb;
 using EfDatabase.Inventory.BaseLogic.Login;
 using EfDatabase.Inventory.BaseLogic.Select;
 using EfDatabase.Inventory.MailLogicLotus;
-using EfDatabase.Inventory.ReportXml.ReturnModelError;
 using EfDatabase.Inventory.SqlModelSelect;
 using EfDatabase.MemoReport;
-using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
 using EfDatabase.ReportCard;
 using EfDatabase.ReportXml.ModelComparableUserResult;
 using EfDatabase.ReportXml.ModelFileServer;
@@ -26,6 +25,7 @@ using EfDatabaseXsdInventoryAutorization;
 using EfDatabase.ReportXml.XsdMail;
 using EfDatabaseXsdQrCodeModel;
 using EfDatabaseXsdSupportNalog;
+using InventoryProcess.StartProcessInventory.ModelSelectProcess;
 using InventoryProcess.StartProcessInventory.ProcessStart;
 using LibaryDocumentGenerator.Barcode;
 using LibaryDocumentGenerator.Documents.Template;
@@ -47,6 +47,7 @@ using Kabinet = EfDatabase.Inventory.Base.Kabinet;
 using LogicaSelect = EfDatabaseParametrsModel.LogicaSelect;
 using Mfu = EfDatabase.Inventory.Base.Mfu;
 using ModelBlockPower = EfDatabase.Inventory.Base.ModelBlockPower;
+using ModelError = EfDatabase.Inventory.ReportXml.ReturnModelError.ModelError;
 using NameSysBlock = EfDatabase.Inventory.Base.NameSysBlock;
 using Otdel = EfDatabase.Inventory.Base.Otdel;
 using Printer = EfDatabase.Inventory.Base.Printer;
@@ -62,6 +63,7 @@ using Type = System.Type;
 using OtherAll = EfDatabase.Inventory.Base.OtherAll;
 using ProizvoditelOther = EfDatabase.Inventory.Base.ProizvoditelOther;
 using ModelOther = EfDatabase.Inventory.Base.ModelOther;
+using ModelPhone = EfDatabase.Inventory.Base.ModelPhone;
 
 
 namespace TestIFNSLibary.Inventarka
@@ -389,6 +391,21 @@ namespace TestIFNSLibary.Inventarka
                 return model;
             });
         }
+        /// <summary>
+        /// Получение всех статусов особых дней
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> GetStatusHoliday()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.GetStatusHoliday();
+                auto.Dispose();
+                return model;
+            });
+        }
+
 
         /// <summary>
         /// Добавление или редактирование справочника праздничных дней
@@ -398,7 +415,7 @@ namespace TestIFNSLibary.Inventarka
         /// <returns></returns>
         public ModelReturn<Rb_Holiday> AddAndEditRbHoliday(Rb_Holiday holidays, string userIdEdit)
         {
-            holidays.DateTime_Holiday = holidays.DateTime_Holiday.AddHours(3);
+           // holidays.DateTime_Holiday = holidays.DateTime_Holiday.AddHours(3);
             AddObjectDb add = new AddObjectDb();
             var model = add.AddAndEditHoliday(holidays);
             add.Dispose();
@@ -2047,8 +2064,9 @@ namespace TestIFNSLibary.Inventarka
         /// </summary>
         /// <returns></returns>
         /// <param name="serialNumber">Серийный номер техники</param>
+        /// <param name="inventoryNumber">Инвентарный номер</param>
         /// <param name="isAll">Генерация на все кабинеты или на один</param>
-        public async Task<Stream> GenerateQrCodeTechnical(string serialNumber, bool isAll = false)
+        public async Task<Stream> GenerateQrCodeTechnical(string serialNumber, string inventoryNumber, bool isAll = false)
         {
             try
             {
@@ -2057,17 +2075,20 @@ namespace TestIFNSLibary.Inventarka
                     var auto = new Select();
                     var i = 0;
                     var sticker = new StickerCode();
-                    var technical = auto.SelectTechnical(serialNumber, isAll);
+                    var technical = auto.SelectTechnical(serialNumber, inventoryNumber, isAll);
                     if (technical.Count == 0) return null;
                     var qrCode = new GenerateBarcode();
                     technical.ForEach(x =>
                     {
+                        var nameServer = !string.IsNullOrWhiteSpace(x.NameServer) ? $"\r\nИмя PC: {x.NameServer}" : null;
                         var templateContent = $"{x.Item}: {x.NameManufacturer} {x.NameModel}\r\n" +
                                               $"s/n: {x.SerNum}\r\n" +
                                               $"Инв.: {x.InventarNum}\r\n" +
                                               $"Сервис.: {x.ServiceNum}\r\n" +
                                               $"Kaб.: {x.NumberKabinet}\r\n" +
-                                              $"User: {x.NameUser}";
+                                              $"User: {x.NameUser}" +
+                                              nameServer;
+                        
                         x.Coment = qrCode.GenerateQrCode(parametersService.SaveReport + i, templateContent);
                         i++;
                     });
@@ -2084,7 +2105,48 @@ namespace TestIFNSLibary.Inventarka
 
             return null;
         }
-
+        /// <summary>
+        /// Генерация штрих-кода для этикеток 
+        /// </summary>
+        /// <param name="serialNumber">Серийный номер</param>
+        /// <param name="inventoryNumber">Инвентарный номер</param>
+        /// <param name="isAll">Создать этикетки на всю технику</param>
+        /// <returns></returns>
+        public async Task<Stream> GenerateTicket128CodeTechnical(string serialNumber, string inventoryNumber, bool isAll = false)
+        {
+            try
+            {
+                return await Task.Factory.StartNew(() =>
+                {
+                    var auto = new Select();
+                    var i = 0;
+                    var stickerCode128 = new DocCode128();
+                    var technical = auto.SelectTechnical(serialNumber, inventoryNumber, isAll);
+                    if (technical.Count == 0) return null;
+                    var code128 = new GenerateBarcode();
+                    technical.ForEach(x =>
+                    {
+                        var countZero = 25;
+                        var modelZero = "";
+                        for (var j = 0; j < countZero-x?.InventarNum?.Length; j++)
+                        {
+                            modelZero += "0";
+                        }
+                        x.Coment = code128.GenerateCode128(parametersService.SaveReport + i, long.TryParse(x.InventarNum, out var resultInventoryNumber) ? modelZero + resultInventoryNumber : "0000000000000000123456789");
+                        i++;
+                    });
+                    stickerCode128.CreateDocument(parametersService.SaveReport + "Code128Office", technical);
+                    technical.Select(x => x.Coment).ToList().ForEach(File.Delete);
+                    auto.Dispose();
+                    return stickerCode128.FileArray();
+                });
+            }
+            catch (Exception e)
+            {
+                Loggers.Log4NetLogger.Error(e);
+            }
+            return null;
+        }
         /// <summary>
         /// Генерация QR Кодов на кабинет
         /// </summary>
@@ -2675,7 +2737,9 @@ namespace TestIFNSLibary.Inventarka
         {
             return await Task.Factory.StartNew(() =>
             {
+
                 SelectSql selectSql = new SelectSql();
+                aksiokAddAndEdit.ParametersModel.Guarantee = aksiokAddAndEdit.ParametersModel.Guarantee?.AddHours(3);
                 var aksiokModelEditAndAdd = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit);
                 selectSql.Dispose();
                 if (aksiokModelEditAndAdd != null)
@@ -2713,11 +2777,11 @@ namespace TestIFNSLibary.Inventarka
         /// <summary>
         /// Общий метод обработки процессов 
         /// </summary>
-        public void StartProcessInventory(int idProcess, string userLogin, string passwordUser)
+        public void StartProcessInventory(SelectProcess selectProcess)
         {
             try
             {
-                var process = new ProcessStart(idProcess, userLogin, passwordUser);
+                var process = new ProcessStart(selectProcess.IdProcess, selectProcess.UserLogin, selectProcess.PasswordUser);
                 process.StartProcess();
             }
             catch (Exception e)
@@ -2755,6 +2819,68 @@ namespace TestIFNSLibary.Inventarka
                 selectSql.Dispose();
                 return model;
             });
+        }
+        /// <summary>
+        /// Создание карточки оборудования 
+        /// </summary>
+        /// <param name="aksiokAddAndEdit">Модель карточки оборудования</param>
+        /// <returns></returns>
+        public async Task<Stream> CreateCardAksiokAndInventory(AksiokAddAndEdit aksiokAddAndEdit)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                aksiokAddAndEdit.ParametersModel.Guarantee = aksiokAddAndEdit.ParametersModel.Guarantee?.AddHours(3);
+                ReportComparableAksiokAndInventoryResult reportCard = new ReportComparableAksiokAndInventoryResult();
+                var model = selectSql.SelectCardAksiokAndInventory(aksiokAddAndEdit);
+                reportCard.CreateDocument(parametersService.SaveReport, model);
+                return reportCard.FileArray();
+            });
+        }
+        /// <summary>
+        /// Вытащить все группы оборудования для синхронизации с SNTP протоколом
+        /// </summary>
+        /// <returns></returns>
+        public async Task<AllTechnicalGroup> GetAllTechnicalGroup()
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSql = new SelectSql();
+                var model = selectSql.AllTechnicalGroup();
+                selectSql.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Все модели телефонов
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> AllModelPhone()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllModelPhone();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Модель телефона
+        /// </summary>
+        /// <param name="modelPhone">Модель телефона</param>
+        /// <returns></returns>
+        public ModelReturn<ModelPhone> AddAndEditModelPhone(ModelPhone modelPhone)
+        {
+            AddObjectDb add = new AddObjectDb();
+            var model = add.AddAndEditModelPhone(modelPhone);
+            add.Dispose();
+            if (model.Model != null)
+            {
+                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeModelPhone(model.Model);
+            }
+            add.Dispose();
+            return model;
         }
     }
 }
