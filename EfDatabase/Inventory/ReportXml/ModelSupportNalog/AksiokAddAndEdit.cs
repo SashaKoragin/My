@@ -21,426 +21,9 @@ namespace EfDatabaseXsdSupportNalog {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class ModelParametrSupport {
-        
-        private string loginField;
-        
-        private string passwordField;
-        
-        private string discriptionField;
-        
-        private int idUserField;
-        
-        private int idMfuField;
-        
-        private int idMonitorField;
-        
-        private int idPrinterField;
-        
-        private int idSysBlockField;
-        
-        private int idTemplateField;
-        
-        private int idScannerField;
-        
-        private int idTelephonField;
-        
-        private int idAnalisysEpoField;
-        
-        private TemplateSupport1[] templateSupportField;
-        
-        private string step3ResponseSupportField;
-        
-        private string errorField;
-        
-        private int idCalendarVksField;
-        
-        private AksiokAddAndEdit aksiokAddAndEditField;
-        
-        public ModelParametrSupport() {
-            this.idUserField = 0;
-            this.idMfuField = 0;
-            this.idMonitorField = 0;
-            this.idPrinterField = 0;
-            this.idSysBlockField = 0;
-            this.idTemplateField = 0;
-            this.idScannerField = 0;
-            this.idTelephonField = 0;
-            this.idAnalisysEpoField = 0;
-            this.idCalendarVksField = 0;
-        }
-        
-        /// <remarks/>
-        public string Login {
-            get {
-                return this.loginField;
-            }
-            set {
-                this.loginField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Discription {
-            get {
-                return this.discriptionField;
-            }
-            set {
-                this.discriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdUser {
-            get {
-                return this.idUserField;
-            }
-            set {
-                this.idUserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdMfu {
-            get {
-                return this.idMfuField;
-            }
-            set {
-                this.idMfuField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdMonitor {
-            get {
-                return this.idMonitorField;
-            }
-            set {
-                this.idMonitorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdPrinter {
-            get {
-                return this.idPrinterField;
-            }
-            set {
-                this.idPrinterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdSysBlock {
-            get {
-                return this.idSysBlockField;
-            }
-            set {
-                this.idSysBlockField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdTemplate {
-            get {
-                return this.idTemplateField;
-            }
-            set {
-                this.idTemplateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdScanner {
-            get {
-                return this.idScannerField;
-            }
-            set {
-                this.idScannerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdTelephon {
-            get {
-                return this.idTelephonField;
-            }
-            set {
-                this.idTelephonField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdAnalisysEpo {
-            get {
-                return this.idAnalisysEpoField;
-            }
-            set {
-                this.idAnalisysEpoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("TemplateSupport", IsNullable=true)]
-        public TemplateSupport1[] TemplateSupport {
-            get {
-                return this.templateSupportField;
-            }
-            set {
-                this.templateSupportField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Step3ResponseSupport {
-            get {
-                return this.step3ResponseSupportField;
-            }
-            set {
-                this.step3ResponseSupportField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Error {
-            get {
-                return this.errorField;
-            }
-            set {
-                this.errorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int IdCalendarVks {
-            get {
-                return this.idCalendarVksField;
-            }
-            set {
-                this.idCalendarVksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public AksiokAddAndEdit AksiokAddAndEdit {
-            get {
-                return this.aksiokAddAndEditField;
-            }
-            set {
-                this.aksiokAddAndEditField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute("TemplateSupport", Namespace="", IsNullable=true)]
-    public partial class TemplateSupport1 : TemplateSupport {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class TemplateSupport {
-        
-        private string nameField;
-        
-        private string infoTemplateField;
-        
-        private string nameStepSupportField;
-        
-        private string helpParameterField;
-        
-        private string nameGuidParametrField;
-        
-        private string parametrField;
-        
-        private byte[] parameterStep3Field;
-        
-        private string typeParametrField;
-        
-        private string nameParametrTypeField;
-        
-        private string selectParametrField;
-        
-        private string templateParametrTypeField;
-        
-        private bool isImportantField;
-        
-        private bool isImportantFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string InfoTemplate {
-            get {
-                return this.infoTemplateField;
-            }
-            set {
-                this.infoTemplateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameStepSupport {
-            get {
-                return this.nameStepSupportField;
-            }
-            set {
-                this.nameStepSupportField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string HelpParameter {
-            get {
-                return this.helpParameterField;
-            }
-            set {
-                this.helpParameterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameGuidParametr {
-            get {
-                return this.nameGuidParametrField;
-            }
-            set {
-                this.nameGuidParametrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Parametr {
-            get {
-                return this.parametrField;
-            }
-            set {
-                this.parametrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="base64Binary")]
-        public byte[] ParameterStep3 {
-            get {
-                return this.parameterStep3Field;
-            }
-            set {
-                this.parameterStep3Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TypeParametr {
-            get {
-                return this.typeParametrField;
-            }
-            set {
-                this.typeParametrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameParametrType {
-            get {
-                return this.nameParametrTypeField;
-            }
-            set {
-                this.nameParametrTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SelectParametr {
-            get {
-                return this.selectParametrField;
-            }
-            set {
-                this.selectParametrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TemplateParametrType {
-            get {
-                return this.templateParametrTypeField;
-            }
-            set {
-                this.templateParametrTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool IsImportant {
-            get {
-                return this.isImportantField;
-            }
-            set {
-                this.isImportantField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsImportantSpecified {
-            get {
-                return this.isImportantFieldSpecified;
-            }
-            set {
-                this.isImportantFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class AksiokAddAndEdit {
         
         private ParametersModel parametersModelField;
-        
-        private CountGroupAddingAndEditing countGroupAddingAndEditingField;
         
         private KitsEquipment kitsEquipmentField;
         
@@ -455,16 +38,6 @@ namespace EfDatabaseXsdSupportNalog {
             }
             set {
                 this.parametersModelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public CountGroupAddingAndEditing CountGroupAddingAndEditing {
-            get {
-                return this.countGroupAddingAndEditingField;
-            }
-            set {
-                this.countGroupAddingAndEditingField = value;
             }
         }
         
@@ -508,8 +81,6 @@ namespace EfDatabaseXsdSupportNalog {
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class ParametersModel {
         
-        private int idCardField;
-        
         private int idFullCategoriaField;
         
         private int idStateField;
@@ -518,17 +89,9 @@ namespace EfDatabaseXsdSupportNalog {
         
         private int idExpertiseField;
         
-        private System.Nullable<int> idContractOnStoField;
-        
-        private System.Nullable<int> idDeliveryContractField;
-        
-        private System.Nullable<System.DateTime> guaranteeField;
+        private int idCardField;
         
         private string modelRequestField;
-        
-        private string nameProducerField;
-        
-        private string nameModelField;
         
         private string serNumberField;
         
@@ -542,6 +105,8 @@ namespace EfDatabaseXsdSupportNalog {
         
         private int exploitationStartYearField;
         
+        private System.DateTime guaranteeField;
+        
         private bool isKitField;
         
         private bool isSmallCostField;
@@ -552,33 +117,14 @@ namespace EfDatabaseXsdSupportNalog {
         
         private string passwordField;
         
-        private bool isMassAddingField;
-        
-        private bool isMassEditFirstModelField;
-        
-        private bool isMassEditingField;
-        
         public ParametersModel() {
-            this.idCardField = 0;
             this.idFullCategoriaField = 0;
             this.idStateField = 0;
             this.idStateStoField = 0;
             this.idExpertiseField = 0;
+            this.idCardField = 0;
             this.codeErrorField = 0;
             this.isKitField = false;
-            this.isMassAddingField = false;
-            this.isMassEditFirstModelField = false;
-            this.isMassEditingField = false;
-        }
-        
-        /// <remarks/>
-        public int IdCard {
-            get {
-                return this.idCardField;
-            }
-            set {
-                this.idCardField = value;
-            }
         }
         
         /// <remarks/>
@@ -622,35 +168,12 @@ namespace EfDatabaseXsdSupportNalog {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> IdContractOnSto {
+        public int IdCard {
             get {
-                return this.idContractOnStoField;
+                return this.idCardField;
             }
             set {
-                this.idContractOnStoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> IdDeliveryContract {
-            get {
-                return this.idDeliveryContractField;
-            }
-            set {
-                this.idDeliveryContractField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> Guarantee {
-            get {
-                return this.guaranteeField;
-            }
-            set {
-                this.guaranteeField = value;
+                this.idCardField = value;
             }
         }
         
@@ -662,28 +185,6 @@ namespace EfDatabaseXsdSupportNalog {
             }
             set {
                 this.modelRequestField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameProducer {
-            get {
-                return this.nameProducerField;
-            }
-            set {
-                this.nameProducerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameModel {
-            get {
-                return this.nameModelField;
-            }
-            set {
-                this.nameModelField = value;
             }
         }
         
@@ -756,6 +257,17 @@ namespace EfDatabaseXsdSupportNalog {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime Guarantee {
+            get {
+                return this.guaranteeField;
+            }
+            set {
+                this.guaranteeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool IsKit {
             get {
@@ -807,78 +319,6 @@ namespace EfDatabaseXsdSupportNalog {
             }
             set {
                 this.passwordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool IsMassAdding {
-            get {
-                return this.isMassAddingField;
-            }
-            set {
-                this.isMassAddingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool IsMassEditFirstModel {
-            get {
-                return this.isMassEditFirstModelField;
-            }
-            set {
-                this.isMassEditFirstModelField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool IsMassEditing {
-            get {
-                return this.isMassEditingField;
-            }
-            set {
-                this.isMassEditingField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class CountGroupAddingAndEditing {
-        
-        private string serNumberField;
-        
-        private string messageCountGroupField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SerNumber {
-            get {
-                return this.serNumberField;
-            }
-            set {
-                this.serNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MessageCountGroup {
-            get {
-                return this.messageCountGroupField;
-            }
-            set {
-                this.messageCountGroupField = value;
             }
         }
     }

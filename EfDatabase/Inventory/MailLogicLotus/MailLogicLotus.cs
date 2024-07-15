@@ -119,7 +119,7 @@ namespace EfDatabase.Inventory.MailLogicLotus
         {
             switch (model.NameGroupModel)
             {
-                case "MailIn":
+                case "MailInView":
                     using (var context = new InventoryContext())
                     {
                         var mailInDb = from mailIn in context.MailIns
@@ -130,9 +130,18 @@ namespace EfDatabase.Inventory.MailLogicLotus
                             Inventory.Entry(new MailLotusOutlookIn() { Id = mailInDb.First().MailIn.Id }).State = EntityState.Deleted;
                             Inventory.SaveChanges();
                         }
+                    }
+                    break;
+                case "MailOutView":
+                    Inventory.Entry(new MailLotusOutlookOut() { IdMail = model.IdMail }).State = EntityState.Deleted;
+                    Inventory.SaveChanges();
+                    break;
+                case "CalendarVksStpView":
+                    using (var context = new InventoryContext())
+                    {
                         var calendarDb = from calendar in context.Calendars
-                            where calendar.IdMail == model.IdMail
-                            select new { Calendars = calendar };
+                        where calendar.IdMail == model.IdMail
+                        select new { Calendars = calendar };
                         if (calendarDb.Any())
                         {
                             Inventory.Entry(new Calendar() { Id = calendarDb.First().Calendars.Id }).State = EntityState.Deleted;
@@ -140,11 +149,7 @@ namespace EfDatabase.Inventory.MailLogicLotus
                         }
                     }
                     break;
-                case "MailOut":
-                    Inventory.Entry(new MailLotusOutlookOut() { IdMail = model.IdMail }).State = EntityState.Deleted;
-                    Inventory.SaveChanges();
-                    break;
-                default:
+            default:
                     return null;
             }
             return $"Удаление почты в модели {model.NameGroupModel} под уникальным номером {model.IdMail} произведено";

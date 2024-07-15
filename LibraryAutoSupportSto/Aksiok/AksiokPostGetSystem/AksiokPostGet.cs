@@ -167,14 +167,14 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
                         catch (Exception e)
                         {
                             Loggers.Log4NetLogger.Error(e);
-                            Loggers.Log4NetLogger.Error(new Exception("Ошибки в синхронизации в Ун типа: " + type.Id + " " + type.Name + ", Ун производителя: " + producer.Id+ " " + producer.Name + " ."));
+                            Loggers.Log4NetLogger.Error(new Exception("Ошибки в синхронизации в Ун типа: " + type.Id + " " + type.Name + ", Ун производителя: " + producer.Id + " " + producer.Name + " ."));
                         }
                     }
                 }
                 var modelDocumentType = PostAksiok<EfDatabase.ModelAksiok.Aksiok.ModelDocumentType[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 5)));
                 foreach (var document in modelDocumentType.Data)
                 {
-                    typeModelError = document.CategoriesTruName;
+                    typeModelError = document.EquipmentTypeName;
                     var modelDocument = PostAksiok<EfDatabase.ModelAksiok.Aksiok.ModelDocument[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 6), 0, 0, document.Id));
                     foreach (var model in modelDocument.Data)
                     {
@@ -184,7 +184,9 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
                         PostAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 8), 0, 0, 0, model.Id));
                     }
                 }
-                AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(null, AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 9)?.ModelUpdateSql);
+                PostAksiok<EfDatabase.ModelAksiok.Aksiok.ContractOnSto[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 9)));
+                PostAksiok<EfDatabase.ModelAksiok.Aksiok.DeliveryContract[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 10)));
+                AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(null, AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 11)?.ModelUpdateSql);
                 Dispose();
             }
             catch (Exception e)
@@ -197,19 +199,29 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
             }
         }
         /// <summary>
+        /// Актуализация справочников Аксиок для ФКУ
+        /// </summary>
+        public void StartUpdateDirectoryAksiok()
+        {
+            PostAksiok<EfDatabase.ModelAksiok.Aksiok.ContractOnSto[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 9)));
+            PostAksiok<EfDatabase.ModelAksiok.Aksiok.DeliveryContract[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 10)));
+            Dispose();
+        }
+
+        /// <summary>
         /// Точечная синхронизация
         /// </summary>
         /// <param name="idModel">Ун модели</param>
         /// <param name="idDocument">Ун документа</param>
         /// <param name="serialNumber">Серийный номер</param>
+        /// <param name="isEnd">Закончить синхронизацию</param>
         public void PointSynchronizationAksiok(int idModel,int idDocument, string serialNumber)
         {
             try
             {
                 PostAksiok<EfDatabase.ModelAksiok.Aksiok.EpoDocument>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 7), 0, 0, 0, idModel), idDocument);
                 PostAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 8), 0, 0, 0, idModel));
-                AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(null, AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 9)?.ModelUpdateSql);
-                Dispose();
+                AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(null, AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 11)?.ModelUpdateSql);
             }
             catch (Exception e)
             {

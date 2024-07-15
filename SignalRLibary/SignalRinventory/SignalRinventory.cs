@@ -715,6 +715,15 @@ namespace SignalRLibary.SignalRinventory
             SerializeJson json = new SerializeJson();
             context.Clients.All.SubscribeModelPhone(json.JsonLibaryIgnoreDate(modelPhone));
         }
+        /// <summary>
+        /// Сообщение о обработки карточки
+        /// </summary>
+        /// <param name="messageProcess">Сообщение о аксиок</param>
+        public static void SubscribeMessageAksiok(string messageProcess)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SignalRinventory>();
+            context.Clients.All.SubscribeMessageAksiok(messageProcess);
+        }
 
     }
     public class UsersContext

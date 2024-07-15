@@ -210,6 +210,31 @@
 					<xs:documentation>Дата акта</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="IncludedInEqSettings" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Галочка настроек</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsArm" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>АРМ</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSharedUsage" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Совместное использование</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSmallCost" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Стоимость до 10 т.р.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsOffBalanceAccount" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>На забалансовом счете</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="EquipmentType">

@@ -196,6 +196,11 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element ref="ParametersModel"/>
+			<xs:element ref="CountGroupAddingAndEditing" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Модель для массового добавления-редактирования оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element ref="KitsEquipment"/>
 			<xs:element ref="ParametersRequestAksiok" minOccurs="0"/>
 			<xs:element ref="UploadFileAksiok" minOccurs="0"/>
@@ -207,10 +212,13 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element ref="IdCard"/>
 				<xs:element ref="IdFullCategoria"/>
 				<xs:element ref="IdState"/>
 				<xs:element ref="IdStateSto"/>
 				<xs:element ref="IdExpertise"/>
+				<xs:element ref="IdContractOnSto"/>
+				<xs:element ref="IdDeliveryContract"/>
 				<xs:element ref="Guarantee"/>
 			</xs:sequence>
 			<xs:attribute name="ModelRequest" type="xs:string">
@@ -263,6 +271,16 @@
 					<xs:documentation>Признак комплектности 0 нет комплекта 1 есть комплект</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="IsSmallCost" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Стоимость до 10 т.р.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsOffBalanceAccount" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>На забалансовом счете</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 			<xs:attribute name="LoginUser" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Пароль пользователя</xs:documentation>
@@ -271,6 +289,21 @@
 			<xs:attribute name="Password" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Пароль пользователя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsMassAdding" type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>Массовое добавление</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsMassEditFirstModel" type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>Массовое редактирование 1 карточки</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsMassEditing" type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>Массовое редактирование</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -462,6 +495,38 @@
 	<xs:element name="Guarantee" type="xs:dateTime" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Гарантия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountGroupAddingAndEditing">
+		<xs:annotation>
+			<xs:documentation>Модель для массового добавления оборудования</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="SerNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Серийный номер для подсчета</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="MessageCountGroup" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Сообщение с сервера по колличество групп</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IdCard" type="xs:int" default="0">
+		<xs:annotation>
+			<xs:documentation>Ун карточки</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdContractOnSto" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Ун контракта СТО</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IdDeliveryContract" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Ун контракта поставки</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

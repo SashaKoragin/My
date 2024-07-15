@@ -715,6 +715,18 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<FullСategory>("Select * From FullСategory"));
         }
         /// <summary>
+        /// Вытаскиваем все карточки оборудования
+        /// </summary>
+        /// <returns></returns>
+        public string AllModelDocumentType()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<ModelDocumentType>("Select ModelDocumentType.Id, ModelDocumentType.Soun, ModelDocumentType.DocumentType, ModelDocumentType.KindEquipmentName, ISNULL(EquipmentType.Name,EquipmentTypeName) as EquipmentTypeName, ModelDocumentType.Number, ModelDocumentType.Author, ModelDocumentType.CanDelete, ModelDocumentType.AgencyName, ModelDocumentType.CreateDate From ModelDocumentType\n" +
+                                                                                            " Left Join EpoDocument on EpoDocument.IdEpoDocument = ModelDocumentType.Id\n" +
+                                                                                            " Left Join EquipmentType on EpoDocument.IdEquipmentType = EquipmentType.Id\n" +
+                                                                                            " Group by ModelDocumentType.Id, ModelDocumentType.Soun, ModelDocumentType.DocumentType, ModelDocumentType.KindEquipmentName, ISNULL(EquipmentType.Name,EquipmentTypeName), ModelDocumentType.Number, ModelDocumentType.Author, ModelDocumentType.CanDelete, ModelDocumentType.AgencyName, ModelDocumentType.CreateDate"));
+        }
+        /// <summary>
         /// Вытаскиваем все типы
         /// </summary>
         /// <returns></returns>
@@ -741,6 +753,25 @@ namespace EfDatabase.Inventory.BaseLogic.Select
             SerializeJson json = new SerializeJson();
             return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<EquipmentModel>("Select * From EquipmentModel"));
         }
+        /// <summary>
+        /// Все контракты СТО оборудования
+        /// </summary>
+        /// <returns></returns>
+        public string AllContractOnSto()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<ContractOnSto>("Select * From ContractOnSto"));
+        }
+        /// <summary>
+        /// Все контракты поставки оборудования
+        /// </summary>
+        /// <returns></returns>
+        public string AllDeliveryContract()
+        {
+            SerializeJson json = new SerializeJson();
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<DeliveryContract>("Select * From DeliveryContract"));
+        }
+
         /// <summary>
         /// Все модели телефонов
         /// </summary>

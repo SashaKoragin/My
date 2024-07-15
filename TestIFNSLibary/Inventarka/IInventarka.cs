@@ -1330,6 +1330,30 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllFullСategories", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> SelectAllFullСategories();
         /// <summary>
+        /// Вытащить все карточки из БД АКСИОК
+        /// http://localhost:8182/Inventarka/SelectAllModelDocumentType
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllModelDocumentType", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SelectAllModelDocumentType();
+        /// <summary>
+        /// Вытащить все Контракты на обслуживание из БД АКСИОК
+        /// http://localhost:8182/Inventarka/SelectAllContractOnSto
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllContractOnSto", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SelectAllContractOnSto();
+        /// <summary>
+        /// Вытащить все Контракты на поставку из БД АКСИОК
+        /// http://localhost:8182/Inventarka/SelectAllDeliveryContract
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllDeliveryContract", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<string> SelectAllDeliveryContract();
+        /// <summary>
         /// Вытащить все типы из БД
         /// http://localhost:8182/Inventarka/SelectAllEquipmentType
         /// </summary>
@@ -1354,6 +1378,22 @@ namespace TestIFNSLibary.Inventarka
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, UriTemplate = "/SelectAllEquipmentModel", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
         Task<string> SelectAllEquipmentModel();
 
+        /// <summary>
+        /// Поиск всех групп оборудования для массового добавления
+        /// http://localhost:8182/Inventarka/ValidationCountingGroupAddingAksiok
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ValidationCountingGroupAddingAksiok", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<CountGroupAddingAndEditing> ValidationCountingGroupAddingAksiok(CountGroupAddingAndEditing countGroupAddingAndEditing);
+        /// <summary>
+        /// Поиск всех групп оборудования для массового редактирования оборудования
+        /// http://localhost:8182/Inventarka/ValidationCountingGroupEditingAksiok
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, UriTemplate = "/ValidationCountingGroupEditingAksiok", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare)]
+        Task<CountGroupAddingAndEditing> ValidationCountingGroupEditingAksiok(CountGroupAddingAndEditing countGroupAddingAndEditing);
         /// <summary>
         /// Проверка оборудования на комплектность
         /// http://localhost:8182/Inventarka/KitsEquipmentValidation
