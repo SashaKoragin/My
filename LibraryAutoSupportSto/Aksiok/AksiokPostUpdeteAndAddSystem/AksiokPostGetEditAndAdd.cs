@@ -4,6 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Mime;
 using System.Text;
+using System.Threading;
+using EfDatabase.Inventory.BaseLogic.Select;
+using EfDatabase.Inventory.ReportXml.ModelAksiok;
 using EfDatabase.ModelAksiok.ModelAksiokEditAndAdd;
 using EfDatabaseXsdSupportNalog;
 using LibaryXMLAuto.ReadOrWrite.SerializationJson;
@@ -57,10 +60,8 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
         /// </summary>
         /// <param name="login">Логин</param>
         /// <param name="password">Пароль</param>
-        /// <param name="aksiokModelDataBase">Модель с сервера для отправки в АКСИОК</param>
-        public AksiokPostGetEditAndAdd(string login, string password, AksiokEditAndAddProcedure aksiokModelDataBase)
+        public AksiokPostGetEditAndAdd(string login, string password)
         {
-            AksiokFullDataBaseModel = aksiokModelDataBase;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             ServicePointManager.ServerCertificateValidationCallback = (senders, certificate, chain, sslPolicyErrors) =>
             {
@@ -87,7 +88,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
         /// </summary>
         /// <param name="parametersUrlModel">Параметры модели</param>
         /// <param name="encoding">Кодировка</param>
-        private void PostEditAndAddModel(ParametersUrlModel parametersUrlModel, Encoding encoding)
+        private void PostEditModel(ParametersUrlModel parametersUrlModel, Encoding encoding)
         {
             DatesBytes = encoding.GetBytes(parametersUrlModel.Parameters);
             Request = (HttpWebRequest)WebRequest.Create(parametersUrlModel.Url);
@@ -129,6 +130,64 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                 }
                 throw new InvalidOperationException(messageError);
             }
+        }
+        /// <summary>
+        /// Добавление новой модели
+        /// </summary>
+        /// <param name="parametersUrlModel">Параметры модели</param>
+        /// <param name="encoding">Кодировка</param>
+        public DataAksiokAddSchemes<T> PostAddModel<T>(ParametersUrlModel parametersUrlModel, Encoding encoding)
+        {
+            DataAksiokAddSchemes<T> dataModelServerAksiok = new DataAksiokAddSchemes<T>();
+            DatesBytes = encoding.GetBytes(parametersUrlModel.Parameters);
+            Request = (HttpWebRequest)WebRequest.Create(parametersUrlModel.Url);
+            Request.Accept = parametersUrlModel.Accept;
+            Request.Referer = "https://aksiok.dpc.tax.nalog.ru/";
+            Request.KeepAlive = true;
+            Request.Credentials = MyCache;
+            Request.CookieContainer = Сookies;
+            Request.Host = "aksiok.dpc.tax.nalog.ru";
+            Request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36";
+            Request.ContentType = parametersUrlModel.ContentType;
+            foreach (var parametersHeaders in parametersUrlModel.Headers)
+            {
+                Request.Headers.Add(parametersHeaders.Key, parametersHeaders.Value);
+            }
+            Request.Method = "POST";
+            Request.ContentLength = DatesBytes.Length;
+            using (var stream = Request.GetRequestStream())
+            {
+                stream.Write(DatesBytes, 0, DatesBytes.Length);
+            }
+
+            try
+            {
+                Response = (HttpWebResponse)Request.GetResponse();
+                Сookies.Add(Response.Cookies);
+                if (Response.StatusCode == HttpStatusCode.OK)
+                {
+                    using (var receiveStream = Response.GetResponseStream())
+                    {
+                        var readStream = String.IsNullOrWhiteSpace(Response.CharacterSet)
+                            ? new StreamReader(receiveStream ?? throw new InvalidOperationException())
+                            : new StreamReader(receiveStream ?? throw new InvalidOperationException(), Encoding.GetEncoding(Response.CharacterSet));
+                        string data = readStream.ReadToEnd();
+                        dataModelServerAksiok = Newtonsoft.Json.JsonConvert.DeserializeObject<DataAksiokAddSchemes<T>>(data);
+                    }
+                }
+            }
+            catch (WebException webEx)
+            {
+                var messageError = string.Empty;
+                using (Stream respStream = webEx.Response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(respStream);
+                    messageError = reader.ReadToEnd();
+                    Loggers.Log4NetLogger.Error(new Exception(messageError));
+                }
+                throw new InvalidOperationException(messageError);
+            }
+            return dataModelServerAksiok;
         }
 
         /// <summary>
@@ -341,40 +400,114 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
         }
 
         /// <summary>
-        /// Запуск процесса Редактирование или добавление модели
+        /// Запуск процесса Редактирование или добавление модели изменено 27.05.2024 подготовка к массовому добавлению
         /// </summary>
         /// <param name="aksiokAddAndEdit"></param>
         public string StartEditAndAddAksiok(AksiokAddAndEdit aksiokAddAndEdit)
         {
+            SelectSql selectSql = new SelectSql();
+            AksiokPostGetSystem.AksiokPostGetSystem aksiokPostGetSystem = new AksiokPostGetSystem.AksiokPostGetSystem(Login, Password);
             try
             {
                 if (aksiokAddAndEdit.ParametersModel.ModelRequest == "Edit")
                 {
-                    PostEditAndAddModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0],aksiokAddAndEdit), Encoding.Default); //Русские буквы так и не побеждены  Encoding.UTF8 и Encoding.Default
-                    PostEditAndAddModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
+                    if (aksiokAddAndEdit.ParametersModel.IsMassEditing)
+                    {
+                        var groupTechnical = selectSql.SelectFullEditGroupTechnical(aksiokAddAndEdit.ParametersModel.SerNumber);
+                        var countCard = 1;
+                        foreach (var serialNumber in groupTechnical)
+                        {
+                            aksiokAddAndEdit.ParametersModel.SerNumber = serialNumber;
+                            aksiokAddAndEdit = selectSql.ModelValidation(aksiokAddAndEdit);
+                            if (string.IsNullOrWhiteSpace(aksiokAddAndEdit.ParametersModel.ErrorServer))
+                            {
+                                try
+                                {
+                                    AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit, aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel);
+                                    if (aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel)
+                                    {
+                                        PostEditModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0], aksiokAddAndEdit), Encoding.Default);
+                                    }
+                                    PostEditModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
+                                    aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.PublicModelValueJson.Id, aksiokAddAndEdit.ParametersModel.IdCard, serialNumber);
+                                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMessageAksiok("Карточка с серийным номером " + serialNumber + " обработана! Общее количество " + countCard);
+                                }
+                                catch (Exception e)
+                                {
+                                    Loggers.Log4NetLogger.Error(e);
+                                    SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMessageAksiok("Карточка с серийным номером " + serialNumber + " содержит ошибку АКСИОК " + e.Message);
+                                }
+                                countCard++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit);
+                        if (AksiokFullDataBaseModel == null)
+                            throw new InvalidOperationException("Фатальная ошибка процедура не вернула модель данных проверь параметры!");
+
+                        PostEditModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0], aksiokAddAndEdit), Encoding.Default); //Русские буквы так и не побеждены  Encoding.UTF8 и Encoding.Default
+                        PostEditModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
+                        if (aksiokAddAndEdit.KitsEquipment.IsCheckedKits) //Скомплектовать true
+                        {
+                            PostEditModel(GenerateParametersModelStep3Edit(allParameters.ModelParametersAksiok[2], aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id), Encoding.Default);
+                            aksiokPostGetSystem.UpdateKitsEquipment(aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id, true);
+                        }
+                        if (aksiokAddAndEdit.KitsEquipment.IsNotCheckedKits) //Разукомплектовать true
+                        {
+                            PostEditModel(GenerateParametersModelStep4Edit(allParameters.ModelParametersAksiok[3], AksiokFullDataBaseModel.AksiokEditPublicModel.Id), Encoding.Default);
+                            aksiokPostGetSystem.UpdateKitsEquipment(aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id, false);
+                        }
+                        aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.AksiokEditPublicModel.Id, AksiokFullDataBaseModel.AksiokEditPublicModel.EpoDocument, AksiokFullDataBaseModel.AksiokEditPublicModel.SerialNumber);
+                    }
                 }
                 else
-                {
-                   //При добавлении новой записи нужно думать (Пока нет таких записей 20.11.2022)
+                { 
+                    if (aksiokAddAndEdit.ParametersModel.IsMassAdding)
+                    {
+                        var groupTechnical = selectSql.SelectFullAddGroupTechnical(aksiokAddAndEdit.ParametersModel.SerNumber);
+                        var countCard = 1;
+                        foreach (var serialNumber in groupTechnical)
+                        {
+                            aksiokAddAndEdit.ParametersModel.SerNumber = serialNumber;
+                            aksiokAddAndEdit = selectSql.ModelValidation(aksiokAddAndEdit);
+                            if (string.IsNullOrWhiteSpace(aksiokAddAndEdit.ParametersModel.ErrorServer))
+                            {
+                                
+                                AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit, true,false);
+                                var epoDocument = PostAddModel<EfDatabase.ModelAksiok.Aksiok.EpoDocument>(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[5], aksiokAddAndEdit), Encoding.Default);
+                                Thread.Sleep(8000);
+                                AksiokFullDataBaseModel.AksiokEditPublicModel.Id = epoDocument.Data[0].Id; //Возвращаем ID из добавления
+                                aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.AksiokEditPublicModel.Id, AksiokFullDataBaseModel.AksiokEditPublicModel.EpoDocument, AksiokFullDataBaseModel.AksiokEditPublicModel.SerialNumber);
+                                AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit);
+                                PostEditModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
+                                aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.AksiokEditPublicModel.Id, AksiokFullDataBaseModel.AksiokEditPublicModel.EpoDocument, AksiokFullDataBaseModel.AksiokEditPublicModel.SerialNumber);
+                                SignalRLibary.SignalRinventory.SignalRinventory.SubscribeMessageAksiok("Карточка с серийным номером "+serialNumber+ " обработана! Общее количество "+ countCard);
+                                countCard++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit, true,false);
+                        var epoDocument = PostAddModel<EfDatabase.ModelAksiok.Aksiok.EpoDocument>(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[5], aksiokAddAndEdit), Encoding.Default);
+                        AksiokFullDataBaseModel.AksiokEditPublicModel.Id = epoDocument.Data[0].Id; //Возвращаем ID из добавления
+                        aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.AksiokEditPublicModel.Id, AksiokFullDataBaseModel.AksiokEditPublicModel.EpoDocument, AksiokFullDataBaseModel.AksiokEditPublicModel.SerialNumber);
+                        AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit);
+                        PostEditModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
+                        aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.AksiokEditPublicModel.Id, AksiokFullDataBaseModel.AksiokEditPublicModel.EpoDocument, AksiokFullDataBaseModel.AksiokEditPublicModel.SerialNumber);
+                    }
                 }
-                AksiokPostGetSystem.AksiokPostGetSystem aksiokPostGetSystem = new AksiokPostGetSystem.AksiokPostGetSystem(Login, Password);
-                if (aksiokAddAndEdit.KitsEquipment.IsCheckedKits) //Скомплектовать true
-                {
-                    PostEditAndAddModel(GenerateParametersModelStep3Edit(allParameters.ModelParametersAksiok[2], aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id), Encoding.Default);
-                    aksiokPostGetSystem.UpdateKitsEquipment(aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id, true);
-                }
-                if (aksiokAddAndEdit.KitsEquipment.IsNotCheckedKits) //Разукомплектовать true
-                {
-                    PostEditAndAddModel(GenerateParametersModelStep4Edit(allParameters.ModelParametersAksiok[3], AksiokFullDataBaseModel.AksiokEditPublicModel.Id), Encoding.Default);
-                    aksiokPostGetSystem.UpdateKitsEquipment(aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id, false);
-                }
-                aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.AksiokEditPublicModel.Id, AksiokFullDataBaseModel.AksiokEditPublicModel.EpoDocument, AksiokFullDataBaseModel.AksiokEditPublicModel.SerialNumber);
                 aksiokPostGetSystem.Dispose();
+                selectSql.Dispose();
                 return "Обновление и синхронизация данных в АКСИОК прошло Успешно!!!";
             }
             catch (Exception e)
             {
                 Loggers.Log4NetLogger.Error(e);
+                aksiokPostGetSystem.Dispose();
+                selectSql.Dispose();
                 return e.Message;
             }
         }

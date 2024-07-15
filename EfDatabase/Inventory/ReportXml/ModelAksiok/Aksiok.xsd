@@ -42,7 +42,7 @@
 					<xs:documentation>Вид оборудования/ПО</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="CategoriesTruName" type="xs:string" use="required">
+			<xs:attribute name="EquipmentTypeName" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Атрибут ТРУ (Тип оборудования)</xs:documentation>
 				</xs:annotation>
@@ -326,6 +326,31 @@
 			<xs:attribute name="RequiresReplacement" type="xs:boolean" use="required">
 				<xs:annotation>
 					<xs:documentation>Требует замены</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IncludedInEqSettings" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Галочка настроек</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsArm" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>АРМ</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSharedUsage" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Совместное использование</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSmallCost" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Стоимость до 10 т.р.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsOffBalanceAccount" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>На забалансовом счете</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

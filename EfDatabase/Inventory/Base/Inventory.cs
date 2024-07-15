@@ -2662,6 +2662,31 @@ namespace EfDatabase.Inventory.Base
         ///</summary>
         public bool RequiresReplacement { get; set; } // RequiresReplacement
 
+        ///<summary>
+        /// Галочка настроек
+        ///</summary>
+        public bool? IncludedInEqSettings { get; set; } // IncludedInEqSettings
+
+        ///<summary>
+        /// АРМ
+        ///</summary>
+        public bool? IsArm { get; set; } // IsArm
+
+        ///<summary>
+        /// Совместное использование
+        ///</summary>
+        public bool? IsSharedUsage { get; set; } // IsSharedUsage
+
+        ///<summary>
+        /// Стоимость до 10 т.р.
+        ///</summary>
+        public bool? IsSmallCost { get; set; } // IsSmallCost
+
+        ///<summary>
+        /// На забалансовом счете
+        ///</summary>
+        public bool? IsOffBalanceAccount { get; set; } // IsOffBalanceAccount
+
         // Reverse navigation
 
         /// <summary>
@@ -5458,7 +5483,7 @@ namespace EfDatabase.Inventory.Base
         ///<summary>
         /// Атрибут ТРУ (Тип оборудования)
         ///</summary>
-        public string CategoriesTruName { get; set; } // CategoriesTruName (length: 512)
+        public string EquipmentTypeName { get; set; } // EquipmentTypeName (length: 512)
 
         ///<summary>
         /// Номер документа
@@ -11982,6 +12007,11 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.AdminsCount).HasColumnName(@"AdminsCount").HasColumnType("int").IsOptional();
             Property(x => x.KeyNumber).HasColumnName(@"KeyNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.RequiresReplacement).HasColumnName(@"RequiresReplacement").HasColumnType("bit").IsRequired();
+            Property(x => x.IncludedInEqSettings).HasColumnName(@"IncludedInEqSettings").HasColumnType("bit").IsOptional();
+            Property(x => x.IsArm).HasColumnName(@"IsArm").HasColumnType("bit").IsOptional();
+            Property(x => x.IsSharedUsage).HasColumnName(@"IsSharedUsage").HasColumnType("bit").IsOptional();
+            Property(x => x.IsSmallCost).HasColumnName(@"IsSmallCost").HasColumnType("bit").IsOptional();
+            Property(x => x.IsOffBalanceAccount).HasColumnName(@"IsOffBalanceAccount").HasColumnType("bit").IsOptional();
 
             // Foreign keys
             HasOptional(a => a.ContractOnSto).WithMany(b => b.EpoDocuments).HasForeignKey(c => c.IdContractOnSto).WillCascadeOnDelete(false); // FK_EpoDocument_ContractOnSto
@@ -13348,7 +13378,7 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.Soun).HasColumnName(@"Soun").HasColumnType("int").IsRequired();
             Property(x => x.DocumentType).HasColumnName(@"DocumentType").HasColumnType("int").IsRequired();
             Property(x => x.KindEquipmentName).HasColumnName(@"KindEquipmentName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
-            Property(x => x.CategoriesTruName).HasColumnName(@"CategoriesTruName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.EquipmentTypeName).HasColumnName(@"EquipmentTypeName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
             Property(x => x.Number).HasColumnName(@"Number").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.Author).HasColumnName(@"Author").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.CanDelete).HasColumnName(@"CanDelete").HasColumnType("bit").IsRequired();

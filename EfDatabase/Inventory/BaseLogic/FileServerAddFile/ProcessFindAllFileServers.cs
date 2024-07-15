@@ -181,15 +181,24 @@ namespace EfDatabase.Inventory.BaseLogic.FileServerAddFile
                                 var modelDataBase = new AllFileServerModel();
                                 foreach (var fileXml in fileXmlAll)
                                 {
-                                     var model = (AllFileServerModel)xmlDeserialize.ReadXml(fileXml, typeof(AllFileServerModel));
-                                     var modelAddToDataBase = model.AllFileServer.AsEnumerable().Section(CountFilePack);
-                                     foreach (var xmlModel in modelAddToDataBase)
-                                     {
-                                         modelDataBase.AllFileServer = xmlModel.ToArray();
-                                         fileServerAddDataBase.AddFileServerToDataBase(modelDataBase);
-                                         modelDataBase.AllFileServer = null;
-                                     }
-                                     File.Delete(fileXml);
+                                    try
+                                    {
+                                        var model = (AllFileServerModel)xmlDeserialize.ReadXml(fileXml, typeof(AllFileServerModel));
+                                        var modelAddToDataBase = model.AllFileServer.AsEnumerable().Section(CountFilePack);
+                                        foreach (var xmlModel in modelAddToDataBase)
+                                        {
+                                            modelDataBase.AllFileServer = xmlModel.ToArray();
+                                            fileServerAddDataBase.AddFileServerToDataBase(modelDataBase);
+                                            modelDataBase.AllFileServer = null;
+
+                                        }
+                                        File.Delete(fileXml);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Loggers.LogFileServer.Error(e);
+                                        Loggers.LogFileServer.Error(new Exception($"Проблема в этом файле {fileXml}: Файл не будет обработан - Кривые данные нельзя десериализовать"));
+                                    }
                                 }
                                 Loggers.LogFileServer.Info(new Exception($"Количество файлов: {countFile}, в папке: {si.Root.FullName}, обработано за сессию: {countFile}"));
                             }

@@ -163,7 +163,97 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                 Url = "https://aksiok.dpc.tax.nalog.ru/action/FileUpload/Download?id={idFile}&inlineExtensions=",
                 Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                 ContentType = null
-            }
+            },
+            new ParametersUrlModel()
+            {
+                Url = "https://aksiok.dpc.tax.nalog.ru/api/EquipmentCard/create",
+                Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                ContentType = "multipart/form-data; boundary=----WebKitFormBoundaryJQPnmm1hsNgDAn6c",
+                Headers = new Dictionary<string, string>()
+                {
+                    {"Cache-Control", "max-age=0"},
+                    {"Accept-Encoding", "gzip, deflate, br, zstd"},
+                    {"Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"},
+                    {"Origin", "https://aksiok.dpc.tax.nalog.ru"},
+                    {"sec-ch-ua", "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""},
+                    {"sec-ch-ua-mobile", "?0"},
+                    {"sec-ch-ua-platform", "Windows"},
+                    {"Sec-Fetch-Dest", "iframe"},
+                    {"Sec-Fetch-Mode", "navigate"},
+                    {"Sec-Fetch-Site", "same-origin"},
+                    {"Sec-Fetch-User", "?1" },
+                    {"Upgrade-Insecure-Requests", "1"}
+                },
+                Parameters = "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n" +
+                              "Content-Disposition: form-data; name=\"records\"\r\n\r\n"+
+                              "[{records}]\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"EquipmentType\"\r\n\r\n"+
+                              "{EquipmentTypeId}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"Producer\"\r\n\r\n"+
+                              "{ProducerId}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"EquipmentModel\"\r\n\r\n"+
+                              "{EquipmentModelId}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"SerialNumber\"\r\n\r\n"+
+                              "{SerialNumber}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"ServiceNumber\"\r\n\r\n"+
+                              "{ServiceNumber}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"InventoryNumber\"\r\n\r\n"+
+                              "{InventoryNumber}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"IndividualServiceNumber\"\r\n\r\n"+
+                              "{IndividualServiceNumber}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"YearOfIssue\"\r\n\r\n"+
+                              "{YearOfIssue}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"ExploitationStartYear\"\r\n\r\n"+
+                              "{ExploitationStartYear}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"Guarantee\"\r\n\r\n"+
+                              "{Guarantee}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"Comment\"\r\n\r\n"+
+                              "{Comment}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"IsKit\"\r\n\r\n"+
+                              "{IsKit}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"ServiceStatus\"\r\n\r\n"+
+                              "{ServiceStatus}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"DeliveryContract\"\r\n\r\n"+
+                              "{DeliveryContractId}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"ContractOnSto\"\r\n\r\n"+
+                              "{ContractOnStoId}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"EquipmentState\"\r\n\r\n"+
+                              "{EquipmentState}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"EquipmentStateSto\"\r\n\r\n"+
+                              "{EquipmentStateSto}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"ComputerName\"\r\n\r\n"+
+                              "{ComputerName}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"ExpertiseStatus\"\r\n\r\n"+
+                              "{ExpertiseStatus}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"ExpertiseFile\"; filename=\"{NameFileExpertise}\"\r\n"+
+                              "Content-Type: {TypeFileExpertise}\r\n\r\n"+
+                              "{ExpertiseFiles}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"File\"; filename=\"{NameFileAkt}\"\r\n"+
+                              "Content-Type: {TypeFileAkt}\r\n\r\n"+
+                              "{FileAkt}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c--"
+            },
         };
 
     }

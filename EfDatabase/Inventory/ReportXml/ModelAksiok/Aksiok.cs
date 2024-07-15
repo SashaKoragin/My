@@ -93,7 +93,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private string kindEquipmentNameField;
         
-        private string categoriesTruNameField;
+        private string equipmentTypeNameField;
         
         private string numberField;
         
@@ -151,12 +151,12 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CategoriesTruName {
+        public string EquipmentTypeName {
             get {
-                return this.categoriesTruNameField;
+                return this.equipmentTypeNameField;
             }
             set {
-                this.categoriesTruNameField = value;
+                this.equipmentTypeNameField = value;
             }
         }
         
@@ -501,6 +501,16 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         private string keyNumberField;
         
         private bool requiresReplacementField;
+        
+        private bool includedInEqSettingsField;
+        
+        private bool isArmField;
+        
+        private bool isSharedUsageField;
+        
+        private bool isSmallCostField;
+        
+        private bool isOffBalanceAccountField;
         
         /// <remarks/>
         public EquipmentType EquipmentType {
@@ -1031,6 +1041,61 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.requiresReplacementField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IncludedInEqSettings {
+            get {
+                return this.includedInEqSettingsField;
+            }
+            set {
+                this.includedInEqSettingsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsArm {
+            get {
+                return this.isArmField;
+            }
+            set {
+                this.isArmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsSharedUsage {
+            get {
+                return this.isSharedUsageField;
+            }
+            set {
+                this.isSharedUsageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsSmallCost {
+            get {
+                return this.isSmallCostField;
+            }
+            set {
+                this.isSmallCostField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsOffBalanceAccount {
+            get {
+                return this.isOffBalanceAccountField;
+            }
+            set {
+                this.isOffBalanceAccountField = value;
             }
         }
     }

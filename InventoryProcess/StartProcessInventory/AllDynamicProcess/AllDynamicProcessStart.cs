@@ -154,6 +154,15 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
             aksiok.StartUpdateAksiok();
             Dispose();
         }
+        /// <summary>
+        /// Актуализация справочников АКСИОК для ФКУ
+        /// </summary>
+        public void ProcessStartUpdateDirectoryAksiokToInventory()
+        {
+            var aksiok = new AksiokPostGetSystem(LoginUser, PasswordUser);
+            aksiok.StartUpdateDirectoryAksiok();
+            Dispose();
+        }
 
         /// <summary>
         /// Запуск процесса сбора данных из систем Lotus, DKS, AD индекс 7

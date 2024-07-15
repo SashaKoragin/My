@@ -2673,6 +2673,48 @@ namespace TestIFNSLibary.Inventarka
             });
         }
         /// <summary>
+        /// Вытащить все карточки из БД АКСИОК
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> SelectAllModelDocumentType()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllModelDocumentType();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Вытащить все Контракты на обслуживание из БД АКСИОК
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> SelectAllContractOnSto()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllContractOnSto();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
+        /// Вытащить все Контракты на поставку из БД АКСИОК
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> SelectAllDeliveryContract()
+        {
+            Select auto = new Select();
+            return await Task.Factory.StartNew(() =>
+            {
+                var model = auto.AllDeliveryContract();
+                auto.Dispose();
+                return model;
+            });
+        }
+        /// <summary>
         /// Вытащить все типы из БД
         /// </summary>
         /// <returns></returns>
@@ -2715,11 +2757,41 @@ namespace TestIFNSLibary.Inventarka
             });
         }
         /// <summary>
-        /// Проверка оборудование на комплектность!!!
+        /// Подсчет количества групп для редактирования оборудования в АКСИОК
         /// </summary>
-        /// <param name="kitsEquipment">Параметры комплектов</param>
+        /// <param name="countGroupAddingAndEditing">Модель подсчета групп оборудования для действий с ним</param>
         /// <returns></returns>
-        public async Task<KitsEquipment> KitsEquipmentValidation(KitsEquipment kitsEquipment)
+        public async Task<CountGroupAddingAndEditing> ValidationCountingGroupAddingAksiok(CountGroupAddingAndEditing countGroupAddingAndEditing)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSal = new SelectSql();
+                var modelCountGroupAdding = selectSal.ValidationCountingGroupAddingAksiok(countGroupAddingAndEditing);
+                selectSal.Dispose();
+                return modelCountGroupAdding;
+            });
+        }
+        /// <summary>
+        /// Подсчет количества групп для редактирования оборудования в АКСИОК
+        /// </summary>
+        /// <param name="countGroupAddingAndEditing">Модель подсчета групп оборудования для действий с ним</param>
+        /// <returns></returns>
+        public async Task<CountGroupAddingAndEditing> ValidationCountingGroupEditingAksiok(CountGroupAddingAndEditing countGroupAddingAndEditing)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                SelectSql selectSal = new SelectSql();
+                var modelCountGroupAdding = selectSal.ValidationCountingGroupEditingAksiok(countGroupAddingAndEditing);
+                selectSal.Dispose();
+                return modelCountGroupAdding;
+            });
+        }
+    /// <summary>
+    /// Проверка оборудование на комплектность!!!
+    /// </summary>
+    /// <param name="kitsEquipment">Параметры комплектов</param>
+    /// <returns></returns>
+    public async Task<KitsEquipment> KitsEquipmentValidation(KitsEquipment kitsEquipment)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -2737,19 +2809,12 @@ namespace TestIFNSLibary.Inventarka
         {
             return await Task.Factory.StartNew(() =>
             {
-
-                SelectSql selectSql = new SelectSql();
                 aksiokAddAndEdit.ParametersModel.Guarantee = aksiokAddAndEdit.ParametersModel.Guarantee?.AddHours(3);
-                var aksiokModelEditAndAdd = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit);
-                selectSql.Dispose();
-                if (aksiokModelEditAndAdd != null)
-                {
-                    var aksiokEditAndAdd = new AksiokPostGetEditAndAdd(aksiokAddAndEdit.ParametersModel.LoginUser, aksiokAddAndEdit.ParametersModel.Password, aksiokModelEditAndAdd);
-                    var message = aksiokEditAndAdd.StartEditAndAddAksiok(aksiokAddAndEdit);
-                    aksiokEditAndAdd.Dispose();
-                    return message;
-                }
-                return "Процедура вернула null Добавление или Редактирование невозможно!!!";
+                var aksiokEditAndAdd = new AksiokPostGetEditAndAdd(aksiokAddAndEdit.ParametersModel.LoginUser, aksiokAddAndEdit.ParametersModel.Password);
+                var message = aksiokEditAndAdd.StartEditAndAddAksiok(aksiokAddAndEdit);
+                aksiokEditAndAdd.Dispose();
+                return message;
+
             });
         }
         /// <summary>
@@ -2766,7 +2831,7 @@ namespace TestIFNSLibary.Inventarka
                 selectSql.Dispose();
                 if (idFile != null)
                 {
-                    var aksiokEditAndAdd = new AksiokPostGetEditAndAdd(aksiokAddAndEdit.ParametersModel.LoginUser, aksiokAddAndEdit.ParametersModel.Password, null);
+                    var aksiokEditAndAdd = new AksiokPostGetEditAndAdd(aksiokAddAndEdit.ParametersModel.LoginUser, aksiokAddAndEdit.ParametersModel.Password);
                     var fileAksiok = aksiokEditAndAdd.UploadFileAksiok((long)idFile);
                     aksiokEditAndAdd.Dispose(); 
                     return fileAksiok;

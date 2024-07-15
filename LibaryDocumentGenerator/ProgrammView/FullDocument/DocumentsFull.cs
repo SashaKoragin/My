@@ -1660,7 +1660,7 @@ namespace LibaryDocumentGenerator.ProgrammView.FullDocument
             body.Append(table);
 
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart("Заявка", "20", JustificationValues.Center,1));
-            body.Append(paragraphGenerate.RunParagraphGeneratorStandart("на предоставление доступа к информационным ресурсам Межрайонной ИФНС России №51по г. Москве (территориальный уровень)", "20", JustificationValues.Center));
+            body.Append(paragraphGenerate.RunParagraphGeneratorStandart("на предоставление доступа к информационным ресурсам Межрайонной ИФНС России № 51 по г. Москве (территориальный уровень)", "20", JustificationValues.Center));
             body.Append(paragraphGenerate.RunParagraphGeneratorStandart($"следующим сотрудникам {template.UserDepartment.RnameOtdel.ToLower()}", "20", JustificationValues.Center));
 
             cellCollection.Add(CellGenerate.GenerateCell(paragraphGenerate.RunParagraphGeneratorStandart("№ п/п","16", JustificationValues.Center), CellGenerate.FormulWidthCell(0.80), TableWidthUnitValues.Dxa,"100","100",TableVerticalAlignmentValues.Center, CellBorders.GenerateBorderFull()));

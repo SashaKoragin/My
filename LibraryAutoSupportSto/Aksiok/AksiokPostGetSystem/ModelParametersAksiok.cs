@@ -62,9 +62,27 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
                 ParametersAksiok = "{\"records\":[],\"id\":\"{modelDocumentId}\"}",
                 ModelUpdateSql  = "ValueCharacteristicJson"
             },
+            new ModelParametersAksiok(){
+                IndexExecute = 9,
+                UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EpoContract/ListBySto?_dc=1716893139454",
+                ParametersAksiok = "{\"records\":[],\"page\":1,\"start\":0,\"limit\":500}",
+                ModelUpdateSql  = "ContractOnSto"
+            },
+            new ModelParametersAksiok(){
+                IndexExecute = 9,
+                UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EpoContract/ListBySto?_dc=1716893139454",
+                ParametersAksiok = "{\"records\":[],\"page\":1,\"start\":0,\"limit\":500}",
+                ModelUpdateSql  = "ContractOnSto"
+            },
+            new ModelParametersAksiok(){
+                IndexExecute = 10,
+                UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EpoContract/ListByStage?_dc=1718891802527",
+                ParametersAksiok = "{\"records\":[],\"page\":1,\"start\":0,\"limit\":500}",
+                ModelUpdateSql  = "DeliveryContract"
+            },
             new ModelParametersAksiok()
             {
-                IndexExecute = 9,
+                IndexExecute = 11,
                 UrlAksiok = null,
                 ParametersAksiok = null,
                 ModelUpdateSql  = "FinishProcess"
