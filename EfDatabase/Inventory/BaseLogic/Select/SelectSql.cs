@@ -651,8 +651,9 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// Проверка модели на действия с ней Редактирование или Добавление
         /// </summary>
         /// <param name="aksiokAddAndEdit">Транспортная модель с параметрами</param>
+        /// <param name="isMassEditFirstModel">Массовое редактирование пользовательскими параметрами</param>
         /// <returns></returns>
-        public AksiokAddAndEdit ModelValidation(AksiokAddAndEdit aksiokAddAndEdit)
+        public AksiokAddAndEdit ModelValidation(AksiokAddAndEdit aksiokAddAndEdit, bool isMassEditFirstModel = false )
         {
             try
             {
@@ -681,23 +682,27 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                         aksiokAddAndEdit.ParametersModel.InventoryNum),
                     idFullCategoria, codeError, errorServer, idState, idStateSto, idExpertise, yearOfIssue, exploitationStartYear, isKit, guarantee, idCard, idContractOnSto, idDeliveryContract, isSmallCost, isOffBalanceAccount
                 );
-                if (idFullCategoria.Value != DBNull.Value)
-                {
-                    aksiokAddAndEdit.ParametersModel.IdFullCategoria = (int)idFullCategoria.Value;
-                    aksiokAddAndEdit.ParametersModel.IdState = (int)idState.Value;
-                    aksiokAddAndEdit.ParametersModel.IdStateSto = (int)idStateSto.Value;
-                    aksiokAddAndEdit.ParametersModel.IdExpertise = (int)idExpertise.Value;
-                    aksiokAddAndEdit.ParametersModel.YearOfIssue = (int) yearOfIssue.Value;
-                    aksiokAddAndEdit.ParametersModel.ExploitationStartYear = (int)exploitationStartYear.Value;
-                    aksiokAddAndEdit.ParametersModel.IsKit = (bool) isKit.Value;
-                    aksiokAddAndEdit.ParametersModel.Guarantee = (DateTime) guarantee.Value;
-                    aksiokAddAndEdit.ParametersModel.IdCard = (int)idCard.Value;
-                    aksiokAddAndEdit.ParametersModel.IdContractOnSto = idContractOnSto.Value == DBNull.Value? null : (int?)idContractOnSto.Value;
-                    aksiokAddAndEdit.ParametersModel.IdDeliveryContract = idDeliveryContract.Value == DBNull.Value ? null : (int?)idDeliveryContract.Value;
-                    aksiokAddAndEdit.ParametersModel.IsSmallCost = (bool) isSmallCost.Value;
-                    aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount = (bool)isOffBalanceAccount.Value;
-                }
-                aksiokAddAndEdit.ParametersModel.CodeError = (int)codeError.Value;
+      
+                    if (idFullCategoria.Value != DBNull.Value) 
+                    {
+                        if (!isMassEditFirstModel) //При массовой валидации на редактирование заменяет пользовательские данные нужен признак не заменять
+                        {
+                            aksiokAddAndEdit.ParametersModel.IdFullCategoria = (int)idFullCategoria.Value;
+                            aksiokAddAndEdit.ParametersModel.IdState = (int)idState.Value;
+                            aksiokAddAndEdit.ParametersModel.IdStateSto = (int)idStateSto.Value;
+                            aksiokAddAndEdit.ParametersModel.IdExpertise = (int)idExpertise.Value;
+                            aksiokAddAndEdit.ParametersModel.YearOfIssue = (int)yearOfIssue.Value;
+                            aksiokAddAndEdit.ParametersModel.ExploitationStartYear = (int)exploitationStartYear.Value;
+                            aksiokAddAndEdit.ParametersModel.IsKit = (bool)isKit.Value;
+                            aksiokAddAndEdit.ParametersModel.Guarantee = (DateTime)guarantee.Value;
+                            aksiokAddAndEdit.ParametersModel.IdCard = (int)idCard.Value;
+                            aksiokAddAndEdit.ParametersModel.IdContractOnSto = idContractOnSto.Value == DBNull.Value ? null : (int?)idContractOnSto.Value;
+                            aksiokAddAndEdit.ParametersModel.IdDeliveryContract = idDeliveryContract.Value == DBNull.Value ? null : (int?)idDeliveryContract.Value;
+                            aksiokAddAndEdit.ParametersModel.IsSmallCost = (bool)isSmallCost.Value;
+                            aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount = (bool)isOffBalanceAccount.Value;
+                        }
+                    }
+                    aksiokAddAndEdit.ParametersModel.CodeError = (int)codeError.Value;
                 aksiokAddAndEdit.ParametersModel.ErrorServer = (string)errorServer.Value;
                 return aksiokAddAndEdit;
             }

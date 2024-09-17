@@ -418,7 +418,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                         foreach (var serialNumber in groupTechnical)
                         {
                             aksiokAddAndEdit.ParametersModel.SerNumber = serialNumber;
-                            aksiokAddAndEdit = selectSql.ModelValidation(aksiokAddAndEdit);
+                            aksiokAddAndEdit = selectSql.ModelValidation(aksiokAddAndEdit, aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel);
                             if (string.IsNullOrWhiteSpace(aksiokAddAndEdit.ParametersModel.ErrorServer))
                             {
                                 try
@@ -426,7 +426,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                                     AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit, aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel);
                                     if (aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel)
                                     {
-                                        PostEditModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0], aksiokAddAndEdit), Encoding.Default);
+                                          PostEditModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0], aksiokAddAndEdit), Encoding.Default);
                                     }
                                     PostEditModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
                                     aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.PublicModelValueJson.Id, aksiokAddAndEdit.ParametersModel.IdCard, serialNumber);
