@@ -3,8 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using EfDatabase.Inventory.Base;
 using EfDatabase.Inventory.BaseLogic.AksiokAddAndUpdateObjectDb;
 using EfDatabase.Inventory.ReportXml.ModelAksiok;
+using EfDatabase.ModelAksiok.Aksiok;
+using LibaryXMLAutoReports.FullTemplateSheme;
+using EpoDocument = EfDatabase.Inventory.Base.EpoDocument;
 
 namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
 {
@@ -115,7 +119,6 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
                     {
                         AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok(dataModelServerAksiok.Data, parameterAksiok.ModelUpdateSql, idType, idProduct);
                     }
-                   
                 }
             }
             return dataModelServerAksiok;
@@ -180,12 +183,18 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
                     {
                         errorResultModelId = model.Id;
                         sNumberModel = model.SerialNumber;
-                        PostAksiok<EfDatabase.ModelAksiok.Aksiok.EpoDocument>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 7), 0, 0, 0, model.Id), document.Id);
+                        var epoDocument = PostAksiok<EfDatabase.ModelAksiok.Aksiok.EpoDocument>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 7), 0, 0, 0, model.Id), document.Id);
+                        epoDocument.Data.CanDelete = model.CanDelete;
+                        epoDocument.Data.CanCreateKit = model.CanCreateKit;
+                        epoDocument.Data.CanEditKit = model.CanEditKit;
+                        epoDocument.Data.CanDisbandKit = model.CanDisbandKit;
+                        epoDocument.Data.EquipmentKitId = model.EquipmentKitId;
+                        AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok(epoDocument.Data, "EpoDocument", document.Id);
                         PostAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 8), 0, 0, 0, model.Id));
                     }
+                    PostAksiok<EfDatabase.ModelAksiok.Aksiok.ContractSpecification[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 10), 0, 0, 0, document.Id), document.Id);
                 }
                 PostAksiok<EfDatabase.ModelAksiok.Aksiok.ContractOnSto[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 9)));
-                PostAksiok<EfDatabase.ModelAksiok.Aksiok.DeliveryContract[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 10)));
                 AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(null, AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 11)?.ModelUpdateSql);
                 Dispose();
             }
@@ -203,8 +212,6 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
         /// </summary>
         public void StartUpdateDirectoryAksiok()
         {
-            PostAksiok<EfDatabase.ModelAksiok.Aksiok.ContractOnSto[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 9)));
-            PostAksiok<EfDatabase.ModelAksiok.Aksiok.DeliveryContract[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 10)));
             Dispose();
         }
 
@@ -214,14 +221,22 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
         /// <param name="idModel">Ун модели</param>
         /// <param name="idDocument">Ун документа</param>
         /// <param name="serialNumber">Серийный номер</param>
-        /// <param name="isEnd">Закончить синхронизацию</param>
-        public void PointSynchronizationAksiok(int idModel,int idDocument, string serialNumber)
+        public EfDatabase.ModelAksiok.Aksiok.EpoDocument PointSynchronizationAksiok(int idModel,int idDocument, string serialNumber)
         {
             try
             {
-                PostAksiok<EfDatabase.ModelAksiok.Aksiok.EpoDocument>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 7), 0, 0, 0, idModel), idDocument);
+                var modelDocuments = PostAksiok<EfDatabase.ModelAksiok.Aksiok.ModelDocument[]>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 6), 0, 0, idDocument));
+                var modelDocument = modelDocuments.Data.First(model => model.SerialNumber == serialNumber);
+                var epoDocument = PostAksiok<EfDatabase.ModelAksiok.Aksiok.EpoDocument>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 7), 0, 0, 0, idModel), idDocument);
+                epoDocument.Data.CanDelete = modelDocument.CanDelete;
+                epoDocument.Data.CanCreateKit = modelDocument.CanCreateKit;
+                epoDocument.Data.CanEditKit = modelDocument.CanEditKit;
+                epoDocument.Data.CanDisbandKit = modelDocument.CanDisbandKit;
+                epoDocument.Data.EquipmentKitId = modelDocument.EquipmentKitId;
+                AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok(epoDocument.Data, "EpoDocument", idDocument);
                 PostAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(GenerateParametersAksiok(AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 8), 0, 0, 0, idModel));
                 AksiokAddAndUpdateObjectDb.AddAndUpdateFullLoadAksiok<EfDatabase.ModelAksiok.Aksiok.ValueCharacteristicJson>(null, AllParameters.ModelParametersAksiok.FirstOrDefault(x => x.IndexExecute == 11)?.ModelUpdateSql);
+                return epoDocument.Data;
             }
             catch (Exception e)
             {
@@ -231,6 +246,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
 
                 Dispose();
             }
+            return null;
         }
         /// <summary>
         /// Обновление комплектности на скомплектованный моделях 
@@ -238,9 +254,10 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
         /// <param name="idFirst">Ун компьютера</param>
         /// <param name="idTwo">Ун монитора</param>
         /// <param name="isKit">Комплектность true/false</param>
-        public void UpdateKitsEquipment(int idFirst, int idTwo, bool isKit)
+        /// <param name="equipmentKitId"> Уникальный номер комплекта</param>
+        public void UpdateKitsEquipment(int idFirst, int idTwo, bool isKit, long? equipmentKitId)
         {
-            AksiokAddAndUpdateObjectDb.UpdateKitsEquipmentAksiok(idFirst, idTwo, isKit);
+            AksiokAddAndUpdateObjectDb.UpdateKitsEquipmentAksiok(idFirst, idTwo, isKit, equipmentKitId);
         }
 
         /// <summary>

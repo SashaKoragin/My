@@ -47,7 +47,7 @@ namespace EfDatabaseXsdSupportNalog {
         
         private int idAnalisysEpoField;
         
-        private TemplateSupport1[] templateSupportField;
+        private TemplateSupport[] templateSupportField;
         
         private string step3ResponseSupportField;
         
@@ -192,7 +192,7 @@ namespace EfDatabaseXsdSupportNalog {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("TemplateSupport", IsNullable=true)]
-        public TemplateSupport1[] TemplateSupport {
+        public TemplateSupport[] TemplateSupport {
             get {
                 return this.templateSupportField;
             }
@@ -248,16 +248,7 @@ namespace EfDatabaseXsdSupportNalog {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute("TemplateSupport", Namespace="", IsNullable=true)]
-    public partial class TemplateSupport1 : TemplateSupport {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
     public partial class TemplateSupport {
         
         private string nameField;
@@ -544,9 +535,23 @@ namespace EfDatabaseXsdSupportNalog {
         
         private bool isKitField;
         
+        private string deliveryContractField;
+        
+        private bool isSharedUsageField;
+        
         private bool isSmallCostField;
         
         private bool isOffBalanceAccountField;
+        
+        private bool forExternalUseField;
+        
+        private bool isSyncBySuimField;
+        
+        private string emptyContractReasonField;
+        
+        private bool isContractNeededField;
+        
+        private long equipmentKitIdField;
         
         private string loginUserField;
         
@@ -768,6 +773,28 @@ namespace EfDatabaseXsdSupportNalog {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DeliveryContract {
+            get {
+                return this.deliveryContractField;
+            }
+            set {
+                this.deliveryContractField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsSharedUsage {
+            get {
+                return this.isSharedUsageField;
+            }
+            set {
+                this.isSharedUsageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsSmallCost {
             get {
                 return this.isSmallCostField;
@@ -785,6 +812,61 @@ namespace EfDatabaseXsdSupportNalog {
             }
             set {
                 this.isOffBalanceAccountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool ForExternalUse {
+            get {
+                return this.forExternalUseField;
+            }
+            set {
+                this.forExternalUseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsSyncBySuim {
+            get {
+                return this.isSyncBySuimField;
+            }
+            set {
+                this.isSyncBySuimField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string EmptyContractReason {
+            get {
+                return this.emptyContractReasonField;
+            }
+            set {
+                this.emptyContractReasonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsContractNeeded {
+            get {
+                return this.isContractNeededField;
+            }
+            set {
+                this.isContractNeededField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long EquipmentKitId {
+            get {
+                return this.equipmentKitIdField;
+            }
+            set {
+                this.equipmentKitIdField = value;
             }
         }
         

@@ -247,7 +247,7 @@ namespace EfDatabase.Inventory.BaseLogic.FileServerAddFile
                         sizeFiles /= 1024;
                     }
 
-                    using (var stream = File.OpenRead(file))
+                    using (var stream = File.Open(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         using (var md5 = MD5.Create())
                         {

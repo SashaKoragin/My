@@ -38,14 +38,14 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
             {
                 IndexExecute = 5,
                 UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EpoRegistry/List?_dc=1649674857153",
-                ParametersAksiok = "{\"records\":[],\"page\":1,\"start\":0,\"limit\":1000}",
+                ParametersAksiok = "{\"records\":[],\"page\":1,\"start\":0,\"limit\":500}",
                 ModelUpdateSql  = "ModelDocumentType"
             },
             new ModelParametersAksiok()
             {
                 IndexExecute = 6,
                 UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EquipmentCard/ListEquipments?_dc=1649676212262",
-                ParametersAksiok = "{\"records\":[],\"epoDocumentId\":\"{modelDocumentTypeId}\",\"showEliminatedEquipment\":true,\"page\":1,\"start\":0,\"limit\":500}",
+                ParametersAksiok = "{\"records\":[],\"epoDocumentId\":\"{modelDocumentTypeId}\",\"showEliminatedEquipment\":true,\"page\":1,\"start\":0,\"limit\":1000}",
                 ModelUpdateSql  = null
             },
             new ModelParametersAksiok()
@@ -53,7 +53,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
                 IndexExecute = 7,
                 UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EquipmentCard/get?_dc=1649676459600",
                 ParametersAksiok = "{\"records\":[],\"id\":\"{modelDocumentId}\"}",
-                ModelUpdateSql  = "EpoDocument"
+                ModelUpdateSql  = null
             },
             new ModelParametersAksiok()
             {
@@ -65,19 +65,13 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
             new ModelParametersAksiok(){
                 IndexExecute = 9,
                 UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EpoContract/ListBySto?_dc=1716893139454",
-                ParametersAksiok = "{\"records\":[],\"page\":1,\"start\":0,\"limit\":500}",
-                ModelUpdateSql  = "ContractOnSto"
-            },
-            new ModelParametersAksiok(){
-                IndexExecute = 9,
-                UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EpoContract/ListBySto?_dc=1716893139454",
-                ParametersAksiok = "{\"records\":[],\"page\":1,\"start\":0,\"limit\":500}",
+                ParametersAksiok = "{\"records\":[],\"page\":1,\"start\":0,\"limit\":1000}",
                 ModelUpdateSql  = "ContractOnSto"
             },
             new ModelParametersAksiok(){
                 IndexExecute = 10,
-                UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EpoContract/ListByStage?_dc=1718891802527",
-                ParametersAksiok = "{\"records\":[],\"page\":1,\"start\":0,\"limit\":500}",
+                UrlAksiok = "https://aksiok.dpc.tax.nalog.ru/api/EquipmentCard/ListEpoContractOnStage?_dc=1751441391317",
+                ParametersAksiok = "{\"records\":[],\"EpoDocument\":{modelDocumentId},\"page\":1,\"start\":0,\"limit\":500}",
                 ModelUpdateSql  = "DeliveryContract"
             },
             new ModelParametersAksiok()
@@ -86,7 +80,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostGetSystem
                 UrlAksiok = null,
                 ParametersAksiok = null,
                 ModelUpdateSql  = "FinishProcess"
-            },
+            }
         };
     }
 

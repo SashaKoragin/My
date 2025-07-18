@@ -156,7 +156,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                     {"Sec-Fetch-Mode", "cors"},
                     {"Sec-Fetch-Site", "same-origin"}
                 },
-                Parameters = "{\"eqCardId\":{IdCard}}"
+                Parameters = "{\"equipmentKitId\":{IdCard}}"
             }, 
             new ParametersUrlModel()
             {
@@ -187,6 +187,15 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                 Parameters = "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n" +
                               "Content-Disposition: form-data; name=\"records\"\r\n\r\n"+
                               "[{records}]\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"DeliveryContract\"\r\n\r\n"+
+                              "{DeliveryContract}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"ContractSpecification\"\r\n\r\n"+
+                              "{ContractSpecificationId}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"EmptyContractReason\"\r\n\r\n"+
+                              "{EmptyContractReason}\r\n"+
                               "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
                               "Content-Disposition: form-data; name=\"EquipmentType\"\r\n\r\n"+
                               "{EquipmentTypeId}\r\n"+
@@ -227,9 +236,6 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                               "Content-Disposition: form-data; name=\"ServiceStatus\"\r\n\r\n"+
                               "{ServiceStatus}\r\n"+
                               "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
-                              "Content-Disposition: form-data; name=\"DeliveryContract\"\r\n\r\n"+
-                              "{DeliveryContractId}\r\n"+
-                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
                               "Content-Disposition: form-data; name=\"ContractOnSto\"\r\n\r\n"+
                               "{ContractOnStoId}\r\n"+
                               "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
@@ -253,6 +259,46 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                               "Content-Type: {TypeFileAkt}\r\n\r\n"+
                               "{FileAkt}\r\n"+
                               "------WebKitFormBoundaryJQPnmm1hsNgDAn6c--"
+            },
+            new ParametersUrlModel()
+            {
+                Url = "https://aksiok.dpc.tax.nalog.ru/api/EquipmentKit/CreateKit",
+                Accept = "*/*",
+                ContentType = "application/json",
+                Headers = new Dictionary<string, string>()
+                {
+                    {"Accept-Encoding", "gzip, deflate, br"},
+                    {"Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"},
+                    {"X-Requested-With", "XMLHttpRequest"},
+                    {"Origin", "https://aksiok.dpc.tax.nalog.ru"},
+                    {"sec-ch-ua", "Not A; Brand\";v=\"99\", \"Chromium\"; v=\"102\", \"Google Chrome\"; v=\"102\""},
+                    {"sec-ch-ua-mobile", "?0"},
+                    {"sec-ch-ua-platform", "Windows"},
+                    {"Sec-Fetch-Dest", "empty"},
+                    {"Sec-Fetch-Mode", "cors"},
+                    {"Sec-Fetch-Site", "same-origin"}
+                },
+                Parameters = "{\"equipmentId\":{EquipmentId}}"
+            },
+            new ParametersUrlModel()
+            {
+                Url = "https://aksiok.dpc.tax.nalog.ru/api/EquipmentKit/DisbandKit",
+                Accept = "*/*",
+                ContentType = "application/json",
+                Headers = new Dictionary<string, string>()
+                {
+                    {"Accept-Encoding", "gzip, deflate, br"},
+                    {"Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"},
+                    {"X-Requested-With", "XMLHttpRequest"},
+                    {"Origin", "https://aksiok.dpc.tax.nalog.ru"},
+                    {"sec-ch-ua", "Not A; Brand\";v=\"99\", \"Chromium\"; v=\"102\", \"Google Chrome\"; v=\"102\""},
+                    {"sec-ch-ua-mobile", "?0"},
+                    {"sec-ch-ua-platform", "Windows"},
+                    {"Sec-Fetch-Dest", "empty"},
+                    {"Sec-Fetch-Mode", "cors"},
+                    {"Sec-Fetch-Site", "same-origin"}
+                },
+                Parameters = "{\"equipmentKitId\":{EquipmentKitId}}"
             },
         };
 

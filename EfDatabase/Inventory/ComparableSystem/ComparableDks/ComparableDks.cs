@@ -22,7 +22,7 @@ namespace EfDatabase.Inventory.ComparableSystem.ComparableDks
 											 case WHEN FullModelUserAllSystem.PHONE_TYPE = 2 THEN '8'+CONVERT(varchar,FullModelUserAllSystem.PHONE_PRINT)
 											 ELSE '8'+CONVERT(varchar,FullModelUserAllSystem.PHONE_PRINT) END as PhoneNumber,
 											 FullModelUserAllSystem.PHONE_TYPE as TypePhone,
-											 RTRIM(MAN_MAIL) as NameMail,
+											 RTRIM(LOTUS) as NameMail,
                                              RTRIM(MAN_KAB) as Room,
                                              NULL as UserAccountControl,
 											 NULL as GroupName

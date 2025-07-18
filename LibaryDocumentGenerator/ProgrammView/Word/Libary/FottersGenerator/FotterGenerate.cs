@@ -13,6 +13,7 @@ namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.FottersGenerator
         public static FooterPart AddFotters(MainDocumentPart mainDocument)
         {
             FooterPart foters = mainDocument.AddNewPart<FooterPart>();
+            
             return foters;
         }
     }

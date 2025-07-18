@@ -47,7 +47,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                var idUser = modelSupport.IdUser;
                modelSupport.IdSysBlock = Inventory.SysBlocks.Where(x => x.IdUser == idUser).Select(sel=>sel.IdSysBlock).FirstOrDefault();
            }
-           modelSupport.TemplateSupport = Inventory.Database.SqlQuery<TemplateSupport1>(model.LogicaSelect.SelectUser,
+           modelSupport.TemplateSupport = Inventory.Database.SqlQuery<TemplateSupport>(model.LogicaSelect.SelectUser,
                new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], modelSupport.IdTemplate)).ToArray();
            if (modelSupport?.TemplateSupport != null && modelSupport?.TemplateSupport.Length > 0)
            {

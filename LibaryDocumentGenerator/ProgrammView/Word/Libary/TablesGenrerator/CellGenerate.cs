@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace LibaryDocumentGenerator.ProgrammView.Word.Libary.TablesGenrerator

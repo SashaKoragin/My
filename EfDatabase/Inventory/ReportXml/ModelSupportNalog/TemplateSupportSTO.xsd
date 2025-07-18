@@ -65,15 +65,10 @@
 			<xs:documentation>Ун пользователя</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="TemplateSupport" nillable="true">
+	<xs:element name="TemplateSupport" type="TemplateSupport" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Шаблон отправки генерации и отправки на СТO</xs:documentation>
 		</xs:annotation>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="TemplateSupport"/>
-			</xs:complexContent>
-		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="TemplateSupport">
 		<xs:annotation>
@@ -271,6 +266,16 @@
 					<xs:documentation>Признак комплектности 0 нет комплекта 1 есть комплект</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="DeliveryContract" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Контракт на поставку</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSharedUsage" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Совместное использование</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 			<xs:attribute name="IsSmallCost" type="xs:boolean" use="required">
 				<xs:annotation>
 					<xs:documentation>Стоимость до 10 т.р.</xs:documentation>
@@ -279,6 +284,31 @@
 			<xs:attribute name="IsOffBalanceAccount" type="xs:boolean" use="required">
 				<xs:annotation>
 					<xs:documentation>На забалансовом счете</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ForExternalUse" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Для внешнего использования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSyncBySuim" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Синхронизировано с СУиМ</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EmptyContractReason" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Причина отсутствия контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsContractNeeded" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Не требует ГК</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentKitId" type="xs:long" use="required">
+				<xs:annotation>
+					<xs:documentation>Уникальный номер комплекта</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name="LoginUser" type="xs:string" use="required">

@@ -34,7 +34,9 @@
     <Reference Include="DocumentFormat.OpenXml, Version=2.18.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\..\WPFLib\WPFLib\packages\DocumentFormat.OpenXml.2.18.0\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,6 +72,7 @@
     <Compile Include="Documents\TemplateExcel\ReportComparableUserResult.cs" />
     <Compile Include="Documents\TemplateExcel\ReportDocumentContainerInventory.cs" />
     <Compile Include="Documents\TemplateExcel\ReportServerIpStatus.cs" />
+    <Compile Include="Documents\TemplateFns\ReportMonitoringNalog.cs" />
     <Compile Include="Documents\Template\BookAccountingInventarka.cs" />
     <Compile Include="Documents\Template\DocCode128.cs" />
     <Compile Include="Documents\Template\DocCodePdf417.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="ProgrammView\Excel\Library\ModelCellFormat.cs" />
     <Compile Include="ProgrammView\Excel\Library\StyleCells.cs" />
     <Compile Include="ProgrammView\FullDocumentExcel\AllDocumentExcel.cs" />
+    <Compile Include="ProgrammView\FullDocumentFns\AllDocumentFns.cs" />
     <Compile Include="ProgrammView\FullDocument\DocumentsFull.cs" />
     <Compile Include="ProgrammView\FullDocument\DocumentsPreChek.cs" />
     <Compile Include="ProgrammView\FullDocument\GenerateStatementPreCheck.cs" />
