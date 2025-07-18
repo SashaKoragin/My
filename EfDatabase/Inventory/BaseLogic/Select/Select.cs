@@ -721,10 +721,13 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         public string AllModelDocumentType()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<ModelDocumentType>("Select ModelDocumentType.Id, ModelDocumentType.Soun, ModelDocumentType.DocumentType, ModelDocumentType.KindEquipmentName, ISNULL(EquipmentType.Name,EquipmentTypeName) as EquipmentTypeName, ModelDocumentType.Number, ModelDocumentType.Author, ModelDocumentType.CanDelete, ModelDocumentType.AgencyName, ModelDocumentType.CreateDate From ModelDocumentType\n" +
-                                                                                            " Left Join EpoDocument on EpoDocument.IdEpoDocument = ModelDocumentType.Id\n" +
-                                                                                            " Left Join EquipmentType on EpoDocument.IdEquipmentType = EquipmentType.Id\n" +
-                                                                                            " Group by ModelDocumentType.Id, ModelDocumentType.Soun, ModelDocumentType.DocumentType, ModelDocumentType.KindEquipmentName, ISNULL(EquipmentType.Name,EquipmentTypeName), ModelDocumentType.Number, ModelDocumentType.Author, ModelDocumentType.CanDelete, ModelDocumentType.AgencyName, ModelDocumentType.CreateDate"));
+            var model = Inventory.Database.SqlQuery<ModelDocumentType>(
+                    "Select ModelDocumentType.Id, ModelDocumentType.Soun, ModelDocumentType.DocumentType, ModelDocumentType.KindEquipmentName, ISNULL(EquipmentType.Name,EquipmentTypeName) as EquipmentTypeName, ModelDocumentType.Number, ModelDocumentType.Author, ModelDocumentType.CanDelete, ModelDocumentType.AgencyName, ModelDocumentType.CreateDate From ModelDocumentType\n" +
+                    " Left Join EpoDocument on EpoDocument.IdEpoDocument = ModelDocumentType.Id\n" +
+                    " Left Join EquipmentType on EpoDocument.IdEquipmentType = EquipmentType.Id\n" +
+                    " Group by ModelDocumentType.Id, ModelDocumentType.Soun, ModelDocumentType.DocumentType, ModelDocumentType.KindEquipmentName, ISNULL(EquipmentType.Name,EquipmentTypeName), ModelDocumentType.Number, ModelDocumentType.Author, ModelDocumentType.CanDelete, ModelDocumentType.AgencyName, ModelDocumentType.CreateDate")
+                .ToArray();
+            return json.JsonLibaryIgnoreDate(model);
         }
         /// <summary>
         /// Вытаскиваем все типы
@@ -766,10 +769,10 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// Все контракты поставки оборудования
         /// </summary>
         /// <returns></returns>
-        public string AllDeliveryContract()
+        public string AllContractSpecification()
         {
             SerializeJson json = new SerializeJson();
-            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<DeliveryContract>("Select * From DeliveryContract"));
+            return json.JsonLibaryIgnoreDate(Inventory.Database.SqlQuery<ContractSpecification>("Select * From ContractSpecification"));
         }
 
         /// <summary>

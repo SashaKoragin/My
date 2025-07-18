@@ -82,6 +82,7 @@
 			<xs:sequence>
 				<xs:element ref="FileId"/>
 				<xs:element ref="ExpertiseFileId"/>
+				<xs:element ref="EquipmentKitId"/>
 			</xs:sequence>
 			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
@@ -138,6 +139,26 @@
 					<xs:documentation>Параметр настроек</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="CanDelete" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак удаления</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanCreateKit" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак создания комплекта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanEditKit" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак редактирования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanDisbandKit" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак разукомплектования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="Id" type="xs:long" nillable="false">
@@ -158,7 +179,7 @@
 				<xs:element ref="DateOfStatement"/>
 				<xs:element ref="File"/>
 				<xs:element ref="ExpertiseFile"/>
-				<xs:element ref="DeliveryContract"/>
+				<xs:element ref="ContractSpecification"/>
 				<xs:element ref="ContractOnSto"/>
 				<xs:element ref="Guarantee"/>
 				<xs:element ref="BoardsNumber"/>
@@ -167,6 +188,7 @@
 				<xs:element ref="InternalDigitNumber"/>
 				<xs:element ref="AdminsCount"/>
 				<xs:element ref="ExploitationStartYear" minOccurs="0"/>
+				<xs:element ref="EquipmentKitId"/>
 			</xs:sequence>
 			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
@@ -251,6 +273,11 @@
 			<xs:attribute name="ServiceStatus" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Сервисный статус</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DeliveryContract" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Контракт на поставку</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name="OsActualVersion" type="xs:string" use="required">
@@ -351,6 +378,61 @@
 			<xs:attribute name="IsOffBalanceAccount" type="xs:boolean" use="required">
 				<xs:annotation>
 					<xs:documentation>На забалансовом счете</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ForExternalUse" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Использовать расширение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanDownloadDeliveryContractFiles" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак загружен ли контракт файл</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanDownloadContractOnStoFiles" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак загружен ли СТО файл</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsContractNeeded" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак нужности контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EmptyContractReason" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Причина отсутствия контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanViewSoftware" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Можно просмотреть програмное обеспечение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSyncBySuim" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Синхронизировано с СУиМ</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanDelete" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак удаления</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanCreateKit" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак создания комплекта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanEditKit" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак редактирования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanDisbandKit" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак разукомплектования</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -493,7 +575,7 @@
 			<xs:restriction base="xs:int"/>
 		</xs:simpleType>
 	</xs:element>
-	<xs:element name="DeliveryContract" nillable="false">
+	<xs:element name="ContractSpecification" nillable="false">
 		<xs:annotation>
 			<xs:documentation>Справочник контрактов</xs:documentation>
 		</xs:annotation>
@@ -501,6 +583,11 @@
 			<xs:attribute name="Id" type="xs:int" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EpoContractId" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>2 Ун контракта</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name="Number" type="xs:string" use="required">
@@ -521,6 +608,56 @@
 			<xs:attribute name="Executor" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Выполневший контракт</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Soun" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>СУОН</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentType" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Тип оборудования</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Producer" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Производитель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ProducerId" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун производителя</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentModel" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Модель</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EquipmentModelId" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун модели</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Garanty" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>Дата гарантии</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Quantity" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Колличество в контракте</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContractSpecificationText" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Описание контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CountInEpoRegistry" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Колличества оборудования в ЭПО</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -980,5 +1117,10 @@
 				<xs:element ref="EquipmentType"/>
 			</xs:sequence>
 		</xs:complexType>
+	</xs:element>
+	<xs:element name="EquipmentKitId" type="xs:long" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Уникальный номер комплекта</xs:documentation>
+		</xs:annotation>
 	</xs:element>
 </xs:schema>

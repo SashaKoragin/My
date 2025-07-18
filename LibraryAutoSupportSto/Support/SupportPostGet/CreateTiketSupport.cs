@@ -146,7 +146,7 @@ namespace LibraryAutoSupportSto.Support.SupportPostGet
         /// <param name="findNode">Модель параметров</param>
         /// <param name="modelParameter">Модель параметров</param>
         /// <param name="isStep3">Параметры шага 3</param>
-        private void GenerateParameterResponse(string findNode, TemplateSupport1[] modelParameter=null, bool isStep3 = false)
+        private void GenerateParameterResponse(string findNode, TemplateSupport[] modelParameter=null, bool isStep3 = false)
         {
             if (Response.StatusCode == HttpStatusCode.OK)
             {

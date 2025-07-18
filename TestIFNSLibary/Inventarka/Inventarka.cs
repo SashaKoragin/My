@@ -2709,7 +2709,7 @@ namespace TestIFNSLibary.Inventarka
             Select auto = new Select();
             return await Task.Factory.StartNew(() =>
             {
-                var model = auto.AllDeliveryContract();
+                var model = auto.AllContractSpecification();
                 auto.Dispose();
                 return model;
             });

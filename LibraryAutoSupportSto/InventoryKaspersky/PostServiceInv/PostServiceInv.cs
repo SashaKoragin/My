@@ -72,7 +72,7 @@ namespace LibraryAutoSupportSto.InventoryKaspersky.PostServiceInv
             {
                 var datesBytes = Encoding.UTF8.GetBytes(ParameterKasperskyModel);
                 Request = (HttpWebRequest)WebRequest.Create(ServiceInvKaspersky);
-                Request.Timeout = 120000;
+                Request.Timeout = 360000;
                 Request.Method = "POST";
                 Request.ContentType = "application/json";
                 Request.ContentLength = datesBytes.Length;
@@ -100,7 +100,7 @@ namespace LibraryAutoSupportSto.InventoryKaspersky.PostServiceInv
             var task = Task.Factory.StartNew(() =>
             {
                 Request = (HttpWebRequest)WebRequest.Create(ServiceInvKasperskyAllHostDrivers);
-                Request.Timeout = 120000;
+                Request.Timeout = 360000;
                 Request.Method = "POST";
                 Request.ContentType = "application/json";
                 Request.ContentLength = 0;

@@ -651,8 +651,9 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// Проверка модели на действия с ней Редактирование или Добавление
         /// </summary>
         /// <param name="aksiokAddAndEdit">Транспортная модель с параметрами</param>
+        /// <param name="isMassEditFirstModel">Массовое редактирование пользовательскими параметрами</param>
         /// <returns></returns>
-        public AksiokAddAndEdit ModelValidation(AksiokAddAndEdit aksiokAddAndEdit)
+        public AksiokAddAndEdit ModelValidation(AksiokAddAndEdit aksiokAddAndEdit, bool isMassEditFirstModel = false )
         {
             try
             {
@@ -672,6 +673,14 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 var idDeliveryContract = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[15], aksiokAddAndEdit.ParametersModel.IdDeliveryContract) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
                 var isSmallCost = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[16], aksiokAddAndEdit.ParametersModel.IsSmallCost) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Bit };
                 var isOffBalanceAccount = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[17], aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Bit };
+                var isSharedUsage = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[18], aksiokAddAndEdit.ParametersModel.IsSharedUsage) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Bit };
+                var forExternalUse = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[19], aksiokAddAndEdit.ParametersModel.ForExternalUse) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Bit };
+                var isSyncBySuim = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[20], aksiokAddAndEdit.ParametersModel.IsSyncBySuim) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Bit };
+                var emptyContractReason = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[21], aksiokAddAndEdit.ParametersModel.EmptyContractReason) { Direction = ParameterDirection.Output, Size = 256, SqlDbType = SqlDbType.VarChar };
+                var isContractNeeded = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[22], aksiokAddAndEdit.ParametersModel.IsContractNeeded) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Bit };
+                var deliveryContract = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[23], aksiokAddAndEdit.ParametersModel.DeliveryContract) { Direction = ParameterDirection.Output, Size = 256, SqlDbType = SqlDbType.VarChar };
+                var equipmentKitId = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[24], aksiokAddAndEdit.ParametersModel.EquipmentKitId) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.BigInt };
+
                 Inventory.Database.ExecuteSqlCommand(selectModel.LogicaSelect.SelectUser,
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0],
                         aksiokAddAndEdit.ParametersModel.ModelRequest),
@@ -679,24 +688,36 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                         aksiokAddAndEdit.ParametersModel.SerNumber),
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2],
                         aksiokAddAndEdit.ParametersModel.InventoryNum),
-                    idFullCategoria, codeError, errorServer, idState, idStateSto, idExpertise, yearOfIssue, exploitationStartYear, isKit, guarantee, idCard, idContractOnSto, idDeliveryContract, isSmallCost, isOffBalanceAccount
+                    idFullCategoria, codeError, errorServer, idState, idStateSto, idExpertise, yearOfIssue, exploitationStartYear, isKit, guarantee, idCard, idContractOnSto, idDeliveryContract, isSmallCost, isOffBalanceAccount, isSharedUsage, forExternalUse, isSyncBySuim, emptyContractReason, isContractNeeded, deliveryContract, equipmentKitId
                 );
-                if (idFullCategoria.Value != DBNull.Value)
-                {
-                    aksiokAddAndEdit.ParametersModel.IdFullCategoria = (int)idFullCategoria.Value;
-                    aksiokAddAndEdit.ParametersModel.IdState = (int)idState.Value;
-                    aksiokAddAndEdit.ParametersModel.IdStateSto = (int)idStateSto.Value;
-                    aksiokAddAndEdit.ParametersModel.IdExpertise = (int)idExpertise.Value;
-                    aksiokAddAndEdit.ParametersModel.YearOfIssue = (int) yearOfIssue.Value;
-                    aksiokAddAndEdit.ParametersModel.ExploitationStartYear = (int)exploitationStartYear.Value;
-                    aksiokAddAndEdit.ParametersModel.IsKit = (bool) isKit.Value;
-                    aksiokAddAndEdit.ParametersModel.Guarantee = (DateTime) guarantee.Value;
-                    aksiokAddAndEdit.ParametersModel.IdCard = (int)idCard.Value;
-                    aksiokAddAndEdit.ParametersModel.IdContractOnSto = idContractOnSto.Value == DBNull.Value? null : (int?)idContractOnSto.Value;
-                    aksiokAddAndEdit.ParametersModel.IdDeliveryContract = idDeliveryContract.Value == DBNull.Value ? null : (int?)idDeliveryContract.Value;
-                    aksiokAddAndEdit.ParametersModel.IsSmallCost = (bool) isSmallCost.Value;
-                    aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount = (bool)isOffBalanceAccount.Value;
-                }
+      
+                    if (idFullCategoria.Value != DBNull.Value) 
+                    {
+                        if (!isMassEditFirstModel) //При массовой валидации на редактирование заменяет пользовательские данные нужен признак не заменять
+                        {
+                            aksiokAddAndEdit.ParametersModel.IdFullCategoria = (int)idFullCategoria.Value;
+                            aksiokAddAndEdit.ParametersModel.IdState = (int)idState.Value;
+                            aksiokAddAndEdit.ParametersModel.IdStateSto = (int)idStateSto.Value;
+                            aksiokAddAndEdit.ParametersModel.IdExpertise = (int)idExpertise.Value;
+                            aksiokAddAndEdit.ParametersModel.YearOfIssue = (int)yearOfIssue.Value;
+                            aksiokAddAndEdit.ParametersModel.ExploitationStartYear = (int)exploitationStartYear.Value;
+                            aksiokAddAndEdit.ParametersModel.IsKit = (bool)isKit.Value;
+                            aksiokAddAndEdit.ParametersModel.Guarantee = (DateTime)guarantee.Value;
+                            aksiokAddAndEdit.ParametersModel.IdCard = (int)idCard.Value;
+                            aksiokAddAndEdit.ParametersModel.IdContractOnSto = idContractOnSto.Value == DBNull.Value ? null : (int?)idContractOnSto.Value;
+                            aksiokAddAndEdit.ParametersModel.IdDeliveryContract = idDeliveryContract.Value == DBNull.Value ? null : (int?)idDeliveryContract.Value;
+                            aksiokAddAndEdit.ParametersModel.IsSmallCost = (bool)isSmallCost.Value;
+                            aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount = (bool)isOffBalanceAccount.Value;
+                            aksiokAddAndEdit.ParametersModel.IsSharedUsage = (bool)isSharedUsage.Value;
+                            aksiokAddAndEdit.ParametersModel.ForExternalUse = (bool)forExternalUse.Value;
+                            aksiokAddAndEdit.ParametersModel.IsSyncBySuim = (bool)isSyncBySuim.Value;
+                            aksiokAddAndEdit.ParametersModel.EmptyContractReason = emptyContractReason.Value == DBNull.Value ? null : (string)emptyContractReason.Value;
+                            aksiokAddAndEdit.ParametersModel.IsContractNeeded = (bool)isContractNeeded.Value;
+                            aksiokAddAndEdit.ParametersModel.DeliveryContract = deliveryContract.Value == DBNull.Value ? null : (string)deliveryContract.Value;
+                            aksiokAddAndEdit.ParametersModel.EquipmentKitId = equipmentKitId.Value == DBNull.Value ? 0 : (long)equipmentKitId.Value;
+                        
+                        }
+                    }
                 aksiokAddAndEdit.ParametersModel.CodeError = (int)codeError.Value;
                 aksiokAddAndEdit.ParametersModel.ErrorServer = (string)errorServer.Value;
                 return aksiokAddAndEdit;
@@ -835,7 +856,13 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                         new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[14], aksiokAddAndEdit.ParametersModel.IdContractOnSto ?? (object)DBNull.Value),
                         new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[15], aksiokAddAndEdit.ParametersModel.IdDeliveryContract ?? (object)DBNull.Value),
                         new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[16], aksiokAddAndEdit.ParametersModel.IsSmallCost),
-                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[17], aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount)
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[17], aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount),
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[18], aksiokAddAndEdit.ParametersModel.IsSharedUsage) { SqlDbType = SqlDbType.Bit },
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[19], aksiokAddAndEdit.ParametersModel.ForExternalUse) { SqlDbType = SqlDbType.Bit },
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[20], aksiokAddAndEdit.ParametersModel.IsSyncBySuim) { SqlDbType = SqlDbType.Bit },
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[21], aksiokAddAndEdit.ParametersModel.EmptyContractReason ?? (object)DBNull.Value),
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[22], aksiokAddAndEdit.ParametersModel.IsContractNeeded) { SqlDbType = SqlDbType.Bit },
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[23], aksiokAddAndEdit.ParametersModel.DeliveryContract ?? (object)DBNull.Value)
                     );
                     if (xmlModel.Value == DBNull.Value)
                     {
@@ -862,7 +889,13 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                                   new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[14], aksiokAddAndEdit.ParametersModel.IdContractOnSto ?? (object)DBNull.Value),
                                   new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[15], aksiokAddAndEdit.ParametersModel.IdDeliveryContract ?? (object)DBNull.Value),
                                   new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[16], aksiokAddAndEdit.ParametersModel.IsSmallCost),
-                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[17], aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount)).FirstOrDefault();
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[17], aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount),
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[18], aksiokAddAndEdit.ParametersModel.IsSharedUsage) { SqlDbType = SqlDbType.Bit },
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[19], aksiokAddAndEdit.ParametersModel.ForExternalUse) { SqlDbType = SqlDbType.Bit },
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[20], aksiokAddAndEdit.ParametersModel.IsSyncBySuim) { SqlDbType = SqlDbType.Bit },
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[21], aksiokAddAndEdit.ParametersModel.EmptyContractReason ?? (object)DBNull.Value),
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[22], aksiokAddAndEdit.ParametersModel.IsContractNeeded) { SqlDbType = SqlDbType.Bit },
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[23], aksiokAddAndEdit.ParametersModel.DeliveryContract ?? (object)DBNull.Value)).FirstOrDefault();
                     if (aksiokAddAndEditReturn.PublicModelValueJson == null)
                     {
                         return null;
@@ -1002,7 +1035,14 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[14], actDate ?? (object) DBNull.Value) { SqlDbType = SqlDbType.DateTime },
                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[15], aksiokAddAndEdit.ParametersModel?.Guarantee ?? (object)DBNull.Value) { SqlDbType = SqlDbType.DateTime },
                 new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[16], aksiokAddAndEdit.ParametersModel.IsSmallCost) { SqlDbType = SqlDbType.Bit},
-                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[17], aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount) { SqlDbType = SqlDbType.Bit }).ToArray();
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[17], aksiokAddAndEdit.ParametersModel.IsOffBalanceAccount) { SqlDbType = SqlDbType.Bit },
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[18], aksiokAddAndEdit.ParametersModel.IsSharedUsage) { SqlDbType = SqlDbType.Bit },
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[19], aksiokAddAndEdit.ParametersModel.ForExternalUse) { SqlDbType = SqlDbType.Bit },
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[20], aksiokAddAndEdit.ParametersModel.IsSyncBySuim) { SqlDbType = SqlDbType.Bit },
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[21], aksiokAddAndEdit.ParametersModel.EmptyContractReason ?? (object)DBNull.Value),
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[22], aksiokAddAndEdit.ParametersModel.IsContractNeeded) { SqlDbType = SqlDbType.Bit },
+                new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[23], aksiokAddAndEdit.ParametersModel.DeliveryContract ?? (object)DBNull.Value)
+                ).ToArray();
             return modelComparable;
         }
         /// <summary>

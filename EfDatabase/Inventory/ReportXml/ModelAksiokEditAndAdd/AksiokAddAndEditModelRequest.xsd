@@ -26,7 +26,7 @@
 				<xs:element ref="EquipmentModel"/>
 				<xs:element ref="File"/>
 				<xs:element ref="DateOfStatement"/>
-				<xs:element ref="DeliveryContract"/>
+				<xs:element ref="ContractSpecification"/>
 				<xs:element ref="ContractOnSto"/>
 				<xs:element ref="BoardsNumber"/>
 				<xs:element ref="FreeBoardsNumber"/>
@@ -235,6 +235,46 @@
 					<xs:documentation>На забалансовом счете</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="ForExternalUse" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Использовать расширение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanDownloadDeliveryContractFiles" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак загружен ли контракт файл</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanDownloadContractOnStoFiles" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак загружен ли СТО файл</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsContractNeeded" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Признак нужности контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="EmptyContractReason" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Причина отсутствия контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="CanViewSoftware" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Можно просмотреть програмное обеспечение</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="IsSyncBySuim" type="xs:boolean" use="required">
+				<xs:annotation>
+					<xs:documentation>Синхронизировано с СУиМ</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="DeliveryContract" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Контракт на поставку</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="EquipmentType">
@@ -350,7 +390,7 @@
 			<xs:documentation>Гарантия</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="DeliveryContract">
+	<xs:element name="ContractSpecification" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Справочник контрактов</xs:documentation>
 		</xs:annotation>
@@ -360,24 +400,19 @@
 					<xs:documentation>Ун контракта</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="EpoContractId" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Ун контракта 2</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 			<xs:attribute name="Number" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Номер контракта</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Name" type="xs:string" use="required">
+			<xs:attribute name="ContractSpecificationText" type="xs:string" use="required">
 				<xs:annotation>
-					<xs:documentation>Наименование контракта</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="ContractDate" type="xs:dateTime" use="required">
-				<xs:annotation>
-					<xs:documentation>Дата контракта</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="Executor" type="xs:string" use="required">
-				<xs:annotation>
-					<xs:documentation>Выполневший контракт</xs:documentation>
+					<xs:documentation>Текстовка контракта</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

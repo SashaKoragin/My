@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mime;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using EfDatabase.Inventory.BaseLogic.Select;
 using EfDatabase.Inventory.ReportXml.ModelAksiok;
@@ -248,6 +249,14 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                             string.Join("",
                                 json.JsonLibrary(AksiokFullDataBaseModel.AksiokEditPublicModel, "yyyy-MM-ddTHH:mm:ss",
                                     false).Select(c => dictionaryRu.Any(ru => ru == c) ? $"\\u{(int) c:x4}" : $"{c}")))
+                        .Replace("{DeliveryContract}",
+                            AksiokFullDataBaseModel.AksiokEditPublicModel.DeliveryContract)
+                        .Replace("{ContractSpecificationId}",
+                            AksiokFullDataBaseModel.AksiokEditPublicModel.ContractSpecification != null
+                                ? AksiokFullDataBaseModel.AksiokEditPublicModel.ContractSpecification.Id.ToString()
+                                : String.Empty)
+                        .Replace("{EmptyContractReason}",
+                            AksiokFullDataBaseModel.AksiokEditPublicModel.EmptyContractReason)
                         .Replace("{EquipmentTypeId}",
                             AksiokFullDataBaseModel.AksiokEditPublicModel.EquipmentType.Id.ToString())
                         .Replace("{ProducerId}", AksiokFullDataBaseModel.AksiokEditPublicModel.Producer.Id.ToString())
@@ -268,8 +277,6 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                         .Replace("{Comment}", AksiokFullDataBaseModel.AksiokEditPublicModel.Comment)
                         .Replace("{IsKit}", AksiokFullDataBaseModel.AksiokEditPublicModel.IsKit.ToString())
                         .Replace("{ServiceStatus}", AksiokFullDataBaseModel.AksiokEditPublicModel.ServiceStatus)
-                        .Replace("{DeliveryContractId}",
-                            AksiokFullDataBaseModel.AksiokEditPublicModel.DeliveryContract.Id.ToString())
                         .Replace("{ContractOnStoId}",
                             AksiokFullDataBaseModel.AksiokEditPublicModel.ContractOnSto != null
                                 ? AksiokFullDataBaseModel.AksiokEditPublicModel.ContractOnSto.Id.ToString()
@@ -345,10 +352,9 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
         /// Генерация параметров для редактирования на шаге 3 редактирование/Добавление комплектность 
         /// </summary>
         /// <param name="parametersUrlModel">Параметры запроса</param>
-        /// <param name="idFirst">Ун компьютера</param>
-        /// <param name="idTwo">Ун монитора</param>
+        /// <param name="equipmentId">Ун карточки оборудования</param>
         /// <returns></returns>
-        private ParametersUrlModel GenerateParametersModelStep3Edit(ParametersUrlModel parametersUrlModel, int idFirst, int idTwo)
+        private ParametersUrlModel GenerateParametersModelStep3Edit(ParametersUrlModel parametersUrlModel, int equipmentId)
         {
             ParametersUrlModel parameters = new ParametersUrlModel
             {
@@ -356,8 +362,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                 Accept = parametersUrlModel.Accept,
                 ContentType = parametersUrlModel.ContentType,
                 Headers = parametersUrlModel.Headers,
-                Parameters = parametersUrlModel.Parameters.Replace("{IdFirst}", idFirst.ToString())
-                    .Replace("{IdTwo}", idTwo.ToString())
+                Parameters = parametersUrlModel.Parameters.Replace("{EquipmentId}", equipmentId.ToString())
             };
             return parameters;
         }
@@ -366,9 +371,9 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
         /// Генерация параметров для редактирования на шаге 3 редактирование - Разукомплектование карточек
         /// </summary>
         /// <param name="parametersUrlModel">Параметры запроса</param>
-        /// <param name="idCard">Ун карточки</param>
+        /// <param name="equipmentKitId">Ун комплектации карточки</param>
         /// <returns></returns>
-        private ParametersUrlModel GenerateParametersModelStep4Edit(ParametersUrlModel parametersUrlModel, int idCard)
+        private ParametersUrlModel GenerateParametersModelStep4Edit(ParametersUrlModel parametersUrlModel, long equipmentKitId)
         {
             ParametersUrlModel parameters = new ParametersUrlModel
             {
@@ -376,7 +381,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                 Accept = parametersUrlModel.Accept,
                 ContentType = parametersUrlModel.ContentType,
                 Headers = parametersUrlModel.Headers,
-                Parameters = parametersUrlModel.Parameters.Replace("{IdCard}", idCard.ToString())
+                Parameters = parametersUrlModel.Parameters.Replace("{EquipmentKitId}", equipmentKitId.ToString())
             };
             return parameters;
         }
@@ -418,7 +423,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                         foreach (var serialNumber in groupTechnical)
                         {
                             aksiokAddAndEdit.ParametersModel.SerNumber = serialNumber;
-                            aksiokAddAndEdit = selectSql.ModelValidation(aksiokAddAndEdit);
+                            aksiokAddAndEdit = selectSql.ModelValidation(aksiokAddAndEdit, aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel);
                             if (string.IsNullOrWhiteSpace(aksiokAddAndEdit.ParametersModel.ErrorServer))
                             {
                                 try
@@ -426,7 +431,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                                     AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit, aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel);
                                     if (aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel)
                                     {
-                                        PostEditModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0], aksiokAddAndEdit), Encoding.Default);
+                                          PostEditModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0], aksiokAddAndEdit), Encoding.Default);
                                     }
                                     PostEditModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
                                     aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.PublicModelValueJson.Id, aksiokAddAndEdit.ParametersModel.IdCard, serialNumber);
@@ -446,20 +451,21 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                         AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit);
                         if (AksiokFullDataBaseModel == null)
                             throw new InvalidOperationException("Фатальная ошибка процедура не вернула модель данных проверь параметры!");
-
                         PostEditModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0], aksiokAddAndEdit), Encoding.Default); //Русские буквы так и не побеждены  Encoding.UTF8 и Encoding.Default
                         PostEditModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
                         if (aksiokAddAndEdit.KitsEquipment.IsCheckedKits) //Скомплектовать true
                         {
-                            PostEditModel(GenerateParametersModelStep3Edit(allParameters.ModelParametersAksiok[2], aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id), Encoding.Default);
-                            aksiokPostGetSystem.UpdateKitsEquipment(aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id, true);
+                            PostEditModel(GenerateParametersModelStep3Edit(allParameters.ModelParametersAksiok[6], aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id), Encoding.Default);
                         }
                         if (aksiokAddAndEdit.KitsEquipment.IsNotCheckedKits) //Разукомплектовать true
                         {
-                            PostEditModel(GenerateParametersModelStep4Edit(allParameters.ModelParametersAksiok[3], AksiokFullDataBaseModel.AksiokEditPublicModel.Id), Encoding.Default);
-                            aksiokPostGetSystem.UpdateKitsEquipment(aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id, false);
+                            PostEditModel(GenerateParametersModelStep4Edit(allParameters.ModelParametersAksiok[7], aksiokAddAndEdit.ParametersModel.EquipmentKitId), Encoding.Default);
                         }
-                        aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.AksiokEditPublicModel.Id, AksiokFullDataBaseModel.AksiokEditPublicModel.EpoDocument, AksiokFullDataBaseModel.AksiokEditPublicModel.SerialNumber);
+                        var epoDocumentSynchronization = aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.AksiokEditPublicModel.Id, AksiokFullDataBaseModel.AksiokEditPublicModel.EpoDocument, AksiokFullDataBaseModel.AksiokEditPublicModel.SerialNumber);
+                        if (aksiokAddAndEdit.KitsEquipment.IsCheckedKits || aksiokAddAndEdit.KitsEquipment.IsNotCheckedKits)
+                        {
+                            aksiokPostGetSystem.UpdateKitsEquipment(aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[0].Id, aksiokAddAndEdit.KitsEquipment.KitsEquipmentServer[1].Id, epoDocumentSynchronization.IsKit, epoDocumentSynchronization.EquipmentKitId);
+                        }
                     }
                 }
                 else

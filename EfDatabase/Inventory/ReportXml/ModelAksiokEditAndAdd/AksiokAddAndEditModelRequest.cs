@@ -67,7 +67,7 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         private System.Nullable<System.DateTime> dateOfStatementField;
         
-        private DeliveryContract deliveryContractField;
+        private ContractSpecification contractSpecificationField;
         
         private ContractOnSto contractOnStoField;
         
@@ -165,6 +165,22 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         private bool isOffBalanceAccountField;
         
+        private bool forExternalUseField;
+        
+        private bool canDownloadDeliveryContractFilesField;
+        
+        private bool canDownloadContractOnStoFilesField;
+        
+        private bool isContractNeededField;
+        
+        private string emptyContractReasonField;
+        
+        private bool canViewSoftwareField;
+        
+        private bool isSyncBySuimField;
+        
+        private string deliveryContractField;
+        
         /// <remarks/>
         public EquipmentType EquipmentType {
             get {
@@ -218,12 +234,13 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         }
         
         /// <remarks/>
-        public DeliveryContract DeliveryContract {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public ContractSpecification ContractSpecification {
             get {
-                return this.deliveryContractField;
+                return this.contractSpecificationField;
             }
             set {
-                this.deliveryContractField = value;
+                this.contractSpecificationField = value;
             }
         }
         
@@ -753,6 +770,94 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
                 this.isOffBalanceAccountField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool ForExternalUse {
+            get {
+                return this.forExternalUseField;
+            }
+            set {
+                this.forExternalUseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool CanDownloadDeliveryContractFiles {
+            get {
+                return this.canDownloadDeliveryContractFilesField;
+            }
+            set {
+                this.canDownloadDeliveryContractFilesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool CanDownloadContractOnStoFiles {
+            get {
+                return this.canDownloadContractOnStoFilesField;
+            }
+            set {
+                this.canDownloadContractOnStoFilesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsContractNeeded {
+            get {
+                return this.isContractNeededField;
+            }
+            set {
+                this.isContractNeededField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string EmptyContractReason {
+            get {
+                return this.emptyContractReasonField;
+            }
+            set {
+                this.emptyContractReasonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool CanViewSoftware {
+            get {
+                return this.canViewSoftwareField;
+            }
+            set {
+                this.canViewSoftwareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool IsSyncBySuim {
+            get {
+                return this.isSyncBySuimField;
+            }
+            set {
+                this.isSyncBySuimField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DeliveryContract {
+            get {
+                return this.deliveryContractField;
+            }
+            set {
+                this.deliveryContractField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -944,18 +1049,16 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class DeliveryContract {
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
+    public partial class ContractSpecification {
         
         private int idField;
         
+        private int epoContractIdField;
+        
         private string numberField;
         
-        private string nameField;
-        
-        private System.DateTime contractDateField;
-        
-        private string executorField;
+        private string contractSpecificationTextField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -965,6 +1068,17 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
             }
             set {
                 this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int EpoContractId {
+            get {
+                return this.epoContractIdField;
+            }
+            set {
+                this.epoContractIdField = value;
             }
         }
         
@@ -981,34 +1095,12 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name {
+        public string ContractSpecificationText {
             get {
-                return this.nameField;
+                return this.contractSpecificationTextField;
             }
             set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime ContractDate {
-            get {
-                return this.contractDateField;
-            }
-            set {
-                this.contractDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Executor {
-            get {
-                return this.executorField;
-            }
-            set {
-                this.executorField = value;
+                this.contractSpecificationTextField = value;
             }
         }
     }

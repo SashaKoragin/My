@@ -17,7 +17,6 @@ namespace EfDatabase.Inventory.BaseLogic.AksiokAddAndUpdateObjectDb
         public LogicaSelect LogicaSelect { get; set; }
         public AksiokAddAndUpdateObjectDb()
         {
-            Inventory?.Dispose();
             Inventory = new InventoryContext();
             Inventory.Database.CommandTimeout = 120000;
             LogicaSelect = Inventory.LogicaSelects.First(x => x.Id == 53);
@@ -44,13 +43,15 @@ namespace EfDatabase.Inventory.BaseLogic.AksiokAddAndUpdateObjectDb
         /// <param name="idFirstAksiokMonitors">Ун компьютера</param>
         /// <param name="idTwoAksiokSysBloks">Ун монитора</param>
         /// <param name="isKit">Комплектность true/false</param>
-        public void UpdateKitsEquipmentAksiok(int idFirstAksiokMonitors, int idTwoAksiokSysBloks, bool isKit)
+        /// <param name="equipmentKitId"> Уникальный номер комплекта</param>
+        public void UpdateKitsEquipmentAksiok(int idFirstAksiokMonitors, int idTwoAksiokSysBloks, bool isKit, long? equipmentKitId)
         {
             var updateKit = Inventory.LogicaSelects.First(x => x.Id == 73);
             Inventory.Database.ExecuteSqlCommand(updateKit.SelectUser,
                 new SqlParameter(updateKit.SelectedParametr.Split(',')[0], SqlDbType.Int) {Value = idFirstAksiokMonitors },
                              new SqlParameter(updateKit.SelectedParametr.Split(',')[1], SqlDbType.Int) {Value = idTwoAksiokSysBloks },
-                             new SqlParameter(updateKit.SelectedParametr.Split(',')[2], SqlDbType.Bit) { Value = isKit });
+                             new SqlParameter(updateKit.SelectedParametr.Split(',')[2], SqlDbType.Bit) { Value = isKit },
+                             new SqlParameter(updateKit.SelectedParametr.Split(',')[3], SqlDbType.BigInt) { Value = equipmentKitId ?? 0 });
         }
 
         /// <summary>
