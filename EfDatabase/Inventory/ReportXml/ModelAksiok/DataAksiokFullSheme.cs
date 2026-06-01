@@ -7,7 +7,7 @@ namespace EfDatabase.Inventory.ReportXml.ModelAksiok
     /// <typeparam name="T">Массив классов который прицепляется</typeparam>
     public class DataAksiokFullSchemes<T>
     {
-        public int? TotalCount { get; set; }
+        public int TotalCount { get; set; } = 0;
         public string Message { get; set; }
 
         public bool? Success { get; set; }

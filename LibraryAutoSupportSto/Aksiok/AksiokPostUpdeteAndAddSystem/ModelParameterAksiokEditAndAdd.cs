@@ -11,7 +11,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
             {
                 Url = "https://aksiok.dpc.tax.nalog.ru/api/EquipmentCard/update",
                 Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                ContentType = "multipart/form-data; boundary=----WebKitFormBoundarya7QqhhYfHVhNL92g",
+                ContentType = "multipart/form-data; boundary=----WebKitFormBoundarylUhPyWpr6dKEbGju",
                 Headers = new Dictionary<string, string>()
                 {
                     {"Cache-Control", "max-age=0"},
@@ -27,75 +27,94 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                     {"Sec-Fetch-User", "?1" },
                     {"Upgrade-Insecure-Requests", "1"},
                 },
-                Parameters = "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n" +
+                   Parameters = "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n" +
                               "Content-Disposition: form-data; name=\"records\"\r\n\r\n"+
                               "[{records}]\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
+                              "Content-Disposition: form-data; name=\"DeliveryContract\"\r\n\r\n"+
+                              "{DeliveryContract}\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
+                              "Content-Disposition: form-data; name=\"ContractSpecification\"\r\n\r\n"+
+                              "{ContractSpecificationId}\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
+                              "Content-Disposition: form-data; name=\"EmptyContractReason\"\r\n\r\n"+
+                              "{EmptyContractReason}\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"EquipmentType\"\r\n\r\n"+
                               "{EquipmentTypeId}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"Producer\"\r\n\r\n"+
                               "{ProducerId}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"EquipmentModel\"\r\n\r\n"+
                               "{EquipmentModelId}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"SerialNumber\"\r\n\r\n"+
                               "{SerialNumber}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"ServiceNumber\"\r\n\r\n"+
                               "{ServiceNumber}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"InventoryNumber\"\r\n\r\n"+
                               "{InventoryNumber}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"IndividualServiceNumber\"\r\n\r\n"+
                               "{IndividualServiceNumber}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"YearOfIssue\"\r\n\r\n"+
                               "{YearOfIssue}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"ExploitationStartYear\"\r\n\r\n"+
                               "{ExploitationStartYear}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"Guarantee\"\r\n\r\n"+
                               "{Guarantee}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
+                              "Content-Disposition: form-data; name=\"UsefulLife\"\r\n\r\n"+
+                              "{UsefulLife}\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
+                              "Content-Disposition: form-data; name=\"SmoothRetirementDate\"\r\n\r\n"+
+                              "{SmoothRetirementDate}\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
+                              "Content-Disposition: form-data; name=\"ApplyingDate\"\r\n\r\n"+
+                              "{ApplyingDate}\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"Comment\"\r\n\r\n"+
                               "{Comment}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"IsKit\"\r\n\r\n"+
                               "{IsKit}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"ServiceStatus\"\r\n\r\n"+
                               "{ServiceStatus}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
-                              "Content-Disposition: form-data; name=\"DeliveryContract\"\r\n\r\n"+
-                              "{DeliveryContractId}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"ContractOnSto\"\r\n\r\n"+
                               "{ContractOnStoId}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"EquipmentState\"\r\n\r\n"+
                               "{EquipmentState}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"EquipmentStateSto\"\r\n\r\n"+
                               "{EquipmentStateSto}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"ComputerName\"\r\n\r\n"+
                               "{ComputerName}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"ExpertiseStatus\"\r\n\r\n"+
                               "{ExpertiseStatus}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
+                              "Content-Disposition: form-data; name=\"MaterialStockTransferFile\"; filename=\"{NameMaterialStockTransferFile}\"\r\n"+
+                              "Content-Type: {TypeMaterialStockTransferFile}\r\n\r\n"+
+                              "{MaterialStockTransferFile}\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"ExpertiseFile\"; filename=\"{NameFileExpertise}\"\r\n"+
                               "Content-Type: {TypeFileExpertise}\r\n\r\n"+
                               "{ExpertiseFiles}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g\r\n"+
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju\r\n"+
                               "Content-Disposition: form-data; name=\"File\"; filename=\"{NameFileAkt}\"\r\n"+
                               "Content-Type: {TypeFileAkt}\r\n\r\n"+
                               "{FileAkt}\r\n"+
-                              "------WebKitFormBoundarya7QqhhYfHVhNL92g--"
+                              "------WebKitFormBoundarylUhPyWpr6dKEbGju--"
             },
             //Обновление дополнительных параметров
             new ParametersUrlModel()
@@ -227,6 +246,15 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                               "Content-Disposition: form-data; name=\"Guarantee\"\r\n\r\n"+
                               "{Guarantee}\r\n"+
                               "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"UsefulLife\"\r\n\r\n"+
+                              "{UsefulLife}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"SmoothRetirementDate\"\r\n\r\n"+
+                              "{SmoothRetirementDate}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"ApplyingDate\"\r\n\r\n"+
+                              "{ApplyingDate}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
                               "Content-Disposition: form-data; name=\"Comment\"\r\n\r\n"+
                               "{Comment}\r\n"+
                               "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
@@ -250,6 +278,10 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                               "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
                               "Content-Disposition: form-data; name=\"ExpertiseStatus\"\r\n\r\n"+
                               "{ExpertiseStatus}\r\n"+
+                              "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
+                              "Content-Disposition: form-data; name=\"MaterialStockTransferFile\"; filename=\"{NameMaterialStockTransferFile}\"\r\n"+
+                              "Content-Type: {TypeMaterialStockTransferFile}\r\n\r\n"+
+                              "{MaterialStockTransferFile}\r\n"+
                               "------WebKitFormBoundaryJQPnmm1hsNgDAn6c\r\n"+
                               "Content-Disposition: form-data; name=\"ExpertiseFile\"; filename=\"{NameFileExpertise}\"\r\n"+
                               "Content-Type: {TypeFileExpertise}\r\n\r\n"+

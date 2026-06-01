@@ -73,6 +73,8 @@ namespace InventoryProcess.StartProcessInventory.ModelParameters {
         
         private string serviceInvKasperskyAllHostDriversField;
         
+        private string countPackPaginationField;
+        
         /// <remarks/>
         public string Domain {
             get {
@@ -320,6 +322,16 @@ namespace InventoryProcess.StartProcessInventory.ModelParameters {
             }
             set {
                 this.serviceInvKasperskyAllHostDriversField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CountPackPagination {
+            get {
+                return this.countPackPaginationField;
+            }
+            set {
+                this.countPackPaginationField = value;
             }
         }
     }

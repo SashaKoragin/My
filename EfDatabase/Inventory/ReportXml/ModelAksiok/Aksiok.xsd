@@ -15,6 +15,7 @@
 			<xs:element ref="ModelDocument" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="EpoDocument" minOccurs="0"/>
 			<xs:element ref="ValueCharacteristicJson" minOccurs="0"/>
+			<xs:element ref="AllContract" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="ModelDocumentType" nillable="true">
@@ -84,7 +85,7 @@
 				<xs:element ref="ExpertiseFileId"/>
 				<xs:element ref="EquipmentKitId"/>
 			</xs:sequence>
-			<xs:attribute name="Id" type="xs:int" use="required">
+			<xs:attribute name="Id" type="xs:long" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун оборудования</xs:documentation>
 				</xs:annotation>
@@ -189,8 +190,16 @@
 				<xs:element ref="AdminsCount"/>
 				<xs:element ref="ExploitationStartYear" minOccurs="0"/>
 				<xs:element ref="EquipmentKitId"/>
+				<xs:element ref="YearOfIssue" minOccurs="0"/>
+				<xs:element ref="EquipmentDataCbId"/>
+				<xs:element ref="EquipmentSuimCharacteristicsId"/>
+				<xs:element ref="UsefulLife"/>
+				<xs:element ref="SmoothRetirementDate"/>
+				<xs:element ref="ApplyingDate"/>
+				<xs:element ref="MaterialStockTransferFile"/>
+				<xs:element ref="EmployeCardLink"/>
 			</xs:sequence>
-			<xs:attribute name="Id" type="xs:int" use="required">
+			<xs:attribute name="Id" type="xs:long" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун документа</xs:documentation>
 				</xs:annotation>
@@ -258,11 +267,6 @@
 			<xs:attribute name="NotOnBalance" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>Что то с балансом</xs:documentation>
-				</xs:annotation>
-			</xs:attribute>
-			<xs:attribute name="YearOfIssue" type="xs:int" use="required">
-				<xs:annotation>
-					<xs:documentation>Год выпуска</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name="Comment" type="xs:string" use="required">
@@ -640,7 +644,7 @@
 					<xs:documentation>Ун модели</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name="Garanty" type="xs:dateTime" use="required">
+			<xs:attribute name="Garanty" type="xs:date" use="required">
 				<xs:annotation>
 					<xs:documentation>Дата гарантии</xs:documentation>
 				</xs:annotation>
@@ -715,7 +719,7 @@
 				<xs:element ref="RamSize"/>
 				<xs:element ref="CpuFrequencyMhz"/>
 			</xs:sequence>
-			<xs:attribute name="Id" type="xs:int" use="required">
+			<xs:attribute name="Id" type="xs:long" use="required">
 				<xs:annotation>
 					<xs:documentation>Ун объекта</xs:documentation>
 				</xs:annotation>
@@ -1121,6 +1125,129 @@
 	<xs:element name="EquipmentKitId" type="xs:long" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Уникальный номер комплекта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="YearOfIssue" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Год выпуска</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AllContract">
+		<xs:annotation>
+			<xs:documentation>Все контракты в АКСИОК</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ContractDate"/>
+				<xs:element ref="ContractYear"/>
+				<xs:element ref="ContractType"/>
+				<xs:element ref="OwnershipType"/>
+				<xs:element ref="IsArchive"/>
+				<xs:element ref="IsCentralContract"/>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Ун контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Number" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ContractNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Номер контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="RegistryNumberEis" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Регистрационный номер контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Executor" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Исполнитель контракта</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="SounName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Наименование ведомства</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContractDate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ContractYear" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>Год контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ContractType" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>Тип конракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OwnershipType" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>Владелец контракта типа</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IsArchive" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>Признак архивации контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IsCentralContract" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>Признак центрального контракта</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EquipmentDataCbId" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Новый параметр от 02.02.2026</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EquipmentSuimCharacteristicsId" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Новый параметр от 02.02.2026</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UsefulLife" type="xs:int" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Новый параметр от 02.02.2026</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SmoothRetirementDate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Новый параметр от 02.02.2026</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ApplyingDate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Новый параметр от 02.02.2026</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MaterialStockTransferFile" type="xs:long" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Новый параметр от 02.02.2026</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EmployeCardLink" type="xs:boolean" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Новый параметр от 02.02.2026</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

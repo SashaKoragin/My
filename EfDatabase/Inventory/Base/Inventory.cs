@@ -30,6 +30,7 @@ namespace EfDatabase.Inventory.Base
     {
         System.Data.Entity.DbSet<Act> Acts { get; set; } // Act
         System.Data.Entity.DbSet<AksiokAllModel> AksiokAllModels { get; set; } // AksiokAllModel
+        System.Data.Entity.DbSet<AllContract> AllContracts { get; set; } // AllContract
         System.Data.Entity.DbSet<AllFileServerSelect> AllFileServerSelects { get; set; } // AllFileServerSelect
         System.Data.Entity.DbSet<AllIpServerSelect> AllIpServerSelects { get; set; } // AllIpServerSelect
         System.Data.Entity.DbSet<AllTechnic> AllTechnics { get; set; } // AllTechnics
@@ -213,6 +214,7 @@ namespace EfDatabase.Inventory.Base
     {
         public System.Data.Entity.DbSet<Act> Acts { get; set; } // Act
         public System.Data.Entity.DbSet<AksiokAllModel> AksiokAllModels { get; set; } // AksiokAllModel
+        public System.Data.Entity.DbSet<AllContract> AllContracts { get; set; } // AllContract
         public System.Data.Entity.DbSet<AllFileServerSelect> AllFileServerSelects { get; set; } // AllFileServerSelect
         public System.Data.Entity.DbSet<AllIpServerSelect> AllIpServerSelects { get; set; } // AllIpServerSelect
         public System.Data.Entity.DbSet<AllTechnic> AllTechnics { get; set; } // AllTechnics
@@ -428,6 +430,7 @@ namespace EfDatabase.Inventory.Base
 
             modelBuilder.Configurations.Add(new ActConfiguration());
             modelBuilder.Configurations.Add(new AksiokAllModelConfiguration());
+            modelBuilder.Configurations.Add(new AllContractConfiguration());
             modelBuilder.Configurations.Add(new AllFileServerSelectConfiguration());
             modelBuilder.Configurations.Add(new AllIpServerSelectConfiguration());
             modelBuilder.Configurations.Add(new AllTechnicConfiguration());
@@ -593,6 +596,7 @@ namespace EfDatabase.Inventory.Base
         {
             modelBuilder.Configurations.Add(new ActConfiguration(schema));
             modelBuilder.Configurations.Add(new AksiokAllModelConfiguration(schema));
+            modelBuilder.Configurations.Add(new AllContractConfiguration(schema));
             modelBuilder.Configurations.Add(new AllFileServerSelectConfiguration(schema));
             modelBuilder.Configurations.Add(new AllIpServerSelectConfiguration(schema));
             modelBuilder.Configurations.Add(new AllTechnicConfiguration(schema));
@@ -852,6 +856,25 @@ namespace EfDatabase.Inventory.Base
         public System.DateTime? Guarantee { get; set; } // Guarantee
         public string Comment { get; set; } // Comment (length: 256)
         public string ServiceStatus { get; set; } // ServiceStatus (length: 256)
+    }
+
+    // AllContract
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class AllContract
+    {
+        public int Id { get; set; } // Id (Primary key)
+        public string Number { get; set; } // Number (length: 256)
+        public string Name { get; set; } // Name
+        public string ContractNumber { get; set; } // ContractNumber (length: 512)
+        public string RegistryNumberEis { get; set; } // RegistryNumberEis (length: 512)
+        public System.DateTime? ContractDate { get; set; } // ContractDate
+        public int? ContractYear { get; set; } // ContractYear
+        public string Executor { get; set; } // Executor
+        public int ContractType { get; set; } // ContractType
+        public int OwnershipType { get; set; } // OwnershipType
+        public string SounName { get; set; } // SounName (length: 512)
+        public bool IsArchive { get; set; } // IsArchive
+        public bool IsCentralContract { get; set; } // IsCentralContract
     }
 
     // AllFileServerSelect
@@ -2401,8 +2424,10 @@ namespace EfDatabase.Inventory.Base
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class EpoDocument
     {
-        public int Id { get; set; } // Id (Primary key)
+        public long Id { get; set; } // Id (Primary key)
         public int? IdEpoDocument { get; set; } // IdEpoDocument
+        public int? EquipmentDataCbId { get; set; } // EquipmentDataCbId
+        public int? EquipmentSuimCharacteristicsId { get; set; } // EquipmentSuimCharacteristicsId
         public int? IdEquipmentType { get; set; } // IdEquipmentType
         public int? IdProducer { get; set; } // IdProducer
         public int? IdEquipmentModel { get; set; } // IdEquipmentModel
@@ -2410,6 +2435,7 @@ namespace EfDatabase.Inventory.Base
         public int? IdContractOnSto { get; set; } // IdContractOnSto
         public long? IdFile { get; set; } // IdFile
         public long? IdExpertiseFile { get; set; } // IdExpertiseFile
+        public long? EquipmentKitId { get; set; } // EquipmentKitId
         public string ComputerName { get; set; } // ComputerName (length: 128)
         public string SerialNumber { get; set; } // SerialNumber (length: 64)
         public string Identifier { get; set; } // Identifier (length: 128)
@@ -2421,16 +2447,20 @@ namespace EfDatabase.Inventory.Base
         public System.DateTime? ActDate { get; set; } // ActDate
         public System.DateTime? DateOfStatement { get; set; } // DateOfStatement
         public int? ExpertiseStatus { get; set; } // ExpertiseStatus
+        public int? UsefulLife { get; set; } // UsefulLife
+        public System.DateTime? SmoothRetirementDate { get; set; } // SmoothRetirementDate
+        public System.DateTime? ApplyingDate { get; set; } // ApplyingDate
         public bool? IsArm { get; set; } // IsArm
         public bool? IncludedInEqSettings { get; set; } // IncludedInEqSettings
         public bool? IsSharedUsage { get; set; } // IsSharedUsage
         public bool? IsSmallCost { get; set; } // IsSmallCost
         public bool? IsOffBalanceAccount { get; set; } // IsOffBalanceAccount
         public bool? ForExternalUse { get; set; } // ForExternalUse
+        public long? MaterialStockTransferFile { get; set; } // MaterialStockTransferFile
         public string ServiceNumber { get; set; } // ServiceNumber (length: 128)
         public string IndividualServiceNumber { get; set; } // IndividualServiceNumber (length: 128)
         public string NotOnBalance { get; set; } // NotOnBalance (length: 256)
-        public int YearOfIssue { get; set; } // YearOfIssue
+        public int? YearOfIssue { get; set; } // YearOfIssue
         public int? ExploitationStartYear { get; set; } // ExploitationStartYear
         public System.DateTime? Guarantee { get; set; } // Guarantee
         public string Comment { get; set; } // Comment (length: 256)
@@ -2461,7 +2491,12 @@ namespace EfDatabase.Inventory.Base
         public string KeyNumber { get; set; } // KeyNumber (length: 256)
         public bool RequiresReplacement { get; set; } // RequiresReplacement
         public bool? CanViewSoftware { get; set; } // CanViewSoftware
+        public bool? EmployeCardLink { get; set; } // EmployeCardLink
         public bool? IsSyncBySuim { get; set; } // IsSyncBySuim
+        public bool? CanDelete { get; set; } // CanDelete
+        public bool? CanCreateKit { get; set; } // CanCreateKit
+        public bool? CanEditKit { get; set; } // CanEditKit
+        public bool? CanDisbandKit { get; set; } // CanDisbandKit
 
         // Reverse navigation
 
@@ -10006,7 +10041,7 @@ namespace EfDatabase.Inventory.Base
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
     public class ValueCharacteristicJson
     {
-        public int Id { get; set; } // Id (Primary key)
+        public long Id { get; set; } // Id (Primary key)
         public string NotOnBalance { get; set; } // NotOnBalance (length: 256)
         public bool RequiresReplacement { get; set; } // RequiresReplacement
         public string Appointment { get; set; } // Appointment (length: 128)
@@ -10235,6 +10270,36 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.Guarantee).HasColumnName(@"Guarantee").HasColumnType("datetime").IsOptional();
             Property(x => x.Comment).HasColumnName(@"Comment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.ServiceStatus).HasColumnName(@"ServiceStatus").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+        }
+    }
+
+    // AllContract
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.37.3.0")]
+    public class AllContractConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AllContract>
+    {
+        public AllContractConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AllContractConfiguration(string schema)
+        {
+            ToTable("AllContract", schema);
+            HasKey(x => x.Id);
+
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Number).HasColumnName(@"Number").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
+            Property(x => x.Name).HasColumnName(@"Name").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ContractNumber).HasColumnName(@"ContractNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.RegistryNumberEis).HasColumnName(@"RegistryNumberEis").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.ContractDate).HasColumnName(@"ContractDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.ContractYear).HasColumnName(@"ContractYear").HasColumnType("int").IsOptional();
+            Property(x => x.Executor).HasColumnName(@"Executor").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.ContractType).HasColumnName(@"ContractType").HasColumnType("int").IsRequired();
+            Property(x => x.OwnershipType).HasColumnName(@"OwnershipType").HasColumnType("int").IsRequired();
+            Property(x => x.SounName).HasColumnName(@"SounName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(512);
+            Property(x => x.IsArchive).HasColumnName(@"IsArchive").HasColumnType("bit").IsRequired();
+            Property(x => x.IsCentralContract).HasColumnName(@"IsCentralContract").HasColumnType("bit").IsRequired();
         }
     }
 
@@ -11310,8 +11375,10 @@ namespace EfDatabase.Inventory.Base
             ToTable("EpoDocument", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("bigint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.IdEpoDocument).HasColumnName(@"IdEpoDocument").HasColumnType("int").IsOptional();
+            Property(x => x.EquipmentDataCbId).HasColumnName(@"EquipmentDataCbId").HasColumnType("int").IsOptional();
+            Property(x => x.EquipmentSuimCharacteristicsId).HasColumnName(@"EquipmentSuimCharacteristicsId").HasColumnType("int").IsOptional();
             Property(x => x.IdEquipmentType).HasColumnName(@"IdEquipmentType").HasColumnType("int").IsOptional();
             Property(x => x.IdProducer).HasColumnName(@"IdProducer").HasColumnType("int").IsOptional();
             Property(x => x.IdEquipmentModel).HasColumnName(@"IdEquipmentModel").HasColumnType("int").IsOptional();
@@ -11319,6 +11386,7 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.IdContractOnSto).HasColumnName(@"IdContractOnSto").HasColumnType("int").IsOptional();
             Property(x => x.IdFile).HasColumnName(@"IdFile").HasColumnType("bigint").IsOptional();
             Property(x => x.IdExpertiseFile).HasColumnName(@"IdExpertiseFile").HasColumnType("bigint").IsOptional();
+            Property(x => x.EquipmentKitId).HasColumnName(@"EquipmentKitId").HasColumnType("bigint").IsOptional();
             Property(x => x.ComputerName).HasColumnName(@"ComputerName").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.SerialNumber).HasColumnName(@"SerialNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(64);
             Property(x => x.Identifier).HasColumnName(@"Identifier").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
@@ -11330,16 +11398,20 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.ActDate).HasColumnName(@"ActDate").HasColumnType("datetime").IsOptional();
             Property(x => x.DateOfStatement).HasColumnName(@"DateOfStatement").HasColumnType("datetime").IsOptional();
             Property(x => x.ExpertiseStatus).HasColumnName(@"ExpertiseStatus").HasColumnType("int").IsOptional();
+            Property(x => x.UsefulLife).HasColumnName(@"UsefulLife").HasColumnType("int").IsOptional();
+            Property(x => x.SmoothRetirementDate).HasColumnName(@"SmoothRetirementDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.ApplyingDate).HasColumnName(@"ApplyingDate").HasColumnType("datetime").IsOptional();
             Property(x => x.IsArm).HasColumnName(@"IsArm").HasColumnType("bit").IsOptional();
             Property(x => x.IncludedInEqSettings).HasColumnName(@"IncludedInEqSettings").HasColumnType("bit").IsOptional();
             Property(x => x.IsSharedUsage).HasColumnName(@"IsSharedUsage").HasColumnType("bit").IsOptional();
             Property(x => x.IsSmallCost).HasColumnName(@"IsSmallCost").HasColumnType("bit").IsOptional();
             Property(x => x.IsOffBalanceAccount).HasColumnName(@"IsOffBalanceAccount").HasColumnType("bit").IsOptional();
             Property(x => x.ForExternalUse).HasColumnName(@"ForExternalUse").HasColumnType("bit").IsOptional();
+            Property(x => x.MaterialStockTransferFile).HasColumnName(@"MaterialStockTransferFile").HasColumnType("bigint").IsOptional();
             Property(x => x.ServiceNumber).HasColumnName(@"ServiceNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.IndividualServiceNumber).HasColumnName(@"IndividualServiceNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);
             Property(x => x.NotOnBalance).HasColumnName(@"NotOnBalance").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
-            Property(x => x.YearOfIssue).HasColumnName(@"YearOfIssue").HasColumnType("int").IsRequired();
+            Property(x => x.YearOfIssue).HasColumnName(@"YearOfIssue").HasColumnType("int").IsOptional();
             Property(x => x.ExploitationStartYear).HasColumnName(@"ExploitationStartYear").HasColumnType("int").IsOptional();
             Property(x => x.Guarantee).HasColumnName(@"Guarantee").HasColumnType("datetime").IsOptional();
             Property(x => x.Comment).HasColumnName(@"Comment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
@@ -11370,7 +11442,12 @@ namespace EfDatabase.Inventory.Base
             Property(x => x.KeyNumber).HasColumnName(@"KeyNumber").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.RequiresReplacement).HasColumnName(@"RequiresReplacement").HasColumnType("bit").IsRequired();
             Property(x => x.CanViewSoftware).HasColumnName(@"CanViewSoftware").HasColumnType("bit").IsOptional();
+            Property(x => x.EmployeCardLink).HasColumnName(@"EmployeCardLink").HasColumnType("bit").IsOptional();
             Property(x => x.IsSyncBySuim).HasColumnName(@"IsSyncBySuim").HasColumnType("bit").IsOptional();
+            Property(x => x.CanDelete).HasColumnName(@"CanDelete").HasColumnType("bit").IsOptional();
+            Property(x => x.CanCreateKit).HasColumnName(@"CanCreateKit").HasColumnType("bit").IsOptional();
+            Property(x => x.CanEditKit).HasColumnName(@"CanEditKit").HasColumnType("bit").IsOptional();
+            Property(x => x.CanDisbandKit).HasColumnName(@"CanDisbandKit").HasColumnType("bit").IsOptional();
 
             // Foreign keys
             HasOptional(a => a.ContractOnSto).WithMany(b => b.EpoDocuments).HasForeignKey(c => c.IdContractOnSto).WillCascadeOnDelete(false); // FK_EpoDocument_ContractOnSto
@@ -14782,7 +14859,7 @@ namespace EfDatabase.Inventory.Base
             ToTable("ValueCharacteristicJson", schema);
             HasKey(x => x.Id);
 
-            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Id).HasColumnName(@"Id").HasColumnType("bigint").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.NotOnBalance).HasColumnName(@"NotOnBalance").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(256);
             Property(x => x.RequiresReplacement).HasColumnName(@"RequiresReplacement").HasColumnType("bit").IsRequired();
             Property(x => x.Appointment).HasColumnName(@"Appointment").HasColumnType("varchar").IsOptional().IsUnicode(false).HasMaxLength(128);

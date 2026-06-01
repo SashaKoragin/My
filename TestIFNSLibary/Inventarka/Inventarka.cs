@@ -2810,6 +2810,8 @@ namespace TestIFNSLibary.Inventarka
             return await Task.Factory.StartNew(() =>
             {
                 aksiokAddAndEdit.ParametersModel.Guarantee = aksiokAddAndEdit.ParametersModel.Guarantee?.AddHours(3);
+                aksiokAddAndEdit.ParametersModel.ApplyingDate = aksiokAddAndEdit.ParametersModel.ApplyingDate?.AddHours(3);
+                aksiokAddAndEdit.ParametersModel.SmoothRetirementDate = aksiokAddAndEdit.ParametersModel.SmoothRetirementDate?.AddHours(3);
                 var aksiokEditAndAdd = new AksiokPostGetEditAndAdd(aksiokAddAndEdit.ParametersModel.LoginUser, aksiokAddAndEdit.ParametersModel.Password);
                 var message = aksiokEditAndAdd.StartEditAndAddAksiok(aksiokAddAndEdit);
                 aksiokEditAndAdd.Dispose();

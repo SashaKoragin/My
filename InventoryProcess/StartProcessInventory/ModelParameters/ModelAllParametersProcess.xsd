@@ -36,6 +36,7 @@
 			<xs:element ref="ServiceInvKaspersky"/>
 			<xs:element ref="ParameterKasperskyModel"/>
 			<xs:element ref="ServiceInvKasperskyAllHostDrivers"/>
+			<xs:element ref="CountPackPagination"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="Domain" type="xs:string">
@@ -161,6 +162,11 @@
 	<xs:element name="ServiceInvKasperskyAllHostDrivers" type="xs:string">
 		<xs:annotation>
 			<xs:documentation>Модель параметры для сервиса касперского инвентаризации адрес всех характеристик</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountPackPagination" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Колличество элементов на странице при синхронизации АКСИОК</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

@@ -215,6 +215,8 @@
 				<xs:element ref="IdContractOnSto"/>
 				<xs:element ref="IdDeliveryContract"/>
 				<xs:element ref="Guarantee"/>
+				<xs:element ref="SmoothRetirementDate"/>
+				<xs:element ref="ApplyingDate"/>
 			</xs:sequence>
 			<xs:attribute name="ModelRequest" type="xs:string">
 				<xs:annotation>
@@ -334,6 +336,11 @@
 			<xs:attribute name="IsMassEditing" type="xs:boolean" default="false">
 				<xs:annotation>
 					<xs:documentation>Массовое редактирование</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="UsefulLife" type="xs:int" use="required">
+				<xs:annotation>
+					<xs:documentation>Срок полезного использования </xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -525,6 +532,16 @@
 	<xs:element name="Guarantee" type="xs:dateTime" nillable="true">
 		<xs:annotation>
 			<xs:documentation>Гарантия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SmoothRetirementDate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата планового выбытия</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ApplyingDate" type="xs:dateTime" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Дата принятия к учету</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="CountGroupAddingAndEditing">

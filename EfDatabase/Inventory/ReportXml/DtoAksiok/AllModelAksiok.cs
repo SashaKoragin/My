@@ -297,7 +297,7 @@ namespace EfDatabase.ModelAksiok.DtoAksiok {
         
         private string logicsButtonField;
         
-        private int idField;
+        private long idField;
         
         private int sounField;
         
@@ -441,7 +441,7 @@ namespace EfDatabase.ModelAksiok.DtoAksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
+        public long Id {
             get {
                 return this.idField;
             }

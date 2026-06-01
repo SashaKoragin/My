@@ -91,45 +91,53 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
         /// <param name="encoding">Кодировка</param>
         private void PostEditModel(ParametersUrlModel parametersUrlModel, Encoding encoding)
         {
-            DatesBytes = encoding.GetBytes(parametersUrlModel.Parameters);
-            Request = (HttpWebRequest)WebRequest.Create(parametersUrlModel.Url);
-            Request.Accept = parametersUrlModel.Accept;
-            Request.Referer = "https://aksiok.dpc.tax.nalog.ru/";
-            Request.KeepAlive = true;
-            Request.Credentials = MyCache;
-            Request.CookieContainer = Сookies;
-            Request.Host = "aksiok.dpc.tax.nalog.ru";
-            Request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36";
-            Request.ContentType = parametersUrlModel.ContentType;
-            foreach (var parametersHeaders in parametersUrlModel.Headers)
+            for (int i = 0; i < 10; i++)
             {
-                    Request.Headers.Add(parametersHeaders.Key,parametersHeaders.Value);
-            }
-            Request.Method = "POST";
-            Request.ContentLength = DatesBytes.Length;
-            using (var stream = Request.GetRequestStream())
-            {
-                stream.Write(DatesBytes, 0, DatesBytes.Length);
-            }
+                try
+                {
+                    DatesBytes = encoding.GetBytes(parametersUrlModel.Parameters);
+                    Request = (HttpWebRequest)WebRequest.Create(parametersUrlModel.Url);
+                    Request.Accept = parametersUrlModel.Accept;
+                    Request.Referer = "https://aksiok.dpc.tax.nalog.ru/";
+                    Request.KeepAlive = true;
+                    Request.Credentials = MyCache;
+                    Request.CookieContainer = Сookies;
+                    Request.Host = "aksiok.dpc.tax.nalog.ru";
+                    Request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36";
+                    Request.ContentType = parametersUrlModel.ContentType;
+                    foreach (var parametersHeaders in parametersUrlModel.Headers)
+                    {
+                        Request.Headers.Add(parametersHeaders.Key, parametersHeaders.Value);
+                    }
 
-            try
-            {
-                Response = (HttpWebResponse)Request.GetResponse();
-                Сookies.Add(Response.Cookies);
-                if (Response.StatusCode == HttpStatusCode.OK)
-                {
+                    Request.Method = "POST";
+                    Request.ContentLength = DatesBytes.Length;
+                    using (var stream = Request.GetRequestStream())
+                    {
+                        stream.Write(DatesBytes, 0, DatesBytes.Length);
+                    }
+                    Response = (HttpWebResponse)Request.GetResponse();
+                    Сookies.Add(Response.Cookies);
+                    if (Response.StatusCode == HttpStatusCode.OK)
+                    {
+                        return;
+                    }
                 }
-            }
-            catch (WebException webEx)
-            {
-                var messageError = string.Empty;
-                using (Stream respStream = webEx.Response.GetResponseStream())
+                catch (WebException webEx)
                 {
-                    StreamReader reader = new StreamReader(respStream);
-                    messageError = reader.ReadToEnd();
-                    Loggers.Log4NetLogger.Error(new Exception(messageError));
+                    var messageError = string.Empty;
+                    using (Stream respStream = webEx.Response.GetResponseStream())
+                    {
+                        StreamReader reader = new StreamReader(respStream);
+                        messageError = reader.ReadToEnd();
+                        Loggers.Log4NetLogger.Error(new Exception(messageError));
+                    }
+                    Loggers.Log4NetLogger.Info(new Exception($"Блокировка запроса! Повтор запроса на редактирование!"));
+                    if (i == 9)
+                    {
+                        throw new InvalidOperationException(messageError);
+                    }
                 }
-                throw new InvalidOperationException(messageError);
             }
         }
         /// <summary>
@@ -215,7 +223,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                 model = new UploadFileAksiok()
                 {
                     TypeFile = Response.ContentType,
-                    NameFile = new ContentDisposition(Response.Headers["content-disposition"]).FileName,
+                    NameFile = ConvertUnicodeToRussianTextFileName(Response.Headers["Content-Disposition"]),
                     File = ms.ToArray()
                 };
             }
@@ -237,7 +245,7 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                     var stringsName = aksiokAddAndEdit.ParametersRequestAksiok.FileAkt.NameFile.Split('_');
                     AksiokFullDataBaseModel.AksiokEditPublicModel.ActNumber = stringsName[0];
                     AksiokFullDataBaseModel.AksiokEditPublicModel.ActDate = DateTime.ParseExact(stringsName[1], "dd.MM.yyyy", null);
-                    AksiokFullDataBaseModel.AksiokEditPublicModel.ActDateSpecified = true;
+                    //AksiokFullDataBaseModel.AksiokEditPublicModel.ActDateSpecified = true;
                 }
                 ParametersUrlModel parameters = new ParametersUrlModel
                 {
@@ -275,6 +283,9 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                         .Replace("{Guarantee}",
                             AksiokFullDataBaseModel.AksiokEditPublicModel.Guarantee.ToString("dd.MM.yyyy"))
                         .Replace("{Comment}", AksiokFullDataBaseModel.AksiokEditPublicModel.Comment)
+                        .Replace("{UsefulLife}", AksiokFullDataBaseModel.AksiokEditPublicModel.UsefulLife.ToString())
+                        .Replace("{SmoothRetirementDate}", AksiokFullDataBaseModel.AksiokEditPublicModel.SmoothRetirementDate.ToString("dd.MM.yyyy"))
+                        .Replace("{ApplyingDate}", AksiokFullDataBaseModel.AksiokEditPublicModel.ApplyingDate.ToString("dd.MM.yyyy"))
                         .Replace("{IsKit}", AksiokFullDataBaseModel.AksiokEditPublicModel.IsKit.ToString())
                         .Replace("{ServiceStatus}", AksiokFullDataBaseModel.AksiokEditPublicModel.ServiceStatus)
                         .Replace("{ContractOnStoId}",
@@ -288,6 +299,9 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                         .Replace("{ComputerName}", WebUtility.HtmlDecode(AksiokFullDataBaseModel.AksiokEditPublicModel.ComputerName))
                         .Replace("{ExpertiseStatus}",
                             AksiokFullDataBaseModel.AksiokEditPublicModel.ExpertiseStatus.ToString())
+                        .Replace("{NameMaterialStockTransferFile}", String.Empty)
+                        .Replace("{TypeMaterialStockTransferFile}", "application/octet-stream")
+                        .Replace("{MaterialStockTransferFile}", String.Empty)
                         .Replace("{NameFileExpertise}",
                             aksiokAddAndEdit.ParametersRequestAksiok.FileExpertise != null
                                 ? aksiokAddAndEdit.ParametersRequestAksiok.FileExpertise.NameFile
@@ -428,10 +442,10 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
                             {
                                 try
                                 {
-                                    AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit, aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel);
+                                   AksiokFullDataBaseModel = selectSql.ReturnModelAksiokEditAndAdd(aksiokAddAndEdit, aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel);
                                     if (aksiokAddAndEdit.ParametersModel.IsMassEditFirstModel)
                                     {
-                                          PostEditModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0], aksiokAddAndEdit), Encoding.Default);
+                                        PostEditModel(GenerateParametersModelStep1Edit(allParameters.ModelParametersAksiok[0], aksiokAddAndEdit), Encoding.Default); //Верхнюю модель не отредактировать
                                     }
                                     PostEditModel(GenerateParametersModelStep2Edit(allParameters.ModelParametersAksiok[1]), Encoding.UTF8);
                                     aksiokPostGetSystem.PointSynchronizationAksiok(AksiokFullDataBaseModel.PublicModelValueJson.Id, aksiokAddAndEdit.ParametersModel.IdCard, serialNumber);
@@ -525,6 +539,20 @@ namespace LibraryAutoSupportSto.Aksiok.AksiokPostUpdeteAndAddSystem
         public UploadFileAksiok UploadFileAksiok(long idFile)
         {
             return GetFileAksiok(GenerateParametersUploadFile(allParameters.ModelParametersAksiok[4],idFile));
+        }
+        /// <summary>
+        /// Перекодирование русский язык
+        /// </summary>
+        /// <param name="contentDisposition">Строка непонятная</param>
+        /// <returns></returns>
+        private string ConvertUnicodeToRussianTextFileName(string contentDisposition)
+        {
+            var match = Regex.Match(contentDisposition, @"filename=""([^""]+)""");
+            if (!match.Success)
+                return null;
+            string brokenName = match.Groups[1].Value;
+            byte[] bytes = Encoding.GetEncoding(28591).GetBytes(brokenName);
+            return Encoding.UTF8.GetString(bytes);
         }
 
         /// <summary>

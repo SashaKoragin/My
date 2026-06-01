@@ -31,6 +31,8 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private ValueCharacteristicJson valueCharacteristicJsonField;
         
+        private AllContract[] allContractField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ModelDocumentType", IsNullable=true)]
         public ModelDocumentType[] ModelDocumentType {
@@ -72,6 +74,17 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.valueCharacteristicJsonField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("AllContract")]
+        public AllContract[] AllContract {
+            get {
+                return this.allContractField;
+            }
+            set {
+                this.allContractField = value;
             }
         }
     }
@@ -231,7 +244,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private System.Nullable<long> equipmentKitIdField;
         
-        private int idField;
+        private long idField;
         
         private string equipmentTypeField;
         
@@ -296,7 +309,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
+        public long Id {
             get {
                 return this.idField;
             }
@@ -505,7 +518,25 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private System.Nullable<long> equipmentKitIdField;
         
-        private int idField;
+        private System.Nullable<int> yearOfIssueField;
+        
+        private bool yearOfIssueFieldSpecified;
+        
+        private System.Nullable<int> equipmentDataCbIdField;
+        
+        private System.Nullable<int> equipmentSuimCharacteristicsIdField;
+        
+        private System.Nullable<int> usefulLifeField;
+        
+        private System.Nullable<System.DateTime> smoothRetirementDateField;
+        
+        private System.Nullable<System.DateTime> applyingDateField;
+        
+        private System.Nullable<long> materialStockTransferFileField;
+        
+        private System.Nullable<bool> employeCardLinkField;
+        
+        private long idField;
         
         private int epoDocument1Field;
         
@@ -532,8 +563,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         private string individualServiceNumberField;
         
         private string notOnBalanceField;
-        
-        private int yearOfIssueField;
         
         private string commentField;
         
@@ -795,8 +824,107 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> YearOfIssue {
+            get {
+                return this.yearOfIssueField;
+            }
+            set {
+                this.yearOfIssueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool YearOfIssueSpecified {
+            get {
+                return this.yearOfIssueFieldSpecified;
+            }
+            set {
+                this.yearOfIssueFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> EquipmentDataCbId {
+            get {
+                return this.equipmentDataCbIdField;
+            }
+            set {
+                this.equipmentDataCbIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> EquipmentSuimCharacteristicsId {
+            get {
+                return this.equipmentSuimCharacteristicsIdField;
+            }
+            set {
+                this.equipmentSuimCharacteristicsIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> UsefulLife {
+            get {
+                return this.usefulLifeField;
+            }
+            set {
+                this.usefulLifeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SmoothRetirementDate {
+            get {
+                return this.smoothRetirementDateField;
+            }
+            set {
+                this.smoothRetirementDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> ApplyingDate {
+            get {
+                return this.applyingDateField;
+            }
+            set {
+                this.applyingDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<long> MaterialStockTransferFile {
+            get {
+                return this.materialStockTransferFileField;
+            }
+            set {
+                this.materialStockTransferFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> EmployeCardLink {
+            get {
+                return this.employeCardLinkField;
+            }
+            set {
+                this.employeCardLinkField = value;
+            }
+        }
+        
+        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
+        public long Id {
             get {
                 return this.idField;
             }
@@ -945,17 +1073,6 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.notOnBalanceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int YearOfIssue {
-            get {
-                return this.yearOfIssueField;
-            }
-            set {
-                this.yearOfIssueField = value;
             }
         }
         
@@ -1944,7 +2061,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="date")]
         public System.DateTime Garanty {
             get {
                 return this.garantyField;
@@ -2100,7 +2217,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         private System.Nullable<int> cpuFrequencyMhzField;
         
-        private int idField;
+        private long idField;
         
         private string notOnBalanceField;
         
@@ -2374,7 +2491,7 @@ namespace EfDatabase.ModelAksiok.Aksiok {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
+        public long Id {
             get {
                 return this.idField;
             }
@@ -3018,6 +3135,193 @@ namespace EfDatabase.ModelAksiok.Aksiok {
             }
             set {
                 this.firewallForVksField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.7.2053.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
+    public partial class AllContract {
+        
+        private System.Nullable<System.DateTime> contractDateField;
+        
+        private int contractYearField;
+        
+        private int contractTypeField;
+        
+        private int ownershipTypeField;
+        
+        private bool isArchiveField;
+        
+        private bool isCentralContractField;
+        
+        private int idField;
+        
+        private bool idFieldSpecified;
+        
+        private string numberField;
+        
+        private string nameField;
+        
+        private string contractNumberField;
+        
+        private string registryNumberEisField;
+        
+        private string executorField;
+        
+        private string sounNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> ContractDate {
+            get {
+                return this.contractDateField;
+            }
+            set {
+                this.contractDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int ContractYear {
+            get {
+                return this.contractYearField;
+            }
+            set {
+                this.contractYearField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int ContractType {
+            get {
+                return this.contractTypeField;
+            }
+            set {
+                this.contractTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int OwnershipType {
+            get {
+                return this.ownershipTypeField;
+            }
+            set {
+                this.ownershipTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsArchive {
+            get {
+                return this.isArchiveField;
+            }
+            set {
+                this.isArchiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsCentralContract {
+            get {
+                return this.isCentralContractField;
+            }
+            set {
+                this.isCentralContractField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IdSpecified {
+            get {
+                return this.idFieldSpecified;
+            }
+            set {
+                this.idFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Number {
+            get {
+                return this.numberField;
+            }
+            set {
+                this.numberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ContractNumber {
+            get {
+                return this.contractNumberField;
+            }
+            set {
+                this.contractNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string RegistryNumberEis {
+            get {
+                return this.registryNumberEisField;
+            }
+            set {
+                this.registryNumberEisField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Executor {
+            get {
+                return this.executorField;
+            }
+            set {
+                this.executorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string SounName {
+            get {
+                return this.sounNameField;
+            }
+            set {
+                this.sounNameField = value;
             }
         }
     }

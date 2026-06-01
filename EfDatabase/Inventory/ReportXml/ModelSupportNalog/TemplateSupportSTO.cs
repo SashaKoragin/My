@@ -515,6 +515,10 @@ namespace EfDatabaseXsdSupportNalog {
         
         private System.Nullable<System.DateTime> guaranteeField;
         
+        private System.Nullable<System.DateTime> smoothRetirementDateField;
+        
+        private System.Nullable<System.DateTime> applyingDateField;
+        
         private string modelRequestField;
         
         private string nameProducerField;
@@ -562,6 +566,8 @@ namespace EfDatabaseXsdSupportNalog {
         private bool isMassEditFirstModelField;
         
         private bool isMassEditingField;
+        
+        private int usefulLifeField;
         
         public ParametersModel() {
             this.idCardField = 0;
@@ -656,6 +662,28 @@ namespace EfDatabaseXsdSupportNalog {
             }
             set {
                 this.guaranteeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> SmoothRetirementDate {
+            get {
+                return this.smoothRetirementDateField;
+            }
+            set {
+                this.smoothRetirementDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> ApplyingDate {
+            get {
+                return this.applyingDateField;
+            }
+            set {
+                this.applyingDateField = value;
             }
         }
         
@@ -925,6 +953,17 @@ namespace EfDatabaseXsdSupportNalog {
             }
             set {
                 this.isMassEditingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int UsefulLife {
+            get {
+                return this.usefulLifeField;
+            }
+            set {
+                this.usefulLifeField = value;
             }
         }
     }

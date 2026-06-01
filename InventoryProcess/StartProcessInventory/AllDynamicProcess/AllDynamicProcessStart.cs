@@ -150,17 +150,17 @@ namespace InventoryProcess.StartProcessInventory.AllDynamicProcess
         /// </summary>
         public void ProcessStartExportDataAksiokToInventory()
         {
-            var aksiok = new AksiokPostGetSystem(LoginUser, PasswordUser);
+            var aksiok = new AksiokPostGetSystem(LoginUser, PasswordUser, Convert.ToInt32(Parameters.CountPackPagination));
             aksiok.StartUpdateAksiok();
             Dispose();
         }
         /// <summary>
         /// Актуализация справочников АКСИОК для ФКУ
         /// </summary>
-        public void ProcessStartUpdateDirectoryAksiokToInventory()
+        public void ProcessStartDownloadAllContractAksiokToInventory()
         {
-            var aksiok = new AksiokPostGetSystem(LoginUser, PasswordUser);
-            aksiok.StartUpdateDirectoryAksiok();
+            var aksiok = new AksiokPostGetSystem(LoginUser, PasswordUser, Convert.ToInt32(Parameters.CountPackPagination));
+            aksiok.StartDownloadAllContractAksiok();
             Dispose();
         }
 

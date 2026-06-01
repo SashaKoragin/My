@@ -119,7 +119,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
            {
                 ModelSelect model = new ModelSelect { LogicaSelect = SqlSelectModel(13) };
                 template.SenderUsers.Security = Inventory.Database.SqlQuery<Security>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], 3),
-                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел информационной безопасности"),
+                          new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел информационной безопасности и информационных технологий"),
                           new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[2], DBNull.Value)).FirstOrDefault();
                 template.SenderUsers.ItOtdel = Inventory.Database.SqlQuery<ItOtdel>(model.LogicaSelect.SelectUser, new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[0], 4),
                           new SqlParameter(model.LogicaSelect.SelectedParametr.Split(',')[1], "Отдел информатизации"),
@@ -460,7 +460,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                     userSql = FindUserGroup(Convert.ToInt32(nameFindTextGroupOnUser));
                 }
                 //Ищем пользователя
-                if (nameFindTextGroupOnUser.Length >= 5)
+                if (nameFindTextGroupOnUser.Length == 5)
                 {
                    var userFindSender = Regex.Matches(nameFindTextGroupOnUser, @"(0[0-1][0-9]{3})").Cast<Match>().Select(m=>m.Value).ToArray();
                    if (userFindSender.Length > 0)
@@ -680,6 +680,9 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                 var isContractNeeded = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[22], aksiokAddAndEdit.ParametersModel.IsContractNeeded) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Bit };
                 var deliveryContract = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[23], aksiokAddAndEdit.ParametersModel.DeliveryContract) { Direction = ParameterDirection.Output, Size = 256, SqlDbType = SqlDbType.VarChar };
                 var equipmentKitId = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[24], aksiokAddAndEdit.ParametersModel.EquipmentKitId) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.BigInt };
+                var usefulLife = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[25], aksiokAddAndEdit.ParametersModel.UsefulLife) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
+                var smoothRetirementDate = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[26], aksiokAddAndEdit.ParametersModel.SmoothRetirementDate) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.SmallDateTime };
+                var applyingDate = new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[27], aksiokAddAndEdit.ParametersModel.ApplyingDate) { Direction = ParameterDirection.Output, SqlDbType = SqlDbType.SmallDateTime };
 
                 Inventory.Database.ExecuteSqlCommand(selectModel.LogicaSelect.SelectUser,
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[0],
@@ -688,7 +691,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                         aksiokAddAndEdit.ParametersModel.SerNumber),
                     new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[2],
                         aksiokAddAndEdit.ParametersModel.InventoryNum),
-                    idFullCategoria, codeError, errorServer, idState, idStateSto, idExpertise, yearOfIssue, exploitationStartYear, isKit, guarantee, idCard, idContractOnSto, idDeliveryContract, isSmallCost, isOffBalanceAccount, isSharedUsage, forExternalUse, isSyncBySuim, emptyContractReason, isContractNeeded, deliveryContract, equipmentKitId
+                    idFullCategoria, codeError, errorServer, idState, idStateSto, idExpertise, yearOfIssue, exploitationStartYear, isKit, guarantee, idCard, idContractOnSto, idDeliveryContract, isSmallCost, isOffBalanceAccount, isSharedUsage, forExternalUse, isSyncBySuim, emptyContractReason, isContractNeeded, deliveryContract, equipmentKitId, usefulLife, smoothRetirementDate, applyingDate
                 );
       
                     if (idFullCategoria.Value != DBNull.Value) 
@@ -715,9 +718,14 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                             aksiokAddAndEdit.ParametersModel.IsContractNeeded = (bool)isContractNeeded.Value;
                             aksiokAddAndEdit.ParametersModel.DeliveryContract = deliveryContract.Value == DBNull.Value ? null : (string)deliveryContract.Value;
                             aksiokAddAndEdit.ParametersModel.EquipmentKitId = equipmentKitId.Value == DBNull.Value ? 0 : (long)equipmentKitId.Value;
-                        
-                        }
+                            aksiokAddAndEdit.ParametersModel.UsefulLife = usefulLife.Value == DBNull.Value ? 0 : (int)usefulLife.Value;
+                            aksiokAddAndEdit.ParametersModel.SmoothRetirementDate = smoothRetirementDate.Value == DBNull.Value ? null : (DateTime?)smoothRetirementDate.Value;
+                            aksiokAddAndEdit.ParametersModel.ApplyingDate = applyingDate.Value == DBNull.Value ? null : (DateTime?)applyingDate.Value;
+
+
+
                     }
+                }
                 aksiokAddAndEdit.ParametersModel.CodeError = (int)codeError.Value;
                 aksiokAddAndEdit.ParametersModel.ErrorServer = (string)errorServer.Value;
                 return aksiokAddAndEdit;
@@ -811,7 +819,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// <returns></returns>
         public string[] SelectFullAddGroupTechnical(string serialNumber)
         {
-            return Inventory.Database.SqlQuery<string>("Select AllTechnics.SerNum From AllTechnics Join AllTechnics as FindFirst on FindFirst.NameModel = AllTechnics.NameModel Left Join EpoDocument on EpoDocument.SerialNumber = AllTechnics.SerNum Where FindFirst.SerNum = '" + serialNumber+ "' and EpoDocument.SerialNumber is null and AllTechnics.WriteOffSign = 0").ToArray();
+            return Inventory.Database.SqlQuery<string>("Select AllTechnics.SerNum From AllTechnics Join AllTechnics as FindFirst on FindFirst.NameModel = AllTechnics.NameModel Left Join EpoDocument on EpoDocument.SerialNumber = AllTechnics.SerNum Where FindFirst.SerNum = '" + serialNumber+ "' and EpoDocument.SerialNumber is null and AllTechnics.WriteOffSign = 0 and DeliveryContract = (Select top 1 DeliveryContract From EpoDocument Where EpoDocument.SerialNumber = '" + serialNumber + "')").ToArray();
         }
         /// <summary>
         /// Запрос серийных номеров по группе оборудования поиск по серийному номеру
@@ -820,7 +828,7 @@ namespace EfDatabase.Inventory.BaseLogic.Select
         /// <returns></returns>
         public string[] SelectFullEditGroupTechnical(string serialNumber)
         {
-            return Inventory.Database.SqlQuery<string>("Select AllTechnics.SerNum From AllTechnics Join AllTechnics as FindFirst on FindFirst.NameModel = AllTechnics.NameModel Join EpoDocument on EpoDocument.SerialNumber = AllTechnics.SerNum Where FindFirst.SerNum = '" + serialNumber + "' and AllTechnics.WriteOffSign = 0").ToArray();
+            return Inventory.Database.SqlQuery<string>("Select AllTechnics.SerNum From AllTechnics Join AllTechnics as FindFirst on FindFirst.NameModel = AllTechnics.NameModel Join EpoDocument on EpoDocument.SerialNumber = AllTechnics.SerNum Where FindFirst.SerNum = '" + serialNumber + "' and AllTechnics.WriteOffSign = 0 and DeliveryContract = (Select top 1 DeliveryContract From EpoDocument Where EpoDocument.SerialNumber = '" + serialNumber + "')").ToArray();
         }
         /// <summary>
         /// Сбор модели для отпраки на сервер для редактирования
@@ -862,7 +870,10 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                         new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[20], aksiokAddAndEdit.ParametersModel.IsSyncBySuim) { SqlDbType = SqlDbType.Bit },
                         new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[21], aksiokAddAndEdit.ParametersModel.EmptyContractReason ?? (object)DBNull.Value),
                         new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[22], aksiokAddAndEdit.ParametersModel.IsContractNeeded) { SqlDbType = SqlDbType.Bit },
-                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[23], aksiokAddAndEdit.ParametersModel.DeliveryContract ?? (object)DBNull.Value)
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[23], aksiokAddAndEdit.ParametersModel.DeliveryContract ?? (object)DBNull.Value),
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[24], aksiokAddAndEdit.ParametersModel.UsefulLife),
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[25], aksiokAddAndEdit.ParametersModel.SmoothRetirementDate) { SqlDbType = SqlDbType.DateTime },
+                        new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[26], aksiokAddAndEdit.ParametersModel.ApplyingDate) { SqlDbType = SqlDbType.DateTime }
                     );
                     if (xmlModel.Value == DBNull.Value)
                     {
@@ -895,7 +906,10 @@ namespace EfDatabase.Inventory.BaseLogic.Select
                                   new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[20], aksiokAddAndEdit.ParametersModel.IsSyncBySuim) { SqlDbType = SqlDbType.Bit },
                                   new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[21], aksiokAddAndEdit.ParametersModel.EmptyContractReason ?? (object)DBNull.Value),
                                   new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[22], aksiokAddAndEdit.ParametersModel.IsContractNeeded) { SqlDbType = SqlDbType.Bit },
-                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[23], aksiokAddAndEdit.ParametersModel.DeliveryContract ?? (object)DBNull.Value)).FirstOrDefault();
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[23], aksiokAddAndEdit.ParametersModel.DeliveryContract ?? (object)DBNull.Value),
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[24], aksiokAddAndEdit.ParametersModel.UsefulLife),
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[25], aksiokAddAndEdit.ParametersModel.SmoothRetirementDate) { SqlDbType = SqlDbType.DateTime },
+                                  new SqlParameter(selectModel.LogicaSelect.SelectedParametr.Split(',')[26], aksiokAddAndEdit.ParametersModel.ApplyingDate) { SqlDbType = SqlDbType.DateTime }).FirstOrDefault();
                     if (aksiokAddAndEditReturn.PublicModelValueJson == null)
                     {
                         return null;

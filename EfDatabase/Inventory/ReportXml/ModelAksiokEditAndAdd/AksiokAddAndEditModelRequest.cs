@@ -65,8 +65,6 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         private File fileField;
         
-        private System.Nullable<System.DateTime> dateOfStatementField;
-        
         private ContractSpecification contractSpecificationField;
         
         private ContractOnSto contractOnStoField;
@@ -83,7 +81,7 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         private ExpertiseFile expertiseFileField;
         
-        private int idField;
+        private long idField;
         
         private int epoDocumentField;
         
@@ -104,6 +102,10 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         private int equipmentStateField;
         
         private string actNumberField;
+        
+        private System.DateTime actDateField;
+        
+        private bool actDateFieldSpecified;
         
         private string notOnBalanceField;
         
@@ -133,6 +135,8 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         private string psVersionField;
         
+        private System.DateTime dateOfStatementField;
+        
         private string ipAddressField;
         
         private string typeOfAnalogConnectionField;
@@ -150,10 +154,6 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         private System.DateTime guaranteeField;
         
         private int exploitationStartYearField;
-        
-        private System.DateTime actDateField;
-        
-        private bool actDateFieldSpecified;
         
         private bool includedInEqSettingsField;
         
@@ -180,6 +180,34 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         private bool isSyncBySuimField;
         
         private string deliveryContractField;
+        
+        private int equipmentDataCbIdField;
+        
+        private bool equipmentDataCbIdFieldSpecified;
+        
+        private int equipmentSuimCharacteristicsIdField;
+        
+        private bool equipmentSuimCharacteristicsIdFieldSpecified;
+        
+        private int usefulLifeField;
+        
+        private bool usefulLifeFieldSpecified;
+        
+        private System.DateTime smoothRetirementDateField;
+        
+        private bool smoothRetirementDateFieldSpecified;
+        
+        private System.DateTime applyingDateField;
+        
+        private bool applyingDateFieldSpecified;
+        
+        private long materialStockTransferFileField;
+        
+        private bool materialStockTransferFileFieldSpecified;
+        
+        private bool employeCardLinkField;
+        
+        private bool employeCardLinkFieldSpecified;
         
         /// <remarks/>
         public EquipmentType EquipmentType {
@@ -219,17 +247,6 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
             }
             set {
                 this.fileField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> DateOfStatement {
-            get {
-                return this.dateOfStatementField;
-            }
-            set {
-                this.dateOfStatementField = value;
             }
         }
         
@@ -322,7 +339,7 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
+        public long Id {
             get {
                 return this.idField;
             }
@@ -438,6 +455,28 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
             }
             set {
                 this.actNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime ActDate {
+            get {
+                return this.actDateField;
+            }
+            set {
+                this.actDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ActDateSpecified {
+            get {
+                return this.actDateFieldSpecified;
+            }
+            set {
+                this.actDateFieldSpecified = value;
             }
         }
         
@@ -597,6 +636,17 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DateOfStatement {
+            get {
+                return this.dateOfStatementField;
+            }
+            set {
+                this.dateOfStatementField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string IpAddress {
             get {
                 return this.ipAddressField;
@@ -691,28 +741,6 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
             }
             set {
                 this.exploitationStartYearField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime ActDate {
-            get {
-                return this.actDateField;
-            }
-            set {
-                this.actDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ActDateSpecified {
-            get {
-                return this.actDateFieldSpecified;
-            }
-            set {
-                this.actDateFieldSpecified = value;
             }
         }
         
@@ -856,6 +884,160 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
             }
             set {
                 this.deliveryContractField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int EquipmentDataCbId {
+            get {
+                return this.equipmentDataCbIdField;
+            }
+            set {
+                this.equipmentDataCbIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool EquipmentDataCbIdSpecified {
+            get {
+                return this.equipmentDataCbIdFieldSpecified;
+            }
+            set {
+                this.equipmentDataCbIdFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int EquipmentSuimCharacteristicsId {
+            get {
+                return this.equipmentSuimCharacteristicsIdField;
+            }
+            set {
+                this.equipmentSuimCharacteristicsIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool EquipmentSuimCharacteristicsIdSpecified {
+            get {
+                return this.equipmentSuimCharacteristicsIdFieldSpecified;
+            }
+            set {
+                this.equipmentSuimCharacteristicsIdFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int UsefulLife {
+            get {
+                return this.usefulLifeField;
+            }
+            set {
+                this.usefulLifeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool UsefulLifeSpecified {
+            get {
+                return this.usefulLifeFieldSpecified;
+            }
+            set {
+                this.usefulLifeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime SmoothRetirementDate {
+            get {
+                return this.smoothRetirementDateField;
+            }
+            set {
+                this.smoothRetirementDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SmoothRetirementDateSpecified {
+            get {
+                return this.smoothRetirementDateFieldSpecified;
+            }
+            set {
+                this.smoothRetirementDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime ApplyingDate {
+            get {
+                return this.applyingDateField;
+            }
+            set {
+                this.applyingDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ApplyingDateSpecified {
+            get {
+                return this.applyingDateFieldSpecified;
+            }
+            set {
+                this.applyingDateFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public long MaterialStockTransferFile {
+            get {
+                return this.materialStockTransferFileField;
+            }
+            set {
+                this.materialStockTransferFileField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool MaterialStockTransferFileSpecified {
+            get {
+                return this.materialStockTransferFileFieldSpecified;
+            }
+            set {
+                this.materialStockTransferFileFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public bool EmployeCardLink {
+            get {
+                return this.employeCardLinkField;
+            }
+            set {
+                this.employeCardLinkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool EmployeCardLinkSpecified {
+            get {
+                return this.employeCardLinkFieldSpecified;
+            }
+            set {
+                this.employeCardLinkFieldSpecified = value;
             }
         }
     }
@@ -1253,7 +1435,7 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         private System.Nullable<System.DateTime> guaranteeField;
         
-        private int idField;
+        private long idField;
         
         private string notOnBalanceField;
         
@@ -1527,7 +1709,7 @@ namespace EfDatabase.ModelAksiok.ModelAksiokEditAndAdd {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int Id {
+        public long Id {
             get {
                 return this.idField;
             }
